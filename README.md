@@ -12,6 +12,6 @@ repo 64个star开微信交流群，128个star录教学视频。LFG!
 
 第4讲：数据存储 (storage/memory/calldata)：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/4_DataStorage.sol)】 【[文章](https://mirror.xyz/ninjak.eth/w5zJWGwElN2ei4tgtuJbTTpKwrGhb-igPY7wTVKRCgY)】
 
-第5讲：数组（Array）和结构体（Struct）：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/5_ArrayAndStruct.sol)】 【[文章](https://mirror.xyz/ninjak.eth/zNxhHPjK8kjx_bSaauDUcEr9rX3hroalEzvYDatshvw)】
+第5讲：数组（array）和结构体（struct）：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/5_ArrayAndStruct.sol)】 【[文章](https://mirror.xyz/ninjak.eth/zNxhHPjK8kjx_bSaauDUcEr9rX3hroalEzvYDatshvw)】
 
 
