@@ -14,4 +14,5 @@ repo 64个star开微信交流群，128个star录教学视频。LFG!
 
 第5讲：数组（array）和结构体（struct）：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/5_ArrayAndStruct.sol)】 【[文章](https://mirror.xyz/ninjak.eth/zNxhHPjK8kjx_bSaauDUcEr9rX3hroalEzvYDatshvw)】
 
+第6讲：映射（mapping）：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/6_Mapping.sol)】 【[文章](https://mirror.xyz/ninjak.eth/iHYV1C-KUBn8JoJRirhgMmcSNgmpaL4cv4trdOoZJB0)】
 
