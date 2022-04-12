@@ -16,3 +16,6 @@ repo 64个star开微信交流群，128个star录教学视频。LFG!
 
 第6讲：映射（mapping）：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/6_Mapping.sol)】 【[文章](https://mirror.xyz/ninjak.eth/iHYV1C-KUBn8JoJRirhgMmcSNgmpaL4cv4trdOoZJB0)】
 
+第7讲：控制流（control flow）和插入排序（insertion sort）：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/7_InsertionSort.sol)】 【[文章](https://mirror.xyz/ninjak.eth/8Q0vr-dyHfiIXS9KnivaQDxpM9cIQTNWoC68TNvCZ9c)】
+
+
