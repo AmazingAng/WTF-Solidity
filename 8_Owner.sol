@@ -16,6 +16,4 @@ contract Owner {
    function changeOwner(address _newOwner) external onlyOwner{
       owner = _newOwner; // 只有owner地址运行这个函数，并改变owner
    }
-
-
 }
