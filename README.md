@@ -24,4 +24,4 @@ repo 64个star开微信交流群，128个star录教学视频。LFG!
 
 第10讲：继承(Inheritance)：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/10_Inheritance.sol)】 【[文章](https://mirror.xyz/ninjak.eth/HTCOqhsxTXs42NNv3wfzNRQMN6qGHGYY9iaTJhhKBb4)】
 
-第11讲：抽象合约(abstract)和接口(Interface)：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/11_Interface.sol)】 【[文章](https://mirror.xyz/ninjak.eth/KKnoJJfHG69Pg3GQda_B454z_nJ1tesyBd4uOvh1WNM)】
+第11讲：抽象合约(abstract)和接口(interface)：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/11_Interface.sol)】 【[文章](https://mirror.xyz/ninjak.eth/KKnoJJfHG69Pg3GQda_B454z_nJ1tesyBd4uOvh1WNM)】
