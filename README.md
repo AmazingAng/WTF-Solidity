@@ -27,3 +27,5 @@ repo 64个star开微信交流群，128个star录教学视频。LFG!
 第11讲：抽象合约(abstract)和接口(interface)：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/11_Interface.sol)】 【[文章](https://mirror.xyz/ninjak.eth/KKnoJJfHG69Pg3GQda_B454z_nJ1tesyBd4uOvh1WNM)】
 
 第12讲：库合约(library)：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/12_Library.sol)】 【[文章](https://mirror.xyz/ninjak.eth/5nhKjOI40nCT0nCk6iO2TXry3xi09F1Ts4e5lMBlZ1w)】
+
+第13讲：异常(Errors)：【[代码](https://github.com/AmazingAng/MinimalSolidity-CN/blob/main/13_Errors.sol)】 【[文章](https://mirror.xyz/ninjak.eth/XhhLu7PV1cAhOp9_m-dk9OoTj7offC7DkYYgsV3e31I)】
