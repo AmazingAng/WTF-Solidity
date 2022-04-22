@@ -3,7 +3,7 @@
 
 repo 64个star开微信交流群，128个star录教学视频。LFG!
 
-## 内容
+## 基础
 第1讲：三行代码HelloWeb3：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3.sol)】 【[文章](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)】
 
 第2讲：数值类型：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes.sol)】 【[文章](https://mirror.xyz/ninjak.eth/XHZVpWe8_sHBHgg6kkrNH2nAWYmQgoB7fKW8hoXnoyI)】
