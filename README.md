@@ -31,5 +31,5 @@ repo 64个star开微信交流群（已开），128个star录教学视频，256�
 第13讲：异常(Errors)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Errors.sol)】 【[文章](https://mirror.xyz/ninjak.eth/XhhLu7PV1cAhOp9_m-dk9OoTj7offC7DkYYgsV3e31I)】
 
 ## 专题
-# ERC721专题
+### ERC721专题
 1. ERC721引用的库：Address, Strings, Context。
