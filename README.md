@@ -32,4 +32,4 @@ repo 64个star开微信交流群（已开），128个star录教学视频，256�
 
 ## 专题
 ### ERC721专题
-1. ERC721引用的库：Address, Strings, Context。
+1. ERC721引用的库：Address, Strings, Context 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
