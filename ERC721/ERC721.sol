@@ -488,7 +488,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      *
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
-    // 这个函数在token被转账之后会被表用，包括mint和burn
+    // 这个函数在token被转账之后会被调用，包括mint和burn
     function _afterTokenTransfer(
         address from,
         address to,
