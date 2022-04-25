@@ -22,7 +22,7 @@ repo 64个star开微信交流群（已开），128个star录教学视频，256�
 
 第9讲：事件（events）：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/09_Events.sol)】 【[文章](https://mirror.xyz/ninjak.eth/nGSCuFbPHMo8mL1ErZMUwOZG_OUECzIWEsGhX0a5eOw)】
 
-第10讲：继承(Inheritance)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/10_Inheritance.sol)】 【[文章](https://mirror.xyz/ninjak.eth/HTCOqhsxTXs42NNv3wfzNRQMN6qGHGYY9iaTJhhKBb4)】
+第10讲：继承(inheritance)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/10_Inheritance.sol)】 【[文章](https://mirror.xyz/ninjak.eth/HTCOqhsxTXs42NNv3wfzNRQMN6qGHGYY9iaTJhhKBb4)】
 
 第11讲：抽象合约(abstract)和接口(interface)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/11_Interface.sol)】 【[文章](https://mirror.xyz/ninjak.eth/KKnoJJfHG69Pg3GQda_B454z_nJ1tesyBd4uOvh1WNM)】
 
