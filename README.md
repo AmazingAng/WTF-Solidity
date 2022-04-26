@@ -32,7 +32,7 @@ repo 64个star开微信交流群（已开），128个star录教学视频，256�
 
 ## 专题
 ### ERC721专题
-1. ERC721相关库：Address, Strings, Context 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
-2. ERC721相关接口 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/4mPkMgHViRjx8OM7TAI-M-2oMfRle36ULzqlpC6S7IQ)】
-3. ERC721主合约 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721/ERC721.sol)】 【[文章](https://mirror.xyz/ninjak.eth/-evZa3S--yw9vVcXfhn9I3UiNRaqWOTLG0eZFFgbcT0)】
+第1讲：ERC721相关库：Address, Strings, Context 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
+第2讲：ERC721相关接口 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/4mPkMgHViRjx8OM7TAI-M-2oMfRle36ULzqlpC6S7IQ)】
+第3讲：ERC721主合约 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721/ERC721.sol)】 【[文章](https://mirror.xyz/ninjak.eth/-evZa3S--yw9vVcXfhn9I3UiNRaqWOTLG0eZFFgbcT0)】
 
