@@ -38,3 +38,4 @@ repo 64个star开微信交流群（已开），128个star录教学视频，256�
 
 第3讲：ERC721主合约 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721/ERC721.sol)】 【[文章](https://mirror.xyz/ninjak.eth/-evZa3S--yw9vVcXfhn9I3UiNRaqWOTLG0eZFFgbcT0)】
 
+第4讲：BAYC主合约和严重漏洞 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721/BAYC.sol)】 【[文章](https://mirror.xyz/ninjak.eth/_buBOQflWtHDpLbg18Fp8zLe8AmLiPka2y-UhppK_u0)】
