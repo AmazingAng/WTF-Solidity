@@ -28,7 +28,7 @@ repo 64个star开微信交流群（已开），128个star录教学视频，256�
 
 第12讲：库合约(library)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/12_Library.sol)】 【[文章](https://mirror.xyz/ninjak.eth/5nhKjOI40nCT0nCk6iO2TXry3xi09F1Ts4e5lMBlZ1w)】
 
-第13讲：异常(Errors)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Errors.sol)】 【[文章](https://mirror.xyz/ninjak.eth/XhhLu7PV1cAhOp9_m-dk9OoTj7offC7DkYYgsV3e31I)】
+第13讲：异常(errors)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Errors.sol)】 【[文章](https://mirror.xyz/ninjak.eth/XhhLu7PV1cAhOp9_m-dk9OoTj7offC7DkYYgsV3e31I)】
 
 第14讲：常量(constant/immutable)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/14_Constant.sol)】 【[文章](https://mirror.xyz/ninjak.eth/p9xMZTxCBLSKBqqP2dlyxHceev1V7Blmo5Wf-OY3R48)】
 
