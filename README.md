@@ -34,6 +34,9 @@ repo 64个star开微信交流群（已开，[填表加入](https://docs.google.c
 
 第15讲：函数重载(overloading)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Overloading.sol)】 【[文章](https://mirror.xyz/ninjak.eth/ADt6g13gwqt42-9_nBxMunSkVHeft6-yb1mp0XH-4f8)】
 
+第16讲：利用回调函数发送ETH(fallback/receive)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Fallback.sol)】 【[文章](https://mirror.xyz/ninjak.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)】
+
+
 ## 专题
 ### ERC721专题
 第1讲：ERC721相关库：Address, Strings, Context 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
