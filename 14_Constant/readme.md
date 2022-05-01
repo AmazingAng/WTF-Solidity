@@ -28,7 +28,7 @@
     uint256 public immutable IMMUTABLE_BLOCK;
     uint256 public immutable IMMUTABLE_TEST;
 ```
-你可以使用全局变量例如`address(this)`，block.number` ，或者自定义的函数给`immutable`变量初始化。在下面这个例子，我们利用了`test()`函数给`IMMUTABLE_TEST`初始化为`9`：
+你可以使用全局变量例如`address(this)`，`block.number` ，或者自定义的函数给`immutable`变量初始化。在下面这个例子，我们利用了`test()`函数给`IMMUTABLE_TEST`初始化为`9`：
 ```
     // 利用constructor初始化immutable变量，因此可以利用
     constructor(){
