@@ -6,9 +6,9 @@ repo 64个star开微信交流群（已开，[填表加入](https://docs.google.c
 ## 基础
 第1讲：三行代码HelloWeb3：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3)】 【[文章](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)】
 
-第2讲：数值类型：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes.sol)】 【[文章](https://mirror.xyz/ninjak.eth/XHZVpWe8_sHBHgg6kkrNH2nAWYmQgoB7fKW8hoXnoyI)】
+第2讲：数值类型：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes)】 【[文章](https://mirror.xyz/ninjak.eth/XHZVpWe8_sHBHgg6kkrNH2nAWYmQgoB7fKW8hoXnoyI)】
 
-第3讲：函数类型 (external/internal/public/private, pure/view/payable)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/03_FunctionTypes.sol)】 【[文章](https://mirror.xyz/ninjak.eth/FWI887JBea4VpNiMlJ2ICyJ5aWUREReGo9Bz0X8iEVc)】
+第3讲：函数类型 (external/internal/public/private, pure/view/payable)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/03_Function)】 【[文章](https://mirror.xyz/ninjak.eth/FWI887JBea4VpNiMlJ2ICyJ5aWUREReGo9Bz0X8iEVc)】
 
 第4讲：数据存储 (storage/memory/calldata)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/04_DataStorage.sol)】 【[文章](https://mirror.xyz/ninjak.eth/w5zJWGwElN2ei4tgtuJbTTpKwrGhb-igPY7wTVKRCgY)】
 
@@ -32,9 +32,9 @@ repo 64个star开微信交流群（已开，[填表加入](https://docs.google.c
 
 第14讲：常量(constant/immutable)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/14_Constant.sol)】 【[文章](https://mirror.xyz/ninjak.eth/p9xMZTxCBLSKBqqP2dlyxHceev1V7Blmo5Wf-OY3R48)】
 
-第15讲：函数重载(overloading)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Overloading.sol)】 【[文章](https://mirror.xyz/ninjak.eth/ADt6g13gwqt42-9_nBxMunSkVHeft6-yb1mp0XH-4f8)】
+第15讲：函数重载(overloading)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Overloading)】 【[文章](https://mirror.xyz/ninjak.eth/ADt6g13gwqt42-9_nBxMunSkVHeft6-yb1mp0XH-4f8)】
 
-第16讲：利用回调函数发送ETH(fallback/receive)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Fallback.sol)】 【[文章](https://mirror.xyz/ninjak.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)】
+第16讲：利用回调函数发送ETH(fallback/receive)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Fallback)】 【[文章](https://mirror.xyz/ninjak.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)】
 
 
 ## 专题
