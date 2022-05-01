@@ -4,7 +4,7 @@
 repo 64个star开微信交流群（已开，[填表加入](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)），128个star录教学视频，256个star出进阶内容，512个star发布官网+课程认证，1024个star发社群NFT。LFG!
 
 ## 基础
-第1讲：三行代码HelloWeb3：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3.sol)】 【[文章](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)】
+第1讲：三行代码HelloWeb3：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3)】 【[文章](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)】
 
 第2讲：数值类型：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes.sol)】 【[文章](https://mirror.xyz/ninjak.eth/XHZVpWe8_sHBHgg6kkrNH2nAWYmQgoB7fKW8hoXnoyI)】
 
