@@ -92,7 +92,10 @@ contract SendETH {
 运行三种方法，可以看到，他们都可以成功的向`ReceiveETH`合约发送`ETH`。
 
 ## 总结
-这一讲，我们介绍`solidity`三种发送`ETH`的方法：`transfer`，`send`和`call`。其中`call`没有`gas`限制，最为灵活，是最提倡的方法；`transfer`有`2300 gas`限制，但是发送失败会自动`revert`交易，是次优选择；`transfer`有`2300 gas`限制，而且发送失败不会自动`revert`交易，几乎没有人用它。
+这一讲，我们介绍`solidity`三种发送`ETH`的方法：`transfer`，`send`和`call`。
+- `call`没有`gas`限制，最为灵活，是最提倡的方法；
+- `transfer`有`2300 gas`限制，但是发送失败会自动`revert`交易，是次优选择；
+- `send`有`2300 gas`限制，而且发送失败不会自动`revert`交易，几乎没有人用它。
 
 
 
