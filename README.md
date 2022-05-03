@@ -36,6 +36,8 @@ repo 64个star开微信交流群（已开，[填表加入](https://docs.google.c
 
 第16讲：接收ETH(fallback/receive)：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Fallback)】 【[文章](https://mirror.xyz/ninjak.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)】
 
+第17讲：发送ETH(transfer/send/call)：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/17_SendETH)】 【[文章](https://mirror.xyz/ninjak.eth/NTNHraVAn2OWUKXpr0byphlxl8ytj7fRUAaOaLYfEtA)】
+
 
 ## 专题
 ### ERC721专题
