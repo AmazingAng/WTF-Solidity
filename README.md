@@ -3,7 +3,7 @@
 
 repo 64个star开微信交流群（已开，[填表加入](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)），128个star录教学视频，256个star出进阶内容，512个star发布官网+课程认证，1024个star发社群NFT。LFG!
 
-## 基础
+## 入门
 第1讲：三行代码HelloWeb3：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3)】 【[文章](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)】
 
 第2讲：数值类型：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes)】 【[文章](https://mirror.xyz/ninjak.eth/XHZVpWe8_sHBHgg6kkrNH2nAWYmQgoB7fKW8hoXnoyI)】
@@ -38,6 +38,7 @@ repo 64个star开微信交流群（已开，[填表加入](https://docs.google.c
 
 第17讲：发送ETH(transfer/send/call)：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/17_SendETH)】 【[文章](https://mirror.xyz/ninjak.eth/NTNHraVAn2OWUKXpr0byphlxl8ytj7fRUAaOaLYfEtA)】
 
+第18讲：函数输出(returns/return)：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/18_Return)】 【[文章](https://mirror.xyz/ninjak.eth/FIGf9tF7wiBlLnQGXfEjVkJ0efzKBNltJS1fRxPKYTk)】
 
 ## 专题
 ### ERC721专题
