@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
+// 3种方法发送ETH
+// transfer: 2300 gas, revert
+// send: 2300 gas, return bool
+// call: all gas, return (bool, data)
+
 error SendFailed(); // 用send发送ETH失败error
 error CallFailed(); // 用call发送ETH失败error
 
