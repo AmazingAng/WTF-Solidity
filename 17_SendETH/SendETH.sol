@@ -21,7 +21,7 @@ contract SendETH {
     }
 
     // send()发送ETH
-        function sendETH(address payable _to, uint256 amount) external payable{
+    function sendETH(address payable _to, uint256 amount) external payable{
         // 处理下send的返回值，如果失败，revert交易并发送error
         bool success = _to.send(amount);
         if(!success){
