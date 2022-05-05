@@ -31,7 +31,7 @@
 
 - **规则3**：如果映射声明为`public`，那么`solidity`会自动给你创建一个`getter`函数，可以通过`Key`来查询对应的`Value`。
 
-- **规则4**：给映射新增的键值对的语法为`var[_Key] = _Value`，其中是映射变量名，`_Key`和`_Value`对应新增的键值对。例子：
+- **规则4**：给映射新增的键值对的语法为`_Var[_Key] = _Value`，其中`_Var`是映射变量名，`_Key`和`_Value`对应新增的键值对。例子：
 ```
     function writeMap (uint _Key, address _Value) public{
         idToAddress[_Key] = _Value;
