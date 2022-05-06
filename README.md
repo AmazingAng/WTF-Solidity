@@ -51,3 +51,7 @@ repo 64个star开微信交流群（已开，[填表加入](https://docs.google.c
 **第3讲：ERC721主合约** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721/ERC721.sol)】 【[文章](https://mirror.xyz/ninjak.eth/-evZa3S--yw9vVcXfhn9I3UiNRaqWOTLG0eZFFgbcT0)】
 
 **第4讲：BAYC主合约和严重漏洞**【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721/BAYC.sol)】 【[文章](https://mirror.xyz/ninjak.eth/_buBOQflWtHDpLbg18Fp8zLe8AmLiPka2y-UhppK_u0)】
+
+### 合约安全专题
+
+**第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Security/Consensys2020)】 【[文章](https://mirror.xyz/ninjak.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
