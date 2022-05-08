@@ -98,7 +98,19 @@ contract Variables {
         return(sender, blockNum, data);
     }
 ```
-在上面例子里，我们使用了3个常用的全局变量：`msg.sender`, `block.number`和`msg.data`，他们分别代表请求发起地址，当前区块高度，和请求数据。更多的全局变量可以看这个[链接](https://learnblockchain.cn/docs/solidity/cheatsheet.html#id3)。
+在上面例子里，我们使用了3个常用的全局变量：`msg.sender`, `block.number`和`msg.data`，他们分别代表请求发起地址，当前区块高度，和请求数据。下面是一些常用的全局变量，更完整的列表请看这个[链接](https://learnblockchain.cn/docs/solidity/units-and-global-variables.html#special-variables-and-functions)：
+
+- `blockhash(uint blockNumber)`: (`bytes32`)给定区块的哈希值 – 只适用于256最近区块, 不包含当前区块。
+- `block.coinbase`: (`address payable`) 当前区块矿工的地址
+- `block.gaslimit`: (`uint`)	当前区块的gaslimit
+- `block.number`: (`uint`)	当前区块的number
+- `block.timestamp`: (`uint`)	当前区块的时间戳，为unix纪元以来的秒
+- `gasleft()`: (`uint256`)	剩余 gas
+- `msg.data`: (`bytes calldata`)	完整call data
+- `msg.sender`: (`address payable`)	消息发送者 (当前 caller)
+- `msg.sig`: (`bytes4`)	calldata的前四个字节 (function identifier)
+- `msg.value`: (`uint`)	当前交易发送的`wei`值
+- `now `: (`uint`)	当前块的时间戳
 
 
 ## 总结
