@@ -1,4 +1,5 @@
-# Solidity极简入门: 4. 变量存储位置 storage, memory, calldata
+# Solidity极简入门: 4. 变量数据存储和作用域 storage/memory/calldata
+
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
@@ -53,6 +54,53 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 
 4. 其他情况，变量赋值给`storage`，会创建独立的复本，修改其中一个不会影响另一个。
 
+## 变量的作用域
+`Solidity`中变量按作用域划分有三种，分别是状态变量（state variable），局部变量（local variable）和全局变量(global variable)
+### 1. 状态变量
+状态变量是数据存储在链上的变量，所有合约内函数都可以访问
+，`gas`消耗高。状态变量在合约内、函数外声明：
+```
+contract Variables {
+    uint public x = 1;
+    uint public y;
+    string public z;
+```
+
+我们可以在函数里更改状态变量的值：
+```
+    function foo() external{
+        // 可以在函数里更改状态变量的值
+        x = 5;
+        y = 2;
+        z = "0xAA";
+    }
+```
+
+### 2. 局部变量
+局部变量是仅在函数执行过程中有效的变量，函数退出后，变量无效。局部变量的数据存储在内存里，不上链，`gas`低。局部变量在函数内声明：
+```
+    function bar() external pure returns(uint){
+        uint xx = 1;
+        uint yy = 3;
+        uint zz = xx + yy;
+        return(zz);
+    }
+```
+
+### 3. 全局变量
+全局变量是全局范围工作的变量，都是`solidity`预留关键字。他们可以在函数内不声明直接使用：
+
+```
+    function global() external view returns(address, uint, bytes memory){
+        address sender = msg.sender;
+        uint blockNum = block.number;
+        bytes memory data = msg.data;
+        return(sender, blockNum, data);
+    }
+```
+在上面例子里，我们使用了3个常用的全局变量：`msg.sender`, `block.number`和`msg.data`，他们分别代表请求发起地址，当前区块高度，和请求数据。更多的全局变量可以看这个[链接](https://learnblockchain.cn/docs/solidity/cheatsheet.html#id3)。
+
+
 ## 总结
-在第4讲，我们介绍了`solidity`中的引用类型和数据位置，重点是`storage`, `memory`和`calldata`三个关键字的用法。他们出现的原因是为了节省链上有限的存储空间和降低`gas`。下一讲我们会介绍引用类型中的数组。
+在第4讲，我们介绍了`solidity`中的引用类型，数据位置和变量的作用域。重点是`storage`, `memory`和`calldata`三个关键字的用法。他们出现的原因是为了节省链上有限的存储空间和降低`gas`。下一讲我们会介绍引用类型中的数组。
 
