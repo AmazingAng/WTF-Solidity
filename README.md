@@ -12,7 +12,7 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第3讲：函数类型 (external/internal/public/private, pure/view/payable)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/03_Function)】 【[文章](https://mirror.xyz/ninjak.eth/FWI887JBea4VpNiMlJ2ICyJ5aWUREReGo9Bz0X8iEVc)】
 
-**第4讲：数据存储 (storage/memory/calldata)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/04_DataStorage)】 【[文章](https://mirror.xyz/ninjak.eth/w5zJWGwElN2ei4tgtuJbTTpKwrGhb-igPY7wTVKRCgY)】
+**第4讲：变量作用域和数据存储 (storage/memory/calldata)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/04_DataStorage)】 【[文章](https://mirror.xyz/ninjak.eth/w5zJWGwElN2ei4tgtuJbTTpKwrGhb-igPY7wTVKRCgY)】
 
 **第5讲：数组（array）和结构体（struct）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/05_ArrayAndStruct)】 【[文章](https://mirror.xyz/ninjak.eth/zNxhHPjK8kjx_bSaauDUcEr9rX3hroalEzvYDatshvw)】
 
