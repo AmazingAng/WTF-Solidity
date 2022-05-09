@@ -1,4 +1,4 @@
-# Solidity极简入门: 5. 引用类型, array, struct
+# Solidity极简入门: 5. 引用类型, array, struct, enum
 
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
@@ -75,7 +75,24 @@
         student.id = 1;
         student.score = 80;
     }
-  
+
+## 枚举 enum
+枚举（`enum`）是`solidity`中用户定义的数据类型。它主要用于为`uint`分配名称，是程序易于阅读和维护。它与`C语言`中的`enum`类似，把名称从`0`开始`uint`表示：
+```
+    // 用enum将uint 0， 1， 2表示为Buy, Hold, Sell
+    enum ActionSet { Buy, Hold, Sell }
+    // 创建enum变量 action
+    ActionSet action = ActionSet.Buy;
+```
+它可以显式的和`uint`相互转换，并会检查转换的正整数是否在枚举的长度内，不然会报错：
+```
+    // 将uint 0， 1， 2表示为Buy, Hold, Sell
+    enum ActionSet { Buy, Hold, Sell };
+    // 创建enum变量 action
+    ActionSet action = ActionSet.Buy;
+```
+`enum`的一个比较冷门的变量，几乎没什么人用。
+
 ## 总结
-这一讲，我们介绍了solidity中数组（`array`）和结构体（`struct`）的基本用法。下一讲我们将介绍solidity中的哈希表——映射（`mapping`）。
+这一讲，我们介绍了solidity中数组（`array`），结构体（`struct`）和枚举（`enum`）的基本用法。下一讲我们将介绍solidity中的哈希表——映射（`mapping`）。
 
