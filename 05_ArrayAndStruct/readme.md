@@ -7,7 +7,7 @@
 所有代码开源在github(64个star开微信交流群，已开[填表加入](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)；128个star录教学视频): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
-这一讲，我们将介绍`solidity`中的两个重要变量类型：数组（`array`）和结构体（`struct`）
+这一讲，我们将介绍`solidity`中的两个重要变量类型：数组（`array`），结构体（`struct`）和枚举（`enum`）。
 
 ## 数组 array
 数组（`Array`）是`solidity`常用的一种变量类型，用来存储一组数据（整数，字节，地址等等）。数组分为固定长度数组和可变长度数组两种：
