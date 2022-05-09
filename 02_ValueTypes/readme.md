@@ -94,6 +94,23 @@
 
 `_byte`变量存储`_byte32`的第一个字节，为`0x4d`。
 
+## 5. 枚举 enum
+枚举（`enum`）是`solidity`中用户定义的数据类型。它主要用于为`uint`分配名称，是程序易于阅读和维护。它与`C语言`中的`enum`类似，把名称从`0`开始`uint`表示：
+```
+    // 用enum将uint 0， 1， 2表示为Buy, Hold, Sell
+    enum ActionSet { Buy, Hold, Sell }
+    // 创建enum变量 action
+    ActionSet action = ActionSet.Buy;
+```
+它可以显式的和`uint`相互转换，并会检查转换的正整数是否在枚举的长度内，不然会报错：
+```
+    // 将uint 0， 1， 2表示为Buy, Hold, Sell
+    enum ActionSet { Buy, Hold, Sell };
+    // 创建enum变量 action
+    ActionSet action = ActionSet.Buy;
+```
+`enum`的一个比较冷门的变量，几乎没什么人用。
+
 ## 总结
-在第二讲，我们介绍了`solidity`中4种变量类型，并详细介绍了数值变量（`value type`)中的布尔型，整型，地址和定长字节数组。之后我们会介绍其他几种类型。
+在第二讲，我们介绍了`solidity`中4种变量类型，并详细介绍了数值变量（`value type`)中的布尔型，整型，地址，定长字节数组和枚举。之后我们会介绍其他几种类型。
 
