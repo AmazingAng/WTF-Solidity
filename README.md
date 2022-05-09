@@ -44,6 +44,9 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第19讲：调用其他合约**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/19_CallContract)】 【[文章](https://mirror.xyz/ninjak.eth/fI48BkuT7wWzRaVKkn1VWxnfLpkUEvIZIJcO5iOIzbk)】
 
+**第20讲：变量初始值**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/19_CallContract)】 【[文章](https://mirror.xyz/ninjak.eth/fI48BkuT7wWzRaVKkn1VWxnfLpkUEvIZIJcO5iOIzbk)】
+
+
 ## 专题
 ### ERC721专题
 **第1讲：ERC721相关库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
