@@ -94,7 +94,7 @@
 
 `_byte`变量存储`_byte32`的第一个字节，为`0x4d`。
 
-## 5. 枚举 enum
+### 5. 枚举 enum
 枚举（`enum`）是`solidity`中用户定义的数据类型。它主要用于为`uint`分配名称，是程序易于阅读和维护。它与`C语言`中的`enum`类似，把名称从`0`开始`uint`表示：
 ```
     // 用enum将uint 0， 1， 2表示为Buy, Hold, Sell
