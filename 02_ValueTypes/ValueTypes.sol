@@ -10,6 +10,7 @@ contract ValueTypes{
     bool public _bool4 = _bool == _bool1; //相等
     bool public _bool5 = _bool != _bool1; //不相等
 
+
     // 整数
     int public _int = -1;
     uint public _uint = 1;
@@ -27,9 +28,21 @@ contract ValueTypes{
     // 地址类型的成员
     uint256 public balance = _address1.balance; // balance of address
     
+    
     // 固定长度的字节数组
     bytes32 public _byte32 = "MiniSolidity"; // bytes32: 0x4d696e69536f6c69646974790000000000000000000000000000000000000000
     bytes1 public _byte = _byte32[0]; // bytes1: 0x4d
+    
+    
+    // Enum
+    // 将uint 0， 1， 2表示为Buy, Hold, Sell
+    enum ActionSet { Buy, Hold, Sell }
+    // 创建enum变量 action
+    ActionSet action = ActionSet.Buy;
 
+    // enum可以和uint显式的转换
+    function enumToUint() external view returns(uint){
+        return uint(action);
+    }
 }
 
