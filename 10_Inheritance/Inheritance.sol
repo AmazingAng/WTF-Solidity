@@ -35,7 +35,7 @@ contract Baba is Yeye{
 }
 
 contract Erzi is Yeye, Baba{
-    // 继承两个function: hip()和pop()，返回值改为B。
+    // 继承两个function: hip()和pop()，输出改为Erzi。
     function hip() public virtual override(Yeye, Baba){
         emit Log("Erzi");
     }
