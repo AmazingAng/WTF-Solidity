@@ -41,7 +41,7 @@ error TransferNotOwner(); // 自定义error
 ```
 
 ### Assert
-`assert`命令一般用于程序员写程序`debug`，因为他不能解释抛出异常的原因（比`require`少个字符串）。他的用法很简单，`require(检查条件）`，当检查条件不成立的时候，就会抛出异常。
+`assert`命令一般用于程序员写程序`debug`，因为他不能解释抛出异常的原因（比`require`少个字符串）。他的用法很简单，`assert(检查条件）`，当检查条件不成立的时候，就会抛出异常。
 
 我们用`assert`命令重写一下上面的`transferOwner`函数：
 ```
