@@ -1,4 +1,4 @@
-## Metamask项目方给Solidity程序员的16个安全建议
+、## Metamask项目方给Solidity程序员的16个安全建议
 
 **原文**：[Solidity Best Practices for Smart Contract Security](https://consensys.net/blog/developers/solidity-best-practices-for-smart-contract-security/)
 
@@ -8,17 +8,17 @@
 
 **Github**: [WTFSolidity]()https://github.com/AmazingAng/WTFSolidity
 
-```
-写在前面：
 
-这是Metamask项目方（Consensys）在2020年8月写的一篇博客，关于智能合约安全，其中给了Solidity程序员16条安全建议，并包含代码样例。
+> 写在前面：
+>
+> 这是Metamask项目方（Consensys）在2020年8月写的一篇博客，关于智能合约安全，其中给了Solidity程序员16条安全建议，并包含代码样例。
+>
+> 这篇文章写于一年半前，那时候solidity版本才到0.5,现在已经是0.8了，很多函数都不同。但很多建议至今仍然适用，读完对我帮助很大。我在网上没找到中文翻译，就简单翻译了一下，并标明了版本差异可能导致的问题，供中文开发者学习。
+>
+> 这篇文章的安全理念也融入到WTF Solidity极简入门教程中。
+>
+> By 0xAA
 
-这篇文章写于一年半前，那时候solidity版本才到0.5,现在已经是0.8了。但很多建议至今仍然适用，读完对我帮助很大。我在网上没找到中文翻译，就简单翻译了一下，供中文开发者学习。
-
-这篇文章的安全理念也融入到WTF Solidity极简入门教程中。
-
-By 0xAA
-```
 如果您已经牢记智能合约的安全理念并且正在处理`EVM`的特性，那么是时候考虑一​​些特定于`Solidity`编程语言的安全模式了。在本综述中，我们将重点关注`Solidity`的安全开发建议，这些建议也可能对用其他语言开发智能合约具有指导意义。 
 
 好了，让我们开始吧。
@@ -100,6 +100,7 @@ uint denominator = 2;
 接口和抽象合约都为智能合约提供了一种可定制和可重用的方法。`Solidity 0.4.11`中引入的接口类似于抽象合约，但不能实现任何功能。接口也有限制，例如不能访问存储或从其他接口继承，这通常使抽象合约更实用。虽然，接口对于在实现之前设计合约肯定有用。此外，重要的是要记住，如果合约继承自抽象合约，它必须通过覆盖实现所有未实现的功能，否则它也将是抽象的。
 
 ## 5. Fallback function 后备函数
+> 0xAA注：`Solidity 0.5.0`时还没有`receive`函数且`fallback`函数当时也直接声明为`function()`。关于最新版本的`fallback`函数教程，请看[链接](https://mirror.xyz/ninjak.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)
 ### 保持fallback function简单
 当合约被发送一个没有参数的消息（或者没有函数匹配）或，`fallback function`会被调用。当被`.send()`或`.transfer`触发时，`fallback function`只能访问`2300 gas`。如果您希望能够从`send()`或`.transfer()`接收`ETH`，那么您在后备函数中最多可以做的就是记录一个事件。如果需要计算更多`gas`，请使用适当的函数。
 ```
