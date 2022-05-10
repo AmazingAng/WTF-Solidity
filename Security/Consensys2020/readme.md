@@ -1,4 +1,4 @@
-、## Metamask项目方给Solidity程序员的16个安全建议
+## Metamask项目方给Solidity程序员的16个安全建议
 
 **原文**：[Solidity Best Practices for Smart Contract Security](https://consensys.net/blog/developers/solidity-best-practices-for-smart-contract-security/)
 
