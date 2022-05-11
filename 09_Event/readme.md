@@ -16,7 +16,7 @@
 - 响应：应用程序（[`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18)）可以通过`RPC`接口订阅和监听这些事件，并在前端做响应。
 - 经济：事件是`EVM`上比较经济的存储数据的方式，每个大概消耗2,000-5,000 `gas`不等。相比之下，存储一个新的变量至少需要20,000 `gas`。
 ### 规则
-事件的声明由`event`关键字开头，然后跟事件名称，括号里面写好时间需要记录的变量类型和变量名。以`ERC20`代币合约的`Transfer`事件为例：
+事件的声明由`event`关键字开头，然后跟事件名称，括号里面写好事件需要记录的变量类型和变量名。以`ERC20`代币合约的`Transfer`事件为例：
 ```
 event Transfer(address indexed from, address indexed to, uint256 value);
 ```
