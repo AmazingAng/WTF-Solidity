@@ -48,6 +48,7 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第20讲：变量初始值**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/20_InitialValue)】 【[文章](https://mirror.xyz/ninjak.eth/WoWQ8s66meku9zPFsHGsXs4m7T6PauZPmfSak76qDkI)】
 
+**第21讲：Call**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/21_Call)】 【[文章](https://mirror.xyz/ninjak.eth/vMJ0AHl3b_A5Lyey5lLdFhzkGT9wJ-D6vJpZpH0vlls)】
 
 ## 专题
 ### ERC721专题
