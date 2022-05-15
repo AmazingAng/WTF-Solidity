@@ -50,6 +50,11 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第21讲：Call**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/21_Call)】 【[文章](https://mirror.xyz/ninjak.eth/vMJ0AHl3b_A5Lyey5lLdFhzkGT9wJ-D6vJpZpH0vlls)】
 
+**第22讲：Delegatecall**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/22_Delegatecall)】 【[文章](https://mirror.xyz/ninjak.eth/hW9iLCOUUqsRCCZbzGS3x5m0wXfJBhlYQWLq93rplcU)】
+
+**第23讲：在合约中创建新合约**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/23_Create)】 【[文章](https://mirror.xyz/ninjak.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)】
+
+
 ## 专题
 ### ERC721专题
 **第1讲：ERC721相关库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
