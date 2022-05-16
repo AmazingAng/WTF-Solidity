@@ -55,6 +55,9 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第23讲：在合约中创建新合约**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/23_Create)】 【[文章](https://mirror.xyz/ninjak.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)】
 
+**第24讲：Create2**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/24_Create2)】 【[文章](https://mirror.xyz/ninjak.eth/Dz7kd6-RrcNvdHnptWKzsW9AcIOSA8PoVsMsQh8nlEM)】
+
+**第25讲：删除合约**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/25_DeleteContract)】 【[文章](https://mirror.xyz/ninjak.eth/080JeNq8X_HfciftWa-ed0S6Wb5YFuIb5GPVISu1gIc)】
 
 ## 专题
 ### ERC721专题
