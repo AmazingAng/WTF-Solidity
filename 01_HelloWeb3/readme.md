@@ -18,7 +18,7 @@
 ## 开发工具：remix
 本教程中，我会用`remix`来跑`solidity`合约。`remix`是以太坊官方推荐的智能合约开发IDE，适合新手，可以在浏览器中快速部署测试智能合约，你不需要在本地安装任何程序。
 
-网址：[remix.ethereum.org](remix.ethereum.org)
+网址：[remix.ethereum.org](https://remix.ethereum.org)
 
 进入`remix`，我们可以看到最左边的菜单有三个按钮，分别对应文件（写代码的地方），编译（跑代码），部署（部署到链上）。我们点新建（`Create New File`）按钮，就可以创建一个空白的`solidity`合约。
 
