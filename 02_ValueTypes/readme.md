@@ -104,10 +104,10 @@
 ```
 它可以显式的和`uint`相互转换，并会检查转换的正整数是否在枚举的长度内，不然会报错：
 ```
-    // 将uint 0， 1， 2表示为Buy, Hold, Sell
-    enum ActionSet { Buy, Hold, Sell };
-    // 创建enum变量 action
-    ActionSet action = ActionSet.Buy;
+    // enum可以和uint显式的转换
+    function enumToUint() external view returns(uint){
+        return uint(action);
+    }
 ```
 `enum`的一个比较冷门的变量，几乎没什么人用。
 
