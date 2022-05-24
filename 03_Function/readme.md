@@ -45,13 +45,13 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
 ## 代码
 ### 1. pure v.s. view
 
-我们在合约里定义一个状态变量 `_number = 5`。
+我们在合约里定义一个状态变量 `number = 5`。
 
     // SPDX-License-Identifier: MIT
     pragma solidity ^0.8.4;
     contract FunctionTypes{
-        uint256 public _number = 5;
-定义一个add() function，每次调用，输出 _number + 1。
+        uint256 public number = 5;
+定义一个add() function，每次调用，输出 number + 1。
 
         // 默认
         function add() external{
@@ -64,7 +64,7 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
     function addPure(uint256 _number) external pure returns(uint256 new_number){
         new_number = _number+1;
     }
-如果`add()`包含`view`，比如`function add() view external`，也会报错。因为`view`能读取，但不能够改写状态变量。可以稍微改写下方程，让他不改写`_number`，而是返回一个新的变量。
+如果`add()`包含`view`，比如`function add() view external`，也会报错。因为`view`能读取，但不能够改写状态变量。可以稍微改写下方程，让他不改写`number`，而是返回一个新的变量。
 
     // view: 看客
     function addView() external view returns(uint256 new_number) {
