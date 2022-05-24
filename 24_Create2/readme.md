@@ -126,11 +126,11 @@ BSC链上的PEOPLE地址:
 1.首先用WBNB和people的地址哈希作为salt来计算出Pair合约的地址
 2.调用PairFactory2.createPair2 传入参数为WBNB和people的地址，获取出创建的pair合约地址
 3.对比合约地址
-![create2_remix_test.png]https://github.com/tangminjie/WTFSolidity/blob/main/24_Create2/create2_remix_test.png
+![create2_remix_test.png](https://github.com/tangminjie/WTFSolidity/blob/main/24_Create2/create2_remix_test.png)
 
 ### 在hardhat上验证
 使用hardhat test 测试用例脚本进行验证，参考脚本代码：create2test.js
-![create2_hardhat_test.jpg]https://github.com/tangminjie/WTFSolidity/blob/main/24_Create2/create2_hardhat_test.jpg
+![create2_hardhat_test.jpg](https://github.com/tangminjie/WTFSolidity/blob/main/24_Create2/create2_hardhat_test.jpg)
 
 ## create2的实际应用场景
 1.交易所为新用户预留创建钱包合约地址。
