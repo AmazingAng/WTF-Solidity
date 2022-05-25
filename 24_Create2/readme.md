@@ -11,10 +11,10 @@
 -----
 
 ## CREATE2
-`CREATE2` 操作码使我们在智能合约部署在以太坊网络之前就能预测合约的地址。`Uniswap`创建`Pair`合约用的就是`CREATE2`而不是`CREATE2`。这一讲，我将介绍`CREATE2`的用法
+`CREATE2` 操作码使我们在智能合约部署在以太坊网络之前就能预测合约的地址。`Uniswap`创建`Pair`合约用的就是`CREATE2`而不是`CREATE`。这一讲，我将介绍`CREATE2`的用法
 
 ### CREATE如何计算地址
-智能合约可以由其他合约和普通账户利用`CREATE`操作码创建。 在这两种情况下，新合约的地址都以相同的方式计算：创建者的地址和`nounce`(该地址发送交易的总数)的哈希。
+智能合约可以由其他合约和普通账户利用`CREATE`操作码创建。 在这两种情况下，新合约的地址都以相同的方式计算：创建者的地址(通常为部署的钱包地址或者合约地址)和`nounce`(该地址发送交易的总数,对于合约账户是创建的合约总数,每创建一个合约nonce+1))的哈希。
 ```
 新地址 = hash(创建者地址, nonce)
 ```
@@ -122,6 +122,19 @@ WBNB地址: 0x2c44b726ADF1963cA47Af88B284C06f30380fC78
 BSC链上的PEOPLE地址:
 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 ```
+### 在remix上验证
+1.首先用WBNB和people的地址哈希作为salt来计算出Pair合约的地址
+2.调用PairFactory2.createPair2 传入参数为WBNB和people的地址，获取出创建的pair合约地址
+3.对比合约地址
+![create2_remix_test.png](https://github.com/tangminjie/WTFSolidity/blob/main/24_Create2/create2_remix_test.png)
+
+### 在hardhat上验证
+使用hardhat test 测试用例脚本进行验证，参考脚本代码：create2test.js
+![create2_hardhat_test.jpg](https://github.com/tangminjie/WTFSolidity/blob/main/24_Create2/create2_hardhat_test.jpg)
+
+## create2的实际应用场景
+1.交易所为新用户预留创建钱包合约地址。
+2.由 CREATE2 驱动的 factory 合约，在uniswapV2中交易对的创建是在 Factory中调用create2完成。这样做的好处是: 它可以得到一个确定的pair地址, 使得 Router中就可以通过 tokenA, tokenB 计算出pair地址, 不再需要执行一次 Factory.getPair(tokenA, tokenB) 的跨合约调用。
 
 ## 总结
 
