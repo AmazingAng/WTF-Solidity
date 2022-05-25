@@ -43,6 +43,7 @@
     bool public _bool4 = _bool == _bool1; //相等
     bool public _bool5 = _bool != _bool1; //不相等
 上面的代码中：变量`_bool`的取值是`true`；`_bool1`是`_bool`的非，为`false`；`_bool && _bool1`为`false`；`_bool || _bool1`为`true`；`_bool == _bool1`为`false`；`_bool != _bool1`为`true`。
+**值得注意的是：**`&&` 和 `||`运算符遵循短路规则，这意味着，假如存在`f(x) || g(y)`的表达式，如果`f(x)`是`true`，`g(y)`不会被计算，即使它和`f(x)`的结果是相反的
 
 ### 2. 整型
 整型是`solidity`中的整数，最常用的包括
@@ -111,6 +112,13 @@
 ```
 `enum`的一个比较冷门的变量，几乎没什么人用。
 
+## 在remix上验证
+- 部署合约后可以查看每个类型的变量具体的数值
+![2.1.png](./2.1.png)
+  
+- enum和uint转换的示例
+![2.2.png](./2.2.png)
+![2.3.png](./2.3.png)
 ## 总结
 在第二讲，我们介绍了`solidity`中4种变量类型，并详细介绍了数值变量（`value type`)中的布尔型，整型，地址，定长字节数组和枚举。之后我们会介绍其他几种类型。
 
