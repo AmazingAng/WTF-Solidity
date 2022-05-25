@@ -55,7 +55,7 @@ contract Parents {
 我们定义了一个`changeOwner`函数，运行他可以改变合约的`owner`，但是由于`onlyOwner`修饰符的存在，只有原先的`owner`可以调用，别人调用就会报错。这也是最常用的控制智能合约权限的方法。
 
 ### OppenZepplin的Ownable标准实现：
-`OppenZepplin`是一个维护`solidity`标准化代码库的组织，他的Ownable标准实现如下：
+`OppenZepplin`是一个维护`solidity`标准化代码库的组织，他的`Ownable`标准实现如下：
 [https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol)
 
 ## 总结
