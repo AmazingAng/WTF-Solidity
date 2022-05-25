@@ -20,6 +20,18 @@
       owner = msg.sender; // 在部署合约的时候，将owner设置为部署者的地址
    }
 ```
+
+注意⚠️：构造函数在不同的solidity版本中的语法并不一致，在Solidity 0.4.22之前，构造函数不使用 `constructor` 而是使用与合约名同名的函数作为构造函数而使用，由于这种旧写法容易使开发者在书写时发生疏漏（例如合约名叫 `Parents`，构造函数名写成 `parents`），使得构造函数变成普通函数，引发漏洞，所以0.4.22版本及之后，采用了全新的 `constructor` 写法。
+
+构造函数的旧写法代码示例：
+```solidity
+pragma solidity =0.4.21;
+contract Parents {
+    // 与合约名Parents同名的函数就是构造函数
+    function Parents () public {
+    }
+}
+```
 ## 修饰器
 修饰器（`modifier`）是`solidity`特有的语法，类似于面向对象编程中的`decorator`，声明函数拥有的特性，并减少代码冗余。它就像钢铁侠的智能盔甲，穿上它的函数会带有某些特定的行为。`modifier`的主要使用场景是运行函数前的检查，例如地址，变量，余额等。
 
@@ -27,7 +39,7 @@
 ![钢铁侠的modifier](https://images.mirror-media.xyz/publication-images/nVwXsOVmrYu8rqvKKPMpg.jpg?height=630&width=1200)
 
 我们来定义一个叫做onlyOwner的modifier：
-```
+```solidity
    // 定义modifier
    modifier onlyOwner {
       require(msg.sender == owner); // 检查调用者是否为owner地址
@@ -35,7 +47,7 @@
    }
 ```
 代有`onlyOwner`修饰符的函数只能被`owner`地址调用，比如下面这个例子：
-```
+```solidity
    function changeOwner(address _newOwner) external onlyOwner{
       owner = _newOwner; // 只有owner地址运行这个函数，并改变owner
    }
