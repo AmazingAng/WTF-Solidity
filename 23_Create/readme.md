@@ -106,5 +106,4 @@ BSC链上的PEOPLE地址:
 ![](3_debug.png)
 
 ## 总结
-
 这一讲，我们用极简`Uniswap`的例子介绍了如何使用`create`方法再合约里创建合约，下一讲我们将介绍如何使用`create2`方法来实现极简`Uniswap`。
