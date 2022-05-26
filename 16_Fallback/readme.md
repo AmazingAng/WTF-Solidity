@@ -66,7 +66,7 @@ contract PresidentOfCountry {
 contract Attack {
     function () { revert(); } // 故意revert造成调用失败
 
-    function Attack(address _target) payable {
+    function attack(address _target) public payable {
         _target.call.value(msg.value)(bytes4(keccak256("becomePresident()"))); // 调用国王合约中的竞选国王函数
     }
 }
@@ -76,6 +76,20 @@ contract Attack {
 
 ![](assets/attackerKing.jpg)
 
+使用remix部署测试一下，正常情况下 `PresidentOfCountry` 合约的国王如下， `0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2` 是一个正常用户的地址。
+![](assets/16534918368752.jpg)
+
+输入大于当前价格的 `value` 值，再点击 `becomePresident` 可以正常竞选国王。可以看到国王的地址被更改为 `0x5B38Da6a701c568545dCfcB03FcB875f56beddC4`。
+![](assets/16534919111454.jpg)
+
+部署 `Attack` 合约，调用 `attack` 函数，参数填入国王合约的地址（点击下图中的 Copy 字样下方的图标即可复制国王合约的地址），**一定不要忘记 `value` 值填入大于当前价格，使得攻击合约能顺利竞选上国王，** 然后点击 `attack` 运行。
+![](assets/16534920441804.jpg)
+
+运行成功后可以发现国王合约中的地址已经被更改为攻击合约的地址。
+![](assets/16534923552004.jpg)
+
+然后再次用正常用户去竞选国王，发现交易会一直失败，国王再也不能被更替。
+![](assets/16534924353745.jpg)
 
 
 ## 回退函数 fallback
