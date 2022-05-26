@@ -65,7 +65,7 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第28讲：函数选择器（selector）**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/28_Selector)】 【[文章](https://mirror.xyz/ninjak.eth/_Q-N_VGUV8F4QZbggR8Swv16LStBdfkeQb8qwSfoNTw)】
 
-**第29讲：Try-Catch **：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/29_TryCatch)】 【[文章](https://mirror.xyz/ninjak.eth/asj1-eKf6YdIoI9oMSLI3VECwqCzRHwaqIS01ALQ7qo)】
+**第29讲：Try-Catch**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/29_TryCatch)】 【[文章](https://mirror.xyz/ninjak.eth/asj1-eKf6YdIoI9oMSLI3VECwqCzRHwaqIS01ALQ7qo)】
 
 ## 专题
 ### ERC721专题
