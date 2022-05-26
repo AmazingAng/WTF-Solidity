@@ -2,10 +2,10 @@
 pragma solidity ^0.8.4;
 
 contract Owner {
-   address owner; // 定义owner变量
+   address public owner; // 定义owner变量
 
    // 构造函数
-   constructor() public {
+   constructor() {
       owner = msg.sender; // 在部署合约的时候，将owner设置为部署者的地址
    }
 
