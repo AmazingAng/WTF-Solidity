@@ -16,13 +16,13 @@
 
 ### 如何使用`selfdestruct`
 `selfdestruct`使用起来非常简单：
-```
+```solidity
 selfdestruct(_addr)；
 ```
 其中`_addr`是接收合约中剩余`ETH`的地址。
 
 ### 例子
-```
+```solidity
 contract DeleteContract {
 
     uint public value = 10;
@@ -46,6 +46,44 @@ contract DeleteContract {
 部署好合约后，我们向`DeleteContract`合约转入1 `ETH`。这时，`getBalance()`会返回1 `ETH`，`value`变量是10。
 
 当我们调用`deleteContract()`函数，合约将自毁，所有变量都清空，此时`value`变为默认值`0`，`getBalance()`也返回空值。
+
+**当我们希望可以对合约的服务进行停止时，其实其实可以采取非暴力的方法：Automatic Deprecation模式**
+```solidity
+contract AutoDeprecated{
+ 
+    uint private _deadline;
+ 
+    function setDeadline(uint time) public {
+        _deadline = time;
+    }
+ 
+    modifier notExpired(){
+        require(now <= _deadline);
+        _;
+    }
+ 
+    function service() public notExpired{ 
+        //some code    
+    } 
+}
+```
+当用户调用`service`，`notExpired`修饰符会先进行日期检测，这样，一旦过了特定时间，调用就会因过期而被拦截在`notExpired`层。当然`setDeadline`最好修饰成`onlyOwner`。
+### 注意事项
+1.对外提供合约销毁接口时，最好设置为只有合约所有者可以调用，可以使用函数修饰符`onlyOwner`进行函数声明。
+
+2.当我们获取一个刚部署得得合约中得一个为初始化任何数据的变量时它得值为0，但是当合约被销毁后与智能合约的交互也能成功，并且返回0,我们不能区分这两种情况。
+
+3.当合约中有`selfdestruct`功能时常常会带来安全问题和信任问题，合约中的Selfdestruct功能会为攻击者打开攻击向量(例如使用`selfdestruct`向一个合约频繁转入token进行攻击，这将大大节省了GAS的费用，虽然很少人这么做)，此外，此功能还会降低用户对合约的信心。
+
+###  在remix上验证
+1.部署合约并且转入1ETH，查看合约状态
+![deployContract.png](https://github.com/tangminjie/WTFSolidity/blob/main/25_DeleteContract/deployContract.png)
+
+2.销毁合约，查看合约状态
+![deleteContract.png](https://github.com/tangminjie/WTFSolidity/blob/main/25_DeleteContract/deleteContract.png)
+
+从测试中观察合约状态可以发现合约销毁后的ETH返回给了指定的地址，并且在合约销毁后依然可以请求交互，所以我们不能根据这个来判断合约是否已经销毁。
+
 
 ## 总结
 
