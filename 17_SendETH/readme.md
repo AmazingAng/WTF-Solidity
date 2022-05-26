@@ -10,8 +10,8 @@
 `Solidity`有三种方法向其他合约发送`ETH`，他们是：`transfer()`，`send()`和`call()`，其中`call()`是被鼓励的用法。
 
 ## 接收ETH合约
-我们先部署一个接收`ETH`合约`ReceiveETH`。`ReceiveETH`合约里有一个事件`Log`，记录收到的`ETH`数量和`gas`剩余。还有两个函数，一个是`receive()`函数，收到`ETH`被触发，并发送`Log`事件；另一个是查询合约`ETH`余额的`getBalance()`函数.
-```
+我们先部署一个接收`ETH`合约`ReceiveETH`。`ReceiveETH`合约里有一个事件`Log`，记录收到的`ETH`数量和`gas`剩余。还有两个函数，一个是`receive()`函数，收到`ETH`被触发，并发送`Log`事件；另一个是查询合约`ETH`余额的`getBalance()`函数。
+```solidity
 contract ReceiveETH {
     // 收到eth事件，记录amount和gas
     event Log(uint amount, uint gas);
@@ -28,16 +28,19 @@ contract ReceiveETH {
 }
 ```
 
-部署好合约后，运行`getBalance()`函数，可以看到当前合约的`ETH`余额为`0`.
+部署`ReceiveETH`合约后，运行`getBalance()`函数，可以看到当前合约的`ETH`余额为`0`。
+
+![image-20220526182704637](./image-20220526182704637.png)
 
 ## 发送ETH合约
 我们将实现三种方法向`ReceiveETH`合约发送`ETH`。首先，先在发送ETH合约`SendETH`中实现`payable`的`构造函数`和`receive()`，让我们能够在部署时和部署后向合约转账。
-```
+```solidity
 contract SendETH {
     // 构造函数，payable使得部署的时候可以转eth进去
     constructor() payable{}
     // receive方法，接收eth时被触发
     receive() external payable{}
+}
 ```
 ### transfer
 - 用法是`transfer(发送ETH数额)`。
@@ -46,14 +49,26 @@ contract SendETH {
 
 代码样例，注意里面的`_to`填`ReceiveETH`合约的地址，`amount`是`ETH`转账金额：
 ```
-    // 用transfer()发送ETH
-    function transferETH(address payable _to, uint256 amount) external payable{
-        _to.transfer(amount);
-    }
+// 用transfer()发送ETH
+function transferETH(address payable _to, uint256 amount) external payable{
+	_to.transfer(amount);
+}
 ```
 
+部署`SendETH`合约后，对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，发生`revert`。
+
+![image-20220526214713112](././image-20220526214713112.png)
+
+此时`amount`为10，`value`为10，`amount`<=`value`，转账成功。
+
+![image-20220526215221635](././image-20220526215221635.png)
+
+在`ReceiveETH`合约中，运行`getBalance()`函数，可以看到当前合约的`ETH`余额为`10`。
+
+![image-20220526215412897](././image-20220526215412897.png)
 
 ### send
+
 - 用法是`send(发送ETH数额)`。
 - `send()`的`gas`限制是`2300`，足够用于转账，但对方合约的`fallback()`或`receive()`函数不能实现太复杂的逻辑。
 - `send()`如果转账失败，不会`revert`。
@@ -61,17 +76,26 @@ contract SendETH {
 
 代码样例：
 ```
-    // send()发送ETH
-        function sendETH(address payable _to, uint256 amount) external payable{
-        // 处理下send的返回值，如果失败，revert交易并发送error
-        bool success = _to.send(amount);
-        if(!success){
-            revert SendFailed();
-        }
+// send()发送ETH
+function sendETH(address payable _to, uint256 amount) external payable{
+    // 处理下send的返回值，如果失败，revert交易并发送error
+    bool success = _to.send(amount);
+    if(!success){
+    	revert SendFailed();
     }
+}
 ```
 
+对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，因为经过处理，所以发生`revert`。
+
+![image-20220526221457066](././image-20220526221457066.png)
+
+此时`amount`为10，`value`为11，`amount`<=`value`，转账成功。
+
+![image-20220526221822581](././image-20220526221822581.png)
+
 ### call
+
 - 用法是`call{value: 发送ETH数额}("")`。
 - `call()`没有`gas`限制，可以支持对方合约`fallback()`或`receive()`函数实现复杂逻辑。
 - `call()`如果转账失败，不会`revert`。
@@ -79,17 +103,25 @@ contract SendETH {
 
 代码样例：
 ```
-    // call()发送ETH
-    function callETH(address payable _to, uint256 amount) external payable{
-        // 处理下call的返回值，如果失败，revert交易并发送error
-        (bool success,) = _to.call{value: amount}("");
-        if(!success){
-            revert CallFailed();
-        }
+// call()发送ETH
+function callETH(address payable _to, uint256 amount) external payable{
+    // 处理下call的返回值，如果失败，revert交易并发送error
+    (bool success,) = _to.call{value: amount}("");
+    if(!success){
+    	revert CallFailed();
     }
+}
 ```
 
-运行三种方法，可以看到，他们都可以成功的向`ReceiveETH`合约发送`ETH`。
+对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，因为经过处理，所以发生`revert`。
+
+![image-20220526222142807](././image-20220526222142807.png)
+
+此时`amount`为10，`value`为11，`amount`<=`value`，转账成功。
+
+![image-20220526222244726](././image-20220526222244726.png)
+
+运行三种方法，可以看到，他们都可以成功地向`ReceiveETH`合约发送`ETH`。
 
 ## 总结
 这一讲，我们介绍`solidity`三种发送`ETH`的方法：`transfer`，`send`和`call`。
