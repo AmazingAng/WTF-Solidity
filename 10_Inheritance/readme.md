@@ -19,7 +19,7 @@
 
 ### 简单继承
 我们先写一个简单的爷爷合约`Yeye`，里面包含1个`Log`事件和3个`function`: `hip()`, `pop()`, `yeye()`，输出都是”Yeye”。
-```
+```solidity
 contract Yeye {
     event Log(string msg);
 
@@ -38,7 +38,7 @@ contract Yeye {
 }
 ```
 我们再定义一个爸爸合约`Baba`，让他继承`Yeye`合约，语法就是`contract Baba is Yeye`，非常直观。在`Baba`合约里，我们重写一下`hip()`和`pop()`这两个函数，加上`override`关键字，并将他们的输出改为`”Baba”`；并且加一个新的函数`baba`，输出也是`”Baba”`。
-```
+```solidity
 contract Baba is Yeye{
     // 继承两个function: hip()和pop()，输出改为Baba。
     function hip() public virtual override{
@@ -63,7 +63,7 @@ contract Baba is Yeye{
 如果某一个函数在多个继承的合约里都存在，比如例子中的`hip()`和`pop()`，在子合约里必须重写，不然会报错。
 重写在多个父合约中重名函数时，`override`关键字后面要加上所有父合约名字，例如`override(Yeye, Baba)`。
 例子：
-```
+```solidity
 contract Erzi is Yeye, Baba{
     // 继承两个function: hip()和pop()，输出值为Erzi。
     function hip() public virtual override(Yeye, Baba){
@@ -78,6 +78,35 @@ contract Erzi is Yeye, Baba{
 
 ### 修饰器的继承
 `Solidity`中的修饰器（`Modifier`）同样可以继承，用法与函数继承类似，在相应的地方加`virtual`和`override`关键字即可。
+```solidity
+contract Base1 {
+    modifier exactDividedBy2And3(uint _a) virtual {
+        require(_a % 2 == 0 && _a % 3 == 0);
+        _;
+    }
+}
+
+contract Identifier is Base1 {
+
+    //计算一个数分别被2除和被3除的值，但是传入的参数必须是2和3的倍数
+    function getExactDividedBy2And3(uint _dividend) public exactDividedBy2And3(_dividend) pure returns(uint, uint) {
+        return getExactDividedBy2And3WithoutModifier(_dividend);
+    }
+
+    //计算一个数分别被2除和被3除的值
+    function getExactDividedBy2And3WithoutModifier(uint _dividend) public pure returns(uint, uint){
+        uint div2 = _dividend / 2;
+        uint div3 = _dividend / 3;
+        return (div2, div3);
+    }
+}
+```
+上面的Identifier可以直接在代码中使用exactDividedBy2And3这个修饰器，也可以像下面一样重写修饰器。
+```solidity
+    modifier exactDividedBy2And3(uint _a) override {
+        _;
+    }
+```
 
 ### 构造函数的继承
 子合约有两种方法继承父合约的构造函数。举个简单的例子，父合约`A`里面有一个状态变量`a`，并由构造函数的参数来确定：
@@ -114,6 +143,21 @@ contract C is A {
         super.pop();
     }
 ```
+## 在Remix上验证
+- 合约简单继承示例, 可以观察到Baba合约多了Yeye的函数
+  ![10-1](./pics/10-1.png)
+  ![10-2](./pics/10-2.png)
+- 合约多重继承可以参考简单继承的操作步骤来增加部署Erzi合约，然后观察暴露的函数以及尝试调用来查看日志
+- 修饰器继承示例
+  ![10-3](./pics/10-3.png)
+  ![10-4](./pics/10-4.png)
+  ![10-5](./pics/10-5.png)
+- 构造函数继承示例
+  ![10-6](./pics/10-6.png)
+  ![10-7](./pics/10-7.png)
+- 调用父合约示例
+  ![10-8](./pics/10-8.png)
+  ![10-9](./pics/10-9.png)
 ## 总结
 这一讲，我们介绍了`solidity`继承的基本用法，包括简单继承，多重继承，修饰器和构造函数的继承，以及调用父合约中的函数。
 
