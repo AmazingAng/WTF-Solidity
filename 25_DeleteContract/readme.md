@@ -47,7 +47,8 @@ contract DeleteContract {
 
 当我们调用`deleteContract()`函数，合约将自毁，所有变量都清空，此时`value`变为默认值`0`，`getBalance()`也返回空值。
 
-**当我们希望可以对合约的服务进行停止时，其实其实可以采取非暴力的方法：Automatic Deprecation模式**
+**delete的替代方案**
+当我们希望可以对合约的服务进行停止时，其实其实可以采取非暴力的方法：`Automatic Deprecation`模式
 ```solidity
 contract AutoDeprecated{
  
