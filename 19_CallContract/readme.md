@@ -15,9 +15,9 @@
 ## 目标合约
 我们先写一个简单的合约`OtherContract`来调用。
 
-```
+```solidity
 contract OtherContract {
-    uint256 private _x = 0; // 状态变量x
+    uint256 private _x = 0; // 状态变量_x
     // 收到eth的事件，记录amount和gas
     event Log(uint amount, uint gas);
     
@@ -35,17 +35,17 @@ contract OtherContract {
         }
     }
 
-    // 读取x
+    // 读取_x
     function getX() external view returns(uint x){
         x = _x;
     }
 }
 ```
 
-这个合约包含一个状态变量`x`，一个事件`Log`在收到`ETH`时触发，三个函数：
+这个合约包含一个状态变量`_x`，一个事件`Log`在收到`ETH`时触发，三个函数：
 - `getBalance()`: 返回合约`ETH`余额。
-- `setX()`: `external payable`函数，可以设置`x`的值，并向合约发送`ETH`。
-- `getX()`: 读取`x`的值。
+- `setX()`: `external payable`函数，可以设置`_x`的值，并向合约发送`ETH`。
+- `getX()`: 读取`_x`的值。
 
 ## 调用`OtherContract`合约
 我们可以利用合约的地址和合约代码（或接口）来创建合约的引用：`_Name(_Address)`，其中`_Name`是合约名，`_Address`是合约地址。然后用合约的引用来调用它的函数：`_Name(_Address).f()`，其中`f()`是要调用的函数。
@@ -55,16 +55,18 @@ contract OtherContract {
 ### 1. 传入合约地址
 我们可以在函数里传入目标合约地址，生成目标合约的引用，然后调用目标函数。以调用`OtherContract`合约的`setX`函数为例，我们在新合约中写一个`callSetX`函数，传入已部署好的`OtherContract`合约地址`_Address`和`setX`的参数`x`：
 
-```
+```solidity
     function callSetX(address _Address, uint256 x) external{
         OtherContract(_Address).setX(x);
     }
 ```
 
 ### 2. 传入合约变量
-我们可以直接在函数里传入合约的引用，只需要把上面参数的`address`类型改为目标合约名，比`OtherContract`。下面例子实现了调用目标合约的`getX()`函数。
+我们可以直接在函数里传入合约的引用，只需要把上面参数的`address`类型改为目标合约名，比如`OtherContract`。下面例子实现了调用目标合约的`getX()`函数。
 
-```
+注意，该函数参数`OtherContract _Address`底层类型仍然是`address`，生成的`ABI`中、调用`callGetX`时传入的参数都是`address`类型
+
+```solidity
     function callGetX(OtherContract _Address) external view returns(uint x){
         x = _Address.getX();
     }
@@ -72,7 +74,7 @@ contract OtherContract {
 
 ### 3. 创建合约变量
 我们可以创建合约变量，然后通过它来调用目标函数。下面例子，我们给变量`oc`存储了`OtherContract`合约的引用：
-```
+```solidity
     function callGetX2(address _Address) external view returns(uint x){
         OtherContract oc = OtherContract(_Address);
         x = oc.getX();
@@ -84,7 +86,7 @@ contract OtherContract {
 
 
 `OtherContract`合约的`setX`函数是`payable`的，在下面这个例子中我们通过调用`setX`来往目标合约转账。
-```
+```solidity
     function setXTransferETH(address otherContract, uint256 x) payable external{
         OtherContract(otherContract).setX{value: msg.value}(x);
     }
@@ -93,4 +95,4 @@ contract OtherContract {
 转账后，我们可以通过`Log`事件和`getBalance()`函数观察目标合约`ETH`余额的变化。
 
 ## 总结
-这一讲，我们介绍如何在通过目标合约代码（或接口）和地址来创建合约的引用，从而调用目标合约的函数。
+这一讲，我们介绍了如何通过目标合约代码（或接口）和地址来创建合约的引用，从而调用目标合约的函数。
