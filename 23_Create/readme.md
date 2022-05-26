@@ -55,6 +55,8 @@ contract Pair{
 构造函数`constructor`在部署时将`factory`赋值为工厂合约地址。`initialize`函数会在`Pair`合约创建的时候被工厂合约调用一次，将`token0`和`token1`更新为币对中两种代币的地址。
 
 > **提问**：为什么`uniswap`不在`constructor`中将`token0`和`token1`地址更新好？
+>
+> **答**：因为`uniswap`使用的是`create2`创建合约，限制构造函数不能有参数。当使用`create`时，`Pair`合约允许构造函数有参数，可以在`constructor`中将`token0`和`token1`地址更新好。
 
 ### `PairFactory`
 ```
@@ -89,5 +91,20 @@ BSC链上的PEOPLE地址:
 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 ```
 
+### 在remix上验证
+
+1.使用`WBNB`和`PEOPLE`的地址作为参数调用`createPair`,得到`Pair`合约地址：0xD3e2008b4Da2cD6DEAF73471590fF30C86778A48
+
+![](1_create.png)
+
+2.查看`Pair`合约各项参数
+
+![](2_pair.png)
+
+3.Debug查看`create`操作码
+
+![](3_debug.png)
+
 ## 总结
+
 这一讲，我们用极简`Uniswap`的例子介绍了如何使用`create`方法再合约里创建合约，下一讲我们将介绍如何使用`create2`方法来实现极简`Uniswap`。
