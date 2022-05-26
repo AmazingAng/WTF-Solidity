@@ -14,9 +14,7 @@
 `Solidity`中的事件（`event`）是`EVM`上日志的抽象，它具有两个特点：
 
 - 响应：应用程序（[`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18)）可以通过`RPC`接口订阅和监听这些事件，并在前端做响应。
-- 经济：事件是`EVM`上比较经济的存储数据的方式，每个大概消耗2,000-5,000 `gas`不等。相比之下，存储一个新的变量至少需要20,000 `gas`。
-
-wishucry注：实际测试了一下，以 Transfer 标准事件为例，事件的消耗 gas 值约为1700多，如果是匿名事件，存储将更小，消耗几百 gas。
+- 经济：事件是`EVM`上比较经济的存储数据的方式，每个大概消耗2,000 `gas`；相比之下，链上存储一个新变量至少需要20,000 `gas`。
 
 ### 规则
 事件的声明由`event`关键字开头，然后跟事件名称，括号里面写好事件需要记录的变量类型和变量名。以`ERC20`代币合约的`Transfer`事件为例：
@@ -47,6 +45,17 @@ event Transfer(address indexed from, address indexed to, uint256 value);
         emit Transfer(from, to, amount);
     }
 ```
+
+### Remix 演示
+以 `Event.sol` 合约为例，编译部署。
+
+然后调用 `_transfer` 函数。
+![](assets/16535538066362.jpg)
+
+点击右侧的交易查看详情，可以看到日志的具体内容。
+![](assets/16535540748258.jpg)
+
+
 ### 在etherscan上查询事件
 我们尝试用`_transfer()`函数在`Rinkeby`测试网络上转账100代币，可以在`etherscan`上查询到相应的`tx`：[网址](https://rinkeby.etherscan.io/tx/0x8cf87215b23055896d93004112bbd8ab754f081b4491cb48c37592ca8f8a36c7)。
 
