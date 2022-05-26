@@ -69,17 +69,17 @@ contract AutoDeprecated{
 ```
 当用户调用`service`，`notExpired`修饰符会先进行日期检测，这样，一旦过了特定时间，调用就会因过期而被拦截在`notExpired`层。当然`setDeadline`最好修饰成`onlyOwner`。
 ### 注意事项
-1.对外提供合约销毁接口时，最好设置为只有合约所有者可以调用，可以使用函数修饰符`onlyOwner`进行函数声明。
+1. 对外提供合约销毁接口时，最好设置为只有合约所有者可以调用，可以使用函数修饰符`onlyOwner`进行函数声明。
 
-2.当我们获取一个刚部署得得合约中得一个为初始化任何数据的变量时它得值为0，但是当合约被销毁后与智能合约的交互也能成功，并且返回0,我们不能区分这两种情况。
+2. 当我们获取一个刚部署得得合约中得一个为初始化任何数据的变量时它得值为0，但是当合约被销毁后与智能合约的交互也能成功，并且返回0,我们不能区分这两种情况。
 
-3.当合约中有`selfdestruct`功能时常常会带来安全问题和信任问题，合约中的Selfdestruct功能会为攻击者打开攻击向量(例如使用`selfdestruct`向一个合约频繁转入token进行攻击，这将大大节省了GAS的费用，虽然很少人这么做)，此外，此功能还会降低用户对合约的信心。
+3. 当合约中有`selfdestruct`功能时常常会带来安全问题和信任问题，合约中的Selfdestruct功能会为攻击者打开攻击向量(例如使用`selfdestruct`向一个合约频繁转入token进行攻击，这将大大节省了GAS的费用，虽然很少人这么做)，此外，此功能还会降低用户对合约的信心。
 
 ###  在remix上验证
-1.部署合约并且转入1ETH，查看合约状态
+1. 部署合约并且转入1ETH，查看合约状态
 ![deployContract.png](https://github.com/tangminjie/WTFSolidity/blob/main/25_DeleteContract/deployContract.png)
 
-2.销毁合约，查看合约状态
+2. 销毁合约，查看合约状态
 ![deleteContract.png](https://github.com/tangminjie/WTFSolidity/blob/main/25_DeleteContract/deleteContract.png)
 
 从测试中观察合约状态可以发现合约销毁后的ETH返回给了指定的地址，并且在合约销毁后依然可以请求交互，所以我们不能根据这个来判断合约是否已经销毁。
