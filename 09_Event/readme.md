@@ -47,6 +47,17 @@ event Transfer(address indexed from, address indexed to, uint256 value);
         emit Transfer(from, to, amount);
     }
 ```
+
+### Remix 演示
+以 `Event.sol` 合约为例，编译部署。
+
+然后调用 `_transfer` 函数。
+![](assets/16535538066362.jpg)
+
+点击右侧的交易查看详情，可以看到日志的具体内容。
+![](assets/16535540748258.jpg)
+
+
 ### 在etherscan上查询事件
 我们尝试用`_transfer()`函数在`Rinkeby`测试网络上转账100代币，可以在`etherscan`上查询到相应的`tx`：[网址](https://rinkeby.etherscan.io/tx/0x8cf87215b23055896d93004112bbd8ab754f081b4491cb48c37592ca8f8a36c7)。
 

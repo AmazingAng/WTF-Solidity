@@ -24,6 +24,9 @@ function saySomething(string memory something) public pure returns(string memory
 
 最终重载函数在经过编译器编译后，由于不同的参数类型，都变成了不同的函数选择器（selector）。关于函数选择器的具体内容可参考[Solidity极简入门: 28. 函数选择器Selector](https://github.com/AmazingAng/WTFSolidity/tree/main/28_Selector)。
 
+以 `Overloading.sol` 合约为例，在 Remix 上编译部署后，分别调用重载函数 `saySomething()` 和 `saySomething(string memory something)`，可以看到他们返回了不同的结果，被区分为不同的函数。
+![](assets/16535544637594.jpg)
+
 ### 实参匹配（Argument Matching）
 在调用重载函数时，会把输入的实际参数和函数参数的变量类型做匹配。
 如果出现多个匹配的重载函数，[solidity文档](https://docs.soliditylang.org/en/v0.8.12/contracts.html#overload-resolution-and-argument-matching)上说会报错。它给的例子是两个叫`f()`的函数，一个参数为`uint8`，另一个为`uint256`。文档说如果输入`50`，既可以被转换为`uint8`，也可以被转换为`uint256`，因此会报错。但是我没遇到：
