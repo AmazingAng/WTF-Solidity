@@ -47,28 +47,6 @@ contract DeleteContract {
 
 当我们调用`deleteContract()`函数，合约将自毁，所有变量都清空，此时`value`变为默认值`0`，`getBalance()`也返回空值。
 
-**delete的替代方案**
-当我们希望可以对合约的服务进行停止时，其实其实可以采取非暴力的方法：`Automatic Deprecation`模式
-```solidity
-contract AutoDeprecated{
- 
-    uint private _deadline;
- 
-    function setDeadline(uint time) public {
-        _deadline = time;
-    }
- 
-    modifier notExpired(){
-        require(now <= _deadline);
-        _;
-    }
- 
-    function service() public notExpired{ 
-        //some code    
-    } 
-}
-```
-当用户调用`service`，`notExpired`修饰符会先进行日期检测，这样，一旦过了特定时间，调用就会因过期而被拦截在`notExpired`层。当然`setDeadline`最好修饰成`onlyOwner`。
 ### 注意事项
 1. 对外提供合约销毁接口时，最好设置为只有合约所有者可以调用，可以使用函数修饰符`onlyOwner`进行函数声明。
 
