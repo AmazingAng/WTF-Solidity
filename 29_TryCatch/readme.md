@@ -20,9 +20,11 @@
             // call失败的情况下 运行一些代码
         }
 ```
-其中`externalContract.f()`时某个外部合约的函数调用，`try`模块在调用成功的情况下运行，而`catch`模块则在调用失败时运行。
+其中`externalContract.f()`是某个外部合约的函数调用，`try`模块在调用成功的情况下运行，而`catch`模块则在调用失败时运行。
 
-如果调用的函数有返回值，那么必须在`try`之后声明`returns(returnType val)`，并且在`try`模块中可以使用返回的变量；如果时创建合约，那么返回值是新创建的合约变量。
+同样可以使用`this.f()`来替代`externalContract.f()`，`this.f()`也被视作为外部调用，但不可在构造函数中使用，因为此时合约还未创建。
+
+如果调用的函数有返回值，那么必须在`try`之后声明`returns(returnType val)`，并且在`try`模块中可以使用返回的变量；如果是创建合约，那么返回值是新创建的合约变量。
 ```
         try externalContract.f() returns(returnType val){
             // call成功的情况下 运行一些代码
@@ -100,7 +102,13 @@ contract OnlyEven{
     }
 ```
 
-当运行`execute(0)`的时候，因为`0`为偶数，没有异常抛出，调用成功并释放`SuccessEvent`事件；当运行`execute(1)`的时候，因为`1`为偶数，异常抛出，调用失败并释放`CatchEvent`事件。
+当运行`execute(0)`的时候，因为`0`为偶数，满足`require(b % 2 == 0, "Ups! Reverting");`，没有异常抛出，调用成功并释放`SuccessEvent`事件。
+
+![](execute(0).png)
+
+当运行`execute(1)`的时候，因为`1`为偶数，不满足`require(b % 2 == 0, "Ups! Reverting");`，异常抛出，调用失败并释放`CatchEvent`事件。
+
+![](execute(1).png)
 
 ### 处理合约创建异常
 
@@ -127,6 +135,18 @@ contract OnlyEven{
 ```
 
 大家可以运行一下`executeNew(0)`，`executeNew(1)`，`executeNew(2)`，看看会有什么不同。
+
+当运行`executeNew(0)`时，因为`0`不满足`require(a != 0, "invalid number");`，会失败并释放`CatchEvent`事件。
+
+![](executeNew(0).png)
+
+当运行`executeNew(1)`时，因为`1`不满足`assert(a != 1);`，会失败并释放`CatchByte`事件。
+
+![](executeNew(1).png)
+
+当运行`executeNew(2)`时，因为`2`满足`require(a != 0, "invalid number");`和`assert(a != 1);`，会成功并释放`SuccessEvent`事件。
+
+![](executeNew(2).png)
 
 ## 总结
 在这一讲，我们介绍了如何在`solidity`使用`try-catch`来智能合约运行中的异常：
