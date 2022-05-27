@@ -123,18 +123,15 @@ BSC链上的PEOPLE地址:
 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 ```
 ### 在remix上验证
-1.首先用WBNB和people的地址哈希作为salt来计算出Pair合约的地址
-2.调用PairFactory2.createPair2 传入参数为WBNB和people的地址，获取出创建的pair合约地址
-3.对比合约地址
-![create2_remix_test.png](https://github.com/tangminjie/WTFSolidity/blob/main/24_Create2/create2_remix_test.png)
-
-### 在hardhat上验证
-使用hardhat test 测试用例脚本进行验证，参考脚本代码：create2test.js
-![create2_hardhat_test.jpg](https://github.com/tangminjie/WTFSolidity/blob/main/24_Create2/create2_hardhat_test.jpg)
+1. 首先用`WBNB`和`PEOPLE`的地址哈希作为`salt`来计算出`Pair`合约的地址
+2. 调用`PairFactory2.createPair2`传入参数为`WBNB`和`PEOPLE`的地址，获取出创建的`pair`合约地址
+3. 对比合约地址
+![create2_remix_test.png](https://github.com/AmazingAng/WTFSolidity/blob/main/24_Create2/create2_remix_test.png)
 
 ## create2的实际应用场景
-1.交易所为新用户预留创建钱包合约地址。
-2.由 CREATE2 驱动的 factory 合约，在uniswapV2中交易对的创建是在 Factory中调用create2完成。这样做的好处是: 它可以得到一个确定的pair地址, 使得 Router中就可以通过 tokenA, tokenB 计算出pair地址, 不再需要执行一次 Factory.getPair(tokenA, tokenB) 的跨合约调用。
+1. 交易所为新用户预留创建钱包合约地址。
+
+2. 由 `CREATE2` 驱动的 `factory` 合约，在`uniswapV2`中交易对的创建是在 `Factory`中调用`create2`完成。这样做的好处是: 它可以得到一个确定的`pair`地址, 使得 `Router`中就可以通过 `(tokenA, tokenB)` 计算出`pair`地址, 不再需要执行一次 `Factory.getPair(tokenA, tokenB)` 的跨合约调用。
 
 ## 总结
 
