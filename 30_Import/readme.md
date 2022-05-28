@@ -23,21 +23,23 @@
 import './Yeye.sol';
 ```
 
-- 通过源文件网址导入网上的合约
+- 通过源文件网址导入网上的合约，例子：
 ```
 // 通过网址引用
 import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
 ```
 
-- 通过`npm`的目录导入
+- 通过`npm`的目录导入，例子：
 ```
 import '@openzeppelin/contracts/access/Ownable.sol';
 ```
 
-- 通过`全局符号`导入特定的合约
+- 通过`全局符号`导入特定的合约，例子：
 ```
 import {Yeye} from './Yeye.sol';
 ```
+
+- 引用(import)在代码中的位置为版本号之后，在其余代码之前
 
 ## 测试导入结果
 
@@ -57,4 +59,4 @@ contract Import {
 ```
 
 ## 总结
-这一讲，我们介绍了利用`import`关键字导入外部源代码的方法。`import`可以让我们直接导入别人写好的代码，非常方便。
+这一讲，我们介绍了利用`import`关键字导入外部源代码的方法。通过`import`关键字，可以引用我们写的其他文件中的合约或者函数，也可以直接导入别人写好的代码，非常方便。
