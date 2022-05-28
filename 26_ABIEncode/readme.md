@@ -12,7 +12,7 @@
 
 `ABI` (Application Binary Interface，应用二进制接口)是与以太坊智能合约交互的标准。数据基于他们的类型编码；并且由于编码后不包含类型信息，解码时需要注明它们的类型。
 
-`Solidity`中，`ABI编码`有4个函数：`abi.encode`, `abi.encodePacked`, `abi.encodeWithSignature`, `abi.encodeWithSelector`。而`ABI解码`有1个函数：abi.decode，用于解码`abi.encode`的数据。这一讲，我们将学习如何使用这些函数。
+`Solidity`中，`ABI编码`有4个函数：`abi.encode`, `abi.encodePacked`, `abi.encodeWithSignature`, `abi.encodeWithSelector`。而`ABI解码`有1个函数：`abi.decode`，用于解码`abi.encode`的数据。这一讲，我们将学习如何使用这些函数。
 
 ## ABI编码
 
@@ -50,7 +50,8 @@
         result = abi.encodeWithSignature("foo(uint256,address,string,uint256[2])", x, addr, name, array);
     }
 ```
-编码的结果为`0xe87082f1000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000007a58c0be72be218b41c608b7fe7c5bb630736c7100000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000043078414100000000000000000000000000000000000000000000000000000000`，等同于在`abi.encode`编码结果前加上了4字节的`函数选择器`。
+编码的结果为`0xe87082f1000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000007a58c0be72be218b41c608b7fe7c5bb630736c7100000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000043078414100000000000000000000000000000000000000000000000000000000`，等同于在`abi.encode`编码结果前加上了4字节的`函数选择器`[^说明]。
+[^说明]: 函数选择器就是通过函数名和参数进行签名处理(Keccak–Sha3)来标识函数，可以用于不同合约之间的函数调用
 
 ### `abi.encodeWithSelector`
 与`abi.encodeWithSignature`功能类似，只不过第一个参数为`函数选择器`，为`函数签名`Keccak哈希的前4个字节。
@@ -85,6 +86,26 @@
 
 - 查看abi.decode方法的解码结果
 ![](./pics/abi_decode.png)
+
+## ABI的使用场景
+1. 在合约开发中，ABI常配合call来实现对合约的底层调用。
+```solidity  
+    bytes4 selector = contract.getValue.selector;
+
+    bytes memory data = abi.encodeWithSelector(selector, _x);
+    (bool success, bytes memory returnedData) = address(contract).staticcall(data);
+    require(success);
+
+    return abi.decode(returnedData, (uint256));
+```
+2. ethers.js中常用ABI实现合约的导入和函数调用。
+```solidity
+    const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+    /*
+        * Call the getAllWaves method from your Smart Contract
+        */
+    const waves = await wavePortalContract.getAllWaves();
+```
 
 ## 总结
 在以太坊中，数据必须编码成字节码才能和智能合约交互。这一讲，我们介绍了4种`abi编码`方法和1种`abi解码`方法。
