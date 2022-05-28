@@ -78,7 +78,7 @@ contract OtherContract {
 ### 利用`call`调用目标合约
 **1. Response事件**
 
-我们写一个`Call`合约来调用目标合约函数。首先写一个定义`Response`事件，输出`call`返回的`success`和`data`，方便我们观察返回值。
+我们写一个`Call`合约来调用目标合约函数。首先定义一个`Response`事件，输出`call`返回的`success`和`data`，方便我们观察返回值。
 
 ```
 // 定义Response事件，输出call返回的结果success和data
