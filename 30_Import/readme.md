@@ -58,5 +58,7 @@ contract Import {
 }
 ```
 
+<img width="1266" alt="lesson30_" src="https://user-images.githubusercontent.com/38929721/170836836-433488b5-02f7-4b91-946a-093e32dd6472.png">
+
 ## 总结
 这一讲，我们介绍了利用`import`关键字导入外部源代码的方法。通过`import`关键字，可以引用我们写的其他文件中的合约或者函数，也可以直接导入别人写好的代码，非常方便。
