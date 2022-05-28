@@ -28,9 +28,13 @@
 
 ## Keccak256
 `Keccak256`函数是`solidity`中最常用的哈希函数，用法非常简单：
-```
+```solidity
 哈希 = keccak256(数据);
 ```
+### Keccak256和sha3
+这是一个很有趣的事情：
+1. sha3由keccak标准化而来，在很多场合下Keccak和SHA3是同义词，但在2015年8月SHA3最终完成标准化时，NIST调整了填充算法。**所以SHA3就和keccak计算的结果不一样**，这点在实际开发中要注意。
+2. 以太坊在开发的时候sha3还在标准化中，所以采用了keccak，所以Ethereum和Solidity智能合约代码中的SHA3是指Keccak256，而不是标准的NIST-SHA3，为了避免混淆，直接在合约代码中写成Keccak256是最清晰的。
 
 ### 生成数据唯一标识
 
