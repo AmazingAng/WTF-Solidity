@@ -70,7 +70,7 @@ contract OtherContract {
 }
 ```
 
-这个合约包含一个状态变量`x`，一个事件`Log`在收到`ETH`时触发，三个函数：
+这个合约包含一个状态变量`x`，一个在收到`ETH`时触发的事件`Log`，三个函数：
 - `getBalance()`: 返回合约`ETH`余额。
 - `setX()`: `external payable`函数，可以设置`x`的值，并向合约发送`ETH`。
 - `getX()`: 读取`x`的值。
@@ -78,11 +78,11 @@ contract OtherContract {
 ### 利用`call`调用目标合约
 **1. Response事件**
 
-我们写一个`Call`合约来调用目标合约函数。首先先写一个定义`Response`事件，输出`call`返回的`success`和`data`，方便我们观察返回值。
+我们写一个`Call`合约来调用目标合约函数。首先写一个定义`Response`事件，输出`call`返回的`success`和`data`，方便我们观察返回值。
 
 ```
-    // 定义Response事件，输出call返回的结果success和data
-    event Response(bool success, bytes data);
+// 定义Response事件，输出call返回的结果success和data
+event Response(bool success, bytes data);
 ```
 
 **2. 调用setX函数**
@@ -91,33 +91,37 @@ contract OtherContract {
 
 ```    
 function callSetX(address payable _addr, uint256 x) public payable {
-        // call setX()，同时可以发送ETH
-        (bool success, bytes memory data) = _addr.call{value: msg.value}(
-            abi.encodeWithSignature("setX(uint256)", x)
-        );
+	// call setX()，同时可以发送ETH
+	(bool success, bytes memory data) = _addr.call{value: msg.value}(
+		abi.encodeWithSignature("setX(uint256)", x)
+	);
 
-        emit Response(success, data); //释放事件
-    }
+	emit Response(success, data); //释放事件
+}
 ```
 
 接下来我们调用`callSetX`把状态变量`_x`改为5，参数为`OtherContract`地址和`5`，由于目标函数`setX()`没有返回值，因此`Response`事件输出的`data`为`0x`，也就是空。
+
+![image-20220528154053935](./image-20220528154053935.png)
 
 **3. 调用getX函数**
 
 下面我们调用`getX()`函数，它将返回目标合约`_x`的值，类型为`uint256`。我们可以利用`abi.decode`来解码`call`的返回值`data`，并读出数值。
 
 ```
-    function callGetX(address _addr) external returns(uint256){
-        // call getX()
-        (bool success, bytes memory data) = _addr.call(
-            abi.encodeWithSignature("getX()")
-        );
+function callGetX(address _addr) external returns(uint256){
+	// call getX()
+	(bool success, bytes memory data) = _addr.call(
+		abi.encodeWithSignature("getX()")
+	);
 
-        emit Response(success, data); //释放事件
-        return abi.decode(data, (uint256));
-    }
+	emit Response(success, data); //释放事件
+	return abi.decode(data, (uint256));
+}
 ```
 从`Response`事件的输出，我们可以看到`data`为`0x0000000000000000000000000000000000000000000000000000000000000005`。而经过`abi.decode`，最终返回值为`5`。
+
+![image-20220528154431270](./image-20220528154431270.png)
 
 **4. 调用不存在的函数**
 
@@ -125,17 +129,19 @@ function callSetX(address payable _addr, uint256 x) public payable {
 
 
 ```
-    function callNonExist(address _addr) external{
-        // call getX()
-        (bool success, bytes memory data) = _addr.call(
-            abi.encodeWithSignature("foo(uint256)")
-        );
+function callNonExist(address _addr) external{
+	// call getX()
+	(bool success, bytes memory data) = _addr.call(
+		abi.encodeWithSignature("foo(uint256)")
+	);
 
-        emit Response(success, data); //释放事件
-    }
+	emit Response(success, data); //释放事件
+}
 ```
 
 上面例子中，我们`call`了不存在的`foo`函数。`call`仍能执行成功，并返回`success`，但其实调用的目标合约`fallback`函数。
+
+![image-20220528154601683](./image-20220528154601683.png)
 
 ## 总结
 
