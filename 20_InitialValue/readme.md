@@ -25,7 +25,7 @@
     - `external`: 空白方程
 
 可以用`public`变量的`getter`函数验证上面写的初始值是否正确：
-```
+```solidity
     bool public _bool; // false
     string public _string; // ""
     int public _int; // 0
@@ -49,7 +49,7 @@
     - 静态数组（定长）: 所有成员设为其默认值的静态数组
 
 可以用`public`变量的`getter`函数验证上面写的初始值是否正确：
-```
+```solidity
     // Reference Types
     uint[8] public _staticArray; // 所有成员设为其默认值的静态数组[0,0,0,0,0,0,0,0]
     uint[] public _dynamicArray; // `[]`
@@ -64,13 +64,19 @@
 
 ### `delete`操作符
 `delete a`会让变量`a`的值变为初始值。
-```
+```solidity
     // delete操作符
     bool public _bool2 = true; 
     function d() external {
         delete _bool2; // delete 会让_bool2变为默认值，false
     }
 ```
+## 在remix上验证
+- 部署合约查看值类型、引用类型的初始值
+![](./pics/initial_value.png)
+
+- 值类型、引用类型delete操作后的默认值
+![](./pics/delete_revert.png)
 
 ## 总结
 这一讲，我们介绍了`solidity`中变量的初始值。变量被声明但没有赋值的时候，它的值默认为初始值。不同类型的变量初始值不同，`delete`操作符可以删除一个变量的值并代替为初始值。
