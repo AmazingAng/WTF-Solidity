@@ -39,7 +39,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import {Yeye} from './Yeye.sol';
 ```
 
-- 引用(import)在代码中的位置为版本号之后，在其余代码之前
+- 引用(import)在代码中的位置为：在声明版本号之后，在其余代码之前。
 
 ## 测试导入结果
 
