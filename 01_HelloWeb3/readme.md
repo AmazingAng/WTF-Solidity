@@ -26,7 +26,7 @@
 
 ## 第一个Solidity程序
 很简单，只有1行注释+3行代码：
-```
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 contract HelloWeb3{
