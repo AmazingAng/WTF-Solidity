@@ -96,17 +96,17 @@ contract B {
 
 ### 在remix上验证
 1. 首先，我们把合约`B`和`C`都部署好
-![deploy.png](./img/22.1.png)
+![deploy.png](./img/22-1.png)
 2. 部署之后，查看`C`合约状态变量的初始值，`B`合约的状态变量也是一样。
-![initialstate.png](./img/22.2.png)
+![initialstate.png](./img/22-2.png)
 3. 此时，调用合约`B`中的`callSetVars`，传入参数为合约`C`地址和`10`
-![call.png](./img/22.3.png)
+![call.png](./img/22-3.png)
 4. 运行后，合约`C`中的状态变量将被修改：`num`被改为`10`，`sender`变为合约`B`的地址
-![resultcall.png](./img/22.4.png)
+![resultcall.png](./img/22-4.png)
 5. 接下来，我们调用合约`B`中的`delegatecallSetVars`，传入参数为合约`C`地址和`100`
-![delegatecall.png](./img/22.5.png)
+![delegatecall.png](./img/22-5.png)
 6. 由于是`delegatecall`，语境为合约`B`。在运行后，合约`B`中的状态变量将被修改：`num`被改为`100`，`sender`变为你的钱包地址。合约`C`中的状态变量不会被修改。
-![resultdelegatecall.png](./img/22.6.png)
+![resultdelegatecall.png](./img/22-6.png)
 
 ## 总结
 这一讲我们介绍了`solidity`中的另一个低级函数`delegatecall`。与`call`类似，它可以用来调用其他合约；不同点在于运行的语境，`B call C`，语境为`C`；而`B delegatecall C`，语境为`B`。目前`delegatecall`最大的应用是代理合约和`EIP-2535 Diamonds`（钻石）。
