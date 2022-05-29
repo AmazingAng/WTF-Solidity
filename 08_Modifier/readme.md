@@ -62,11 +62,11 @@ contract Parents {
 以 `Owner.sol` 为例。
 1. 在 Remix 上编译部署代码。
 2. 点击 `owner` 按钮查看当前 owner 变量。
-    ![](assets/16535518992297.jpg)
+    ![](img/8-1.jpg)
 3. 以 owner 地址的用户身份，调用 `changeOwner` 函数，交易成功。
-    ![](assets/16535524536219.jpg)
+    ![](img/8-2.jpg)
 4. 以非 owner 地址的用户身份，调用 `changeOwner` 函数，交易失败，因为modifier onlyOwner 的检查语句不满足。
-    ![](assets/16535527548427.jpg)
+    ![](img/8-3.jpg)
 
 
 ## 总结
