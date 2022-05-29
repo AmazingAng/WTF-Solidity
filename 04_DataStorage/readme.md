@@ -27,6 +27,9 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
         return(_x);
     }
 ```
+**Example:**
+![4.1.png](4.1.png)
+
 ### 不同类型相互赋值时的规则
 在不同存储类型相互赋值时候，有时会产生独立的副本（修改新变量不会影响原变量），有时会产生引用（修改新变量会影响原变量）。规则如下：
 
@@ -40,6 +43,9 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
         xStorage[0] = 100;
     }
 ```
+**Example:**
+![4.2.png](4.2.png)
+
 2. `storage`赋值给`memory`，会创建独立的复本，修改其中一个不会影响另一个；反之亦然。例子：
 ```
     uint[] x = [1,2,3]; // 状态变量：数组 x
@@ -50,6 +56,9 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
         xMemory[0] = 100;
     }
 ```
+**Example:**
+![4.3.png](4.3.png)
+
 3. `memory`赋值给`memory`，会创建引用，改变新变量会影响原变量。
 
 4. 其他情况，变量赋值给`storage`，会创建独立的复本，修改其中一个不会影响另一个。
@@ -112,7 +121,8 @@ contract Variables {
 - `msg.value`: (`uint`)	当前交易发送的`wei`值
 - `now `: (`uint`)	当前块的时间戳
 
-
+**Example:**
+![4.4.png](4.4.png)
 ## 总结
 在第4讲，我们介绍了`solidity`中的引用类型，数据位置和变量的作用域。重点是`storage`, `memory`和`calldata`三个关键字的用法。他们出现的原因是为了节省链上有限的存储空间和降低`gas`。下一讲我们会介绍引用类型中的数组。
 
