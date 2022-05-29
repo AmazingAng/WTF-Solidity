@@ -35,7 +35,7 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
     uint[] x = [1,2,3]; // 状态变量：数组 x
 
     function fStorage() public{
-        //声明一个storage的变量 xStorage，指向x。修改xCopy也会影响x
+        //声明一个storage的变量 xStorage，指向x。修改xStorage也会影响x
         uint[] storage xStorage = x;
         xStorage[0] = 100;
     }
