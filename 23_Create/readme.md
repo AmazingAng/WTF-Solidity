@@ -16,7 +16,7 @@
 有两种方法可以在合约中创建新合约，`create`和`create2`，这里我们讲`create`，下一讲会介绍`create2`。
 
 `create`的用法很简单，就是`new`一个合约，并传入新合约构造函数所需的参数：
-```
+```solidity
 Contract x = new Contract{value: _value}(params)
 ```
 
@@ -32,7 +32,7 @@ Contract x = new Contract{value: _value}(params)
 
 ###  `Pair`合约
 
-```
+```solidity
 contract Pair{
     address public factory; // 工厂合约地址
     address public token0; // 代币1
@@ -59,7 +59,7 @@ contract Pair{
 > **答**：因为`uniswap`使用的是`create2`创建合约，限制构造函数不能有参数。当使用`create`时，`Pair`合约允许构造函数有参数，可以在`constructor`中将`token0`和`token1`地址更新好。
 
 ### `PairFactory`
-```
+```solidity
 contract PairFactory{
     mapping(address => mapping(address => address)) public getPair; // 通过两个代币地址查Pair地址
     address[] public allPairs; // 保存所有Pair地址
@@ -80,7 +80,7 @@ contract PairFactory{
 工厂合约（`PairFactory`）有两个状态变量`getPair`是两个代币地址到币对地址的`map`，方便根据代币找到币对地址；`allPairs`是币对地址的数组，存储了所有代币地址。
 
 `PairFactory`合约只有一个`createPair`函数，根据输入的两个代币地址`tokenA`和`tokenB`来创建新的`Pair`合约。其中
-```
+```solidity
     Pair pair = new Pair(); 
 ```
 就是创建合约的代码，非常简单。大家可以部署好`PairFactory`合约，然后用下面两个地址作为参数调用`createPair`，看看创建的币对地址是什么：
@@ -94,15 +94,15 @@ BSC链上的PEOPLE地址:
 
 1.使用`WBNB`和`PEOPLE`的地址作为参数调用`createPair`,得到`Pair`合约地址：0xD3e2008b4Da2cD6DEAF73471590fF30C86778A48
 
-![](1_create.png)
+![](./img/23-1.png)
 
 2.查看`Pair`合约变量
 
-![](2_pair.png)
+![](./img/23-2.png)
 
 3.Debug查看`create`操作码
 
-![](3_debug.png)
+![](./img/23-3.png)
 
 ## 总结
 这一讲，我们用极简`Uniswap`的例子介绍了如何使用`create`方法再合约里创建合约，下一讲我们将介绍如何使用`create2`方法来实现极简`Uniswap`。
