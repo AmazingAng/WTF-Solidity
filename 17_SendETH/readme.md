@@ -30,7 +30,7 @@ contract ReceiveETH {
 
 部署`ReceiveETH`合约后，运行`getBalance()`函数，可以看到当前合约的`ETH`余额为`0`。
 
-![image-20220526182704637](./image-20220526182704637.png)
+![17-1](./17-1.png)
 
 ## 发送ETH合约
 我们将实现三种方法向`ReceiveETH`合约发送`ETH`。首先，先在发送ETH合约`SendETH`中实现`payable`的`构造函数`和`receive()`，让我们能够在部署时和部署后向合约转账。
@@ -48,7 +48,7 @@ contract SendETH {
 - `transfer()`如果转账失败，会自动`revert`（回滚交易）。
 
 代码样例，注意里面的`_to`填`ReceiveETH`合约的地址，`amount`是`ETH`转账金额：
-```
+```solidity
 // 用transfer()发送ETH
 function transferETH(address payable _to, uint256 amount) external payable{
 	_to.transfer(amount);
@@ -57,15 +57,15 @@ function transferETH(address payable _to, uint256 amount) external payable{
 
 部署`SendETH`合约后，对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，发生`revert`。
 
-![image-20220526214713112](././image-20220526214713112.png)
+![17-2](./17-2.png)
 
 此时`amount`为10，`value`为10，`amount`<=`value`，转账成功。
 
-![image-20220526215221635](././image-20220526215221635.png)
+![17-3](./17-3.png)
 
 在`ReceiveETH`合约中，运行`getBalance()`函数，可以看到当前合约的`ETH`余额为`10`。
 
-![image-20220526215412897](././image-20220526215412897.png)
+![17-4](./17-4.png)
 
 ### send
 
@@ -75,7 +75,7 @@ function transferETH(address payable _to, uint256 amount) external payable{
 - `send()`的返回值是`bool`，代表着转账成功或失败，需要额外代码处理一下。
 
 代码样例：
-```
+```solidity
 // send()发送ETH
 function sendETH(address payable _to, uint256 amount) external payable{
     // 处理下send的返回值，如果失败，revert交易并发送error
@@ -88,11 +88,11 @@ function sendETH(address payable _to, uint256 amount) external payable{
 
 对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，因为经过处理，所以发生`revert`。
 
-![image-20220526221457066](././image-20220526221457066.png)
+![17-5](./17-5.png)
 
 此时`amount`为10，`value`为11，`amount`<=`value`，转账成功。
 
-![image-20220526221822581](././image-20220526221822581.png)
+![17-6](./17-6.png)
 
 ### call
 
@@ -102,7 +102,7 @@ function sendETH(address payable _to, uint256 amount) external payable{
 - `call()`的返回值是`(bool, data)`，其中`bool`代表着转账成功或失败，需要额外代码处理一下。
 
 代码样例：
-```
+```solidity
 // call()发送ETH
 function callETH(address payable _to, uint256 amount) external payable{
     // 处理下call的返回值，如果失败，revert交易并发送error
@@ -115,11 +115,11 @@ function callETH(address payable _to, uint256 amount) external payable{
 
 对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，因为经过处理，所以发生`revert`。
 
-![image-20220526222142807](././image-20220526222142807.png)
+![17-7](./17-7.png)
 
 此时`amount`为10，`value`为11，`amount`<=`value`，转账成功。
 
-![image-20220526222244726](././image-20220526222244726.png)
+![17-8](./17-8.png)
 
 运行三种方法，可以看到，他们都可以成功地向`ReceiveETH`合约发送`ETH`。
 

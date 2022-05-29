@@ -41,7 +41,7 @@ abi.encodeWithSignature("函数签名", 逗号分隔的具体参数)
 ### 目标合约
 我们先写一个简单的目标合约`OtherContract`并部署，代码与第19讲中基本相同，只是多了`fallback`函数。
 
-```
+```solidity
 contract OtherContract {
     uint256 private _x = 0; // 状态变量x
     // 收到eth的事件，记录amount和gas
@@ -80,7 +80,7 @@ contract OtherContract {
 
 我们写一个`Call`合约来调用目标合约函数。首先写一个定义`Response`事件，输出`call`返回的`success`和`data`，方便我们观察返回值。
 
-```
+```solidity
 // 定义Response事件，输出call返回的结果success和data
 event Response(bool success, bytes data);
 ```
@@ -89,7 +89,7 @@ event Response(bool success, bytes data);
 
 我们定义`callSetX`函数来调用目标合约的`setX()`，转入`msg.value`数额的`ETH`，并释放`Response`事件输出`success`和`data`：
 
-```    
+```solidity
 function callSetX(address payable _addr, uint256 x) public payable {
 	// call setX()，同时可以发送ETH
 	(bool success, bytes memory data) = _addr.call{value: msg.value}(
@@ -102,13 +102,13 @@ function callSetX(address payable _addr, uint256 x) public payable {
 
 接下来我们调用`callSetX`把状态变量`_x`改为5，参数为`OtherContract`地址和`5`，由于目标函数`setX()`没有返回值，因此`Response`事件输出的`data`为`0x`，也就是空。
 
-![image-20220528154053935](./image-20220528154053935.png)
+![21-1](./21-1.png)
 
 **3. 调用getX函数**
 
 下面我们调用`getX()`函数，它将返回目标合约`_x`的值，类型为`uint256`。我们可以利用`abi.decode`来解码`call`的返回值`data`，并读出数值。
 
-```
+```solidity
 function callGetX(address _addr) external returns(uint256){
 	// call getX()
 	(bool success, bytes memory data) = _addr.call(
@@ -121,14 +121,14 @@ function callGetX(address _addr) external returns(uint256){
 ```
 从`Response`事件的输出，我们可以看到`data`为`0x0000000000000000000000000000000000000000000000000000000000000005`。而经过`abi.decode`，最终返回值为`5`。
 
-![image-20220528154431270](./image-20220528154431270.png)
+![21-2](./21-2.png)
 
 **4. 调用不存在的函数**
 
 如果我们给`call`输入的函数不存在于目标合约，那么目标合约的`fallback`函数会被触发。
 
 
-```
+```solidity
 function callNonExist(address _addr) external{
 	// call getX()
 	(bool success, bytes memory data) = _addr.call(
@@ -141,7 +141,7 @@ function callNonExist(address _addr) external{
 
 上面例子中，我们`call`了不存在的`foo`函数。`call`仍能执行成功，并返回`success`，但其实调用的目标合约`fallback`函数。
 
-![image-20220528154601683](./image-20220528154601683.png)
+![21-3](./21-3.png)
 
 ## 总结
 
