@@ -67,6 +67,8 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第29讲：Try-Catch**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/29_TryCatch)】 【[文章](https://mirror.xyz/ninjak.eth/asj1-eKf6YdIoI9oMSLI3VECwqCzRHwaqIS01ALQ7qo)】
 
+**第30讲：Import**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/30_Import)】 【[文章](https://mirror.xyz/ninjak.eth/f43II54h19ucfkNDarEdDFGts0lBkJCyrZ57U5Njk3A)】
+
 ## 专题
 ### ERC721专题
 **第1讲：ERC721相关库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
