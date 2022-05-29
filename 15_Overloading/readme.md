@@ -38,7 +38,6 @@ function saySomething(string memory something) public pure returns(string memory
     function f(uint256 _in) public pure returns (uint256 out) {
         out = _in;
     }
-}
 ```
 我们调用`f(50)`，因为`50`既可以被转换为`uint8`，也可以被转换为`uint256`，因此会报错。
 
