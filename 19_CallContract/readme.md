@@ -50,7 +50,13 @@ contract OtherContract {
 ## 调用`OtherContract`合约
 我们可以利用合约的地址和合约代码（或接口）来创建合约的引用：`_Name(_Address)`，其中`_Name`是合约名，`_Address`是合约地址。然后用合约的引用来调用它的函数：`_Name(_Address).f()`，其中`f()`是要调用的函数。
 
-下面我们介绍4个调用合约的例子：
+下面我们介绍4个调用合约的例子，在remix中编译合约后，分别部署`OtherContract`和`CallContract`：
+
+![deploy contract0 in remix](readme.assets/deploy_contract0_in_remix.png)
+
+![deploy contract1 in remix](readme.assets/deploy_contract1_in_remix.png)
+
+![deploy contract2 in remix](readme.assets/deploy_contract2_in_remix.png)
 
 ### 1. 传入合约地址
 我们可以在函数里传入目标合约地址，生成目标合约的引用，然后调用目标函数。以调用`OtherContract`合约的`setX`函数为例，我们在新合约中写一个`callSetX`函数，传入已部署好的`OtherContract`合约地址`_Address`和`setX`的参数`x`：
@@ -60,6 +66,12 @@ contract OtherContract {
         OtherContract(_Address).setX(x);
     }
 ```
+
+复制`OtherContract`合约的地址，填入`callSetX`函数的参数中，成功调用后，调用`OtherContract`合约中的`getX`验证`x`变为123
+
+![call contract1 in remix](readme.assets/call_contract1_in_remix.png)
+
+![call contract2 in remix](readme.assets/call_contract2_in_remix.png)
 
 ### 2. 传入合约变量
 我们可以直接在函数里传入合约的引用，只需要把上面参数的`address`类型改为目标合约名，比如`OtherContract`。下面例子实现了调用目标合约的`getX()`函数。
@@ -72,6 +84,10 @@ contract OtherContract {
     }
 ```
 
+复制`OtherContract`合约的地址，填入`callGetX`函数的参数中，调用后成功获取`x`的值
+
+![call contract3 in remix](readme.assets/call_contract3_in_remix.png)
+
 ### 3. 创建合约变量
 我们可以创建合约变量，然后通过它来调用目标函数。下面例子，我们给变量`oc`存储了`OtherContract`合约的引用：
 ```solidity
@@ -80,6 +96,10 @@ contract OtherContract {
         x = oc.getX();
     }
 ```
+
+复制`OtherContract`合约的地址，填入`callGetX2`函数的参数中，调用后成功获取`x`的值
+
+![call contract4 in remix](readme.assets/call_contract4_in_remix.png)
 
 ### 4. 调用合约并发送`ETH`
 如果目标合约的函数是`payable`的，那么我们可以通过调用它来给合约转账：`_Name(_Address).f{value: _Value}()`，其中`_Name`是合约名，`_Address`是合约地址，`f`是目标函数名，`_Value`是要转的`ETH`数额（以`wei`为单位）。
@@ -91,7 +111,13 @@ contract OtherContract {
     }
 ```
 
+复制`OtherContract`合约的地址，填入`setXTransferETH`函数的参数中，并转入10ETH
+
+![call contract5 in remix](readme.assets/call_contract5_in_remix.png)
+
 转账后，我们可以通过`Log`事件和`getBalance()`函数观察目标合约`ETH`余额的变化。
+
+![call contract6 in remix](readme.assets/call_contract6_in_remix.png)
 
 ## 总结
 这一讲，我们介绍了如何通过目标合约代码（或接口）和地址来创建合约的引用，从而调用目标合约的函数。
