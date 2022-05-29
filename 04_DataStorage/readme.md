@@ -20,7 +20,7 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 
 3. `calldata`：和`memory`类似，存储在内存中，不上链。与`memory`的不同点在于`calldata`变量不能修改（`immutable`），一般用于函数的参数。例子：
 
-```
+```solidity
     function fCalldata(uint[] calldata _x) public pure returns(uint[] calldata){
         //参数为calldata数组，不能被修改
         // _x[0] = 0 //这样修改会报错
@@ -34,7 +34,7 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 在不同存储类型相互赋值时候，有时会产生独立的副本（修改新变量不会影响原变量），有时会产生引用（修改新变量会影响原变量）。规则如下：
 
 1. `storage`（合约的状态变量）赋值给本地`storage`（函数里的）时候，会创建引用，改变新变量会影响原变量。例子：
-```
+```solidity
     uint[] x = [1,2,3]; // 状态变量：数组 x
 
     function fStorage() public{
@@ -47,7 +47,7 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 ![4.2.png](4.2.png)
 
 2. `storage`赋值给`memory`，会创建独立的复本，修改其中一个不会影响另一个；反之亦然。例子：
-```
+```solidity
     uint[] x = [1,2,3]; // 状态变量：数组 x
     
     function fMemory() public view{
@@ -68,7 +68,7 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 ### 1. 状态变量
 状态变量是数据存储在链上的变量，所有合约内函数都可以访问
 ，`gas`消耗高。状态变量在合约内、函数外声明：
-```
+```solidity
 contract Variables {
     uint public x = 1;
     uint public y;
@@ -76,7 +76,7 @@ contract Variables {
 ```
 
 我们可以在函数里更改状态变量的值：
-```
+```solidity
     function foo() external{
         // 可以在函数里更改状态变量的值
         x = 5;
@@ -87,7 +87,7 @@ contract Variables {
 
 ### 2. 局部变量
 局部变量是仅在函数执行过程中有效的变量，函数退出后，变量无效。局部变量的数据存储在内存里，不上链，`gas`低。局部变量在函数内声明：
-```
+```solidity
     function bar() external pure returns(uint){
         uint xx = 1;
         uint yy = 3;
@@ -99,7 +99,7 @@ contract Variables {
 ### 3. 全局变量
 全局变量是全局范围工作的变量，都是`solidity`预留关键字。他们可以在函数内不声明直接使用：
 
-```
+```solidity
     function global() external view returns(address, uint, bytes memory){
         address sender = msg.sender;
         uint blockNum = block.number;
