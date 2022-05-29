@@ -101,14 +101,15 @@ contract OnlyEven{
         }
     }
 ```
+### 在remix上验证
 
 当运行`execute(0)`的时候，因为`0`为偶数，满足`require(b % 2 == 0, "Ups! Reverting");`，没有异常抛出，调用成功并释放`SuccessEvent`事件。
 
-![](./img/29.1.png)
+![](./img/29-1.png)
 
 当运行`execute(1)`的时候，因为`1`为偶数，不满足`require(b % 2 == 0, "Ups! Reverting");`，异常抛出，调用失败并释放`CatchEvent`事件。
 
-![](./img/29.2.png)
+![](./img/29-2.png)
 
 ### 处理合约创建异常
 
@@ -134,19 +135,19 @@ contract OnlyEven{
     }
 ```
 
-大家可以运行一下`executeNew(0)`，`executeNew(1)`，`executeNew(2)`，看看会有什么不同。
+### 在remix上验证
 
 当运行`executeNew(0)`时，因为`0`不满足`require(a != 0, "invalid number");`，会失败并释放`CatchEvent`事件。
 
-![](./img/29.3.png)
+![](./img/29-3.png)
 
 当运行`executeNew(1)`时，因为`1`不满足`assert(a != 1);`，会失败并释放`CatchByte`事件。
 
-![](./img/29.4.png)
+![](./img/29-4.png)
 
 当运行`executeNew(2)`时，因为`2`满足`require(a != 0, "invalid number");`和`assert(a != 1);`，会成功并释放`SuccessEvent`事件。
 
-![](./img/29.5.png)
+![](./img/29-5.png)
 
 ## 总结
 在这一讲，我们介绍了如何在`solidity`使用`try-catch`来智能合约运行中的异常：
