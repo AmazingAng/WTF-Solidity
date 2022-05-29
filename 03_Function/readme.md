@@ -64,12 +64,17 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
     function addPure(uint256 _number) external pure returns(uint256 new_number){
         new_number = _number+1;
     }
+**Example:**
+![3.3.png](3.3.png)
+
 如果`add()`包含`view`，比如`function add() view external`，也会报错。因为`view`能读取，但不能够改写状态变量。可以稍微改写下方程，让他不改写`number`，而是返回一个新的变量。
 
     // view: 看客
     function addView() external view returns(uint256 new_number) {
         new_number = number + 1;
     }
+**Example:**
+![3.4.png](3.4.png)
 ### 2. internal v.s. external
     // internal: 内部
     function minus() internal {
@@ -81,6 +86,8 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
         minus();
     }
 我们定义一个`internal`的`minus()`函数，每次调用使得`number`变量减1。由于是`internal`，只能由合约内部调用，而外部不能。因此，我们必须再定义一个`external`的`minusCall()`函数，来间接调用内部的`minus()`。
+**Example:**
+![3.1.png](3.1.png)
 
 ### 3. payable
     // payable: 递钱，能给合约支付eth的函数
@@ -96,6 +103,9 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
 我们可以在返回的信息中看到，合约的余额是1 ETH。
 
 ![](https://images.mirror-media.xyz/publication-images/nGZ2pz0MvzgXuKrENJPYf.png?height=128&width=1130)
+
+**Example:**
+![3.2.png](3.2.png)
 
 ## 总结
 在第三讲，我们介绍了`solidity`中的函数类型，比较难理解的是`pure`和`view`，在其他语言中没出现过。`solidity`引入`pure`和`view`关键字主要是为了节省`gas`和控制函数权限，这两种方程都是不消耗`gas`的。下一讲我们会介绍引用和映射两种类型，并介绍更复杂的函数。
