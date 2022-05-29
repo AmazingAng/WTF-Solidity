@@ -94,15 +94,15 @@ BSC链上的PEOPLE地址:
 
 1.使用`WBNB`和`PEOPLE`的地址作为参数调用`createPair`,得到`Pair`合约地址：0xD3e2008b4Da2cD6DEAF73471590fF30C86778A48
 
-![](./img/23.1.png)
+![](./img/23-1.png)
 
 2.查看`Pair`合约变量
 
-![](./img/23.2.png)
+![](./img/23-2.png)
 
 3.Debug查看`create`操作码
 
-![](./img/23.3.png)
+![](./img/23-3.png)
 
 ## 总结
 这一讲，我们用极简`Uniswap`的例子介绍了如何使用`create`方法再合约里创建合约，下一讲我们将介绍如何使用`create2`方法来实现极简`Uniswap`。
