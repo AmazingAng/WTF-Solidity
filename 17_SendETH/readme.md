@@ -30,7 +30,7 @@ contract ReceiveETH {
 
 部署`ReceiveETH`合约后，运行`getBalance()`函数，可以看到当前合约的`ETH`余额为`0`。
 
-![17-1](./17-1.png)
+![17-1](./img/17-1.png)
 
 ## 发送ETH合约
 我们将实现三种方法向`ReceiveETH`合约发送`ETH`。首先，先在发送ETH合约`SendETH`中实现`payable`的`构造函数`和`receive()`，让我们能够在部署时和部署后向合约转账。
@@ -57,15 +57,15 @@ function transferETH(address payable _to, uint256 amount) external payable{
 
 部署`SendETH`合约后，对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，发生`revert`。
 
-![17-2](./17-2.png)
+![17-2](./img/17-2.png)
 
 此时`amount`为10，`value`为10，`amount`<=`value`，转账成功。
 
-![17-3](./17-3.png)
+![17-3](./img/17-3.png)
 
 在`ReceiveETH`合约中，运行`getBalance()`函数，可以看到当前合约的`ETH`余额为`10`。
 
-![17-4](./17-4.png)
+![17-4](./img/17-4.png)
 
 ### send
 
@@ -88,11 +88,11 @@ function sendETH(address payable _to, uint256 amount) external payable{
 
 对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，因为经过处理，所以发生`revert`。
 
-![17-5](./17-5.png)
+![17-5](./img/17-5.png)
 
 此时`amount`为10，`value`为11，`amount`<=`value`，转账成功。
 
-![17-6](./17-6.png)
+![17-6](./img/17-6.png)
 
 ### call
 
@@ -115,11 +115,11 @@ function callETH(address payable _to, uint256 amount) external payable{
 
 对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，因为经过处理，所以发生`revert`。
 
-![17-7](./17-7.png)
+![17-7](./img/17-7.png)
 
 此时`amount`为10，`value`为11，`amount`<=`value`，转账成功。
 
-![17-8](./17-8.png)
+![17-8](./img/17-8.png)
 
 运行三种方法，可以看到，他们都可以成功地向`ReceiveETH`合约发送`ETH`。
 

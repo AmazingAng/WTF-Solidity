@@ -102,7 +102,7 @@ function callSetX(address payable _addr, uint256 x) public payable {
 
 接下来我们调用`callSetX`把状态变量`_x`改为5，参数为`OtherContract`地址和`5`，由于目标函数`setX()`没有返回值，因此`Response`事件输出的`data`为`0x`，也就是空。
 
-![21-1](./21-1.png)
+![21-1](./img/21-1.png)
 
 **3. 调用getX函数**
 
@@ -121,7 +121,7 @@ function callGetX(address _addr) external returns(uint256){
 ```
 从`Response`事件的输出，我们可以看到`data`为`0x0000000000000000000000000000000000000000000000000000000000000005`。而经过`abi.decode`，最终返回值为`5`。
 
-![21-2](./21-2.png)
+![21-2](./img/21-2.png)
 
 **4. 调用不存在的函数**
 
@@ -141,7 +141,7 @@ function callNonExist(address _addr) external{
 
 上面例子中，我们`call`了不存在的`foo`函数。`call`仍能执行成功，并返回`success`，但其实调用的目标合约`fallback`函数。
 
-![21-3](./21-3.png)
+![21-3](./img/21-3.png)
 
 ## 总结
 
