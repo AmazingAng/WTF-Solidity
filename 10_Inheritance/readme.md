@@ -110,7 +110,7 @@ contract Identifier is Base1 {
 
 ### 构造函数的继承
 子合约有两种方法继承父合约的构造函数。举个简单的例子，父合约`A`里面有一个状态变量`a`，并由构造函数的参数来确定：
-```
+```solidity
 // 构造函数的继承
 abstract contract A {
     uint public a;
@@ -131,13 +131,13 @@ contract C is A {
 子合约有两种方式调用父合约的函数，直接调用和利用`super`关键字。
 
 1. 直接调用：子合约可以直接用`父合约名.函数名()`的方式来调用父合约函数，例如`Yeye.pop()`。
-```
+```solidity
     function callParent() public{
         Yeye.pop();
     }
 ```
 2. `super`关键字：子合约可以利用`super.函数名()`来调用最近的父合约函数。`solidity`继承关系按声明时从右到左的顺序是：`contract Erzi is Yeye, Baba`，那么`Baba`是最近的父合约，`super.pop()`将调用`Baba.pop()`而不是`Yeye.pop()`：
-```
+```solidity
     function callParentSuper() public{
         // 将调用最近的父合约函数，Baba.pop()
         super.pop();
@@ -145,19 +145,19 @@ contract C is A {
 ```
 ## 在Remix上验证
 - 合约简单继承示例, 可以观察到Baba合约多了Yeye的函数
-  ![10-1](./pics/10-1.png)
-  ![10-2](./pics/10-2.png)
+  ![10.1](./img/10.1.png)
+  ![10.2](./img/10.2.png)
 - 合约多重继承可以参考简单继承的操作步骤来增加部署Erzi合约，然后观察暴露的函数以及尝试调用来查看日志
 - 修饰器继承示例
-  ![10-3](./pics/10-3.png)
-  ![10-4](./pics/10-4.png)
-  ![10-5](./pics/10-5.png)
+  ![10.3](./img/10.3.png)
+  ![10.4](./img/10.4.png)
+  ![10.5](./img/10.5.png)
 - 构造函数继承示例
-  ![10-6](./pics/10-6.png)
-  ![10-7](./pics/10-7.png)
+  ![10.6](./img/10.6.png)
+  ![10.7](./img/10.7.png)
 - 调用父合约示例
-  ![10-8](./pics/10-8.png)
-  ![10-9](./pics/10-9.png)
+  ![10.8](./img/10.8.png)
+  ![10.9](./img/10.9.png)
 ## 总结
 这一讲，我们介绍了`solidity`继承的基本用法，包括简单继承，多重继承，修饰器和构造函数的继承，以及调用父合约中的函数。
 
