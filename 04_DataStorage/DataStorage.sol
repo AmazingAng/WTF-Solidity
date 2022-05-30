@@ -8,7 +8,7 @@ contract DataStorage {
     uint[] x = [1,2,3];
 
     function fStorage() public{
-        //声明一个storage的变量 xStorage，指向x。修改xCopy也会影响x
+        //声明一个storage的变量xStorage，指向x。修改xStorage也会影响x
         uint[] storage xStorage = x;
         xStorage[0] = 100;
     }

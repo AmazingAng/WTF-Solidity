@@ -12,7 +12,7 @@
 
 ## 抽象合约
 如果一个智能合约里至少有一个未实现的函数，即某个函数缺少主体`{}`中的内容，则必须将该合约标为`abstract`，不然编译会报错；另外，未实现的函数需要加`virtual`，以便子合约重写。拿我们之前的插入排序合约为例，如果我们还没想好具体怎么实现插入排序函数，那么可以把合约标为`abstract`，之后让别人补写上。
-```
+```solidity
 abstract contract InsertionSort{
     function insertionSort(uint[] memory a) public pure virtual returns(uint[] memory);
 }
@@ -26,7 +26,7 @@ abstract contract InsertionSort{
 4. 所有函数都必须是external（接口与合约的`ABI`等价）
 
 我们看一个`ERC721`接口的例子，所有NFT都使用了这个接口：
-```
+```solidity
 interface IERC721 is IERC165 {
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
@@ -75,6 +75,11 @@ interface IERC721 is IERC165 {
 ## 什么时候使用抽象合约和接口？
 1. 写大工程的时候打草稿用
 2. 大神写标准的时候
+## 在Remix上验证
+- 抽象合约示例（简单的演示代码如图所示）
+  ![11-1](./img/11-1.png)
+- 接口示例（简单的演示代码如图所示）
+  ![11-2](./img/11-2.png)
 ## 总结
 这一讲，我介绍了`solidity`中的抽象合约（`abstract`）和接口（`interface`），他们都可以写模版并且减少代码冗余。我们还讲了`ERC721`接口合约，以后会更详细的讲一下`ERC721`代币标准。
 

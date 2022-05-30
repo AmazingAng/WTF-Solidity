@@ -27,7 +27,7 @@
     }
      mapping(Student => uint) public testVar;
 ```
-- **规则2**：映射的存储位置必须是`storage`，因此可以用于合约的状态变量，函数中的`stoage`变量。不能用于`public`函数的参数或返回结果中。
+- **规则2**：映射的存储位置必须是`storage`，因此可以用于合约的状态变量，函数中的`stoage`变量。不能用于`public`函数的参数或返回结果中，因为`mapping`记录的是一种关系 (key - value pair)。
 
 - **规则3**：如果映射声明为`public`，那么`solidity`会自动给你创建一个`getter`函数，可以通过`Key`来查询对应的`Value`。
 
@@ -37,6 +37,28 @@
         idToAddress[_Key] = _Value;
     }
 ```
+## 映射的原理
+- **原理1**: 映射不储存任何键（`Key`）的资讯，也没有length的资讯。
+
+- **原理2**: 映射使用`keccak256(key)`当成offset存取value。
+
+- **原理3**: 因为Ethereum会定义所以未使用的空间为0，所以对于所以未赋值（`Value`）的键（`Key`），其初始值都是0。
+
+## 在Remix上验证 (以 `Mapping.sol`为例)
+- 映射示例 1 部署
+
+    ![6-1](./pics/6-1.jpg)
+
+- 映射示例 2 初始值
+
+    ![6-2](./pics/6-2.jpg)
+
+- 映射示例 3 key-value pair
+
+    ![6-3](./pics/6-3.jpg)
+
+
+
 ## 总结
 这一讲，我们介绍了`solidity`中哈希表——映射（`Mapping`）的用法。至此，我们已经学习了所有常用变量种类，之后我们会学习控制流`if-else`,` while`等。
 

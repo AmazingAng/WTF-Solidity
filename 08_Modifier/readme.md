@@ -58,6 +58,17 @@ contract Parents {
 `OppenZepplin`是一个维护`solidity`标准化代码库的组织，他的`Ownable`标准实现如下：
 [https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol)
 
+## Remix 演示示例
+以 `Owner.sol` 为例。
+1. 在 Remix 上编译部署代码。
+2. 点击 `owner` 按钮查看当前 owner 变量。
+    ![](img/8-1.jpg)
+3. 以 owner 地址的用户身份，调用 `changeOwner` 函数，交易成功。
+    ![](img/8-2.jpg)
+4. 以非 owner 地址的用户身份，调用 `changeOwner` 函数，交易失败，因为modifier onlyOwner 的检查语句不满足。
+    ![](img/8-3.jpg)
+
+
 ## 总结
 这一讲，我们介绍了`solidity`中的构造函数和修饰符，并举了一个控制合约权限的`Ownable`合约。
 

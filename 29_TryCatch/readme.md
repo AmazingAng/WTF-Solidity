@@ -13,17 +13,19 @@
 
 ## `try-catch`
 在`solidity`中，`try-catch`只能被用于`external`函数或创建合约时`constructor`（被视为`external`函数）的调用。基本语法如下：
-```
+```solidity
         try externalContract.f() {
             // call成功的情况下 运行一些代码
         } catch {
             // call失败的情况下 运行一些代码
         }
 ```
-其中`externalContract.f()`时某个外部合约的函数调用，`try`模块在调用成功的情况下运行，而`catch`模块则在调用失败时运行。
+其中`externalContract.f()`是某个外部合约的函数调用，`try`模块在调用成功的情况下运行，而`catch`模块则在调用失败时运行。
 
-如果调用的函数有返回值，那么必须在`try`之后声明`returns(returnType val)`，并且在`try`模块中可以使用返回的变量；如果时创建合约，那么返回值是新创建的合约变量。
-```
+同样可以使用`this.f()`来替代`externalContract.f()`，`this.f()`也被视作为外部调用，但不可在构造函数中使用，因为此时合约还未创建。
+
+如果调用的函数有返回值，那么必须在`try`之后声明`returns(returnType val)`，并且在`try`模块中可以使用返回的变量；如果是创建合约，那么返回值是新创建的合约变量。
+```solidity
         try externalContract.f() returns(returnType val){
             // call成功的情况下 运行一些代码
         } catch {
@@ -33,7 +35,7 @@
 
 另外，`catch`模块支持捕获特殊的异常原因：
 
-```
+```solidity
         try externalContract.f() returns(returnType){
             // call成功的情况下 运行一些代码
         } catch Error(string memory reason) {
@@ -46,7 +48,7 @@
 ## `try-catch`实战
 ### `OnlyEven`
 我们创建一个外部合约`OnlyEven`，并使用`try-catch`来处理异常：
-```
+```solidity
 contract OnlyEven{
     constructor(uint a){
         require(a != 0, "invalid number");
@@ -67,7 +69,7 @@ contract OnlyEven{
 
 ### 处理外部函数调用异常
 首先，在`TryCatch`合约中定义一些事件和状态变量：
-```
+```solidity
     // 成功event
     event SuccessEvent();
 
@@ -86,7 +88,7 @@ contract OnlyEven{
 
 然后我们在`execute`函数中使用`try-catch`处理调用外部函数`onlyEven`中的异常：
 
-```
+```solidity
     // 在external call中使用try-catch
     function execute(uint amount) external returns (bool success) {
         try even.onlyEven(amount) returns(bool _success){
@@ -99,14 +101,21 @@ contract OnlyEven{
         }
     }
 ```
+### 在remix上验证
 
-当运行`execute(0)`的时候，因为`0`为偶数，没有异常抛出，调用成功并释放`SuccessEvent`事件；当运行`execute(1)`的时候，因为`1`为偶数，异常抛出，调用失败并释放`CatchEvent`事件。
+当运行`execute(0)`的时候，因为`0`为偶数，满足`require(b % 2 == 0, "Ups! Reverting");`，没有异常抛出，调用成功并释放`SuccessEvent`事件。
+
+![](./img/29-1.png)
+
+当运行`execute(1)`的时候，因为`1`为偶数，不满足`require(b % 2 == 0, "Ups! Reverting");`，异常抛出，调用失败并释放`CatchEvent`事件。
+
+![](./img/29-2.png)
 
 ### 处理合约创建异常
 
 这里，我们利用`try-catch`来处理合约创建时的异常。只需要把`try`模块改写为`OnlyEven`合约的创建就行：
 
-```
+```solidity
     // 在创建新合约中使用try-catch （合约创建被视为external call）
     // executeNew(0)会失败并释放`CatchEvent`
     // executeNew(1)会失败并释放`CatchByte`
@@ -126,7 +135,19 @@ contract OnlyEven{
     }
 ```
 
-大家可以运行一下`executeNew(0)`，`executeNew(1)`，`executeNew(2)`，看看会有什么不同。
+### 在remix上验证
+
+当运行`executeNew(0)`时，因为`0`不满足`require(a != 0, "invalid number");`，会失败并释放`CatchEvent`事件。
+
+![](./img/29-3.png)
+
+当运行`executeNew(1)`时，因为`1`不满足`assert(a != 1);`，会失败并释放`CatchByte`事件。
+
+![](./img/29-4.png)
+
+当运行`executeNew(2)`时，因为`2`满足`require(a != 0, "invalid number");`和`assert(a != 1);`，会成功并释放`SuccessEvent`事件。
+
+![](./img/29-5.png)
 
 ## 总结
 在这一讲，我们介绍了如何在`solidity`使用`try-catch`来智能合约运行中的异常：

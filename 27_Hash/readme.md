@@ -35,7 +35,7 @@
 ### 生成数据唯一标识
 
 我们可以利用`keccak256`来生成一些数据的唯一标识。比如我们有几个不同类型的数据：`uint`，`string`，`address`，我们可以先用`abi.encodePacked`方法将他们打包编码，然后再用`keccak256`来生成唯一标识：
-```
+```solidity
     function hash(
         uint _num,
         string memory _string,
@@ -50,7 +50,7 @@
 
 我们给定一个消息`0xAA`，试图去找另一个消息，使得它们的哈希值相等：
 
-```
+```solidity
     // 弱抗碰撞性
     function weak(
         string memory string1
@@ -66,7 +66,7 @@
 
 我们构造一个函数`strong`，接收两个不同的`string`参数`string1`和`string2`，然后判断它们的哈希是否相同：
 
-```
+```solidity
     // 强抗碰撞性
     function strong(
         string memory string1,
@@ -77,6 +77,13 @@
 ```
 
 大家可以试个10次，看看能不能幸运的碰撞上。
+
+## 在remix上验证
+- 部署合约查看唯一标识的生成结果
+![](./pics/hash.png)
+
+- 验证哈希函数的灵敏性，以及强、弱抗碰撞性
+![](./pics/hash_bump.png)
 
 ## 总结
 
