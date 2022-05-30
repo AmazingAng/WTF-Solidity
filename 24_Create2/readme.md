@@ -44,7 +44,7 @@ Contract x = new Contract{salt: _salt, value: _value}(params)
 跟[上一讲](https://mirror.xyz/dashboard/edit/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)类似，我们用`Create2`来实现极简`Uniswap`。
 
 ### `Pair`
-```
+```solidity
 contract Pair{
     address public factory; // 工厂合约地址
     address public token0; // 代币1
@@ -67,7 +67,7 @@ contract Pair{
 构造函数`constructor`在部署时将`factory`赋值为工厂合约地址。`initialize`函数会在`Pair`合约创建的时候被工厂合约调用一次，将`token0`和`token1`更新为币对中两种代币的地址。
 
 ### `PairFactory2`
-```
+```solidity
 contract PairFactory2{
         mapping(address => mapping(address => address)) public getPair; // 通过两个代币地址查Pair地址
         address[] public allPairs; // 保存所有Pair地址
@@ -90,16 +90,16 @@ contract PairFactory2{
 工厂合约（`PairFactory2`）有两个状态变量`getPair`是两个代币地址到币对地址的`map`，方便根据代币找到币对地址；`allPairs`是币对地址的数组，存储了所有代币地址。
 
 `PairFactory2`合约只有一个`createPair2`函数，使用`CREATE2`根据输入的两个代币地址`tokenA`和`tokenB`来创建新的`Pair`合约。其中
-```
+```solidity
     Pair pair = new Pair{salt: salt}(); 
 ```
 就是利用`CREATE2`创建合约的代码，非常简单，而`salt`为`token1`和`token2`的`hash`：
-```
+```solidity
             bytes32 salt = keccak256(abi.encodePacked(token0, token1));
 ```
 
 ### 事先计算`Pair`地址
-```
+```solidity
         // 提前计算pair合约地址
         function calculateAddr(address tokenA, address tokenB) public view returns(address predictedAddress){
             // 计算用tokenA和tokenB地址计算salt
