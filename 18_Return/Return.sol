@@ -28,10 +28,11 @@ contract Return {
         // 读取全部返回值
         uint256 _number;
         bool _bool;
+        bool _bool2;
         uint256[3] memory _array;
         (_number, _bool, _array) = returnNamed();
         
         // 读取部分返回值，解构式赋值
-        (, bool _bool2, ) = returnNamed();
+        (, _bool2, ) = returnNamed();
     }
 }
