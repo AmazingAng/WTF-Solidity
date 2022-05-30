@@ -14,6 +14,7 @@
 
 1. `if-else`
 
+   ``` solidity
         // if else
         function IfElseTest(uint256 _number) public returns(uint256){
         if(条件){
@@ -22,22 +23,29 @@
             ...;
         }
     }
+    ```
 2. `for循环`
 
+    ``` solidity
         for(uint256 i = 0; i < n; i++){
             ...;
         }
+    ```
 3. `while循环`
 
+    ``` solidity
         while(i < n){
             ...;
         }
+    ```
 4. `do-while循环`
 
+    ``` solidity
         do{
             ...;
 
         }while(i < n);
+    ```
 另外还有`continue`（立即进入下一个循环）和break（跳出当前循环）关键字可以使用。
 
 ## 用`solidity`实现插入排序
@@ -50,7 +58,7 @@
 
 ### `python`代码
 我们可以先看一下插入排序的python代码：
-```
+``` python
 # Python program for implementation of Insertion Sort
 def insertionSort(arr):
 	for i in range(1, len(arr)):
@@ -63,7 +71,7 @@ def insertionSort(arr):
 ```
 ### 改写成`solidity`后有`BUG`！
 一共8行`python`代码就可以完成插入排序，非常简单。那么我们将它改写成`solidity`代码，将函数，变量，循环等等都做了相应的转换，只需要9行代码：
-
+``` solidity
     // 插入排序 错误版
     function insertionSortWrong(uint[] memory a) public pure returns(uint[] memory) {
         
@@ -78,15 +86,17 @@ def insertionSort(arr):
         }
         return(a);
     }
+```
 那我们把改好的放到`remix`上去跑，输入`[2, 5, 3, 1]`。BOOM！有`bug`！改了半天，没找到`bug`在哪。我又去`google`搜”solidity insertion sort”，然后发现网上用`solidity`写的插入算法教程都是错的，比如：[Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
 
 Remix decode output 出现错误内容
-![7-1](./pics/7-1.jpg)
+![7-1](./img/7-1.jpg)
+
 ### 正确的solidity插入排序
 花了几个小时，在`Dapp-Learning`社群一个朋友的帮助下，终于找到了`bug`所在。`solidity`中最常用的变量类型是`uint`，也就是正整数，取到负值的话，会报`underflow`错误。而在插入算法中，变量`j`有可能会取到`-1`，引起报错。
 
 这里，我们需要把`j`加1，让它无法取到负值。正确代码：
-
+``` solidity
     // 插入排序 正确版
     function insertionSort(uint[] memory a) public pure returns(uint[] memory) {
         // note that uint can not take negative value
@@ -101,6 +111,7 @@ Remix decode output 出现错误内容
         }
         return(a);
     }
+```
 运行后的结果：
 
 !["输入[2,5,3,1] 输出[1,2,3,5]
