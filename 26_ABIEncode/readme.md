@@ -79,13 +79,13 @@
 
 ## 在remix上验证
 - 部署合约查看abi.encode方法的编码结果
-![](./pics/abi_encode.png)
+![](./img/26-1.png)
 
 - 对比验证四种编码方法的异同点
-![](./pics/compare_abi_encodes.png)
+![](./img/26-2.png)
 
 - 查看abi.decode方法的解码结果
-![](./pics/abi_decode.png)
+![](./img/26-3.png)
 
 ## ABI的使用场景
 1. 在合约开发中，ABI常配合call来实现对合约的底层调用。
