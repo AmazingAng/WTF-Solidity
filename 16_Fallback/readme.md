@@ -65,6 +65,22 @@ receive()   fallback()
 
 `receive()`和`payable fallback()`均不存在的时候，向合约发送`ETH`将会报错。
 
+
+## Remix 演示
+1. 首先在 Remix 上部署合约 "Fallback.sol"。
+2. "VALUE" 栏中填入要发送给合约的金额（单位是 Wei），然后点击 "Transact"。
+    ![](img/16-1.jpg)
+
+3. 可以看到交易成功，并且触发了 "receivedCalled" 事件。
+    ![](img/16-2.jpg)
+
+4. "VALUE" 栏中填入要发送给合约的金额（单位是 Wei），"CALLDATA" 栏中填入随意编写的`msg.data`，然后点击 "Transact"。
+    ![](img/16-3.jpg)
+    
+5. 可以看到交易成功，并且触发了 "receivedCalled" 事件。
+    ![](img/16-4.jpg)
+
+
 ## 总结
 这一讲，我介绍了`Solidity`中的两种特殊函数，`receive()`和`fallback()`，他们主要在两种情况下被使用，他们主要用于处理接收`ETH`和代理合约`proxy contract`。
 
