@@ -56,10 +56,10 @@ contract DeleteContract {
 
 ###  在remix上验证
 1. 部署合约并且转入1ETH，查看合约状态
-![deployContract.png](https://github.com/tangminjie/WTFSolidity/blob/main/25_DeleteContract/img/5-2.png)
+![deployContract.png](./img/25-2.png)
 
 2. 销毁合约，查看合约状态
-![deleteContract.png](https://github.com/tangminjie/WTFSolidity/blob/main/25_DeleteContract/img/5-1.png)
+![deleteContract.png](./img/25-1.png)
 
 从测试中观察合约状态可以发现合约销毁后的ETH返回给了指定的地址，并且在合约销毁后依然可以请求交互，所以我们不能根据这个来判断合约是否已经销毁。
 
