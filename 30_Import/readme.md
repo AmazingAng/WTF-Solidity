@@ -30,21 +30,21 @@ import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 ```
 
 - 通过`npm`的目录导入，例子：
-```
+```solidity
 import '@openzeppelin/contracts/access/Ownable.sol';
 ```
 
 - 通过`全局符号`导入特定的合约，例子：
-```
+```solidity
 import {Yeye} from './Yeye.sol';
 ```
 
-- 引用(import)在代码中的位置为：在声明版本号之后，在其余代码之前。
+- 引用(`import`)在代码中的位置为：在声明版本号之后，在其余代码之前。
 
 ## 测试导入结果
 
 我们可以用下面这段代码测试是否成功导入了外部源代码：
-```
+```solidity
 contract Import {
     // 成功导入Address库
     using Address for address;
