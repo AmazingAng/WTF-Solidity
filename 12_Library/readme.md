@@ -24,7 +24,7 @@
 
 ## String库合约
 `String库合约`是将`uint256`类型转换为相应的`string`类型的代码库，样例代码如下：
-```
+```solidity
 library Strings {
     bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
 
@@ -93,7 +93,7 @@ library Strings {
 **1. 利用using for指令**
 
 指令`using A for B;`可用于附加库函数（从库 A）到任何类型（B）。添加完指令后，库`A`中的函数会自动添加为`B`类型变量的成员，可以直接调用。注意：在调用的时候，这个变量会被当作第一个参数传递给函数：
-```
+```solidity
     // 利用using for指令
     using Strings for uint256;
     function getString1(uint256 _number) public pure returns(string memory){
@@ -102,7 +102,7 @@ library Strings {
     }
 ```
 **2. 通过库合约名称调用库函数**
-```
+```solidity
     // 直接通过库合约名调用
     function getString2(uint256 _number) public pure returns(string memory){
         return Strings.toHexString(_number);
