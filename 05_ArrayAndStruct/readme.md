@@ -55,13 +55,13 @@
 
 ## 结构体 struct
 `Solidity`支持通过构造结构体的形式定义新的类型。创建结构体的方法：
-
+```solidity
     // 结构体
     struct Student{
         uint256 id;
         uint256 score; 
     }
-
+```
     Student student; // 初始一个student结构体
 给结构体赋值的两种方法：
 
