@@ -78,13 +78,13 @@
 
 ## 在remix上验证
 - 部署合约查看abi.encode方法的编码结果
-![](./pics/abi_encode.png)
+![](./img/26-1.png)
 
 - 对比验证四种编码方法的异同点
-![](./pics/compare_abi_encodes.png)
+![](./img/26-2.png)
 
 - 查看abi.decode方法的解码结果
-![](./pics/abi_decode.png)
+![](./img/26-3.png)
 
 ## 总结
 在以太坊中，数据必须编码成字节码才能和智能合约交互。这一讲，我们介绍了4种`abi编码`方法和1种`abi解码`方法。
