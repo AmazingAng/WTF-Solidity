@@ -33,65 +33,6 @@
 
 有些恶意合约，会在`receive()` 函数（老版本的话，就是 `fallback()` 函数）嵌入恶意消耗`gas`的内容或者使得执行故意失败的代码，导致一些包含退款和转账逻辑的合约不能正常工作，因此写包含退款等逻辑的合约时候，一定要注意这种情况。
 
-例如下面一个合约示例，`King of the Ether Throne` 是一个竞选国王的合约游戏，游戏规则是如果新玩家发送的 ETH 数量大于当前指定的价格，合约就向上一个国王发送等于当前价格的 ETH，新玩家就会成为新的国王，然后合约把价格调的更高一些，等待下一位国王。
-
-![](img/16-1.jpg)
-
-
-```solidity
-pragma solidity ^0.4.10;
-
-contract PresidentOfCountry {
-    address public president;
-    uint256 price;
-
-    function PresidentOfCountry(uint256 _price) {
-        require(_price > 0);
-        price = _price;
-        president = msg.sender;
-    }
-
-    function becomePresident() payable {
-        require(msg.value >= price); // 金额必须高于当前价格，才能成为国王
-        president.transfer(price);   // 给前任国王打钱
-        president = msg.sender;      // 当选现任国王
-        price = price * 2;           // 当前价格更新为上次的两倍
-    }
-}
-```
-
-如果竞选国王的“人”是一个合约账户，那么“给前任国王打钱”（代码中 `president.transfer(price);`）的时候会调用该合约的 `fallback()` 函数，攻击者可以将合约写成故意失败的代码逻辑：
-
-```solidity
-contract Attack {
-    function () { revert(); } // 故意revert造成调用失败
-
-    function attack(address _target) public payable {
-        _target.call.value(msg.value)(bytes4(keccak256("becomePresident()"))); // 调用国王合约中的竞选国王函数
-    }
-}
-```
-
-因此当攻击者合约竞选国王后，此后任何账户如果试图成为国王，会触发转币给攻击者合约的 `fallback()` 函数。也就是会调用 `revert()；` 导致转币失败。如此就会阻止其他账户成为国王，导致合约逻辑永远陷入停滞。
-
-![](img/16-2.jpg)
-
-使用remix部署测试一下，正常情况下 `PresidentOfCountry` 合约的国王如下， `0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2` 是一个正常用户的地址。
-![](img/16-3.jpg)
-
-输入大于当前价格的 `value` 值，再点击 `becomePresident` 可以正常竞选国王。可以看到国王的地址被更改为 `0x5B38Da6a701c568545dCfcB03FcB875f56beddC4`。
-![](img/16-4.jpg)
-
-部署 `Attack` 合约，调用 `attack` 函数，参数填入国王合约的地址（点击下图中的 Copy 字样下方的图标即可复制国王合约的地址），**一定不要忘记 `value` 值填入大于当前价格，使得攻击合约能顺利竞选上国王，** 然后点击 `attack` 运行。
-![](img/16-5.jpg)
-
-运行成功后可以发现国王合约中的地址已经被更改为攻击合约的地址。
-![](img/16-6.jpg)
-
-然后再次用正常用户去竞选国王，发现交易会一直失败，国王再也不能被更替。
-![](img/16-7.jpg)
-
-
 ## 回退函数 fallback
 `fallback()`函数会在调用合约不存在的函数时被触发。可用于接收ETH，也可以用于代理合约`proxy contract`。`fallback()`声明时不需要`function`关键字，必须由`external`修饰，一般也会用`payable`修饰，用于接收ETH:`fallback() external payable { ... }`。
 
@@ -123,6 +64,22 @@ receive()   fallback()
 简单来说，合约接收`ETH`时，`msg.data`为空且存在`receive()`时，会触发`receive()`；`msg.data`不为空或不存在`receive()`时，会触发`fallback()`，此时`fallback()`必须为`payable`。
 
 `receive()`和`payable fallback()`均不存在的时候，向合约发送`ETH`将会报错。
+
+
+## Remix 演示
+1. 首先在 Remix 上部署合约 "Fallback.sol"。
+2. "VALUE" 栏中填入要发送给合约的金额（单位是 Wei），然后点击 "Transact"。
+    ![](img/16-1.jpg)
+
+3. 可以看到交易成功，并且触发了 "receivedCalled" 事件。
+    ![](img/16-2.jpg)
+
+4. "VALUE" 栏中填入要发送给合约的金额（单位是 Wei），"CALLDATA" 栏中填入随意编写的`msg.data`，然后点击 "Transact"。
+    ![](img/16-3.jpg)
+    
+5. 可以看到交易成功，并且触发了 "receivedCalled" 事件。
+    ![](img/16-4.jpg)
+
 
 ## 总结
 这一讲，我介绍了`Solidity`中的两种特殊函数，`receive()`和`fallback()`，他们主要在两种情况下被使用，他们主要用于处理接收`ETH`和代理合约`proxy contract`。
