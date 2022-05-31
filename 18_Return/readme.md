@@ -59,7 +59,7 @@
 
 ## 在remix上验证
 - 部署合约后查看三种返回方式的结果
-![](./pics/return_result.png)
+![](./img/18-1.png)
 
 
 ## 总结
