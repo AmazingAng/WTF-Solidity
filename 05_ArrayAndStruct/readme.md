@@ -51,7 +51,7 @@
 - `pop()`: `动态数组`和`bytes`拥有`pop()`成员，可以移除数组最后一个元素。
 
 **Example:**
-![5.1.png](5.1.png)
+![5-1.png](./img/5-1.png)
 
 ## 结构体 struct
 `Solidity`支持通过构造结构体的形式定义新的类型。创建结构体的方法：
@@ -75,7 +75,7 @@
     }
 ```
 **Example:**
-![5.2.png](5.2.png)
+![5-2.png](./img/5-2.png)
 
 ```solidity
      // 方法2:直接引用状态变量的struct
@@ -85,7 +85,7 @@
     }
 ```
 **Example:**
-![5.3.png](5.3.png)
+![5-3.png](./img/5-3.png)
 
 ## 总结
 这一讲，我们介绍了solidity中数组（`array`）和结构体（`struct`）的基本用法。下一讲我们将介绍solidity中的哈希表——映射（`mapping`）。
