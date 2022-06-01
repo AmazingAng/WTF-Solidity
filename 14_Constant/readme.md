@@ -45,12 +45,16 @@
 
 ## 在remix上验证
 1. 部署好合约之后，通过remix上的`getter`函数，能获取到`constant`和`immutable`变量初始化好的值。
+
    ![14 1.png](https://github.com/Rulesbreaker/WTFSolidity/blob/080325f750e18aaf89e6283c9b9f3209668fc037/14_Constant/img/14.1.png)   
    
 2. `constant`变量初始化之后，尝试改变它的值，会编译不通过并抛出`TypeError: Cannot assign to a constant variable.`的错误。
+
+
    ![14 2.png](https://github.com/Rulesbreaker/WTFSolidity/blob/080325f750e18aaf89e6283c9b9f3209668fc037/14_Constant/img/14.2.png)   
    
 3. `immutable`变量初始化之后，尝试改变它的值，会编译不通过并抛出`TypeError: Immutable state variable already initialized.`的错误。
+
    ![14 3.png](https://github.com/Rulesbreaker/WTFSolidity/blob/080325f750e18aaf89e6283c9b9f3209668fc037/14_Constant/img/14.3.png)
 
 ## 总结
