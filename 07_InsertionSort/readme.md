@@ -14,39 +14,65 @@
 
 1. `if-else`
 
-   ``` solidity
-        // if else
-        function IfElseTest(uint256 _number) public returns(uint256){
-        if(条件){
-            ...;
-        }else{
-            ...;
+   ```solidity
+        function ifElseTest(uint256 _number) public pure returns(bool){
+            if(_number == 0){
+                return(true);
+            }else{
+                return(false);
+            }
         }
-    }
     ```
 2. `for循环`
 
-    ``` solidity
-        for(uint256 i = 0; i < n; i++){
-            ...;
+    ```solidity
+        function forLoopTest() public pure returns(uint256){
+            uint sum = 0;
+            for(uint i = 0; i < 10; i++){
+                sum += i;
+            }
+            return(sum);
         }
     ```
 3. `while循环`
 
-    ``` solidity
-        while(i < n){
-            ...;
+    ```solidity
+        function whileTest() public pure returns(uint256){
+            uint sum = 0;
+            uint i = 0;
+            while(i < 10){
+                sum += i;
+                i++;
+            }
+            return(sum);
         }
     ```
 4. `do-while循环`
 
-    ``` solidity
-        do{
-            ...;
-
-        }while(i < n);
+    ```solidity
+        function doWhileTest() public pure returns(uint256){
+            uint sum = 0;
+            uint i = 0;
+            do{
+                sum += i;
+                i++;
+            }while(i < 10);
+            return(sum);
+        }
     ```
-另外还有`continue`（立即进入下一个循环）和break（跳出当前循环）关键字可以使用。
+
+5. `三元运算符`
+三元运算符是`solidity`中唯一一个接受三个操作数的运算符，规则`条件? 条件为真的表达式:条件为假的表达式`。 此运算符经常用作 if 语句的快捷方式。
+
+    ```solidity
+        // 三元运算符 tenary/conditional operator
+        function tenaryTest(uint256 x, uint256 y) public pure returns(uint256){
+            // return the max of x and y
+            return x >= y ? x: y; 
+        }
+    ```
+
+另外还有`continue`（立即进入下一个循环）和`break`（跳出当前循环）关键字可以使用。
 
 ## 用`solidity`实现插入排序
 ### 写在前面：90%以上的人用`solidity`写插入算法都会出错。
