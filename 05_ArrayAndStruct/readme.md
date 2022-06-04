@@ -64,8 +64,8 @@
 ```
 ```solidity
     Student student; // 初始一个student结构体
-给结构体赋值的两种方法：
 ```
+给结构体赋值的两种方法：
 ```solidity
     //  给结构体赋值
     // 方法1:在函数中创建一个storage的struct引用
