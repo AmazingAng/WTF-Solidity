@@ -4,7 +4,9 @@
 
 repo 64个star开微信交流群（已开)，128个star录教学视频，256个star出进阶内容，512个star发布官网，1024个star发课程认证，2048个star发社群NFT。LFG!
 
-**discord[内有进微信群方法](https://discord.gg/5akcruXrsk)**
+**[社群discord](https://discord.gg/5akcruXrsk)**
+
+**Solidity技术交流微信群[填表加入](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)**
 
 ## 入门
 **第1讲：三行代码HelloWeb3**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3)】 【[文章](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)】
