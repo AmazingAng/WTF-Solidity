@@ -122,7 +122,7 @@ abstract contract A {
 ```
 1. 在继承时声明父构造函数的参数，例如：`contract B is A(1)`
 2. 在子合约的构造函数中声明构造函数的参数，例如：
-```
+```solidity
 contract C is A {
     constructor(uint _c) A(_c * _c) {}
 }
