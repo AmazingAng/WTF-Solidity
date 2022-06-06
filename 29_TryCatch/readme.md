@@ -107,7 +107,7 @@ contract OnlyEven{
 
 ![](./img/29-1.png)
 
-当运行`execute(1)`的时候，因为`1`为基數，不满足`require(b % 2 == 0, "Ups! Reverting");`，异常抛出，调用失败并释放`CatchEvent`事件。
+当运行`execute(1)`的时候，因为`1`为奇数，不满足`require(b % 2 == 0, "Ups! Reverting");`，异常抛出，调用失败并释放`CatchEvent`事件。
 
 ![](./img/29-2.png)
 
