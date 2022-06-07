@@ -1,12 +1,12 @@
-# Solidity极简入门: 7. 控制流，用solidity实现插入排序
+# Solidity极简入门: 10. 控制流，用solidity实现插入排序
 
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-WTF社群discord：[链接](https://discord.gg/5akcruXrsk)
+WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
 
-所有代码和教程开源在github(64个star开微信交流群；128个star录教学视频): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 这一讲，我们将介绍`solidity`中的控制流，然后讲如何用`solidity`实现插入排序（`InsertionSort`），一个看起来简单，但实际上很容易写出`bug`的程序。
@@ -16,63 +16,63 @@ WTF社群discord：[链接](https://discord.gg/5akcruXrsk)
 
 1. `if-else`
 
-   ```solidity
-        function ifElseTest(uint256 _number) public pure returns(bool){
-            if(_number == 0){
-                return(true);
-            }else{
-                return(false);
-            }
-        }
-    ```
+```solidity
+function ifElseTest(uint256 _number) public pure returns(bool){
+    if(_number == 0){
+	return(true);
+    }else{
+	return(false);
+    }
+}
+```
 2. `for循环`
 
-    ```solidity
-        function forLoopTest() public pure returns(uint256){
-            uint sum = 0;
-            for(uint i = 0; i < 10; i++){
-                sum += i;
-            }
-            return(sum);
-        }
-    ```
+```solidity
+function forLoopTest() public pure returns(uint256){
+    uint sum = 0;
+    for(uint i = 0; i < 10; i++){
+	sum += i;
+    }
+    return(sum);
+}
+```
 3. `while循环`
 
-    ```solidity
-        function whileTest() public pure returns(uint256){
-            uint sum = 0;
-            uint i = 0;
-            while(i < 10){
-                sum += i;
-                i++;
-            }
-            return(sum);
-        }
-    ```
+```solidity
+function whileTest() public pure returns(uint256){
+    uint sum = 0;
+    uint i = 0;
+    while(i < 10){
+	sum += i;
+	i++;
+    }
+    return(sum);
+}
+```
 4. `do-while循环`
 
-    ```solidity
-        function doWhileTest() public pure returns(uint256){
-            uint sum = 0;
-            uint i = 0;
-            do{
-                sum += i;
-                i++;
-            }while(i < 10);
-            return(sum);
-        }
-    ```
+```solidity
+function doWhileTest() public pure returns(uint256){
+    uint sum = 0;
+    uint i = 0;
+    do{
+	sum += i;
+	i++;
+    }while(i < 10);
+    return(sum);
+}
+```
 
 5. `三元运算符`
 三元运算符是`solidity`中唯一一个接受三个操作数的运算符，规则`条件? 条件为真的表达式:条件为假的表达式`。 此运算符经常用作 if 语句的快捷方式。
 
-    ```solidity
-        // 三元运算符 tenary/conditional operator
-        function tenaryTest(uint256 x, uint256 y) public pure returns(uint256){
-            // return the max of x and y
-            return x >= y ? x: y; 
-        }
-    ```
+```solidity
+// 三元运算符 tenary/conditional operator
+function tenaryTest(uint256 x, uint256 y) public pure returns(uint256){
+    // return the max of x and y
+    return x >= y ? x: y; 
+}
+```
 
 另外还有`continue`（立即进入下一个循环）和`break`（跳出当前循环）关键字可以使用。
 
