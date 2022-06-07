@@ -6,7 +6,7 @@
 
 WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在github（1024个star发课程认证，2048个star发社群NFT）: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 这一讲，我们将介绍`solidity`中的控制流，然后讲如何用`solidity`实现插入排序（`InsertionSort`），一个看起来简单，但实际上很容易写出`bug`的程序。
@@ -86,7 +86,7 @@ function tenaryTest(uint256 x, uint256 y) public pure returns(uint256){
 
 ### `python`代码
 我们可以先看一下插入排序的python代码：
-``` python
+```python
 # Python program for implementation of Insertion Sort
 def insertionSort(arr):
 	for i in range(1, len(arr)):
@@ -124,7 +124,7 @@ Remix decode output 出现错误内容
 花了几个小时，在`Dapp-Learning`社群一个朋友的帮助下，终于找到了`bug`所在。`solidity`中最常用的变量类型是`uint`，也就是正整数，取到负值的话，会报`underflow`错误。而在插入算法中，变量`j`有可能会取到`-1`，引起报错。
 
 这里，我们需要把`j`加1，让它无法取到负值。正确代码：
-``` solidity
+```solidity
     // 插入排序 正确版
     function insertionSort(uint[] memory a) public pure returns(uint[] memory) {
         // note that uint can not take negative value
