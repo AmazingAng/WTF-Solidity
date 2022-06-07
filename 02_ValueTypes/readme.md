@@ -4,7 +4,9 @@
 
 欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-所有代码开源在github(64个star开微信交流群，已开[填表加入](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)；128个star录教学视频): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
+
+所有代码和教程开源在github（1024个star发课程认证，2048个star发社群NFT）: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
@@ -22,7 +24,7 @@
 ## 数值类型
 ### 1. 布尔型
 布尔型是二值变量，取值为`true`或`false`。
-```
+```solidity
     // 布尔值
     bool public _bool = true;
 ```
@@ -35,13 +37,14 @@
 - != （不等于）
 
 代码：
-
+```solidity
     // 布尔运算
     bool public _bool1 = !_bool; //取非
     bool public _bool2 = _bool && _bool1; //与
     bool public _bool3 = _bool || _bool1; //或
     bool public _bool4 = _bool == _bool1; //相等
     bool public _bool5 = _bool != _bool1; //不相等
+```
 上面的代码中：变量`_bool`的取值是`true`；`_bool1`是`_bool`的非，为`false`；`_bool && _bool1`为`false`；`_bool || _bool1`为`true`；`_bool == _bool1`为`false`；`_bool != _bool1`为`true`。
 **值得注意的是：**`&&` 和 `||`运算符遵循短路规则，这意味着，假如存在`f(x) || g(y)`的表达式，如果`f(x)`是`true`，`g(y)`不会被计算，即使它和`f(x)`的结果是相反的
 
