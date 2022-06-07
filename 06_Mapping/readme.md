@@ -4,7 +4,9 @@
 
 欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-所有代码开源在github(64个star开微信交流群，已开[填表加入](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)；128个star录教学视频): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
+
+所有代码和教程开源在github（1024个star发课程认证，2048个star发社群NFT）: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
@@ -14,13 +16,13 @@
 在映射中，人们可以通过键（`Key`）来查询对应的值（`Value`），比如：通过一个人的`id`来查询他的钱包地址。
 
 声明映射的格式为`mapping(_KeyType => _ValueType)`，其中`_KeyType`和`_ValueType`分别是`Key`和`Value`的变量类型。例子：
-``` solidity
+```solidity
     mapping(uint => address) public idToAddress; // id映射到地址
     mapping(address => address) public swapPair; // 币对的映射，地址到地址
 ```  
 ## 映射的规则
 - **规则1**：映射的`_KeyType`只能选择`solidity`默认的类型，比如`uint`，`address`等，不能用自定义的结构体。而`_ValueType`可以使用自定义的类型。下面这个例子会报错，因为`_KeyType`使用了我们自定义的结构体：
-``` solidity
+```solidity
     // 我们定义一个结构体 Struct
     struct Student{
         uint256 id;
@@ -33,7 +35,7 @@
 - **规则3**：如果映射声明为`public`，那么`solidity`会自动给你创建一个`getter`函数，可以通过`Key`来查询对应的`Value`。
 
 - **规则4**：给映射新增的键值对的语法为`_Var[_Key] = _Value`，其中`_Var`是映射变量名，`_Key`和`_Value`对应新增的键值对。例子：
-``` solidity
+```solidity
     function writeMap (uint _Key, address _Value) public{
         idToAddress[_Key] = _Value;
     }
