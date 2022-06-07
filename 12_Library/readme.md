@@ -4,7 +4,9 @@
 
 欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-所有代码开源在github(64个star开微信交流群，已开[填表加入](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)；128个star录教学视频): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
+
+所有代码和教程开源在github（1024个star发课程认证，2048个star发社群NFT）: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 这一讲，我们用`ERC721`的引用的库合约`String`为例介绍`solidity`中的库合约（`library`），并总结了常用的库函数。
