@@ -58,7 +58,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 点击`DEPLOY`键，部署完毕！
 
-**注意：**如果我们选择的是`Injected Web3`来部署合约，每一笔交易都将上链，需要钱包确认交易并支付`gas`。
+**注意**：如果我们选择的是`Injected Web3`来部署合约，每一笔交易都将上链，需要钱包确认交易并支付`gas`。
 
 ### 调用
 在合约部署成功后，我们可以在`Deployed Contracts`中找到我们部署的合约`Storage`。展开它，我们将看到所有的外部函数：`store`和`retrieve`。
