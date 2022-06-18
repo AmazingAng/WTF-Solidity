@@ -67,8 +67,8 @@ function doWhileTest() public pure returns(uint256){
 三元运算符是`solidity`中唯一一个接受三个操作数的运算符，规则`条件? 条件为真的表达式:条件为假的表达式`。 此运算符经常用作 if 语句的快捷方式。
 
 ```solidity
-// 三元运算符 tenary/conditional operator
-function tenaryTest(uint256 x, uint256 y) public pure returns(uint256){
+// 三元运算符 ternary/conditional operator
+function ternaryTest(uint256 x, uint256 y) public pure returns(uint256){
     // return the max of x and y
     return x >= y ? x: y; 
 }
