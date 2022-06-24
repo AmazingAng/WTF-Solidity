@@ -108,6 +108,7 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
 ```
 我们定义一个`external payable`的`minusPayable()`函数，间接的调用`minus()`，并且返回合约里的`ETH`余额（`this`关键字可以让我们引用合约地址)。
 我们可以在调用`minusPayable()`时，往合约里转入1个`ETH`。
+这里需要注意的是，并不是在Deploy的时候输入1ETH，会导致Deploy失败。在Deploy成功之后，调用`minusPayable()`之前，输入1`ETH`。
 
 ![](https://images.mirror-media.xyz/publication-images/ETDPN8myq7jFfAL8CUAFt.png?height=148&width=588)
 
