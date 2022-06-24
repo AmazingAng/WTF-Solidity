@@ -12,7 +12,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 ## Loot
 
-!()[./img/Loot-1.png]
+![](./img/Loot-1.png)
 
 `Loot`是以太坊链上的实验性NFT项目，发行于21年8月，共有8000个，前7777个免费`mint`，后233个项目方预留，最高时地板价突破20 `ETH`，目前稳定在1 `ETH`左右。与充斥市场的图片NFT不同，`Loot`是文字类NFT，所有元数据都保存在链上，保证了绝对的去中心化，没人能篡改。
 
@@ -188,7 +188,7 @@ data:application/json;base64,eyJuYW1lIjogIkJhZyAjNSIsICJkZXNjcmlwdGlvbiI6ICJMb29
 ```
 
 把它复制到浏览器打开，可以直接获取`Loot`的元数据，挺神奇的：
-!()[./img/Loot-2.png]
+![](./img/Loot-2.png)
 
 下面是`Loot`生成的文字描述`svg`图片的例子
 ```
@@ -197,7 +197,7 @@ data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIH
 
 把它复制到浏览器打开，得到下面的图片：
 
-!()[./img/Loot-3.png]
+![](./img/Loot-3.png)
 
 
 ## Loot的铸造漏洞
