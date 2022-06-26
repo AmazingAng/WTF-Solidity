@@ -56,7 +56,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 ```
 - 读取部分返回值：声明要读取的返回值对应的变量，不读取的留空。下面这段代码中，我们只读取`_bool`，而不读取返回的`_number`和`_array`：
 ```solidity
-        (, bool _bool2, ) = returnNamed();
+        (, _bool2, ) = returnNamed();
 ```
 
 ## 在remix上验证
