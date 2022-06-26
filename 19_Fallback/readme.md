@@ -80,7 +80,7 @@ receive()   fallback()
 4. "VALUE" 栏中填入要发送给合约的金额（单位是 Wei），"CALLDATA" 栏中填入随意编写的`msg.data`，然后点击 "Transact"。
     ![](img/19-3.jpg)
     
-5. 可以看到交易成功，并且触发了 "receivedCalled" 事件。
+5. 可以看到交易成功，并且触发了 "fallbackCalled" 事件。
     ![](img/19-4.jpg)
 
 
