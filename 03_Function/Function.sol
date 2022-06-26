@@ -3,9 +3,10 @@ pragma solidity ^0.8.4;
 contract FunctionTypes{
     uint256 public number = 5;
     
+    constructor() payable {}
+
     // 函数类型
     // function (<parameter types>) {internal|external} [pure|view|payable] [returns (<return types>)]
-
     // 默认function
     function add() external{
         number = number + 1;
@@ -36,5 +37,4 @@ contract FunctionTypes{
         minus();    
         balance = address(this).balance;
     }
-
 }
