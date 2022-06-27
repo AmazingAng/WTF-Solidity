@@ -10,7 +10,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 -----
 
-我们曾在[第17讲：发送ETH]()那一讲介绍过利用`call`来发送`ETH`，这一讲我们将介绍如何利用它调用合约。
+我们曾在[第20讲：发送ETH](https://github.com/AmazingAng/WTFSolidity/tree/main/20_SendETH)那一讲介绍过利用`call`来发送`ETH`，这一讲我们将介绍如何利用它调用合约。
 
 ## Call
 `call` 是`address`类型的低级成员函数，它用来与其他合约交互。它的返回值为`(bool, data)`，分别对应`call`是否成功以及目标函数的返回值。
