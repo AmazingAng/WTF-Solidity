@@ -47,7 +47,7 @@ contract OtherContract {
     // 收到eth的事件，记录amount和gas
     event Log(uint amount, uint gas);
     
-    fallback() external payable{};
+    fallback() external payable{}
 
     // 返回合约ETH余额
     function getBalance() view public returns(uint) {
