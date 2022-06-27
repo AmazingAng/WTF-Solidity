@@ -14,7 +14,7 @@
 
 ## ERC20
 
-`ERC20`是以太坊上的代币标准，是2015年11月V神参与的[`EIP20`的实现](https://eips.ethereum.org/EIPS/eip-20)。它主要实现了代币转账的基本逻辑：
+`ERC20`是以太坊上的代币标准，来自2015年11月V神参与的[`EIP20`](https://eips.ethereum.org/EIPS/eip-20)。它实现了代币转账的基本逻辑：
 
 - 账户余额
 - 转账
