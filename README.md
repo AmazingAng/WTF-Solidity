@@ -74,6 +74,8 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第31讲：ERC20**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/31_ERC20)】 【[文章](https://mirror.xyz/ninjak.eth/-LNwtaA4Eb0e1GZEsaZEXs09Nm9l57HVvoeRUfxVZNg)】
 
+**第32讲：代币水龙头**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/32_Faucet)】 【[文章](https://mirror.xyz/ninjak.eth/tr1pm32UYMO96gOsgQsU5beAAcD3rkHtaBYg9MBzCz0)】
+
 ## 专题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/专题/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
