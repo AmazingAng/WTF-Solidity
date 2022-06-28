@@ -72,7 +72,7 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 ## 应用
 
-**第31讲：ERC20**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/31_ERC20)】 【[文章](https://mirror.xyz/ninjak.eth/asj1-eKf6YdIoI9oMSLI3VECwqCzRHwaqIS01ALQ7qo)】
+**第31讲：ERC20**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/31_ERC20)】 【[文章](https://mirror.xyz/ninjak.eth/-LNwtaA4Eb0e1GZEsaZEXs09Nm9l57HVvoeRUfxVZNg)】
 
 ## 专题
 ### `工具`
