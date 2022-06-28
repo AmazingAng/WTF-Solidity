@@ -148,7 +148,8 @@
     }
 ```
 
-- `approve()`函数：实现`IERC20`中的`approve`函数，代币授权逻辑。被授权方`spender`可以支配授权方的`amount`数量的代币。
+- `approve()`函数：实现`IERC20`中的`approve`函数，代币授权逻辑。被授权方`spender`可以支配授权方的`amount`数量的代币。`spender`可以是EOA账户，也可以是合约账户：当你用`uniswap`交易代币时，你需要将代币授权给`uniswap`合约。
+
 ```solidity
     function approve(address spender, uint amount) external override returns (bool) {
         allowance[msg.sender][spender] = amount;
