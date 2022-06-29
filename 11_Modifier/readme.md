@@ -18,7 +18,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
    address owner; // 定义owner变量
 
    // 构造函数
-   constructor() public {
+   constructor() {
       owner = msg.sender; // 在部署合约的时候，将owner设置为部署者的地址
    }
 ```
