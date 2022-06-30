@@ -14,7 +14,7 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第3讲：函数类型 (external/internal/public/private, pure/view, payable)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/03_Function)】 【[文章](https://mirror.xyz/ninjak.eth/FWI887JBea4VpNiMlJ2ICyJ5aWUREReGo9Bz0X8iEVc)】
 
-**第4讲：函数输出(returns/return)**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/04_Return)】 【[文章](https://mirror.xyz/ninjak.eth/FIGf9tF7wiBlLnQGXfEjVkJ0efzKBNltJS1fRxPKYTk)】
+**第4讲：函数输出（returns/return）**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/04_Return)】 【[文章](https://mirror.xyz/ninjak.eth/FIGf9tF7wiBlLnQGXfEjVkJ0efzKBNltJS1fRxPKYTk)】
 
 **第5讲：变量作用域和数据存储 (storage/memory/calldata)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/05_DataStorage)】 【[文章](https://mirror.xyz/ninjak.eth/w5zJWGwElN2ei4tgtuJbTTpKwrGhb-igPY7wTVKRCgY)】
 
@@ -24,31 +24,31 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第8讲：变量初始值**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/08_InitialValue)】 【[文章](https://mirror.xyz/ninjak.eth/WoWQ8s66meku9zPFsHGsXs4m7T6PauZPmfSak76qDkI)】
 
-**第9讲：常量(constant/immutable)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/09_Constant)】 【[文章](https://mirror.xyz/ninjak.eth/p9xMZTxCBLSKBqqP2dlyxHceev1V7Blmo5Wf-OY3R48)】
+**第9讲：常量（constant/immutable）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/09_Constant)】 【[文章](https://mirror.xyz/ninjak.eth/p9xMZTxCBLSKBqqP2dlyxHceev1V7Blmo5Wf-OY3R48)】
 
-**第10讲：控制流（control flow）和插入排序（insertion sort）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/10_InsertionSort)】 【[文章](https://mirror.xyz/ninjak.eth/8Q0vr-dyHfiIXS9KnivaQDxpM9cIQTNWoC68TNvCZ9c)】
+**第10讲：控制流和插入排序**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/10_InsertionSort)】 【[文章](https://mirror.xyz/ninjak.eth/8Q0vr-dyHfiIXS9KnivaQDxpM9cIQTNWoC68TNvCZ9c)】
 
 **第11讲：构造函数（constructor）和修饰器（modifier）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/11_Modifier)】 【[文章](https://mirror.xyz/ninjak.eth/X8HHTaD8hqkfshhugHHp7ho3EaLjuviya_g1l3MsF_U)】
 
 **第12讲：事件（events）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/12_Event)】 【[文章](https://mirror.xyz/ninjak.eth/nGSCuFbPHMo8mL1ErZMUwOZG_OUECzIWEsGhX0a5eOw)】
 
-**第13讲：继承(inheritance)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Inheritance)】 【[文章](https://mirror.xyz/ninjak.eth/HTCOqhsxTXs42NNv3wfzNRQMN6qGHGYY9iaTJhhKBb4)】
+**第13讲：继承**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Inheritance)】 【[文章](https://mirror.xyz/ninjak.eth/HTCOqhsxTXs42NNv3wfzNRQMN6qGHGYY9iaTJhhKBb4)】
 
-**第14讲：抽象合约(abstract)和接口(interface)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/14_Interface)】 【[文章](https://mirror.xyz/ninjak.eth/KKnoJJfHG69Pg3GQda_B454z_nJ1tesyBd4uOvh1WNM)】
+**第14讲：抽象合约（abstract）和接口（interface）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/14_Interface)】 【[文章](https://mirror.xyz/ninjak.eth/KKnoJJfHG69Pg3GQda_B454z_nJ1tesyBd4uOvh1WNM)】
 
-**第15讲：异常(errors)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Errors)】 【[文章](https://mirror.xyz/ninjak.eth/XhhLu7PV1cAhOp9_m-dk9OoTj7offC7DkYYgsV3e31I)】
+**第15讲：异常（errors）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Errors)】 【[文章](https://mirror.xyz/ninjak.eth/XhhLu7PV1cAhOp9_m-dk9OoTj7offC7DkYYgsV3e31I)】
 
 ## 进阶
 
-**第16讲：函数重载(overloading)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Overloading)】 【[文章](https://mirror.xyz/ninjak.eth/ADt6g13gwqt42-9_nBxMunSkVHeft6-yb1mp0XH-4f8)】
+**第16讲：函数重载**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Overloading)】 【[文章](https://mirror.xyz/ninjak.eth/ADt6g13gwqt42-9_nBxMunSkVHeft6-yb1mp0XH-4f8)】
 
-**第17讲：库合约(library)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/17_Library)】 【[文章](https://mirror.xyz/ninjak.eth/5nhKjOI40nCT0nCk6iO2TXry3xi09F1Ts4e5lMBlZ1w)】
+**第17讲：库合约（library）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/17_Library)】 【[文章](https://mirror.xyz/ninjak.eth/5nhKjOI40nCT0nCk6iO2TXry3xi09F1Ts4e5lMBlZ1w)】
 
 **第18讲：Import**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/18_Import)】 【[文章](https://mirror.xyz/ninjak.eth/f43II54h19ucfkNDarEdDFGts0lBkJCyrZ57U5Njk3A)】
 
-**第19讲：接收ETH(fallback/receive)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/19_Fallback)】 【[文章](https://mirror.xyz/ninjak.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)】
+**第19讲：接收ETH（fallback/receive）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/19_Fallback)】 【[文章](https://mirror.xyz/ninjak.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)】
 
-**第20讲：发送ETH(transfer/send/call)**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/20_SendETH)】 【[文章](https://mirror.xyz/ninjak.eth/NTNHraVAn2OWUKXpr0byphlxl8ytj7fRUAaOaLYfEtA)】
+**第20讲：发送ETH（transfer/send/call）**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/20_SendETH)】 【[文章](https://mirror.xyz/ninjak.eth/NTNHraVAn2OWUKXpr0byphlxl8ytj7fRUAaOaLYfEtA)】
 
 **第21讲：调用其他合约**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/21_CallContract)】 【[文章](https://mirror.xyz/ninjak.eth/fI48BkuT7wWzRaVKkn1VWxnfLpkUEvIZIJcO5iOIzbk)】
 
