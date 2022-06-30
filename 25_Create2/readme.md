@@ -126,7 +126,7 @@ BSC链上的PEOPLE地址:
 1. 首先用`WBNB`和`PEOPLE`的地址哈希作为`salt`来计算出`Pair`合约的地址
 2. 调用`PairFactory2.createPair2`传入参数为`WBNB`和`PEOPLE`的地址，获取出创建的`pair`合约地址
 3. 对比合约地址
-![create2_remix_test.png](./img/24-1.png)
+![create2_remix_test.png](./img/25-1.png)
 
 ## create2的实际应用场景
 1. 交易所为新用户预留创建钱包合约地址。
