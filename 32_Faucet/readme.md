@@ -81,7 +81,7 @@
 2. 部署`Faucet`水龙头合约，初始化的参数填上面`ERC20`代币的合约地址。
     ![部署`Faucet`水龙头合约](./img/32-2.png)
 
-3. 利用`ERC20`代币合约的`trasnfer()`函数，将 10000 单位代币转账到`Faucet`合约地址。
+3. 利用`ERC20`代币合约的`transfer()`函数，将 10000 单位代币转账到`Faucet`合约地址。
     ![给`Faucet`水龙头合约转账](./img/32-3.png)
 
 4. 换一个新账户，调用`Faucet`合约`requestTokens()`函数，领取代币。可以在终端看到`SendToken`事件被释放。
