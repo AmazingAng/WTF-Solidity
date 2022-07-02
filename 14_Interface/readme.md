@@ -20,14 +20,25 @@ abstract contract InsertionSort{
 }
 ```
 ## 接口
-接口也是一种合约，跟抽象合约类似，都是为了设立标准和减少代码冗余，但是接口的要求更加严格：
+
+接口类似于抽象合约，但它不实现任何功能。接口的规则：
 
 1. 不能包含状态变量
 2. 不能包含构造函数
 3. 不能继承除接口外的其他合约
-4. 所有函数都必须是external（接口与合约的`ABI`等价）
+4. 所有函数都必须是external且不能有函数体
+5. 继承接口的合约必须实现接口定义的所有功能
 
-我们看一个`ERC721`接口的例子，所有NFT都使用了这个接口：
+虽然接口不实现任何功能，但它非常重要。接口是智能合约的骨架，定义了合约的功能以及如何触发它们：如果智能合约实现了某种接口（比如`ERC20`或`ERC721`），其他Dapps和智能合约就知道如何与它交互。因为接口提供了两个重要的信息：
+
+1. 合约里每个函数的`bytes4`选择器，以及基于它们的函数签名`函数名(每个参数类型）`。
+
+2. 接口id（更多信息见[EIP165](https://eips.ethereum.org/EIPS/eip-165)）
+
+另外，接口与合约`ABI`（Application Binary Interface）等价，可以相互转换：编译接口可以得到合约的`ABI`，利用[abi-to-sol工具](https://gnidan.github.io/abi-to-sol/)也可以将`ABI json`文件转换为`接口sol`文件。
+
+我们以`ERC721`接口合约`IERC721`为例，它定义了3个`event`和9个`function`，所有`ERC721`标准的NFT都实现了这些函数。我们可以看到，接口和常规合约的区别在于每个函数都以`;`代替函数体`{ }`结尾。
+
 ```solidity
 interface IERC721 is IERC165 {
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
@@ -53,35 +64,54 @@ interface IERC721 is IERC165 {
     function safeTransferFrom( address from, address to, uint256 tokenId, bytes calldata data) external;
 }
 ```
-这个接口里面共定义了3个`event`和9个`function`，为所有`ERC721`函数设立了标准：所有`ERC721`合约都要实现这些`function`。
 
-### `ERC721`接口的`Event`
-接口中事件的定义和正常合约里一样。`ERC721`接口里面的`event`包括：
+### IERC721事件
+`IERC721`包含3个事件，其中`Transfer`和`Approval`事件在`ERC20`中也有。
+- `Transfer`事件：在转账时被释放，记录代币的发出地址`from`，接收地址`to`和`tokenid`。
+- `Approval`事件：在授权时释放，记录授权地址`owner，被授权地址`approved`和`tokenid`。
+- `ApprovalForAll`事件：在批量授权时释放，记录批量授权的发出地址`owner`，被授权地址`operator`和授权与否的`approved`。
 
-1. `Transfer`（转账事件）：记录`发起地址`，`接收地址`，和`tokenId`
-2. `Approve`（批准事件）：记录`持有地址`，`批准地址`，和`tokenId`
-3. `ApproveForAll`（批量批准事件）：记录`持有地址`，`批准地址`，和一个代表批准与否的`bool`值。可以看到，接口中的事件和正常合约里的事件一样。
+### IERC721函数
+- `balanceOf`：返回某地址的NFT持有量`balance`。
+- `ownerOf`：返回某`tokenId`的主人`owner`。
+- `transferFrom`：普通转账，参数为转出地址`from`，接收地址`to`和`tokenId`。
+- `safeTransferFrom`：安全转账（如果接收方是合约地址，会要求实现`ERC721Receiver`接口）。参数为转出地址`from`，接收地址`to`和`tokenId`。
+- `approve`：授权另一个地址使用你的NFT。参数为被授权地址`approve`和`tokenId`。
+- `getApproved`：查询`tokenId`被批准给了哪个地址。
+- `setApprovalForAll`：将自己持有的该系列NFT批量授权给某个地址`operator`。
+- `isApprovedForAll`：查询某地址的NFT是否批量授权给了另一个`operator`地址。
+- `safeTransferFrom`：安全转账的重载函数，参数里面包含了`data`。
 
-### `ERC721`接口的`Function`
-接口中所有`function`都必须带有`external`标签（不需要写`virtual`标签，因为默认为`virtual`）。`ERC721`接口里面的`function`包括：
 
-1. `balanceOf`：查询某个地址的`NFT`持有量
-2. `ownerOf`：查询某个`tokenId`的持有人
-3. `safeTransferFrom`：安全转账（如果接收方是合约地址，会要求实现`ERC721`的接收接口）。
-4. `transferFrom`：普通转账
-5. `approve`：批准另一个地址使用你的`NFT`
-6. `getApproved`：查询`NFT`被批准给了哪个地址
-7. `setApprovalForAll`：将全部`NFT`批量批准给某个地址
-8. `isApprovedForAll`：查询全部`NFT`是否批准给了某个地址
-9. `safeTransferFrom`：安全转账，与`3.`不同的地方在于参数里面包含了`data`
-## 什么时候使用抽象合约和接口？
-1. 写大工程的时候打草稿用
-2. 大神写标准的时候
+
+### 什么时候使用接口？
+如果我们知道一个合约实现了`IERC721`接口，我们不需要知道它具体代码实现，就可以与它交互。
+
+无聊猿`BAYC`属于`ERC721`代币，实现了`IERC721`接口的功能。我们不需要知道它的源代码，只需知道它的合约地址，用`IERC721`接口就可以与它交互，比如用`balanceOf()`来查询某个地址的`BAYC`余额，用`safeTransferFrom()`来转账`BAYC`。
+
+```solidity
+contract interactBAYC {
+    // 利用BAYC地址创建接口合约变量（ETH主网）
+    IERC721 BAYC = IERC721(0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D);
+
+    // 通过接口调用BAYC的balanceOf()查询持仓量
+    function balanceOfBAYC(address owner) external view returns (uint256 balance){
+        return BAYC.balanceOf(owner);
+    }
+
+    // 通过接口调用BAYC的safeTransferFrom()安全转账
+    function safeTransferFromBAYC(address from, address to, uint256 tokenId) external{
+        BAYC.safeTransferFrom(from, to, tokenId);
+    }
+}
+```
+
 ## 在Remix上验证
 - 抽象合约示例（简单的演示代码如图所示）
   ![14-1](./img/14-1.png)
 - 接口示例（简单的演示代码如图所示）
   ![14-2](./img/14-2.png)
+
 ## 总结
-这一讲，我介绍了`solidity`中的抽象合约（`abstract`）和接口（`interface`），他们都可以写模版并且减少代码冗余。我们还讲了`ERC721`接口合约，以后会更详细的讲一下`ERC721`代币标准。
+这一讲，我介绍了`solidity`中的抽象合约（`abstract`）和接口（`interface`），他们都可以写模版并且减少代码冗余。我们还讲了`ERC721`接口合约`IERC721`，以及如何利用它与无聊猿`BAYC`合约进行交互。
 
