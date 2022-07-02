@@ -121,8 +121,6 @@ contract Variables {
 - `msg.sender`: (`address payable`)	消息发送者 (当前 caller)
 - `msg.sig`: (`bytes4`)	calldata的前四个字节 (function identifier)
 - `msg.value`: (`uint`)	当前交易发送的`wei`值
-- `now `: (`uint`)	当前块的时间戳
-  - 在 0.7.0 版本，`now` （`block.timestamp`的别名）已经被移除了。
 
 **Example:**
 ![5-4.png](./img/5-4.png)
