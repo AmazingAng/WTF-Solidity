@@ -78,6 +78,8 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第33讲：空投**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/33_Airdrop)】 【[文章](https://mirror.xyz/ninjak.eth/pRoRGe7V4djkWX-_ZkkrdzKE8RSO5ivoDktCacE-4R8)】
 
+**第34讲：ERC721**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/7BbjaN4Zz1ycAlfvKARlijMusL0RV3SOAltSx0nJed4)】
+
 ## 专题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/专题/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
