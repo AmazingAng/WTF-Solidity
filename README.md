@@ -3,7 +3,7 @@
 # WTF Solidity
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
-repo 64个star开微信交流群（已开)，128个star录教学视频，256个star出进阶内容，512个star发布官网，1024个star发课程认证，2048个star发社群NFT。LFG!
+repo 64个star开微信交流群（已开)，128个star录教学视频，256个star出进阶内容（已出)，512个star发布官网，1024个star发课程认证，2048个star发社群NFT。LFG!
 
 **Solidity技术交流社群[discord](https://discord.gg/5akcruXrsk)，微信群[填表加入](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)**
 
@@ -79,6 +79,8 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 **第33讲：空投**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/33_Airdrop)】 【[文章](https://mirror.xyz/ninjak.eth/pRoRGe7V4djkWX-_ZkkrdzKE8RSO5ivoDktCacE-4R8)】
 
 **第34讲：ERC721**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/7BbjaN4Zz1ycAlfvKARlijMusL0RV3SOAltSx0nJed4)】
+
+**第35讲：荷兰拍卖**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/35_DutchAuction)】 【[文章](https://mirror.xyz/ninjak.eth/6v7-GIVSQIG5mNUIMP8VhXt6AS1Iq24kMt2DOh196Fc)】
 
 ## 专题
 ### `工具`
