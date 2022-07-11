@@ -20,8 +20,8 @@ contract Airdrop {
         require(_addresses.length == _amounts.length, "Lengths of Addresses and Amounts NOT EQUAL");
         IERC20 token = IERC20(_token); // 声明IERC合约变量
         uint _amountSum = getSum(_amounts); // 计算空投代币总量
-        // 检查：授权代币数量 > 空投代币总量
-        require(token.allowance(msg.sender, address(this)) > _amountSum, "Need Approve ERC20 token");
+        // 检查：授权代币数量 >= 空投代币总量
+        require(token.allowance(msg.sender, address(this)) >= _amountSum, "Need Approve ERC20 token");
         
         // for循环，利用transferFrom函数发送空投
         for (uint8 i; i < _addresses.length; i++) {
