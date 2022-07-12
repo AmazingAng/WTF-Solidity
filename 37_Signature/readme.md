@@ -30,7 +30,6 @@
 
 1. 签名者利用`私钥`（隐私的）对`消息`（公开的）创建`签名`（公开的）。
 2. 其他人使用`消息`（公开的）和`签名`（公开的）恢复签名者的`公钥`（公开的）并验证签名。
-
 我们将配合`ECDSA`库合讲解这两个部分。本教程所用的`私钥`，`公钥`，`消息`，`以太坊签名消息`，`签名`如下所示：
 ```
 私钥: 0x227dbb8586117d55284e26620bc76534dfbd2394be34cf4a09cb775d593b6f2b
@@ -238,13 +237,3 @@ _signature: 0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d55
 ## 总结
 
 这一讲，我们介绍了以太坊中的数字签名`ECDSA`，如何利用`ECDSA`创建和验证签名，`ECDSA`合约，以及如何利用它发放`NFT`白名单。代码中的`ECDSA`库由`openzepplin`的[同名库](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/cryptography/ECDSA.sol)简化而成。由于签名是链下的，不需要`gas`，因此这种白名单发放模式比`Merkle Tree`模式还要经济。
-
-
-
-
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-
-
-
