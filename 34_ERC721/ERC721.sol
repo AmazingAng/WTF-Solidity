@@ -127,7 +127,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         require(from == owner, "not owner");
         require(to != address(0), "transfer to the zero address");
 
-        _approve(owner, address(0), tokenId);
+        _approve(owner, to, tokenId);
 
         _balances[from] -= 1;
         _balances[to] += 1;
