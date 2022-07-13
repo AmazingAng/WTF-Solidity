@@ -57,6 +57,7 @@ contract ERC721 is IERC721, IERC721Metadata{
     function ownerOf(uint tokenId) public view override returns (address owner) {
         owner = _owners[tokenId];
         require(owner != address(0), "token doesn't exist");
+        return owner;
     }
 
     // 实现IERC721的isApprovedForAll，利用_operatorApprovals变量查询owner地址是否将所持NFT批量授权给了operator地址。
