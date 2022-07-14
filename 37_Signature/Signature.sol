@@ -74,8 +74,9 @@ contract SignatureNFT is ERC721 {
         bytes32 _ethSignedMessageHash = ECDSA.toEthSignedMessageHash(_msgHash); // 计算以太坊签名消息
         require(verify(_ethSignedMessageHash, _signature), "Invalid signature"); // ECDSA检验通过
         require(!mintedAddress[_account], "Already minted!"); // 地址没有mint过
-        _mint(_account, _tokenId); // mint
+                
         mintedAddress[_account] = true; // 记录mint过的地址
+        _mint(_account, _tokenId); // mint
     }
 
     /*

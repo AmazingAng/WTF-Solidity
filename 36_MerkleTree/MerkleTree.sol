@@ -80,8 +80,9 @@ contract MerkleTree is ERC721 {
     {
         require(_verify(_leaf(account), proof), "Invalid merkle proof"); // Merkle检验通过
         require(!mintedAddress[account], "Already minted!"); // 地址没有mint过
-        _mint(account, tokenId); // mint
+        
         mintedAddress[account] = true; // 记录mint过的地址
+        _mint(account, tokenId); // mint
     }
 
     // 计算Merkle书叶子的哈希值
