@@ -97,7 +97,7 @@ ethereum.request({method: "personal_sign", params: [account, hash]})
 0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d559b12d220f99f41d17651b0c1c6a669d346a397f8541760d6b32a5725378b241c
 ```
 
-![浏览器console调用metamask进行签名](./img/37-4.png)
+![浏览器console调用metamask进行签名](./img/37-4.jpg)
 
 ### 验证签名
 
