@@ -48,15 +48,15 @@ contract DutchAuction is Ownable, ERC721 {
         "not enough remaining reserved for auction to support desired mint amount"
         ); // 检查是否超过NFT上限
 
+        uint256 totalCost = getAuctionPrice(auctionStartTime) * quantity; // 计算mint成本
+        require(msg.value >= totalCost, "Need to send more ETH."); // 检查用户是否支付足够ETH
+        
         // Mint NFT
         for(uint i = 0; i < quantity; i++) {
             uint mintIndex = totalSupply();
             _mint(msg.sender, mintIndex);
             _addTokenToAllTokensEnumeration(mintIndex);
         }
-
-        uint256 totalCost = getAuctionPrice(auctionStartTime) * quantity; // 计算mint成本
-        require(msg.value >= totalCost, "Need to send more ETH."); // 检查用户是否支付足够ETH
         // 多余ETH退款
         if (msg.value > totalCost) {
             payable(msg.sender).transfer(msg.value - totalCost);
