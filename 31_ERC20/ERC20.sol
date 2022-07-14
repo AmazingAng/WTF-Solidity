@@ -18,6 +18,7 @@ contract ERC20 is IERC20 {
     
     uint8 public decimals = 18; // 小数位数
 
+    // @dev 在合约部署的时候实现合约名称和符号
     constructor(string memory name_, string memory symbol_){
         name = name_;
         symbol = symbol_;
