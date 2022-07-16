@@ -25,12 +25,12 @@
 - `getSum()`函数：返回`uint`数组的和。
 
 ```solidity
-    // 数组求和函数
-    function getSum(uint256[] calldata _arr) public pure returns(uint sum)
-    {
-        for(uint i = 0; i < _arr.length; i++)
-            sum = sum + _arr[i];
-    }
+// 数组求和函数
+function getSum(uint256[] calldata _arr) public pure returns(uint sum)
+{
+    for(uint i = 0; i < _arr.length; i++)
+        sum = sum + _arr[i];
+}
 ```
 
 - `multiTransferToken()`函数：发送`ERC20`代币空投，包含三个参数：
@@ -42,42 +42,51 @@
 
 ```solidity
 /// @notice 向多个地址转账ERC20代币，使用前需要先授权
-    ///
-    /// @param _token 转账的ERC20代币地址
-    /// @param _addresses 空投地址数组
-    /// @param _amounts 代币数量数组（每个地址的空投数量）
-    function multiTransferToken(
-        address _token,
-        address[] calldata _addresses,
-        uint256[] calldata _amounts
-        ) external {
-        // 检查：_addresses和_amounts数组的长度相等
-        require(_addresses.length == _amounts.length, "Lengths of Addresses and Amounts NOT EQUAL");
-        IERC20 token = IERC20(_token); // 声明IERC合约变量
-        uint _amountSum = getSum(_amounts); // 计算空投代币总量
-        // 检查：授权代币数量 >= 空投代币总量
-        require(token.allowance(msg.sender, address(this)) >= _amountSum, "Need Approve ERC20 token");
-        
-        // for循环，利用transferFrom函数发送空投
-        for (uint8 i; i < _addresses.length; i++) {
-            token.transferFrom(msg.sender, _addresses[i], _amounts[i]);
-        }
+///
+/// @param _token 转账的ERC20代币地址
+/// @param _addresses 空投地址数组
+/// @param _amounts 代币数量数组（每个地址的空投数量）
+function multiTransferToken(
+    address _token,
+    address[] calldata _addresses,
+    uint256[] calldata _amounts
+    ) external {
+    // 检查：_addresses和_amounts数组的长度相等
+    require(_addresses.length == _amounts.length, "Lengths of Addresses and Amounts NOT EQUAL");
+    IERC20 token = IERC20(_token); // 声明IERC合约变量
+    uint _amountSum = getSum(_amounts); // 计算空投代币总量
+    // 检查：授权代币数量 >= 空投代币总量
+    require(token.allowance(msg.sender, address(this)) >= _amountSum, "Need Approve ERC20 token");
+    
+    // for循环，利用transferFrom函数发送空投
+    for (uint8 i; i < _addresses.length; i++) {
+        token.transferFrom(msg.sender, _addresses[i], _amounts[i]);
     }
+}
+
+// 数组求和函数
+function getSum(uint256[] calldata _arr) public pure returns(uint sum)
+{
+    for(uint i = 0; i < _arr.length; i++)
+        sum = sum + _arr[i];
+}
 ```
 
 ### 空投实践
 
-1. 部署`ERC20`代币合约，并给自己`mint` 10000 单位代币。
+1. 部署`ERC20`代币合约，并给自己`mint`10000 单位代币。
 
 ![部署`ERC20`](./img/33-1.png)
 
+![mint](./img/33-2.png)
+
 2. 部署`Airdrop`空投合约。
 
-![部署`Airdrop`合约](./img/33-2.png)
+![部署`Airdrop`合约](./img/33-3.png)
 
 3. 利用`ERC20`代币合约中的`approve()`函数，给`Airdrop`空投合约授权10000 单位代币。
 
-![授权`Airdrop`合约](./img/33-3.png)
+![授权`Airdrop`合约](./img/33-4.png)
 
 4. 执行`Airdrop`合约的`multiTransferToken()`函数进行空投， `_token`填`ERC20`代币地址，`_addresses`和`_amounts`按照以下填写
 
@@ -89,13 +98,12 @@
 [100, 200]
 ```
 
-![空投](./img/33-4.png)
+![空投](./img/33-5.png)
 
 5. 利用`ERC20`合约的`balanceOf()`函数查询上面用户地址的代币余额，成功变为`100`和`200`，空投成功！
 
-![查询空投用户的代币余额](./img/33-5.png)
+![查询空投用户的代币余额](./img/33-6.png)
 
 ## 总结
 
 这一讲，我们介绍了如何使用`solidity`写`ERC20`代币空投合约，极大增加空投效率。我撸空投收获最大的一次是`ENS`空投，你们呢？
-
