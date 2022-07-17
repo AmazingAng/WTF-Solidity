@@ -44,17 +44,17 @@ contract DutchAuction is Ownable, ERC721 {
 
 合约中一共有`9`个状态变量，其中有`6`个和拍卖相关，他们是：
 
-- `COLLECTOIN_SIZE`：NFT总量
+- `COLLECTOIN_SIZE`：NFT总量。
 - `AUCTION_START_PRICE`：荷兰拍卖起拍价，也是最高价。
-- `AUCTION_END_PRICE`：荷兰拍卖结束价，也是地板价。
+- `AUCTION_END_PRICE`：荷兰拍卖结束价，也是最低价/地板价。
 - `AUCTION_TIME`：拍卖持续时长。
 - `AUCTION_DROP_INTERVAL`：每过多久时间，价格衰减一次。
 - `auctionStartTime`：拍卖起始时间（区块链时间戳，`block.timestamp`）。
 
 ```solidity
     uint256 public constant COLLECTOIN_SIZE = 10000; // NFT总数
-    uint256 public constant AUCTION_START_PRICE = 1 ether; // 起拍价
-    uint256 public constant AUCTION_END_PRICE = 0.1 ether; // 结束价（最低价）
+    uint256 public constant AUCTION_START_PRICE = 1 ether; // 起拍价(最高价)
+    uint256 public constant AUCTION_END_PRICE = 0.1 ether; // 结束价(最低价/地板价)
     uint256 public constant AUCTION_TIME = 10 minutes; // 拍卖时间，为了测试方便设为10分钟
     uint256 public constant AUCTION_DROP_INTERVAL = 1 minutes; // 每过多久时间，价格衰减一次
     uint256 public constant AUCTION_DROP_PER_STEP =
@@ -67,7 +67,7 @@ contract DutchAuction is Ownable, ERC721 {
 ```
 
 ### `DutchAuction`函数
-荷兰拍卖合约中共有`9`个函数，与`ERC721`相关的函数我们这里不再重复介绍，只介绍和拍卖相关的。
+荷兰拍卖合约中共有`9`个函数，与`ERC721`相关的函数我们这里不再重复介绍，只介绍和拍卖相关的函数。
 
 - 设定拍卖起始时间：我们在构造函数中会声明当前区块时间为起始时间，项目方也可以通过`setAuctionStartTime()`函数来调整：
 
@@ -82,7 +82,10 @@ contract DutchAuction is Ownable, ERC721 {
     }
 ```
 
-- 获取拍卖实时价格：`getAuctionPrice()`函数通过当前区块时间以及拍卖相关的状态变量来计算实时拍卖价格。当`block.timestamp`小于起始时间，价格为最高价`AUCTION_START_PRICE`；当`block.timestamp`大于结束时间，价格为最低价`AUCTION_END_PRICE`；当`block.timestamp`处于两者之间时，则计算出当前的衰减价格。
+- 获取拍卖实时价格：`getAuctionPrice()`函数通过当前区块时间以及拍卖相关的状态变量来计算实时拍卖价格。
+<br>当`block.timestamp`小于起始时间，价格为最高价`AUCTION_START_PRICE`；
+<br>当`block.timestamp`大于结束时间，价格为最低价`AUCTION_END_PRICE`；
+<br>当`block.timestamp`处于两者之间时，则计算出当前的衰减价格。
 
 ```solidity
     // 获取拍卖实时价格
@@ -103,7 +106,8 @@ contract DutchAuction is Ownable, ERC721 {
     }
 ```
 
-- 用户拍卖并铸造`NFT`：用户通过调用`auctionMint()`函数，支付`ETH`参加荷兰拍卖并铸造`NFT`。该函数首先检查拍卖是否开始/铸造是否超出`NFT`总量。接着，合约通过`getAuctionPrice()`和铸造数量计算拍卖成本，并检查用户支付的`ETH`是否足够：如果足够，则将`NFT`铸造给用户，并退回超额的`ETH`；反之，则回退交易。
+- 用户拍卖并铸造`NFT`：用户通过调用`auctionMint()`函数，支付`ETH`参加荷兰拍卖并铸造`NFT`。
+<br>该函数首先检查拍卖是否开始/铸造是否超出`NFT`总量。接着，合约通过`getAuctionPrice()`和铸造数量计算拍卖成本，并检查用户支付的`ETH`是否足够：如果足够，则将`NFT`铸造给用户，并退回超额的`ETH`；反之，则回退交易。
 
 ```solidity
     // 拍卖mint函数
