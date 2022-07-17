@@ -12,9 +12,29 @@
 
 `BTC`和`ETH`这类代币都属于同质化代币，矿工挖出的第`1`枚`BTC`与第`10000`枚`BTC`并没有不同，是等价的。但世界中很多物品是不同质的，其中包括房产、古董、虚拟艺术品等等，这类物品无法用同质化代币抽象。因此，[以太坊EIP721](https://eips.ethereum.org/EIPS/eip-721)提出了`ERC721`标准，来抽象非同质化的物品。这一讲，我们将介绍`ERC721`标准，并基于它发行一款`NFT`。
 
+## EIP与ERC
+
+这里有一个点需要理解，本节标题是`ERC721`，这里又提到了`EIP721`,这两个是什么关系呢？
+
+`EIP`全称 `Ethereum Imporvement Proposals`(以太坊改进建议), 是以太坊开发者社区提出的改进建议, 是一系列以编号排定的文件, 类似互联网上IETF的RFC。
+
+`EIP`可以是 `Ethereum` 生态中任意领域的改进, 比如新特性、ERC、协议改进、编程工具等等。
+
+`ERC`全称 Ethereum Request For Comment (以太坊意见征求稿), 用以记录以太坊上应用级的各种开发标准和协议。如典型的Token标准(`ERC20`, `ERC721`)、名字注册(`ERC26`, `ERC13`), URI范式(`ERC67`), Library/Package格式(`EIP82`), 钱包格式(`EIP75`,`EIP85`)。
+
+ERC协议标准是影响以太坊发展的重要因素, 像`ERC20`, `ERC223`, `ERC721`, `ERC777`等, 都是对以太坊生态产生了很大影响。
+
+所以最终结论：`EIP`包含`ERC`。
+
+**在这一节学习完成后，才能明白为什么上来讲`ERC165`而不是`ERC721`，想要看结论可直接移动到最下面**
+
 ## ERC165
 
-通过[ERC165标准](https://eips.ethereum.org/EIPS/eip-165)，智能合约可以声明它支持的接口，供其他合约检查。`IERC165`接口合约只声明了一个`supportsInterface`函数，输入要查询的`interfaceId`接口id，若合约实现了该接口id，则返回`true`：
+通过[ERC165标准](https://eips.ethereum.org/EIPS/eip-165)，智能合约可以声明它支持的接口，供其他合约检查。
+
+通俗一些就是ERC165就是检查某项目是不是智能合约。
+
+`IERC165`接口合约只声明了一个`supportsInterface`函数，输入要查询的`interfaceId`接口id，若合约实现了该接口id，则返回`true`：
 
 ```solidity
 interface IERC165 {
@@ -457,6 +477,36 @@ contract WTFApe is ERC721{
     }
 }
 ```
+## 发行`ERC721`NFT
+
+有了`ERC721`标准后，在`ETH`链上发行NFT变得非常简单。现在，我们发行属于我们的NFT。
+
+在`Remix`上编译好`ERC721`合约和`WTFApe`合约（按照顺序），在部署栏点击下按钮，输入构造函数的参数，`name_`和`symbol_`都设为`WTF`，然后点击`transact`键进行部署。
+
+![NFT信息如何重点](./img/34-1.png)
+![部署合约](./img/34-2.png)
+
+这样，我们就创建好了`WTF`NFT。我们需要运行`mint()`函数来给自己铸造一些代币。在`mint`函数那一栏点开右侧的下按钮输入账户地址，和tokenid，并点击`mint`按钮，为自己铸造`0`号`WTF`NFT。
+
+可以点开右侧的Debug按钮，具体查看下面的logs。
+
+里面包含四个关键信息：
+- 事件`Transfer`
+- 铸造地址`0x0000000000000000000000000000000000000000`
+- 接收地址`0x5B38Da6a701c568545dCfcB03FcB875f56beddC4`
+- tokenid`0`
+
+![铸造NFT](./img/34-3.png)
+
+我们利用`balanceOf()`函数来查询账户余额。输入我们当前的账户，可以看到有一个`NFT`，`tokenid`为`0`，铸造成功。
+
+账户信息如图左侧，右侧标注为函数执行的具体信息。
+
+![查询NFT详情](./img/34-4.png)
+
+我们也可以利用`ownerOf()`函数来查询NFT属于哪个账户。输入`tokenid`，可以我们的地址，查询无误。
+
+![tokenid查询拥有者详情](./img/34-5.png)
 
 ## ERC165与ERC721详解
 上面说到,为了防止NFT被转到一个没有能力操作NFT的合约中去,目标必须正确实现ERC721TokenReceiver接口：
