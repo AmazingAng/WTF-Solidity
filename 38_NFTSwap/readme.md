@@ -154,7 +154,7 @@ contract NFTSwap is IERC721Receiver{
 ## `Remix`实现
 
 ### 1. 部署NFT合约
-参考 [ERC721](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721) 教程了解NFT，并部署`WTFApe`NFT合约。
+参考 [ERC721](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721) 教程了解NFT，并部署`WTFApe` NFT合约。
 
 ![部署NFT合约](./img/38-1.png)
 
