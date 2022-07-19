@@ -154,54 +154,63 @@ contract NFTSwap is IERC721Receiver{
 ## `Remix`实现
 
 ### 1. 部署NFT合约
-参考 [ERC721](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721) 教程了解NFT，并使用该教程部署发布测试WTFAPE的NFT，命名为WTF
-本文中部署成功后得到NFT地址为：`0xaE036c65C649172b43ef7156b009c6221B596B8b`，为`WTFApe`合约
-![](./img/38-1.png)
+参考 [ERC721](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721) 教程了解NFT，并部署`WTFApe`NFT合约。
 
-在 `WTFApe` 合约中，将首个NFT mint给自己，后续可以上架到NFTSwap。
-![](./img/38-3.png)
+![部署NFT合约](./img/38-1.png)
 
-在`WTFApe`确认自己已经获得NFT
-![](./img/38-4.png)
+将首个NFT mint给自己。
+
+![mint NFT](./img/38-2.png)
+
+利用`ownerOf`确认自己已经获得`tokenId`为0的NFT。
+
+![确认自己已经获得NFT](./img/38-3.png)
 
 ### 2. 部署`NFTSwap`合约
-本文中部署成功之后得到NFTSwap合约为 `NFTSwap` 合约
-![](./img/38-2.png)
+部署`NFTSwap`合约。
+
+![部署`NFTSwap`合约](./img/38-4.png)
 
 ### 3. 将要上架的`NFT`授权给`NFTSwap`合约
-在`WTFApe`将合约授权给 `NFTSwap` 合约,使用 `Approval`授权。将自己所有的id为0的NFT授权给交易合约。
-![](./img/38-6.png)
+在`WTFApe`合约中调用 `approve()`授权函数，将自己持有的`tokenId`为0的NFT授权给`NFTSwap`合约地址。
+
+![](./img/38-5.png)
+
 ### 4. 上架`NFT`
-将自己持有的id为0的NFT上架到`NFTSwap`合约。
+调用`NFTSwap`合约的`list()`函数，将自己持有的`tokenId`为0的NFT上架到`NFTSwap`，价格设为1 `wei`。
+
+![](./img/38-6.png)
+
+调用`NFTSwap`合约的`nftList()`函数查看上架的NFT。
+
 ![](./img/38-7.png)
 
-查看上架的NFT
+
+调用`NFTSwap`合约的`update()`函数，将NFT价格更新为77 `wei`
+
 ![](./img/38-8.png)
 
+### 5. 下架NFT
 
-更新NFT价格为77wei
-![](./img/38-11.png)
+调用`NFTSwap`合约的`revoke()`函数下架NFT。
 
-#### 测试下架NFT
-下架NFT
 ![](./img/38-9.png)
 
-再次查看NFT，就已经不存在了，如果下架NFT之后，需要重新授权`Approval`才能重新再次上架
+调用`NFTSwap`合约的`nftList()`函数，可以看到`NFT`已经下架。再次上架需要重新授权。
+
 ![](./img/38-10.png)
 
-### 5. 购买`NFT`
+### 6. 购买`NFT`
 
-切换账号，然后购买NFT
+切换账号，调用`NFTSwap`合约的`purchase()`函数购买NFT，购买时需要输入`NFT`合约地址，`tokenId`，并输入支付的`ETH`。
 
-因为之前已经更新过价格为77wei了，这里带上价格之后，发起购买
+![](./img/38-11.png)
+
+### 7. 验证`NFT`持有人改变
+
+购买成功之后，调用`WTFApe`合约的`ownerOf()`函数，可以看到`NFT`持有者发生变化，购买成功！
+
 ![](./img/38-12.png)
-
-### 6. 验证`NFT`持有人改变
-
-购买成功之后，通过`WTFApe`合约查看所有者发生变化
-由最初的`0x5B38Da6a701c568545dCfcB03FcB875f56beddC4`变为购买者 `0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2`
-
-![](./img/38-13.png)
 
 ## 总结
 这一讲，我们建立了一个零手续费的去中心化`NFT`交易所。`OpenSea`虽然对`NFT`的发展做了很大贡献，但它的缺点也非常明显：高手续费、不发币回馈用户、交易机制容易被钓鱼导致用户资产丢失。目前`Looksrare`和`dydx`等新的`NFT`交易平台正在挑战`OpenSea`的位置，`Uniswap`也在研究新的`NFT`交易所。相信不久的将来，我们会用到更好的`NFT`交易所。
