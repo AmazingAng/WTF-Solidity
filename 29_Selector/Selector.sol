@@ -6,7 +6,7 @@ contract Selector{
     event Log(bytes data);
 
     // 输入参数 to: 0x2c44b726ADF1963cA47Af88B284C06f30380fC78
-    function mint(address to) external{
+    function mint(address /*to*/) external{
         emit Log(msg.data);
     } 
 

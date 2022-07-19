@@ -13,11 +13,11 @@
 这一讲，我将介绍`Merkle Tree`，以及如何利用`Merkle Tree`发放`NFT`白名单。
 
 ## `Merkle Tree`
-`Merkle Tree`，也叫默克尔树或哈希树，是区块链的底层加密技术，被比特币和以太坊区块链广泛采用。`Merkle Tree`是一种加密树，每个叶子是对应数据的哈希，而每个非叶子为它的`2`个子节点的哈希。
+`Merkle Tree`，也叫默克尔树或哈希树，是区块链的底层加密技术，被比特币和以太坊区块链广泛采用。`Merkle Tree`是一种自下而上构建的加密树，每个叶子是对应数据的哈希，而每个非叶子为它的`2`个子节点的哈希。
 
 ![Merkle Tree](./img/36-1.png)
 
-`Merkle Tree`允许对大型数据结构的内容进行有效和安全的验证（`Merkle Proof`）。在对于有`N`个叶子结点的`Merkle Tree`，在已知`root`根值的情况下，验证某个数据是否有效（属于`Merkle Tree`叶子结点）只需要`log(N)`个数据（也叫`proof`），非常高效。如果数据有误，或者给的`proof`错误，则无法还原出`root`根植。下面的例子中，叶子`L1`的`Merkle proof`为`Hash 0-1`和`Hash 1`：知道这两个值，就能验证`L1`的值是不是在`Merkle Tree`的叶子中。
+`Merkle Tree`允许对大型数据结构的内容进行有效和安全的验证（`Merkle Proof`）。对于有`N`个叶子结点的`Merkle Tree`，在已知`root`根值的情况下，验证某个数据是否有效（属于`Merkle Tree`叶子结点）只需要`log(N)`个数据（也叫`proof`），非常高效。如果数据有误，或者给的`proof`错误，则无法还原出`root`根植。下面的例子中，叶子`L1`的`Merkle proof`为`Hash 0-1`和`Hash 1`：知道这两个值，就能验证`L1`的值是不是在`Merkle Tree`的叶子中。
 
 ![Merkle Proof](./img/36-2.png)
 
@@ -51,7 +51,7 @@
 ![生成Merkle Tree](./img/36-3.png)
 
 ## `Merkle Proof`验证
-通过网站，我们可以得到`地址0`的`proof`为：
+通过网站，我们可以得到`地址0`的`proof`如下，即图2中蓝色结点的哈希值：
 ```solidity
 [
   "0x999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb",
@@ -98,15 +98,15 @@ library MerkleProof {
 
 1. `verify()`函数利用`proof`数来验证`leaf`是否属于根为`root`的`Merkle Tree`中，如果是，则返回`true`。它调用了`processProof()`函数。
 
-2. `processProof()`函数利用`proof`和`leaf`计算出`Merkle Tree`的`root`。它调用了`_hashPair()`函数。
+2. `processProof()`函数利用`proof`和`leaf`依次计算出`Merkle Tree`的`root`。它调用了`_hashPair()`函数。
 
 3.  `_hashPair()`函数用`keccak256()`函数计算非根节点对应的两个子节点的哈希（排序后）。
 
-我们将`地址0`，`root`和对应的`proof`输入到`verify()`函数，将返回`ture`。因为`地址0`在跟为`root`的`Merkle Tree`中，且`proof`正确。如果改变了其中一个值，都将返回`false`。
+我们将`地址0`，`root`和对应的`proof`输入到`verify()`函数，将返回`ture`。因为`地址0`在根为`root`的`Merkle Tree`中，且`proof`正确。如果改变了其中任意一个值，都将返回`false`。
 
 ## 利用`Merkle Tree`发放`NFT`白名单
 
-由于`Merkle Tree`验证时，`leaf`和`proof`可以存在后端，链上仅需存储一个`root`的值，非常节省`gas`，项目方经常用它来发放白名单。很多`ERC721`标准的`NFT`和`ERC20`标准代币的白名单/空投都是利用`Merkle Tree`发出的，比如`optimism`的空投。
+一份拥有800个地址的白名单，更新一次所需的gas fee很容易超过1个ETH。而由于`Merkle Tree`验证时，`leaf`和`proof`可以存在后端，链上仅需存储一个`root`的值，非常节省`gas`，项目方经常用它来发放白名单。很多`ERC721`标准的`NFT`和`ERC20`标准代币的白名单/空投都是利用`Merkle Tree`发出的，比如`optimism`的空投。
 
 这里，我们介绍如何利用`MerkleTree`合约来发放`NFT`白名单：
 
@@ -122,7 +122,7 @@ contract MerkleTree is ERC721 {
         root = merkleroot;
     }
 
-    // 利用Merkle书验证地址并mint
+    // 利用Merkle树验证地址并完成mint
     function mint(address account, uint256 tokenId, bytes32[] calldata proof)
     external
     {
@@ -132,7 +132,7 @@ contract MerkleTree is ERC721 {
         mintedAddress[account] = true; // 记录mint过的地址
     }
 
-    // 计算Merkle书叶子的哈希值
+    // 计算Merkle树叶子的哈希值
     function _leaf(address account)
     internal pure returns (bytes32)
     {
@@ -153,13 +153,13 @@ contract MerkleTree is ERC721 {
 ### 状态变量
 合约中共有两个状态变量：
 - `root`存储了`Merkle Tree`的根，部署合约的时候赋值。
-- `mintedAddress`是一个`mapping`，记录了已经`mint`过的地址。
+- `mintedAddress`是一个`mapping`，记录了已经`mint`过的地址，某地址mint成功后进行赋值。
 
 ### 函数
 合约中共有4个函数：
 - 构造函数初始化`NFT`的名称和代号，还有`Merkle Tree`的`root`。
-- `mint()`函数接受地址`address`，`tokenId`和`proof`三个参数，验证`address`是否在白名单中：如果在，则把`tokenId`的`NFT`铸造给该地址，并将它记录到`mintedAddress`。它调用了`_leaf()`和`_verify()`函数。
-- `_leaf()`函数计算了地址的哈希：`Merkle Tree`的叶子为地址的哈希。
+- `mint()`函数接受地址`address`，`tokenId`和`proof`三个参数。首先验证`address`是否在白名单中，验证通过则把序号为`tokenId`的`NFT`铸造给该地址，并将它记录到`mintedAddress`。此过程中调用了`_leaf()`和`_verify()`函数。
+- `_leaf()`函数计算了`Merkle Tree`的叶子地址的哈希。
 - `_verify()`函数调用了`MerkleProof`库的`verify()`函数，来进行`Merkle Tree`验证。
 
 ### `remix`验证
@@ -187,9 +187,12 @@ proof = [   "0x999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb"
 
 ![tokenId为0的持有者改变，合约运行成功！](./img/36-7.png)
 
+此时，若再次调用mint函数，虽然该地址能够通过`Merkle Proof`验证，但由于地址已经记录在`mintedAddress`中，因此该交易会由于`"Already minted!"`被中止。
+
 ## 总结
 
-这一讲，我们介绍了`Merkle Tree`的概念，如何生成简单的`Merkle Tree`，如何利用智能合约验证`Merkle Tree`，以及用它来发放`NFT`白名单。在实际使用中，复杂的`Merkle Tree`可以利用`javascript`库`merkletreejs`来生成和管理，链上只需要存储一个根值，非常节省`gas`。很多项目方都选择利用`Merkle Tree`来发放白名单。
+这一讲，我们介绍了`Merkle Tree`的概念，如何生成简单的`Merkle Tree`，如何利用智能合约验证`Merkle Tree`，以及用它来发放`NFT`白名单。
+<br>在实际使用中，复杂的`Merkle Tree`可以利用`javascript`库`merkletreejs`来生成和管理，链上只需要存储一个根值，非常节省`gas`。很多项目方都选择利用`Merkle Tree`来发放白名单。
 
 
 
