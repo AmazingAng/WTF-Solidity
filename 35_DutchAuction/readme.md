@@ -147,6 +147,14 @@ contract DutchAuction is Ownable, ERC721 {
         require(success, "Transfer failed.");
     }
 ```
+## Remix演示
+
+1. 首先，部署`DutchAuction.sol`合约，并通过`setAuctionStartTime函数`设置拍卖起始时间。
+本例采用的起始时间为，2022年7月12日 1点30分，对应的utc时间为1658338200。实验时可以在工具网站（[比如这里](https://tool.chinaz.com/tools/unixtime.aspx)）自行查询对应时间。
+![设置拍卖起始时间](./img/35-2.png)
+
+2. 随后，可以通过`getAuctionPrice`函数获取到*当前*的拍卖价格。可以观察到，拍卖开始前的价格为`起拍价 AUCTION_START_PRICE`随着拍卖进行，拍卖价格在逐渐降低，直到降低至`地板价 AUCTION_END_PRICE`后不再变化。
+![荷兰拍卖价格变化](./img/35-3.png)
 
 ## 总结
 
