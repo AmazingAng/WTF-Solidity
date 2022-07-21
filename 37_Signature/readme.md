@@ -80,7 +80,7 @@
 ![以太坊签名消息](./img/37-3.png)
 
 
-**3. 利用钱包签名：** 日常操作中，大部分用户都是通过这种方式进行签名。在获取到需要签名的消息之后，我们需要使用`metamask`钱包进行签名。`metamask`的`personal_sign`方法会自动把`消息哈希`转换为`以太坊签名消息`，然后发起签名。所以我们只需要输入`消息哈希hash`和`签名者钱包account`即可。需要注意的是输入的`签名者钱包account`需要和`metamask`当前连接的account一致才能使用。
+**3-1. 利用钱包签名：** 日常操作中，大部分用户都是通过这种方式进行签名。在获取到需要签名的消息之后，我们需要使用`metamask`钱包进行签名。`metamask`的`personal_sign`方法会自动把`消息哈希`转换为`以太坊签名消息`，然后发起签名。所以我们只需要输入`消息哈希hash`和`签名者钱包account`即可。需要注意的是输入的`签名者钱包account`需要和`metamask`当前连接的account一致才能使用。
 
 因此首先把例子中的`私钥`导入到小狐狸钱包，然后打开浏览器的`console`页面：`Chrome菜单-更多工具-开发者工具-Console`。在连接钱包的状态下（如连接opensea，否则会出现错误），依次输入以下指令进行签名：
 
@@ -99,7 +99,7 @@ ethereum.request({method: "personal_sign", params: [account, hash]})
 
 ![浏览器console调用metamask进行签名](./img/37-4.jpg)
 
-**4. 利用web3.py签名：** 批量调用中更倾向于使用代码进行签名，以下是基于web3.py的实现。
+**3-2. 利用web3.py签名：** 批量调用中更倾向于使用代码进行签名，以下是基于web3.py的实现。
 ```
 from web3 import Web3, HTTPProvider
 from eth_account.messages import encode_defunct
