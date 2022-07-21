@@ -80,9 +80,9 @@
 ![以太坊签名消息](./img/37-3.png)
 
 
-**3. 利用钱包签名：** 之后，我们需要使用`metamask`钱包进行签。`metamask`的`personal_sign`方法会自动把`消息哈希`转换为`以太坊签名消息`，然后发起签名，所以我们只需要输入`消息哈希hash`和`签名者钱包account`即可。
+**3. 利用钱包签名：** 日常操作中，大部分用户都是通过这种方式进行签名。在获取到需要签名的消息之后，我们需要使用`metamask`钱包进行签名。`metamask`的`personal_sign`方法会自动把`消息哈希`转换为`以太坊签名消息`，然后发起签名。所以我们只需要输入`消息哈希hash`和`签名者钱包account`即可。需要注意的是输入的`签名者钱包account`需要和`metamask`当前连接的account一致才能使用。
 
-首先把例子中的`私钥`导入到小狐狸钱包，然后打开浏览器的`console`页面：`Chrome菜单-更多工具-开发者工具-Console`。在连接钱包的状态下，依次输入以下指令进行签名：
+因此首先把例子中的`私钥`导入到小狐狸钱包，然后打开浏览器的`console`页面：`Chrome菜单-更多工具-开发者工具-Console`。在连接钱包的状态下（如连接opensea，否则会出现错误），依次输入以下指令进行签名：
 
 ```
 ethereum.enable()
@@ -99,6 +99,30 @@ ethereum.request({method: "personal_sign", params: [account, hash]})
 
 ![浏览器console调用metamask进行签名](./img/37-4.jpg)
 
+**4. 利用web3.py签名：** 批量调用中更倾向于使用代码进行签名，以下是基于web3.py的实现。
+```
+from web3 import Web3, HTTPProvider
+from eth_account.messages import encode_defunct
+
+private_key = "0x227dbb8586117d55284e26620bc76534dfbd2394be34cf4a09cb775d593b6f2b"
+address = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4"
+rpc = 'https://rpc.ankr.com/eth'
+w3 = Web3(HTTPProvider(rpc))
+
+#打包信息
+msg = Web3.solidityKeccak(['address','uint256'], [address,0])
+print(f"消息：{msg.hex()}")
+#构造可签名信息
+message = encode_defunct(hexstr=msg.hex())
+#签名
+signed_message = w3.eth.account.sign_message(message, private_key=private_key)
+print(f"签名：{signed_message['signature'].hex()}")
+```
+运行的结果如下所示。计算得到的消息，签名和前面的案例一致。
+```
+消息：0x1bf2c0ce4546651a1a2feb457b39d891a6b83931cc2454434f39961345ac378c
+签名：0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d559b12d220f99f41d17651b0c1c6a669d346a397f8541760d6b32a5725378b241c
+```
 ### 验证签名
 
 为了验证签名，验证者需要拥有`消息`，`签名`，和签名使用的`公钥`。我们能验证签名的原因是只有`私钥`的持有者才能够针对交易生成这样的签名，而别人不能。
@@ -132,7 +156,12 @@ ethereum.request({method: "personal_sign", params: [account, hash]})
         return ecrecover(_msgHash, v, r, s);
     }
 ```
-
+参数分别为：
+```
+_msgHash：0xb42ca4636f721c7a331923e764587e98ec577cea1a185f60dfcc14dbb9bd900b
+_signature：0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d559b12d220f99f41d17651b0c1c6a669d346a397f8541760d6b32a5725378b241c
+```
+![通过签名和消息恢复公钥](./img/37-8.png)
 **5. 对比公钥并验证签名：** 接下来，我们只需要比对恢复的`公钥`与签名者公钥`_signer`是否相等：若相等，则签名有效；否则，签名无效：
 
 ```solidity
@@ -146,7 +175,13 @@ ethereum.request({method: "personal_sign", params: [account, hash]})
         return recoverSigner(_msgHash, _signature) == _signer;
     }
 ```
-
+参数分别为：
+```
+_msgHash：0xb42ca4636f721c7a331923e764587e98ec577cea1a185f60dfcc14dbb9bd900b
+_signature：0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d559b12d220f99f41d17651b0c1c6a669d346a397f8541760d6b32a5725378b241c
+_signer：0xe16C1623c1AA7D919cd2241d8b36d9E79C1Be2A2
+```
+![对比公钥并验证签名：](./img/37-9.png)
 ## 利用签名发放白名单
 
 `NFT`项目方可以利用`ECDSA`的这个特性发放白名单。由于签名是链下的，不需要`gas`，因此这种白名单发放模式比`Merkle Tree`模式还要经济。方法非常简单，项目方利用项目方账户把白名单发放地址签名（可以加上地址可以铸造的`tokenId`）。然后`mint`的时候利用`ECDSA`检验签名是否有效，如果有效，则给他`mint`。
@@ -236,4 +271,4 @@ _signature: 0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d55
 
 ## 总结
 
-这一讲，我们介绍了以太坊中的数字签名`ECDSA`，如何利用`ECDSA`创建和验证签名，`ECDSA`合约，以及如何利用它发放`NFT`白名单。代码中的`ECDSA`库由`openzepplin`的[同名库](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/cryptography/ECDSA.sol)简化而成。由于签名是链下的，不需要`gas`，因此这种白名单发放模式比`Merkle Tree`模式还要经济。
+这一讲，我们介绍了以太坊中的数字签名`ECDSA`，如何利用`ECDSA`创建和验证签名，还有`ECDSA`合约，以及如何利用它发放`NFT`白名单。代码中的`ECDSA`库由`openzepplin`的[同名库](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/cryptography/ECDSA.sol)简化而成。由于签名是链下的，不需要`gas`，因此这种白名单发放模式比`Merkle Tree`模式还要经济，但由于要请求接口获取签名，不可避免的牺牲了一部分去中心化。
