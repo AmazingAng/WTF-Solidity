@@ -90,6 +90,8 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第39讲：随机数**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/39_Random)】 【[文章](https://mirror.xyz/ninjak.eth/JYXCXDLhHp8wxXPfClQKqW_5g1QhgVp44HFk9WtC6tk)】
 
+**第40讲：随机数**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/40_ERC1155)】 【[文章](https://mirror.xyz/ninjak.eth/dGmLVDYjGXCKR5kPvQspMj6f0qYnJbCUshy9hlzld0c)】
+
 ## 专题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/专题/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
