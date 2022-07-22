@@ -90,7 +90,7 @@ repo 64个star开微信交流群（已开)，128个star录教学视频，256个s
 
 **第39讲：随机数**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/39_Random)】 【[文章](https://mirror.xyz/ninjak.eth/JYXCXDLhHp8wxXPfClQKqW_5g1QhgVp44HFk9WtC6tk)】
 
-**第40讲：随机数**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/40_ERC1155)】 【[文章](https://mirror.xyz/ninjak.eth/dGmLVDYjGXCKR5kPvQspMj6f0qYnJbCUshy9hlzld0c)】
+**第40讲：ERC1155**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/40_ERC1155)】 【[文章](https://mirror.xyz/ninjak.eth/dGmLVDYjGXCKR5kPvQspMj6f0qYnJbCUshy9hlzld0c)】
 
 ## 专题
 ### `工具`
