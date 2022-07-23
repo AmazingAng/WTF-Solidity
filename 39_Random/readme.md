@@ -260,27 +260,27 @@ contract Random is ERC721, VRFConsumerBase{
 
 ### 3. 将`LINK`代币转入`Random`合约
 
-合约部署后，拷贝合约地址，像普通转账一样，通过小狐狸钱包转账LINK到合约地址
+合约部署后，拷贝合约地址，像普通转账一样，通过小狐狸钱包转账`LINK`到合约地址
 ![LINK转入合约](./img/39-4.png)
 
 ### 4. 利用链上随机数铸造`NFT`
 
-在Remix界面中，点击左侧橙色函数mintRandomOnchain![minOnchain](./img/39-5-1.png),在弹出的小狐狸钱包中点击确认，利用链上随机数铸造交易就开始了
+在`remix`界面中，点击左侧橙色函数`mintRandomOnchain`![mintOnchain](./img/39-5-1.png)，在弹出的小狐狸钱包中点击确认，利用链上随机数铸造交易就开始了
 
 ![链上随机数铸造](./img/39-5.png)
 
 ### 5. 利用`Chainlink VRF`链下随机数铸造`NFT`
 
-同理，在Remix界面中，点击左侧橙色函数mintRandomVRF，在弹出的小狐狸钱包中点击确认，利用Chainlink VRF链下随机数铸造交易就开始了
+同理，在`remix`界面中，点击左侧橙色函数`mintRandomVRF`，在弹出的小狐狸钱包中点击确认，利用`Chainlink VRF`链下随机数铸造交易就开始了
 
-**注意:** 采用VRF铸造NFT时，发起交易和铸造成功不在同一个区块
+**注意:** 采用`VRF`铸造`NFT`时，发起交易和铸造成功不在同一个区块
 
 ![VRF铸造开始交易](./img/39-6.png)
 ![VRF铸造成功交易](./img/39-7.png)
 
 ### 6. 验证`NFT`已被铸造
 
-通过以上截图可以看出，本例中，tokenId=87的NFT被链上随机铸造出来，tokenId=77的NFT被VRF铸造出来。
+通过以上截图可以看出，本例中，`tokenId=87`的`NFT`被链上随机铸造出来，`tokenId=77`的`NFT`被`VRF`铸造出来。
 
 ## 总结
 
