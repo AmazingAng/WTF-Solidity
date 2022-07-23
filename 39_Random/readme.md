@@ -14,7 +14,7 @@ discord：[WTF Academy](https://discord.gg/5akcruXrsk)
 
 ## 链上随机数生成
 
-我们可以一些链上的全局变量作为种子，利用`keccak256()`哈希函数来获取伪随机数。这是因为哈希函数具有灵敏性和均一性，可以得到“看似”随机的结果。下面的`getRandomOnchain()`函数利用全局变量`block.number`，`msg.sender`和`blockhash(block.timestamp-1)`作为种子来获取随机数：
+我们可以将一些链上的全局变量作为种子，利用`keccak256()`哈希函数来获取伪随机数。这是因为哈希函数具有灵敏性和均一性，可以得到“看似”随机的结果。下面的`getRandomOnchain()`函数利用全局变量`block.number`，`msg.sender`和`blockhash(block.timestamp-1)`作为种子来获取随机数：
 
 ```solidity
     /** 
@@ -30,7 +30,7 @@ discord：[WTF Academy](https://discord.gg/5akcruXrsk)
     }
 ```
 
-注意，这个方法并不安全：
+**注意:**，这个方法并不安全：
 - 首先，`block.number`，`msg.sender`和`blockhash(block.timestamp-1)`这些变量都是公开的，使用者可以预测出用这些种子生成出的随机数，并挑出他们想要的随机数执行合约。
 - 其次，矿工可以操纵`blockhash`和`block.timestamp`，使得生成的随机数符合他的利益。
 
@@ -81,7 +81,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
         )
     {
         keyHash = 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311;
-        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkkeby测试网)
+        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkeby测试网)
     }
 ```
 **2. 用户合约申请随机数** 
@@ -177,7 +177,7 @@ contract Random is ERC721, VRFConsumerBase{
         ERC721("WTF Random", "WTF")
     {
         keyHash = 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311;
-        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkkeby测试网)
+        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkeby测试网)
     }
 ```
 
@@ -252,19 +252,35 @@ contract Random is ERC721, VRFConsumerBase{
 ```
 ## `remix`验证
 
-待社区成员补充。
-
 ### 1. 在`Rinkeby`测试网部署`Random`合约
+![合约部署](./img/39-2.png)
 
 ### 2. 利用`Chainlink`水龙头获取测试网的`LINK`和`ETH`
+![Rinkeby测试网领取LINK和ETH](./img/39-3.png)
 
 ### 3. 将`LINK`代币转入`Random`合约
 
+合约部署后，拷贝合约地址，像普通转账一样，通过小狐狸钱包转账`LINK`到合约地址
+![LINK转入合约](./img/39-4.png)
+
 ### 4. 利用链上随机数铸造`NFT`
+
+在`remix`界面中，点击左侧橙色函数`mintRandomOnchain`![mintOnchain](./img/39-5-1.png)，在弹出的小狐狸钱包中点击确认，利用链上随机数铸造交易就开始了
+
+![链上随机数铸造](./img/39-5.png)
 
 ### 5. 利用`Chainlink VRF`链下随机数铸造`NFT`
 
+同理，在`remix`界面中，点击左侧橙色函数`mintRandomVRF`，在弹出的小狐狸钱包中点击确认，利用`Chainlink VRF`链下随机数铸造交易就开始了
+
+**注意:** 采用`VRF`铸造`NFT`时，发起交易和铸造成功不在同一个区块
+
+![VRF铸造开始交易](./img/39-6.png)
+![VRF铸造成功交易](./img/39-7.png)
+
 ### 6. 验证`NFT`已被铸造
+
+通过以上截图可以看出，本例中，`tokenId=87`的`NFT`被链上随机铸造出来，`tokenId=77`的`NFT`被`VRF`铸造出来。
 
 ## 总结
 

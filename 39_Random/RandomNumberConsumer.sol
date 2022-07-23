@@ -29,7 +29,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
         )
     {
         keyHash = 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311;
-        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkkeby测试网)
+        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkeby测试网)
     }
         
     /** 
