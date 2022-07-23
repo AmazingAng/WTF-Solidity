@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
+/**
+* 从github和npm导入
+* 导入文件存放于当前工作区的.deps目录下
+*/
 import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
 
@@ -8,14 +12,13 @@ contract RandomNumber is ERC721, VRFConsumerBase{
     // NFT参数
     uint256 public totalSupply = 100; // 总供给
     uint256[100] public ids; // 用于计算可以mint的tokenId
-    uint256 public mintCount; // 已mint数量
+    uint256 public mintCount; // 已mint数量, 默认值为0
     // chainlink VRF参数
     bytes32 internal keyHash;
     uint256 internal fee;
 
+    // 记录VRF申请标识对应的mint地址
     mapping(bytes32 => address) public requestToSender;
-    uint256 public randomResult;
-    
     /**
      * 使用chainlink VRF，构造函数需要继承 VRFConsumerBase 
      * 不同链参数填的不一样
@@ -32,13 +35,14 @@ contract RandomNumber is ERC721, VRFConsumerBase{
         ERC721("WTF Random", "WTF")
     {
         keyHash = 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311;
-        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkkeby测试网)
+        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkeby测试网)
     }
     
     /** 
     * 输入uint256数字，返回一个可以mint的tokenId
     */
     function pickRandomUniqueId(uint256 random) private returns (uint256 tokenId) {
+        //先计算减法，再计算++, 关注(a++，++a)区别
         uint256 len = totalSupply - mintCount++; // 可mint数量
         require(len > 0, "mint close"); // 所有tokenId被mint完了
         uint256 randomIndex = random % len; // 获取链上随机数
@@ -54,6 +58,10 @@ contract RandomNumber is ERC721, VRFConsumerBase{
     * 返回时转换成uint256类型
     */
     function getRandomOnchain() public view returns(uint256){
+        /*
+         * 本例链上随机只依赖区块哈希，调用者地址，和区块时间，
+         * 想提高随机性可以再增加一些属性比如nonce等，但是不能根本上解决安全问题
+         */
         bytes32 randomBytes = keccak256(abi.encodePacked(blockhash(block.number-1), msg.sender, block.timestamp));
         return uint256(randomBytes);
     }
