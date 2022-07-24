@@ -33,7 +33,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 ### 3. 填写API Key信息
 
-`NETWORK`选择 Web3 API (Formerly Ethereum)，`NAME`随便填一个，我填的`WTF`，之后点击**CREATE**按钮。
+`NETWORK`选择 **Web3 API (Formerly Ethereum)**，有的版本这里显示的是**Ethereum**，`NAME`随便填一个，我填的`WTF`，之后点击**CREATE**按钮。
 
 ![填写信息](./img/infura4.png)
 
