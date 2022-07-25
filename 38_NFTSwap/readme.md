@@ -147,7 +147,7 @@ contract NFTSwap is IERC721Receiver{
         delete nftList[_nftAddr][_tokenId]; // 删除order
 
         // 释放Purchase事件
-        emit List(msg.sender, _nftAddr, _tokenId, msg.value);
+        emit Purchase(msg.sender, _nftAddr, _tokenId, msg.value);
     }
 ```
 
