@@ -1,4 +1,4 @@
-# Solidity Minimalist Primer: Tutorial 2. Value Types
+# Solidity Minimalist Primer: 2. Value Types
 
 Recently, I have been relearning the Solidity, consolidating the finer details, and also writing a "Solidity Minimalist Primer" for newbies to learn and use from (advanced programmers can find another tutorial). Lectures are updated 1~3 times weekly. 
 
