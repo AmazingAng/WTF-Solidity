@@ -1,10 +1,10 @@
 # Solidity Minimalist Primer: Tutorial 2. Value Types
 
-Recently, I have been relearning the Solidity, consolidating the finer details, and also writing a "Solidity Minimalist Primer" for newbies to learn and use from (advanced programmers can find another tutorial). Lectures are updated 1 o 3 times weekly. 
+Recently, I have been relearning the `Solidity` programming language, consolidating my understanding on the finer details, and also writing a "Solidity Minimalist Primer" for newbies to learn and use (advanced programmers can find another tutorial). Lectures are updated 1 to 3 times weekly. 
 
 Everyone is welcomed to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
-WTF Solidity Discord server, herein contains the method to join the Chinese WeChat communinity: [Link](https://discord.gg/5akcruXrsk)
+WTF Academy Discord server, herein contains the method to join the Chinese WeChat communinity: [Link](https://discord.gg/5akcruXrsk)
 
 All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -15,7 +15,7 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 
 2. **Reference Type**：This includes arrays and structs, which take up a large amount of storage space and pass addresses (i.e. like a pointers) directly when values are assigned.
 
-3. **Mapping Type**: These are the hash tables of `Solidity`.
+3. **Mapping Type**: These are similar to hash tables for `Solidity`.
 
 4. **Function Type**：The `Solidity` documentation classifies functions into numeric types, but I think they are very different from the other types mentioned, so I will classify them separately. 
 
@@ -47,7 +47,8 @@ Code：
     bool public _bool5 = _bool != _bool1; // inequality
 ```
 From the above source code：the value of the variable `_bool` is `true`；so `_bool1` is not`_bool`，which yields `false`；`_bool && _bool1`'s value is `false`；`_bool || _bool1`'s value is `true`；`_bool == _bool1`'s value is `false`；and `_bool != _bool1`'s value is `true`.
-**Important note：** The `&&` and `||` operator follows a short-circuit evaluation rule. This means that if `f(x) || g(y)`的表达式，如果`f(x)`是`true`，`g(y)`不会被计算，即使它和`f(x)`的结果是相反的
+
+**Important note：** The `&&` and `||` operator follows a short-circuit evaluation rule. This means that for an expression such as `f(x) || g(y)`，if `f(x)` is `true`，then `g(y)` will not be computed; even if its result is the opposite of `f(x)`.
 
 ### 2. Integers
 Integers are the whole numbers in `Solidity`，most frequently used examples include:
@@ -73,7 +74,7 @@ Code：
 You can try running these code and see the results of these 4 variables. Correct answers get a `POAP`, maybe?
 
 ### 3. Addresses
-Address type stores a 20-bit calue (similar to the size of an Ethereum address). Address types also have a member variables (members of address) which serve as the basis for all contracts. There are ordinary addresses and addresses that can transfer 'ETH' ('payable'). The 'payable' address has two members, 'balance()' and 'tranfer()', making it easy to check 'ETH' balances and transfer funds.
+Address type stores a 20-bit value (similar to the size of an Ethereum address). Address types also have a member variable (members of address) which serve as the basis for all contracts. There are ordinary addresses and addresses that can transfer 'ETH' ('payable'). The 'payable' address has two members, 'balance()' and 'tranfer()', making it easy to check 'ETH' balances and transfer funds.
 
 Code:
 ```solidity
@@ -95,7 +96,7 @@ Code：
     bytes1 public _byte = _byte32[0]; 
 ```
 
-The 'MiniSolidity' value is stored in the form bytes into the variable `_byte32`. If converted to 'hexadecimal' format the output is as follows: `0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
+The 'MiniSolidity' value is stored in the form of bytes into the variable `_byte32`. If converted to 'hexadecimal' format the output is as follows: `0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
 
 On the other hand, the `_byte` variable stores the first byte of the `_byte32` variable, which is `0x4d`.
 
@@ -117,6 +118,7 @@ It can be converted interchangeably to `uint` data type and checks whether the c
         return uint(action);
     }
 ```
+
 `enum` is a less popular class of variable that is hardly used by anyone. 
 
 ## Example from Remix
@@ -128,4 +130,4 @@ It can be converted interchangeably to `uint` data type and checks whether the c
 ![2-3.png](./img/2-3.png)
 
 ## Tutorial summary 
-In the second lecture, we introduce the 4 variable types in `Solidity`, and explained the Boolean, integer, address, fixed-length byte array, and enumeration of numeric variables ('value type'). We'll cover several other value types in the subsequent tutorials.
+In the second lecture, we introduce the 4 variable types in `Solidity` and explained the Boolean, integer, address, fixed-length byte array, and enumeration of numeric variables ('value type'). We will cover several other value types in the subsequent tutorials.
