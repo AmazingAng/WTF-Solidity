@@ -80,4 +80,4 @@ You can use `getter` function of `public` variables to verify whether the initia
 ![](./img/8-2_en.jpg)
 
 ## Tutorial summary
-In this section, We introduce the initial values of variables in `solidity`. When a variable is declared but not assigned, its value defaults to initial value. Different types of variables have different initial values. The `delete` operator can delete value of a variable and replace it with the initial value.
+In this section, we introduce the initial values of variables in `solidity`. When a variable is declared but not assigned, its value defaults to initial value. Different types of variables have different initial values. The `delete` operator can delete value of a variable and replace it with the initial value.
