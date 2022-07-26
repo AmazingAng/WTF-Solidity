@@ -5,7 +5,7 @@ contract Mapping {
       mapping(address => address) public swapPair; // Mapping of token pairs, from address to address
 
 
-      //Rule 1. _KeyType cannot be custom. The following example will throw an error
+      //Rule 1. _KeyType cannot be custom types. The following example will throw an error
       //Define a struct
       //struct Student{
       //    uint256 id;
