@@ -17,12 +17,21 @@ contract DataStorage {
         //声明一个Memory的变量xMemory，复制x。修改xMemory不会影响x
         uint[] memory xMemory = x;
         xMemory[0] = 100;
+        xMemory[1] = 200;
+        uint[] memory xMemory2 = x;
+        xMemory2[0] = 300;
     }
 
     function fCalldata(uint[] calldata _x) public pure returns(uint[] calldata){
         //参数为calldata数组，不能被修改
         // _x[0] = 0 //这样修改会报错
         return(_x);
+    }
+    function global() external view returns(address, uint, bytes memory){
+        address sender = msg.sender;
+        uint blockNum = block.number;
+        bytes memory data = msg.data;
+        return(sender,blockNum,data);
     }
 }
 
