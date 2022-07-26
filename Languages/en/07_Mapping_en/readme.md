@@ -1,10 +1,10 @@
-# Solidity Minimalist Primer: Tutorial 7. Mapping type
+# Solidity Minimalist Primer: 7. Mapping
 
-Recently, I have been relearning the Solidity, consolidating the finer details, and also writing a "Solidity Minimalist Primer" for newbies to learn and use from (advanced programmers can find another tutorial). Lectures are updated 1 o 3 times weekly. 
+Recently, I have been relearning the Solidity, consolidating the finer details, and also writing a "Solidity Minimalist Primer" for newbies to learn and use from (advanced programmers can find another tutorial). Lectures are updated 1~3 times weekly. 
 
 Everyone is welcomed to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
-WTF Solidity Discord server, herein contains the method to join the Chinese WeChat communinity: [Link](https://discord.gg/5akcruXrsk)
+WTF Solidity Discord: [Link](https://discord.gg/5akcruXrsk)
 
 All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -22,7 +22,7 @@ The format of declaring the mapping is `mapping(_KeyType => _ValueType)`, where 
 ```
 
 ## Rules of mapping
-- **Rule 1**: The `_KeyType` of the map can only select the default types in `solidity` such as ` uint `, `address`, etc. No custom struct can be used. However, `_ValueType` can use a custom type. The following example will throw an error, because `_KeyType` uses our custom struct:
+- **Rule 1**: The `_KeyType` should be selected among default types in `solidity` such as ` uint `, `address`, etc. No custom struct can be used. However, `_ValueType` can be any custom types. The following example will throw an error, because `_KeyType` uses a custom struct:
 ```solidity
       //Define a struct
       struct Student{
@@ -31,11 +31,11 @@ The format of declaring the mapping is `mapping(_KeyType => _ValueType)`, where 
       }
       mapping(Student => uint) public testVar;
 ```
-- **Rule 2**: The storage location of the mapping must be `storage`, so it can be used for the state variable of the contract, the `storage` variable in the function. But it can't be used in arguments or return results of `public` function because what `mapping` records is a relationship (key - value pair).
+- **Rule 2**: The storage location of the mapping must be `storage`: it can serve as the state variable or the `storage` variable inside function. But it can't be used in arguments or return results of `public` function.
 
-- **Rule 3**: If the mapping is declared as `public` then `solidity` will automatically create a `getter` function for you to query for the Value by the Key.
+- **Rule 3**: If the mapping is declared as `public` then `solidity` will automatically create a `getter` function for you to query for the `Value` by the `Key`.
 
-- **Rule 4**：The syntax of adding a key-value pair to a mapping is `_Var[_Key] = _Value`, where '_Var' is the name of the mapping variable, and '_Key' and '_Value' correspond to the new key-value pair. An example is as follows:
+- **Rule 4**：The syntax of adding a key-value pair to a mapping is `_Var[_Key] = _Value`, where '_Var' is the name of the mapping variable, and '_Key' and '_Value' correspond to the new key-value pair. Example:
 ```solidity
     function writeMap (uint _Key, address _Value) public {
         idToAddress[_Key] = _Value;
@@ -64,4 +64,4 @@ The format of declaring the mapping is `mapping(_KeyType => _ValueType)`, where 
 
 
 ## Tutorial summary
-In this section，we introduced the use of the hash table `Mapping` in `solidity`. So far, we've learned all kinds of common variables, and then we'll learn control flow such as `if-else`, `while` and so on..
+In this section，we introduced the `Mapping` type in `solidity`. So far, we've learned all kinds of common variables, and then we'll learn control flow such as `if-else`, `while` in the coming tutorials.
