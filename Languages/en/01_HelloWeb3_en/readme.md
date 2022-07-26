@@ -1,4 +1,4 @@
-# Solidity Minimalist Primer: Tutorial 1. HelloWeb3 (Coding in 3 lines)
+# Solidity Minimalist Primer: 1. HelloWeb3 (Solidity in 3 lines)
 
 Recently, I have been relearning the Solidity programming language, consolidating my understanding on the finer details, and also writing a "Solidity Minimalist Primer" for newbies to learn and use (advanced programmers can find another tutorial). Lectures are updated 1 to 3 times weekly. 
 
