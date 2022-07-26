@@ -56,6 +56,9 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
         //声明一个Memory的变量xMemory，复制x。修改xMemory不会影响x
         uint[] memory xMemory = x;
         xMemory[0] = 100;
+        xMemory[1] = 200;
+        uint[] memory xMemory2 = x;
+        xMemory2[0] = 300;
     }
 ```
 **Example:**
