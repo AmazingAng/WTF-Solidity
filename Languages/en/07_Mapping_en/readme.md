@@ -49,15 +49,15 @@ The format of declaring the mapping is `mapping(_KeyType => _ValueType)`, where 
 - **principle 3**: Since Ethereum defines all unused space as 0, all `key` that are not assigned a `Value` will have an initial Value of 0.
 
 ## Verify on Remix (use `Mapping.sol` as example)
-- Example of mapping 1 deploy
+- Deploy `Mapping.sol`
 
     ![7-1_en](./img/7-1_en.png)
 
-- Example of mapping 2 initial value
+- Check initial value of map `idToAddress`.
 
     ![7-2_en](./img/7-2_en.png)
 
-- Example of mapping 3 key-value pair
+- Write new key-value pair
 
     ![7-3_en](./img/7-3_en.png)
 
