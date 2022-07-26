@@ -202,10 +202,11 @@ contract Random is ERC721, VRFConsumerBase{
         uint256 len = totalSupply - mintCount++; // 可mint数量
         require(len > 0, "mint close"); // 所有tokenId被mint完了
         uint256 randomIndex = random % len; // 获取链上随机数
-
+        
+        //随机数取模，得到tokenId，作为数组下标，同时记录value为len-1，如果取模得到的值已存在，则tokenId取该数组下标的value
         tokenId = ids[randomIndex] != 0 ? ids[randomIndex] : randomIndex; // 获取tokenId
         ids[randomIndex] = ids[len - 1] == 0 ? len - 1 : ids[len - 1]; // 更新ids 列表
-        ids[len - 1] = 0; // 删除最后一个元素
+        ids[len - 1] = 0; // 删除最后一个元素，能返还gas
     }
 
     /** 
