@@ -24,6 +24,12 @@ contract ArrayTypes {
         x[2] = 4;
         return(x);
     }  
+    function arrayPush() public returns(uint[] memory){
+        uint[2] memory a = [uint(1),2];
+        array4 = a;
+        array4.push(3);
+        return array4;
+    }
 }
 
 pragma solidity ^0.8.4;
