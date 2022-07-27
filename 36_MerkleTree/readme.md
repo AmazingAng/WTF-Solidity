@@ -112,7 +112,7 @@ library MerkleProof {
 
 ```solidity
 contract MerkleTree is ERC721 {
-    bytes32 immutable public root; // Merkle书的根
+    bytes32 immutable public root; // Merkle树的根
     mapping(address => bool) public mintedAddress;   // 记录已经mint的地址
 
     // 构造函数，初始化NFT合集的名称、代号、Merkle树的根
@@ -193,7 +193,6 @@ proof = [   "0x999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb"
 
 这一讲，我们介绍了`Merkle Tree`的概念，如何生成简单的`Merkle Tree`，如何利用智能合约验证`Merkle Tree`，以及用它来发放`NFT`白名单。
 <br>在实际使用中，复杂的`Merkle Tree`可以利用`javascript`库`merkletreejs`来生成和管理，链上只需要存储一个根值，非常节省`gas`。很多项目方都选择利用`Merkle Tree`来发放白名单。
-
 
 
 
