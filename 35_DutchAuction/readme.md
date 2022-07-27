@@ -83,9 +83,12 @@ contract DutchAuction is Ownable, ERC721 {
 ```
 
 - 获取拍卖实时价格：`getAuctionPrice()`函数通过当前区块时间以及拍卖相关的状态变量来计算实时拍卖价格。
-<br>当`block.timestamp`小于起始时间，价格为最高价`AUCTION_START_PRICE`；
-<br>当`block.timestamp`大于结束时间，价格为最低价`AUCTION_END_PRICE`；
-<br>当`block.timestamp`处于两者之间时，则计算出当前的衰减价格。
+
+当`block.timestamp`小于起始时间，价格为最高价`AUCTION_START_PRICE`；
+
+当`block.timestamp`大于结束时间，价格为最低价`AUCTION_END_PRICE`；
+
+当`block.timestamp`处于两者之间时，则计算出当前的衰减价格。
 
 ```solidity
     // 获取拍卖实时价格
@@ -107,7 +110,8 @@ contract DutchAuction is Ownable, ERC721 {
 ```
 
 - 用户拍卖并铸造`NFT`：用户通过调用`auctionMint()`函数，支付`ETH`参加荷兰拍卖并铸造`NFT`。
-<br>该函数首先检查拍卖是否开始/铸造是否超出`NFT`总量。接着，合约通过`getAuctionPrice()`和铸造数量计算拍卖成本，并检查用户支付的`ETH`是否足够：如果足够，则将`NFT`铸造给用户，并退回超额的`ETH`；反之，则回退交易。
+
+该函数首先检查拍卖是否开始/铸造是否超出`NFT`总量。接着，合约通过`getAuctionPrice()`和铸造数量计算拍卖成本，并检查用户支付的`ETH`是否足够：如果足够，则将`NFT`铸造给用户，并退回超额的`ETH`；反之，则回退交易。
 
 ```solidity
     // 拍卖mint函数

@@ -192,12 +192,5 @@ proof = [   "0x999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb"
 ## 总结
 
 这一讲，我们介绍了`Merkle Tree`的概念，如何生成简单的`Merkle Tree`，如何利用智能合约验证`Merkle Tree`，以及用它来发放`NFT`白名单。
-<br>在实际使用中，复杂的`Merkle Tree`可以利用`javascript`库`merkletreejs`来生成和管理，链上只需要存储一个根值，非常节省`gas`。很多项目方都选择利用`Merkle Tree`来发放白名单。
 
-
-
-
-
-
-
-
+在实际使用中，复杂的`Merkle Tree`可以利用`javascript`库`merkletreejs`来生成和管理，链上只需要存储一个根值，非常节省`gas`。很多项目方都选择利用`Merkle Tree`来发放白名单。
