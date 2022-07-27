@@ -3,9 +3,18 @@
 # WTF Solidity
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
-repo 64个star开微信交流群（已开)，128个star录教学视频，256个star出进阶内容（已出)，512个star发布官网，1024个star发课程认证，2048个star发社群NFT。LFG!
+路线图根据本仓库star数量来定：
+- [x] 64:star:建立社群：[discord](https://discord.gg/5akcruXrsk) | [微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)（已满需申请排队）
 
-**Solidity技术交流社群[discord](https://discord.gg/5akcruXrsk)，微信群[填表加入](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)**
+- [ ] 128:star:录教学视频
+
+- [x] 256:star:出进阶内容
+
+- [x] 512:star:发布官网: [wtf.academy](https://wtf.academy)
+
+- [ ] 1024:star:发课程认证（`Soulbound Token`）
+
+- [ ] 2048:star:发社群NFT
 
 ## 入门
 **第1讲：三行代码HelloWeb3**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3)】 【[文章](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)】
