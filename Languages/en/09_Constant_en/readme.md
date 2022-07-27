@@ -9,11 +9,11 @@ WTF Solidity Discord: [Link](https://discord.gg/5akcruXrsk)
 All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
-In this section, we will introduce the two keywords in `solidity`, `constant` and `immutable`. After the state variable declares these two keywords, you cannot change the values after the contract and it will help to save ` gas `. In addition, only the numeric variables can declare them as `constant` and `immutable`; the `string` and ` bytes ` can be declared as `constant`, but not as `immutable`.
+In this section, we will introduce two keywords in `solidity`, `constant` and `immutable`. After the state variable declares these two keywords, you cannot change the values after the contract and it will help to save ` gas `. In addition, only the numeric variables can declare them as `constant` and `immutable`; the `string` and ` bytes ` can be declared as `constant`, but not as `immutable`.
 
 ## constant and immutable
 ### constant
-The `constant` variable must be initialized when declared and cannot be changed after that. Compilation cannot pass if try to change it.
+The `constant` variable must be initialized when declared and cannot be changed after that. Code cannot compile if try to change it.
 ``` solidity
     // The constant variable must be initialized when declared and cannot be changed after that
     uint256 constant CONSTANT_NUM = 10;
@@ -46,19 +46,19 @@ You can initialize the `immutable` variable using a global variable such as `add
 ```
 
 ## Verify on Remix
-1. After the contract is deployed, the initialized values of the `constant` and `immutable` variables can be obtained through the `getter` function on the remix. 
+1. After the contract deployed, initialized values of the `constant` and `immutable` variables can be obtained through the `getter` function on the remix. 
 
    ![9-1.png](./img/9-1.png)   
    
-2. After the `constant` variable is initialized, try to change its value. Compilation cannot pass with throwing an exception of `TypeError: Cannot assign to a constant variable. `.
+2. After the `constant` variable initialized, code cannot compile if try to change its value and the compiler will issue an error of `TypeError: Cannot assign to a constant variable. `.
 
    ![9-2.png](./img/9-2.png)   
    
-3. After the `immutable` variable is initialized, try to change its value. Compilation cannot pass with throwing an exception of `TypeError: Immutable state variable already initialized. `.
+3. After the `immutable` variable initialized, code cannot compile if try to change its value and the compiler will issue an error of `TypeError: Immutable state variable already initialized. `.
 
    ![9-3.png](./img/9-3.png)
 
 ## Tutorial summary
-In this section, we introduced the two keywords in `solidity`, `constant` and `immutable`, to keep the variables that should not be changed. It will help to save ` gas ` while improving contract security.
+In this section, we introduced two keywords in `solidity`, `constant` and `immutable`, to keep the variables that should not be changed. It will help to save ` gas ` while improving contract security.
 
 

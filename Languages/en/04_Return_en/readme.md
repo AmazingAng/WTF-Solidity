@@ -10,12 +10,12 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 
 -----
 
-In this section, we will introduce `Solidity` function output including return multiple variables, named returns, and reading full and part of return values using destructuring assignments. 
+In this section, we will introduce `Solidity` function output, including return multiple variables, named returns, and reading full and part of return values using destructuring assignments. 
 
 ## Return values(return and returns)
-`There are two keywords about function output: `return` and `returns`, which differ from:`
-- `returns` is added after the function name to declare the variable type and variable name;
-- `return` is used for the function body and returns the specified variables.
+There are two keywords about function output: `return` and `returns`, which differ from:
+- `returns` is added after the function name to declare variable type and variable name;
+- `return` is used for the function body and returns specified variables.
 
 ```solidity
     // return multiple variables
@@ -23,10 +23,10 @@ In this section, we will introduce `Solidity` function output including return m
             return(1, true, [uint256(1),2,5]);
         }
 ```
-In the above code, we stated that the `returnMultiple()` function will have multiple outputs: `returns (uint256, bool, uint256[3] memory) `, and then we determined the return values in the function body with `return (1, true, [uint256 (1), 2,5]) `.
+In the above code, we stated that the `returnMultiple()` function will have multiple outputs: `returns (uint256, bool, uint256[3] memory) `, and then we determined return values in the function body with `return (1, true, [uint256 (1), 2,5]) `.
 
 ## Named returns
-We can indicate the name of the return variables in the `returns`, so that the `solidity` automatically initializes these variables, and automatically returns the values of these functions, without adding a `return`.
+We can indicate the name of the return variables in `returns`, so that the `solidity` automatically initializes these variables, and automatically returns the values of these functions, without adding a `return`.
 
 ```solidity
     // named returns
@@ -36,7 +36,7 @@ We can indicate the name of the return variables in the `returns`, so that the `
         _array = [uint256(3),2,1];
     }
 ```
-In the above code, we declare the return variable type and variable name with the `returns (uint256 _number, bool _bool, uint256[3] memory _array) `. This way, we will only need to assign values to the variables ` _ number` in the body, ` _bool ` and ` _array ` and they will automatically return.
+In the above code, we declare the return variable type and variable name with the `returns (uint256 _number, bool _bool, uint256[3] memory _array) `. This way, we will only need to assign values to the variable ` _ number` in the body, ` _bool ` and ` _array ` and they will automatically return.
 
 Of course, you can also return variables with `return` in named returns:
 ```solidity
@@ -47,14 +47,14 @@ Of course, you can also return variables with `return` in named returns:
 ```
 ## Destructuring assignments
 `solidity` uses rules for destructuring assignments and supports the full or part of return values of the function.
-- Read all return values: declare variables and variables to be assigned are separated by `, ` in order.
+- Read all return values: declare the variables to be assigned and separate them  by `, ` in order.
 ```solidity
         uint256 _number;
         bool _bool;
         uint256[3] memory _array;
         (_number, _bool, _array) = returnNamed();
 ```
-- Read part of return values: declare the variable corresponding to the return values to read, keep the values not to read blank . In the following code, we only read the ` _bool `, but not the returned ` _ number` and ` _array `:
+- Read part of return values: declare the variables to read in return values and the variables not to read can be left out. In the following code, we only read the return value ` _bool `, but not ` _ number` and ` _array `:
 ```solidity
         (, _bool2, ) = returnNamed();
 ```
