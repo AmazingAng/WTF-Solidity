@@ -23,8 +23,11 @@ contract ArrayTypes {
         x[1] = 3;
         x[2] = 4;
         return(x);
-    }
+    }  
+}
 
+pragma solidity ^0.8.4;
+contract StructTypes {
     // 结构体 Struct
     struct Student{
         uint256 id;
@@ -44,5 +47,17 @@ contract ArrayTypes {
         student.id = 1;
         student.score = 80;
     }
-  
+}
+
+pragma solidity ^0.8.4;
+contract EnumTypes {
+    // 将uint 0， 1， 2表示为Buy, Hold, Sell
+    enum ActionSet { Buy, Hold, Sell }
+    // 创建enum变量 action
+    ActionSet action = ActionSet.Buy;
+
+    // enum可以和uint显式的转换
+    function enumToUint() external view returns(uint){
+        return uint(action);
+    }
 }
