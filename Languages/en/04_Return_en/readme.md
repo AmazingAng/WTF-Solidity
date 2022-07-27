@@ -1,4 +1,4 @@
-# Solidity Minimalist Primer: Tutorial 4. Function output (return/returns)
+# Solidity Minimalist Primer: 4. Function output (return/returns)
 
 Recently, I have been relearning the Solidity, consolidating the finer details, and also writing a "Solidity Minimalist Primer" for newbies to learn and use from (advanced programmers can find another tutorial). Lectures are updated 1~3 times weekly. 
 
@@ -12,7 +12,7 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 
 In this section, we will introduce `Solidity` function output including return multiple variables, named returns, and reading full and part of return values using destructuring assignments. 
 
-## Return values(return and returns）
+## Return values(return and returns)
 `There are two keywords about function output: `return` and `returns`, which differ from:`
 - `returns` is added after the function name to declare the variable type and variable name;
 - `return` is used for the function body and returns the specified variables.
