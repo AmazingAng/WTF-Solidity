@@ -10,7 +10,7 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 
 -----
 
-In this section, we will introduce `Solidity` function output, including return multiple variables, named returns, and reading full and part of return values using destructuring assignments. 
+In this section, we will introduce `Solidity` function output, including returning multiple values, named returns, and reading full and part of return values using destructuring assignments. 
 
 ## Return values(return and returns)
 There are two keywords about function output: `return` and `returns`, which differ from:
@@ -18,7 +18,7 @@ There are two keywords about function output: `return` and `returns`, which diff
 - `return` is used for the function body and returns specified variables.
 
 ```solidity
-    // return multiple variables
+    // returning multiple variables
     function returnMultiple() public pure returns(uint256, bool, uint256[3] memory){
             return(1, true, [uint256(1),2,5]);
         }
@@ -65,7 +65,7 @@ Of course, you can also return variables with `return` in named returns:
 
 
 ## Tutorial summary
-In this section, we introduced function return values `return` and `returns`, including return multiple variables, named returns, and reading full and part of return values using destructuring assignments. 
+In this section, we introduced function return values `return` and `returns`, including returning multiple variables, named returns, and reading full and part of return values using destructuring assignments. 
 
 
 
