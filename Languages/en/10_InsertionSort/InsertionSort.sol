@@ -41,7 +41,7 @@ contract InsertionSort {
         return(sum);
     }
 
-    // 三元运算符 ternary/conditional operator
+    // Ternary/Conditional operator
     function ternaryTest(uint256 x, uint256 y) public pure returns(uint256){
         // return the max of x and y
         return x >= y ? x: y; 
