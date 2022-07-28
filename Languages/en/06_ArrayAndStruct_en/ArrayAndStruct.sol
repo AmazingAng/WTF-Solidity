@@ -31,8 +31,10 @@ contract ArrayTypes {
         array4.push(3);
         return array4;
     }
+}
 
-
+pragma solidity ^0.8.4;
+contract StructTypes {
     // Struct
     struct Student{
         uint256 id;
@@ -53,4 +55,17 @@ contract ArrayTypes {
         student.score = 80;
     }
   
+}
+
+pragma solidity ^0.8.4;
+contract EnumTypes {
+    // Represent uint 0, 1, 2 as Buy, Hold, Sell
+    enum ActionSet { Buy, Hold, Sell }
+    // Create enum variable action
+    ActionSet action = ActionSet.Buy;
+
+    // enum can be explicitly converted to uint
+    function enumToUint() external view returns(uint){
+        return uint(action);
+    }
 }
