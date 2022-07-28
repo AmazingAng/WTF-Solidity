@@ -127,7 +127,7 @@ Then we put the modified version into `remix` and run by entering `[2, 5, 3, 1]`
 After correcting it for a long time, I still could not find where the `bug` is. 
 I went to `google` to search for "solidity insertion sort", and found that the insertion algorithm tutorials written with `solidity` on the Internet are all wrong, such as: [Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
 
-Remix decode mistake output is:
+Remix decoded mistake output is:
 ![10-1](./img/10-1.jpg)
 
 ### Correct Version of `Solidity InsertionSort`
