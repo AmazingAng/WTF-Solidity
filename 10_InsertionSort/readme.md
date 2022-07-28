@@ -11,7 +11,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 -----
 这一讲，我们将介绍`solidity`中的控制流，然后讲如何用`solidity`实现插入排序（`InsertionSort`），一个看起来简单，但实际上很容易写出`bug`的程序。
 
-控制流
+## 控制流
 `Solidity`的控制流与其他语言类似，主要包含以下几种：
 
 1. `if-else`
@@ -117,7 +117,7 @@ def insertionSort(arr):
 ```
 那我们把改好的放到`remix`上去跑，输入`[2, 5, 3, 1]`。BOOM！有`bug`！改了半天，没找到`bug`在哪。我又去`google`搜”solidity insertion sort”，然后发现网上用`solidity`写的插入算法教程都是错的，比如：[Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
 
-Remix decode output 出现错误内容
+Remix decoded output 出现错误内容
 ![10-1](./img/10-1.jpg)
 
 ### 正确的solidity插入排序
