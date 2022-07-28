@@ -83,8 +83,6 @@ In addition, there are `continue` (immediately enter the next loop) and `break` 
 
 ### Insertion Sort
 
-排序算法解决的问题是将无序的一组数字，例如`[2, 5, 3, 1]`，从小到大一次排列好。插入排序（`InsertionSort`）是最简单的一种排序算法，也是很多人学习的第一个算法。它的思路很简答，从前往后，依次将每一个数和排在他前面的数字比大小，如果比前面的数字小，就互换位置。示意图：
-
 The problem solved by the sorting algorithm is to arrange an unordered set of numbers from small to large, such as `[2, 5, 3, 1]` to `[1, 2, 3, 5]`. 
 Insertion Sort (`InsertionSort`) is the simplest sorting algorithm and the first algorithm many people learn. 
 The idea of `InsertionSort` is very simple: From front to back, compare each number with the number in front of it, and if it is smaller than the number in front, switch the positions of them. 
