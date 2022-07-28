@@ -5,7 +5,7 @@ pragma solidity ^0.8.4;
 * 从github和npm导入
 * 导入文件存放于当前工作区的.deps目录下
 */
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/ERC721.sol";
+import "../34_ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
 
 contract RandomNumber is ERC721, VRFConsumerBase{
