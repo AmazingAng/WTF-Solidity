@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "../34_ERC721/IERC165.sol";
 
 /**
  * @dev ERC1155标准的接口合约，实现了EIP1155的功能
