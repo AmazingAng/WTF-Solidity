@@ -162,7 +162,7 @@ So, we just need to add 1 to `j` so that it cannot take a negative value. The co
 
 Result of the correct code：
 
-!["Input [2,5,3,1] Output[1,2,3,5]"](https://images.mirror-media.xyz/publication-images/S-i6rwCMeXoi8eNJ0fRdB.png?height=300&width=554)
+   !["Input [2,5,3,1] Output[1,2,3,5]"](https://images.mirror-media.xyz/publication-images/S-i6rwCMeXoi8eNJ0fRdB.png?height=300&width=554)
 
 ## Tutorial summary
 
