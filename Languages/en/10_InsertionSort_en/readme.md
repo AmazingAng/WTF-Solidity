@@ -166,7 +166,7 @@ Result of the correct code：
 
 ## Tutorial summary
 
-In this lecture, we introduced control flow in Solidity and wrote Insertion Sort in Solidity. Solidity looks simple but there are many pitfalls hidden. Every month, there are projects that lose tens of millions or even hundreds of millions of dollars because of these small bugs. Master the basics and keep practicing to write better Solidity code.
+In this lecture, we introduced control flow in Solidity and learn about the Insertion Sort algorithm in Solidity. Solidity looks simple but there are many pitfalls hidden. Every month, there are projects that lose tens of millions or even hundreds of millions of dollars because of these small bugs. Master the basics and keep practicing to write better Solidity code.
 
 
 
