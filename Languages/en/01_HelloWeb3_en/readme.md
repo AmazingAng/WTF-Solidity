@@ -27,9 +27,10 @@ Website: [remix.ethereum.org](https://remix.ethereum.org)
 
 Within Remix, we can see that there are four buttons on the leftmost vertical menu, corresponding to FILE EXPLORER (where to write code), SEARCH IN FILES (find and replace files), SOLIDITY COMPILER (to run code), and DEPLOY & RUN TRANSACTIONS (on-chain deployment). We can create a blank Solidity contract by clicking the `Create New File` button.
 
-![Remix Menu](./img/1-1.png)
+   ![Remix Menu](./img/1-1.png)
 
 ## The first Solidity program
+
 This one is easy, the program runs on 1 line of comment and 3 lines of code:
 
 ```solidity
@@ -66,11 +67,11 @@ On the code editor page, pressing CTRL+S is a convenient way to compile the code
 
 After compiling, click the `Deploy` button on the left menu to enter the deployment page.
 
-![](./img/1-2.png)
+   ![](./img/1-2.png)
 
 By default, Remix uses the JavaScript virtual machine to simulate the Ethereum chain and run smart contracts, similar to running a testnet on the browser. Remix will allocate several test accounts to you, each with 100 ETH (test tokens), which can be used at your disposal. You click on `Deploy` (yellow button) to deploy the contract we have written.
 
-![](./img/1-3.png)
+   ![](./img/1-3.png)
 
 After a successful deployment, you will see a contract named `HelloWeb3` below, clicking on the variable `_string`, you can see "Hello Web3!" written in the code.
 
@@ -81,5 +82,4 @@ In the first tutorial, we briefly introduced the Solidity programming language, 
 ### Recommended materials on Solidity：
 
 1. [Solidity Documentation](https://docs.soliditylang.org/en/latest/)
-
 2. [Solidity Tutorial by freeCodeCamp](https://www.youtube.com/watch?v=ipwxYa-F1uY)
