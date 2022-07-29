@@ -5,7 +5,7 @@ abstract contract InsertionSort{
     function insertionSort(uint[] memory a) public pure virtual returns(uint[] memory);
 }
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol";
+import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 
 interface IERC721 is IERC165 {
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);

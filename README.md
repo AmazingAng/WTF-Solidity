@@ -121,3 +121,14 @@
 ### `合约安全`
 
 **第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Security/Consensys2020)】 【[文章](https://mirror.xyz/ninjak.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
+
+
+## test
+```shell
+yarn install
+npx hardhat compile
+npx hardhat test
+
+# report gas used for each test
+REPORT_GAS=true npx hardhat test test/31_ERC20.spec.ts
+```
