@@ -1,6 +1,7 @@
 import { Signer } from '@ethersproject/abstract-signer';
 import { Contract, ContractReceipt, ContractTransaction } from '@ethersproject/contracts';
 import web3 from 'web3';
+// @ts-ignore
 import { ethers } from 'hardhat';
 import { BigNumber } from 'ethers';
 import { formatEther, formatUnits } from 'ethers/lib/utils';

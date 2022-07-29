@@ -3,6 +3,7 @@ import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import {
   ERC20
 } from '../typechain-types';
+// @ts-ignore
 import { ethers } from 'hardhat';
 import { expect } from 'chai';
 

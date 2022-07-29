@@ -72,7 +72,8 @@ export default {
     timeout: 2000000
   },
   paths: {
-    sources: './[0-9][0-9]_**',
+    // sources: './[0-9][0-9]_**',
+    sources: './31_ERC20',
     tests: "./test",
     cache: "./cache",
     artifacts: "./artifacts"
