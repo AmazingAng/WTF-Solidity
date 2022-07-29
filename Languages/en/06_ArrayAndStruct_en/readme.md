@@ -1,4 +1,4 @@
-# Solidity Minimalist Tutorial: Tutorial 6. reference type, array, struct
+# Solidity Minimalist Tutorial: 6. Reference Type, Array & Struct
 
 Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "Solidity Minimalist Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
 
