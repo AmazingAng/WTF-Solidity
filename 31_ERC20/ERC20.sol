@@ -5,8 +5,6 @@ pragma solidity ^0.8.4;
 
 import "./IERC20.sol";
 
-import "hardhat/console.sol";
-
 contract ERC20 is IERC20 {
 
     mapping(address => uint256) public override balanceOf;
@@ -28,15 +26,8 @@ contract ERC20 is IERC20 {
 
     // @dev 实现`transfer`函数，代币转账逻辑
     function transfer(address recipient, uint amount) external override returns (bool) {
-        console.log("line 31", "start transfer");
-
-        console.log("line 33, before transfer", balanceOf[msg.sender], balanceOf[recipient]);
-
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;
-
-        console.log("line 38, after transfer", balanceOf[msg.sender], balanceOf[recipient]);
-
         emit Transfer(msg.sender, recipient, amount);
         return true;
     }
