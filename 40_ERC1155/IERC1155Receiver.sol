@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "../34_ERC721/IERC165.sol";
 
 /**
  * @dev ERC1155接收合约，要接受ERC1155的安全转账，需要实现这个合约

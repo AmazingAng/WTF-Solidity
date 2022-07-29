@@ -2,7 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/ERC721.sol";
+import "../34_ERC721/ERC721.sol";
 
 contract DutchAuction is Ownable, ERC721 {
     uint256 public constant COLLECTOIN_SIZE = 10000; // NFT总数
