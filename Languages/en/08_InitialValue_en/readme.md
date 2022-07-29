@@ -1,4 +1,4 @@
-# Solidity Minimalist Tutorial: 8. Initial value
+# Solidity Minimalist Tutorial: 8. Initial Value
 
 Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "Solidity Minimalist Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
 
