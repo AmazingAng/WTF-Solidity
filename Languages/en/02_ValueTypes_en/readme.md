@@ -143,12 +143,13 @@ It can be converted interchangeably to `uint` data type and checks whether the c
 
 - After deploying the contract, you can view the specific values of each type of variable
 
-![2-1.png](./img/2-1.png)
+   ![2-1.png](./img/2-1.png)
   
 - Conversion between enum and uint
 
-![2-2.png](./img/2-2.png)
-![2-3.png](./img/2-3.png)
+   ![2-2.png](./img/2-2.png)
+
+   ![2-3.png](./img/2-3.png)
 
 ## Tutorial summary 
 
