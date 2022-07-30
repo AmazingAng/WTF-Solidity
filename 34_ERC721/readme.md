@@ -109,7 +109,7 @@ interface IERC721 is IERC165 {
 ### IERC721事件
 `IERC721`包含3个事件，其中`Transfer`和`Approval`事件在`ERC20`中也有。
 - `Transfer`事件：在转账时被释放，记录代币的发出地址`from`，接收地址`to`和`tokenid`。
-- `Approval`事件：在授权时释放，记录授权地址`owner，被授权地址`approved`和`tokenid`。
+- `Approval`事件：在授权时释放，记录授权地址`owner`，被授权地址`approved`和`tokenid`。
 - `ApprovalForAll`事件：在批量授权时释放，记录批量授权的发出地址`owner`，被授权地址`operator`和授权与否的`approved`。
 
 ### IERC721函数
