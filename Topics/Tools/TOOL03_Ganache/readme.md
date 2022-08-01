@@ -90,7 +90,7 @@ const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545");
 
 ### 部署合约，查询v神余额
 
-这个合约写了一个可以查询eth余额的方法
+这个合约写了一个可以查询eth余额的方法，因为我们fork了主网，所以查询一下v神在我们本地测试网络的余额，应该和主网的余额是一样的。
 
 ```solidity
 // contracts/GLDToken.sol†
@@ -107,15 +107,15 @@ contract XBXToken {
 
 ```
 
-[v神钱包地址](https://etherscan.io/address/0xab5801a7d398351b8be11c439e05c5b3259aec9b)
+[v神主网钱包地址](https://etherscan.io/address/0xab5801a7d398351b8be11c439e05c5b3259aec9b)
 
 ![](./img/ganache-5.png)
 
-通过remix调用查看该地址余额
+通过remix调用查看fork之后，本地部署该地址余额
 
 ![](./img/ganache-6.png)
 
-
+本地fork的网络查询v神余额与主网上的余额一致，fork主网测试成功。
 
 ## 总结
 
