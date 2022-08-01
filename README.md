@@ -107,6 +107,8 @@
 
 **第2讲：Infura, 连接链下与链上的桥梁** 【[文章](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL02_Infura/readme.md)】
 
+**第3讲：Ganache，搭建本地测试网络** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL03_Ganache/readme.md)】
+
 ### `ERC721`
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
 
