@@ -3,6 +3,7 @@ title: 41. WETH
 tags:
   - solidity
   - ERC20
+  - fallback
 ---
 
 # Solidity极简入门: 41. WETH

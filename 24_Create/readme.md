@@ -1,4 +1,13 @@
-# Solidity极简入门: 25. 在合约中创建新合约
+---
+title: 24. 在合约中创建新合约
+tags:
+  - solidity
+  - advanced
+  - wtfacademy
+  - create contract
+---
+
+# Solidity极简入门: 24. 在合约中创建新合约
 
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
