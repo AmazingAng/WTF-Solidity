@@ -1,4 +1,13 @@
-# Solidity极简入门: 20. 发送ETH transfer,send和call
+---
+title: 20. 发送ETH
+tags:
+  - solidity
+  - advanced
+  - wtfacademy
+  - transfer/send/call
+---
+
+# Solidity极简入门: 20. 发送ETH
 
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 

@@ -1,3 +1,13 @@
+---
+title: 14. 抽象合约和接口
+tags:
+  - solidity
+  - basic
+  - wtfacademy
+  - abstract
+  - interface
+---
+
 # Solidity极简入门: 14. 抽象合约和接口
 
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
