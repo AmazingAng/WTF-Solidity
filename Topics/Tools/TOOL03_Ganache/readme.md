@@ -66,19 +66,21 @@ ganache -f https://eth-mainnet.alchemyapi.io/v2/YOUR_API_KEY --wallet.accounts=A
 
 点击quickstart就可以快速启动，但是快速启动默认的网络端口是 7545，如果你用remix链接的时候需要修改一下。启动完成之后就如下图所示：
 
+![](./img/ganache-9.png)
+
 第一行可以看到你现在的网络`prc server`, 默认是地址和端口是`127.0.0.1:7545`，如果你在remix中使用默认的，需要把端口改为7545。
 
-![](./img/ganache-9.png)
+
 
 #### remix 链接默认ganache
 
 ![](./img/ganache-10.png)
 
-选择环境为 ganache provider，具体端口看你的设置。
+选择环境为 ganache provider，具体端口看你的设置,需要跟ganache的端口一致。
 
 ![](./img/ganache-11.png)
 
-端口改为和ganache默认一样的`7545`
+端口改为和本地ganache默认一样的`7545`
 
 #### 测试部署一个合约
 
@@ -90,6 +92,8 @@ ganache -f https://eth-mainnet.alchemyapi.io/v2/YOUR_API_KEY --wallet.accounts=A
 
 
 #### 自定义配置
+
+有时候你可能需要自定义配置，比如你的网络端口，或者你需要fork主网，你可以在初始化空间的时候配置。
 
 选择`new workspace`
 
