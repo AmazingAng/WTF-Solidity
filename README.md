@@ -125,3 +125,13 @@
 ### `合约安全`
 
 **第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Security/Consensys2020)】 【[文章](https://mirror.xyz/ninjak.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
+
+## WTF贡献者
+<div align="center">
+  <h4 align="center">
+    贡献者是WTF学院的基石
+  </h4>
+  <a href="https://github.com/AmazingAng/WTFSolidity/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=AmazingAng/WTFSolidity" />
+  </a>
+</div>
