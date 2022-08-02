@@ -23,7 +23,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 ## Alchemy 和 Infura 的区别
 
-![](./img/alchemy-1.png)
+![Alchemy 和 Infura 的区别](./img/alchemy-1.png)
 
 左边是`alchemy` 右边是 `Infura`，我们来对比下免费的套餐
 
@@ -33,16 +33,16 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 `Alchemy`每个月有`300,000,000`的访问量，`Infura`每个月有`3,000,000`的访问量。
 
 
-### 公链的区别（免费版本）
+### 支持公链的区别（免费版本）
 
-![](./img/alchemy-2.png)
+![公链的区别](./img/alchemy-2.png)
 
 `Alchemy`支持：ETH、Polygon、Solana、Arbitrum、Optimism
 `Infura`支持：ETH、ETH2、IPFS、Filecoin 
 
 ### Alchemy支持enhanced-apis
 
-![](./img/alchemy-3.png)
+![Alchemy支持enhanced-apis](./img/alchemy-3.png)
 
 
 Alchemy自己封装了一些web3的api，大家可以自己看文档获取更多的细节。
@@ -55,13 +55,13 @@ Alchemy自己封装了一些web3的api，大家可以自己看文档获取更多
 
 网址：[alchemy.com](https://www.alchemy.com/)
 
-![](./img/alchemy-4.png)
+![Alchemy官网](./img/alchemy-4.png)
 
 
 ### 2. 创建API Key
 注册后，进入控制台Dashboard，并点击右上角的 **+ CREATE APP** 按钮。
 
-![](./img/alchemy-5.png)
+![创建API Key](./img/alchemy-5.png)
 
 
 ### 3. 填写API Key信息
@@ -69,7 +69,7 @@ Alchemy自己封装了一些web3的api，大家可以自己看文档获取更多
 `CHAIN`：选择你需要的网络，如果是以太网就是 `Ethereum`。
 `NETWORK`:并选择是主网还是测试网。
 
-![](./img/alchemy-6.png)
+![填写API Key信息](./img/alchemy-6.png)
 
 填写完成之后点击 `CREATE APP` 即可创建。
 
@@ -77,14 +77,14 @@ Alchemy自己封装了一些web3的api，大家可以自己看文档获取更多
 
 回到控制台Dashboard，可以看到名为`WTFSolidity`的API Key已经创建完毕。在控制台Dashboard，点击  **view key** 按钮，可以查看API Key详情。
 
-![](./img/alchemy-7.png)
+![查看api key](./img/alchemy-7.png)
 
 
 ### 5. 查看API Key详情
 
 可以看到我们创建好了相应的api key，最常用的https和websockets都支持。
 
-![](./img/alchemy-8.png)
+![查看api key 详情](./img/alchemy-8.png)
 
 
 ## 使用`Alchemy` API Key 
@@ -111,7 +111,7 @@ RPC URL：填在alchemy申请的optimism rpc链接
 区块链浏览器URL (Blockchain Explorer URL): https://etherscan.io
 ```
 
-![](./img/alchemy-9.png)
+![小狐狸钱包添加新的网络](./img/alchemy-9.png)
 
 
 ## 总结
