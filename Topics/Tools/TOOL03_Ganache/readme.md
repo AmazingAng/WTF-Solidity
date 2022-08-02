@@ -52,6 +52,78 @@ ganache -f https://eth-mainnet.alchemyapi.io/v2/YOUR_API_KEY
 ganache -f https://eth-mainnet.alchemyapi.io/v2/YOUR_API_KEY --wallet.accounts=ACCOUNT_PRIATE_KEY,AMOUNT_WEI --wallet.accounts=ACCOUNT_PRIATE_KEY,1000000000000000000000
 ```
 
+### 方法二：UI配置
+不太推荐，如果你是新上手，可以通过这个熟悉。
+
+[点击下载Ganache - Truffle Suite](https://trufflesuite.com/ganache/)
+
+#### 客户端界面
+![](./img//ganache-7.png)
+
+#### 初始化新建工作空间
+
+![](./img//ganache-8.png)
+
+点击quickstart就可以快速启动，但是快速启动默认的网络端口是 7545，如果你用remix链接的时候需要修改一下。启动完成之后就如下图所示：
+
+![](./img/ganache-9.png)
+
+第一行可以看到你现在的网络`prc server`, 默认是地址和端口是`127.0.0.1:7545`，如果你在remix中使用默认的，需要把端口改为7545。
+
+
+
+#### remix 链接默认ganache
+
+![](./img/ganache-10.png)
+
+选择环境为 ganache provider，具体端口看你的设置,需要跟ganache的端口一致。
+
+![](./img/ganache-11.png)
+
+端口改为和本地ganache默认一样的`7545`
+
+#### 测试部署一个合约
+
+这里能看到区块里的交易信息，显示我部署了一个合约地址。
+
+![](./img/ganache-12.png)
+
+![](./img/ganache-13.png)
+
+
+#### 自定义配置
+
+有时候你可能需要自定义配置，比如你的网络端口，或者你需要fork主网，你可以在初始化空间的时候配置。
+
+选择`new workspace`
+
+![](./img/ganache-14.png)
+
+
+#### 设置端口和网络ID
+
+端口：可以将默认端口7545改成8545，看你的习惯
+
+![](./img/ganache-15.png)
+
+
+#### fork主网
+
+这里的地址填入你alchemy的的主网地址即可
+
+没有的话申请一个 [Alchemy - Blockchain APIs and Node Infrastructure](https://alchemy.com/?r=7ad384cba6732c9d) 或者参考 [Infura, 连接链下与链上的桥梁](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL02_Infura/readme.md) 申请一个infura的链接。
+
+在chain forking下面的`ENTER CUSTOM URL`里面填入你的eth mainnet地址即可
+
+![](./img/ganache-16.png)
+
+
+#### 设置固定账号和余额
+
+![](./img/ganache-17.png)
+
+最后点击 save workspace 就可以启动啦。
+
 
 ## web3js/ethersjs 链接 ganache
 ganache生成的本地rpc地址为 `127.0.0.1:8545` UI的默认地址和命令行有区别，所以我上述做了变更。像remix默认使用的就是8454端口
