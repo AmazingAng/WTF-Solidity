@@ -1,4 +1,4 @@
-# Solidity极简入门-工具篇4：Alchemy, 连接链下与链上的桥梁
+# Solidity极简入门-工具篇4：Alchemy, 区块链API和节点基础设施
 
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用），每周更新1-3讲。
 
