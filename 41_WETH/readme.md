@@ -22,7 +22,7 @@ discord：[WTF Academy](https://discord.gg/5akcruXrsk)
 
 ## 什么是`WETH`？
 
-![WETH](./img/41-1.png)
+![WETH](./img/41-1.gif)
 
 `WETH` (Wrapped ETH)是`ETH`的带包装版本。我们常见的`WETH`，`WBTC`，`WBNB`，都是带包装的原生代币。那么我们为什么要包装它们？
 
