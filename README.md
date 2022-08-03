@@ -17,89 +17,91 @@
 - [ ] 2048:star:发社群NFT
 
 ## 入门
-**第1讲：三行代码HelloWeb3**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3)】 【[文章](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)】
+**第1讲：三行代码HelloWeb3**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)
 
-**第2讲：数值类型**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes)】 【[文章](https://mirror.xyz/ninjak.eth/XHZVpWe8_sHBHgg6kkrNH2nAWYmQgoB7fKW8hoXnoyI)】
+**第2讲：数值类型**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/XHZVpWe8_sHBHgg6kkrNH2nAWYmQgoB7fKW8hoXnoyI)
 
-**第3讲：函数类型 (external/internal/public/private, pure/view, payable)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/03_Function)】 【[文章](https://mirror.xyz/ninjak.eth/FWI887JBea4VpNiMlJ2ICyJ5aWUREReGo9Bz0X8iEVc)】
+**第3讲：函数类型 (external/internal/public/private, pure/view, payable)**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/03_Function) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/03_Function/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/FWI887JBea4VpNiMlJ2ICyJ5aWUREReGo9Bz0X8iEVc)
 
-**第4讲：函数输出（returns/return）**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/04_Return)】 【[文章](https://mirror.xyz/ninjak.eth/FIGf9tF7wiBlLnQGXfEjVkJ0efzKBNltJS1fRxPKYTk)】
+**第4讲：函数输出（returns/return）**：[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/04_Return) | [文章](https://github.com/AmazingAng/WTFSolidity/tree/main/04_Return/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/FIGf9tF7wiBlLnQGXfEjVkJ0efzKBNltJS1fRxPKYTk)
 
-**第5讲：变量作用域和数据存储 (storage/memory/calldata)**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/05_DataStorage)】 【[文章](https://mirror.xyz/ninjak.eth/w5zJWGwElN2ei4tgtuJbTTpKwrGhb-igPY7wTVKRCgY)】
+**第5讲：变量作用域和数据存储 (storage/memory/calldata)**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/05_DataStorage) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/05_DataStorage/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/w5zJWGwElN2ei4tgtuJbTTpKwrGhb-igPY7wTVKRCgY)
 
-**第6讲：数组（array）和结构体（struct）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/06_ArrayAndStruct)】 【[文章](https://mirror.xyz/ninjak.eth/zNxhHPjK8kjx_bSaauDUcEr9rX3hroalEzvYDatshvw)】
+**第6讲：数组（array）和结构体（struct）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/06_ArrayAndStruct) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/06_ArrayAndStruct/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/zNxhHPjK8kjx_bSaauDUcEr9rX3hroalEzvYDatshvw)
 
-**第7讲：映射（mapping）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/07_Mapping)】 【[文章](https://mirror.xyz/ninjak.eth/iHYV1C-KUBn8JoJRirhgMmcSNgmpaL4cv4trdOoZJB0)】
+**第7讲：映射（mapping）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/07_Mapping) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/07_Mapping/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/iHYV1C-KUBn8JoJRirhgMmcSNgmpaL4cv4trdOoZJB0)
 
-**第8讲：变量初始值**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/08_InitialValue)】 【[文章](https://mirror.xyz/ninjak.eth/WoWQ8s66meku9zPFsHGsXs4m7T6PauZPmfSak76qDkI)】
+**第8讲：变量初始值**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/08_InitialValue) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/08_InitialValue/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/WoWQ8s66meku9zPFsHGsXs4m7T6PauZPmfSak76qDkI)
 
-**第9讲：常量（constant/immutable）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/09_Constant)】 【[文章](https://mirror.xyz/ninjak.eth/p9xMZTxCBLSKBqqP2dlyxHceev1V7Blmo5Wf-OY3R48)】
+**第9讲：常量（constant/immutable）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/09_Constant) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/09_Constant/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/p9xMZTxCBLSKBqqP2dlyxHceev1V7Blmo5Wf-OY3R48)
 
-**第10讲：控制流和插入排序**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/10_InsertionSort)】 【[文章](https://mirror.xyz/ninjak.eth/8Q0vr-dyHfiIXS9KnivaQDxpM9cIQTNWoC68TNvCZ9c)】
+**第10讲：控制流和插入排序**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/10_InsertionSort) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/10_InsertionSort/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/8Q0vr-dyHfiIXS9KnivaQDxpM9cIQTNWoC68TNvCZ9c)
 
-**第11讲：构造函数（constructor）和修饰器（modifier）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/11_Modifier)】 【[文章](https://mirror.xyz/ninjak.eth/X8HHTaD8hqkfshhugHHp7ho3EaLjuviya_g1l3MsF_U)】
+**第11讲：构造函数（constructor）和修饰器（modifier）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/11_Modifier) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/11_Modifier/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/X8HHTaD8hqkfshhugHHp7ho3EaLjuviya_g1l3MsF_U)
 
-**第12讲：事件（events）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/12_Event)】 【[文章](https://mirror.xyz/ninjak.eth/nGSCuFbPHMo8mL1ErZMUwOZG_OUECzIWEsGhX0a5eOw)】
+**第12讲：事件（events）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/12_Event) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/12_Event/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/nGSCuFbPHMo8mL1ErZMUwOZG_OUECzIWEsGhX0a5eOw)
 
-**第13讲：继承**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Inheritance)】 【[文章](https://mirror.xyz/ninjak.eth/HTCOqhsxTXs42NNv3wfzNRQMN6qGHGYY9iaTJhhKBb4)】
+**第13讲：继承**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Inheritance) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Inheritance/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/HTCOqhsxTXs42NNv3wfzNRQMN6qGHGYY9iaTJhhKBb4)
 
-**第14讲：抽象合约（abstract）和接口（interface）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/14_Interface)】 【[文章](https://mirror.xyz/ninjak.eth/KKnoJJfHG69Pg3GQda_B454z_nJ1tesyBd4uOvh1WNM)】
+**第14讲：抽象合约（abstract）和接口（interface）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/14_Interface) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/14_Interface/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/KKnoJJfHG69Pg3GQda_B454z_nJ1tesyBd4uOvh1WNM)
 
-**第15讲：异常（errors）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Errors)】 【[文章](https://mirror.xyz/ninjak.eth/XhhLu7PV1cAhOp9_m-dk9OoTj7offC7DkYYgsV3e31I)】
+**第15讲：异常（errors）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Errors) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Errors/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/XhhLu7PV1cAhOp9_m-dk9OoTj7offC7DkYYgsV3e31I)
 
 ## 进阶
 
-**第16讲：函数重载**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Overloading)】 【[文章](https://mirror.xyz/ninjak.eth/ADt6g13gwqt42-9_nBxMunSkVHeft6-yb1mp0XH-4f8)】
+**第16讲：函数重载**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Overloading) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Overloading/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/ADt6g13gwqt42-9_nBxMunSkVHeft6-yb1mp0XH-4f8)
 
-**第17讲：库合约（library）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/17_Library)】 【[文章](https://mirror.xyz/ninjak.eth/5nhKjOI40nCT0nCk6iO2TXry3xi09F1Ts4e5lMBlZ1w)】
+**第17讲：库合约（library）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/17_Library) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/17_Library/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/5nhKjOI40nCT0nCk6iO2TXry3xi09F1Ts4e5lMBlZ1w)
 
-**第18讲：Import**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/18_Import)】 【[文章](https://mirror.xyz/ninjak.eth/f43II54h19ucfkNDarEdDFGts0lBkJCyrZ57U5Njk3A)】
+**第18讲：Import**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/18_Import) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/18_Import/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/f43II54h19ucfkNDarEdDFGts0lBkJCyrZ57U5Njk3A)
 
-**第19讲：接收ETH（fallback/receive）**：【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/19_Fallback)】 【[文章](https://mirror.xyz/ninjak.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)】
+**第19讲：接收ETH（fallback/receive）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/19_Fallback) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/19_Fallback/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)
 
-**第20讲：发送ETH（transfer/send/call）**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/20_SendETH)】 【[文章](https://mirror.xyz/ninjak.eth/NTNHraVAn2OWUKXpr0byphlxl8ytj7fRUAaOaLYfEtA)】
+**第20讲：发送ETH（transfer/send/call）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/20_SendETH) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/20_SendETH/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/NTNHraVAn2OWUKXpr0byphlxl8ytj7fRUAaOaLYfEtA)
 
-**第21讲：调用其他合约**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/21_CallContract)】 【[文章](https://mirror.xyz/ninjak.eth/fI48BkuT7wWzRaVKkn1VWxnfLpkUEvIZIJcO5iOIzbk)】
+**第21讲：调用其他合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/21_CallContract) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/21_CallContract/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/fI48BkuT7wWzRaVKkn1VWxnfLpkUEvIZIJcO5iOIzbk)
 
-**第22讲：Call**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/22_Call)】 【[文章](https://mirror.xyz/ninjak.eth/vMJ0AHl3b_A5Lyey5lLdFhzkGT9wJ-D6vJpZpH0vlls)】
+**第22讲：Call**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/22_Call) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/22_Call/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/vMJ0AHl3b_A5Lyey5lLdFhzkGT9wJ-D6vJpZpH0vlls)
 
-**第23讲：Delegatecall**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/23_Delegatecall)】 【[文章](https://mirror.xyz/ninjak.eth/hW9iLCOUUqsRCCZbzGS3x5m0wXfJBhlYQWLq93rplcU)】
+**第23讲：Delegatecall**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/23_Delegatecall) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/23_Delegatecall/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/hW9iLCOUUqsRCCZbzGS3x5m0wXfJBhlYQWLq93rplcU)
 
-**第24讲：在合约中创建新合约**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/24_Create)】 【[文章](https://mirror.xyz/ninjak.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)】
+**第24讲：在合约中创建新合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/24_Create) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/24_Create/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)
 
-**第25讲：Create2**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/25_Create2)】 【[文章](https://mirror.xyz/ninjak.eth/Dz7kd6-RrcNvdHnptWKzsW9AcIOSA8PoVsMsQh8nlEM)】
+**第25讲：Create2**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/25_Create2) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/25_Create2/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/Dz7kd6-RrcNvdHnptWKzsW9AcIOSA8PoVsMsQh8nlEM)
 
-**第26讲：删除合约**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/26_DeleteContract)】 【[文章](https://mirror.xyz/ninjak.eth/080JeNq8X_HfciftWa-ed0S6Wb5YFuIb5GPVISu1gIc)】
+**第26讲：删除合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/26_DeleteContract) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/26_DeleteContract/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/080JeNq8X_HfciftWa-ed0S6Wb5YFuIb5GPVISu1gIc)
 
-**第27讲：ABI编码解码**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/27_ABIEncode)】 【[文章](https://mirror.xyz/ninjak.eth/jXJnvwkoQzvJaqVIxagxneSZim6Qxm-StuNNxLuKuw8)】
+**第27讲：ABI编码解码**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/27_ABIEncode) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/27_ABIEncode/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/jXJnvwkoQzvJaqVIxagxneSZim6Qxm-StuNNxLuKuw8)
 
-**第28讲：Hash**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/28_Hash)】 【[文章](https://mirror.xyz/ninjak.eth/csiRSVEpEwj7f0OOtSpm1KdGHRqD4fNogmiahHx60nE)】
+**第28讲：Hash**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/28_Hash) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/28_Hash/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/csiRSVEpEwj7f0OOtSpm1KdGHRqD4fNogmiahHx60nE)
 
-**第29讲：函数选择器（selector）**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/29_Selector)】 【[文章](https://mirror.xyz/ninjak.eth/_Q-N_VGUV8F4QZbggR8Swv16LStBdfkeQb8qwSfoNTw)】
+**第29讲：函数选择器（selector）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/29_Selector) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/29_Selector/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/_Q-N_VGUV8F4QZbggR8Swv16LStBdfkeQb8qwSfoNTw)
 
-**第30讲：Try-Catch**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/30_TryCatch)】 【[文章](https://mirror.xyz/ninjak.eth/asj1-eKf6YdIoI9oMSLI3VECwqCzRHwaqIS01ALQ7qo)】
+**第30讲：Try-Catch**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/30_TryCatch) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/30_TryCatch/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/asj1-eKf6YdIoI9oMSLI3VECwqCzRHwaqIS01ALQ7qo)
 
 ## 应用
 
-**第31讲：ERC20**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/31_ERC20)】 【[文章](https://mirror.xyz/ninjak.eth/-LNwtaA4Eb0e1GZEsaZEXs09Nm9l57HVvoeRUfxVZNg)】
+**第31讲：ERC20**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/31_ERC20) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/31_ERC20/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/-LNwtaA4Eb0e1GZEsaZEXs09Nm9l57HVvoeRUfxVZNg)
 
-**第32讲：代币水龙头**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/32_Faucet)】 【[文章](https://mirror.xyz/ninjak.eth/tr1pm32UYMO96gOsgQsU5beAAcD3rkHtaBYg9MBzCz0)】
+**第32讲：代币水龙头**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/32_Faucet) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/32_Faucet/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/tr1pm32UYMO96gOsgQsU5beAAcD3rkHtaBYg9MBzCz0)
 
-**第33讲：空投**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/33_Airdrop)】 【[文章](https://mirror.xyz/ninjak.eth/pRoRGe7V4djkWX-_ZkkrdzKE8RSO5ivoDktCacE-4R8)】
+**第33讲：空投**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/33_Airdrop) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/33_Airdrop/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/pRoRGe7V4djkWX-_ZkkrdzKE8RSO5ivoDktCacE-4R8)
 
-**第34讲：ERC721**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/7BbjaN4Zz1ycAlfvKARlijMusL0RV3SOAltSx0nJed4)】
+**第34讲：ERC721**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/7BbjaN4Zz1ycAlfvKARlijMusL0RV3SOAltSx0nJed4)
 
-**第35讲：荷兰拍卖**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/35_DutchAuction)】 【[文章](https://mirror.xyz/ninjak.eth/6v7-GIVSQIG5mNUIMP8VhXt6AS1Iq24kMt2DOh196Fc)】
+**第35讲：荷兰拍卖**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/35_DutchAuction) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/35_DutchAuction/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/6v7-GIVSQIG5mNUIMP8VhXt6AS1Iq24kMt2DOh196Fc)
 
-**第36讲：Merkle Tree**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/36_MerkleTree)】 【[文章](https://mirror.xyz/ninjak.eth/kPBE6QzZeplo72UvGeJOcCEpZZMu9qVMmEu4KDZHzsM)】
+**第36讲：Merkle Tree**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/36_MerkleTree) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/36_MerkleTree/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/kPBE6QzZeplo72UvGeJOcCEpZZMu9qVMmEu4KDZHzsM)
 
-**第37讲：数字签名**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/37_Signature)】 【[文章](https://mirror.xyz/ninjak.eth/pVjNv3xzVoOB1AtsXNsZ01b6FZy-iVbdNZsv0qVQ7Qo)】
+**第37讲：数字签名**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/37_Signature) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/37_Signature/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/pVjNv3xzVoOB1AtsXNsZ01b6FZy-iVbdNZsv0qVQ7Qo)
 
-**第38讲：NFT交易所**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/38_NFTSwap)】 【[文章](https://mirror.xyz/ninjak.eth/lHIwfCzjKYUN_1V7PQCo1FPY-t_WzbV6i7cQjge1ANc)】
+**第38讲：NFT交易所**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/38_NFTSwap) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/38_NFTSwap/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/lHIwfCzjKYUN_1V7PQCo1FPY-t_WzbV6i7cQjge1ANc)
 
-**第39讲：随机数**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/39_Random)】 【[文章](https://mirror.xyz/ninjak.eth/JYXCXDLhHp8wxXPfClQKqW_5g1QhgVp44HFk9WtC6tk)】
+**第39讲：随机数**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/39_Random) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/39_Random/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/JYXCXDLhHp8wxXPfClQKqW_5g1QhgVp44HFk9WtC6tk)
 
-**第40讲：ERC1155**：【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/40_ERC1155)】 【[文章](https://mirror.xyz/ninjak.eth/dGmLVDYjGXCKR5kPvQspMj6f0qYnJbCUshy9hlzld0c)】
+**第40讲：ERC1155**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/40_ERC1155) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/40_ERC1155/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/dGmLVDYjGXCKR5kPvQspMj6f0qYnJbCUshy9hlzld0c)
+
+**第41讲：WETH**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/41_WETH) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/41_WETH/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/2Ma5ZRoAy54_aJXZw52xkItKykmQPpqsdFjVqEqB89k)
 
 ## Topics
 ### `工具`
