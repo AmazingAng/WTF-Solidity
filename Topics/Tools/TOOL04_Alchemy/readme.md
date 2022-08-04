@@ -93,11 +93,11 @@ Alchemy自己封装了一些web3的api，大家可以自己看文档获取更多
 ## 使用`Alchemy` API Key 
 
 ### Javascript (`ethers.js`)
-在`ether.js`中，我们可以利用`Infura` API Key来创建`JsonRpcProvider`，与链上交互。
+在`ether.js`中，我们可以利用`Alchemy` API Key来创建`JsonRpcProvider`，与链上交互。
 
 ```javascript
 const { ethers } = require("ethers");
-// 填上你的Infura API Key
+// 填上你的Alchemy API Key
 const ALCHEMY_ID = '' 
 const provider = new ethers.providers.JsonRpcProvider(`https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_ID}`)
 ```
