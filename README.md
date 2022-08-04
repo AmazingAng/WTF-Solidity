@@ -103,6 +103,9 @@
 
 **第41讲：WETH**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/41_WETH) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/41_WETH/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/2Ma5ZRoAy54_aJXZw52xkItKykmQPpqsdFjVqEqB89k)
 
+**第42讲：分账**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/42_PaymentSplit) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/42_PaymentSplit/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/j373uOA3btcD9xRWT_qaww4CSR-iaoqU6EClv1nXWsM)
+
+
 ## Topics
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
