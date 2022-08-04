@@ -2,6 +2,7 @@
 title: 41. WETH
 tags:
   - solidity
+  - application
   - ERC20
   - fallback
 ---
