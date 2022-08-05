@@ -3,6 +3,7 @@ title: 42. 分账
 tags:
   - solidity
   - application
+
 ---
 
 # Solidity极简入门: 42. 分账
@@ -23,7 +24,7 @@ discord：[WTF Academy](https://discord.gg/5akcruXrsk)
 
 分账就是按照一定比例分钱财。在现实中，经常会有“分赃不均”的事情发生；而在区块链的世界里，`Code is Law`，我们可以事先把每个人应分的比例写在智能合约中，获得收入后，再由智能合约来进行分账。
 
-![分账](./img/42-1.webp)
+![分账](D:\Desktop\42_PaymentSplit\img\42-1.webp)
 
 ## 分账合约
 
@@ -46,7 +47,9 @@ contract PaymentSplit{
 ```
 
 ### 事件
+
 分账合约中共有`3`个事件：
+
 - `PayeeAdded`：增加受益人事件。
 - `PaymentReleased`：受益人提款事件。
 - `PaymentReceived`：分账合约收款事件。
@@ -57,7 +60,9 @@ contract PaymentSplit{
     event PaymentReleased(address to, uint256 amount); // 受益人提款事件
     event PaymentReceived(address from, uint256 amount); // 合约收款事件
 ```
+
 ### 状态变量
+
 分账合约中共有`5`个状态变量，用来记录受益地址、份额、支付出去的`ETH`等变量：
 
 - `totalShares`：总份额，为`shares`的和。
@@ -76,6 +81,7 @@ contract PaymentSplit{
 ```
 
 ### 函数
+
 分账合约中共有`6`个函数：
 
 - 构造函数：始化受益人数组`_payees`和分账份额数组`_shares`，其中数组长度不能为0，两个数组长度要相等。_shares中元素要大于0，_payees中地址不能为0地址且不能有重复地址。
@@ -169,15 +175,26 @@ contract PaymentSplit{
 ```
 
 ## `Remix`演示
+
 ### 1. 部署`PaymentSplit`分账合约，并转入`1 ETH`
 
 在构造函数中，输入两个受益人地址，份额为`1`和`3`。
 
-### 2. 查看受益人地址、份额、应分到的`ETH`、
+![42-2](.\img\42-2.png)
+
+### 2. 查看受益人地址、份额、应分到的`ETH`
+
+![42-3-0](D.\img\42-3-0.png)
+
+![42-3-1](.\img\42-3-1.png)
 
 ### 3. 调用`release()`函数领取`ETH`
 
+![42-4](.\img\42-4.png)
+
 ### 4. 查看总支出、受益人余额、应分到的`ETH`的变化
+
+![42-5](.\img\42-5.png)
 
 ## 总结
 
