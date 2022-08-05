@@ -10,12 +10,12 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 
 -----
 
-In this section, we will introduce `Solidity` function output, including returning multiple values, named returns, and reading full and part of return values using destructuring assignments. 
+In this chapter, we will introduce `Solidity` function output, including returning multiple values, named returns, and reading full and part of return values using destructuring assignments. 
 
 ## Return values (return and returns)
-There are two keywords about function output: `return` and `returns`, which differ from:
+There are two keywords about function output: `return` and `returns`:
 - `returns` is added after the function name to declare variable type and variable name;
-- `return` is used for the function body and returns specified variables.
+- `return` is used in the function body and returns desired variables.
 
 ```solidity
     // returning multiple variables
@@ -23,10 +23,10 @@ There are two keywords about function output: `return` and `returns`, which diff
             return(1, true, [uint256(1),2,5]);
         }
 ```
-In the above code, we stated that the `returnMultiple()` function will have multiple outputs: `returns (uint256, bool, uint256[3] memory) `, and then we determined return values in the function body with `return (1, true, [uint256 (1), 2,5]) `.
+In the above code, the `returnMultiple()` function have multiple outputs: `returns (uint256, bool, uint256[3] memory) `, and then we specify the return variables/values in the function body with `return (1, true, [uint256 (1), 2,5]) `.
 
 ## Named returns
-We can indicate the name of the return variables in `returns`, so that the `solidity` automatically initializes these variables, and automatically returns the values of these functions, without adding a `return`.
+We can indicate the name of the return variables in `returns`, so that the `solidity` automatically initializes these variables, and automatically returns the values of these functions without adding the `return` keyword.
 
 ```solidity
     // named returns
@@ -36,9 +36,9 @@ We can indicate the name of the return variables in `returns`, so that the `soli
         _array = [uint256(3),2,1];
     }
 ```
-In the above code, we declare the return variable type and variable name with the `returns (uint256 _number, bool _bool, uint256[3] memory _array) `. This way, we will only need to assign values to the variable ` _ number` in the body, ` _bool ` and ` _array ` and they will automatically return.
+In the above code, we declare the return variable type and variable name with `returns (uint256 _number, bool _bool, uint256[3] memory _array) `. Thus, we only need to assign values to the variable ` _number`, ` _bool ` and ` _array `in the function body, and they will automatically return.
 
-Of course, you can also return variables with `return` in named returns:
+Of course, you can also return variables with `return` keyword in named returns:
 ```solidity
     // Named return, still support return
     function returnNamed2() public pure returns(uint256 _number, bool _bool, uint256[3] memory _array){
@@ -46,21 +46,23 @@ Of course, you can also return variables with `return` in named returns:
     }
 ```
 ## Destructuring assignments
-`solidity` uses rules for destructuring assignments and supports the full or part of return values of the function.
-- Read all return values: declare the variables to be assigned and separate them  by `, ` in order.
+`Solidity` internally allows tuple types, i.e. a list of objects of potentially different types whose number is a constant at compile-time. The tuples can be used to return multiple values at the same time.
+
+- Variables declared with type and assigned from the returned tuple, not all elements have to be specified (but the number must match):
 ```solidity
         uint256 _number;
         bool _bool;
         uint256[3] memory _array;
         (_number, _bool, _array) = returnNamed();
 ```
-- Read part of return values: declare the variables to read in return values and the variables not to read can be left out. In the following code, we only read the return value ` _bool `, but not ` _ number` and ` _array `:
+- Assign part of return values: Components can be left out. In the following code, we only assign the return value ` _bool2 `, but not ` _ number` and ` _array `:
 ```solidity
         (, _bool2, ) = returnNamed();
 ```
 
 ## Verify on Remix
-- View the results of the three return methods after deploying the contract
+- Deploy the contract, and check the return values of the functions.
+
 ![](./img/4-1.png)
 
 
