@@ -75,7 +75,7 @@ By default, Remix uses the JavaScript virtual machine to simulate the Ethereum c
 
 After a successful deployment, you will see a contract named `HelloWeb3` below, clicking on the variable `_string`, you can see "Hello Web3!" written in the code.
 
-## Tutorial summary
+## Summary
 
 In the first tutorial, we briefly introduced the Solidity programming language, Remix tools and IDE, and completed the first Solidity program - `HelloWeb3`. Going forward, we will explore further topics on our Solidity journey.
 

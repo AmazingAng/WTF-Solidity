@@ -151,6 +151,6 @@ It can be converted interchangeably to `uint` data type and checks whether the c
 
    ![2-3.png](./img/2-3.png)
 
-## Tutorial summary 
+## Summary 
 
 In the second lecture, we introduce the 4 variable types in Solidity and explained the Boolean, integer, address, fixed-length byte array, and enumeration of numeric variables ('value type'). We will cover several other value types in the subsequent tutorials.

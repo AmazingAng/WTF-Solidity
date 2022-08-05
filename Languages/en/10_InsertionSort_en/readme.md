@@ -164,7 +164,7 @@ Result of the correct code：
 
    !["Input [2,5,3,1] Output[1,2,3,5]"](https://images.mirror-media.xyz/publication-images/S-i6rwCMeXoi8eNJ0fRdB.png?height=300&width=554)
 
-## Tutorial summary
+## Summary
 
 In this lecture, we introduced control flow in Solidity and learn about the Insertion Sort algorithm in Solidity. Solidity looks simple but there are many pitfalls hidden. Every month, there are projects that lose tens of millions or even hundreds of millions of dollars because of these small bugs. Master the basics and keep practicing to write better Solidity code.
 

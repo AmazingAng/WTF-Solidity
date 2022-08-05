@@ -66,7 +66,7 @@ Of course, you can also return variables with `return` keyword in named returns:
 ![](./img/4-1.png)
 
 
-## Tutorial summary
+## Summary
 In this section, we introduced function return values `return` and `returns`, including returning multiple variables, named returns, and reading full and part of return values using destructuring assignments. 
 
 

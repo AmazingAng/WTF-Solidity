@@ -69,7 +69,7 @@ You can initialize the `immutable` variable using a global variable such as `add
 
    ![9-3.png](./img/9-3.png)
 
-## Tutorial summary
+## Summary
 
 In this section, we introduced two keywords in Solidity, `constant` and `immutable`, to keep the variables that should not be changed. It will help to save `gas` while improving the contract's security.
 
