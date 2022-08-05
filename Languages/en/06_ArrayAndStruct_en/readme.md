@@ -115,7 +115,7 @@ There are two ways to assign values to structures:
 
 ![6-3.png](./img/6-3.png)
 
-## Tutorial summary
+## Summary
 
 In this lecture, we introduced the basic usage of array (`array`) and structure (`struct`) in Solidity. In the next lecture, we will introduce the hash table in Solidity - mapping (`mapping`)。
 

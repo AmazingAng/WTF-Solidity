@@ -72,6 +72,6 @@ The format of declaring the `mapping` is `mapping(_KeyType => _ValueType)`, wher
 
 
 
-## Tutorial summary
+## Summary
 
 In this section，we introduced the `mapping` type in Solidity. So far, we've learned all kinds of common variables, and then we'll learn control flow such as `if-else` and `while` in the coming tutorials.

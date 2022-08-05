@@ -140,6 +140,6 @@ We can see that contract balance is 1 `ETH` in return message.
 **Example:**
 ![3-2.png](./img/3-2.png)
 
-## Tutorial summary
+## Summary
 
 In this section, we introduced `solidity` function type. `pure` and `view` keywords are difficult to understand, since they have not appeared in other languages. You don't need to pay gas fees for calling `pure` or `view` functions, since they don't modify the on-chain data.
