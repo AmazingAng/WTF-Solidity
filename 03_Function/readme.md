@@ -62,7 +62,7 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
     contract FunctionTypes{
         uint256 public number = 5;
 ```
-定义一个`add()`函数，每次调用，输出 `number + 1`。
+定义一个`add()`函数，每次调用，每次给`number + 1`。
 ```solidity
     // 默认
     function add() external{

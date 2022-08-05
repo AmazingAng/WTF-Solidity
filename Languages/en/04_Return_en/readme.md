@@ -12,7 +12,7 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 
 In this section, we will introduce `Solidity` function output, including returning multiple values, named returns, and reading full and part of return values using destructuring assignments. 
 
-## Return values(return and returns)
+## Return values (return and returns)
 There are two keywords about function output: `return` and `returns`, which differ from:
 - `returns` is added after the function name to declare variable type and variable name;
 - `return` is used for the function body and returns specified variables.
