@@ -20,7 +20,7 @@ BanaCat一期项目是一个部署在polygon区块链上的头像数字艺术品
 
 **`balanceOf（）`**：返回地址参数在本合约中所持有NFT的数量。
 
-![Untitled](.\img\Untitled 1.png)
+![Untitled](.\img\1.png)
 
 建立一个**`address`** 到**`token`**数量的映射表，函数**`balanceOf（）`**检查地址的合法性的前提下，返回映射表中返回地址持有的NFT数量。
 
