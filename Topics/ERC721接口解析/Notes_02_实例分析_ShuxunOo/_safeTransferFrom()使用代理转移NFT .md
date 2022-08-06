@@ -2,10 +2,6 @@
 
 地址`0xb9016E740176B54755cBAad721dCDD6a65aB40Fd`下有`tokenID`为`[951, 952]`
 
-<<<<<<< HEAD
-![Untitled](./img/_safeTransferFrom()使用代理转移NFT_.png)
-=======
-![Untitled](_safeTransferFrom()%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E8%BD%AC%E7%A7%BBNFT%20(1)%209ed361c7830b4b1a8375000b5bedcd07/Untitled_.png)
 
 
 地址`0x0FD745DB2fd13f1598c65fa3d32696C1fF6DA23f`没有NFT
