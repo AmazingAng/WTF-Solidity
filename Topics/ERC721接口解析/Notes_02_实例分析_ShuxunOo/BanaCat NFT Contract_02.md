@@ -114,7 +114,7 @@ BanaCat一期项目是一个部署在polygon区块链上的头像数字艺术品
 
 ERC721合约中一共有两类角色可以将NFT转移走：一是NFT的owner，二是当前NFT的授权代理。函数名称中的“from“ 就是代表从哪个账户中将NFT转移走，很多时候转移走NFT的地址不一定是NFT的实际拥有者。我们接下来举个小例子说明这个现象。
 
-[_safeTransferFrom()使用代理转移NFT (1)](https://github.com/ShuxunoO/WTFSolidity/blob/main/Topics/ERC721%E6%8E%A5%E5%8F%A3%E8%A7%A3%E6%9E%90/Notes_02_%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90_ShuxunOo/_safeTransferFrom()%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E8%BD%AC%E7%A7%BBNFT%20.md)
+[_safeTransferFrom()使用代理转移NFT (1)](BanaCat%20NFT%20Contract%EF%BC%882%203%EF%BC%89%202fed2b20e00b4af9acf6104983616ced/_safeTransferFrom()%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E8%BD%AC%E7%A7%BBNFT%20(1)%209ed361c7830b4b1a8375000b5bedcd07.md)
 
 但是操作的目的是啥呢？
 
