@@ -70,16 +70,15 @@ contract BanaCatBot {
 
 [Polygon Transaction Hash (Txhash) Details | PolygonScan](https://polygonscan.com/tx/0x92342888a4ecbe3775fe920c7efc9cab1eb5befe643c955d9a7bc786cc6e29a5)
 
- 2. **在代理合约中调用`setInterfaceContract（）`函数将BanaCatNFT contract 的合约地址设置为代理合约的目标接口**
+2. **在代理合约中调用`setInterfaceContract（）`函数将BanaCatNFT contract 的合约地址设置为代理合约的目标接口**
 
 这一步的目的是让代理合约知道自己要从哪个NFT主合约中转移NFT
 
 [Polygon Transaction Hash (Txhash) Details | PolygonScan](https://polygonscan.com/tx/0x56f289faaab56c3cb1ac1401f970a23c9f79d0c193d0e76d9d3e049494c37f03#eventlog)
 
 1. **构建`NFTList`，`addressList`发起交易**
-    
-    ![Untitled](setApprovalForAll%EF%BC%88%EF%BC%89%E7%9A%84%E5%AE%9E%E4%BE%8B%2006a266d055b346cfb592940ae772bd9a/Untitled.png)
-    
+   
+    ![Untitled](./img/setApprovalForAll（）的实例.png)
 
 这里有个小问题需要注意一下，**`bulkTransfer（）`**函数的两个参数会因为函数的执行上下文的不容儿有所差别
 

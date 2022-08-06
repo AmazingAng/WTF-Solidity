@@ -2,13 +2,23 @@
 
 # 关于BanaCatNFT
 
-合约中的读函数
+BanaCat一期项目是一个部署在polygon区块链上的头像数字艺术品
 
-[BanaCat NFT Contract（1/3）](BanaCat%20NFT%20Contract%EF%BC%881%203%EF%BC%89%209284fb7d529046fb908e70cfed5cbc64.md) 
+项目链接：[BanaCato_O - Collection | OpenSea](https://opensea.io/collection/banacat-v2)
+
+合约源码地址：https://polygonscan.com/address/0xd2bc5c3990c06ccd26f10a3e9d93b19450136c8d#code
+
+同时，基于这款数字艺术品也设计了配套的表情包周边，目前已经有一款已经上架到微信表情包商城，表情包链接：[香蕉猫看戏篇](https://sticker.weixin.qq.com/cgi-bin/mmemoticon-bin/emoticonview?oper=single&t=shop/detail&productid=aL2PCfwK/89qO7sF6/+I+UDhfwEjhec2ZNvdnLLJRd/N7QVyYnUnFpeB0t9OOOGqFiGlj08OJVil+/ruMQmJp3eFNlkqDVcbCJC9A4/2eWbE=)
+
+# 
+
+---
 
 # “写”函数会改变合约的状态，每一笔交易都会消耗一定的gas。
 
 因为要用自己的私钥为每一笔交易签名，所以在与合约交互之前，要先链接上自己的钱包。
+
+![](./img/Untitled.png)
 
 ---
 
@@ -48,7 +58,7 @@
 
 ![Untitled](./img/6.png)
 
-_safeMint() 函数之所以“safe”，是因为它会对铸造者的身份做审查，要是铸造者是个合约，则要求这个合约必须实现`IERC721Receiver`接口，关于`IERC721Receiver`可以参考A大的文章：
+`_safeMint()` 函数之所以“safe”，是因为它会对铸造者的身份做审查，要是铸造者是个合约，则要求这个合约必须实现`IERC721Receiver`接口，关于`IERC721Receiver`可以参考A大的文章：
 
 [Solidity极简入门 ERC721专题：1. ERC721相关库](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)
 

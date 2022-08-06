@@ -302,5 +302,3 @@ openzeppelin 关于`Ownable.sol` 实现
 ![Untitled](./img/50.png)
 
 这篇文章主要介绍了猫猫合约中的“读”函数，下一篇我们会介绍合约中的“写”函数。
-
-[BanaCat NFT Contract（2/3）](BanaCat%20NFT%20Contract%EF%BC%882%203%EF%BC%89%202fed2b20e00b4af9acf6104983616ced.md)
