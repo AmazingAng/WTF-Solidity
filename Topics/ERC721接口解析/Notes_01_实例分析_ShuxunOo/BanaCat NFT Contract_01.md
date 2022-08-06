@@ -10,7 +10,7 @@ BanaCat一期项目是一个部署在polygon区块链上的头像数字艺术品
 
 合约源码地址：[https://polygonscan.com/address/0xd2bc5c3990c06ccd26f10a3e9d93b19450136c8d#code](https://polygonscan.com/address/0xd2bc5c3990c06ccd26f10a3e9d93b19450136c8d#code)
 
-同时，基于这款数字艺术品，我们也设计了配套的表情包周边，目前已经有一款已经上架到微信表情包商城，表情包链接：[香蕉猫看戏篇](https://sticker.weixin.qq.com/cgi-bin/mmemoticon-bin/emoticonview?oper=single&t=shop/detail&productid=aL2PCfwK/89qO7sF6/+I+UDhfwEjhec2ZNvdnLLJRd/N7QVyYnUnFpeB0t9OOOGqFiGlj08OJVil+/ruMQmJp3eFNlkqDVcbCJC9A4/2eWbE=)
+同时，基于这款数字艺术品也设计了配套的表情包周边，目前已经有一款已经上架到微信表情包商城，表情包链接：[香蕉猫看戏篇](https://sticker.weixin.qq.com/cgi-bin/mmemoticon-bin/emoticonview?oper=single&t=shop/detail&productid=aL2PCfwK/89qO7sF6/+I+UDhfwEjhec2ZNvdnLLJRd/N7QVyYnUnFpeB0t9OOOGqFiGlj08OJVil+/ruMQmJp3eFNlkqDVcbCJC9A4/2eWbE=)
 
 ![Untitled](./img/Untitled.png)
 
