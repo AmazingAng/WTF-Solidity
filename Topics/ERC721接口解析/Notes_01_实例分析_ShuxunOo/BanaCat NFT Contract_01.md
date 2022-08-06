@@ -66,7 +66,9 @@ baseExtension也可以在后期通过函数进行修改
 
 一个应用的实例：
 
-[_safeTransferFrom()使用代理转移NFT](https://www.notion.so/_safeTransferFrom-NFT-ba9d0cc177894101afbb955625aad2e4) 
+[_safeTransferFrom()使用代理转移NFT](file:./_safeTransferFrom()使用代理转移NFT.md) 
+
+
 
 ---
 
