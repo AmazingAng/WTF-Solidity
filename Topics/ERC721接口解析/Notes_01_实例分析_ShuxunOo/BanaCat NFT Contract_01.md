@@ -250,7 +250,7 @@ openzeppelin 关于`Ownable.sol` 实现
 
 以#1623号雷达猫的Metadata文件举例说明：
 
-![Untitled](./img/Untitled.png)
+![Untitled](./img/NFT%231623.png)
 
 ```json
 {
