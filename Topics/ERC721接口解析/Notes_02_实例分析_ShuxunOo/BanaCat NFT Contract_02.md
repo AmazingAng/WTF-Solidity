@@ -193,5 +193,3 @@ ERC721合约中一共有两类角色可以将NFT转移走：一是NFT的owner，
 ![Untitled](./img/35.png)
 
 下一篇会介绍BanaCatNFT合约中设计的一种密码白名单机制
-
-[BanaCat NFT Contract（3/3）](BanaCat%20NFT%20Contract%EF%BC%883%203%EF%BC%89%20c1e94cb165ab49c09020284e3cdc3189.md)
