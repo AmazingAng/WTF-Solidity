@@ -1,8 +1,0 @@
-﻿合约名字,合约类型,链接,描述
-Address.sol,标准库,https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol,与地址类型相关的函数集合，提供地址信息的确认与权限判断功能。
-Context.sol,标准库,https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol,提供有关当前执行上下文的信息，包括事务的发送方及其数据。而这些通常可以通过味精获得。发送者和味精。数据，它们不应该以这样一种直接的方式被访问，因为在处理元事务时，发送和支付执行的帐户可能不是实际的发送者(就应用程序而言)。
-Strings.sol,标准库,https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Strings.sol,提供基础的字符串操作。
-IERC721.sol,接口定义,https://eips.ethereum.org/EIPS/eip-721,主合约
-IERC721Receiver.sol,接口,https://www.notion.so/ERC-721-4562e8d3cd3447fcbbb136f8ea4ff81b#a44b8a6172be44108c50c4304d11bd0f,接收NFT的目标合约必须实现这个接口
-IERC721Metadata.sol,接口,https://www.notion.so/ERC-721-4562e8d3cd3447fcbbb136f8ea4ff81b#9558ccc545754ad5a7412c3d8138e5ad,关于NFT源数据的说明，tokenURI就是在这里定义的
-EIP165,接口,https://eips.ethereum.org/EIPS/eip-165,创建一个标准方法来发布和检测智能合约实现的接口。

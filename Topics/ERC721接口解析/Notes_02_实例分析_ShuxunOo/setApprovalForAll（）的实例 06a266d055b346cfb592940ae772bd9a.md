@@ -78,7 +78,7 @@ contract BanaCatBot {
 
 1. **构建`NFTList`，`addressList`发起交易**
     
-    ![Untitled](Untitled%20111.png)
+    ![Untitled](setApprovalForAll%EF%BC%88%EF%BC%89%E7%9A%84%E5%AE%9E%E4%BE%8B%2006a266d055b346cfb592940ae772bd9a/Untitled.png)
     
 
 这里有个小问题需要注意一下，**`bulkTransfer（）`**函数的两个参数会因为函数的执行上下文的不容儿有所差别
