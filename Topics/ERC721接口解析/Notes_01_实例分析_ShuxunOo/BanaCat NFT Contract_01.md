@@ -68,8 +68,6 @@ baseExtension也可以在后期通过函数进行修改
 
 [_safeTransferFrom()使用代理转移NFT](file:./_safeTransferFrom()使用代理转移NFT.md) 
 
-
-
 ---
 
 `isApprovedForAll（）`：检查NFT的`owner`是不是把自己的当前地址的所有NFT授权给`operator`地址。
