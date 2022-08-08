@@ -24,7 +24,7 @@ discord：[WTF Academy](https://discord.gg/5akcruXrsk)
 
 分账就是按照一定比例分钱财。在现实中，经常会有“分赃不均”的事情发生；而在区块链的世界里，`Code is Law`，我们可以事先把每个人应分的比例写在智能合约中，获得收入后，再由智能合约来进行分账。
 
-![分账](D:\Desktop\42_PaymentSplit\img\42-1.webp)
+![分账](.\img\42-1.webp)
 
 ## 分账合约
 
