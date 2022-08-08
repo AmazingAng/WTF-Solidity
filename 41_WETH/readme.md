@@ -103,17 +103,31 @@ contract WETH is ERC20{
 
 ### 1. 部署`WETH`合约
 
+![WETH](./img/41-2.jpg)
+
 ### 2. 调用`deposit`，存入`1 ETH`，并查看`WETH`余额
 
-此时`WETH`余额为`1 ETH`。
+![WETH](./img/41-3.jpg)
+
+此时`WETH`余额为`1 WETH`。
+
+![WETH](./img/41-4.jpg)
 
 ### 3. 直接向`WETH`合约转入`1 ETH`，并查看`WETH`余额
 
-此时`WETH`余额为`2 ETH`。
+![WETH](./img/41-5.jpg)
+
+此时`WETH`余额为`2 WETH`。
+
+![WETH](./img/41-6.jpg)
 
 ### 4. 调用`withdraw`，取出`1.5 ETH`，并查看`WETH`余额
 
-此时`WETH`余额为`0.5 ETH`。
+![WETH](./img/41-7.jpg)
+
+此时`WETH`余额为`0.5 WETH`。
+
+![WETH](./img/41-8.jpg)
 
 ## 总结
 
