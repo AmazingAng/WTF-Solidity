@@ -105,6 +105,8 @@
 
 **第42讲：分账**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/42_PaymentSplit) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/42_PaymentSplit/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/j373uOA3btcD9xRWT_qaww4CSR-iaoqU6EClv1nXWsM)
 
+**第43讲：线性释放**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/43_TokenVesting) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/43_TokenVesting/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/j-so8JO_lcYye4N9S03v_VIljQ9rg8nGbmZrSbzak8A)
+
 
 ## Topics
 ### `工具`
