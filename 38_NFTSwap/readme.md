@@ -180,6 +180,7 @@ contract NFTSwap is IERC721Receiver{
 在`WTFApe`合约中，利用`ownerOf`确认自己已经获得`tokenId`为0的NFT。
 
 `ownerOf(uint tokenId)`方法有1个参数:
+
 `tokenId`: `tokenId`为NFT的id，本案例中为上述mint的`0`Id。
 
 ![确认自己已经获得NFT](./img/38-3.png)
