@@ -171,17 +171,22 @@ contract NFTSwap is IERC721Receiver{
 将首个NFT mint给自己，这里mint给自己是为了之后能够上架NFT、修改价格等一系类操作。
 
 `mint(address to, uint tokenId)`方法有2个参数:
+
 `to`:将 NFT mint给指定的地址，这里通常是自己的钱包地址。
-`tokenId`: `WTFApe`合约定义了总量为10000个NFT，图中mint它的的第一个NFT，`tokenId`为0
+
+`tokenId`: `WTFApe`合约定义了总量为10000个NFT，图中mint它的的第一个和第二个NFT，`tokenId`分别为`0`和`1`。
 
 ![mint NFT](./img/38-2.png)
 
 在`WTFApe`合约中，利用`ownerOf`确认自己已经获得`tokenId`为0的NFT。
 
 `ownerOf(uint tokenId)`方法有1个参数:
+
 `tokenId`: `tokenId`为NFT的id，本案例中为上述mint的`0`Id。
 
 ![确认自己已经获得NFT](./img/38-3.png)
+
+按照上述方法，将TokenId为 `0` 和 `1` 的NFT都mint给自己，其中`tokenId`为`0`的，我们执行更新购买操作，`tokenId`为`1`的，我们执行下架操作。
 
 ### 2. 部署`NFTSwap`合约
 部署`NFTSwap`合约。
@@ -192,59 +197,89 @@ contract NFTSwap is IERC721Receiver{
 在`WTFApe`合约中调用 `approve()`授权函数，将自己持有的`tokenId`为0的NFT授权给`NFTSwap`合约地址。
 
 `approve(address to, uint tokenId)`方法有2个参数:
+
 `to`: 将tokenId授权给 `to` 地址，本案例中将授权给`NFTSwap`合约地址。
+
 `tokenId`: `tokenId`为NFT的id，本案例中为上述mint的`0`Id。
 
 ![](./img/38-5.png)
+
+按照上述方法，同理将`tokenId`为`1`的NFT也授权给`NFTSwap`合约地址。
 
 ### 4. 上架`NFT`
 调用`NFTSwap`合约的`list()`函数，将自己持有的`tokenId`为0的NFT上架到`NFTSwap`，价格设为1 `wei`。
 
 `list(address _nftAddr, uint256 _tokenId, uint256 _price)`方法有3个参数:
+
 `_nftAddr`: `_nftAddr`为NFT合约地址，本案例中为`WTFApe`合约地址。
+
 `_tokenId`: `_tokenId`为NFT的id，本案例中为上述mint的`0`Id。
+
 `_price`: `_price`为NFT的价格，本案例中为1 `wei`。
 
 ![](./img/38-6.png)
 
+按照上述方法，同理将自己持有的`tokenId`为1的NFT上架到`NFTSwap`，价格设为1 `wei`。
+
+### 5. 查看上架NFT
+
 调用`NFTSwap`合约的`nftList()`函数查看上架的NFT。
 
 `nftList`:是一个NFT Order的映射，结构如下：
+
 `nftList[_nftAddr][_tokenId]`: 输入`_nftAddr`和`_tokenId`，返回一个NFT订单。 
 
 ![](./img/38-7.png)
 
+### 6. 更新`NFT`价格
 
-调用`NFTSwap`合约的`update()`函数，将NFT价格更新为77 `wei`
+调用`NFTSwap`合约的`update()`函数，将`tokenId`为0的NFT价格更新为77 `wei`
 
 `update(address _nftAddr, uint256 _tokenId, uint256 _newPrice)`方法有3个参数:
+
 `_nftAddr`: `_nftAddr`为NFT合约地址，本案例中为`WTFApe`合约地址。
+
 `_tokenId`: `_tokenId`为NFT的id，本案例中为上述mint的`0`Id。
+
 `_newPrice`: `_newPrice`为NFT的新价格，本案例中为77 `wei`。
 
+执行`update`之后，调用`nftList` 查看更新后的价格
+
 ![](./img/38-8.png)
+
 
 ### 5. 下架NFT
 
 调用`NFTSwap`合约的`revoke()`函数下架NFT。
 
-`revoke(address _nftAddr, uint256 _tokenId)`方法有2个参数:
-`_nftAddr`: `_nftAddr`为NFT合约地址，本案例中为`WTFApe`合约地址。
-`_tokenId`: `_tokenId`为NFT的id，本案例中为上述mint的`0`Id。
+上述文章中，我们上架了2个NFT，`tokenId`分别为 `0` 和 `1`。本次方法中，我们下架`tokenId`为`1`的NFT。
 
-![](./img/38-9.png)
+`revoke(address _nftAddr, uint256 _tokenId)`方法有2个参数:
+
+`_nftAddr`: `_nftAddr`为NFT合约地址，本案例中为`WTFApe`合约地址。
+
+`_tokenId`: `_tokenId`为NFT的id，本案例中为上述mint的`1`Id。
+
+![](./img/38-9-1.png)
 
 调用`NFTSwap`合约的`nftList()`函数，可以看到`NFT`已经下架。再次上架需要重新授权。
 
-![](./img/38-10.png)
+![](./img/38-10-1.png)
+
+**注意下架NFT之后，需要重新从步骤3开始，重新授权和上架NFT之后，才能进行购买**
 
 ### 6. 购买`NFT`
 
 切换账号，调用`NFTSwap`合约的`purchase()`函数购买NFT，购买时需要输入`NFT`合约地址，`tokenId`，并输入支付的`ETH`。
 
+我们下架了`tokenId`为`1`的NFT，现在还存在`tokenId`为`0`的NFT，所以我们可以购买`tokenId`为`0`的NFT。
+
 `purchase(address _nftAddr, uint256 _tokenId, uint256 _wei)`方法有3个参数:
+
 `_nftAddr`: `_nftAddr`为NFT合约地址，本案例中为`WTFApe`合约地址。
+
 `_tokenId`: `_tokenId`为NFT的id，本案例中为上述mint的`0`Id。
+
 `_wei`: `_wei`为支付的`ETH`数量，本案例中为1 `wei`。
 
 ![](./img/38-11.png)
