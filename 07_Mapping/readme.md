@@ -54,7 +54,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 - **原理2**: 映射使用`keccak256(key)`当成offset存取value。
 
-- **原理3**: 因为Ethereum会定义所以未使用的空间为0，所以对于所以未赋值（`Value`）的键（`Key`），其初始值都是0。
+- **原理3**: 因为Ethereum会定义所有未使用的空间为0，所以未赋值（`Value`）的键（`Key`）初始值都是0。
 
 ## 在Remix上验证 (以 `Mapping.sol`为例)
 - 映射示例 1 部署
