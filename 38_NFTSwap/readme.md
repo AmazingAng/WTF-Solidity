@@ -260,11 +260,11 @@ contract NFTSwap is IERC721Receiver{
 
 `_tokenId`: `_tokenId`为NFT的id，本案例中为上述mint的`1`Id。
 
-![](./img/38-9-1.png)
+![](./img/38-9.png)
 
 调用`NFTSwap`合约的`nftList()`函数，可以看到`NFT`已经下架。再次上架需要重新授权。
 
-![](./img/38-10-1.png)
+![](./img/38-10.png)
 
 **注意下架NFT之后，需要重新从步骤3开始，重新授权和上架NFT之后，才能进行购买**
 
