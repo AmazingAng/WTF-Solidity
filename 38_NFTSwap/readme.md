@@ -173,7 +173,8 @@ contract NFTSwap is IERC721Receiver{
 `mint(address to, uint tokenId)`方法有2个参数:
 
 `to`:将 NFT mint给指定的地址，这里通常是自己的钱包地址。
-`tokenId`: `WTFApe`合约定义了总量为10000个NFT，图中mint它的的第一个NFT，`tokenId`为0
+
+`tokenId`: `WTFApe`合约定义了总量为10000个NFT，图中mint它的的第一个和第二个NFT，`tokenId`分别为`0`和`1`。
 
 ![mint NFT](./img/38-2.png)
 
@@ -185,7 +186,7 @@ contract NFTSwap is IERC721Receiver{
 
 ![确认自己已经获得NFT](./img/38-3.png)
 
-按照上述方法，将TokenId为 `0` 和 `1` 的NFT都mint给自己。
+按照上述方法，将TokenId为 `0` 和 `1` 的NFT都mint给自己，其中`tokenId`为`0`的，我们执行更新购买操作，`tokenId`为`1`的，我们执行下架操作。
 
 ### 2. 部署`NFTSwap`合约
 部署`NFTSwap`合约。
@@ -203,7 +204,7 @@ contract NFTSwap is IERC721Receiver{
 
 ![](./img/38-5.png)
 
-按照上述方法，同理将Id为`1`的NFT也授权给`NFTSwap`合约地址。
+按照上述方法，同理将`tokenId`为`1`的NFT也授权给`NFTSwap`合约地址。
 
 ### 4. 上架`NFT`
 调用`NFTSwap`合约的`list()`函数，将自己持有的`tokenId`为0的NFT上架到`NFTSwap`，价格设为1 `wei`。
@@ -218,7 +219,7 @@ contract NFTSwap is IERC721Receiver{
 
 ![](./img/38-6.png)
 
-按照上述方法，同理讲自己持有的`tokenId`为1的NFT上架到`NFTSwap`，价格设为1 `wei`。
+按照上述方法，同理将自己持有的`tokenId`为1的NFT上架到`NFTSwap`，价格设为1 `wei`。
 
 ### 5. 查看上架NFT
 
@@ -259,11 +260,11 @@ contract NFTSwap is IERC721Receiver{
 
 `_tokenId`: `_tokenId`为NFT的id，本案例中为上述mint的`1`Id。
 
-![](./img/38-9.png)
+![](./img/38-9-1.png)
 
 调用`NFTSwap`合约的`nftList()`函数，可以看到`NFT`已经下架。再次上架需要重新授权。
 
-![](./img/38-10.png)
+![](./img/38-10-1.png)
 
 **注意下架NFT之后，需要重新从步骤3开始，重新授权和上架NFT之后，才能进行购买**
 
