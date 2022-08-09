@@ -185,6 +185,8 @@ contract NFTSwap is IERC721Receiver{
 
 ![确认自己已经获得NFT](./img/38-3.png)
 
+按照上述方法，将TokenId为 `0` 和 `1` 的NFT都mint给自己。
+
 ### 2. 部署`NFTSwap`合约
 部署`NFTSwap`合约。
 
@@ -201,6 +203,8 @@ contract NFTSwap is IERC721Receiver{
 
 ![](./img/38-5.png)
 
+按照上述方法，同理将Id为`1`的NFT也授权给`NFTSwap`合约地址。
+
 ### 4. 上架`NFT`
 调用`NFTSwap`合约的`list()`函数，将自己持有的`tokenId`为0的NFT上架到`NFTSwap`，价格设为1 `wei`。
 
@@ -214,6 +218,10 @@ contract NFTSwap is IERC721Receiver{
 
 ![](./img/38-6.png)
 
+按照上述方法，同理讲自己持有的`tokenId`为1的NFT上架到`NFTSwap`，价格设为1 `wei`。
+
+### 5. 查看上架NFT
+
 调用`NFTSwap`合约的`nftList()`函数查看上架的NFT。
 
 `nftList`:是一个NFT Order的映射，结构如下：
@@ -222,8 +230,9 @@ contract NFTSwap is IERC721Receiver{
 
 ![](./img/38-7.png)
 
+### 6. 更新`NFT`价格
 
-调用`NFTSwap`合约的`update()`函数，将NFT价格更新为77 `wei`
+调用`NFTSwap`合约的`update()`函数，将`tokenId`为0的NFT价格更新为77 `wei`
 
 `update(address _nftAddr, uint256 _tokenId, uint256 _newPrice)`方法有3个参数:
 
@@ -233,17 +242,22 @@ contract NFTSwap is IERC721Receiver{
 
 `_newPrice`: `_newPrice`为NFT的新价格，本案例中为77 `wei`。
 
+执行`update`之后，调用`nftList` 查看更新后的价格
+
 ![](./img/38-8.png)
+
 
 ### 5. 下架NFT
 
 调用`NFTSwap`合约的`revoke()`函数下架NFT。
 
+上述文章中，我们上架了2个NFT，`tokenId`分别为 `0` 和 `1`。本次方法中，我们下架`tokenId`为`1`的NFT。
+
 `revoke(address _nftAddr, uint256 _tokenId)`方法有2个参数:
 
 `_nftAddr`: `_nftAddr`为NFT合约地址，本案例中为`WTFApe`合约地址。
 
-`_tokenId`: `_tokenId`为NFT的id，本案例中为上述mint的`0`Id。
+`_tokenId`: `_tokenId`为NFT的id，本案例中为上述mint的`1`Id。
 
 ![](./img/38-9.png)
 
@@ -256,6 +270,8 @@ contract NFTSwap is IERC721Receiver{
 ### 6. 购买`NFT`
 
 切换账号，调用`NFTSwap`合约的`purchase()`函数购买NFT，购买时需要输入`NFT`合约地址，`tokenId`，并输入支付的`ETH`。
+
+我们下架了`tokenId`为`1`的NFT，现在还存在`tokenId`为`0`的NFT，所以我们可以购买`tokenId`为`0`的NFT。
 
 `purchase(address _nftAddr, uint256 _tokenId, uint256 _wei)`方法有3个参数:
 
