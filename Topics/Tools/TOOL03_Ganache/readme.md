@@ -68,7 +68,7 @@ ganache -f https://eth-mainnet.alchemyapi.io/v2/YOUR_API_KEY --wallet.accounts=A
 
 ![](./img/ganache-9.png)
 
-第一行可以看到你现在的网络`prc server`, 默认是地址和端口是`127.0.0.1:7545`，如果你在remix中使用默认的，需要把端口改为7545。
+第一行可以看到你现在的网络`rpc server`, 默认是地址和端口是`127.0.0.1:7545`，如果你在remix中使用默认的，需要把端口改为7545。
 
 
 
