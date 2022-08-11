@@ -128,7 +128,7 @@ contract TokenVesting {
 
 ![铸造10000枚代币](./img/43-3.png)
 
-### 2. 部署`TokenVesting`线性释放合约，输入设为自己，归属期设为`100`秒。
+### 2. 部署`TokenVesting`线性释放合约，受益人设为自己，归属期设为`100`秒。
 
 ![部署TokenVesting](./img/43-4.png)
 
