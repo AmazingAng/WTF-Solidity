@@ -107,6 +107,8 @@
 
 **第43讲：线性释放**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/43_TokenVesting) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/43_TokenVesting/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/j-so8JO_lcYye4N9S03v_VIljQ9rg8nGbmZrSbzak8A)
 
+**第44讲：代币锁**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/44_TokenLocker) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/44_TokenLocker/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/WJCju6bbg-r1Cf97f1abYdNUiO4ArthIAGqs1zZZHi0)
+
 
 ## Topics
 ### `工具`
