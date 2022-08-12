@@ -245,4 +245,4 @@ address target, uint256 value, string memory signature, bytes memory data, uint2
 
 ## 总结
 
-在区块链，时间锁可以将智能合约的某些功能锁定一段时间，大大减少项目方`rug pull`和黑客攻击的机会，增加去中心化应用的安全性。它被`DeFi`和`DAO`大量采用，其中包括`Uniswap`和`Compound`。
+在区块链，时间锁可以将智能合约的某些功能锁定一段时间，大大减少项目方`rug pull`和黑客攻击的机会，增加去中心化应用的安全性。它被`DeFi`和`DAO`大量采用，其中包括`Uniswap`和`Compound`。你投资的项目有使用时间锁吗？
