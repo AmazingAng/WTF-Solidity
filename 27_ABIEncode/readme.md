@@ -116,6 +116,16 @@ tags:
         */
     const waves = await wavePortalContract.getAllWaves();
 ```
+3. 对不开源合约进行反编译后，某些函数无法查到函数签名，可通过ABI进行调用。
+```solidity
+    // 0x32fcd966() 是一个反编译后显示的函数，并且无法查到函数签名
+    bytes memory data = abi.encodeWithSelector(bytes4(0x32fcd966));
+
+    (bool success, bytes memory returnedData) = address(contract).staticcall(data);
+    require(success);
+
+    return abi.decode(returnedData, (uint256));
+```
 
 ## 总结
 在以太坊中，数据必须编码成字节码才能和智能合约交互。这一讲，我们介绍了4种`abi编码`方法和1种`abi解码`方法。
