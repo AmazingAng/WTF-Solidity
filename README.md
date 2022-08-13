@@ -109,6 +109,8 @@
 
 **第44讲：代币锁**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/44_TokenLocker) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/44_TokenLocker/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/WJCju6bbg-r1Cf97f1abYdNUiO4ArthIAGqs1zZZHi0)
 
+**第45讲：时间锁**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/45_Timelock) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/45_Timelock/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/o8nvAnljLf7l4AGNRSdec17Knp3PsKTWyTXVSx1olM4)
+
 
 ## Topics
 ### `工具`
