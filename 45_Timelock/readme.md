@@ -18,28 +18,28 @@ tags:
 
 -----
 
-这一讲，我们就将介绍时间锁是什么，并介绍时间锁合约。代码由Compound的[Timelock合约](https://github.com/compound-finance/compound-protocol/blob/master/contracts/Timelock.sol)简化而来。
+这一讲，我们就将介绍时间锁和时间锁合约。代码由Compound的[Timelock合约](https://github.com/compound-finance/compound-protocol/blob/master/contracts/Timelock.sol)简化而来。
 
 ## 时间锁
 
 ![时间锁](./img/45-1.jpeg)
 
-时间锁（Timelock）是银行金库和其他高安全性容器中常见的锁定机制的一部分。它是一种计时器，旨在防止保险箱或保险库在达到预设时间之前打开，即使已知正确的锁组合也是如此。
+时间锁（Timelock）是银行金库和其他高安全性容器中常见的锁定机制。它是一种计时器，旨在防止保险箱或保险库在达到预设时间之前打开，即便知道正确密码。
 
-在区块链，时间锁被`DeFi`和`DAO`大量采用。它是一段代码，他可以将智能合约的某些功能锁定一段时间。假设一个黑客黑了`Uniswap`的多签，准备把金库的钱都提走，但金库合约加了2天锁定期的时间锁，那么黑客从创建提钱的交易，到实际把钱提走，需要2天的等待期。在这一段时间，项目方可以找解决办法，投资者可以提前抛售代币减少损失。
+在区块链，时间锁被`DeFi`和`DAO`大量采用。它是一段代码，他可以将智能合约的某些功能锁定一段时间。它可以大大改善智能合约的安全性，举个例子，假如一个黑客黑了`Uniswap`的多签，准备提走金库的钱，但金库合约加了2天锁定期的时间锁，那么黑客从创建提钱的交易，到实际把钱提走，需要2天的等待期。在这一段时间，项目方可以找应对办法，投资者可以提前抛售代币减少损失。
 
 ## 时间锁合约
 
 下面，我们介绍一下时间锁`Timelock`合约。它的逻辑并不复杂：
 
-- 在创建`Timelock`合约时，项目方可以初始化锁定期，并把合约的管理员设为自己。
+- 在创建`Timelock`合约时，项目方可以设定锁定期，并把合约的管理员设为自己。
 
 - 时间锁主要有三个功能：
-    - 创建交易，并把它加入到时间锁队列。
+    - 创建交易，并加入到时间锁队列。
     - 在交易的锁定期满后，执行交易。
     - 后悔了，取消时间锁队列中的某些交易。
 
-- 项目方一般会把时间锁合约设为重要合约的管理员，例如金库合约。
+- 项目方一般会把时间锁合约设为重要合约的管理员，例如金库合约，再通过时间锁操作他们。
 - 时间锁合约的管理员一般为项目的多签钱包，保证去中心化。
 
 ### 事件
@@ -100,7 +100,14 @@ tags:
 `Timelock`合约中共有`7`个函数。
 
 - 构造函数：初始化交易锁定时间（秒）和管理员地址。
-- `queueTransaction()`：创建交易并添加到时间锁队列中。参数比较复杂，因为要描述一个完整的交易：包括`target``目标合约地址，value`发送ETH数额，`signature`调用的函数签名（function signature），`data`交易的call data，`executeTime`交易执行的区块链时间戳。要保证交易预计执行时间`executeTime`大于当前区块链时间戳+锁定时间`delay`。交易的唯一标识符为所有参数的哈希值，利用`getTxHash()`函数计算。进入队列的交易会更新在`queuedTransactions`变量中，并释放`QueueTransaction`事件。
+- `queueTransaction()`：创建交易并添加到时间锁队列中。参数比较复杂，因为要描述一个完整的交易：
+    - `target`：目标合约地址
+    - `value`：发送ETH数额
+    - `signature`：调用的函数签名（function signature）
+    - `data`：交易的call data
+    - `executeTime`：交易执行的区块链时间戳。
+    
+    调用这个函数时，要保证交易预计执行时间`executeTime`大于当前区块链时间戳+锁定时间`delay`。交易的唯一标识符为所有参数的哈希值，利用`getTxHash()`函数计算。进入队列的交易会更新在`queuedTransactions`变量中，并释放`QueueTransaction`事件。
 - `executeTransaction()`：执行交易。它的参数与`queueTransaction()`相同。要求被执行的交易在时间锁队列中，达到交易的执行时间，且没有过期。执行交易时用到了`solidity`的低级成员函数`call`，在[第22讲](https://github.com/AmazingAng/WTFSolidity/blob/main/22_Call/readme.md)中有介绍。
 - `cancelTransaction()`：取消交易。它的参数与`queueTransaction()`相同。它要求被取消的交易在队列中，会更新`queuedTransactions`并释放`CancelTransaction`事件。
 - `changeAdmin()`：修改管理员地址，只能被`Timelock`合约调用。
@@ -249,4 +256,4 @@ address target, uint256 value, string memory signature, bytes memory data, uint2
 
 ## 总结
 
-在区块链，时间锁可以将智能合约的某些功能锁定一段时间，大大减少项目方`rug pull`和黑客攻击的机会，增加去中心化应用的安全性。它被`DeFi`和`DAO`大量采用，其中包括`Uniswap`和`Compound`。你投资的项目有使用时间锁吗？
+时间锁可以将智能合约的某些功能锁定一段时间，大大减少项目方`rug pull`和黑客攻击的机会，增加去中心化应用的安全性。它被`DeFi`和`DAO`大量采用，其中包括`Uniswap`和`Compound`。你投资的项目有使用时间锁吗？
