@@ -231,7 +231,11 @@ address target, uint256 value, string memory signature, bytes memory data, uint2
 - `target`：因为调用的是`Timelock`自己的函数，填入合约地址。
 - `value`：不用转入ETH，这里填`0`。
 - `signature`：`changeAdmin()`的函数签名为：`"changeAdmin(address)"`。
-- `data`：这里填要传入的参数，也就是新管理员的地址。但是要把地址填充为32字节的数据，以满足[以太坊ABI编码标准](https://github.com/AmazingAng/WTFSolidity/blob/main/27_ABIEncode/readme.md)。可以使用[hashex](https://abi.hashex.org/)网站进行参数的ABI编码。
+- `data`：这里填要传入的参数，也就是新管理员的地址。但是要把地址填充为32字节的数据，以满足[以太坊ABI编码标准](https://github.com/AmazingAng/WTFSolidity/blob/main/27_ABIEncode/readme.md)。可以使用[hashex](https://abi.hashex.org/)网站进行参数的ABI编码。例子：
+    ```solidity
+    编码前地址：0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
+    编码后地址：0x000000000000000000000000ab8483f64d9c6d1ecf9b849ae677dd3315835cb2
+    ```
 - `executeTime`：先调用`getBlockTimestamp()`得到当前区块链时间，再在它的基础上加个150秒填入。
 
 
