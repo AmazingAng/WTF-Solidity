@@ -122,6 +122,7 @@ tags:
 ![](./img/27-5.png)
 - 这种情况无法通过构造interface接口或contract来进行调用
 ![](./img/27-6.png)
+
 这种情况下，就可以通过ABI函数选择器来调用
 ```solidity
     bytes memory data = abi.encodeWithSelector(bytes4(0x533ba33a));
