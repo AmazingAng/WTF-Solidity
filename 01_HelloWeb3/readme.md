@@ -19,7 +19,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 -----
 
 ## Solidity简述
-`Solidity`是以太坊虚拟机（`EVM`）智能合约的语言。同时，我也觉得`solidity`是玩链上项目必备的技能：区块链项目大部分是开源的，如果你能读懂代码，能帮你规避很多亏钱项目。
+`Solidity`是以太坊虚拟机（`EVM`）智能合约的语言。同时，我认为`solidity`是玩链上项目必备的技能：区块链项目大部分是开源的，如果你能读懂代码，就可以规避很多亏钱项目。
 
 `Solidity`具有两个特点：
 
@@ -27,7 +27,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 2. 高级：不会`solidity`，在币圈显得很low。
 
 ## 开发工具：remix
-本教程中，我会用`remix`来跑`solidity`合约。`remix`是以太坊官方推荐的智能合约开发IDE，适合新手，可以在浏览器中快速部署测试智能合约，你不需要在本地安装任何程序。
+本教程中，我会用`remix`来跑`solidity`合约。`remix`是以太坊官方推荐的智能合约开发IDE（集成开发环境），适合新手，可以在浏览器中快速部署测试智能合约，你不需要在本地安装任何程序。
 
 网址：[remix.ethereum.org](https://remix.ethereum.org)
 
@@ -48,7 +48,7 @@ contract HelloWeb3{
 ```solidity
 // SPDX-License-Identifier: MIT
 ```
-2. 第2行声明源文件所用的solidity版本，因为不同版本语法有差别。这行代码意思是源文件将不允许低于 0.8.4 版本并且不高于 0.9.0 的编译器编译（第二个条件由`^`提供）。
+2. 第2行声明源文件所用的solidity版本，因为不同版本语法有差别。这行代码意思是源文件将不允许低于 0.8.4 版本并且不高于 0.9.0 的编译器编译（第二个条件由`^`提供）。Solidity 语句以分号（;）结尾。
 ```solidity
 pragma solidity ^0.8.4;
 ```
