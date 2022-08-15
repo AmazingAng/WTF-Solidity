@@ -1,5 +1,5 @@
 ---
-title: 11. 造函数和修饰器
+title: 11. 构造函数和修饰器
 tags:
   - solidity
   - basic
