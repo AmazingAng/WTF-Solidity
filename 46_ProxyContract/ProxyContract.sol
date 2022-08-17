@@ -34,6 +34,8 @@ contract Proxy {
             // 读取位置为0的storage，也就是implementation地址。
             let _implementation := sload(0)
 
+            calldatacopy(0, 0, calldatasize())
+
             // 利用delegatecall调用implementation合约
             // delegatecall操作码的参数分别为：gas, 目标合约地址，input mem起始位置，input mem长度，output area mem起始位置，output area mem长度
             // output area起始位置和长度位置，所以设为0
