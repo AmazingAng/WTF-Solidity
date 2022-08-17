@@ -8,7 +8,7 @@ pragma solidity ^0.8.4;
  * 委托调用的返回值，会直接返回给Proxy的调用者
  */
 contract Proxy {
-    address immutable implementation; // 逻辑合约地址。implementation合约同一个位置的状态变量类型必须和Proxy合约的相同，不然会报错。
+    address public implementation; // 逻辑合约地址。implementation合约同一个位置的状态变量类型必须和Proxy合约的相同，不然会报错。
 
     /**
      * @dev 初始化逻辑合约地址
@@ -64,18 +64,12 @@ contract Proxy {
 contract Logic {
     address public implementation; // 与Proxy保持一致，防止插槽冲突
     uint public x = 99; 
-    event LogicCalled();
-    event FallbackCalled();
-
-    // 回调函数，释放FallbackCalled事件
-    fallback() external payable {
-        emit FallbackCalled();
-    }
+    event CallSuccess();
 
     // 这个函数会释放LogicCalled并返回一个uint。
     // 函数selector: 0xd09de08a
     function increment() external returns(uint) {
-        emit LogicCalled();
+        emit CallSuccess();
         return x + 1;
     }
 }
@@ -91,8 +85,25 @@ contract Caller{
     }
 
     // 通过代理合约调用 increase()函数
-    function increase() external returns(bytes memory) {
+    function increment() external returns(bytes memory) {
         ( , bytes memory data) = proxy.call("0xd09de08a");
         return data;
+    }
+}
+
+/**
+ * @dev Caller合约，调用代理合约，并获取执行结果
+ */
+contract Caller2{
+    address public proxy; // 代理合约地址
+
+    constructor(address proxy_){
+        proxy = proxy_;
+    }
+
+    // 通过代理合约调用 increase()函数
+    function increase() external returns(uint) {
+        ( , bytes memory data) = proxy.call(abi.encodeWithSignature("increment()"));
+        return abi.decode(data,(uint));
     }
 }
