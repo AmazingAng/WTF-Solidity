@@ -18,7 +18,7 @@ tags:
 
 -----
 
-这一讲，我们就将介绍时间锁和时间锁合约。代码由Compound的[Timelock合约](https://github.com/compound-finance/compound-protocol/blob/master/contracts/Timelock.sol)简化而来。
+这一讲，我们介绍时间锁和时间锁合约。代码由Compound的[Timelock合约](https://github.com/compound-finance/compound-protocol/blob/master/contracts/Timelock.sol)简化而来。
 
 ## 时间锁
 
