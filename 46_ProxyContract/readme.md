@@ -165,5 +165,23 @@ contract Caller{
 
 ## `Remix`演示
 
+1. 部署`Logic`合约。
+
+2. 调用`Logic`合约的`increment()`函数，返回`100`。
+
+3. 部署`Proxy`合约，初始化时填入`Logic`合约地址。
+
+4. 调用`Proxy`合约`increment()`函数，无返回值。
+    
+    调用方法：在`Remix`部署面板中点`Proxy`合约，在最下面的`Low level interaction`中填入`increment()`函数的选择器`0xd09de08a`，并点击`Transact`。
+
+5. 部署`Caller`合约，初始化时填入`Proxy`合约地址。
+
+6. 调用`Caller`合约`increment()`函数，返回`1`。
+
+
 ## 总结
 
+这一讲，我们介绍了代理模式和简单的代理合约。代理合约利用`delegatecall`将函数调用委托给了另一个逻辑合约，使得数据和逻辑分别由不同合约负责。并且，它利用内联汇编黑魔法，让没有返回值的回调函数也可以返回数据。下一讲，我们会介绍可升级代理合约。
+
+代理合约虽然很强大，但是它非常容易出`bug`，用的时候最好直接复制[OpenZepplin](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/proxy)的模版合约。
