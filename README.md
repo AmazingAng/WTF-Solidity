@@ -111,7 +111,7 @@
 
 **第45讲：时间锁**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/45_Timelock) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/45_Timelock/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/o8nvAnljLf7l4AGNRSdec17Knp3PsKTWyTXVSx1olM4)
 
-**第46讲：时间锁**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/v4ov2J0xjtMnVflsLpbbh7S55fiyPljttbDh3Xhiqis)
+**第46讲：代理合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/v4ov2J0xjtMnVflsLpbbh7S55fiyPljttbDh3Xhiqis)
 
 
 ## Topics
