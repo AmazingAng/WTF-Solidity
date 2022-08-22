@@ -33,7 +33,7 @@ In this section, we will introduce `constructor` and unique `modifier` in solidi
    }
 ```
 
-**notice**⚠️：The syntax of constructor in different solidity versions is not consistent，Before Solidity 0.4.22, constructors did not use `constructor`. Instead, it used functions with the same name as the contract name as constructor. This old method of writing makes it easy for developers to make mistakes in writing (e.g., the contract is called 'Parents' and the constructor is called' parents'), making constructor change to a normal function and occurring a mistake, So in version 0.4.22 and later, new writing of `constructor` was used.
+**notice**⚠️：The syntax of constructor in different solidity versions is not consistent，Before Solidity 0.4.22, constructors did not use `constructor`. Instead, it used functions with the same name as the contract name as constructor. This old method of writing makes it easy for developers to make mistakes in writing (e.g., the contract is called `Parents` and the constructor is called `parents`), making constructor change to a normal function and occurring a mistake, So in version 0.4.22 and later, new writing of `constructor` was used.
 
 Example of old code of constructor：
 ```solidity
@@ -45,7 +45,7 @@ contract Parents {
 }
 ```
 ## modifier
-'modifier' is unique syntax of `solidity`. It is similar to 'decorator' in object-oriented programming, which used to declare peculiar properties of functions and reduce code redundancy. It's like Iron Man's intelligent armor. The function wear it will have some specific behaviors. The main use scenario of modifier is to check before running a function, such as address, variable, balance, etc.
+`modifier` is unique syntax of `solidity`. It is similar to `decorator` in object-oriented programming, which used to declare peculiar properties of functions and reduce code redundancy. It's like Iron Man's intelligent armor. The function wear it will have some specific behaviors. The main use scenario of modifier is to check before running a function, such as address, variable, balance, etc.
 
 
 ![Iron Man's modifier](https://images.mirror-media.xyz/publication-images/nVwXsOVmrYu8rqvKKPMpg.jpg?height=630&width=1200)
