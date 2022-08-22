@@ -24,7 +24,7 @@ In this section, we take transferring ERC20 tokens for example to introduce `eve
 ## event
 `event` in `solidity` is an abstraction of the log on `EVM`. It has two characteristics：
 
-- response：Applications([`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18))can subscribe and listen to these events through `RPC` interface and respond at front end。
+- response：Applications([`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18))can subscribe and listen to these events through `RPC` interface and respond at front end.
 - economical：`event` is an economical way to store data on `EVM`, each costing about 2,000 `gas`; By comparison, it takes at least 20,000 `gas` to store a new variable on the chain.
 
 ### rule
@@ -37,9 +37,9 @@ We can see that `Transfer` event records three variables `from`，`to` and `valu
 At the same time, `from` and `to` are marked by the keyword `indexed`. Each variable marked by `indexed` can be understood as the index "key" of retrieving events, which is stored and indexed separately as a `topic` on Ethereum, so program can easily screen out specific transfer address and transfer event of receiving address. Each event has up to three variables marked with `indexed`. The size of each `indexed` variable is fixed 256 bits. The hash of event and these three variables marked with `indexed` are usually stored as `topic` in `EVM` log, where `topic[0]` is `keccak256` hash of this event, and `topic[1]` to `topic[3]` store `keccak256` hash of variables marked with `indexed`.
 ![](img/12-3.jpg)
 
-`value` which doesn't marked with `indexed` will be stored in `data` section of the event, and it can be interpreted as "value" of the event. Variables in `data` section can't be retrieved directly, but it can store data of any size. Therefore, in general, `data` section can be used to store complex data structures, such as arrays and strings, etc., because these data exceed 256 bits. Even if stored in `topic` section of the event, it is stored in the hash way. Besides，Variables in `data` part consume less gas on storage compared to `topic`.
+`value` which doesn't marked with `indexed` will be stored in `data` section of the event, and it can be interpreted as "value" of the event. Variables in `data` section can't be retrieved directly, but it can store data of any size. Therefore, in general, `data` section can be used to store complex data structures, such as arrays and strings, etc., because these data exceed 256 bits. Even if stored in `topic` section of the event, it is stored in the hash way. Besides, Variables in `data` part consume less gas on storage compared to `topic`.
 
-We can emit events in functions。In the following example, each time the `_transfer()` function is used to transfer token, `Transfer` event will be emitted and corresponding variables will be recorded.
+We can emit events in functions. In the following example, each time the `_transfer()` function is used to transfer token, `Transfer` event will be emitted and corresponding variables will be recorded.
 ```solidity
     // define _transfer function，execute transfer logic
     function _transfer(
@@ -61,14 +61,14 @@ We can emit events in functions。In the following example, each time the `_tran
 ### Remix demo
 Take `Event.sol` contract for example，compile and deploy.
 
-Then call `_transfer` function。
+Then call `_transfer` function.
 ![](img/12-1_en.jpg)
 
 Click transaction on the right to view details of the log
 ![](img/12-2_en.jpg)
 
 ### Query event on etherscan
-We try to transfer 100 tokens on `Rinkeby` test network by `_transfer()` function, and the corresponding `tx` can be queried on `etherscan`：[URL](https://rinkeby.etherscan.io/tx/0x8cf87215b23055896d93004112bbd8ab754f081b4491cb48c37592ca8f8a36c7)。
+We try to transfer 100 tokens on `Rinkeby` test network by `_transfer()` function, and the corresponding `tx` can be queried on `etherscan`：[URL](https://rinkeby.etherscan.io/tx/0x8cf87215b23055896d93004112bbd8ab754f081b4491cb48c37592ca8f8a36c7)
 
 Click `Logs` button to see details of the event：
 
