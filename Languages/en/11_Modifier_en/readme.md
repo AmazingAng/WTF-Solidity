@@ -29,7 +29,7 @@ In this section, we will introduce `constructor` and unique `modifier` in solidi
 
    // constructor
    constructor() {
-      owner = msg.sender; //  set `owner` to the address of deployer when contract is being deployed
+      owner = msg.sender; //  set owner to the address of deployer when contract is being deployed
    }
 ```
 
@@ -58,22 +58,22 @@ Let's define a modifier called `onlyOwner`：
       _; // if true，continue to run the body of function；otherwise throw an error and revert transaction
    }
 ```
-Functions with 'onlyOwner' modifier can only be called by 'owner' address, as in the following example：
+Functions with `onlyOwner` modifier can only be called by `owner` address, as in the following example：
 ```solidity
    function changeOwner(address _newOwner) external onlyOwner{
       owner = _newOwner; // only owner address can run this function and change owner
    }
 ```
-We define a 'changeOwner' function, which can be run to change the 'owner' of contract. However, due to the 'onlyOwner' modifier, only original 'owner' can call and an error will be thrown if others call. This is also the most common way to control smart contract privilege.
+We define a `changeOwner` function, which can be run to change the `owner` of contract. However, due to the `onlyOwner` modifier, only original `owner` can call and an error will be thrown if others call. This is also the most common way to control smart contract privilege.
 
 ### OppenZepplin's standards implementation of Ownable：
 `OppenZepplin` is an organization that maintains a standardized code base for `Solidity`, His standard implementation of `Ownable` is as follows：
 [https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol)
 
 ## Remix Demo example
-Take `Owner.sol` for example。
+Take `Owner.sol` for example.
 1. compile and deploy code in Remix.
-2. click `owner` button to view current owner variable。
+2. click `owner` button to view current owner variable.
     ![](img/11-1_en.jpg)
 3. The transaction succeeds when `changeOwner` function is called by the owner address user.
     ![](img/11-2_en.jpg)
@@ -82,4 +82,4 @@ Take `Owner.sol` for example。
 
 
 ## Summary
-In this lecture，we introduced constructor and modifier in `solidity` and learned an `Ownable` contract which controls contract privilege.
+In this lecture, we introduced constructor and modifier in `solidity` and learned an `Ownable` contract which controls contract privilege.
