@@ -58,7 +58,7 @@ contract Parents {
       _; // 如果是的话，继续运行函数主体；否则报错并revert交易
    }
 ```
-代有`onlyOwner`修饰符的函数只能被`owner`地址调用，比如下面这个例子：
+带有`onlyOwner`修饰符的函数只能被`owner`地址调用，比如下面这个例子：
 ```solidity
    function changeOwner(address _newOwner) external onlyOwner{
       owner = _newOwner; // 只有owner地址运行这个函数，并改变owner
