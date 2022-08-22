@@ -29,7 +29,7 @@ In this section, we will introduce `constructor` and unique `modifier` in solidi
 
    // constructor
    constructor() {
-      owner = msg.sender; //  set owner to the address of deployer when contract is being deployed
+      owner = msg.sender; //  set `owner` to the address of deployer when contract is being deployed
    }
 ```
 
@@ -75,11 +75,11 @@ Take `Owner.sol` for example。
 1. compile and deploy code in Remix.
 2. click `owner` button to view current owner variable。
     ![](img/11-1_en.jpg)
-3. The transaction succeeds when 'changeOwner' function is called by the owner address user.
+3. The transaction succeeds when `changeOwner` function is called by the owner address user.
     ![](img/11-2_en.jpg)
-4. The transaction fails when 'changeOwner' function is not called by the owner address user, because the check statement of modifier `onlyOwner` is not satisfied.
+4. The transaction fails when `changeOwner` function is not called by the owner address user, because the check statement of modifier `onlyOwner` is not satisfied.
     ![](img/11-3_en.jpg)
 
 
 ## Summary
-In this lecture，we introduced constructor and modifier in 'solidity' and learned an 'Ownable' contract which controls contract privilege.
+In this lecture，we introduced constructor and modifier in `solidity` and learned an `Ownable` contract which controls contract privilege.
