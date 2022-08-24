@@ -43,7 +43,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
     address public _address; // 0x0000000000000000000000000000000000000000
 
     enum ActionSet { Buy, Hold, Sell}
-    ActionSet public _enum; // 第一个元素 0
+    ActionSet public _enum; // 第1个内容Buy的索引0
 
     function fi() internal{} // internal空白方程 
     function fe() external{} // external空白方程 
