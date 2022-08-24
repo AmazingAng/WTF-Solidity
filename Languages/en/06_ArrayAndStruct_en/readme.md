@@ -10,7 +10,7 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 
 -----
 
-In this lecture, we will introduce two important variable types in Solidity: `array` and  `struct`.
+In this lecture, we will introduce two important variable types in Solidity: `array` and `struct`.
 
 ## Array
 
@@ -18,7 +18,7 @@ An `array` is a variable type commonly used in Solidity to store a set of data (
 
 There are two types of arrays: fixed-length arrays and variable-length arrays.：
 
-- Fixed-length arrays: Specify the length of the array at the time of declaration. An `array` is declared in the format `T[k]`, where `T` is the type of the element and `k` is the length.
+- Fixed-length arrays: Specify the length of the array at the time of declaration. An `array` is declared in the format `T[k]`, where `T` is the element type and `k` is the length.
 
 ```solidity
     // fixed-length array
@@ -27,7 +27,7 @@ There are two types of arrays: fixed-length arrays and variable-length arrays.�
     address[100] array3;
 ```
 
-- Variable-length array（Dynamic Array）：Length of the array is not specified during declaration. Uses the format of `T[]`, where `T` is the type of the element. `bytes` is special case, it is an array but you don't need to add `[]`.
+- Variable-length array（Dynamic Array）：Length of the array is not specified during declaration.  It uses the format of `T[]`, where `T` is the element type. `bytes` is special case, it is an array but you don't need to add `[]` to it.
 
 ```solidity
     // variable-length array
