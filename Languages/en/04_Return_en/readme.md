@@ -13,7 +13,7 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 In this chapter, we will introduce `Solidity` function output, including returning multiple values, named returns, and reading full and part of return values using destructuring assignments. 
 
 ## Return values (return and returns)
-There are two keywords about function output: `return` and `returns`:
+There are two keywords related to function output: `return` and `returns`:
 - `returns` is added after the function name to declare variable type and variable name;
 - `return` is used in the function body and returns desired variables.
 
@@ -23,10 +23,10 @@ There are two keywords about function output: `return` and `returns`:
             return(1, true, [uint256(1),2,5]);
         }
 ```
-In the above code, the `returnMultiple()` function have multiple outputs: `returns (uint256, bool, uint256[3] memory) `, and then we specify the return variables/values in the function body with `return (1, true, [uint256 (1), 2,5]) `.
+In the above code, the `returnMultiple()` function has multiple outputs: `returns (uint256, bool, uint256[3] memory) `, and then we specify the return variables/values in the function body with `return (1, true, [uint256 (1), 2,5]) `.
 
 ## Named returns
-We can indicate the name of the return variables in `returns`, so that the `solidity` automatically initializes these variables, and automatically returns the values of these functions without adding the `return` keyword.
+We can indicate the name of the return variables in `returns`, so that `solidity` automatically initializes these variables, and automatically returns the values of these functions without adding the `return` keyword.
 
 ```solidity
     // named returns
