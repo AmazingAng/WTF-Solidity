@@ -22,7 +22,7 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 
 In this section, we will introduce `constructor` and unique `modifier` in solidity language using the example of contract privilege control（`Ownable`）.
 
-## constructor
+## Constructor
 `constructor` is a special function and each contract can define one, which will automatically run once when the contract is deployed. It can be used to initialize some parameters of a contract. For example, it can initialize `owner` address of a contract:
 ```solidity
    address owner; // define owner variable
@@ -44,7 +44,8 @@ contract Parents {
     }
 }
 ```
-## modifier
+
+## Modifier
 `modifier` is unique syntax of `solidity`. It is similar to `decorator` in object-oriented programming, which used to declare peculiar properties of functions and reduce code redundancy. It's like Iron Man's intelligent armor. The function wear it will have some specific behaviors. The main use scenario of modifier is to check before running a function, such as address, variable, balance, etc.
 
 
@@ -66,12 +67,12 @@ Functions with `onlyOwner` modifier can only be called by `owner` address, as in
 ```
 We define a `changeOwner` function, which can be run to change the `owner` of contract. However, due to the `onlyOwner` modifier, only original `owner` can call and an error will be thrown if others call. This is also the most common way to control smart contract privilege.
 
-### OppenZepplin's standards implementation of Ownable：
-`OppenZepplin` is an organization that maintains a standardized code base for `Solidity`, His standard implementation of `Ownable` is as follows：
+### OppenZepplin's implementation of Ownable：
+`OppenZepplin` is an organization that maintains a standardized code base for `Solidity`, Their standard implementation of `Ownable` is as follows：
 [https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol)
 
 ## Remix Demo example
-Take `Owner.sol` for example.
+Here, we take `Owner.sol` as an example.
 1. compile and deploy code in Remix.
 2. click `owner` button to view current owner variable.
     ![](img/11-1_en.jpg)
@@ -82,4 +83,4 @@ Take `Owner.sol` for example.
 
 
 ## Summary
-In this lecture, we introduced constructor and modifier in `solidity` and learned an `Ownable` contract which controls contract privilege.
+In this lecture, we introduced constructor and modifier in `solidity`, and learned an `Ownable` contract which controls contract privilege.

@@ -1,5 +1,5 @@
 ---
-title: 12. event
+title: 12. Events
 tags:
   - solidity
   - basic
@@ -7,7 +7,7 @@ tags:
   - event
 ---
 
-# WTF Solidity Tutorial: 12. Event
+# WTF Solidity Tutorial: 12. Events
 
 Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
 
@@ -21,13 +21,13 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 
 In this section, we take transferring ERC20 tokens for example to introduce `event` in `solidity`.
 
-## event
-`event` in `solidity` is an abstraction of the log on `EVM`. It has two characteristics：
+## Events
+Events in `solidity` is an abstraction of the log on `EVM`. It has two characteristics：
 
 - response：Applications([`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18))can subscribe and listen to these events through `RPC` interface and respond at front end.
-- economical：`event` is an economical way to store data on `EVM`, each costing about 2,000 `gas`; By comparison, it takes at least 20,000 `gas` to store a new variable on the chain.
+- economical：Events are economical to store data on `EVM`, each costing about 2,000 `gas`; By comparison, it takes at least 20,000 `gas` to store a new variable on the chain.
 
-### rule
+### Rules for events
 The declaration of event starts with the `event` keyword, followed by event name, then the type and name of variables to be recorded in parenthesis. Take the `Transfer` event of the `ERC20` token contract for example：
 ```solidity
 event Transfer(address indexed from, address indexed to, uint256 value);
@@ -77,4 +77,4 @@ Click `Logs` button to see details of the event：
 There are three elements in `Topics`, `[0]` is hash of the event, `[1]` and `[2]` are the information of two variables marked with `indexed` we defined, namely outgoing address and receiving address of the transfer. The remaining element in `Data` is variable without `indexed`, namely the transfer number.
 
 ## Summary
-In this lecture, we introduced how to use and query events in `solidity`. Many on-chain Analysis tools, including `Nansen` and `Dune Analysis`, work based on events.
+In this lecture, we introduced how to use and query events in `solidity`. Many on-chain Analysis tools, including `Nansen` and `Dune Analysis`, are based on events.
