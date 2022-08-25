@@ -1,4 +1,4 @@
-# WTF Solidity Tutorial: 5. Variable data storage and scope
+# WTF Solidity Tutorial: 5. Data Storage and Scope
 
 Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
 
