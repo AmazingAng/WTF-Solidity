@@ -1,4 +1,4 @@
-# WTF Solidity Tutorial: 6. Reference Type, Array & Struct
+# WTF Solidity Tutorial: 6. Array & Struct
 
 Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
 
