@@ -64,11 +64,11 @@ AND project = 'Uniswap'
 
 那么ETH、BSC、Polygon、solana这些都是对应的数据库，它下面的各种合约应用可以看成一个表，这张表通过各种transitions将数据链接了起来。
 
-我们查询其中一个表，以aave为例：[aave区块链浏览器](https://etherscan.io/address/0x398ec7346dcd622edc5ae82352f02be94c62d119#writeProxyContract)
+我们查询其中一个表，以aave为例：[aave区块链浏览器](./img/5.png)
 
 通过查询aave这个合约，它有deposit（存储）这个方法
 
-![image-20220223145833252](https://afox-1256168983.cos.ap-shanghai.myqcloud.com/image-20220223145833252.png)
+![image-20220223145833252](./img/6.png)
 
 
 
@@ -81,7 +81,7 @@ SELECT * FROM aave."LendingPool_evt_Deposit"
 limit 100
 ```
 
-![image-20220223150738524](https://afox-1256168983.cos.ap-shanghai.myqcloud.com/image-20220223150738524.png)
+![image-20220223150738524](./img/7.png)
 
 就可以得到aave合约中存储方法的相应数据，通过这个数据可以做一些筛选
 
@@ -118,7 +118,7 @@ limit 100
 
 #### 了解aave."LendingPool_evt_Borrow" 表
 
-![image-20220223160439372](https://afox-1256168983.cos.ap-shanghai.myqcloud.com/image-20220223160439372.png)
+![image-20220223160439372](./img/8.png)
 
 #### 查看全表数据
 
@@ -127,7 +127,7 @@ SELECT * FROM aave."LendingPool_evt_Borrow"
 limit 100
 ```
 
-![image-20220223160548278](https://afox-1256168983.cos.ap-shanghai.myqcloud.com/image-20220223160548278.png)
+![image-20220223160548278](./img/9.png)
 
 #### 使用SUM统计USDC借贷数量
 
@@ -136,7 +136,7 @@ SELECT  SUM(_amount) as USDC_total FROM aave."LendingPool_evt_Borrow"
 WHERE _reserve = '\xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
 ```
 
-![image-20220223161132985](https://afox-1256168983.cos.ap-shanghai.myqcloud.com/image-20220223161132985.png)
+![image-20220223161132985](./img/10.png)
 
 方便的查出来借贷的数据
 
@@ -178,11 +178,11 @@ ORDER BY USDC_total DESC
 
 ### 数据可视化
 
-![image-20220223202930943](https://afox-1256168983.cos.ap-shanghai.myqcloud.com/image-20220223202930943.png)
+![image-20220223202930943](./img/11.png)
 
 点击 New visualization 就可以选择你需要的视图，比如我点击 `bar chart`
 
-![image-20220223203009698](https://afox-1256168983.cos.ap-shanghai.myqcloud.com/image-20220223203009698.png)
+![image-20220223203009698](./img/12.png)
 
 就会将我刚才筛选的数据可视化。看最长的几根，就是借贷最多的几个账号。
 
