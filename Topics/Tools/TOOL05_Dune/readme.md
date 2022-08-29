@@ -9,60 +9,47 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
-## 什么是Dune
+## Dune是什么？
+
+
+`Dune`是区块链查询分析工具，每个人可以通过写类sql语言查询区块链上的所有信息，例如巨鲸，链上交易的数据等等。同时`Dune`能便捷的将数据转换为可视化的图表。
+
+> 以太坊是数据库，智能合约是数据表，来自钱包的交易是每个表中的行。
+
+这句话讲出了区块链的精髓：区块链本质上就是公开的存储数据的分布式账本，现在我们可以通过Dune来查询这个分布式账本的数据。
 
 [Dune官网](https://dune.xyz/)
-
-> Dune Analytics is a powerful tool for blockchain research. Dune gives you all the tools to query, extract, and visualize vast amounts of data from the blockchain. Dune is unlocking the power of public blockchain data by making it accessible to everyone. This documentation will help you answer questions like:
-
-
-简单理解就是区块链查询分析工具，每个人可以通过写类sql语言查询区块链上的所有信息。
-
-比如可以看一些巨鲸的数据，以及链上交易的数据等等。同时他能便捷的将数据转换为可视化的图表。
 
 ![dune可视化](./img/1.png)
 
 ![dune可视化](./img/2.png)
 
 
+## 第一个查询
 
-## 实践第一个查询
+目标：查询**过去 24 小时在 Uniswap 上购买的 DAI稳定币**
 
-目标：查询**过去 24 小时在 Uniswap 上购买的 Dai**
+1. 注册登陆Dune。
+2. 点击右上角**new query**新建查询，输入代码：
 
-1. 注册登陆Dune
-2. 点击右上角 new query 新建查询
-
-```sql
-SELECT SUM(token_a_amount) AS dai_bought
-FROM dex."trades"
-WHERE block_time > now() - interval '24 hours'
-AND token_a_symbol = 'DAI'
-AND project = 'Uniswap'
-;
-```
+    ```sql
+    SELECT
+    SUM(token_a_amount) AS dai_bought
+    FROM
+    dex."trades"
+    WHERE
+    block_time > now() - interval '24 hours'
+    AND token_a_symbol = 'DAI'
+    AND project = 'Uniswap';
+    ```
+3. 点击右下角的**Run**执行查询，得到最近的24h内通过uniswap购买DAI的的数量。
 
 ![dune sql query](./img/3.png)
 
-执行查询，得到最近的24h内，通过uniswap购买了多少DAI的代币
-
-## 实现原理
-
-> Keep in mind, Ethereum is the **database**, smart contracts are the **data tables**, and transactions from wallets are **the rows** in each table.
->
-> 以太坊是数据库，智能合约是数据表，来自钱包的交易是每个表中的行。
-
-我觉得这句话直接讲出了区块链的精髓，区块链本质上就是消耗一定的gas，让你的数据永久的存储在分布式账本上。现在我们可以通过dune来查询这个分布式账本的数据，因为区块链它是公开的。
 
 ## 从0开始构建查询
 
-入门学习一下如何使用和简单的语法介绍。
-
-**目标：学会使用 SELECT, WHERE, and LIMIT**
-
-我们把ETH EVM当作一个数据库，其中的智能合约当作一个表。
-
-那么ETH、BSC、Polygon、solana这些都是对应的数据库，它下面的各种合约应用可以看成一个表，这张表通过各种transitions将数据链接了起来。
+**目标：学会使用 SELECT, WHERE, LIMIT**
 
 我们查询其中一个表，以aave为例：[aave合约](https://etherscan.io/address/0x398ec7346dcd622edc5ae82352f02be94c62d119#writeProxyContract)
 
@@ -116,7 +103,7 @@ limit 100
 
 
 
-###学习 COUNT, SUM, MAX, GROUP BY, HAVING, ORDER BY
+## 学习 COUNT, SUM, MAX, GROUP BY, HAVING, ORDER BY
 
 #### 了解aave."LendingPool_evt_Borrow" 表
 
