@@ -64,13 +64,15 @@ AND project = 'Uniswap'
 
 那么ETH、BSC、Polygon、solana这些都是对应的数据库，它下面的各种合约应用可以看成一个表，这张表通过各种transitions将数据链接了起来。
 
-我们查询其中一个表，以aave为例：[aave区块链浏览器](./img/5.png)
+我们查询其中一个表，以aave为例：[aave合约](https://etherscan.io/address/0x398ec7346dcd622edc5ae82352f02be94c62d119#writeProxyContract)
 
-通过查询aave这个合约，它有deposit（存储）这个方法
+通过查询aave这个合约，它有deposit（存储）这个方法，并且有该事件（事件会在执行的时候广播）。
 
 ![image-20220223145833252](./img/6.png)
 
+回到Dune查找对应的表，根据在Ethereum上搜索aave相关的表，并对应事件,`LendingPool_evt_Deposit`找到该表。
 
+![](https://afox-1256168983.cos.ap-shanghai.myqcloud.com/20220829101336.png)
 
 ### 学习：SELECT 、 LIMIT、WHERE查询数据
 
