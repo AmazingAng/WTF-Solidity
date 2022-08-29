@@ -27,18 +27,14 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 - 响应：应用程序（[`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18)）可以通过`RPC`接口订阅和监听这些事件，并在前端做响应。
 - 经济：事件是`EVM`上比较经济的存储数据的方式，每个大概消耗2,000 `gas`；相比之下，链上存储一个新变量至少需要20,000 `gas`。
 
-### 规则
-事件的声明由`event`关键字开头，然后跟事件名称，括号里面写好事件需要记录的变量类型和变量名。以`ERC20`代币合约的`Transfer`事件为例：
+### 声明事件
+事件的声明由`event`关键字开头，接着是事件名称，括号里面写好事件需要记录的变量类型和变量名。以`ERC20`代币合约的`Transfer`事件为例：
 ```solidity
 event Transfer(address indexed from, address indexed to, uint256 value);
 ```
-我们可以看到，`Transfer`事件共记录了3个变量`from`，`to`和`value`，分别对应代币的转账地址，接收地址和转账数量。
+我们可以看到，`Transfer`事件共记录了3个变量`from`，`to`和`value`，分别对应代币的转账地址，接收地址和转账数量，其中`from`和`to`前面带有`indexed`关键字，他们会保存在以太坊虚拟机日志的`topics`中，方便之后检索。
 
-同时`from`和`to`前面带着`indexed`关键字，每个`indexed`标记的变量可以理解为检索事件的索引“键”，在以太坊上单独作为一个`topic`进行存储和索引，程序可以轻松的筛选出特定转账地址和接收地址的转账事件。每个事件最多有3个带`indexed`的变量。每个 `indexed` 变量的大小为固定的256比特。事件的哈希以及这三个带`indexed`的变量在`EVM`日志中通常被存储为`topic`。其中`topic[0]`是此事件的`keccak256`哈希，`topic[1]`到`topic[3]`存储了带`indexed`变量的`keccak256`哈希。
-![](img/12-3.jpg)
-
-`value` 不带 `indexed` 关键字，会存储在事件的 `data` 部分中，可以理解为事件的“值”。`data` 部分的变量不能被直接检索，但可以存储任意大小的数据。因此一般 `data` 部分可以用来存储复杂的数据结构，例如数组和字符串等等，因为这些数据超过了256比特，即使存储在事件的 `topic` 部分中，也是以哈希的方式存储。另外，`data` 部分的变量在存储上消耗的gas相比于 `topic` 更少。
-
+### 释放事件
 我们可以在函数里释放事件。在下面的例子中，每次用`_transfer()`函数进行转账操作的时候，都会释放`Transfer`事件，并记录相应的变量。
 ```solidity
     // 定义_transfer函数，执行转账逻辑
@@ -58,7 +54,29 @@ event Transfer(address indexed from, address indexed to, uint256 value);
     }
 ```
 
-### Remix 演示
+## EVM日志 `Log`
+
+以太坊虚拟机（EVM）用日志`Log`来存储`Solidity`事件，每条日志记录都包含主题`topics`和数据`data`两部分。
+
+![](img/12-3.png)
+
+### 主题 `Topics`
+
+日志的第一部分是主题数组，用于描述事件，长度不能超过`4`。它的第一个元素是事件的签名（哈希）。对于上面的`Transfer`事件，它的签名就是：
+```solidity
+keccak256("Transfer(addrses,address,uint256)")
+
+//0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+```
+除了事件签名，主题还可以包含至多`3`个`indexed`参数，也就是`Transfer`事件中的`from`和`to`。
+
+`indexed`标记的参数可以理解为检索事件的索引“键”，方便之后搜索。每个 `indexed` 参数的大小为固定的256比特，如果参数太大了（比如字符串），就会自动计算哈希存储在主题中。
+
+### 数据 `Data`
+
+事件中不带 `indexed`的参数会被存储在 `data` 部分中，可以理解为事件的“值”。`data` 部分的变量不能被直接检索，但可以存储任意大小的数据。因此一般 `data` 部分可以用来存储复杂的数据结构，例如数组和字符串等等，因为这些数据超过了256比特，即使存储在事件的 `topic` 部分中，也是以哈希的方式存储。另外，`data` 部分的变量在存储上消耗的gas相比于 `topic` 更少。
+
+## `Remix`演示
 以 `Event.sol` 合约为例，编译部署。
 
 然后调用 `_transfer` 函数。
