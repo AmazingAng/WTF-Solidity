@@ -16,7 +16,9 @@
 
 - [ ] 2048:star:发社群NFT
 
+
 ## 入门
+
 **第1讲：三行代码HelloWeb3**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)
 
 **第2讲：数值类型**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/XHZVpWe8_sHBHgg6kkrNH2nAWYmQgoB7fKW8hoXnoyI)
@@ -46,6 +48,7 @@
 **第14讲：抽象合约（abstract）和接口（interface）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/14_Interface) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/14_Interface/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/KKnoJJfHG69Pg3GQda_B454z_nJ1tesyBd4uOvh1WNM)
 
 **第15讲：异常（errors）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Errors) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Errors/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/XhhLu7PV1cAhOp9_m-dk9OoTj7offC7DkYYgsV3e31I)
+
 
 ## 进阶
 
@@ -78,6 +81,7 @@
 **第29讲：函数选择器（selector）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/29_Selector) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/29_Selector/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/_Q-N_VGUV8F4QZbggR8Swv16LStBdfkeQb8qwSfoNTw)
 
 **第30讲：Try-Catch**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/30_TryCatch) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/30_TryCatch/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/asj1-eKf6YdIoI9oMSLI3VECwqCzRHwaqIS01ALQ7qo)
+
 
 ## 应用
 
@@ -114,7 +118,7 @@
 **第46讲：代理合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/v4ov2J0xjtMnVflsLpbbh7S55fiyPljttbDh3Xhiqis)
 
 
-## Topics
+## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
 
@@ -124,7 +128,7 @@
 
 **第4讲：Alchemy, 区块链API和节点基础设施** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】
 
-**第5讲：Dune,使用dune可视化区块链数据** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL05_Dune/readme.md)】
+**第5讲：Dune，使用Dune可视化区块链数据** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL05_Dune/readme.md)】
 
 ### `ERC721`
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
