@@ -16,7 +16,7 @@
 
 - [ ] 2048:star:发社群NFT
 
----
+
 ## 入门
 
 **第1讲：三行代码HelloWeb3**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/01_HelloWeb3/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)
@@ -49,7 +49,7 @@
 
 **第15讲：异常（errors）**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Errors) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/15_Errors/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/XhhLu7PV1cAhOp9_m-dk9OoTj7offC7DkYYgsV3e31I)
 
----
+
 ## 进阶
 
 **第16讲：函数重载**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Overloading) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/16_Overloading/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/ADt6g13gwqt42-9_nBxMunSkVHeft6-yb1mp0XH-4f8)
@@ -82,7 +82,7 @@
 
 **第30讲：Try-Catch**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/30_TryCatch) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/30_TryCatch/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/asj1-eKf6YdIoI9oMSLI3VECwqCzRHwaqIS01ALQ7qo)
 
----
+
 ## 应用
 
 **第31讲：ERC20**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/31_ERC20) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/31_ERC20/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/-LNwtaA4Eb0e1GZEsaZEXs09Nm9l57HVvoeRUfxVZNg)
@@ -117,7 +117,7 @@
 
 **第46讲：代理合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/v4ov2J0xjtMnVflsLpbbh7S55fiyPljttbDh3Xhiqis)
 
----
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
@@ -145,7 +145,6 @@
 
 **第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Security/Consensys2020)】 【[文章](https://mirror.xyz/ninjak.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
 
----
 ## WTF贡献者
 <div align="center">
   <h4 align="center">
