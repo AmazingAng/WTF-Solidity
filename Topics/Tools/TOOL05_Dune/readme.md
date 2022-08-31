@@ -77,9 +77,13 @@ limit 100
 #### 各个字段的意义
 
 _user：发起存款的钱包地址
+
 _reserve：作为抵押品存放的代币地址
+
 _amount：存入的代币数量
+
 _timestamp：交易被挖掘到区块链的时间戳
+
 
 #### 使用 WHERE过滤数据
 
@@ -101,69 +105,43 @@ WHERE _reserve = '\xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
 limit 100
 ```
 
+以上案例参考 [Your guide to basic SQL while learning Ethereum at the same time](https://towardsdatascience.com/your-guide-to-basic-sql-while-learning-ethereum-at-the-same-time-9eac17a05929)
+
+### 实践链上转账
 
 
-## 学习 COUNT, SUM, MAX, GROUP BY, HAVING, ORDER BY
+实践`Ethereum.Transactions`表的转账查询
 
-#### 了解aave."LendingPool_evt_Borrow" 表
-
-![dune query Ethereum table](./img/8.png)
-
-#### 查看全表数据
 
 ```sql
-SELECT * FROM aave."LendingPool_evt_Borrow"
-limit 100
+select * from ethereum.transactions
+LIMIT 10
 ```
 
-![dune query](./img/9.png)
+![DUNE面板说明](./img/14.png)
 
-#### 使用SUM统计USDC借贷数量
+### 字段和转账对应说明
+
+看这个[hash](https://etherscan.io/tx/0xfa69f5eb0218f56ae602ef7f01588d9193a891e6fe7ba7e1c3994075a689bb51)转账 
+
+![image-20220314174346876](./img/16.png)
+
+由[0x22fff189c37302c02635322911c3b64f80ce7203](https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0x22fff189c37302c02635322911c3b64f80ce7203) 转账到 [0x8aae242452471d2dfea145214ceedf87ca043198](https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0x8aae242452471d2dfea145214ceedf87ca043198)
+
+hash：`0xfa69f5eb0218f56ae602ef7f01588d9193a891e6fe7ba7e1c3994075a689bb51`
+
+我们可以直接通过dune查到该条信息
 
 ```sql
-SELECT  SUM(_amount) as USDC_total FROM aave."LendingPool_evt_Borrow"
-WHERE _reserve = '\xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+select * from ethereum.transactions
+WHERE hash='\xfa69f5eb0218f56ae602ef7f01588d9193a891e6fe7ba7e1c3994075a689bb51'
 ```
 
-![query result](./img/10.png)
+![dune-查询](./img/15.png)
 
-方便的查出来借贷的数据
+dune中的字段，也是和etherscan中一一对应。
 
-#### 查看最近7天USDT的借贷情况
 
-```sql
-SELECT  SUM(_amount) FROM aave."LendingPool_evt_Borrow"
-WHERE "evt_block_time" > ( now() - interval '7 days') AND _reserve = '\xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
-
-```
-
-#### 使用分组查询GROUP
-
-查看到aave有不同的`borrowRateMode`借贷利率，模式分为1和2
-
-```sql
-SELECT  "_borrowRateMode", SUM(_amount) FROM aave."LendingPool_evt_Borrow"
-WHERE  _reserve = '\xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
-GROUP BY 1
-```
-
-#### HAVING 子句
-
-HAVING 子句可以让我们筛选分组后的各组数据。
-
-首先我们根据用户地址，统计每个地址借贷USDC的总数量
-
-然后再这个结果中筛选USDC历史借贷大于1000000的账号，最后根据USDC数量从大到小排序
-
-这样一个聪明账号就可以被我们筛选出来了。
-
-```sql
-SELECT "_user", SUM(_amount) as USDC_total FROM aave."LendingPool_evt_Borrow"
-WHERE _reserve = '\xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
-GROUP BY 1
-HAVING SUM(_amount) > 1000000
-ORDER BY USDC_total DESC
-```
 
 ### 数据可视化
 
