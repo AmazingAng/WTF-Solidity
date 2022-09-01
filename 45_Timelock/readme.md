@@ -230,7 +230,11 @@ tags:
 ## `Remix`演示
 ### 1. 部署`Timelock`合约，锁定期设为`120`秒。
 
+![`Remix`演示](./img/45-1.jpg)
+
 ### 2. 直接调用`changeAdmin()`将报错。
+
+![`Remix`演示](./img/45-2.jpg)
 
 ### 3. 构造更改管理员的交易。
 为了构造交易，我们要分别填入以下参数：
@@ -244,15 +248,23 @@ address target, uint256 value, string memory signature, bytes memory data, uint2
     编码后地址：0x000000000000000000000000ab8483f64d9c6d1ecf9b849ae677dd3315835cb2
     ```
 - `executeTime`：先调用`getBlockTimestamp()`得到当前区块链时间，再在它的基础上加个150秒填入。
-
+![`Remix`演示](./img/45-3.jpg)
 
 ### 4. 调用`queueTransaction`，将交易放入时间锁队列。
 
+![`Remix`演示](./img/45-4.jpg)
+
 ### 5. 在锁定期内调用`executeTransaction`，调用失败。
+
+![`Remix`演示](./img/45-5.jpg)
 
 ### 6. 在锁定期满调用`executeTransaction`，交易成功。
 
+![`Remix`演示](./img/45-6.jpg)
+
 ### 7. 查看新的`admin`地址。
+
+![`Remix`演示](./img/45-7.jpg)
 
 ## 总结
 
