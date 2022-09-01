@@ -23,9 +23,6 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 In this section, we use the interface contract of `ERC721` as an example to introduce the `abstract` and `interface` in `solidity` to help you better understand the `ERC721` standard.
 
 ## Abstract
-如果一个智能合约里至少有一个未实现的函数，即某个函数缺少主体`{}`中的内容，则必须将该合约标为`abstract`，不然编译会报错；另外，未实现的函数需要加`virtual`，以便子合约重写。
-拿我们之前的[插入排序合约](https://github.com/AmazingAng/WTFSolidity/tree/main/07_InsertionSort)为例，如果我们还没想好具体怎么实现插入排序函数，
-那么可以把合约标为`abstract`，之后让别人补写上。
 
 If there is at least one unimplemented function in a smart contract, that is, a function lacks the content in the body `{}`, 
 the contract must be marked as `abstract`, otherwise the compilation will report an error; in addition, the unimplemented function requires `virtual` for subcontract rewriting. 
