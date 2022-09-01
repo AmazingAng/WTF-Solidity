@@ -116,15 +116,15 @@ For example, use `balanceOf()` to query the `BAYC` balance of an address, or use
 
 ```solidity
 contract interactBAYC {
-    // 利用BAYC地址创建接口合约变量（ETH主网）
+    // Use BAYC address to create interface contract variables (ETH Mainnet)
     IERC721 BAYC = IERC721(0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D);
 
-    // 通过接口调用BAYC的balanceOf()查询持仓量
+    // Call BAYC's balanceOf() to query the open interest through the interface
     function balanceOfBAYC(address owner) external view returns (uint256 balance){
         return BAYC.balanceOf(owner);
     }
 
-    // 通过接口调用BAYC的safeTransferFrom()安全转账
+    // Safe transfer by calling BAYC's safeTransferFrom() through the interface
     function safeTransferFromBAYC(address from, address to, uint256 tokenId) external{
         BAYC.safeTransferFrom(from, to, tokenId);
     }
