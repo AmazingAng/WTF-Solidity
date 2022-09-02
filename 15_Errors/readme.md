@@ -66,13 +66,13 @@ error TransferNotOwner(); // 自定义error
 ## 在remix上验证
    
 1. 输入任意`uint256`数字和非0地址，调用`transferOwner1`，也就是`error`方法，控制台抛出了异常并显示我们自定义的`TransferNotOwner`。
-   ![13 1.png](./img/15-1.png)
+   ![15 1.png](./img/15-1.png)
    
 2. 输入任意`uint256`数字和非0地址，调用`transferOwner2`，也就是`require`方法，控制台抛出了异常并打印出`require`中的字符串。
-   ![13 2.png](./img/15-2.png)
+   ![15 2.png](./img/15-2.png)
    
 3. 输入任意`uint256`数字和非0地址，调用`transferOwner3`，也就是`assert`方法，控制台只抛出了异常。
-   ![13 3.png](./img/15-3.png)
+   ![15 3.png](./img/15-3.png)
    
 
 ## 三种方法的gas比较
