@@ -75,21 +75,23 @@ Let's rewrite the above `transferOwner` function with the `assert` command:
 1. Enter any `uint256` number and non-zero address, call `transferOwner1`, which is the `error` method, 
 and the console will throw an exception and displays the customed `TransferNotOwner`.
 
-   ![15 1.png](./img/15-1.png)
+![15 1.png](./img/15-1.png)
    
 2. Enter any `uint256` number and a non-zero address, call `transferOwner2`, which is the `require` method, 
 the console throws an exception and prints the string in `require`.
-   ![15 2.png](./img/15-2.png)
+
+![15 2.png](./img/15-2.png)
    
 3. Enter any `uint256` number and non-zero address, call `transferOwner3`, which is the `assert` method, the console only throws an exception.
-   ![15 3.png](./img/15-3.png)
+
+![15 3.png](./img/15-3.png)
    
 
 ## Gas comparison of three methods
 Let's compare the `gas` consumption of the three exceptions. Through the Debug button of the remix console, 
 you can find the `gas` consumption of each function call as follows:
 
-1. **`gas` of `error` **：24445
+1. **`gas` of `error`**：24445
 2. **`gas` of `require`**：24743
 3. **`gas` of `assert`**：24446
 
