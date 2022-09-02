@@ -144,7 +144,7 @@ contract Logic {
 - 构造函数：在部署合约时初始化`proxy`变量。
 - `increase()`：利用`call`来调用代理合约的`increment()`函数，并返回一个`uint`。在调用时，我们利用`abi.encodeWithSignature()`获取了`increment()`函数的`selector`。在返回时，利用`abi.decode()`将返回值解码为`uint`类型。
 
-```
+```solidity
 /**
  * @dev Caller合约，调用代理合约，并获取执行结果
  */
