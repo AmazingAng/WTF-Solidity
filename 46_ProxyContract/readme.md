@@ -144,7 +144,7 @@ contract Logic {
 - 构造函数：在部署合约时初始化`proxy`变量。
 - `increase()`：利用`call`来调用代理合约的`increment()`函数，并返回一个`uint`。在调用时，我们利用`abi.encodeWithSignature()`获取了`increment()`函数的`selector`。在返回时，利用`abi.decode()`将返回值解码为`uint`类型。
 
-```
+```solidity
 /**
  * @dev Caller合约，调用代理合约，并获取执行结果
  */
@@ -167,18 +167,36 @@ contract Caller{
 
 1. 部署`Logic`合约。
 
+![](./img/46-2.jpg)
+
 2. 调用`Logic`合约的`increment()`函数，返回`100`。
 
+![](./img/46-3.jpg)
+
 3. 部署`Proxy`合约，初始化时填入`Logic`合约地址。
+
+
+![](./img/46-4.jpg)
+
 
 4. 调用`Proxy`合约`increment()`函数，无返回值。
     
     调用方法：在`Remix`部署面板中点`Proxy`合约，在最下面的`Low level interaction`中填入`increment()`函数的选择器`0xd09de08a`，并点击`Transact`。
+    
+    
+![](./img/46-5.jpg)
+
 
 5. 部署`Caller`合约，初始化时填入`Proxy`合约地址。
 
+
+![](./img/46-6.jpg)
+
+
 6. 调用`Caller`合约`increment()`函数，返回`1`。
 
+
+![](./img/46-7.jpg)
 
 ## 总结
 
