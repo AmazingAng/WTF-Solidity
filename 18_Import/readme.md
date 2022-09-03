@@ -19,7 +19,7 @@ tags:
 
 -----
 
-`solidity`支持利用`import`关键字导入其他源代码中的合约，让开发更加模块化。
+`solidity`支持利用`import`关键字导入其他合约中的全局符号（简单理解为外部源代码），让开发更加模块化。一般不具体指定则将导入文件的所有全局符号到当前全局作用域中。
 
 ## `import`用法
 
@@ -34,7 +34,7 @@ tags:
 import './Yeye.sol';
 ```
 
-- 通过源文件网址导入网上的合约，例子：
+- 通过源文件网址导入网上的合约的全局符号，例子：
 ```
 // 通过网址引用
 import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
@@ -45,7 +45,7 @@ import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 import '@openzeppelin/contracts/access/Ownable.sol';
 ```
 
-- 通过`全局符号`导入特定的合约，例子：
+- 通过指定`全局符号`导入合约特定的全局符号，例子：
 ```solidity
 import {Yeye} from './Yeye.sol';
 ```
