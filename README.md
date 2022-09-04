@@ -117,6 +117,8 @@
 
 **第46讲：代理合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/v4ov2J0xjtMnVflsLpbbh7S55fiyPljttbDh3Xhiqis)
 
+**第46讲：可升级合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/47_Upgrade) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/47_Upgrade/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/p1WBSV9yQ5Zfcui8kaWEoVq71rirv7-I4VqLFAhz4J0)
+
 
 ## 主题
 ### `工具`
