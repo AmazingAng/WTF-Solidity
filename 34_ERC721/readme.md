@@ -41,9 +41,7 @@ ERC协议标准是影响以太坊发展的重要因素, 像`ERC20`, `ERC223`, `E
 
 ## ERC165
 
-通过[ERC165标准](https://eips.ethereum.org/EIPS/eip-165)，智能合约可以声明它支持的接口，供其他合约检查。
-
-通俗一些就是ERC165就是检查某项目是不是智能合约。
+通过[ERC165标准](https://eips.ethereum.org/EIPS/eip-165)，智能合约可以声明它支持的接口，供其他合约检查。简单的说，ERC165就是检查一个智能合约是不是支持了`ERC721`，`ERC1155`的接口。
 
 `IERC165`接口合约只声明了一个`supportsInterface`函数，输入要查询的`interfaceId`接口id，若合约实现了该接口id，则返回`true`：
 
