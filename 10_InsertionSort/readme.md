@@ -105,6 +105,7 @@ def insertionSort(arr):
 				arr[j+1] = arr[j]
 				j -= 1
 		arr[j+1] = key
+    return arr
 ```
 ### 改写成`solidity`后有`BUG`！
 一共8行`python`代码就可以完成插入排序，非常简单。那么我们将它改写成`solidity`代码，将函数，变量，循环等等都做了相应的转换，只需要9行代码：
