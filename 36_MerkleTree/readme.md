@@ -106,11 +106,11 @@ library MerkleProof {
 ```
 `MerkleProof`库有三个函数：
 
-1. `verify()`函数利用`proof`数来验证`leaf`是否属于根为`root`的`Merkle Tree`中，如果是，则返回`true`。它调用了`processProof()`函数。
+1. `verify()`函数：利用`proof`数来验证`leaf`是否属于根为`root`的`Merkle Tree`中，如果是，则返回`true`。它调用了`processProof()`函数。
 
-2. `processProof()`函数利用`proof`和`leaf`依次计算出`Merkle Tree`的`root`。它调用了`_hashPair()`函数。
+2. `processProof()`函数：利用`proof`和`leaf`依次计算出`Merkle Tree`的`root`。它调用了`_hashPair()`函数。
 
-3.  `_hashPair()`函数用`keccak256()`函数计算非根节点对应的两个子节点的哈希（排序后）。
+3.  `_hashPair()`函数：用`keccak256()`函数计算非根节点对应的两个子节点的哈希（排序后）。
 
 我们将`地址0`，`root`和对应的`proof`输入到`verify()`函数，将返回`ture`。因为`地址0`在根为`root`的`Merkle Tree`中，且`proof`正确。如果改变了其中任意一个值，都将返回`false`。
 
@@ -167,10 +167,10 @@ contract MerkleTree is ERC721 {
 
 ### 函数
 合约中共有4个函数：
-- 构造函数初始化`NFT`的名称和代号，还有`Merkle Tree`的`root`。
-- `mint()`函数接受地址`address`，`tokenId`和`proof`三个参数。首先验证`address`是否在白名单中，验证通过则把序号为`tokenId`的`NFT`铸造给该地址，并将它记录到`mintedAddress`。此过程中调用了`_leaf()`和`_verify()`函数。
-- `_leaf()`函数计算了`Merkle Tree`的叶子地址的哈希。
-- `_verify()`函数调用了`MerkleProof`库的`verify()`函数，来进行`Merkle Tree`验证。
+- 构造函数：初始化`NFT`的名称和代号，还有`Merkle Tree`的`root`。
+- `mint()`函数：利用白名单铸造`NFT`。参数为白名单地址`account`，铸造的`tokenId`，和`proof`。首先验证`address`是否在白名单中，验证通过则把序号为`tokenId`的`NFT`铸造给该地址，并将它记录到`mintedAddress`。此过程中调用了`_leaf()`和`_verify()`函数。
+- `_leaf()`函数：计算了`Merkle Tree`的叶子地址的哈希。
+- `_verify()`函数：调用了`MerkleProof`库的`verify()`函数，进行`Merkle Tree`验证。
 
 ### `remix`验证
 
