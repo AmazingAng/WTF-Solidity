@@ -11,12 +11,12 @@ library ECDSA{
      * _signature为签名
      * _signer为签名地址
      */
-    function verify(bytes32 _msgHash, bytes memory _signature, address _signer) public pure returns (bool) {
+    function verify(bytes32 _msgHash, bytes memory _signature, address _signer) internal pure returns (bool) {
         return recoverSigner(_msgHash, _signature) == _signer;
     }
 
     // @dev 从_msgHash和签名_signature中恢复signer地址
-    function recoverSigner(bytes32 _msgHash, bytes memory _signature) public pure returns (address){
+    function recoverSigner(bytes32 _msgHash, bytes memory _signature) internal pure returns (address){
         // 检查签名长度，65是标准r,s,v签名的长度
         require(_signature.length == 65, "invalid signature length");
         bytes32 r;
