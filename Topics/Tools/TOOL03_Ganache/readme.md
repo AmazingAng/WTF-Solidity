@@ -12,7 +12,9 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 `Ganache` 是一个适用于 “开发场景”（或开发过程中的）的 **以太坊区块链网络**，它使开发以太坊应用程序（的工作）更快、更容易、更安全。它包括所有流行的 RPC 功能和特性（如事件），并且可以确定性地运行以使开发变得轻而易举。
 
-> 可以理解 ganache 是一个以太坊区块链“模拟器”，在开发过程中 “模拟” 生产环境、方便的获取合约调用的上下文。但是请不要在生产环境中作为区块链网络使用（如果需要请使用 geth 或 openethereum 等节点应用）。
+> 可以理解 ganache 是一个以太坊区块链“模拟器”，在开发过程中 “模拟” 生产环境、方便的获取合约调用的上下文。
+
+> ⚠️ 注意：**请不要在生产环境中作为区块链网络使用** 如果需要请使用 geth 或 openethereum 等节点应用。
 
 `Ganache` 同时有着 GUI 版本，适合于新手快速配置使用。
 
@@ -27,7 +29,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 - 适用于命令行/npm的文档：[https://trufflesuite.com/blog/introducing-ganache-7/](https://trufflesuite.com/blog/introducing-ganache-7/)
 
 
-> 注意：Ganache 的官网中的 Github repo 为UI版本。CLI 版本在 npm 中有 `ganache` & `ganache-cli`，其中 `ganache-cli` 已被弃用。
+> ⚠️ 注意：Ganache 的官网中的 Github repo 为UI版本。CLI 版本在 npm 中有 `ganache` & `ganache-cli`，其中 `ganache-cli` 已被弃用。
 
 ## 为什么要使用Ganache？
 
@@ -92,12 +94,9 @@ ganache -f https://eth-mainnet.alchemyapi.io/v2/YOUR_API_KEY --wallet.accounts=A
 
 ### 推进时间
 
-Ganache 允许我们通过 RPC 调用（方法 `evm_increaseTime` 和 `evm_setTime` ）来推进区块链上的时间。
-
-这里有个在项目中应用的案例：[liquity 项目合约测试 - ForwardTime 的功能实现](https://github.com/liquity/dev/blob/0c61ed8b7181450da214d4f10a1327c2082bd4f4/packages/contracts/utils/testHelpers.js#L1104-L1119)
-
-  
 需要操纵时间的原因或场景：一些合约锁住了用户的Token，设计了释放周期/时间逐步释放这些被锁住的Token，或者在未来某个特定时间允许用户进行一些操作。
+
+Ganache 允许我们通过 RPC 调用（方法 `evm_increaseTime` 和 `evm_setTime` ）来推进区块链上的时间。
 
 大多数情况下我们无法等到这个时间，我们可以使用 `evm_increaseTime` 将区块链当前时间戳**增加指定的时间量**（以秒为单位）（以十六进制格式传入）。这将返回以毫秒为单位调整的总时间。
 
@@ -107,6 +106,7 @@ curl -H 'Content-Type: application/json' --data' {"jsonrpc": "2.0", "id": 1, "me
 
 此外，您可以使用 `evm_setTime` 将其设置为特定的时间戳；它接受具有毫秒精度的 JavaScript 时间戳，并返回给定时间戳和当前时间之间的秒数。
 
+此外，这里有个在项目中应用的案例：[liquity 项目合约测试 - ForwardTime 的功能实现](https://github.com/liquity/dev/blob/0c61ed8b7181450da214d4f10a1327c2082bd4f4/packages/contracts/utils/testHelpers.js#L1104-L1119)
 ### 通过GUI使用 Ganache
 不太推荐，如果你是新上手，可以通过这个快速熟悉 Ganache。
 
