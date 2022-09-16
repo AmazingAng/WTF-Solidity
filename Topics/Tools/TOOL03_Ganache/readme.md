@@ -92,7 +92,7 @@ ganache -f https://eth-mainnet.alchemyapi.io/v2/YOUR_API_KEY
 ganache -f https://eth-mainnet.alchemyapi.io/v2/YOUR_API_KEY --wallet.accounts=ACCOUNT_PRIATE_KEY,AMOUNT_WEI --wallet.accounts=ACCOUNT_PRIATE_KEY,1000000000000000000000
 ```
 
-### 推进时间
+### 推进时间 (Fast Forward time)
 
 需要操纵时间的原因或场景：一些合约锁住了用户的Token，设计了释放周期/时间逐步释放这些被锁住的Token，或者在未来某个特定时间允许用户进行一些操作。
 
@@ -106,7 +106,7 @@ curl -H 'Content-Type: application/json' --data' {"jsonrpc": "2.0", "id": 1, "me
 
 此外，您可以使用 `evm_setTime` 将其设置为特定的时间戳；它接受具有毫秒精度的 JavaScript 时间戳，并返回给定时间戳和当前时间之间的秒数。
 
-此外，这里有个在项目中应用的案例：[liquity 项目合约测试 - ForwardTime 的功能实现](https://github.com/liquity/dev/blob/0c61ed8b7181450da214d4f10a1327c2082bd4f4/packages/contracts/utils/testHelpers.js#L1104-L1119)
+这里有个在项目中应用的案例（很实用）：[liquity 项目合约测试 - ForwardTime 的功能实现](https://github.com/liquity/dev/blob/0c61ed8b7181450da214d4f10a1327c2082bd4f4/packages/contracts/utils/testHelpers.js#L1104-L1119)
 ### 通过GUI使用 Ganache
 不太推荐，如果你是新上手，可以通过这个快速熟悉 Ganache。
 
