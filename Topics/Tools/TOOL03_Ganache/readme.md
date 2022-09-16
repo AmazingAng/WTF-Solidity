@@ -35,7 +35,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 Ganache 的主要功能有：
 - 开箱即用，快速启动一个EVM区块链网络（可以设置 miner、出块时间）；
-- 方便的 fork（分叉）已经存在的区块链网络（无序等待完整的同步每个块的信息）；
+- 方便的 fork（分叉）已经存在的区块链网络（无需等待区块同步）；
 - [使用 `console.log`](https://github.com/trufflesuite/ganache#consolelog-in-solidity) 在 Solidity 开发过程中方便的调试，；
 - [快进时间（Fast-forward time）](https://trufflesuite.com/blog/introducing-ganache-7/#6-fast-forward-time)，模拟智能合约在未来时间的状态；
 - 模拟任何一个账户（你可以无需私钥模拟环境中使用任意用户的Token）；
