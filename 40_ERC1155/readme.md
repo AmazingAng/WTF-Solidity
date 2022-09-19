@@ -186,7 +186,7 @@ interface IERC1155Receiver is IERC165 {
     ) external returns (bytes4);
 
     /**
-     * @dev 接受ERC1155批量安全转账`safeTransferFrom` 
+     * @dev 接受ERC1155批量安全转账`safeBatchTransferFrom` 
      * 需要返回 0xbc197c81 或 `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))`
      */
     function onERC1155BatchReceived(
