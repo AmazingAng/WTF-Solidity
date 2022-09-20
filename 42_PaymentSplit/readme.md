@@ -156,21 +156,21 @@ contract PaymentSplit{
     }
 
     /**
-     * @dev 新增受益人_acount以及对应的份额_acountShares。只能在构造器中被调用，不能修改。
+     * @dev 新增受益人_account以及对应的份额_accountShares。只能在构造器中被调用，不能修改。
      */
-    function _addPayee(address _account, uint256 _acountShares) private {
+    function _addPayee(address _account, uint256 _accountShares) private {
         // 检查_account不为0地址
         require(_account != address(0), "PaymentSplitter: account is the zero address");
-        // 检查_acountShares不为0
-        require(_acountShares > 0, "PaymentSplitter: shares are 0");
+        // 检查_accountShares不为0
+        require(_accountShares > 0, "PaymentSplitter: shares are 0");
         // 检查_account不重复
         require(shares[_account] == 0, "PaymentSplitter: account already has shares");
         // 更新payees，shares和totalShares
         payees.push(_account);
-        shares[_account] = _acountShares;
-        totalShares += _acountShares;
+        shares[_account] = _accountShares;
+        totalShares += _accountShares;
         // 释放增加受益人事件
-        emit PayeeAdded(_account, _acountShares);
+        emit PayeeAdded(_account, _accountShares);
     }
 ```
 
