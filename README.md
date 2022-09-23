@@ -122,6 +122,9 @@
 **第47讲：可升级合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/47_Upgrade) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/47_Upgrade/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/p1WBSV9yQ5Zfcui8kaWEoVq71rirv7-I4VqLFAhz4J0)
 
 
+**第48讲：透明代理**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/48_TransparentProxy) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/48_TransparentProxy/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/DmqC4Nyfyo2-pF5x5w9SFYqBr2DHo43AH6IfnePXcH8)
+
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】

@@ -43,8 +43,8 @@ tags:
 它包含`3`个函数
 
 - 构造函数：初始化admin和逻辑合约地址。
-- `fallback()`：回调函数，将调用委托给逻辑合约
-- `upgrade()`：升级函数，改变逻辑合约地址，只能由`admin`调用
+- `fallback()`：回调函数，将调用委托给逻辑合约。
+- `upgrade()`：升级函数，改变逻辑合约地址，只能由`admin`调用。
 
 ```solidity
 // SPDX-License-Identifier: MIT
