@@ -124,6 +124,7 @@
 
 **第48讲：透明代理**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/48_TransparentProxy) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/48_TransparentProxy/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/DmqC4Nyfyo2-pF5x5w9SFYqBr2DHo43AH6IfnePXcH8)
 
+**第49讲：通用可升级代理UUPS**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/49_UUPS) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/49_UUPS/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/KPwXlRDdL2XfBWi7Z9uk8eccbWKG3hffC-RjTgiTLi8)
 
 ## 主题
 ### `工具`
