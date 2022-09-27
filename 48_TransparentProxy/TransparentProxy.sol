@@ -38,7 +38,7 @@ contract TransparentProxy {
     }
 }
 
-// 逻辑合约1
+// 旧逻辑合约
 contract Logic1 {
     // 状态变量和proxy合约一致，防止插槽冲突
     address public implementation; 
@@ -51,7 +51,7 @@ contract Logic1 {
     }
 }
 
-// 逻辑合约2
+// 新逻辑合约
 contract Logic2 {
     // 状态变量和proxy合约一致，防止插槽冲突
     address public implementation; 

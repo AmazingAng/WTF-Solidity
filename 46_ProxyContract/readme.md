@@ -55,7 +55,7 @@ tags:
 
 ```solidity
 contract Proxy {
-    address public immutable implementation; // 逻辑合约地址。implementation合约同一个位置的状态变量类型必须和Proxy合约的相同，不然会报错。
+    address public implementation; // 逻辑合约地址。implementation合约同一个位置的状态变量类型必须和Proxy合约的相同，不然会报错。
 
     /**
      * @dev 初始化逻辑合约地址
