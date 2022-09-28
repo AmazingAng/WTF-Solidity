@@ -6,7 +6,6 @@ pragma solidity ^0.8.4;
 contract MultisigWallet {
     event ExecutionSuccess(bytes32 txHash);    // 交易成功事件
     event ExecutionFailure(bytes32 txHash);    // 交易失败事件
-
     address[] public owners;                   // 多签持有人数组 
     mapping(address => bool) public isOwner;   // 记录一个地址是否为多签
     uint256 public ownerCount;                 // 多签持有人数量
@@ -57,7 +56,7 @@ contract MultisigWallet {
         bytes memory signatures
     ) public payable virtual returns (bool success) {
         // 编码交易数据，计算哈希
-        bytes32 txHash = encodeTransactionData(to, value, data, nonce);
+        bytes32 txHash = encodeTransactionData(to, value, data, nonce, block.chainid);
         nonce++;  // 增加nonce
         checkSignatures(txHash, signatures); // 检查签名
         // 利用call执行交易，并获取交易结果
@@ -129,12 +128,14 @@ contract MultisigWallet {
     /// @param value msg.value，支付的以太坊
     /// @param data calldata
     /// @param _nonce 交易的nonce.
+    /// @param chainid 链id
     /// @return 交易哈希bytes.
     function encodeTransactionData(
         address to,
         uint256 value,
         bytes memory data,
-        uint256 _nonce
+        uint256 _nonce,
+        uint256 chainid
     ) public pure returns (bytes32) {
         bytes32 safeTxHash =
             keccak256(
@@ -142,7 +143,8 @@ contract MultisigWallet {
                     to,
                     value,
                     keccak256(data),
-                    _nonce
+                    _nonce,
+                    chainid
                 )
             );
         return safeTxHash;
