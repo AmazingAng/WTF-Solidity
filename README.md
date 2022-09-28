@@ -126,6 +126,8 @@
 
 **第49讲：通用可升级代理UUPS**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/49_UUPS) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/49_UUPS/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/KPwXlRDdL2XfBWi7Z9uk8eccbWKG3hffC-RjTgiTLi8)
 
+**第50讲：多签钱包**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/DeediQG7FbXhCK68f2iPUoQkpN-gLdiuKhDV99gHpgg)
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
