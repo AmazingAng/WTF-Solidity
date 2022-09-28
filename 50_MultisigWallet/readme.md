@@ -41,6 +41,7 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
     - `value`：交易发送的以太坊数量。
     - `data`：calldata，包含调用函数的选择器和参数。
     - `nonce`：初始为`0`，随着多签合约每笔成功执行的交易递增的值，可以防止签名重放攻击。
+    - `chainid`：链id，防止不同链的签名重放攻击。
 
 3. 收集多签签名（链下）：将上一步的交易ABI编码并计算哈希，得到交易哈希，然后让多签人签名，并拼接到一起的到打包签名。对ABI编码和哈希不了解的，可以看WTF Solidity极简教程[第27讲](https://github.com/AmazingAng/WTFSolidity/blob/main/27_ABIEncode/readme.md)和[第28讲](https://github.com/AmazingAng/WTFSolidity/blob/main/28_Hash/readme.md)。
 
@@ -138,7 +139,7 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
         bytes memory signatures
     ) public payable virtual returns (bool success) {
         // 编码交易数据，计算哈希
-        bytes32 txHash = encodeTransactionData(to, value, data, nonce);
+        bytes32 txHash = encodeTransactionData(to, value, data, nonce, block.chainid);
         nonce++;  // 增加nonce
         checkSignatures(txHash, signatures); // 检查签名
         // 利用call执行交易，并获取交易结果
@@ -225,12 +226,14 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
     /// @param value msg.value，支付的以太坊
     /// @param data calldata
     /// @param _nonce 交易的nonce.
+    /// @param chainid 链id
     /// @return 交易哈希bytes.
     function encodeTransactionData(
         address to,
         uint256 value,
         bytes memory data,
-        uint256 _nonce
+        uint256 _nonce,
+        uint256 chainid
     ) public pure returns (bytes32) {
         bytes32 safeTxHash =
             keccak256(
@@ -238,7 +241,8 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
                     to,
                     value,
                     keccak256(data),
-                    _nonce
+                    _nonce,
+                    chainid
                 )
             );
         return safeTxHash;
@@ -268,8 +272,10 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
     value: 1000000000000000000
     data: 0x
     _nonce: 0
+    chainid: 1
+
     结果
-    交易哈希： 0x60b286f1ebc340b158aaed0ae30d8275b7441ec9819fcd8b0749793fb482a3d4
+    交易哈希： 0xb43ad6901230f2c59c3f7ef027c9a372f199661c61beeec49ef5a774231fc39b
     ```
 
     ![计算交易哈希](./img/50-4.png)
