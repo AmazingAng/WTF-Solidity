@@ -1,7 +1,5 @@
 ![](./img/logo2.jpeg)
 
-**WTF Academy进入Gitcoin GR15，欢迎给我们捐款！[捐款链接](https://gitcoin.co/grants/6090/wtf-solidity)**
-
 # WTF Solidity
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
