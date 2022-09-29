@@ -4,17 +4,17 @@
 我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 路线图根据本仓库star数量来定：
-- [x] 64:star:建立社群：[discord](https://discord.gg/5akcruXrsk) | [微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)
+- [x] 64 :star: 建立社群：[discord](https://discord.gg/5akcruXrsk) | [微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)
 
-- [ ] 128:star:录教学视频
+- [ ] 128 :star: 录教学视频
 
-- [x] 256:star:出进阶内容
+- [x] 256 :star: 出进阶内容
 
-- [x] 512:star:发布官网: [wtf.academy](https://wtf.academy)
+- [x] 512 :star: 发布官网: [wtf.academy](https://wtf.academy)
 
-- [ ] 1024:star:发课程认证（`Soulbound Token`）
+- [ ] 1024 :star: 发课程认证（`Soulbound Token`）
 
-- [ ] 2048:star:发社群NFT
+- [ ] 2048 :star: 发社群NFT
 
 
 ## 入门
