@@ -28,6 +28,11 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 - `override`：子合约重写了父合约中的函数，需要加上`override`关键字。
 
+**注意**：用`override`修饰`public`变量，会重写与变量同名的`getter`函数，例如：
+```solidity
+mapping(address => uint256) public override balanceOf;
+```
+
 ### 简单继承
 我们先写一个简单的爷爷合约`Yeye`，里面包含1个`Log`事件和3个`function`: `hip()`, `pop()`, `yeye()`，输出都是”Yeye”。
 ```solidity
