@@ -78,7 +78,7 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
 
 ```solidity
     address[] public owners;                   // 多签持有人数组 
-    mapping(address => bool) public isOwner;   // 记录一个地址是否为多签
+    mapping(address => bool) public isOwner;   // 记录一个地址是否为多签持有人
     uint256 public ownerCount;                 // 多签持有人数量
     uint256 public threshold;                  // 多签执行门槛，交易至少有n个多签人签名才能被执行。
     uint256 public nonce;                      // nonce，防止签名重放攻击
