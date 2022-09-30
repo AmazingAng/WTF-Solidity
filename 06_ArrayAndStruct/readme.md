@@ -25,14 +25,14 @@ tags:
 ```solidity
     // 固定长度 Array
     uint[8] array1;
-    byte[5] array2;
+    bytes1[5] array2;
     address[100] array3;
 ```
 - 可变长度数组（动态数组）：在声明时不指定数组的长度。用`T[]`的格式声明，其中`T`是元素的类型，例如（`bytes`比较特殊，是数组，但是不用加`[]`）：
 ```solidity
     // 可变长度 Array
     uint[] array4;
-    byte[] array5;
+    bytes1[] array5;
     address[] array6;
     bytes array7;
 ```
