@@ -6,3 +6,6 @@ typechain-types
 artifacts
 .idea
 .history
+**node_modules**
+**cache**
+**artifacts**
