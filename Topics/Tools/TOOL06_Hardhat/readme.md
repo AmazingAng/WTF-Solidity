@@ -186,6 +186,20 @@ npx hardhat test
 npx mocha test/test.js
 ```
 
+看到如下输出，说明测试成功。
+
+```shell
+(node:17142) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+  ERC20 合约测试
+    ✔ 合约部署 (1648ms)
+
+
+  1 passing (2s)
+```
+
 ## 总结
 
 这一讲，我们介绍了Hardhat基础用法。通过Hardhat我们能够工程化solidity的项目，并提供了很多有用的脚手架。在后续的文章中，我们会介绍更多的Hardhat的高级用法，比如如何使用Hardhat的插件，如何使用Hardhat的测试框架等等。
