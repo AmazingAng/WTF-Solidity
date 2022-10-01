@@ -71,14 +71,14 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
 
 `MultisigWallet`合约有`5`个状态变量：
 1. `owners`：多签持有人数组
-2. `isOwner`：`address => bool`的映射，记录一个地址是否为多签。
+2. `isOwner`：`address => bool`的映射，记录一个地址是否为多签持有人。
 3. `ownerCount`：多签持有人数量
 4. `threshold`：多签执行门槛，交易至少有n个多签人签名才能被执行。
 5. `nonce`：初始为`0`，随着多签合约每笔成功执行的交易递增的值，可以防止签名重放攻击。
 
 ```solidity
     address[] public owners;                   // 多签持有人数组 
-    mapping(address => bool) public isOwner;   // 记录一个地址是否为多签
+    mapping(address => bool) public isOwner;   // 记录一个地址是否为多签持有人
     uint256 public ownerCount;                 // 多签持有人数量
     uint256 public threshold;                  // 多签执行门槛，交易至少有n个多签人签名才能被执行。
     uint256 public nonce;                      // nonce，防止签名重放攻击
