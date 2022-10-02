@@ -12,5 +12,8 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "hardhat": "^2.11.2"
+  },
+  "directories": {
+    "test": "test"
   }
 }
