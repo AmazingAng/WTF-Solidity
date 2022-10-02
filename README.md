@@ -138,7 +138,7 @@
 
 **第5讲：Dune，使用Dune可视化区块链数据** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL05_Dune/readme.md)】
 
-**第6讲：Hardhat，使用Hardhat为solidity编写测试代码**【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721/TOOL06_Hardhat/readme.md)】
+**第6讲：Hardhat，以太坊开发环境** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL06_Hardhat/readme.md)】
 
 **第7讲：Foundry -- 以太坊开发工具包** 【[代码](./Topics/Tools/TOOL07_Foundry/readme.md)】
 
