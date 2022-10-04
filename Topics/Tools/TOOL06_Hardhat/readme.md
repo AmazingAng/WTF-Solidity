@@ -210,15 +210,49 @@ npx mocha test/test.js
 
 ## 部署合约
 
-新建一个`scripst`文件夹，我们来编写部署合约脚本。并在该目录下新建一个`deploy.js`
+新建一个`scripts`文件夹，我们来编写部署合约脚本。并在该目录下新建一个`deploy.js`
 
 输入以下代码
 
 ```js
+// 我们可以通过 npx hardhat run <script> 来运行想要的脚本
+// 这里你可以使用 npx hardhat run deploy.js 来运行
+const hre = require("hardhat");
+
+async function main() {
+  const Contract = await hre.ethers.getContractFactory("ERC20");
+  const token = await Contract.deploy("WTF","WTF");
+
+  await token.deployed();
+
+  console.log("成功部署合约:", token.address);
+}
+
+// 运行脚本
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
 
 ```
 
-## 网络配置
+运行以下代码部署合约到本地测试网络
+
+hardhat会提供一个默认的网络，参考：[hardhat默认网络](https://hardhat.org/hardhat-network/docs/overview)
+
+```shell
+npx hardhat run --network hardhat  scripts/deploy.js
+```
+
+看到如下输出，说明合约部署成功：
+
+```shell
+(node:45779) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+成功部署合约: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+```
+
+## 部署合约到Goerli测试网络 ｜ 网络配置
 
 ### 前期准备
 
@@ -262,10 +296,22 @@ module.exports = {
 配置完成运行
 
 ```shell
-npx hardhat run scripts/deploy.js --network goerli
+npx hardhat run --network goerli scripts/deploy.js
 ```
 
 你就可以把你的合约部署到Goerli测试网络了。
+
+看到如下信息，你就成功部署到Goerli测试网络了。
+
+```shell
+(node:46996) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:46999) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+成功部署合约: 0xeEAcef71084Dd1Ae542***9D8F64E3c68e15****
+```
+
+可以通过[etherscan](https://etherscan.io/)查看合约部署情况
 
 同理你也可以配置多个网络，比如`mainnet`，`rinkeby`等。
 
