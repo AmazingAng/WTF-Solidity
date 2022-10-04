@@ -208,6 +208,116 @@ npx mocha test/test.js
   1 passing (2s)
 ```
 
+## 部署合约
+
+在remix中，我们只需要点击一下`deploy`就可以部署合约了，但是在本地hardhat中，我们需要编写一个部署脚本。
+
+新建一个`scripts`文件夹，我们来编写部署合约脚本。并在该目录下新建一个`deploy.js`
+
+输入以下代码
+
+```js
+// 我们可以通过 npx hardhat run <script> 来运行想要的脚本
+// 这里你可以使用 npx hardhat run deploy.js 来运行
+const hre = require("hardhat");
+
+async function main() {
+  const Contract = await hre.ethers.getContractFactory("ERC20");
+  const token = await Contract.deploy("WTF","WTF");
+
+  await token.deployed();
+
+  console.log("成功部署合约:", token.address);
+}
+
+// 运行脚本
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
+
+```
+
+运行以下代码部署合约到本地测试网络
+
+hardhat会提供一个默认的网络，参考：[hardhat默认网络](https://hardhat.org/hardhat-network/docs/overview)
+
+```shell
+npx hardhat run --network hardhat  scripts/deploy.js
+```
+
+看到如下输出，说明合约部署成功：
+
+```shell
+(node:45779) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+成功部署合约: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+```
+
+## 部署合约到Goerli测试网络 ｜ 网络配置
+
+### 前期准备
+
+1. 申请alchemy的api key
+参考【[第4讲：Alchemy, 区块链API和节点基础设施](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】 
+2. 申请Goerli测试代币
+[点击申请](https://goerlifaucet.com/) 登录alchemy账号每天可以领取0.2个代币
+3. 导出私钥
+因为需要把合约部署到Goerli测试网络，所以该测试账号中留有一定的测试代币。导出已有测试代币的账户的私钥，用于部署合约
+
+### 配置网络
+
+在`hardhat.config.js`中，我们可以配置多个网络，这里我们配置`Goerli`测试网络。
+
+
+编辑 `hardhat.config.js`
+
+
+```js
+require("@nomicfoundation/hardhat-toolbox");
+
+// 申请alchemy的api key
+const ALCHEMY_API_KEY = "KEY";
+
+//将此私钥替换为测试账号私钥
+//从Metamask导出您的私钥，打开Metamask和进入“帐户详细信息”>导出私钥
+//注意:永远不要把真正的以太放入测试帐户
+const GOERLI_PRIVATE_KEY = "YOUR GOERLI PRIVATE KEY";
+
+module.exports = {
+  solidity: "0.8.9", // solidity的编译版本
+  networks: {
+    goerli: {
+      url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+      accounts: [GOERLI_PRIVATE_KEY]
+    }
+  }
+};
+```
+
+配置完成运行
+
+```shell
+npx hardhat run --network goerli scripts/deploy.js
+```
+
+你就可以把你的合约部署到Goerli测试网络了。
+
+看到如下信息，你就成功部署到Goerli测试网络了。
+
+```shell
+(node:46996) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:46999) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+成功部署合约: 0xeEAcef71084Dd1Ae542***9D8F64E3c68e15****
+```
+
+可以通过[etherscan](https://etherscan.io/)查看合约部署情况
+
+同理你也可以配置多个网络，比如`mainnet`，`rinkeby`等。
+
+
 ## 总结
 
 这一讲，我们介绍了Hardhat基础用法。通过Hardhat我们能够工程化solidity的项目，并提供了很多有用的脚手架。在后续的文章中，我们会介绍更多的Hardhat的高级用法，例如使用Hardhat的插件、测试框架等等。
