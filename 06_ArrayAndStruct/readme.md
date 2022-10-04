@@ -7,9 +7,9 @@ tags:
   - array/struct
 ---
 
-# Solidity极简入门: 6. 引用类型, array, struct
+# WTF Solidity极简入门: 6. 引用类型, array, struct
 
-我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 

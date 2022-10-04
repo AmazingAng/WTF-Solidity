@@ -60,7 +60,7 @@ BanaCat一期项目是一个部署在polygon区块链上的头像数字艺术品
 
 `_safeMint()` 函数之所以“safe”，是因为它会对铸造者的身份做审查，要是铸造者是个合约，则要求这个合约必须实现`IERC721Receiver`接口，关于`IERC721Receiver`可以参考A大的文章：
 
-[Solidity极简入门 ERC721专题：1. ERC721相关库](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)
+[WTF Solidity极简入门 ERC721专题：1. ERC721相关库](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)
 
 ![Untitled](./img/7.png)
 
