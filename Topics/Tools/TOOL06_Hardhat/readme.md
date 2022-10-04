@@ -210,6 +210,8 @@ npx mocha test/test.js
 
 ## 部署合约
 
+在remix中，我们只需要点击一下`deploy`就可以部署合约了，但是在本地hardhat中，我们需要编写一个部署脚本。
+
 新建一个`scripts`文件夹，我们来编写部署合约脚本。并在该目录下新建一个`deploy.js`
 
 输入以下代码
