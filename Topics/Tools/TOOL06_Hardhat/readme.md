@@ -25,6 +25,7 @@ Hardhat是以太坊最流行的开发环境，它可以帮你编译和部署智�
 打开命令行工具，输入：
 ```shell
 mkdir hardhat-demo
+cd hardhat-demo
 npm init -y
 npm install --save-dev hardhat
 ```
