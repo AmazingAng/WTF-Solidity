@@ -306,7 +306,7 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     /*
-     * 转账函数。通过调整_balances和_owner变量将 tokenId 从 from 转账给 to，同时释放Tranfer事件。
+     * 转账函数。通过调整_balances和_owner变量将 tokenId 从 from 转账给 to，同时释放Transfer事件。
      * 条件:
      * 1. tokenId 被 from 拥有
      * 2. to 不是0地址
@@ -388,7 +388,7 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     /** 
-     * 铸造函数。通过调整_balances和_owners变量来铸造tokenId并转账给 to，同时释放Tranfer事件。铸造函数。通过调整_balances和_owners变量来铸造tokenId并转账给 to，同时释放Tranfer事件。
+     * 铸造函数。通过调整_balances和_owners变量来铸造tokenId并转账给 to，同时释放Transfer事件。铸造函数。通过调整_balances和_owners变量来铸造tokenId并转账给 to，同时释放Transfer事件。
      * 这个mint函数所有人都能调用，实际使用需要开发人员重写，加上一些条件。
      * 条件:
      * 1. tokenId尚不存在。
@@ -404,7 +404,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         emit Transfer(address(0), to, tokenId);
     }
 
-    // 销毁函数，通过调整_balances和_owners变量来销毁tokenId，同时释放Tranfer事件。条件：tokenId存在。
+    // 销毁函数，通过调整_balances和_owners变量来销毁tokenId，同时释放Transfer事件。条件：tokenId存在。
     function _burn(uint tokenId) internal virtual {
         address owner = ownerOf(tokenId);
         require(msg.sender == owner, "not owner of token");
