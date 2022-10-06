@@ -1,17 +1,19 @@
-# WTF Solidity极简入门-工具篇7: Foundry -- 以太坊开发工具包
+# WTF Solidity极简入门-工具篇7: Foundry，以Solidity为中心的开发工具包
 
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用），每周更新1-3讲。
 
-欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
+社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
 ## 什么是 Foundry?
-来自 Foundry [官网 (getfoundry.sh) ](https://getfoundry.sh) 对该工具的介绍：`Foundry是 一个用 Rust编写的用于以太坊应用程序开发的极快、可移植和模块化的工具包 ( Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.)`
+来自 Foundry [官网 (getfoundry.sh) ](https://getfoundry.sh) 对该工具的介绍：
+
+> Foundry是 一个用 Rust编写的用于以太坊应用程序开发的极快、可移植和模块化的工具包 ( Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.)
 
 项目设施：
 - 官网：[https://getfoundry.sh](https://getfoundry.sh)
@@ -103,6 +105,7 @@ $ foundryup
 如果一切顺利，您现在可以使用三个二进制文件：`forge`、`cast` 和 `anvil`。
 
 
+<!--
 
 ---
 
@@ -123,7 +126,7 @@ cargo install --path ./cli --profile local --bins --locked --force
 # 安装 anvil
 cargo install --path ./anvil --profile local --locked --force
 ```
-
+-->
 ### 初始化一个 Foundry 项目
 
 通过 `forge` 的 `forge init` 初始化项目 "hello_wtf"
@@ -184,23 +187,37 @@ contract Counter {          // 一个很简单的 Counter 合约
 
 #### script 目录
 
-参考 Foundry 项目文档中的 [Solidity-scripting](https://book.getfoundry.sh/tutorials/solidity-scripting) 该目录主要由“部署”脚本构成（也可通过该脚本调用 Foundry 提供的 `vm` 功能实现应用业务逻辑之外的高级功能，等同于 Hardhat.js 中的 scripts）
+参考 Foundry 项目文档中的 [Solidity-scripting](https://book.getfoundry.sh/tutorials/solidity-scripting) 该目录主要由“部署”脚本构成（也可通过该脚本调用 Foundry 提供的 `vm` 功能实现应用业务逻辑之外的高级功能，等同于 Hardhat.js 中的 scripts）。
 
-script 目录中的 `./script/Counter.s.sol`
+详见script 目录中的 `./script/Counter.s.sol`：
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.13; // 许可 和 Solidity版本标识
 
-import "forge-std/Script.sol";
+import "forge-std/Script.sol"; // 引入foundry forge中的Script库
+import "../src/Counter.sol"; // 引入要部署的Counter合约
 
+// 部署脚本继承了Script合约
 contract CounterScript is Script {
+    // 可选函数，在每个函数运行之前被调用
     function setUp() public {}
+
+    // 部署合约时会调用run()函数
     function run() public {
-        vm.broadcast(); // 
+        vm.startBroadcast(); // 开始部署
+        new Counter(); // 创建合约
+        vm.stopBroadcast(); // 结束部署
     }
 }
 ```
+
+Foundry的部署脚本是一个用Solidity写的智能合约，虽然它不会被部署，但符合Solidity的规范。你可以用`forge script`运行脚本并部署合约。
+
+```shell
+forge script script/Counter.s.sol:CounterScript
+```
+
 
 #### test 目录
 
@@ -286,7 +303,8 @@ Test result: ok. 2 passed; 0 failed; finished in 9.98ms
 
 ... etc.
 
-  
-
-
 -->
+
+## 总结
+
+这一讲我们介绍了以Solidity为中心的开发工具，并介绍了如何利用Foundry编译，部署，测试智能合约。由于Foundry的部署和测试脚本都是用Solidity编写，减少了开发者学习javascript的时间成本，并提供了更多练习Solidity的机会，推荐大家使用。
