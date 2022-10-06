@@ -178,6 +178,68 @@ There are two ways for a child contract to call the functions of the parent cont
         super.pop();
     }
 ```
+
+#### Multiple inheritance + diamond inheritance 
+
+The diamond inheritance problem, also known as the diamond problem, means that a derived class has two or more base classes at the same time.
+When using the `super` keyword on a multiple + diamond inheritance chain, it should be noted that using the `super` keyword will call the relevant function of each contract in the inheritance chain, not just the nearest parent contract.
+
+We first write a contract called `God`, and let `Adam` and `Eve` inherit this contract. Finally, we let the creation contract `people` inherit from `Adam` and `Eve`, take note that each contract has the two functions of `foo` and `bar` in their respective contracts.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+/* Inheritance tree visualized：
+  God
+ /  \
+Adam Eve
+ \  /
+people
+*/
+contract God {
+    event Log(string message);
+    function foo() public virtual {
+        emit Log("God.foo called");
+    }
+    function bar() public virtual {
+        emit Log("God.bar called");
+    }
+}
+contract Adam is God {
+    function foo() public virtual override {
+        emit Log("Adam.foo called");
+        Adam.foo();
+    }
+    function bar() public virtual override {
+        emit Log("Adam.bar called");
+        super.bar();
+    }
+}
+contract Eve is God {
+    function foo() public virtual override {
+        emit Log("Eve.foo called");
+        Eve.foo();
+    }
+    function bar() public virtual override {
+        emit Log("Eve.bar called");
+        super.bar();
+    }
+}
+contract people is Adam, Eve {
+    function foo() public override(Adam, Eve) {
+        super.foo();
+    }
+    function bar() public override(Adam, Eve) {
+        super.bar();
+    }
+}
+```
+
+In this example, calling the `super.bar()` function in the `people` contract will in turn call the `Eve`, `Adam`, and finally `God` contract's `bar()` function, respectively.
+
+Although `Eve` and `Adam` are both child contracts of the `God` parent contract, the `God` contract will only be called once in the whole process. The specific reason is that Solidity borrows the way of Python, forcing a DAG (directed acyclic graph) composed of base classes to guarantee a specific order based on C3 Linearization. For more information on inheritance and linearization, read the official [Solidity docs here](https://solidity-cn.readthedocs.io/zh/develop/contracts.html?highlight=%E7%BB%A7%E6%89%BF#index-16).
+
 ## Verify on Remix
 - Example of simple inheritance of contracts, it can be observed that the `Father` contract has `Grandfather` functions, too.
   ![13-1](./img/13-1.png)
@@ -193,6 +255,8 @@ There are two ways for a child contract to call the functions of the parent cont
 - Calling the functions from parent contracts
   ![13-8](./img/13-8.png)
   ![13-9](./img/13-9.png)
+- Diamond inheritance example
+   ![13-10](./img/13-10.png)
 
 ## Summary
 In this tutorial, we introduced the basic uses of Solidity's inheritance function, including simple inheritance, multiple inheritance, inheritance of modifiers and constructors, and calling functions from the parent contract.
