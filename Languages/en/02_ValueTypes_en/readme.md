@@ -86,7 +86,7 @@ You can try running these code and see the results of these 4 variables. Correct
 
 ### 3. Addresses
 
-Address type stores a 20-bit value (similar to the size of an Ethereum address). Address types also have a member variable (members of address) which serve as the basis for all contracts. There are ordinary addresses and addresses that can transfer 'ETH' ('payable'). The 'payable' address has two members, 'balance()' and 'tranfer()', making it easy to check 'ETH' balances and transfer funds.
+Address type stores a 20-bit value (similar to the size of an Ethereum address). Address types also have a member variable (members of address) which serve as the basis for all contracts. There are ordinary addresses and addresses that can transfer 'ETH' ('payable'). The 'payable' address has two members, 'balance()' and 'transfer()', making it easy to check 'ETH' balances and transfer funds.
 
 Code:
 
