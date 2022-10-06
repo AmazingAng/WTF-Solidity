@@ -238,24 +238,39 @@ contract people is Adam, Eve {
 
 In this example, calling the `super.bar()` function in the `people` contract will in turn call the `Eve`, `Adam`, and finally `God` contract's `bar()` function, respectively.
 
-Although `Eve` and `Adam` are both child contracts of the `God` parent contract, the `God` contract will only be called once in the whole process. The specific reason is that Solidity borrows the way of Python, forcing a DAG (directed acyclic graph) composed of base classes to guarantee a specific order based on C3 Linearization. For more information on inheritance and linearization, read the official [Solidity docs here](https://solidity-cn.readthedocs.io/zh/develop/contracts.html?highlight=%E7%BB%A7%E6%89%BF#index-16).
+Although `Eve` and `Adam` are both child contracts of the `God` parent contract, the `God` contract will only be called once in the whole process. The specific reason is that Solidity borrows the way of Python, forcing a DAG (directed acyclic graph) composed of base classes to guarantee a specific order based on C3 Linearization. For more information on inheritance and linearization, read the official [Solidity docs here](https://docs.soliditylang.org/en/v0.8.17/contracts.html#multiple-inheritance-and-linearization).
 
 ## Verify on Remix
 - Example of simple inheritance of contracts, it can be observed that the `Father` contract has `Grandfather` functions, too.
+
   ![13-1](./img/13-1.png)
+
   ![13-2](./img/13-2.png)
-- For multiple inheritance of contracts, you can refer to the operation steps of simple inheritance to increase the deployment of the child contracts, and then observe the exposed functions and try to call them to view the logs
+
+* For multiple inheritance of contracts, you can refer to the operation steps of simple inheritance to increase the deployment of the child contracts, and then observe the exposed functions and try to call them to view the logs
+
 - Inheritance of modifiers examples
+
   ![13-3](./img/13-3.png)
+  
   ![13-4](./img/13-4.png)
+  
   ![13-5](./img/13-5.png)
+  
 - Inheritance of constructor examples
+
   ![13-6](./img/13-6.png)
+  
   ![13-7](./img/13-7.png)
+  
 - Calling the functions from parent contracts
+
   ![13-8](./img/13-8.png)
+  
   ![13-9](./img/13-9.png)
+  
 - Diamond inheritance example
+
    ![13-10](./img/13-10.png)
 
 ## Summary
