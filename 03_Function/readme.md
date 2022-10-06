@@ -84,7 +84,7 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
 ```solidity
     // pure: 纯纯牛马
     function addPure(uint256 _number) external pure returns(uint256 new_number){
-        new_number = _number+1;
+        new_number = _number + 1;
     }
 ```
 
