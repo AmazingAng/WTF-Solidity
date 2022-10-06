@@ -7,9 +7,9 @@ tags:
 
 ---
 
-# Solidity极简入门: 47. 可升级合约
+# WTF Solidity极简入门: 47. 可升级合约
 
-我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
@@ -43,8 +43,8 @@ tags:
 它包含`3`个函数
 
 - 构造函数：初始化admin和逻辑合约地址。
-- `fallback()`：回调函数，将调用委托给逻辑合约
-- `upgrade()`：升级函数，改变逻辑合约地址，只能由`admin`调用
+- `fallback()`：回调函数，将调用委托给逻辑合约。
+- `upgrade()`：升级函数，改变逻辑合约地址，只能由`admin`调用。
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -79,7 +79,7 @@ contract SimpleUpgrade {
 
 ### 旧逻辑合约
 
-这个逻辑合约包含`3`个状态变量，与保持代理合约一致，防止插槽冲突。它只有一个函数`foo()`，将代理合约中的`wrods`的值改为`"old"`。
+这个逻辑合约包含`3`个状态变量，与保持代理合约一致，防止插槽冲突。它只有一个函数`foo()`，将代理合约中的`words`的值改为`"old"`。
 
 ```solidity
 // 逻辑合约1
@@ -98,7 +98,7 @@ contract Logic1 {
 
 ### 新逻辑合约
 
-这个逻辑合约包含`3`个状态变量，与保持代理合约一致，防止插槽冲突。它只有一个函数`foo()`，将代理合约中的`wrods`的值改为`"new"`。
+这个逻辑合约包含`3`个状态变量，与保持代理合约一致，防止插槽冲突。它只有一个函数`foo()`，将代理合约中的`words`的值改为`"new"`。
 
 ```solidity
 // 逻辑合约2
@@ -121,11 +121,11 @@ contract Logic2 {
 
 2. 部署可升级合约`SimpleUpgrade`，将`implementation`地址指向把旧逻辑合约。
 
-3. 利用选择器`0xc2985578`，在代理合约中调用旧逻辑合约`Logic1`的`foo()`函数，将`wrods`的值改为`"old"`。
+3. 利用选择器`0xc2985578`，在代理合约中调用旧逻辑合约`Logic1`的`foo()`函数，将`words`的值改为`"old"`。
 
 4. 调用`upgrade()`，将`implementation`地址指向新逻辑合约`Logic2`。
 
-5. 利用选择器`0xc2985578`，在代理合约中调用新逻辑合约`Logic2`的`foo()`函数，将`wrods`的值改为`"new"`。
+5. 利用选择器`0xc2985578`，在代理合约中调用新逻辑合约`Logic2`的`foo()`函数，将`words`的值改为`"new"`。
 
 ## 总结
 

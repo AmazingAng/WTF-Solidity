@@ -1,20 +1,20 @@
 ![](./img/logo2.jpeg)
 
 # WTF Solidity
-我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 路线图根据本仓库star数量来定：
-- [x] 64:star:建立社群：[discord](https://discord.gg/5akcruXrsk) | [微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)
+- [x] 64 :star: 建立社群：[discord](https://discord.gg/5akcruXrsk) | [微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)
 
-- [ ] 128:star:录教学视频
+- [ ] 128 :star: 录教学视频
 
-- [x] 256:star:出进阶内容
+- [x] 256 :star: 出进阶内容
 
-- [x] 512:star:发布官网: [wtf.academy](https://wtf.academy)
+- [x] 512 :star: 发布官网: [wtf.academy](https://wtf.academy)
 
-- [ ] 1024:star:发课程认证（`Soulbound Token`）
+- [ ] 1024 :star: 发课程认证（`Soulbound Token`）
 
-- [ ] 2048:star:发社群NFT
+- [ ] 2048 :star: 发社群NFT
 
 
 ## 入门
@@ -120,6 +120,12 @@
 **第47讲：可升级合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/47_Upgrade) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/47_Upgrade/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/p1WBSV9yQ5Zfcui8kaWEoVq71rirv7-I4VqLFAhz4J0)
 
 
+**第48讲：透明代理**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/48_TransparentProxy) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/48_TransparentProxy/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/DmqC4Nyfyo2-pF5x5w9SFYqBr2DHo43AH6IfnePXcH8)
+
+**第49讲：通用可升级代理UUPS**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/49_UUPS) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/49_UUPS/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/KPwXlRDdL2XfBWi7Z9uk8eccbWKG3hffC-RjTgiTLi8)
+
+**第50讲：多签钱包**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/DeediQG7FbXhCK68f2iPUoQkpN-gLdiuKhDV99gHpgg)
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
@@ -131,6 +137,10 @@
 **第4讲：Alchemy, 区块链API和节点基础设施** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】
 
 **第5讲：Dune，使用Dune可视化区块链数据** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL05_Dune/readme.md)】
+
+**第6讲：Hardhat，以太坊开发环境** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL06_Hardhat/readme.md)】
+
+**第7讲：Foundry -- 以太坊开发工具包** 【[代码](./Topics/Tools/TOOL07_Foundry/readme.md)】
 
 ### `ERC721`
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
