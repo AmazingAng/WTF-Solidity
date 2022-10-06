@@ -1,17 +1,9 @@
 ![](./img/logo2.jpeg)
 
 # WTF Solidity
-# WTF Solidity Tutorial: 10. Control Flow, and Solidity Implementation of Insertion Sort
 
-Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
+## Tutorial Chapters
 
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
-
-Discord: [Link](https://discord.gg/5akcruXrsk)
-
-All codes and tutorials are open-source and available on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
-
-## 入门
 **Chapter 1: HelloWeb3 (3 lines of code)**：[Code](./01_HelloWeb3_en) | [Tutorial](./01_HelloWeb3_en/readme.md)
 
 **Chapter 2: Value Type**：[Code](./02_ValueTypes_en) | [Tutorial](./02_ValueTypes_en/readme.md)
@@ -28,9 +20,19 @@ All codes and tutorials are open-source and available on GitHub: [github.com/Ama
 
 **Chapter 8: Default Value**：[Code](./08_InitialValue_en) | [Tutorial](./08_InitialValue_en/readme.md)
 
-**Chapter9: Constant（constant/immutable）**：[Code](./09_Constant_en) | [Tutorial](./09_Constant/readme.md_en)
+**Chapter 9: Constant（constant/immutable）**：[Code](./09_Constant_en) | [Tutorial](./09_Constant/readme.md_en)
 
 **Chapter 10: Control Flow**：[Code](./10_InsertionSort_en) | [Tutorial](./10_InsertionSort_en/readme.md)
+
+**Chapter 11: Modifiers**：[Code](./11_Modifier_en) | [Tutorial](./11_Modifier_en/readme.md)
+
+**Chapter 12: Event**：[Code](./12_Event_en) | [Tutorial](./12_Event_en/readme.md)
+
+**Chapter 13: Inheritance**：[Code](./13_Inheritance_en) | [Tutorial](./13_Inheritance_en/readme.md)
+
+**Chapter 14: Interface**：[Code](./14_Interface_en) | [Tutorial](./14_Interface_en/readme.md)
+
+**Chapter 15: Errors**：[Code](./15_Errors_en) | [Tutorial](./15_Errors_en/readme.md)
 
 
 ## WT Contributors
