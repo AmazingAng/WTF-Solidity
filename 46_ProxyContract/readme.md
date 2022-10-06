@@ -6,9 +6,9 @@ tags:
 
 ---
 
-# Solidity极简入门: 46. 代理合约
+# WTF Solidity极简入门: 46. 代理合约
 
-我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
@@ -55,7 +55,7 @@ tags:
 
 ```solidity
 contract Proxy {
-    address public immutable implementation; // 逻辑合约地址。implementation合约同一个位置的状态变量类型必须和Proxy合约的相同，不然会报错。
+    address public implementation; // 逻辑合约地址。implementation合约同一个位置的状态变量类型必须和Proxy合约的相同，不然会报错。
 
     /**
      * @dev 初始化逻辑合约地址

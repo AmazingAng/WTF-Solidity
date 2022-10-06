@@ -8,9 +8,9 @@ tags:
   - revert/assert/require
 ---
 
-# Solidity极简入门: 15. 异常
+# WTF Solidity极简入门: 15. 异常
 
-我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
@@ -26,15 +26,21 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 写智能合约经常会出`bug`，`solidity`中的异常命令帮助我们`debug`。
 
 ### Error
-`error`是`solidity 0.8版本`新加的内容，方便且高效（省`gas`）地向用户解释操作失败的原因。人们可以在`contract`之外定义异常。下面，我们定义一个`TransferNotOwner`异常，当用户不是代币`owner`的时候尝试转账，会抛出错误：
+`error`是`solidity 0.8.4版本`新加的内容，方便且高效（省`gas`）地向用户解释操作失败的原因，同时还可以在抛出异常的同时携带参数，帮助开发者更好地调试。人们可以在`contract`之外定义异常。下面，我们定义一个`TransferNotOwner`异常，当用户不是代币`owner`的时候尝试转账，会抛出错误：
 ```solidity
 error TransferNotOwner(); // 自定义error
 ```
+我们也可以定义一个携带参数的异常，来提示尝试转账的账户地址
+```solidity
+error TransferNotOwner(address sender); // 自定义的带参数的error
+```
+
 在执行当中，`error`必须搭配`revert`（回退）命令使用。
 ```solidity
     function transferOwner1(uint256 tokenId, address newOwner) public {
         if(_owners[tokenId] != msg.sender){
             revert TransferNotOwner();
+            // revert TransferNotOwner(msg.sender);
         }
         _owners[tokenId] = newOwner;
     }
@@ -77,10 +83,11 @@ error TransferNotOwner(); // 自定义error
 
 ## 三种方法的gas比较
 我们比较一下三种抛出异常的`gas`消耗，通过remix控制台的Debug按钮，能查到每次函数调用的`gas`消耗分别如下：
+（使用0.8.17版本编译）
 
-1. **`error`方法`gas`消耗**：24445
-2. **`require`方法`gas`消耗**：24743
-3. **`assert`方法`gas`消耗**：24446
+1. **`error`方法`gas`消耗**：24457  (**加入参数后`gas`消耗**：24660)
+2. **`require`方法`gas`消耗**：24755
+3. **`assert`方法`gas`消耗**：24473
 
 我们可以看到，`error`方法`gas`最少，其次是`assert`，`require`方法消耗`gas`最多！因此，`error`既可以告知用户抛出异常的原因，又能省`gas`，大家要多用！（注意，由于部署测试时间的不同，每个函数的`gas`消耗会有所不同，但是比较结果会是一致的。）
 

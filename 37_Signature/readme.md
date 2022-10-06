@@ -8,9 +8,9 @@ tags:
   - Signature
 ---
 
-# Solidity极简入门: 37. 数字签名 Signature
+# WTF Solidity极简入门: 37. 数字签名 Signature
 
-我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
@@ -30,7 +30,7 @@ tags:
 
 以太坊使用的数字签名算法叫双椭圆曲线数字签名算法（`ECDSA`），基于双椭圆曲线“私钥-公钥”对的数字签名算法。它主要起到了[三个作用](https://en.wikipedia.org/wiki/Digital_signature)：
 
-1. **身份认证**：证明签名方时私钥的持有人。
+1. **身份认证**：证明签名方是私钥的持有人。
 2. **不可否认**：发送方不能否认发送过这个消息。
 3. **完整性**：消息在传输过程中无法被修改。
 
@@ -141,7 +141,7 @@ print(f"签名：{signed_message['signature'].hex()}")
 
 ```solidity
     // @dev 从_msgHash和签名_signature中恢复signer地址
-    function recoverSigner(bytes32 _msgHash, bytes memory _signature) public pure returns (address){
+    function recoverSigner(bytes32 _msgHash, bytes memory _signature) internal pure returns (address){
         // 检查签名长度，65是标准r,s,v签名的长度
         require(_signature.length == 65, "invalid signature length");
         bytes32 r;
@@ -181,7 +181,7 @@ _signature：0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d5
      * _signature为签名
      * _signer为签名地址
      */
-    function verify(bytes32 _msgHash, bytes memory _signature, address _signer) public pure returns (bool) {
+    function verify(bytes32 _msgHash, bytes memory _signature, address _signer) internal pure returns (bool) {
         return recoverSigner(_msgHash, _signature) == _signer;
     }
 ```

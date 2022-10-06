@@ -7,9 +7,9 @@ tags:
   - ERC1155
 ---
 
-# Solidity极简入门: 40. ERC1155
+# WTF Solidity极简入门: 40. ERC1155
 
-我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
@@ -186,7 +186,7 @@ interface IERC1155Receiver is IERC165 {
     ) external returns (bytes4);
 
     /**
-     * @dev 接受ERC1155批量安全转账`safeTransferFrom` 
+     * @dev 接受ERC1155批量安全转账`safeBatchTransferFrom` 
      * 需要返回 0xbc197c81 或 `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))`
      */
     function onERC1155BatchReceived(

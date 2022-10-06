@@ -7,9 +7,9 @@ tags:
   - array/struct
 ---
 
-# Solidity极简入门: 6. 引用类型, array, struct
+# WTF Solidity极简入门: 6. 引用类型, array, struct
 
-我最近在重新学solidity，巩固一下细节，也写一个“Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
@@ -25,17 +25,19 @@ tags:
 ```solidity
     // 固定长度 Array
     uint[8] array1;
-    byte[5] array2;
+    bytes1[5] array2;
     address[100] array3;
 ```
-- 可变长度数组（动态数组）：在声明时不指定数组的长度。用`T[]`的格式声明，其中`T`是元素的类型，例如（`bytes`比较特殊，是数组，但是不用加`[]`）：
+- 可变长度数组（动态数组）：在声明时不指定数组的长度。用`T[]`的格式声明，其中`T`是元素的类型，例如：
 ```solidity
     // 可变长度 Array
     uint[] array4;
-    byte[] array5;
+    bytes1[] array5;
     address[] array6;
     bytes array7;
 ```
+**注意**：`bytes`比较特殊，是数组，但是不用加`[]`。另外，不能用`byte[]`声明单字节数组，可以使用`bytes`或`bytes1[]`。
+
 ### 创建数组的规则
 在solidity里，创建数组有一些规则：
 
