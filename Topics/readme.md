@@ -12,7 +12,7 @@
 
 **第6讲：Hardhat，以太坊开发环境** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL06_Hardhat/readme.md)】
 
-**第7讲：Foundry -- 以太坊开发工具包** 【[代码](./Tools/TOOL07_Foundry/readme.md)】
+**第7讲：Foundry，以Solidity为中心的开发工具包** 【[代码](./Tools/TOOL07_Foundry/readme.md)】
 
 ### `ERC721`
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
