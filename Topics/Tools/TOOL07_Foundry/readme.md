@@ -307,4 +307,4 @@ Test result: ok. 2 passed; 0 failed; finished in 9.98ms
 
 ## 总结
 
-这一讲我们介绍了以Solidity为中心的开发工具，并介绍了如何利用Foundry编译，部署，测试智能合约。由于Foundry的部署和测试脚本都是用Solidity编写，减少了开发者学习javascript的时间成本，并提供了更多练习Solidity的机会，推荐大家使用。
+这一讲我们介绍了以Solidity为中心的开发工具，并介绍了如何利用Foundry编译，部署，测试智能合约。由于Foundry的部署和测试脚本都是用Solidity编写，免去了开发者学习javascript的时间成本，并提供了更多练习Solidity的机会，推荐大家使用。
