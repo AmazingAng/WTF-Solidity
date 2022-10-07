@@ -138,22 +138,4 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
 ![3-2.png](./img/3-2.png)
 
 ## 总结
-在这一讲，我们介绍了`solidity`中的函数类型，比较难理解的是`pure`和`view`，在其他语言中没出现过。`solidity`引入`pure`和`view`关键字主要是为了节省`gas`和控制函数权限，这两种方程都是不消耗`gas`的。
-
-事实上如果`pure`和`view`函数被internally的方式调用的话，是会导致消耗的gas更多的。例如
-```solidity
-    function callViewFunctionInternally() external returns(uint256 new_number) {
-        // uint256 a = addView();
-        return 1;
-    }
-```
-这个函数会消耗21489 gas，但是如果我们在它里面加上一个view函数的调用呢？如果view函数确实不会消耗gas的话，理论上我们仍然只会消耗21489 gas，然而？
-```solidity
-    function callViewFunctionInternally() external returns(uint256 new_number) {
-        uint256 a = addView();
-        return 1;
-    }
-```
-这个函数会消耗23831 gas，这说明如果`pure`和`view`函数被internally的方式调用的话，是会导致消耗的gas更多的。英文原话为：
-We also have state modifiers, which tell us how the function interacts with the BlockChain: view tells us that by running the function, no data will be saved/changed. pure tells us that not only does the function not save any data to the blockchain, but it also doesn't read any data from the blockchain. Both of these don't cost any gas to call if they're called externally from outside the contract (but they do cost gas if called internally by another function).
-
+在这一讲，我们介绍了`solidity`中的函数类型，比较难理解的是`pure`和`view`，在其他语言中没出现过。`solidity`引入`pure`和`view`关键字主要是为了节省`gas`和控制函数权限：如果用户直接调用`pure`/`view`方程是不消耗`gas`的（合约中非`pure`/`view`函数调用它们则会改写链上状态，需要付gas）。
