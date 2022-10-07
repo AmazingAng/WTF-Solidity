@@ -19,7 +19,7 @@ tags:
 
 -----
 
-这一讲，我们将介绍代理合约的选择器冲突（Selector Clash），以及这一问题的解决方案：透明代理（Transparent Proxy）。教学代码由`OpenZepplin`的`TransparentUpgradeableProxy`简化而成，不应用于生产。
+这一讲，我们将介绍代理合约的选择器冲突（Selector Clash），以及这一问题的解决方案：透明代理（Transparent Proxy）。教学代码由`OpenZepplin`的[TransparentUpgradeableProxy](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/proxy/transparent/TransparentUpgradeableProxy.sol)简化而成，不应用于生产。
 
 ## 选择器冲突
 
@@ -34,6 +34,8 @@ contract Foo {
     function collate_propagate_storage(bytes16) external {}
 }
 ```
+
+![48-1.png](./img/48-1.png)
 
 示例中，函数`burn()`和`collate_propagate_storage()`的选择器都为`0x42966c68`，是一样的，这种情况被称为“选择器冲突”。在这种情况下，`EVM`无法通过函数选择器分辨用户调用哪个函数，因此该合约无法通过编译。
 
@@ -126,17 +128,23 @@ contract Logic2 {
 ## `Remix`实现
 
 1. 部署新旧逻辑合约`Logic1`和`Logic2`。
+![48-2.png](./img/48-2.png)
+![48-3.png](./img/48-3.png)
 
 2. 部署透明代理合约`TranparentProxy`，将`implementation`地址指向把旧逻辑合约。
+![48-4.png](./img/48-4.png)
 
 3. 利用选择器`0xc2985578`，在代理合约中调用旧逻辑合约`Logic1`的`foo()`函数。调用将失败，因为管理员不能调用逻辑合约。
+![48-5.png](./img/48-5.png)
 
 4. 切换新钱包，利用选择器`0xc2985578`，在代理合约中调用旧逻辑合约`Logic1`的`foo()`函数，将`words`的值改为`"old"`，调用将成功。
+![48-6.png](./img/48-6.png)
 
 5. 切换回管理员钱包，调用`upgrade()`，将`implementation`地址指向新逻辑合约`Logic2`。
+![48-7.png](./img/48-7.png)
 
 6. 切换新钱包，利用选择器`0xc2985578`，在代理合约中调用新逻辑合约`Logic2`的`foo()`函数，将`words`的值改为`"new"`。
-
+![48-8.png](./img/48-8.png)
 
 ## 总结
 
