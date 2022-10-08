@@ -49,7 +49,7 @@ contract HelloWeb3{
 ```solidity
 // SPDX-License-Identifier: MIT
 ```
-2. 第2行声明源文件所用的solidity版本，因为不同版本语法有差别。这行代码意思是源文件将不允许低于 0.8.4 版本并且不高于 0.9.0 的编译器编译（第二个条件由`^`提供）。Solidity 语句以分号（;）结尾。
+2. 第2行声明源文件所用的solidity版本，因为不同版本语法有差别。这行代码意思是源文件将不允许小于 0.8.4 版本或大于等于 0.9.0 的编译器编译（第二个条件由`^`提供）。Solidity 语句以分号（;）结尾。
 ```solidity
 pragma solidity ^0.8.4;
 ```
