@@ -20,7 +20,7 @@ tags:
 ## Solidity中的函数
 solidity官方文档里把函数归到数值类型，但我觉得差别很大，所以单独分一类。我们先看一下solidity中函数的形式：
 ```solidity
-    function (<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
+    function <function name>(<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
 ```
 看着些复杂，咱们从前往后一个一个看（方括号中的是可写可不写的关键字）：
 
