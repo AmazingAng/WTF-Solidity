@@ -101,22 +101,22 @@ contract DutchAuction is Ownable, ERC721 {
 当`block.timestamp`处于两者之间时，则计算出当前的衰减价格。
 
 ```solidity
-    // 获取拍卖实时价格
-    function getAuctionPrice(uint256 _auctionStartTime)
-        public
-        view
-        returns (uint256)
-    {
-        if (block.timestamp < _auctionStartTime) {
-        return AUCTION_START_PRICE;
-        }else if (block.timestamp - _auctionStartTime >= AUCTION_TIME) {
-        return AUCTION_END_PRICE;
-        } else {
-        uint256 steps = (block.timestamp - _auctionStartTime) /
-            AUCTION_DROP_INTERVAL;
-        return AUCTION_START_PRICE - (steps * AUCTION_DROP_PER_STEP);
-        }
+  // 获取拍卖实时价格
+  function getAuctionPrice(uint256 _auctionStartTime)
+    public
+    view
+    returns (uint256)
+  {
+    if (block.timestamp < _auctionStartTime) {
+      return AUCTION_START_PRICE;
+    } else if (block.timestamp - _auctionStartTime >= AUCTION_TIME) {
+      return AUCTION_END_PRICE;
+    } else {
+      uint256 steps = (block.timestamp - _auctionStartTime) /
+        AUCTION_DROP_INTERVAL;
+      return AUCTION_START_PRICE - (steps * AUCTION_DROP_PER_STEP);
     }
+  }
 ```
 
 - 用户拍卖并铸造`NFT`：用户通过调用`auctionMint()`函数，支付`ETH`参加荷兰拍卖并铸造`NFT`。
@@ -124,42 +124,42 @@ contract DutchAuction is Ownable, ERC721 {
 该函数首先检查拍卖是否开始/铸造是否超出`NFT`总量。接着，合约通过`getAuctionPrice()`和铸造数量计算拍卖成本，并检查用户支付的`ETH`是否足够：如果足够，则将`NFT`铸造给用户，并退回超额的`ETH`；反之，则回退交易。
 
 ```solidity
-    // 拍卖mint函数
-    function auctionMint(uint256 quantity) external payable{
-        uint256 _saleStartTime = uint256(auctionStartTime); // 建立local变量，减少gas花费
-        require(
-        _saleStartTime != 0 && block.timestamp >= _saleStartTime,
-        "sale has not started yet"
-        ); // 检查拍卖是否开始
-        require(
-        totalSupply() + quantity <= COLLECTOIN_SIZE,
-        "not enough remaining reserved for auction to support desired mint amount"
-        ); // 检查是否超过NFT上限
+  // 拍卖mint函数
+  function auctionMint(uint256 quantity) external payable {
+    uint256 _saleStartTime = uint256(auctionStartTime); // 建立local变量，减少gas花费
+    require(
+      _saleStartTime != 0 && block.timestamp >= _saleStartTime,
+      "sale has not started yet"
+    ); // 检查拍卖是否开始
+    require(
+      totalSupply() + quantity <= COLLECTOIN_SIZE,
+      "not enough remaining reserved for auction to support desired mint amount"
+    ); // 检查是否超过NFT上限
 
-        uint256 totalCost = getAuctionPrice(auctionStartTime) * quantity; // 计算mint成本
-        require(msg.value >= totalCost, "Need to send more ETH."); // 检查用户是否支付足够ETH
+    uint256 totalCost = getAuctionPrice(auctionStartTime) * quantity; // 计算mint成本
+    require(msg.value >= totalCost, "Need to send more ETH."); // 检查用户是否支付足够ETH
 
-        // Mint NFT
-        for(uint i = 0; i < quantity; i++) {
-            uint mintIndex = totalSupply();
-            _mint(msg.sender, mintIndex);
-            _addTokenToAllTokensEnumeration(mintIndex);
-        }
-        // 多余ETH退款
-        if (msg.value > totalCost) {
-            payable(msg.sender).transfer(msg.value - totalCost);
-        }
+    // Mint NFT
+    for (uint256 i = 0; i < quantity; i++) {
+      uint256 mintIndex = totalSupply();
+      _mint(msg.sender, mintIndex);
+      _addTokenToAllTokensEnumeration(mintIndex);
     }
+    // 多余ETH退款
+    if (msg.value > totalCost) {
+      payable(msg.sender).transfer(msg.value - totalCost);
+    }
+  }
 ```
 
 - 项目方取出筹集的`ETH`：项目方可以通过`withdrawMoney()`函数提走拍卖筹集的`ETH`。
 
 ```solidity
-    // 提款函数，onlyOwner
-    function withdrawMoney() external onlyOwner {
-        (bool success, ) = msg.sender.call{value: address(this).balance}("");
-        require(success, "Transfer failed.");
-    }
+  // 提款函数，onlyOwner
+  function withdrawMoney() external onlyOwner {
+    (bool success, ) = msg.sender.call{value: address(this).balance}(""); // call函数的调用方式详见第22讲
+    require(success, "Transfer failed.");
+  }
 ```
 ## Remix演示
 
