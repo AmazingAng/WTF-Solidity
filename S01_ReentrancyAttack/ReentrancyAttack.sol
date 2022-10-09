@@ -56,7 +56,7 @@ contract Attack {
     }
 }
 
-// 利用 检查-效果-交互模式（checks-effect-interaction）防止重入攻击
+// 利用 检查-影响-交互模式（checks-effect-interaction）防止重入攻击
 contract GoodBank {
     mapping (address => uint256) public balanceOf;
 

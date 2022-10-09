@@ -155,3 +155,61 @@ contract Attack {
 3. 调用`Atack`合约的`attack()`函数发动攻击。
 4. 调用`Bank`合约的`getBalance()`函数，发现余额已被提空。
 5. 调用`Attack`合约的`getBalance()`函数，可以看到余额变为`21 ETH`，重入攻击成功。
+
+## 预防办法
+
+目前主要有两种办法来预防可能的重入攻击漏洞： 检查-影响-交互模式（checks-effect-interaction）和重入锁。
+
+### 检查-影响-交互模式
+
+检查-影响-交互模式强调编写函数时，要先检查状态变量是否符合要求，紧接着更新状态变量（例如余额），最后再和别的合约交互。如果我们将`Bank`合约`withdraw()`函数中的更新余额提前到转账`ETH`之前，就可以修复漏洞：
+
+```solidity 
+function withdraw() external {
+    uint256 balance = balanceOf[msg.sender];
+    require(balance > 0, "Insufficient balance");
+    // 检查-效果-交互模式（checks-effect-interaction）：先更新余额变化，再发送ETH
+    // 重入攻击的时候，balanceOf[msg.sender]已经被更新为0了，不能通过上面的检查。
+    balanceOf[msg.sender] = 0;
+    (bool success, ) = msg.sender.call{value: balance}("");
+    require(success, "Failed to send Ether");
+}
+```
+
+### 重入锁
+
+重入锁是一种防止重入函数的修饰器（modifier），它包含一个默认为`0`的状态变量`_status`。被`nonReentrant`重入锁修饰的函数，在第一次调用时会检查`_status`是否为`0`，紧接着将`_status`的值改为`1`，调用结束后才会再改为`0`。这样，当攻击合约在调用结束前第二次的调用就会报错，重入攻击失败。如果你不了解修饰器，可以阅读[WTF Solidity极简教程第11讲：修饰器](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Modifier/readme.md)。
+
+```solidity
+uint256 private _status; // 重入锁
+
+// 重入锁
+modifier nonReentrant() {
+    // 在第一次调用 nonReentrant 时，_status 将是 0
+    require(_status == 0, "ReentrancyGuard: reentrant call");
+    // 在此之后对 nonReentrant 的任何调用都将失败
+    _status = 1;
+    _;
+    // 调用结束，将 _status 恢复为0
+    _status = 0;
+}
+```
+
+只需要用`nonReentrant`重入锁修饰`withdraw()`函数，就可以预防重入攻击了。
+
+```solidity
+// 用重入锁保护有漏洞的函数
+function withdraw() external nonReentrant{
+    uint256 balance = balanceOf[msg.sender];
+    require(balance > 0, "Insufficient balance");
+
+    (bool success, ) = msg.sender.call{value: balance}("");
+    require(success, "Failed to send Ether");
+
+    balanceOf[msg.sender] = 0;
+}
+```
+
+## 总结
+
+这一讲，我们介绍了以太坊最常见的一种攻击——重入攻击，并编了一个`0xAA`抢银行的小故事方便大家理解，最后我们介绍了两种预防重入攻击的办法：检查-影响-交互模式（checks-effect-interaction）和重入锁。在例子中，黑客利用了回退函数在目标合约进行`ETH`转账时进行重入攻击。实际业务中，`ERC721`和`ERC1155`的`safeTransfer()`和`safeTransferFrom()`安全转账函数，还有`ERC777`的回退函数，都可能会引发重入攻击。对于新手，我的建议是用重入锁保护所有可能改变合约状态的`external`函数，虽然可能会消耗更多的`gas`，但是可以预防更大的损失。
