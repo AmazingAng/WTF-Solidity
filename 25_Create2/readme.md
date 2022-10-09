@@ -84,7 +84,7 @@ contract PairFactory2{
 
         function createPair2(address tokenA, address tokenB) external returns (address pairAddr) {
             require(tokenA != tokenB, 'IDENTICAL_ADDRESSES'); //避免tokenA和tokenB相同产生的冲突
-            // 计算用tokenA和tokenB地址计算salt
+            // 用tokenA和tokenB地址计算salt
             (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA); //将tokenA和tokenB按大小排序
             bytes32 salt = keccak256(abi.encodePacked(token0, token1));
             // 用create2部署新合约
