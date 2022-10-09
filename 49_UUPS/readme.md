@@ -120,15 +120,25 @@ contract UUPS2{
 
 1. 部署UUPS新旧逻辑合约`UUPS1`和`UUPS2`。
 
-2. 部署UUPS代理合约`UUPSProxy`，将`implementation`地址指向把旧逻辑合约`UUPS1`。
+![demo](./img/49-3.jpg)
+
+2. 部署UUPS代理合约`UUPSProxy`，将`implementation`地址指向旧逻辑合约`UUPS1`。
+
+![demo](./img/49-4.jpg)
 
 3. 利用选择器`0xc2985578`，在代理合约中调用旧逻辑合约`UUPS1`的`foo()`函数，将`words`的值改为`"old"`。
 
-4. 利用在线ABI编码器(HashEx)[https://abi.hashex.org/]获得二进制编码，调用升级函数`upgrade()`，将`implementation`地址指向新逻辑合约`UUPS2`。
+![demo](./img/49-5.jpg)
+
+4. 利用在线ABI编码器[HashEx](https://abi.hashex.org/)获得二进制编码，调用升级函数`upgrade()`，将`implementation`地址指向新逻辑合约`UUPS2`。
 
 ![编码](./img/49-3.png)
 
+![demo](./img/49-6.jpg)
+
 5. 利用选择器`0xc2985578`，在代理合约中调用新逻辑合约`UUPS2`的`foo()`函数，将`words`的值改为`"new"`。
+
+![demo](./img/49-7.jpg)
 
 ## 总结
 
