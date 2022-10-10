@@ -40,7 +40,7 @@ tags:
 
 1. 签名者利用`私钥`（隐私的）对`消息`（公开的）创建`签名`（公开的）。
 2. 其他人使用`消息`（公开的）和`签名`（公开的）恢复签名者的`公钥`（公开的）并验证签名。
-我们将配合`ECDSA`库合讲解这两个部分。本教程所用的`私钥`，`公钥`，`消息`，`以太坊签名消息`，`签名`如下所示：
+我们将配合`ECDSA`库讲解这两个部分。本教程所用的`私钥`，`公钥`，`消息`，`以太坊签名消息`，`签名`如下所示：
 ```
 私钥: 0x227dbb8586117d55284e26620bc76534dfbd2394be34cf4a09cb775d593b6f2b
 公钥: 0xe16C1623c1AA7D919cd2241d8b36d9E79C1Be2A2
@@ -71,7 +71,7 @@ tags:
 ```solidity
     /**
      * @dev 返回 以太坊签名消息
-     * `hash`：消息哈希 
+     * `hash`：消息
      * 遵从以太坊签名标准：https://eth.wiki/json-rpc/API#eth_sign[`eth_sign`]
      * 以及`EIP191`:https://eips.ethereum.org/EIPS/eip-191`
      * 添加"\x19Ethereum Signed Message:\n32"字段，防止签名的是可执行交易。
@@ -90,7 +90,7 @@ tags:
 ![以太坊签名消息](./img/37-3.png)
 
 
-**3-1. 利用钱包签名：** 日常操作中，大部分用户都是通过这种方式进行签名。在获取到需要签名的消息之后，我们需要使用`metamask`钱包进行签名。`metamask`的`personal_sign`方法会自动把`消息哈希`转换为`以太坊签名消息`，然后发起签名。所以我们只需要输入`消息哈希hash`和`签名者钱包account`即可。需要注意的是输入的`签名者钱包account`需要和`metamask`当前连接的account一致才能使用。
+**3-1. 利用钱包签名：** 日常操作中，大部分用户都是通过这种方式进行签名。在获取到需要签名的消息之后，我们需要使用`metamask`钱包进行签名。`metamask`的`personal_sign`方法会自动把`消息`转换为`以太坊签名消息`，然后发起签名。所以我们只需要输入`消息`和`签名者钱包account`即可。需要注意的是输入的`签名者钱包account`需要和`metamask`当前连接的account一致才能使用。
 
 因此首先把例子中的`私钥`导入到小狐狸钱包，然后打开浏览器的`console`页面：`Chrome菜单-更多工具-开发者工具-Console`。在连接钱包的状态下（如连接opensea，否则会出现错误），依次输入以下指令进行签名：
 
@@ -172,6 +172,7 @@ _msgHash：0xb42ca4636f721c7a331923e764587e98ec577cea1a185f60dfcc14dbb9bd900b
 _signature：0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d559b12d220f99f41d17651b0c1c6a669d346a397f8541760d6b32a5725378b241c
 ```
 ![通过签名和消息恢复公钥](./img/37-8.png)
+
 **5. 对比公钥并验证签名：** 接下来，我们只需要比对恢复的`公钥`与签名者公钥`_signer`是否相等：若相等，则签名有效；否则，签名无效：
 
 ```solidity
@@ -238,7 +239,7 @@ contract SignatureNFT is ERC721 {
      * 将mint地址（address类型）和tokenId（uint256类型）拼成消息msgHash
      * _account: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
      * _tokenId: 0
-     * 对应的消息哈希: 0x1bf2c0ce4546651a1a2feb457b39d891a6b83931cc2454434f39961345ac378c
+     * 对应的消息: 0x1bf2c0ce4546651a1a2feb457b39d891a6b83931cc2454434f39961345ac378c
      */
     function getMessageHash(address _account, uint256 _tokenId) public pure returns(bytes32){
         return keccak256(abi.encodePacked(_account, _tokenId));
