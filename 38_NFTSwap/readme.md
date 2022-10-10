@@ -112,7 +112,7 @@ contract NFTSwap is IERC721Receiver{
         
         // 将NFT转给卖家
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
-         delete nftList[_nftAddr][_tokenId]; // 删除order
+        delete nftList[_nftAddr][_tokenId]; // 删除order
       
         // 释放Revoke事件
         emit Revoke(msg.sender, _nftAddr, _tokenId);
@@ -291,4 +291,4 @@ contract NFTSwap is IERC721Receiver{
 ![](./img/38-12.png)
 
 ## 总结
-这一讲，我们建立了一个零手续费的去中心化`NFT`交易所。`OpenSea`虽然对`NFT`的发展做了很大贡献，但它的缺点也非常明显：高手续费、不发币回馈用户、交易机制容易被钓鱼导致用户资产丢失。目前`Looksrare`和`dydx`等新的`NFT`交易平台正在挑战`OpenSea`的位置，`Uniswap`也在研究新的`NFT`交易所。相信不久的将来，我们会用到更好的`NFT`交易所。
+这一讲，我们建立了一个零手续费的去中心化`NFT`交易所。`OpenSea`虽然对`NFT`的发展做了很大贡献，但它的缺点也非常明显：高手续费、不发币回馈用户、交易机制容易被钓鱼导致用户资产丢失，用户直接将NFT所有权转到Opensea合约而不只是简单的授权。目前`Looksrare`和`dydx`等新的`NFT`交易平台正在挑战`OpenSea`的位置，`Uniswap`也在研究新的`NFT`交易所。相信不久的将来，我们会用到更好的`NFT`交易所。
