@@ -33,7 +33,7 @@ discord：[WTF Academy](https://discord.gg/5akcruXrsk)
 1. 在创建合约时定好分账受益人`payees`和每人的份额`shares`。
 2. 份额可以是相等，也可以是其他任意比例。
 3. 在该合约收到的所有`ETH`中，每个受益人将能够提取与其分配的份额成比例的金额。
-4. 分账合约遵循`Pull Payment`模式，付款不会自动转入账户，而是保存在此合约中。受益通过调用`release()`函数触发实际转账。
+4. 分账合约遵循`Pull Payment`模式，付款不会自动转入账户，而是保存在此合约中。受益人通过调用`release()`函数触发实际转账。
 
 ```solidity
 // SPDX-License-Identifier: MIT
