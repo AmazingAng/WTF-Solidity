@@ -120,7 +120,7 @@ contract Identifier is Base1 {
 上面的Identifier可以直接在代码中使用exactDividedBy2And3这个修饰器，也可以像下面一样重写修饰器。
 ```solidity
     modifier exactDividedBy2And3(uint _a) override {
-    require(_a % 2 == 0 && _a % 3 == 0);
+        require(_a % 2 == 0 && _a % 3 == 0);
         _;
     }
 ```
