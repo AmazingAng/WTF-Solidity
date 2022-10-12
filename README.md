@@ -130,7 +130,7 @@
 
 **S01：重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S01_ReentrancyAttack) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S01_ReentrancyAttack/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/SrNu6LLzwH7qlTVKbJY6lkTpmadGqUXw0L8iUMzfMxo)
 
-**S01：选择器碰撞**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S02_SelectorClash) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S02_SelectorClash/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/5rwcsBZzphdlKZj4MoIpn8aqwQ1MzQ8qy50ZEGNU_HU)
+**S02：选择器碰撞**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S02_SelectorClash) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S02_SelectorClash/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/5rwcsBZzphdlKZj4MoIpn8aqwQ1MzQ8qy50ZEGNU_HU)
 
 ## 主题
 ### `工具`
