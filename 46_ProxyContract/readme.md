@@ -68,7 +68,7 @@ contract Proxy {
 `Proxy`的回调函数将外部对本合约的调用委托给 `Logic` 合约。这个回调函数很别致，它利用内联汇编（inline assembly），让本来不能有返回值的回调函数有了返回值。其中用到的内联汇编操作码：
 
 - `calldatacopy(t, f, s)`：将calldata（输入数据）从位置`f`开始复制`s`字节到mem（内存）的位置`t`。
-- `delegatecall(g, a, in, insize, out, outsize)`：调用地址`a`的合约，输入为`mem[in..(in+insize))` ，输出为`mem[out..(out+outsize))`， 提供`g`的gas 和`v` wei的以太坊。这个操作码在错误时返回`0`，在成功时返回`1`。
+- `delegatecall(g, a, in, insize, out, outsize)`：调用地址`a`的合约，输入为`mem[in..(in+insize))` ，输出为`mem[out..(out+outsize))`， 提供`g`wei的以太坊gas。这个操作码在错误时返回`0`，在成功时返回`1`。
 - `returndatacopy(t, f, s)`：将returndata（输出数据）从位置`f`开始复制`s`字节到mem（内存）的位置`t`。
 - `switch`：基础版`if/else`，不同的情况`case`返回不同值。可以有一个默认的`default`情况。
 - `return(p, s)`：终止函数执行, 返回数据`mem[p..(p+s))`。
@@ -200,6 +200,8 @@ contract Caller{
 
 ## 总结
 
-这一讲，我们介绍了代理模式和简单的代理合约。代理合约利用`delegatecall`将函数调用委托给了另一个逻辑合约，使得数据和逻辑分别由不同合约负责。并且，它利用内联汇编黑魔法，让没有返回值的回调函数也可以返回数据。下一讲，我们会介绍可升级代理合约。
+这一讲，我们介绍了代理模式和简单的代理合约。代理合约利用`delegatecall`将函数调用委托给了另一个逻辑合约，使得数据和逻辑分别由不同合约负责。并且，它利用内联汇编黑魔法，让没有返回值的回调函数也可以返回数据。前面留给大家的问题是：为什么通过Proxy调用`increment()`会返回1呢？按照我们在[第23讲Delegatecall](https://github.com/AmazingAng/WTF-Solidity/tree/main/23_Delegatecall)中所说的，当Caller合约通过Proxy合约来`delegatecall` Logic合约的时候，如果Logic合约函数改变或读取一些状态变量的时候都会在Proxy的对应变量上操作，而这里Proxy合约的`x`变量的值是0（因为从来没有设置过`x`这个变量，即Proxy合约的storage区域所对应位置值为0），所以通过Proxy调用`increment()`会返回1。
+
+下一讲，我们会介绍可升级代理合约。
 
 代理合约虽然很强大，但是它非常容易出`bug`，用的时候最好直接复制[OpenZepplin](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/proxy)的模版合约。
