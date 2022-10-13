@@ -12,6 +12,8 @@ Community: [Discord](https://discord.wtf.academy) | [Website: wtf.academy](https
 
 Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
+**NOTE: the English Version of WTF Solidity is preliminary and requires further community review.**
+
 ## Intro
 
 **Chapter 1: HelloWeb3 (3 lines of code)**：[Code](./01_HelloWeb3_en) | [Tutorial](./01_HelloWeb3_en/readme.md)
