@@ -152,6 +152,7 @@ predictedAddress = address(uint160(uint(keccak256(abi.encodePacked(
                 keccak256(abi.encodePacked(type(Pair).creationCode, abi.encode(address(this))))
             )))));
 ```
+
 ### 在remix上验证
 1. 首先用`WBNB`和`PEOPLE`的地址哈希作为`salt`来计算出`Pair`合约的地址
 2. 调用`PairFactory2.createPair2`传入参数为`WBNB`和`PEOPLE`的地址，获取出创建的`pair`合约地址
