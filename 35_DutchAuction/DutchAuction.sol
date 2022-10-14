@@ -18,9 +18,7 @@ contract DutchAuction is Ownable, ERC721 {
     string private _baseTokenURI;   // metadata URI
     uint256[] private _allTokens; // 记录所有存在的tokenId 
 
-    constructor() ERC721("WTF Dutch Auctoin", "WTF Dutch Auctoin") {
-        auctionStartTime = block.timestamp;
-    }
+    constructor() ERC721("WTF Dutch Auctoin", "WTF Dutch Auctoin") {}
 
     /**
      * ERC721Enumerable中totalSupply函数的实现
