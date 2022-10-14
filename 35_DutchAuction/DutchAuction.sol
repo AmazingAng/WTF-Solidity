@@ -18,7 +18,10 @@ contract DutchAuction is Ownable, ERC721 {
     string private _baseTokenURI;   // metadata URI
     uint256[] private _allTokens; // 记录所有存在的tokenId 
 
-    constructor() ERC721("WTF Dutch Auctoin", "WTF Dutch Auctoin") {}
+    //设定拍卖起始时间：我们在构造函数中会声明当前区块时间为起始时间，项目方也可以通过`setAuctionStartTime(uint32)`函数来调整
+    constructor() ERC721("WTF Dutch Auctoin", "WTF Dutch Auctoin") {
+        auctionStartTime = block.timestamp;
+    }
 
     /**
      * ERC721Enumerable中totalSupply函数的实现
