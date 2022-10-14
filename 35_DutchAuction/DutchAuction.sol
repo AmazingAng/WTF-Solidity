@@ -64,17 +64,17 @@ contract DutchAuction is Ownable, ERC721 {
     }
 
     // 获取拍卖实时价格
-    function getAuctionPrice(uint256 _auctionStartTime)
+    function getAuctionPrice()
         public
         view
         returns (uint256)
     {
-        if (block.timestamp < _auctionStartTime) {
+        if (block.timestamp < auctionStartTime) {
         return AUCTION_START_PRICE;
-        }else if (block.timestamp - _auctionStartTime >= AUCTION_TIME) {
+        }else if (block.timestamp - auctionStartTime >= AUCTION_TIME) {
         return AUCTION_END_PRICE;
         } else {
-        uint256 steps = (block.timestamp - _auctionStartTime) /
+        uint256 steps = (block.timestamp - auctionStartTime) /
             AUCTION_DROP_INTERVAL;
         return AUCTION_START_PRICE - (steps * AUCTION_DROP_PER_STEP);
         }
