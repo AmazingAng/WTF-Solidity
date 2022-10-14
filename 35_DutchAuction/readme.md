@@ -146,7 +146,7 @@ contract DutchAuction is Ownable, ERC721 {
       }
       // 多余ETH退款
       if (msg.value > totalCost) {
-          payable(msg.sender).transfer(msg.value - totalCost);
+          payable(msg.sender).transfer(msg.value - totalCost); //注意一下这里是否有重入的风险
       }
   }
 ```
