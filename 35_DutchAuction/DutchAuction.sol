@@ -39,8 +39,9 @@ contract DutchAuction is Ownable, ERC721 {
 
     // 拍卖mint函数
     function auctionMint(uint256 quantity) external payable{
+        uint256 _saleStartTime = uint256(auctionStartTime); // 建立local变量，减少gas花费
         require(
-        auctionStartTime != 0 && block.timestamp >= auctionStartTime,
+        _saleStartTime != 0 && block.timestamp >= _saleStartTime,
         "sale has not started yet"
         ); // 检查是否设置起拍时间，拍卖是否开始
         require(
