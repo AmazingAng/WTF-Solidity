@@ -18,7 +18,7 @@ tags:
 
 -----
 
-这一讲，我们介绍代理合约（Proxy Contract）。教学代码由OpenZepplin的[Proxy合约](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/proxy/Proxy.sol)简化而来。
+这一讲，我们介绍代理合约（Proxy Contract）。教学代码由OpenZeppelin的[Proxy合约](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/proxy/Proxy.sol)简化而来。
 
 ## 代理模式
 
@@ -41,7 +41,7 @@ tags:
 
 ## 代理合约
 
-下面我们介绍一个简单的代理合约，它由OpenZepplin的[Proxy合约](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/proxy/Proxy.sol)简化而来。它有三个部分：代理合约`Proxy`，逻辑合约`Logic`，和一个调用示例`Caller`。它的逻辑并不复杂：
+下面我们介绍一个简单的代理合约，它由OpenZeppelin的[Proxy合约](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/proxy/Proxy.sol)简化而来。它有三个部分：代理合约`Proxy`，逻辑合约`Logic`，和一个调用示例`Caller`。它的逻辑并不复杂：
 
 - 首先部署逻辑合约`Logic`。
 - 创建代理合约`Proxy`，状态变量`implementation`记录`Logic`合约地址。
@@ -204,4 +204,4 @@ contract Caller{
 
 下一讲，我们会介绍可升级代理合约。
 
-代理合约虽然很强大，但是它非常容易出`bug`，用的时候最好直接复制[OpenZepplin](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/proxy)的模版合约。
+代理合约虽然很强大，但是它非常容易出`bug`，用的时候最好直接复制[OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/proxy)的模版合约。

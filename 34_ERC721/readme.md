@@ -6,7 +6,7 @@ tags:
   - wtfacademy
   - ERC721
   - ERC165
-  - openzepplin
+  - OpenZeppelin
 ---
 
 # WTF Solidity极简入门: 34. ERC721

@@ -1,10 +1,10 @@
 ---
-title: S01. 重入攻击
+title: S02. 选择器碰撞
 tags:
   - solidity
   - security
-  - fallback
-  - modifier
+  - selector
+  - abi encode
 ---
 
 # WTF Solidity 合约安全: S02. 选择器碰撞
