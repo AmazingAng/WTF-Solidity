@@ -134,6 +134,8 @@
 
 **S02：选择器碰撞**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S02_SelectorClash) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S02_SelectorClash/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/5rwcsBZzphdlKZj4MoIpn8aqwQ1MzQ8qy50ZEGNU_HU)
 
+**S03：中心化风险**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S03_Centralization) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S03_Centralization/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/0MlTKdaSGD9-A9WIbgbtrDlAazg-8DLpTJv7l8vsq3c)
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
