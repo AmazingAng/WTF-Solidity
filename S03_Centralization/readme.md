@@ -1,12 +1,12 @@
 ---
-title: S03. 伪去中心化
+title: S03. 中心化风险
 tags:
   - solidity
   - security
   - multisig
 ---
 
-# WTF Solidity 合约安全: S03. 中心化
+# WTF Solidity 合约安全: S03. 中心化风险
 
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
