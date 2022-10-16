@@ -20,7 +20,7 @@ tags:
 
 -----
 
-这一讲，我们将简单的介绍以太坊中的数字签名`ECDSA`，以及如何利用它发放`NFT`白名单。代码中的`ECDSA`库由`openzepplin`的同名库简化而成。
+这一讲，我们将简单的介绍以太坊中的数字签名`ECDSA`，以及如何利用它发放`NFT`白名单。代码中的`ECDSA`库由`OpenZeppelin`的同名库简化而成。
 
 ## 数字签名
 
@@ -282,7 +282,7 @@ _signature: 0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d55
 
 ## 总结
 
-这一讲，我们介绍了以太坊中的数字签名`ECDSA`，如何利用`ECDSA`创建和验证签名，还有`ECDSA`合约，以及如何利用它发放`NFT`白名单。代码中的`ECDSA`库由`openzepplin`的[同名库](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/cryptography/ECDSA.sol)简化而成。
+这一讲，我们介绍了以太坊中的数字签名`ECDSA`，如何利用`ECDSA`创建和验证签名，还有`ECDSA`合约，以及如何利用它发放`NFT`白名单。代码中的`ECDSA`库由`OpenZeppelin`的[同名库](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/cryptography/ECDSA.sol)简化而成。
 - 由于签名是链下的，不需要`gas`，因此这种白名单发放模式比`Merkle Tree`模式还要经济；
 - 但由于用户要请求中心化接口去获取签名，不可避免的牺牲了一部分去中心化；
 - 额外还有一个好处是白名单可以动态变化，而不是提前写死在合约里面了，因为项目方的中心化后端接口可以接受任何新地址的请求并给予白名单签名。

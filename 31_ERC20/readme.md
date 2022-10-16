@@ -5,7 +5,7 @@ tags:
   - application
   - wtfacademy
   - ERC20
-  - openzepplin
+  - OpenZeppelin
 ---
 
 # WTF Solidity极简入门: 31. ERC20
