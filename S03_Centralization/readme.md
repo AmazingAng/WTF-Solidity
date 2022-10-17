@@ -40,6 +40,29 @@ tags:
 
 ![](./img/S03-1.png)
 
+## 漏洞合约例子
+
+有中心化风险的合约多种多样，这里只举一个最常见的例子：`owner`地址可以任意铸造代币的`ERC20`合约。当项目内鬼或黑客取得`owner`的私钥后，可以无限铸币，造成投资人大量损失。
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract Centralization is ERC20, Ownable {
+    constructor() ERC20("Centralization", "Cent") {
+        address exposedAccount = 0xe16C1623c1AA7D919cd2241d8b36d9E79C1Be2A2;
+        transferOwnership(exposedAccount);
+    }
+
+    function mint(address to, uint256 amount) external onlyOwner{
+        _mint(to, amount);
+    }
+}
+```
+
 ## 如何减少中心化/伪去中心化风险？
 
 1. 使用多签钱包管理国库和控制合约参数。为了兼顾效率和去中心化，可以选择 4/7 或 6/9 多签。如果你不了解多签钱包，可以阅读[WTF Solidity第50讲：多签钱包](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet/readme.md)。
