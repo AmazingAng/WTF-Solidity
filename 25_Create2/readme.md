@@ -142,8 +142,8 @@ BSC链上的PEOPLE地址:
 > Pair pair = new Pair{salt: salt}(address(this)); 
 
 计算时，需要将参数和bytecode一起进行打包：
-~~keccak256(type(Pair).creationCode)~~
-=> keccak256(abi.encodePacked(type(Pair).creationCode, abi.encode
+> ~~keccak256(type(Pair).creationCode)~~
+> => keccak256(abi.encodePacked(type(Pair).creationCode, abi.encode(address(this))))
 ```solidity
 predictedAddress = address(uint160(uint(keccak256(abi.encodePacked(
                 bytes1(0xff),
