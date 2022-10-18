@@ -57,7 +57,7 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 **Example:**
 ![5-2.png](./img/5-2.png)
 
-2. `storage`赋值给`memory`，会创建独立的复本，修改其中一个不会影响另一个；反之亦然。例子：
+2. `storage`赋值给`memory`，会创建独立的副本，修改其中一个不会影响另一个；反之亦然。例子：
 ```solidity
     uint[] x = [1,2,3]; // 状态变量：数组 x
     
@@ -75,7 +75,7 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 
 3. `memory`赋值给`memory`，会创建引用，改变新变量会影响原变量。
 
-4. 其他情况，变量赋值给`storage`，会创建独立的复本，修改其中一个不会影响另一个。
+4. 其他情况，变量赋值给`storage`，会创建独立的副本，修改其中一个不会影响另一个。
 
 ## 变量的作用域
 `Solidity`中变量按作用域划分有三种，分别是状态变量（state variable），局部变量（local variable）和全局变量(global variable)
