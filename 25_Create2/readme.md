@@ -106,7 +106,7 @@ contract PairFactory2{
 ```
 就是利用`CREATE2`创建合约的代码，非常简单，而`salt`为`token1`和`token2`的`hash`：
 ```solidity
-            bytes32 salt = keccak256(abi.encodePacked(token0, token1));
+    bytes32 salt = keccak256(abi.encodePacked(token0, token1));
 ```
 
 ### 事先计算`Pair`地址
