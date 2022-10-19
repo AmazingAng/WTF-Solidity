@@ -178,3 +178,8 @@
     <img src="https://contrib.rocks/image?repo=AmazingAng/WTFSolidity" />
   </a>
 </div>
+
+## 捐赠
+
+- [Gitcoin](https://gitcoin.co/grants/6090/wtf-solidity)
+- [Mirror](https://mirror.xyz/ninjak.eth/collection)
