@@ -136,6 +136,8 @@
 
 **S03：中心化风险**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S03_Centralization) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S03_Centralization/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/0MlTKdaSGD9-A9WIbgbtrDlAazg-8DLpTJv7l8vsq3c)
 
+**S04：权限管理漏洞**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S04_AccessControlExploit) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S04_AccessControlExploit/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/lWnJZJYygZtqe0GFwH6bJg80t2NaSCfdRXCh0EDHxqs)
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
