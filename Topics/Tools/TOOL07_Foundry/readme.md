@@ -530,7 +530,7 @@ cast run 0x20e7dda515f04ea6a787f68689e27bcadbba914184da5336204f3f36771f59f0
 
 运行结果：
 
-![](https://afox-1256168983.cos.ap-shanghai.myqcloud.com/20221018120934.png)
+![cast-run](./img/1.png)
 
 可以在结果中看到运行消耗的gas，以及方法顺序调用的过程，以及释放的emit的事件。通过这个可以了解一个hash的内在过程。类似 [BlockSec Building BlockChain Security Infrastructure](https://blocksec.com/) 和 [Tenderly | Ethereum Developer Platform](https://tenderly.co/) 可以结合使用。
 
