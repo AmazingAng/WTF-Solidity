@@ -138,6 +138,8 @@
 
 **S04：权限管理漏洞**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S04_AccessControlExploit) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S04_AccessControlExploit/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/lWnJZJYygZtqe0GFwH6bJg80t2NaSCfdRXCh0EDHxqs)
 
+**S05：整型溢出漏洞**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S05_Overflow) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S05_Overflow/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/FCRPHFa5JkCuRVSIrQQubuDPwrAfZctZnjWTaqZpcRU)
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
