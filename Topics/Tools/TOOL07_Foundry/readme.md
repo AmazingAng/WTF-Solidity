@@ -658,6 +658,471 @@ cast --from-rlp
 cast block 15769241 --json --rpc-url=$RPC_MAIN
 ```
 
+## Anvil本地节点的使用
+
+### 基本命令行
+
+anvil 跟 hardhat 还有 truffle中的ganache都是一样的，是一个本地的eth节点，同样拥有各种fork的功能。
+
+```shell
+anvil 
+anvil --accounts=<NUM> --balance=<NUM> 
+anvil --mnemonic=<MNEMONIC> 
+anvil --fork-url=$RPC --fork-block-number=<BLOCK>
+```
+
+### PRC的使用
+
+```shell
+anvil_* -> hardhat_* 
+
+anvil_impersonateAccount 
+
+anvil_setStorageAt
+```
+
+## Forge命令行进阶的使用
+
+### 初始化项目
+```shell
+
+forge init <dir_name> 
+
+forge init --template <template_path> <dir_name>
+
+```
+
+## 热更新
+
+```shell
+forge build -w
+```
+
+
+### 测试
+
+```shell
+# 三个v会现实详细的log信息
+forge test -vvv
+# 热更新模式
+forge test -vvv -w
+
+# log打印 需要 - vv 2个v以上才可以
+```
+
+使用 console2.log("test") 来打印
+
+```js
+
+
+function testSetNumber(uint256 x) public {
+        console2.log("testNumber: %s==============", x);
+        counter.setNumber(x);
+        assertEq(counter.number(), x);
+    }
+```
+
+
+使用 emit log 来打印
+
+```js
+function testNumberIs42() public {
+        emit log("test");
+        assertEq(testNumber, 42);
+    }
+```
+
+改变状态
+
+```js
+
+function testCheatCode()public
+console2.Log("before:"block.timestamp);
+vm.warp(1000);
+console2.log("after:"block.timestamp);
+
+```
+
+改变msg.sender 【可以模拟管理员账户】
+
+```js
+// 只有第一次有影响
+vm.prank(address)
+
+
+// 多次影响
+vm.startPrank(address)
+...code
+vm.stopPrank()
+
+```
+
+
+改变存储状态
+
+```js
+function testCheatCode()public{
+	console2.Log("before:"alice.balance);
+	vm.deal(alice,1 ether);
+	console2.Log("after:"alice.balance);
+}
+
+```
+
+## 安装插件
+
+### 使用forge安装插件
+
+```shell
+forge install [OPTIONS] <github username>/<github project>@<tag>
+```
+
+### 使用npm安装插件
+
+```shell
+npm init -y
+npm i @openzeppelin/contracts 
+// yarn add @openzeppelin/contracts
+```
+
+安装完成之后需要配置`foundry.toml`方法，在libs中添加 `node_modules`文件夹。
+
+```toml
+[profile.default]
+src = 'src'
+out = 'out'
+libs = ['lib','node_modules']
+```
+
+
+## 测试一
+
+新建`test/Test.t.sol`
+
+```js
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.13;
+
+import "forge-std/Test.sol";
+import "../src/Counter.sol";
+// 导入IERC20的接口，通过该接口可以调用对应的方法
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+contract IERC20Test is Test {
+  // 声明Counter合约对象变量
+  Counter public counter;
+  // 声明一个地址变量
+  address public alice;
+  // 声明一个msgSender
+  address public msgSender;
+  // 声明帮助合约函数
+  Helper public h;
+
+  //定义一个IERC20 合约对象
+  IERC20 public dai;
+
+  function setUp() public {
+    // new测试合约对象
+    counter = new Counter();
+    // 调用对象方法
+    counter.setNumber(0);
+    // new helper对象
+    h = new Helper();
+
+    alice = address(10086);
+    console2.log(alice);
+    dai = IERC20(0x6B175474E89094C44Da98b954EedeAC495271d0F);
+  }
+
+  // 测试给合约地址转账
+  function testCheatCode() public {
+    console2.log("before:", dai.balanceOf(alice));
+    deal(address(dai), alice,1 ether);
+    console2.log("after:", dai.balanceOf(alice));
+  }
+  // 测试改变合约msg.sender
+  function testCheatAddress() public {
+    console2.log("before:", h.whoCalled());
+    vm.prank(address(1));
+    console2.log("after:", h.whoCalled());
+  }
+}
+
+
+contract Helper {
+  function whoCalled() public view returns (address) {
+    return msg.sender;
+  }
+}
+```
+
+
+运行测试：
+
+因为本地没有dai的部署合约，所以我们直接fork主网， -vvv可以现实console2.log，-w表示watch模式。
+
+```shell
+forge test -vvv --fork-url=$ETH_RPC_URL -w
+```
+
+输出结果：
+
+```shell
+Running 2 tests for test/Test.t.sol:IERC20Test
+[PASS] testCheatAddress() (gas: 12873)
+Logs:
+  0x0000000000000000000000000000000000002766
+  before: 0xb4c79daB8f259C7Aee6E5b2Aa729821864227e84
+  after: 0x0000000000000000000000000000000000000001
+
+[PASS] testCheatCode() (gas: 153596)
+Logs:
+  0x0000000000000000000000000000000000002766
+  before: 0
+  after: 1000000000000000000
+
+Test result: ok. 2 passed; 0 failed; finished in 5.61s
+```
+
+### 代码中fork网络
+
+```js
+function testCodeFork() public {
+    console2.log(address(dai));
+    string memory rpc = vm.envString("ETH_RPC_URL");
+    uint256 mainnet = vm.createFork(rpc);
+    vm.selectFork(mainnet);
+    // 这边下面开始就是直接fork网络了
+    console2.log("before:",dai.balanceOf(alice));
+    deal(address(dai),alice,1 ether);
+    console2.log("after:",dai.balanceOf(alice));
+  }
+```
+
+### 从代码中读取环境变量
+
+```js
+// 通过 vm.envAddress 获取环境变量中的地址
+    dai = IERC20(vm.envAddress("DAI"));
+```
+
+### 完整代码
+
+```js
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.13;
+
+import "forge-std/Test.sol";
+import "../src/Counter.sol";
+// 导入IERC20的接口，通过该接口可以调用对应的方法
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+contract IERC20Test is Test {
+  // 声明Counter合约对象变量
+  Counter public counter;
+  // 声明一个地址变量
+  address public alice;
+  // 声明一个msgSender
+  address public msgSender;
+  // 声明帮助合约函数
+  Helper public h;
+
+  //定义一个IERC20 合约对象
+  IERC20 public dai;
+
+  function setUp() public {
+    // new测试合约对象
+    counter = new Counter();
+    // 调用对象方法
+    counter.setNumber(0);
+    // new helper对象
+    h = new Helper();
+
+    alice = address(10086);
+    console2.log(alice);
+    // 通过 vm.envAddress 获取环境变量中的地址
+    dai = IERC20(vm.envAddress("DAI"));
+  }
+
+
+  // 测试给合约地址转账
+  function testCheatCode() public {
+    console2.log("before:", dai.balanceOf(alice));
+    deal(address(dai), alice,1 ether);
+    console2.log("after:", dai.balanceOf(alice));
+  }
+  // 测试改变合约msg.sender
+  function testCheatAddress() public {
+    console2.log("before:", h.whoCalled());
+    vm.prank(address(1));
+    console2.log("after:", h.whoCalled());
+  }
+
+  function testCodeFork() public {
+    console2.log(address(dai));
+    string memory rpc = vm.envString("ETH_RPC_URL");
+    uint256 mainnet = vm.createFork(rpc);
+    vm.selectFork(mainnet);
+    // 这边下面开始就是直接fork网络了
+    console2.log("before:",dai.balanceOf(alice));
+    deal(address(dai),alice,1 ether);
+    console2.log("after:",dai.balanceOf(alice));
+  }
+
+}
+
+
+contract Helper {
+  function whoCalled() public view returns (address) {
+    return msg.sender;
+  }
+}
+```
+
+### vm.sol
+
+`vm.sol` 中还有很多封装好的方法可以直接使用
+
+```js
+// Sets the *next* call's msg.sender to be the input address
+    function prank(address) external;
+    // Sets all subsequent calls' msg.sender to be the input address until `stopPrank` is called
+    function startPrank(address) external;
+    // Sets the *next* call's msg.sender to be the input address, and the tx.origin to be the second input
+    function prank(address,address) external;
+    // Sets all subsequent calls' msg.sender to be the input address until `stopPrank` is called, and the tx.origin to be the second input
+    function startPrank(address,address) external;
+    // Resets subsequent calls' msg.sender to be `address(this)`
+    function stopPrank() external;
+    // Sets an address' balance, (who, newBalance)
+    function deal(address, uint256) external;
+    // Sets an address' code, (who, newCode)
+    function etch(address, bytes calldata) external;
+    // Expects an error on next call
+    function expectRevert(bytes calldata) external;
+    function expectRevert(bytes4) external;
+    function expectRevert() external;
+    // Records all storage reads and writes
+    function record() external;
+    // Gets all accessed reads and write slot from a recording session, for a given address
+    function accesses(address) external returns (bytes32[] memory reads, bytes32[] memory writes);
+```
+
+
+##  运行脚本
+
+```shell
+forge script [OPTIONS] <PATH> [ARGS]...
+forge script script/Counter.s.sol:CounterScript
+```
+
+`script/Counter.s.sol` 脚本代码
+
+```js
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import "forge-std/Script.sol";
+
+contract CounterScript is Script {
+// 每次初始化会运行
+    function setUp() public {
+        console2.log("setup ");
+    }
+
+    function run() public {
+        vm.broadcast();
+        console2.log("run");
+    }
+
+    function someFunction(uint256 x) public {
+        console2.log("some other func");
+        console2.log(x);
+    }
+}
+
+```
+
+指定方法，带参数的测试运行
+
+```shell
+forge script script/Counter.s.sol --sig="someFunction(uint256 x)" 10
+```
+
+## 脚本部署合约
+
+编写部署脚本：
+```shell
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import "forge-std/Script.sol";
+// 引入合约
+import "../src/Counter.sol";
+
+contract CounterScript is Script {
+    function setUp() public {
+        console2.log("setup ");
+    }
+
+    function run() public {
+        vm.startBroadcast();
+		//生成合约对象
+        Counter c = new Counter();
+
+        vm.stopBroadcast();
+    }
+
+}
+
+```
+
+测试部署：
+
+```shell
+forge script script/Counter.s.sol -vvvv --rpc-url=http://127.0.0.1:8545
+```
+
+正式部署：
+
+```
+forge script script/Counter.s.sol -vvvv --rpc-url=http://127.0.0.1:8545 --broadcast --private-key=privete_key
+```
+
+部署完成之后会多一个broadcast文件夹，查看该文件夹有`run-latest.json`可以看到部署的相应信息。
+
+### 部署多个网络
+
+使用fork代码可以部署多个网络
+
+
+```js
+uint256 mainnet = vm.createFork(rpc);
+```
+
+## Tips： 
+
+```shell
+forge test --gas-report
+
+forge inspect
+
+# 对比gas是否减少
+
+forge snapshot
+
+forge snapshot --diff 
+
+# 交互式Debugger
+forge script script/Counter.s.sol --debug
+
+# 链上交易debugger
+forge run --debug
+
+```
+
+
+
 ## 总结
 
 这一讲我们介绍了以Solidity为中心的开发工具，并介绍了如何利用Foundry编译，部署，测试智能合约。由于Foundry的部署和测试脚本都是用Solidity编写，免去了开发者学习javascript的时间成本，并提供了更多练习Solidity的机会，推荐大家使用。
