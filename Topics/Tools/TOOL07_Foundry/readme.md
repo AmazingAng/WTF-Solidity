@@ -683,6 +683,30 @@ anvil_setStorageAt
 
 ## Forge命令行进阶的使用
 
+代码存放在`WTFSolidity/Topics/Tools/TOOL07_Foundry/hello_wtf`
+
+代码目录树如下：
+
+```shell
+.
+├── broadcast
+│   └── Counter.s.sol 
+├── foundry.toml        # foundry配置文件
+├── lib
+│   └── forge-std
+├── node_modules        # 使用npm依赖包目录，你也可以直接使用forge install
+│   └── @openzeppelin
+├── package-lock.json
+├── package.json
+├── script
+│   └── Counter.s.sol   # 脚本合约
+├── src
+│   └── Counter.sol
+└── test
+    ├── Counter.t.sol
+    └── Test.t.sol      # 测试合约
+```
+
 ### 初始化项目
 ```shell
 
