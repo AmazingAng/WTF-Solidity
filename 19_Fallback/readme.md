@@ -52,6 +52,8 @@ tags:
 我们定义一个`fallback()`函数，被触发时候会释放`fallbackCalled`事件，并输出`msg.sender`，`msg.value`和`msg.data`:
 
 ```solidity
+    event fallbackCalled(address Sender, uint Value, bytes Data);
+
     // fallback
     fallback() external payable{
         emit fallbackCalled(msg.sender, msg.value, msg.data);
