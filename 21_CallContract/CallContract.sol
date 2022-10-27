@@ -32,7 +32,7 @@ contract CallContract{
     }
 
     function callGetX(OtherContract _Address) external view returns(uint x){
-        x = _Address.getX();
+        x = OtherContract(_Address).getX();
     }
 
     function callGetX2(address _Address) external view returns(uint x){
