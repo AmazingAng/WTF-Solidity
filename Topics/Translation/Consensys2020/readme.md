@@ -6,7 +6,7 @@
 
 **翻译**：[0xAA](https://twitter.com/0xAA_Science)
 
-**Github**: [WTFSolidity]()https://github.com/AmazingAng/WTFSolidity
+**Github**: [WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 
 > 写在前面：
