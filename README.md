@@ -169,9 +169,9 @@
 
 ### `翻译`
 
-**第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translatoin/Consensys2020)】 【[Mirror](https://mirror.xyz/ninjak.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
+**第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/Consensys2020)】 【[Mirror](https://mirror.xyz/ninjak.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
 
-**第2讲：深入以太坊虚拟机系列**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translatoin/DiveEVM2017)】
+**第2讲：深入以太坊虚拟机系列**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017)】
 
 ## WTF贡献者
 <div align="center">
