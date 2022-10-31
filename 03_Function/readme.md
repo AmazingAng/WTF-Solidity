@@ -30,7 +30,7 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
 
 3. `(<parameter types>)`：圆括号里写函数的参数，也就是要输入到函数的变量类型和名字。
 
-4. `{internal|external|public|private}`：函数可见性说明符，一共4种。没标明函数类型的，默认`internal`。
+4. `{internal|external|public|private}`：函数可见性说明符，一共4种。没标明函数类型的，默认`public`。合约之外的函数，即"自由函数"，始终具有隐含`internal`可见性。
 
     - `public`: 内部外部均可见。(也可用于修饰状态变量，public变量会自动生成 `getter`函数，用于查询数值).
     - `private`: 只能从本合约内部访问，继承的合约也不能用（也可用于修饰状态变量）。
