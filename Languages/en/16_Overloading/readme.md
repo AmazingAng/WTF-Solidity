@@ -15,6 +15,7 @@ Everyone is welcomed to follow my Twitter: [@0xAA_Science](https://twitter.com/0
 WTF Academy Discord, where you can find the way to join WeChat group: [Link](https://discord.gg/5akcruXrsk)
 
 All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+
 -----
 
 ## Overloading
@@ -45,8 +46,7 @@ we can see different results, for the functions are regarded as different ones.
 ![](./img/16-1.jpg)
 
 ### Argument Matching
-在调用重载函数时，会把输入的实际参数和函数参数的变量类型做匹配。
-如果出现多个匹配的重载函数，则会报错。下面这个例子有两个叫`f()`的函数，一个参数为`uint8`，另一个为`uint256`：
+
 When the overloading function is called, the variable type will be matched between input parameter and function parameters.
 An error will be reported if there are multiple matching overloading functions,
 The following example has two functions called `f()`, one have `uint8` parameter and the other get `uint256`:
@@ -63,6 +63,7 @@ The following example has two functions called `f()`, one have `uint8` parameter
 For `50` can be converted to `uint8` as well as `uint256`, so it will report an error if we call `f(50)`.
 
 ## Summary
+
 In this lecture, we introduce the basic usage of overloading function in `solidity`: 
 functions with the same name but different input parameter types can exist at the same time, 
 which are treated as different functions.
