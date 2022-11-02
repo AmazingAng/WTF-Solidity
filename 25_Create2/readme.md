@@ -106,7 +106,7 @@ contract PairFactory2{
 ```
 就是利用`CREATE2`创建合约的代码，非常简单，而`salt`为`token1`和`token2`的`hash`：
 ```solidity
-            bytes32 salt = keccak256(abi.encodePacked(token0, token1));
+    bytes32 salt = keccak256(abi.encodePacked(token0, token1));
 ```
 
 ### 事先计算`Pair`地址
@@ -134,16 +134,38 @@ WBNB地址: 0x2c44b726ADF1963cA47Af88B284C06f30380fC78
 BSC链上的PEOPLE地址:
 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 ```
+
+#### 如果部署合约构造函数中存在参数
+
+
+例如当create2合约时：
+> Pair pair = new Pair{salt: salt}(address(this)); 
+
+计算时，需要将参数和bytecode一起进行打包：
+> ~~keccak256(type(Pair).creationCode)~~
+> => keccak256(abi.encodePacked(type(Pair).creationCode, abi.encode(address(this))))
+```solidity
+predictedAddress = address(uint160(uint(keccak256(abi.encodePacked(
+                bytes1(0xff),
+                address(this),
+                salt,
+                keccak256(abi.encodePacked(type(Pair).creationCode, abi.encode(address(this))))
+            )))));
+```
+
 ### 在remix上验证
 1. 首先用`WBNB`和`PEOPLE`的地址哈希作为`salt`来计算出`Pair`合约的地址
 2. 调用`PairFactory2.createPair2`传入参数为`WBNB`和`PEOPLE`的地址，获取出创建的`pair`合约地址
 3. 对比合约地址
 ![create2_remix_test.png](./img/25-1.png)
 
+
+
 ## create2的实际应用场景
 1. 交易所为新用户预留创建钱包合约地址。
 
 2. 由 `CREATE2` 驱动的 `factory` 合约，在`uniswapV2`中交易对的创建是在 `Factory`中调用`create2`完成。这样做的好处是: 它可以得到一个确定的`pair`地址, 使得 `Router`中就可以通过 `(tokenA, tokenB)` 计算出`pair`地址, 不再需要执行一次 `Factory.getPair(tokenA, tokenB)` 的跨合约调用。
+
 
 ## 总结
 
