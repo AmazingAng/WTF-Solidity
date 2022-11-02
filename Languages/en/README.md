@@ -48,9 +48,9 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 16: Overloading**：[Code](./16_Overloading_en) | [Tutorial](./16_Overloading_en/readme.md)
 
-**Chapter 17: Library **：[Code](./17_Library_en) | [Tutorial](./17_Library_en/readme.md)
+**Chapter 17: Library**：[Code](./17_Library_en) | [Tutorial](./17_Library_en/readme.md)
 
-**Chapter 18: Import **：[Code](./18_Import_en) | [Tutorial](./18_Import/readme.md)
+**Chapter 18: Import**：[Code](./18_Import_en) | [Tutorial](./18_Import/readme.md)
 
 ## WTF Contributors
 <div align="center">
