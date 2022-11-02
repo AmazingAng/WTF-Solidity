@@ -18,7 +18,7 @@ tags:
 
 -----
 
-这一讲，我们将介绍智能合约的签名重放（Signature Replay）攻击，它曾间接导致了著名做市商 Wintermute 被盗2000万枚 $OP。
+这一讲，我们将介绍智能合约的签名重放（Signature Replay）攻击和预防方法，它曾间接导致了著名做市商 Wintermute 被盗2000万枚 $OP。
 
 ## 签名重放
 
@@ -108,21 +108,21 @@ contract SigReplay is ERC20 {
 
 ## `Remix` 复现
 
-1. 部署 `SigReplay` 合约，签名者地址 `signer` 被初始化为部署钱包地址。
+**1.** 部署 `SigReplay` 合约，签名者地址 `signer` 被初始化为部署钱包地址。
 
-    ![](./img/S06-2.png)
+![](./img/S06-2.png)
 
-2. 利用`getMessageHash`函数获取消息。
+**2.** 利用`getMessageHash`函数获取消息。
 
-    ![](./img/S06-3.png)
+![](./img/S06-3.png)
 
-3. 点击 `Remix` 部署面板的签名按钮，使用私钥给消息签名。
+**3.** 点击 `Remix` 部署面板的签名按钮，使用私钥给消息签名。
 
-    ![](./img/S06-4.png)
+![](./img/S06-4.png)
 
-4. 反复调用 `badMint` 进行签名重放攻击，铸造大量代币。
+**4.** 反复调用 `badMint` 进行签名重放攻击，铸造大量代币。
 
-    ![](./img/S06-5.png)
+![](./img/S06-5.png)
 
 ## 预防办法
 
