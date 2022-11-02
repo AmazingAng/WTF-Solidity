@@ -141,7 +141,6 @@ proving that we call the library function successfully!
 
 ## Summary
 
-这一讲，我们用`ERC721`的引用的库函数`String`为例介绍`solidity`中的库函数（`Library`）。99%的开发者都不需要自己去写库合约，会用大神写的就可以了。我们只需要知道什么情况该用什么库合约。常用的有：
 In this lecture, we use the referenced library function `String` of `ERC721` as an example to introduce the library function (`Library`) in `solidity`. 
 99% of developers have no need to write library contracts themselves, 
 who can use the ones written by masters. 
