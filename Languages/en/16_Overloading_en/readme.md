@@ -43,7 +43,7 @@ For the specific content of the function selector, please refer to [WTF Solidity
 Taking the `Overloading.sol` contract as an example, after compiling and deploying on Remix.
 After calling the overloading functions `saySomething()` and `saySomething(string memory something)` respectively, 
 we can see different results, for the functions are regarded as different ones.
-![](./img/16-1.jpg)
+![](./img/16-1.jpeg)
 
 ### Argument Matching
 
