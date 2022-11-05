@@ -1,5 +1,5 @@
 ---
-title: 49. 透明代理
+title: 49. 通用可升级代理
 tags:
   - solidity
   - proxy
