@@ -6,7 +6,7 @@
 
 **翻译**：[0xAA](https://twitter.com/0xAA_Science)
 
-**Github**: [WTFSolidity]()https://github.com/AmazingAng/WTFSolidity
+**Github**: [WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 
 > 写在前面：
@@ -96,7 +96,7 @@ uint numerator = 5;
 uint denominator = 2;
 ```
 
-### 4. 注意抽象合约`abstract`和接口`interface`之间的权衡
+## 4. 注意抽象合约`abstract`和接口`interface`之间的权衡
 接口和抽象合约都为智能合约提供了一种可定制和可重用的方法。`Solidity 0.4.11`中引入的接口类似于抽象合约，但不能实现任何功能。接口也有限制，例如不能访问存储或从其他接口继承，这通常使抽象合约更实用。虽然，接口对于在实现之前设计合约肯定有用。此外，重要的是要记住，如果合约继承自抽象合约，它必须通过覆盖实现所有未实现的功能，否则它也将是抽象的。
 
 ## 5. Fallback function 后备函数

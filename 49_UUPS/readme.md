@@ -1,9 +1,9 @@
 ---
-title: 49. 透明代理
+title: 49. 通用可升级代理
 tags:
   - solidity
   - proxy
-  - openzepplin
+  - OpenZeppelin
 
 ---
 
@@ -19,7 +19,7 @@ tags:
 
 -----
 
-这一讲，我们将介绍代理合约中选择器冲突（Selector Clash）的另一个解决办法：通用可升级代理（UUPS，universal upgradeable proxy standard）。教学代码由`OpenZepplin`的`UUPSUpgradeable`简化而成，不应用于生产。
+这一讲，我们将介绍代理合约中选择器冲突（Selector Clash）的另一个解决办法：通用可升级代理（UUPS，universal upgradeable proxy standard）。教学代码由`OpenZeppelin`的`UUPSUpgradeable`简化而成，不应用于生产。
 
 ## UUPS
 

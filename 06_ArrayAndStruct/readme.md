@@ -36,7 +36,7 @@ tags:
     address[] array6;
     bytes array7;
 ```
-**注意**：`bytes`比较特殊，是数组，但是不用加`[]`。另外，不能用`byte[]`声明单字节数组，可以使用`bytes`或`bytes1[]`。
+**注意**：`bytes`比较特殊，是数组，但是不用加`[]`。另外，不能用`byte[]`声明单字节数组，可以使用`bytes`或`bytes1[]`。在gas上，`bytes`比`bytes1[]`便宜。因为`bytes1[]`在`memory`中要增加31个字节进行填充，会产生额外的gas。但是在`storage`中，由于内存紧密打包，不存在字节填充。
 
 ### 创建数组的规则
 在solidity里，创建数组有一些规则：
@@ -47,7 +47,21 @@ tags:
     uint[] memory array8 = new uint[](5);
     bytes memory array9 = new bytes(9);
 ```
-- 数组字面常数是写作表达式形式的数组，并且不会立即赋值给变量，例如`[uint(1),2,3]`（需要声明第一个元素的类型，不然默认用存储空间最小的类型）
+- 数组字面常数(Array Literals)是写作表达式形式的数组，用方括号包着来初始化array的一种方式，并且里面每一个元素的type是以第一个元素为准的，例如`[1,2,3]`里面所有的元素都是uint8类型，因为在solidity中如果一个值没有指定type的话，默认就是最小单位的该type，这里int的默认最小单位类型就是uint8。而`[uint(1),2,3]`里面的元素都是uint类型，因为第一个元素指定了是uint类型了，我们都以第一个元素为准。
+下面的合约中，对于f函数里面的调用，如果我们没有显式对第一个元素进行uint强转的话，是会报错的，因为如上所述我们其实是传入了uint8类型的array，可是g函数需要的却是uint类型的array，就会报错了。
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.16 <0.9.0;
+
+contract C {
+    function f() public pure {
+        g([uint(1), 2, 3]);
+    }
+    function g(uint[3] memory) public pure {
+        // ...
+    }
+}
+```
 - 如果创建的是动态数组，你需要一个一个元素的赋值。
 ```solidity
     uint[] memory x = new uint[](3);

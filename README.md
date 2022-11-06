@@ -1,5 +1,7 @@
 ![](./img/logo2.jpeg)
 
+中文  / [English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/README.md)
+
 # WTF Solidity
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
@@ -126,6 +128,20 @@
 
 **第50讲：多签钱包**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/DeediQG7FbXhCK68f2iPUoQkpN-gLdiuKhDV99gHpgg)
 
+## 合约安全
+
+**S01：重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S01_ReentrancyAttack) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S01_ReentrancyAttack/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/SrNu6LLzwH7qlTVKbJY6lkTpmadGqUXw0L8iUMzfMxo)
+
+**S02：选择器碰撞**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S02_SelectorClash) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S02_SelectorClash/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/5rwcsBZzphdlKZj4MoIpn8aqwQ1MzQ8qy50ZEGNU_HU)
+
+**S03：中心化**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S03_Centralization) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S03_Centralization/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/0MlTKdaSGD9-A9WIbgbtrDlAazg-8DLpTJv7l8vsq3c)
+
+**S04：权限管理**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S04_AccessControlExploit) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S04_AccessControlExploit/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/lWnJZJYygZtqe0GFwH6bJg80t2NaSCfdRXCh0EDHxqs)
+
+**S05：整型溢出**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S05_Overflow) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S05_Overflow/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/FCRPHFa5JkCuRVSIrQQubuDPwrAfZctZnjWTaqZpcRU)
+
+**S06：签名重放**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S06_SignatureReplay) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S06_SignatureReplay/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/hHQO1EGe0vapiejyIrP8bcuPm50Djlse2MareeHLDwE)
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
@@ -153,9 +169,11 @@
 
 **第5讲：Loot**【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721/5_Loot/Loot.sol)】 【[文章](https://mirror.xyz/ninjak.eth/-Bc_vjP9EX-wg6chtUFAz0zm5v-jaIekMlOlqHJ_IhE)】
 
-### `合约安全`
+### `翻译`
 
-**第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Security/Consensys2020)】 【[文章](https://mirror.xyz/ninjak.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
+**第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/Consensys2020)】 【[Mirror](https://mirror.xyz/ninjak.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
+
+**第2讲：深入EVM**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017)】
 
 ## WTF贡献者
 <div align="center">
@@ -166,3 +184,8 @@
     <img src="https://contrib.rocks/image?repo=AmazingAng/WTFSolidity" />
   </a>
 </div>
+
+## 捐赠
+
+- [Gitcoin](https://gitcoin.co/grants/6090/wtf-solidity)
+- [Mirror](https://mirror.xyz/ninjak.eth/collection)

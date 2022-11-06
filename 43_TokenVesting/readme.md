@@ -19,7 +19,7 @@ tags:
 
 -----
 
-这一讲，我们将介绍代币归属条款，并写一个线性释放`ERC20`代币的合约。代码由`OpenZepplin`的`VestingWallet`合约简化而来。
+这一讲，我们将介绍代币归属条款，并写一个线性释放`ERC20`代币的合约。代码由`OpenZeppelin`的`VestingWallet`合约简化而来。
 
 ## 代币归属条款
 
