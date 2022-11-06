@@ -32,7 +32,7 @@ In this tutorial we focus on receiving Ether.
 ## Receiving ETH Function: receive()
 The `receive()` function is solely used for receiving `ETH`. A contract can have at most one `receive()` function, declared not like others, no `function` keyword is needed: `receive() external payable { ... }`. This function cannot have arguments, cannot return anything and must have `external` visibility and `payable` state mutability. 
 
-`receive()` is executed on plain Ether transfers to a contract. You should not perform too much operations in `receive()`, when sending Ether with `send` or `transfer`, only 2300 `gas` is available, complicated operations will trigger `Out of Gas` error; instead you should use `call` function which can specifiy `gas` limit. (We will cover all three ways of sending Ether later）. 
+`receive()` is executed on plain Ether transfers to a contract. You should not perform too much operations in `receive()`, when sending Ether with `send` or `transfer`, only 2300 `gas` is available, complicated operations will trigger `Out of Gas` error; instead you should use `call` function which can specify `gas` limit. (We will cover all three ways of sending Ether later）. 
 
 We can send an `event` in `receive()` function, for example: 
 ```solidity
@@ -60,7 +60,7 @@ Let's declare a `fallback()` function, which will send a `fallbackCalled` event,
     }
 ```
 
-## Deffirence between receive and fallback
+## Difference between receive and fallback
 Both `receive` and `fallback` can receive `ETH`, they are triggered in such orders: 
 ```
 Execute fallback() or receive()?
