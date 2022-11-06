@@ -102,17 +102,17 @@ contract DutchAuction is Ownable, ERC721 {
 
 ```solidity
     // 获取拍卖实时价格
-    function getAuctionPrice(uint256 _auctionStartTime)
+    function getAuctionPrice()
         public
         view
         returns (uint256)
     {
-        if (block.timestamp < _auctionStartTime) {
+        if (block.timestamp < auctionStartTime) {
         return AUCTION_START_PRICE;
-        }else if (block.timestamp - _auctionStartTime >= AUCTION_TIME) {
+        }else if (block.timestamp - auctionStartTime >= AUCTION_TIME) {
         return AUCTION_END_PRICE;
         } else {
-        uint256 steps = (block.timestamp - _auctionStartTime) /
+        uint256 steps = (block.timestamp - auctionStartTime) /
             AUCTION_DROP_INTERVAL;
         return AUCTION_START_PRICE - (steps * AUCTION_DROP_PER_STEP);
         }
@@ -130,24 +130,24 @@ contract DutchAuction is Ownable, ERC721 {
         require(
         _saleStartTime != 0 && block.timestamp >= _saleStartTime,
         "sale has not started yet"
-        ); // 检查拍卖是否开始
+        ); // 检查是否设置起拍时间，拍卖是否开始
         require(
         totalSupply() + quantity <= COLLECTOIN_SIZE,
         "not enough remaining reserved for auction to support desired mint amount"
         ); // 检查是否超过NFT上限
 
-        uint256 totalCost = getAuctionPrice(auctionStartTime) * quantity; // 计算mint成本
+        uint256 totalCost = getAuctionPrice() * quantity; // 计算mint成本
         require(msg.value >= totalCost, "Need to send more ETH."); // 检查用户是否支付足够ETH
-
+        
         // Mint NFT
-        for(uint i = 0; i < quantity; i++) {
-            uint mintIndex = totalSupply();
+        for(uint256 i = 0; i < quantity; i++) {
+            uint256 mintIndex = totalSupply();
             _mint(msg.sender, mintIndex);
             _addTokenToAllTokensEnumeration(mintIndex);
         }
         // 多余ETH退款
         if (msg.value > totalCost) {
-            payable(msg.sender).transfer(msg.value - totalCost);
+            payable(msg.sender).transfer(msg.value - totalCost); //注意一下这里是否有重入的风险
         }
     }
 ```
@@ -157,7 +157,7 @@ contract DutchAuction is Ownable, ERC721 {
 ```solidity
     // 提款函数，onlyOwner
     function withdrawMoney() external onlyOwner {
-        (bool success, ) = msg.sender.call{value: address(this).balance}("");
+        (bool success, ) = msg.sender.call{value: address(this).balance}(""); // call函数的调用方式详见第22讲
         require(success, "Transfer failed.");
     }
 ```

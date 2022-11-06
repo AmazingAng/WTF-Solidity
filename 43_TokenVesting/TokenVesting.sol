@@ -9,7 +9,7 @@ import "../31_ERC20/ERC20.sol";
  * @dev 这个合约会将ERC20代币线性释放给给受益人`_beneficiary`。
  * 释放的代币可以是一种，也可以是多种。释放周期由起始时间`_start`和时长`_duration`定义。
  * 所有转到这个合约上的代币都会遵循同样的线性释放周期，并且需要受益人调用`release()`函数提取。
- * 合约是从openzepplin的VestingWallet简化而来。
+ * 合约是从OpenZeppelin的VestingWallet简化而来。
  */
 contract TokenVesting {
     // 事件

@@ -3,7 +3,7 @@ title: 47. 可升级合约
 tags:
   - solidity
   - proxy
-  - openzepplin
+  - OpenZeppelin
 
 ---
 
@@ -19,7 +19,7 @@ tags:
 
 -----
 
-这一讲，我们将介绍可升级合约（Upgradeable Contract）。教学用的合约由`OpenZepplin`中的合约简化而来，可能有安全问题，不应用于生产环境。
+这一讲，我们将介绍可升级合约（Upgradeable Contract）。教学用的合约由`OpenZeppelin`中的合约简化而来，可能有安全问题，不要用于生产环境。
 
 ## 可升级合约
 

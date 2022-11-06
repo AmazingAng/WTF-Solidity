@@ -54,7 +54,7 @@ tags:
 编码的结果为`0x000000000000000000000000000000000000000000000000000000000000000a7a58c0be72be218b41c608b7fe7c5bb630736c713078414100000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000006`，由于`abi.encodePacked`对编码进行了压缩，长度比`abi.encode`短很多。
 
 ### `abi.encodeWithSignature`
-与`abi.encode`功能类似，只不过第一个参数为`函数签名`，比如`"foo(uint256,address)"`。当调用其他合约的时候可以使用。
+与`abi.encode`功能类似，只不过第一个参数为`函数签名`，比如`"foo(uint256,address,string,uint256[2])"`。当调用其他合约的时候可以使用。
 ```solidity
     function encodeWithSignature() public view returns(bytes memory result) {
         result = abi.encodeWithSignature("foo(uint256,address,string,uint256[2])", x, addr, name, array);

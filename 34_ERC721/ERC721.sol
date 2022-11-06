@@ -101,7 +101,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         _approve(owner, to, tokenId);
     }
 
-    // 查询 spender地址是否被可以使用tokenId（他是owner或被授权地址）。
+    // 查询 spender地址是否可以使用tokenId（需要是owner或被授权地址）
     function _isApprovedOrOwner(
         address owner,
         address spender,

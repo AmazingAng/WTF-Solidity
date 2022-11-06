@@ -77,7 +77,7 @@ contract Baba is Yeye{
 
 继承时要按辈分最高到最低的顺序排。比如我们写一个`Erzi`合约，继承`Yeye`合约和`Baba`合约，那么就要写成`contract Erzi is Yeye, Baba`，而不能写成`contract Erzi is Baba, Yeye`，不然就会报错。
 如果某一个函数在多个继承的合约里都存在，比如例子中的`hip()`和`pop()`，在子合约里必须重写，不然会报错。
-重写在多个父合约中重名函数时，`override`关键字后面要加上所有父合约名字，例如`override(Yeye, Baba)`。
+重写在多个父合约中都重名的函数时，`override`关键字后面要加上所有父合约名字，例如`override(Yeye, Baba)`。
 例子：
 ```solidity
 contract Erzi is Yeye, Baba{
@@ -117,10 +117,13 @@ contract Identifier is Base1 {
     }
 }
 ```
-上面的Identifier可以直接在代码中使用exactDividedBy2And3这个修饰器，也可以像下面一样重写修饰器。
+
+`Identifier`合约可以直接在代码中使用父合约中的`exactDividedBy2And3`修饰器，也可以利用`override`关键字重写修饰器：
+
 ```solidity
     modifier exactDividedBy2And3(uint _a) override {
         _;
+        require(_a % 2 == 0 && _a % 3 == 0);
     }
 ```
 

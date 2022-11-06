@@ -20,23 +20,26 @@ tags:
 ## Solidity中的函数
 solidity官方文档里把函数归到数值类型，但我觉得差别很大，所以单独分一类。我们先看一下solidity中函数的形式：
 ```solidity
-    function (<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
+    function <function name>(<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
 ```
 看着些复杂，咱们从前往后一个一个看（方括号中的是可写可不写的关键字）：
 
 1. `function`：声明函数时的固定用法，想写函数，就要以function关键字开头。
 
-2. `(<parameter types>)`：圆括号里写函数的参数，也就是要输入到函数的变量类型和名字。
+2. ` <function name>`：函数名。
 
-3. `{internal|external|public|private}`：函数可见性说明符，一共4种。没标明函数类型的，默认`internal`。
+3. `(<parameter types>)`：圆括号里写函数的参数，也就是要输入到函数的变量类型和名字。
+
+4. `{internal|external|public|private}`：函数可见性说明符，一共4种。没标明函数类型的，默认`public`。合约之外的函数，即"自由函数"，始终具有隐含`internal`可见性。
 
     - `public`: 内部外部均可见。(也可用于修饰状态变量，public变量会自动生成 `getter`函数，用于查询数值).
     - `private`: 只能从本合约内部访问，继承的合约也不能用（也可用于修饰状态变量）。
     - `external`: 只能从合约外部访问（但是可以用`this.f()`来调用，`f`是函数名）
     - `internal`: 只能从合约内部访问，继承的合约可以用（也可用于修饰状态变量）。
-4. `[pure|view|payable]`：决定函数权限/功能的关键字。`payable`（可支付的）很好理解，带着它的函数，运行的时候可以给合约转入`ETH`。`pure`和`view`的介绍见下一节。
 
-5. `[returns ()]`：函数返回的变量类型和名称。
+5. `[pure|view|payable]`：决定函数权限/功能的关键字。`payable`（可支付的）很好理解，带着它的函数，运行的时候可以给合约转入`ETH`。`pure`和`view`的介绍见下一节。
+
+6. `[returns ()]`：函数返回的变量类型和名称。
 
 ## 到底什么是`Pure`和`View`？
 我刚开始学`solidity`的时候，一直不理解`pure`跟`view`关键字，因为别的语言没有类似的关键字。`solidity`加入这两个关键字，我认为是因为`gas fee`。合约的状态变量存储在链上，`gas fee`很贵，如果不改变链上状态，就不用付`gas`。包含`pure`跟`view`关键字的函数是不改写链上状态的，因此用户直接调用他们是不需要付gas的（合约中非`pure`/`view`函数调用它们则会改写链上状态，需要付gas）。
