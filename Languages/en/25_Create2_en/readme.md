@@ -78,7 +78,7 @@ contract Pair{
     }
 }
 ```
-'Pair' contract is simple and contains three state variables: `factory`, `token0` and `token1`.
+`Pair` contract is simple and contains three state variables: `factory`, `token0` and `token1`.
 
 Constructor assigns the `factory` to factory contract address at deployment time. `initialize` function is called once by factory contract when the `Pair` contract is created, updating `token0` and `token1` to the addresses of two tokens in the token pair.
 
@@ -117,7 +117,7 @@ It's the above code that uses `CREATE2` to create contract, which is very simple
 
 ### Calculate `Pair` address beforehand
 ```solidity
-        // Calculate `Pair` contract address beforehand
+        // Calculate Pair contract address beforehand
         function calculateAddr(address tokenA, address tokenB) public view returns(address predictedAddress){
             require(tokenA != tokenB, 'IDENTICAL_ADDRESSES'); //Avoid conflicts when tokenA and tokenB are the same
             // Calculate salt with tokenA and tokenB addresses
@@ -132,7 +132,7 @@ It's the above code that uses `CREATE2` to create contract, which is very simple
             )))));
         }
 ```
-We write a `calculateAddr` function to precompute the address of `Pair` that 'tokenA' and 'tokenB' will generate. With it, we can verify whether the address we calculated in advance is the same as actual address.
+We write a `calculateAddr` function to precompute the address of `Pair` that `tokenA` and `tokenB` will generate. With it, we can verify whether the address we calculated in advance is the same as actual address.
 
 You can deploy `PairFactory2` contract and call `createPair2` with the following two addresses as parameters to see what is the address of token pair created and whether it is the same as the precomputed address.
 
