@@ -7,7 +7,7 @@ tags:
   - transfer/send/call
 ---
 
-# WTF Solidity极简入门: 20. 发送ETH
+# WTF Solidity Tutorial: 20. Sending ETH
 
 Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
 
