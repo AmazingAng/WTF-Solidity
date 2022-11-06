@@ -24,7 +24,7 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 In this chapter, we will introduce you how to use `try-catch` to handle exceptions in smart contracts. 
 
 ## `try-catch`
-In `solidity`, `try-catch` can only be used for `external` function or call `constructor` (considered 'external' function) when creating contracts. The basic syntax is as follows:
+In `solidity`, `try-catch` can only be used for `external` function or call `constructor` (considered `external` function) when creating contracts. The basic syntax is as follows:
 ```solidity
         try externalContract.f() {
             // if call succeeds, run some codes
