@@ -106,7 +106,7 @@ contract Attack {
 
 目前主要有两种办法来预防可能的`tx.origin`钓鱼攻击。
 
-### 使用`msg.sender`代替`tx.origin`
+### 1.使用`msg.sender`代替`tx.origin`
 
 `msg.sender`能够获取直接调用当前合约的调用发送者地址，通过对`msg.sender`的检验，就可以避免整个调用过程中混入外部攻击合约对当前合约的调用
 
@@ -119,7 +119,7 @@ function transfer(address payable _to, uint256 _amount) public {
 }
 ```
 
-### 检验`tx.origin == msg.sender`
+### 2.检验`tx.origin == msg.sender`
 
 如果一定要使用`tx.origin`，那么可以再检验`tx.origin`是否等于`msg.sender`，这样也可以避免整个调用过程中混入外部攻击合约对当前合约的调用
 
