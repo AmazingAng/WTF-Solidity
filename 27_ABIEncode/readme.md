@@ -26,7 +26,7 @@ tags:
 
 ## ABI编码
 
-我们将用编码4个变量，他们的类型分别是`uint256`, `address`, `string`, `uint256[2]`：
+我们将编码4个变量，他们的类型分别是`uint256`（别名 uint）, `address`, `string`, `uint256[2]`：
 ```solidity
     uint x = 10;
     address addr = 0x7A58c0Be72BE218B41C608b7Fe7C5bB630736C71;

@@ -188,7 +188,7 @@ openzeppelin 关于`Ownable.sol` 实现
 
 ---
 
-`tokenOfOwnerByIndex（）`：返回输入的地址参数`owner`在在索引`index`处的`tokenID`。
+`tokenOfOwnerByIndex（）`：返回输入的地址参数`owner`在索引`index`处的`tokenID`。
 
 怎么理解这个功能呢？一个`ERC721`标准的NFT只能被一个地址所持有，但是一个地址却可以同时持有多个NFT。标准的`ERC721`合约只提供了查询地址下有多少个NFT的接口`balanceOf（）`但是没有提供相关的接口规范来查询当前地址下有哪些tokens，`tokenOfOwnerByIndex（）`为这个需求提供了自己的功能，具体过程会在下面的`walletOfOwner()`中展开讲解。
 
