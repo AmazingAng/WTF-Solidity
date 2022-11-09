@@ -52,10 +52,10 @@ contract TryCatch {
             emit SuccessEvent();
             success = _even.onlyEven(a);
         } catch Error(string memory reason) {
-            // catch失败的 revert() 和 require()
+            // catch revert("reasonString") 和 require(false, "reasonString")
             emit CatchEvent(reason);
         } catch (bytes memory reason) {
-            // catch失败的 assert()
+            // catch失败的assert assert失败的错误类型是Panic(uint256) 不是Error(string)类型 故会进入该分支
             emit CatchByte(reason);
         }
     }

@@ -48,10 +48,13 @@ tags:
 ```solidity
         try externalContract.f() returns(returnType){
             // call成功的情况下 运行一些代码
-        } catch Error(string memory reason) {
-            // 捕获失败的 revert() 和 require()
-        } catch (bytes memory reason) {
-            // 捕获失败的 assert()
+        } catch Error(string memory /*reason*/) {
+            // 捕获revert("reasonString") 和 require(false, "reasonString")
+        } catch Panic(uint /*errorCode*/) {
+            // 捕获Panic导致的错误 例如assert失败 溢出 除零 数组访问越界
+        } catch (bytes memory /*lowLevelData*/) {
+            // 如果发生了revert且上面2个异常类型匹配都失败了 会进入该分支
+            // 例如revert() require(false) revert自定义类型的error
         }
 ```
 
