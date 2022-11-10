@@ -52,7 +52,7 @@ contract BadRandomness is ERC721 {
 
 它有一个主要的铸造函数 `luckyMint()`，用户调用时输入一个 `0-99` 的数字，如果和链上生成的伪随机数 `randomNumber` 相等，即可铸造幸运 NFT。伪随机数使用 `blockhash` 和 `block.timestamp` 声称。这个漏洞在于用户可以完美预测生成的随机数并铸造NFT。
 
-下面我们写个攻击合约 `Attack.sol`。在攻击函数 `attackMint()`中的参数为 `BadRandomness`合约地址。在函数中，我们计算了随机数 `luckyNumber`，然后将它作为参数输入到 `luckyMint()` 函数完成攻击。由于`attackMint()`和`luckyMint()`将在同一个区块中调用，`blockhash`和`block.timestamp`是相同的，利用他们生成的随机数也相同。
+下面我们写个攻击合约 `Attack.sol`。
 
 ```solidity
 contract Attack {
@@ -66,6 +66,8 @@ contract Attack {
     }
 }
 ```
+
+攻击函数 `attackMint()`中的参数为 `BadRandomness`合约地址。在其中，我们计算了随机数 `luckyNumber`，然后将它作为参数输入到 `luckyMint()` 函数完成攻击。由于`attackMint()`和`luckyMint()`将在同一个区块中调用，`blockhash`和`block.timestamp`是相同的，利用他们生成的随机数也相同。
 
 ## `Remix` 复现
 
