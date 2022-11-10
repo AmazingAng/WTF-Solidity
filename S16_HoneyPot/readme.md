@@ -130,19 +130,19 @@ contract Logger {
 
 **1.** 部署蜜罐（Honey Pot）合约。
 
-![](./img/S16-1.jpg)
+![部署蜜罐](./img/S16-1.jpg)
 
 **2.** 复制并粘贴蜜罐合约地址，部署`ERC20`合约。
 
-![](./img/S16-2.jpg)
+![部署ERC20合约](./img/S16-2.jpg)
 
 **3.** 将`value`设置为`1ETH`，将`ERC20`合约的`mint()`函数的参数设置为`100`并调用，成功`mint`100个代币，并且合约余额为`1ETH`。
 
-![](./img/S16-3.jpg)
+![mint](./img/S16-3.jpg)
 
 **4.** 调用`Bank`合约的`transfer()`函数（`recipient`地址任意，`amount`输入`100`），调用失败，原因为`untransferable`。
 
-![](./img/S16-4.jpg)
+![transfer](./img/S16-4.jpg)
 
 ## 预防办法
 
