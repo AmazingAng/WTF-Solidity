@@ -144,6 +144,8 @@
 
 **S07：坏随机数**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S07_BadRandomness) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S07_BadRandomness/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/5NQbE-url7o8OV5UtpTPEkMEVwTZqdDIRYDMiG1bECw)
 
+**S08：绕过合约检查**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S08_ContractCheck) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S08_ContractCheck/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/EbA6ZmPleFPtMgdVqRf65Ib8Hab_gIgt5Q3c0INy9mg)
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
