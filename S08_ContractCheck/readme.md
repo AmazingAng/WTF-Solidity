@@ -39,6 +39,8 @@ tags:
 
 这里有一个漏洞，就是在合约在被创建的时候，`runtime bytecode` 还没有被存储到地址上，因此 `bytecode` 长度为0。也就是说，如果我们将逻辑写在合约的构造函数 `constructor` 中的话，就可以绕过 `isContract()` 检查。
 
+![](./img/S08-1.png)
+
 ## 漏洞例子
 
 下面我们来看一个例子：`ContractCheck`合约是一个 freemint ERC20 合约，铸造函数 `mint()` 中使用了 `isContract()` 函数来阻止合约地址的调用，防止科学家批量铸造。每次调用 `mint()` 可以铸造 100 枚代币。
