@@ -26,7 +26,7 @@ tags:
 
 在2022年4月，一个很火的 NFT 项目名为 Akutar，他们使用[荷兰拍卖](https://github.com/AmazingAng/WTF-Solidity/tree/main/35_DutchAuction)进行公开发行，筹集了 11,539.5 ETH，非常成功。之前持有他们社区Pass的参与者会得到 0.5 ETH的退款，但是他们处理退款的时候，发现智能合约不能正常运行，全部资金被永远锁在了合约里。他们的智能合约有拒绝服务漏洞。
 
-.[](./img/S09-1.png)
+![](./img/S09-1.png)
 
 ## 漏洞例子
 
@@ -83,10 +83,12 @@ contract DoSGame {
 
 ```solidity
 contract Attack {
+    // 退款时进行DoS攻击
     fallback() external payable{
         revert("DoS Attack!");
     }
 
+    // 参与DoS游戏并存款
     function attack(address gameAddr) external payable {
         DoSGame dos = DoSGame(gameAddr);
         dos.deposit{value: msg.value}();
@@ -116,4 +118,4 @@ contract Attack {
 
 ## 总结
 
-这一讲，我们介绍了智能合约的拒绝服务，并举了 Akutar 项目因为该漏洞损失了一万多枚ETH。很多逻辑错误都能导致DoS，开发者写智能合约时要万分谨慎，比如退款要让用户自行领取，而非合约批量发送给用户。
+这一讲，我们介绍了智能合约的拒绝服务漏洞，并举了 Akutar 项目因为该漏洞损失了一万多枚ETH。很多逻辑错误都能导致DoS，开发者写智能合约时要万分谨慎，比如退款要让用户自行领取，而非合约批量发送给用户。
