@@ -8,23 +8,23 @@ tags:
 
 # WTF Solidity 合约安全: S09. 拒绝服务
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 solidity，巩固一下细节，也写一个“WTF Solidity 极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
 社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 
-这一讲，我们将介绍智能合约的拒绝服务（Denial of Service, DoS）漏洞，并介绍预防的方法。NFT项目 Akutar 曾因为 DoS 漏洞损失 11,539 ETH，当时价值 3400 万美元。
+这一讲，我们将介绍智能合约的拒绝服务（Denial of Service, DoS）漏洞，并介绍预防的方法。NFT 项目 Akutar 曾因为 DoS 漏洞损失 11,539 ETH，当时价值 3400 万美元。
 
 ## DoS
 
 在 Web2 中，拒绝服务攻击（DoS）是指通过向服务器发送大量垃圾信息或干扰信息的方式，导致服务器无法向正常用户提供服务的现象。而在 Web3，它指的是利用漏洞使得智能合约无法正常提供服务。
 
-在2022年4月，一个很火的 NFT 项目名为 Akutar，他们使用[荷兰拍卖](https://github.com/AmazingAng/WTF-Solidity/tree/main/35_DutchAuction)进行公开发行，筹集了 11,539.5 ETH，非常成功。之前持有他们社区Pass的参与者会得到 0.5 ETH的退款，但是他们处理退款的时候，发现智能合约不能正常运行，全部资金被永远锁在了合约里。他们的智能合约有拒绝服务漏洞。
+在 2022 年 4 月，一个很火的 NFT 项目名为 Akutar，他们使用[荷兰拍卖](https://github.com/AmazingAng/WTF-Solidity/tree/main/35_DutchAuction)进行公开发行，筹集了 11,539.5 ETH，非常成功。之前持有他们社区 Pass 的参与者会得到 0.5 ETH 的退款，但是他们处理退款的时候，发现智能合约不能正常运行，全部资金被永远锁在了合约里。他们的智能合约有拒绝服务漏洞。
 
 ![](./img/S09-1.png)
 
@@ -41,7 +41,7 @@ contract DoSGame {
     bool public refundFinished;
     mapping(address => uint256) public balanceOf;
     address[] public players;
-    
+
     // 所有玩家存ETH到合约里
     function deposit() external payable {
         require(!refundFinished, "Game Over");
@@ -79,7 +79,7 @@ contract DoSGame {
 (bool success, ) = player.call{value: refundETH}("");
 ```
 
-下面我们写个攻击合约， `attack()` 函数中将调用 `DoSGame` 合约的 `deposit()` 存款并参与游戏；`fallback()` 回调函数将回退所有向该合约发送`ETH`的交易，对`DoSGame` 合约中的DoS漏洞进行了攻击，所有退款将不能正常进行，资金被锁在合约中，就像 Akutar 合约中的一万多枚ETH一样。
+下面我们写个攻击合约， `attack()` 函数中将调用 `DoSGame` 合约的 `deposit()` 存款并参与游戏；`fallback()` 回调函数将回退所有向该合约发送`ETH`的交易，对`DoSGame` 合约中的 DoS 漏洞进行了攻击，所有退款将不能正常进行，资金被锁在合约中，就像 Akutar 合约中的一万多枚 ETH 一样。
 
 ```solidity
 contract Attack {
@@ -98,11 +98,16 @@ contract Attack {
 
 ## `Remix` 复现
 
-1. 部署 `DoSGame` 合约。
-2. 调用 `DoSGame` 合约的 `deposit()`，进行存款并参与游戏。
-3. 部署 `Attack` 合约。
-4. 调用 `Attack` 合约的 `attack()`，进行存款并参与游戏。
-5. 调用 `DoSGame` 合约`refund()`，进行退款，发现不能正常运行，攻击成功。
+**1.** 部署 `DoSGame` 合约。
+**2.** 调用 `DoSGame` 合约的 `deposit()`，进行存款并参与游戏。
+![](./img/S09-2.png)
+**3.** 此时，如果游戏结束调用 `refund()` 退款的话是可以正常退款的。
+![](./img/S09-3.png)
+**3.** 重新部署 `DoSGame` 合约，并部署 `Attack` 合约。
+**4.** 调用 `Attack` 合约的 `attack()`，进行存款并参与游戏。
+![](./img/S09-4.png)
+**5.** 调用 `DoSGame` 合约`refund()`，进行退款，发现不能正常运行，攻击成功。
+![](./img/S09-5.png)
 
 ## 预防方法
 
@@ -118,4 +123,4 @@ contract Attack {
 
 ## 总结
 
-这一讲，我们介绍了智能合约的拒绝服务漏洞，并举了 Akutar 项目因为该漏洞损失了一万多枚ETH。很多逻辑错误都能导致DoS，开发者写智能合约时要万分谨慎，比如退款要让用户自行领取，而非合约批量发送给用户。
+这一讲，我们介绍了智能合约的拒绝服务漏洞，并举了 Akutar 项目因为该漏洞损失了一万多枚 ETH。很多逻辑错误都能导致 DoS，开发者写智能合约时要万分谨慎，比如退款要让用户自行领取，而非合约批量发送给用户。
