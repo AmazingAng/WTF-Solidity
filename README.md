@@ -148,6 +148,8 @@
 
 **S09：拒绝服务漏洞**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S09_DoS) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S09_DoS/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/tiae-8Z9YQurL4RzCbcGgBonIGqIDp_KR0uKVy5101U)
 
+**S10：貔貅 Honeypot**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S10_HoneyPot) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S10_HoneyPot/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/tJmYTJbHlYX0Ah0k6m9gd4NpbKpBxsoU8fstLz3PqJY)
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
