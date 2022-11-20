@@ -37,14 +37,19 @@ Front-running 最初诞生于传统金融市场，是一场单纯未了利益的
 
 **1.** 使用 `anvil` 部署本地测试链，并声明 chain-id。
 ![](./img/S10-2.png)
+
 **2.** 调用 [`etherjs` 脚本](./js/index.js)监听 pending 状态的交易。
 ![](./img/S10-3.png)
+
 **3.** Metamask 连接本地链
 ![](./img/S10-4.png)
+
 **4.** 使用 `anvil` 部署后提供的私钥导入账户。
 ![](./img/S10-6.png)
+
 **5.** 使用 Metamask 给 anvil 提供的另一个账户地址转账。
 ![](./img/S10-7.png)
+
 **6.** 监听脚本捕获到了交易的消息，这时可以发起立刻发起一笔交易，并提高 gas price 来抢先。
 ![](./img/S10-8.png)
 
