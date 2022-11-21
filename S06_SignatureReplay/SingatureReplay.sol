@@ -8,11 +8,8 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 // 权限管理错误例子
 contract SigReplay is ERC20 {
 
-    address public signer;
-
     // 构造函数：初始化代币名称和代号
     constructor() ERC20("SigReplay", "Replay") {
-        signer = msg.sender;
     }
     
     /**
@@ -52,7 +49,7 @@ contract SigReplay is ERC20 {
 
     // ECDSA验证
     function verify(bytes32 _msgHash, bytes memory _signature) public view returns (bool){
-        return ECDSA.recover(_msgHash, _signature) == signer;
+        return ECDSA.recover(_msgHash, _signature) == msg.sender;
     }
 
 
