@@ -208,6 +208,9 @@ contract Random is ERC721, VRFConsumerBase{
 ```solidity
     /** 
     * 输入uint256数字，返回一个可以mint的tokenId
+    * 算法过程可理解为：totalSupply个空杯子（0初始化的ids）排成一排，每个杯子旁边放一个球，编号为[0, totalSupply - 1]。
+    每次从场上随机拿走一个球（球可能在杯子旁边，这是初始状态；也可能是在杯子里，说明杯子旁边的球已经被拿走过，则此时新的球从末尾被放到了杯子里）
+    再把末尾的一个球（依然是可能在杯子里也可能在杯子旁边）放进被拿走的球的杯子里，循环totalSupply次。相比传统的随机排列，省去了初始化ids[]的gas。
     */
     function pickRandomUniqueId(uint256 random) private returns (uint256 tokenId) {
         uint256 len = totalSupply - mintCount++; // 可mint数量
