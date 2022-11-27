@@ -1,20 +1,17 @@
 # WTF Solidity Tutorial: 5. Data Storage and Scope
 
-Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
+Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
 
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
+Everyone is welcomed to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
-Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
+WTF Academy Discord: [Link](https://discord.gg/5akcruXrsk)
 
-Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
-\
+All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)\
 
 -----
 
 ## Reference types in Solidity
-**Reference Type**: `array`, `struct` and `mapping`, these types take up a lot of space, and the address (similar to a pointer) is passed when assigning a value. 
-
-Because such variables are complex and take up a lot of storage space, we need to declare the location of the data storage when using them.
+**Reference Type**: Reference types differ from value types in that they do not store values directly on their own. Instead, reference types store the address/pointer of the data’s location and do not directly share the data. You can modify the underlying data with different variable names. Reference types `array`, `struct` and `mapping`, which take up a lot of storage space. We need to deal with the location of the data storage when using them.
 
 ## Data location
 There are three types of data storage locations in solidity: `storage`, `memory` and `calldata`. Gas costs are different for different storage locations. 
@@ -25,7 +22,7 @@ General usage:
 
 1. `storage`: The state variables are `storage` by default, which are stored on-chain. 
 
-2. `memory`: The parameters and temporary variables in the function generally use `memory`, which is stored in memory and not on-chain. 
+2. `memory`: The parameters and temporary variables in the function generally use `memory` label, which is stored in memory and not on-chain. 
 
 3. `calldata`: Similar to `memory`, stored in memory, not on-chain. The difference from `memory` is that `calldata` variables cannot be modified, and is generally used for function parameters. Example:
 
@@ -36,6 +33,7 @@ General usage:
         return(_x);
     }
 ```
+
 **Example:**
 ![5-1.png](./img/5-1.png)
 
@@ -43,7 +41,7 @@ General usage:
 
 Data locations are not only relevant for persistency of data, but also for the semantics of assignments:
 
-1. When `storage` (a state variable of the contract) is assigned to the local `storage` (in a function), a reference will be created, and changing the new variable will affect the original one. Example:
+1. When `storage` (a state variable of the contract) is assigned to the local `storage` (in a function), a reference will be created, and changing value of the new variable will affect the original one. Example:
 ```solidity
     uint[] x = [1,2,3]; // state variable: array x
 
@@ -74,7 +72,8 @@ Data locations are not only relevant for persistency of data, but also for the s
 4. Otherwise, assigning a variable to `storage` will create independent copies, and modifying one will not affect the other.
 
 ## Variable scope
-There are three types of variables in `Solidity` according to their scope, which are state variables, local variables and global variables.
+There are three types of variables in `Solidity` according to their scope: state variables, local variables, and global variables.
+
 ### 1. State variables
 State variables are variables whose data is stored on-chain and can be accessed by in-contract functions, but their `gas` consumption is high. 
 
@@ -98,7 +97,7 @@ We can change the value of the state variable in a function:
 ```
 
 ### 2. Local variable
-Local variables are variables that are only valid during function execution. After the function exits, the variables are invalid. The data of local variables are stored in memory, not on-chain, and their `gas` consumption is low. 
+Local variables are variables that are only valid during function execution; they are invalid after function exit. The data of local variables are stored in memory, not on-chain, and their `gas` consumption is low. 
 
 Local variables are declared inside a function:
 ```solidity
