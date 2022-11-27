@@ -11,7 +11,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 -----
 
-In this chapter, we will introduce `Solidity` function output, including returning multiple values, named returns, and reading full and part of return values using destructuring assignments. 
+In this chapter, we will introduce `Solidity` function output, including returning multiple values, named returns, and reading full or part of return values using destructuring assignments. 
 
 ## Return values (return and returns)
 There are two keywords related to function output: `return` and `returns`:
@@ -68,7 +68,7 @@ Of course, you can also return variables with `return` keyword in named returns:
 
 
 ## Summary
-In this section, we introduced function return values `return` and `returns`, including returning multiple variables, named returns, and reading full and part of return values using destructuring assignments. 
+In this section, we introduced function return values `return` and `returns`, including returning multiple variables, named returns, and reading full or part of return values using destructuring assignments. 
 
 
 
