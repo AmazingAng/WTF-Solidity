@@ -13,7 +13,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 ## Initial values of variables
 
-In Solidity, variables declared but not assigned have their initial/default values. In this tutorial, we will introduce the initial values of common variables.
+In Solidity, variables declared but not assigned have their initial/default values. In this tutorial, we will introduce the initial values of common variable types.
 
 ### Initial values of value types
 
@@ -69,7 +69,7 @@ You can use `getter` function of `public` variables to confirm initial values:
 
 ### `delete` operator
 
-`delete a` will change the value of `a` to its initial value.
+`delete a` will change the value of variable `a` to its initial value.
 
 ```solidity
     // delete operator
@@ -91,4 +91,4 @@ You can use `getter` function of `public` variables to confirm initial values:
 
 ## Summary
 
-In this section, we introduced the initial values of variables in Solidity. When a variable is declared but not assigned, its value defaults to the initial value. Variables with different types have different initial values. The `delete` operator can reset the value of the variable to the initial value.
+In this section, we introduced the initial values of variables in Solidity. When a variable is declared but not assigned, its value defaults to the initial value, which is equivalent as `0` represented in its type. The `delete` operator can reset the value of the variable to the initial value.
