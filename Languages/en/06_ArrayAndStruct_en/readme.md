@@ -17,9 +17,9 @@ In this lecture, we will introduce two important variable types in Solidity: `ar
 
 An `array` is a variable type commonly used in Solidity to store a set of data (integers, bytes, addresses, etc.).
 
-There are two types of arrays: fixed-length arrays and variable-length arrays.：
+There are two types of arrays: fixed-sized and dynamically-sized arrays.：
 
-- Fixed-length arrays: Specify the length of the array at the time of declaration. An `array` is declared in the format `T[k]`, where `T` is the element type and `k` is the length.
+- fixed-sized arrays: The length of the array is specified at the time of declaration. An `array` is declared in the format `T[k]`, where `T` is the element type and `k` is the length.
 
 ```solidity
     // fixed-length array
@@ -28,7 +28,7 @@ There are two types of arrays: fixed-length arrays and variable-length arrays.�
     address[100] array3;
 ```
 
-- Variable-length array（Dynamic Array）：Length of the array is not specified during declaration.  It uses the format of `T[]`, where `T` is the element type. `bytes` is special case, it is an array but you don't need to add `[]` to it.
+- Dynamically-sized array（dynamic array）：Length of the array is not specified during declaration.  It uses the format of `T[]`, where `T` is the element type. `bytes` is special case, it is a dynamic array, but you don't need to add `[]` to it.
 
 ```solidity
     // variable-length array
@@ -42,7 +42,7 @@ There are two types of arrays: fixed-length arrays and variable-length arrays.�
 
 In Solidity, there are some rules for creating arrays：
 
-- For a `memory` modified `dynamic array`, it can be created with the `new` operator, but the length must be declared, and the length cannot be changed after the declaration. For example：
+- For a `memory` dynamic array, it can be created with the `new` operator, but the length must be declared, and the length cannot be changed after the declaration. For example：
 
 ```solidity
     // memory dynamic array
@@ -61,12 +61,12 @@ In Solidity, there are some rules for creating arrays：
     x[2] = 4;
 ```
 
-### Array member
+### Members of Array
 
 - `length`: Arrays have a `length` member containing the number of elements, and the length of a `memory` array is fixed after creation.
-- `push()`: `Dynamic arrays` and `bytes` have a `push()` member that adds a `0` element at the end of the array.
-- `push(x)`: `Dynamic arrays` and `bytes` have `push(x)` members, which can add an `x` element at the end of the array.
-- `pop()`: `Dynamic arrays` and `bytes` have a `pop()` member that removes the last element of the array.
+- `push()`: Dynamic arrays have a `push()` member function that adds a `0` element at the end of the array.
+- `push(x)`: Dynamic arrays have a `push(x)` member function, which can add an `x` element at the end of the array.
+- `pop()`: Dynamic arrays have a `pop()` member that removes the last element of the array.
 
 **Example:**
 
@@ -74,7 +74,7 @@ In Solidity, there are some rules for creating arrays：
 
 ## Struct
 
-`Dynamic arrays` and `bytes` have a `pop()` member that removes the last element of the array.
+You can define new types in the form of `struct` in Solidity:
 
 ```solidity
     // struct
@@ -82,13 +82,11 @@ In Solidity, there are some rules for creating arrays：
         uint256 id;
         uint256 score; 
     }
-```
 
-```solidity
     Student student; // Initially a student structure
 ```
 
-There are two ways to assign values to structures:
+Elements of `struct` can be primitive types or reference types. And `struct` can be the element for `array` or `mapping`. There are two ways to assign values to `struct`:
 
 ```solidity
     //  assign value to structure
@@ -118,5 +116,5 @@ There are two ways to assign values to structures:
 
 ## Summary
 
-In this lecture, we introduced the basic usage of array (`array`) and structure (`struct`) in Solidity. In the next lecture, we will introduce the hash table in Solidity - mapping (`mapping`)。
+In this lecture, we introduced the basic usage of `array` and `struct` in Solidity. In the next lecture, we will introduce the hash table in Solidity - `mapping`。
 
