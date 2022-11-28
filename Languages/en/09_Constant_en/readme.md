@@ -11,13 +11,15 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 -----
 
-In this section, we will introduce two keywords in Solidity, `constant` and `immutable`. After the state variable declares these two keywords, you cannot change the values after the contract is compiled and it will help to save on `gas`. In addition, only the numeric variables can declare them as `constant` and `immutable`; the `string` and `bytes` variables can be declared as `constant`, but not as `immutable`.
+In this section, we will introduce two keywords in Solidity, `constant` and `immutable`. After the state variable are declared with them, you cannot change the values after the contract is compiled. They will restrict the modication of variables and save `gas`. 
+
+Value-typed variables can declare them as `constant` and `immutable`; `string` and `bytes` can be declared as `constant`, but not as `immutable`.
 
 ## Constant and immutable
 
 ### Constant
 
-The `constant` variable must be initialized when declared and cannot be changed after that. Any attempt at changes will cause the contract to fail its compilation step. 
+The `constant` variable must be initialized when declared and cannot be changed afterwards. Any modification attempt will cause errors at compilation. 
 
 ``` solidity
     // The constant variable must be initialized when declared and cannot be changed after that
@@ -29,7 +31,7 @@ The `constant` variable must be initialized when declared and cannot be changed 
 
 ### Immutable
 
-The `immutable` variable can be initialized at declaration or in the constructor, so it is more flexible to work with.
+The `immutable` variable can be initialized at declaration or in the constructor, so it is more flexible.
 
 ``` solidity
     // The immutable variable can be initialized in the constructor and cannot be changed later
@@ -58,7 +60,7 @@ You can initialize the `immutable` variable using a global variable such as `add
 
 ## Verify on Remix
 
-1. After the contract is deployed, initialized values of the `constant` and `immutable` variables can be obtained through the `getter` function on the Remix. 
+1. After the contract is deployed, initialized values of the `constant` and `immutable` variables can be obtained through the `getter` function. 
 
    ![9-1.png](./img/9-1.png)   
    
