@@ -26,7 +26,7 @@ The format of declaring the `mapping` is `mapping(_KeyType => _ValueType)`, wher
 
 ## Rules of `mapping`
 
-- **Rule 1**: The `_KeyType` should be selected among default types in `solidity` such as ` uint `, `address`, etc. No custom struct can be used. However, `_ValueType` can be any custom types. The following example will throw an error, because `_KeyType` uses a custom struct:
+- **Rule 1**: The `_KeyType` should be selected among default types in `solidity` such as ` uint `, `address`, etc. No custom `struct` can be used. However, `_ValueType` can be any custom types. The following example will throw an error, because `_KeyType` uses a custom struct:
 
 ```solidity
       // define a struct
@@ -41,7 +41,7 @@ The format of declaring the `mapping` is `mapping(_KeyType => _ValueType)`, wher
 
 - **Rule 3**: If the mapping is declared as `public` then Solidity will automatically create a `getter` function for you to query for the `Value` by the `Key`.
 
-- **Rule 4**：The syntax of adding a key-value pair to a mapping is `_Var[_Key] = _Value`, where '_Var' is the name of the mapping variable, and '_Key' and '_Value' correspond to the new key-value pair. For example:
+- **Rule 4**：The syntax of adding a key-value pair to a mapping is `_Var[_Key] = _Value`, where `_Var` is the name of the mapping variable, and `_Key` and `_Value` correspond to the new key-value pair. For example:
 
 ```solidity
     function writeMap (uint _Key, address _Value) public {
@@ -55,7 +55,7 @@ The format of declaring the `mapping` is `mapping(_KeyType => _ValueType)`, wher
 
 - **Principle 2**: Mapping use `keccak256(key)` as offset to access value.
 
-- **Principle 3**: Since Ethereum defines all unused space as 0, all `key` that are not assigned a `Value` will have an initial Value of 0.
+- **Principle 3**: Since Ethereum defines all unused space as 0, all `key` that are not assigned a `value` will have an initial value of 0.
 
 ## Verify on Remix (use `Mapping.sol` as example)
 
@@ -75,4 +75,4 @@ The format of declaring the `mapping` is `mapping(_KeyType => _ValueType)`, wher
 
 ## Summary
 
-In this section，we introduced the `mapping` type in Solidity. So far, we've learned all kinds of common variables, and then we'll learn control flow such as `if-else` and `while` in the coming tutorials.
+In this section，we introduced the `mapping` type in Solidity. So far, we've learned all kinds of common variables.
