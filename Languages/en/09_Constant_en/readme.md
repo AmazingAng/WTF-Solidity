@@ -64,16 +64,16 @@ You can initialize the `immutable` variable using a global variable such as `add
 
    ![9-1.png](./img/9-1.png)   
    
-2. After the `constant` variable is initialized, the contract cannot be compiled if there is an attempt to change its value and the compiler will issue an error of `TypeError: Cannot assign to a constant variable.`
+2. After the `constant` variable is initialized, the contract cannot be compiled if there is an attempt to change its value. The compiler will throw: `TypeError: Cannot assign to a constant variable.`
 
    ![9-2.png](./img/9-2.png)   
    
-3. After the `immutable` variable is initialized, the contract cannot be compiled if there is an attempt to change its value and the compiler will issue an error of `TypeError: Immutable state variable already initialized.`
+3. After the `immutable` variable is initialized, the contract cannot be compiled if there is an attempt to change its value. The compiler will throw: `TypeError: Immutable state variable already initialized.`
 
    ![9-3.png](./img/9-3.png)
 
 ## Summary
 
-In this section, we introduced two keywords in Solidity, `constant` and `immutable`, to keep the variables that should not be changed. It will help to save `gas` while improving the contract's security.
+In this section, we introduced two keywords in Solidity, `constant` and `immutable`. They keep the variables that should not be changed unchanged. It will help to save `gas` while improving the contract's security.
 
 
