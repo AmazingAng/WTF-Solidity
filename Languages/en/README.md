@@ -32,7 +32,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 8: Default Value**：[Code](./08_InitialValue_en) | [Tutorial](./08_InitialValue_en/readme.md)
 
-**Chapter 9: Constant（constant/immutable）**：[Code](./09_Constant_en) | [Tutorial](./09_Constant/readme.md_en)
+**Chapter 9: Constant（constant/immutable）**：[Code](./09_Constant_en) | [Tutorial](./09_Constant/readme.md)
 
 **Chapter 10: Control Flow**：[Code](./10_InsertionSort_en) | [Tutorial](./10_InsertionSort_en/readme.md)
 
