@@ -75,9 +75,12 @@ contract Baba is Yeye{
 ### 多重继承
 `solidity`的合约可以继承多个合约。规则：
 
-继承时要按辈分最高到最低的顺序排。比如我们写一个`Erzi`合约，继承`Yeye`合约和`Baba`合约，那么就要写成`contract Erzi is Yeye, Baba`，而不能写成`contract Erzi is Baba, Yeye`，不然就会报错。
-如果某一个函数在多个继承的合约里都存在，比如例子中的`hip()`和`pop()`，在子合约里必须重写，不然会报错。
-重写在多个父合约中都重名的函数时，`override`关键字后面要加上所有父合约名字，例如`override(Yeye, Baba)`。
+1. 继承时要按辈分最高到最低的顺序排。比如我们写一个`Erzi`合约，继承`Yeye`合约和`Baba`合约，那么就要写成`contract Erzi is Yeye, Baba`，而不能写成`contract Erzi is Baba, Yeye`，不然就会报错。
+
+2. 如果某一个函数在多个继承的合约里都存在，比如例子中的`hip()`和`pop()`，在子合约里必须重写，不然会报错。
+
+3. 重写在多个父合约中都重名的函数时，`override`关键字后面要加上所有父合约名字，例如`override(Yeye, Baba)`。
+
 例子：
 ```solidity
 contract Erzi is Yeye, Baba{
@@ -162,13 +165,14 @@ contract C is A {
         super.pop();
     }
 ```
-#### 多重继承+菱形继承问题
 
->菱形继承问题，又称为钻石问题，即一个派生类同时有两个或两个以上的基类。
+### 钻石继承
+
+在面向对象编程中，钻石继承（菱形继承）指一个派生类同时有两个或两个以上的基类。
 
 在多重+菱形继承链条上使用`super`关键字时，需要注意的是使用`super`会调用继承链条上的每一个合约的相关函数，而不是只调用最近的父合约。
 
-我们先写一个合约`God`,再让`Adam`和`Eve`继承这个合约，最后让创建合约`people`继承自`Adam`和`Eve`，每个合约都有`foo`和`bar`两个函数。
+我们先写一个合约`God`，再写`Adam`和`Eve`两个合约继承`God`合约，最后让创建合约`people`继承自`Adam`和`Eve`，每个合约都有`foo`和`bar`两个函数。
 
 ```solidity
 // SPDX-License-Identifier: MIT
