@@ -37,7 +37,11 @@ kind of complicated, let's move forward one by one (keyword in square brackets i
 
    - `internal`: Can only be accessed internal and by contracts deriving from it.
 
-    **Note**: `public|private|internal` can be also used on state variables. Public variables will automatically generate `getter` functions for querying values. The default visibility for state variables is `internal`.
+    **Note 1**: `public` is the default visibility for functions.
+    
+    **Note 2**: `public|private|internal` can be also used on state variables. Public variables will automatically generate `getter` functions for querying values. 
+    
+    **Note 2**: The default visibility for state variables is `internal`.
 
 4. `[pure|view|payable]`: Keywords that dictate a Solidity functions behavior. `payable` is easy to understand. One can send `ETH` to the contract via `payable` functions. `pure` and `view` are introduced in the next section.
 

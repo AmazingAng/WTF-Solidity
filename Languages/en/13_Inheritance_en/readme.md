@@ -19,19 +19,26 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 -----
 
-In this section, we introduce inheritance in Solidity, including single inheritance, multiple inheritance, and inheritance of modifiers and constructors.
+In this section, we introduce inheritance in Solidity, including simple inheritance, multiple inheritance, and inheritance of modifiers and constructors.
 
 ## Inheritance
-Inheritance is an important part of object-oriented programming and can significantly reduce code duplication. If contracts are considered objects, Solidity is also object-oriented programming language and supports the use of inheritance.
+Inheritance is one of the core concepts in object-oriented programming, which can significantly reduce code redundancy. It is a mechanism where you can to derive a class from another class for a hierarchy of classes that share a set of attributes and methods. In solidity, smart contracts can be viewed objects, which supports inheritance.
 
-### Function overriding rules
-- `virtual`:  For child contract to be able to override the base functions in the parent contract, the `virtual` keyword must be stated.
+### Rules
 
-- `override`：The child contract can override the function in the parent contract by adding the `override` keyword.
+There are two important keywards for inheritance in Solidity:
 
-### Single inheritance
+- `virtual`: If the functions in the parent contract are expected to be overridden in its child contracts, they should be declared as `virtual`.
 
-Let's start by writing a simple `Grandfather` contract, which contains 1 `Log` event and 3 functions: `hip()`, `pop()`, `grandfather()`, with the output `"Grandfather"`.
+- `override`：If the functions in the child contract override the functions in its parent contract, they should be declared as `override`.
+
+**Note 1**: If a function both overrides and is expected to be overridden, it should be labeled as `virtual override`.
+
+**Note 2**: If a `public` state variable is labeled as `override`, its `getter` function will be overriden.
+
+### Simple inheritance
+
+Let's start by writing a simple `Grandfather` contract, which contains 1 `Log` event and 3 functions: `hip()`, `pop()`, `grandfather()`, which outputs a string `"Grandfather"`.
 
 ```solidity
 contract Grandfather {
@@ -52,7 +59,7 @@ contract Grandfather {
 }
 ```
 
-Let's define another contract called `Father` and let him inherit the `Grandfather` contract, the syntax is `contract Father is Grandfather`, which is very intuitive when applied to understanding inheritance. In the `Father` contract, we rewrote the functions `hip()` and `pop()`, added the `override` keyword, and changed their output to `Father`; we also added a new function called `father` with the output `"Father"`.
+Let's define another contract called `Father`, which inherits the `Grandfather` contract. The syntax for inheritance is `contract Father is Grandfather`, which is very intuitive. In the `Father` contract, we rewrote the functions `hip()` and `pop()` with the `override` keyword, changing their output to `"Father"`. We also added a new function called `father`, which output a string `"Father"`.
 
 
 ```solidity
@@ -72,16 +79,18 @@ contract Father is Grandfather{
 }
 ```
 
-When we deploy the contract, we can see that there are 4 functions in the `Father` contract, where the outputs of `hip()` and `pop()` are successfully rewritten as `Father`, while the output of the inherited `grandfather()` function is still `"Gatherfather"`.
+After deploying the contract, we can see that there are 4 functions in the `Father` contract. The outputs of `hip()` and `pop()` are successfully rewritten with output `"Father"`, while the output of the inherited `grandfather()` function is still `"Gatherfather"`.
 
 
 ### Multiple inheritance
 
-A Solidity contract can inherit multiple contracts together, this is called multiple inheritance. The rules are:
+A solidity contract can inherit multiple contracts. The rules are:
 
-Inheritance should be arranged in the order of the highest to the lowest order, in this case, the order from the highest to lowest generational senority, similar to a hierarchical sequence. For example, if we write a `Son` contract and inherit the `Grandfather` contract and the `Father` contract, then we must write `contract Son is Gatherfather, Father`, and not `contract son is Father, Gatherfather`, otherwise it will output an error.
+1. For multiple inheritance, parent contracts should be ordered by seniority, from the highest to the lowest. For example: `contract Son is Gatherfather, Father`. A error will be thrown if the order is not correct.
 
-When overriding a renamed function in multiple parent contracts, the `override` keyword is followed by all parent contract names, such as `override(Grandfather, Father)`.
+2. If a function exists in multiple parent contracts, it must be overriden in the child contract, otherwise an error will occur.
+
+3. When a function exists in multiple parent contracts, you need to put all parent contract names after the `override` keyword. For example: `override(Grandfather, Father)`.
 
 Example：
 ```solidity
@@ -96,11 +105,11 @@ contract Son is Grandfather, Father{
     }
 ```
 
-We can see that in the `Son` contract, we rewrote the `hip()` and `pop()` functions, changed the output to `"Son"`, and also inherited the `grandfather()` and `father()` functions from the `Grandfather` and `Father` contracts, respectively.
+After deploying the contract, we can see that in the `Son` contract, we successfully rewrote the `hip()` and `pop()` functions, changing the output to `"Son"`, while the `grandfather()` and `father()` functions inherited from its parent contracts remain unchanged.
 
 ### Inheritance of modifiers
 
-Likewise, modifiers in Solidity can be inherited as well. The usage is similar to the inheritance function, where one only need to add the `virtual` and `override` keywords to the corresponding places.
+Likewise, modifiers in Solidity can be inherited as well. Rules for modifier inheritence are similar as the function inheritance, using the `virtual` and `override` keywords.
 
 ```solidity
 contract Base1 {
@@ -111,13 +120,12 @@ contract Base1 {
 }
 
 contract Identifier is Base1 {
-
-    // Calculate the value of a number divided by 2 and divided by 3, respectively, but the parameters passed in must be multiples of 2 and 3
+    // Calculate _dividend/2 and _dividend/3, but the _dividend must be a multiple of 2 and 3
     function getExactDividedBy2And3(uint _dividend) public exactDividedBy2And3(_dividend) pure returns(uint, uint) {
         return getExactDividedBy2And3WithoutModifier(_dividend);
     }
 
-    // Calculate the value of a number divided by 2 and divided by 3, respectively
+    // Calculate _dividend/2 and _dividend/3
     function getExactDividedBy2And3WithoutModifier(uint _dividend) public pure returns(uint, uint){
         uint div2 = _dividend / 2;
         uint div3 = _dividend / 3;
@@ -126,17 +134,18 @@ contract Identifier is Base1 {
 }
 ```
 
-The identifier above can use the exactDividedBy2And3 modifier directly in the code, or it can be rewritten as shown in the following code sample.
+`Identifier` contract can directly use the `exactDividedBy2And3` modifier, because it inherits `Base1` contract. We can also rewrite the modifier in the contract:
 
 ```solidity
     modifier exactDividedBy2And3(uint _a) override {
         _;
+        require(_a % 2 == 0 && _a % 3 == 0);
     }
 ```
 
 ### Inheritance of constructors
 
-There are two ways to inherit the constructor of a parent contract. For example, the parent contract `A` will have a state variable `a` in it, which is determined by the parameters of the constructor:
+Let first consider a the parent contract `A` with a state variable `a`, which is initialized in its constructor:
 
 ```solidity
 // Applying inheritance to the constructor functions
@@ -149,42 +158,49 @@ abstract contract A {
 }
 ```
 
-1. Declare the parameters of the parent constructor at inheritance time. For example: `contract B is A(1)`.
-2. Declare the constructor's parameters in the constructor of the child contract. For example:
+There are two ways for a child contract to inherit the constructor from its parent `A`: 
+1. Declare the parameters of the parent constructor at inheritance: 
 
-```solidity
-contract C is A {
-    constructor(uint _c) A(_c * _c) {}
-}
-```
+    ```solidity
+    contract B is A(1){}
+    ```
+
+2. Declare the parameter of the parent constructor in the constructor of the child contract:
+
+    ```solidity
+    contract C is A {
+        constructor(uint _c) A(_c * _c) {}
+    }
+    ```
 
 ### Calling the functions from the parent contracts
 
-There are two ways for a child contract to call the functions of the parent contract, either directly or by using the `super` keyword.
+There are two ways for a child contract to call the functions of the parent contract:
 
-1. Direct calling：The child contract can directly use the `parentContractName.functionName()` way to call on the parent contract's function. For example, `Grandfather.pop()`.
+1. Direct calling：The child contract can directly call the parent's function with `parentContractName.functionName()`. For example:
 
-```solidity
-    function callParent() public{
-        Grandfather.pop();
-    }
-```
+    ```solidity
+        function callParent() public{
+            Grandfather.pop();
+        }
+    ```
 
-2. `super` keyword：The child contract can use the `super.functionName()` to call on the parent contract's function in hierarchical order. Solidity child contracts can use the `super.functionName()` way to use the parent contract's function that is the most derived. Solidity inheritance relationships are in right-to-left order when declared：`contract Son is Grandfather, Father`，then `Father` is the most derived parent contract，so a `super.pop()` function will call for `Father.pop()` and not `Grandfather.pop()`：
+2. `super` keyword：The child contract can use the `super.functionName()` to call the function in the neareast parent contract in the inheritance hierarchy. Solidity inheritance are declared in a right-to-left order: for `contract Son is Grandfather, Father`, `Father` contract is closer than the `Grandfather` contract. Thus, `super.pop()` in the `Son` contract will call `Father.pop()` but not `Grandfather.pop()`.
 
-```solidity
-    function callParentSuper() public{
-        // Calling for the most derived parent contract，Father.pop()
-        super.pop();
-    }
-```
+    ```solidity
+        function callParentSuper() public{
+            // call the function one level higher up in the inheritance hierarchy
+            super.pop();
+        }
+    ```
 
-#### Multiple inheritance + diamond inheritance 
+### Diamond inheritance 
 
-The diamond inheritance problem, also known as the diamond problem, means that a derived class has two or more base classes at the same time.
-When using the `super` keyword on a multiple + diamond inheritance chain, it should be noted that using the `super` keyword will call the relevant function of each contract in the inheritance chain, not just the nearest parent contract.
+In Object-Oriented Programming, the diamond inheritance refers the scenario that a derived class has two or more base classes.
 
-We first write a contract called `God`, and let `Adam` and `Eve` inherit this contract. Finally, we let the creation contract `people` inherit from `Adam` and `Eve`, take note that each contract has the two functions of `foo` and `bar` in their respective contracts.
+When using the `super` keyword on a diamond inheritance chain, it should be noted that it will call the relevant function of each contract in the inheritance chain, not just the nearest parent contract.
+
+First, we write a base contract called `God`. Then we write two contracts `Adam` and `Eve` inheriting from `God` contract. Lastly, we write another contract `people` inheriting from `Adam` and `Eve`. Each contract has two functions, `foo()` and `bar()`:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -236,20 +252,18 @@ contract people is Adam, Eve {
 }
 ```
 
-In this example, calling the `super.bar()` function in the `people` contract will in turn call the `Eve`, `Adam`, and finally `God` contract's `bar()` function, respectively.
+In this example, calling the `super.bar()` function in the `people` contract will call the `Eve`, `Adam`, and `God` contract's `bar()` function, which is different from ordinary multiple inheritance.
 
-Although `Eve` and `Adam` are both child contracts of the `God` parent contract, the `God` contract will only be called once in the whole process. The specific reason is that Solidity borrows the way of Python, forcing a DAG (directed acyclic graph) composed of base classes to guarantee a specific order based on C3 Linearization. For more information on inheritance and linearization, read the official [Solidity docs here](https://docs.soliditylang.org/en/v0.8.17/contracts.html#multiple-inheritance-and-linearization).
+Although `Eve` and `Adam` are both child contracts of the `God` parent contract, the `God` contract will only be called once in the whole process. This is because Solidity borrows the paradigm from Python, forcing a DAG (directed acyclic graph) composed of base classes to guarantee a specific order based on C3 Linearization. For more information on inheritance and linearization, read the official [Solidity docs here](https://docs.soliditylang.org/en/v0.8.17/contracts.html#multiple-inheritance-and-linearization).
 
 ## Verify on Remix
-- Example of simple inheritance of contracts, it can be observed that the `Father` contract has `Grandfather` functions, too.
+- After deploying example contract in Simple Inheritance session, we can see that the `Father` contract has `Grandfather` functions:
 
   ![13-1](./img/13-1.png)
 
   ![13-2](./img/13-2.png)
 
-* For multiple inheritance of contracts, you can refer to the operation steps of simple inheritance to increase the deployment of the child contracts, and then observe the exposed functions and try to call them to view the logs
-
-- Inheritance of modifiers examples
+- Modifier inheritance examples:
 
   ![13-3](./img/13-3.png)
   
@@ -257,21 +271,21 @@ Although `Eve` and `Adam` are both child contracts of the `God` parent contract,
   
   ![13-5](./img/13-5.png)
   
-- Inheritance of constructor examples
+- Inheritance of constructors:
 
   ![13-6](./img/13-6.png)
   
   ![13-7](./img/13-7.png)
   
-- Calling the functions from parent contracts
+- Calling the functions from parent contracts:
 
   ![13-8](./img/13-8.png)
   
   ![13-9](./img/13-9.png)
   
-- Diamond inheritance example
+- Diamond inheritance:
 
    ![13-10](./img/13-10.png)
 
 ## Summary
-In this tutorial, we introduced the basic uses of Solidity's inheritance function, including simple inheritance, multiple inheritance, inheritance of modifiers and constructors, and calling functions from the parent contract.
+In this tutorial, we introduced the basic uses of Solidity's inheritance function, including simple inheritance, multiple inheritance, inheritance of modifiers and constructors, and calling functions from parent contracts.
