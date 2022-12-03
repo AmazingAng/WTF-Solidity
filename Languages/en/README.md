@@ -36,6 +36,16 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 10: Control Flow**：[Code](./10_InsertionSort_en) | [Tutorial](./10_InsertionSort_en/readme.md)
 
+**Chapter 11: Modifier**：[Code](./11_Modifier_en) | [Tutorial](./11_Modifier_en/readme.md)
+
+**Chapter 12: Event**：[Code](./12_Event_en) | [Tutorial](./12_Event_en/readme.md)
+
+**Chapter 13: Inheritance**：[Code](./13_Inheritance_en) | [Tutorial](./13_Inheritance_en/readme.md)
+
+**Chapter 14: Interface**：[Code](./14_Interface_en) | [Tutorial](./14_Interface_en/readme.md)
+
+**Chapter 10: Errors**：[Code](./15_Errors_en) | [Tutorial](./15_Errors_en/readme.md)
+
 ## WTF Contributors
 <div align="center">
   <h4 align="center">
