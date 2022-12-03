@@ -44,7 +44,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 14: Interface**：[Code](./14_Interface_en) | [Tutorial](./14_Interface_en/readme.md)
 
-**Chapter 10: Errors**：[Code](./15_Errors_en) | [Tutorial](./15_Errors_en/readme.md)
+**Chapter 15: Errors**：[Code](./15_Errors_en) | [Tutorial](./15_Errors_en/readme.md)
 
 ## WTF Contributors
 <div align="center">
