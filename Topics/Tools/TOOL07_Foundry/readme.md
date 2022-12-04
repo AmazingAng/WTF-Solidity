@@ -497,7 +497,7 @@ cast sig "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)"
 
 ```shell
 # 获得calldata
-cast tx 0x20e7dda515f04ea6a787f68689e27bcadbba914184da5336204f3f36771f59f0 input
+cast tx 0x20e7dda515f04ea6a787f68689e27bcadbba914184da5336204f3f36771f59f0 input --rpc-url=$RPC
 
 # 可以通过该方法decode交易的数据，类似etherscan中的decode方法
 # cast pretty-calldata <CALLDATA>
@@ -584,7 +584,7 @@ cast wallet verify --address <ADDRESS> <MESSAGE> <SIGNATURE>
 ```shell
 cast etherscan-source <contract address>
 
-cast etherscan-source 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 --etherscan-api-key=‘key’
+cast etherscan-source 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 --etherscan-api-key='key'
 
 ```
 
@@ -601,16 +601,16 @@ cast etherscan-source $WETH -d ~/Downloads
 调用 WETH合约的`balanceOf`方法,查看`0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`账号的余额
 
 ```shell
-#cast call [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND]
+#cast call [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND] --rpc-url=$RPC
 
-cast call $WETH "balanceOf(address)" 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+cast call $WETH "balanceOf(address)" 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 --rpc-url=$RPC
 
 # 输出
 # 0x0000000000000000000000000000000000000000000000230d12770f2845219c
 
 # 格式化输出 在参数后面加一个返回值的格式
 
-cast call $WETH "balanceOf(address)(uint256)" 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+cast call $WETH "balanceOf(address)(uint256)" 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 --rpc-url=$RPC
 
 # 输出
 # 646577988758891995548
