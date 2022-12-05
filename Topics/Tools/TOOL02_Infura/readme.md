@@ -46,7 +46,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 ### 5. 查看API Key详情
 
-进入API Key详情页，我们可以看到我们的API Key（图中`174d`开头的一组密钥）。在下面的 **NETWORK ENDPOINT** 栏中，可以查到以太网主网/测试网的rpc节点链接，用于访问链上数据并交互。另外，你可以申请免费的Layer2 rpc节点，包括`Polygon`，`Optimism`和`Arbitrum`，但是需要绑定`visa`卡。领`Optimism`空投那次，公开rpc节点卡爆了，而使用`Infura`的私人rpc节点的人可以正常领取。
+进入API Key详情页，我们可以看到我们的API Key（图中`184d`开头的一组密钥）。在下面的 **NETWORK ENDPOINT** 栏中，可以查到以太网主网/测试网的rpc节点链接，用于访问链上数据并交互。另外，你可以申请免费的Layer2 rpc节点，包括`Polygon`，`Optimism`和`Arbitrum`，但是需要绑定`visa`卡。领`Optimism`空投那次，公开rpc节点卡爆了，而使用`Infura`的私人rpc节点的人可以正常领取。
 
 ![查看信息](./img/infura6.png)
 

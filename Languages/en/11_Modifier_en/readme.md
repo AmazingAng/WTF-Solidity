@@ -10,20 +10,21 @@ tags:
 
 # WTF Solidity Tutorial: 11. Constructor & Modifier
 
-Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
-Everyone is welcomed to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-WTF Academy Discord, where you can find the way to join WeChat group: [Link](https://discord.gg/5akcruXrsk)
+Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
-In this section, we will introduce `constructor` and unique `modifier` in solidity language using the example of contract privilege control（`Ownable`）.
+In this section, we will introduce `constructor` and `modifier` in solidity with a control contract for access control（`Ownable`）.
 
 ## Constructor
-`constructor` is a special function and each contract can define one, which will automatically run once when the contract is deployed. It can be used to initialize some parameters of a contract. For example, it can initialize `owner` address of a contract:
+`constructor` is a special and optional function, which will automatically run once during contract deployment. It can be used to initialize parameters of a contract. For example, it can initialize `owner` address in the below contract:
+
 ```solidity
    address owner; // define owner variable
 
@@ -33,9 +34,9 @@ In this section, we will introduce `constructor` and unique `modifier` in solidi
    }
 ```
 
-**notice**⚠️：The syntax of constructor in different solidity versions is not consistent，Before Solidity 0.4.22, constructors did not use `constructor`. Instead, it used functions with the same name as the contract name as constructor. This old method of writing makes it easy for developers to make mistakes in writing (e.g., the contract is called `Parents` and the constructor is called `parents`), making constructor change to a normal function and occurring a mistake, So in version 0.4.22 and later, new writing of `constructor` was used.
+**Note**：The syntax of constructor in solidity is not consistent for different versions: Before `solidity 0.4.22`, constructors did not use the `constructor` keyword. Instead, the constructor function has the same name as the contract name. This old syntax is prone to mistakes: the developer may mistakenly name the contract as `Parents`, while the constructor as `parents`. So in `0.4.22` and later version, new syntax of `constructor` is used.
 
-Example of old code of constructor：
+Example of constructor prior to `solidity 0.4.22`：
 ```solidity
 pragma solidity =0.4.21;
 contract Parents {
@@ -46,7 +47,7 @@ contract Parents {
 ```
 
 ## Modifier
-`modifier` is unique syntax of `solidity`. It is similar to `decorator` in object-oriented programming, which used to declare peculiar properties of functions and reduce code redundancy. It's like Iron Man's intelligent armor. The function wear it will have some specific behaviors. The main use scenario of modifier is to check before running a function, such as address, variable, balance, etc.
+`modifier` is similar to `decorator` in object-oriented programming, which is used to declare dedicated properties of functions and reduce code redundancy. It's like Iron Man Armor for functions: the function with it will have some magic properties. The popular use case of modiferie is to control the access for functions, which can only be called by dedicated address, such as contract owner.
 
 
 ![Iron Man's modifier](https://images.mirror-media.xyz/publication-images/nVwXsOVmrYu8rqvKKPMpg.jpg?height=630&width=1200)
@@ -59,13 +60,14 @@ Let's define a modifier called `onlyOwner`：
       _; // if true，continue to run the body of function；otherwise throw an error and revert transaction
    }
 ```
-Functions with `onlyOwner` modifier can only be called by `owner` address, as in the following example：
+
+Functions with `onlyOwner` modifier can only be called by `owner` address：
 ```solidity
    function changeOwner(address _newOwner) external onlyOwner{
       owner = _newOwner; // only owner address can run this function and change owner
    }
 ```
-We define a `changeOwner` function, which can be run to change the `owner` of contract. However, due to the `onlyOwner` modifier, only original `owner` can call and an error will be thrown if others call. This is also the most common way to control smart contract privilege.
+We define a `changeOwner` function, which can change the `owner` of the contract. However, due to the `onlyOwner` modifier, only original contract `owner` can call it; errors will be thrown if others call it. This is the most common way to control smart contract privilege.
 
 ### OppenZepplin's implementation of Ownable：
 `OppenZepplin` is an organization that maintains a standardized code base for `Solidity`, Their standard implementation of `Ownable` is as follows：
@@ -73,14 +75,14 @@ We define a `changeOwner` function, which can be run to change the `owner` of co
 
 ## Remix Demo example
 Here, we take `Owner.sol` as an example.
-1. compile and deploy code in Remix.
-2. click `owner` button to view current owner variable.
+1. compile and deploy the code in Remix.
+2. click `owner` button to view current owner.
     ![](img/11-1_en.jpg)
 3. The transaction succeeds when `changeOwner` function is called by the owner address user.
     ![](img/11-2_en.jpg)
-4. The transaction fails when `changeOwner` function is not called by the owner address user, because the check statement of modifier `onlyOwner` is not satisfied.
+4. The transaction fails when `changeOwner` function is called by other addresses.
     ![](img/11-3_en.jpg)
 
 
 ## Summary
-In this lecture, we introduced constructor and modifier in `solidity`, and learned an `Ownable` contract which controls contract privilege.
+In this lecture, we introduced constructor and modifier in `solidity`, and wrote an `Ownable` contract that controls contract privilege.

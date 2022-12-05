@@ -1,46 +1,46 @@
 # WTF Solidity Tutorial: 2. Value Types
 
-Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
-Everyone is welcomed to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-WTF Academy Discord: [Link](https://discord.gg/5akcruXrsk)
+Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+
 
 -----
 
-### Types of variables in Solidity
+### Variable Types in Solidity
 
-1. **Value Type**：This include Boolean, integer, etc. data types, which the variables of these types will always be passed by value (i.e. they are always copied when they are used as function arguments or in assignments).
+1. **Value Type**：This include boolean, integer, etc. Varialbes of these types will always be passed by value (i.e. always create a new copy when used as function arguments or in assignments).
 
-2. **Reference Type**：This includes arrays and structs, which take up a large amount of storage space and pass addresses (i.e. like a pointers) directly when values are assigned.
+2. **Reference Type**：This includes arrays and structs. Variables of these types take up a large amount of storage, will be passed by pointers during assignment, and can be modified through multiple variable names. 
 
 3. **Mapping Type**: These are similar to hash tables for Solidity.
 
-4. **Function Type**：The Solidity documentation classifies functions into numeric types, but I think they are very different from the other types mentioned, so I will classify them separately. 
+4. **Function Type**：The Solidity documentation classifies functions into value types, but I think they are very different. So I will classify them separately. 
 
-Only the more commonly used value types will be introduced in this primer. The uncommon value types will not be discussed as it is not widely used. This tutorial, Tutorial 2, will introduce numeric types, while Tutorial 3 will introduce function types, and Tutorial 4 will introduce reference type and mapping type.
+Only the most common types will be introduced here. In this chapter, we will introduce value types.
 
-
-## Numeric type
+## Value types
 
 ### 1. Boolean
 
-Boolean data type is a binary variable，either a value of `true` or `false`.
+The value of a Boolean is binary, either `true` or `false`.
 
 ```solidity
     // Boolean
     bool public _bool = true;
 ```
 
-Operators for Boolean data type include:
+Operators for Boolean type include:
 
-- !  （logical NOT）
-- && （logical AND）
-- || （logical OR）
-- == （equality）
-- != （inequality）
+- `!`   (logical NOT)
+- `&&`  (logical AND)
+- `||`  (logical OR)
+- `==`  (equality)
+- `!=`  (inequality)
 
 Code：
 
@@ -53,7 +53,7 @@ Code：
     bool public _bool5 = _bool != _bool1; // inequality
 ```
 
-From the above source code：the value of the variable `_bool` is `true`；so `_bool1` is not`_bool`，which yields `false`；`_bool && _bool1`'s value is `false`；`_bool || _bool1`'s value is `true`；`_bool == _bool1`'s value is `false`；and `_bool != _bool1`'s value is `true`.
+From the above source code：the value of the variable `_bool` is `true`；so `_bool1` is not`_bool`，which yields `false`；`_bool && _bool1``s value is `false`；`_bool || _bool1``s value is `true`；`_bool == _bool1``s value is `false`；and `_bool != _bool1``s value is `true`.
 
 **Important note：** The `&&` and `||` operator follows a short-circuit evaluation rule. This means that for an expression such as `f(x) || g(y)`，if `f(x)` is `true`，then `g(y)` will not be computed; even if its result is the opposite of `f(x)`.
 
@@ -69,8 +69,8 @@ Integers are the whole numbers in Solidity，most frequently used examples inclu
 ```
 Some commonly used integer operators include:
 
-- Inequality operator（which returns a Boolean value）： `<=`， `<`， `==`， `!=`， `>=`， `>` 
-- Arithmetic operator： `+`， `-`， unary operators `-`， `+`， `*`， `/`， `%`（modulo），`**`（exponent）
+- Inequality operator (which returns a Boolean)： `<=`， `<`， `==`， `!=`， `>=`， `>` 
+- Arithmetic operator： `+`， `-`， unary operators `-`， `+`， `*`， `/`， `%` (modulo)，`**` (exponent)
 
 Code：
 
@@ -82,11 +82,11 @@ Code：
     bool public _numberbool = _number2 > _number3; // Great than
 ```
 
-You can try running these code and see the results of these 4 variables. Correct answers get a `POAP`, maybe?
+You can run the above code and check the values of the variables.
 
 ### 3. Addresses
 
-Address type stores a 20-bit value (similar to the size of an Ethereum address). Address types also have a member variable (members of address) which serve as the basis for all contracts. There are ordinary addresses and addresses that can transfer 'ETH' ('payable'). The 'payable' address has two members, 'balance()' and 'transfer()', making it easy to check 'ETH' balances and transfer funds.
+Address type stores a 20-bit value, the same as the size of an Ethereum address. Address types also have member variables and functions. There are two types of address: plain addresses and `payable` addresses. The `payable` address has two members, `balance()` and `transfer()`, making it easy to check `ETH` balances and transfer funds. You are not supposed to send `ETH` to plain addresses.
 
 Code:
 
@@ -98,11 +98,9 @@ Code:
     uint256 public balance = _address1.balance; // balance of address
 ```
 
-The next tutorial (Tutorial 3) on function type will teach you how to use these address types.
-
 ### 4. Fixed-size byte arrays
 
-There are two types of byte arrays (`bytes`), one is fixed of length (`byte`, `bytes8`, `bytes32`), and the other is without a fixed length. The fixed length belongs to the numeric type, and the non-fixed length type is the reference type (to be introduced in Tutorial 4). The fixed length `bytes` can store data, and consumes less `gas`.
+There are two types of byte arrays (`bytes`): fixe-sized (`byte`, `bytes8`, `bytes32`) and dynamically-sized (`bytes`, `string`). The fixe-sized byte arrays belong to value type, and the dynamically-sized belong to reference type. The fixe-sized byte arrays can store data, and consumes less `gas`.
 
 Code：
 
@@ -112,13 +110,13 @@ Code：
     bytes1 public _byte = _byte32[0]; 
 ```
 
-The 'MiniSolidity' value is stored in the form of bytes into the variable `_byte32`. If converted to 'hexadecimal' format the output is as follows: `0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
+We assign value `MiniSolidity` to the variable `_byte32`, or in `hexadecimal`: `0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
 
 On the other hand, the `_byte` variable stores the first byte of the `_byte32` variable, which is `0x4d`.
 
 ### 5. Enumeration
 
-Enumeration（`enum`）is a user-defined data type within Solidity. It is mainly used to assign names to the `uint` data type, which keeps the program easy to maintain and read. It is similar to `enum` in the C language, with indexation starting at `0` for `uint` data type.
+Enumeration (`enum`) is a user-defined data type within Solidity. It is mainly used to assign names to `uint`, which keeps the program easy to read.
 
 Code:
 
@@ -129,7 +127,8 @@ Code:
     ActionSet action = ActionSet.Buy;
 ```
 
-It can be converted interchangeably to `uint` data type and checks whether the converted positive integer is within the length of the enumeration, otherwise it will report an error:
+It can be converted to `uint` easily:
+
 ```solidity
     // Enum can be converted into uint
     function enumToUint() external view returns(uint){
@@ -137,15 +136,15 @@ It can be converted interchangeably to `uint` data type and checks whether the c
     }
 ```
 
-`enum` is a less popular class of variable that is hardly used by anyone. 
+`enum` is a less popular type in Solidity. 
 
-## Example from Remix
+## Example with Remix
 
-- After deploying the contract, you can view the specific values of each type of variable
+- After deploying the contract, you can cehck the values of each variable:
 
    ![2-1.png](./img/2-1.png)
   
-- Conversion between enum and uint
+- Conversion between enum and uint:
 
    ![2-2.png](./img/2-2.png)
 
@@ -153,4 +152,4 @@ It can be converted interchangeably to `uint` data type and checks whether the c
 
 ## Summary 
 
-In the second lecture, we introduce the 4 variable types in Solidity and explained the Boolean, integer, address, fixed-length byte array, and enumeration of numeric variables ('value type'). We will cover several other value types in the subsequent tutorials.
+In this chapter, we introduced the variable types in Solidity and explained the boolean, integer, address, fixed-length byte array, and enumeration in value types. We will cover several other types in the subsequent tutorials.
