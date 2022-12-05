@@ -82,7 +82,7 @@ contract SelectorClash {
 
 我们的目标是利用`executeCrossChainTx()`函数调用合约中的`putCurEpochConPubKeyBytes()`，目标函数的选择器为：`0x41973cd9`。观察到`executeCrossChainTx()`中是利用`_method`参数和`"(bytes,bytes,uint64)"`作为函数签名计算的选择器。因此，我们只需要选择恰当的`_method`，让这里算出的选择器等于`0x41973cd9`，通过选择器碰撞调用目标函数。
 
-Poly Network黑客事件中，黑客碰撞出的`_method`为 `f1121318093`，即`f1121318093(bytes,bytes,uint64)`的哈希前`4`位也是`0x41973cd9`，可以成功的调用函数。接下来我们要做的就是将`0x41973cd9`转换为`bytes`类型：`0x6631313231333138303933`，然后作为参数输入到`executeCrossChainTx()`中。`executeCrossChainTx()`函数另`3`个参数不重要，都填 `0x` 就可以。
+Poly Network黑客事件中，黑客碰撞出的`_method`为 `f1121318093`，即`f1121318093(bytes,bytes,uint64)`的哈希前`4`位也是`0x41973cd9`，可以成功的调用函数。接下来我们要做的就是将`f1121318093`转换为`bytes`类型：`0x6631313231333138303933`，然后作为参数输入到`executeCrossChainTx()`中。`executeCrossChainTx()`函数另`3`个参数不重要，都填 `0x` 就可以。
 
 ## `Remix`演示
 

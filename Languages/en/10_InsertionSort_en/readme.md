@@ -1,12 +1,13 @@
-# WTF Solidity Tutorial: 10. Control Flow, and Solidity Implementation of Insertion Sort
+# WTF Solidity Tutorial: 10. Control Flow
 
-Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
-Everyone is welcomed to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-WTF Academy Discord: [Link](https://discord.gg/5akcruXrsk)
+Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+
 
 -----
 
@@ -14,7 +15,7 @@ In this section, we will introduce control flow in Solidity, and how to use Soli
 
 ## Control Flow
 
-Solidity's control flow is similar to other languages, mainly including the following parts:
+Solidity's control flow is similar to other languages, mainly including the following components:
 
 1. `if-else`
 
@@ -70,7 +71,9 @@ function doWhileTest() public pure returns(uint256){
 
 5. Conditional (`ternary`) operator
 
-The `ternary` operator is the only operator in Solidity that accepts three operands：a condition followed by a question mark (?), then an expression to execute if the condition is true followed by a colon (:), and finally the expression to execute if the condition is false (`... ? ... : ...`). This operator is frequently used as an alternative to an if...else statement.
+The `ternary` operator is the only operator in Solidity that accepts three operands：a condition followed by a question mark (`?`), then an expression `x` to execute if the condition is true followed by a colon (`:`), and finally the expression `y`to execute if the condition is false: `condition ? x : y`. 
+
+This operator is frequently used as an alternative to an `if-else` statement.
 
 ```solidity
 // ternary/conditional operator
@@ -84,11 +87,11 @@ In addition, there are `continue` (immediately enter the next loop) and `break` 
 
 ## `Solidity` Implementation of Insertion Sort
 
-### N.B.: Over 90% of people who write the insertion algorithm with Solidity will get it wrong.
+**Note**: Over 90% of people who write the insertion algorithm with Solidity will get it wrong at first try.
 
 ### Insertion Sort
 
-The problem solved by the sorting algorithm is to arrange an unordered set of numbers from small to large, such as sorting `[2, 5, 3, 1]` to `[1, 2, 3, 5]`. Insertion Sort (`InsertionSort`) is the simplest sorting algorithm and the first algorithm many people learn. The idea of `InsertionSort` is very simple: from front to back, compare each number with the number in front of it, and if it is smaller than the number in front, switch their positions. 
+The problem solved by the sorting algorithm is to arrange an unordered set of numbers from small to large, such as sorting `[2, 5, 3, 1]` to `[1, 2, 3, 5]`. Insertion Sort (`InsertionSort`) is the simplest sorting algorithm and the first algorithm many people learn in their computer science class. The idea of `InsertionSort` is very simple: from begin to the end, compare each number with the number in front of it. If it is smaller than the number in front, switch their positions. 
 
 The schematic is shown below:
 
@@ -112,7 +115,7 @@ def insertionSort(arr):
 
 ### Bug shows up after rewriting to Solidity! 
 
-Python implimentation of Insertion Sort can be completed in only 8 lines. Thus, we rewrite it into Solidity code, by converting functions, variables, loops, etc. accordingly, and only need 9 lines of code:
+Python version of Insertion Sort takes up 8 lines. We can rewrite it into Solidity by converting functions, variables, loops accordingly. It only takes up 9 lines of code:
 
 ``` solidity
     // Insertion Sort (Wrong version）
@@ -131,17 +134,17 @@ Python implimentation of Insertion Sort can be completed in only 8 lines. Thus, 
     }
 ```
 
-Then we put the modified version into Remix and run by entering `[2, 5, 3, 1]`. *BOOM!* There are bugs! After correcting it for a long time, I still could not find where the bug is. I went to Google to search for "Solidity insertion sort", and found that the insertion algorithm tutorials written with Solidity on the Internet are all wrong, such as: [Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
+But when we compile the modified version and try to sort `[2, 5, 3, 1]`. *BOOM!* There are bugs! After long-time debugging, I still could not find where the bug is. I googled "Solidity insertion sort", and found that the insertion algorithm written with Solidity are all wrong, such as: [Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
 
-Remix decoded the mistake with the following output:
+Errors occured in `Remix decoded output`:
 
-	![10-1](./img/10-1.jpg)
+![10-1](./img/10-1.jpg)
 
 ### Correct Version of Solidity `InsertionSort`
 
-After a few hours, with the help of a friend in the `Dapp-Learning` community, we finally found the problem. The most commonly used variable type in Solidity is `uint`, which is a positive integer. If it takes a negative value, an error `underflow` will be reported. In the insertion algorithm, the variable `j` may get `-1`, resulting in the corresponding error.
+After a few hours, with the help of a friend in the `Dapp-Learning` community, we finally found the problem. The most commonly used variable type in Solidity is `uint`, which represent a positive integer. If it takes a negative value, an error `underflow` will be reported. In the above code, the variable `j` may get `-1`, resulting in the corresponding error.
 
-So, we just need to add 1 to `j` so that it cannot take a negative value. The correct version is:
+So, we just need to add 1 to `j` so that it can never take a negative value. The correct version of Insertion Sort:
 
 ```solidity
     // Insertion Sort（Correct Version）
@@ -166,7 +169,7 @@ Result of the correct code：
 
 ## Summary
 
-In this lecture, we introduced control flow in Solidity and learn about the Insertion Sort algorithm in Solidity. Solidity looks simple but there are many pitfalls hidden. Every month, there are projects that lose tens of millions or even hundreds of millions of dollars because of these small bugs. Master the basics and keep practicing to write better Solidity code.
+In this lecture, we introduced control flow in Insertion Sort algorithm in Solidity. Solidity looks simple but have many traps. Every month, projects lose millions of dollars because of small bugs in their smart contract. To write a safe contract, we need to master the basics of the Solidity and keep practicing.
 
 
 

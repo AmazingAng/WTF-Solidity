@@ -32,11 +32,11 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 8: Default Value**：[Code](./08_InitialValue_en) | [Tutorial](./08_InitialValue_en/readme.md)
 
-**Chapter 9: Constant（constant/immutable）**：[Code](./09_Constant_en) | [Tutorial](./09_Constant/readme.md_en)
+**Chapter 9: Constant（constant/immutable）**：[Code](./09_Constant_en) | [Tutorial](./09_Constant/readme.md)
 
 **Chapter 10: Control Flow**：[Code](./10_InsertionSort_en) | [Tutorial](./10_InsertionSort_en/readme.md)
 
-**Chapter 11: Modifiers**：[Code](./11_Modifier_en) | [Tutorial](./11_Modifier_en/readme.md)
+**Chapter 11: Modifier**：[Code](./11_Modifier_en) | [Tutorial](./11_Modifier_en/readme.md)
 
 **Chapter 12: Event**：[Code](./12_Event_en) | [Tutorial](./12_Event_en/readme.md)
 
@@ -45,12 +45,6 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 **Chapter 14: Interface**：[Code](./14_Interface_en) | [Tutorial](./14_Interface_en/readme.md)
 
 **Chapter 15: Errors**：[Code](./15_Errors_en) | [Tutorial](./15_Errors_en/readme.md)
-
-**Chapter 16: Overloading**：[Code](./16_Overloading_en) | [Tutorial](./16_Overloading_en/readme.md)
-
-**Chapter 17: Library**：[Code](./17_Library_en) | [Tutorial](./17_Library_en/readme.md)
-
-**Chapter 18: Import**：[Code](./18_Import_en) | [Tutorial](./18_Import/readme.md)
 
 ## WTF Contributors
 <div align="center">
