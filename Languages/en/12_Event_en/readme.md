@@ -9,37 +9,35 @@ tags:
 
 # WTF Solidity Tutorial: 12. Events
 
-Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
-Everyone is welcomed to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-WTF Academy Discord, where you can find the way to join WeChat group: [Link](https://discord.gg/5akcruXrsk)
+Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
-In this section, we take transferring ERC20 tokens for example to introduce `event` in `solidity`.
+In this section, we introduce `event` in `solidity` using transferring ERC20 tokens as an example .
 
 ## Events
-Events in `solidity` is an abstraction of the log on `EVM`. It has two characteristics：
+The event in `solidity` are the transaction logs stored on the `EVM` (Ethereum Virtual Machine). They can be emited during function calls and are accessible with the contract address. Events have two characteristics：
 
-- response：Applications([`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18))can subscribe and listen to these events through `RPC` interface and respond at front end.
-- economical：Events are economical to store data on `EVM`, each costing about 2,000 `gas`; By comparison, it takes at least 20,000 `gas` to store a new variable on the chain.
+- Responsive: Applications (e.g. [`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18)) can subscribe and listen to these events through `RPC` interface and respond at frontend.
+- Economical: It is cheap to store data with events, costing about 2,000 `gas` each; By comparison, it takes at least 20,000 `gas` to store a new variable on-chain.
 
-### Rules for events
-The declaration of event starts with the `event` keyword, followed by event name, then the type and name of variables to be recorded in parenthesis. Take the `Transfer` event of the `ERC20` token contract for example：
+### Declare events
+The events are declared with the `event` keyword, followed by event name, then the type and name of each parameter to be recorded. Let's take the `Transfer` event from the `ERC20` token contract as an example：
 ```solidity
 event Transfer(address indexed from, address indexed to, uint256 value);
 ```
-We can see that `Transfer` event records three variables `from`，`to` and `value`，which correspond to the transfer address of token, the receiving address and transfer number.
+`Transfer` event records three parameters: `from`，`to`, and `value`，which correspond to the address where the tokens are sent, the receiving address, and the number of tokens being transferred. Parameter `from` and `to` are marked with `indexed` keywords, which will be stored at a special data structure known as `topics` and easily queried by programs.
 
-At the same time, `from` and `to` are marked by the keyword `indexed`. Each variable marked by `indexed` can be understood as the index "key" of retrieving events, which is stored and indexed separately as a `topic` on Ethereum, so program can easily screen out specific transfer address and transfer event of receiving address. Each event has up to three variables marked with `indexed`. The size of each `indexed` variable is fixed 256 bits. The hash of event and these three variables marked with `indexed` are usually stored as `topic` in `EVM` log, where `topic[0]` is `keccak256` hash of this event, and `topic[1]` to `topic[3]` store `keccak256` hash of variables marked with `indexed`.
-![](img/12-3.jpg)
 
-`value` which doesn't marked with `indexed` will be stored in `data` section of the event, and it can be interpreted as "value" of the event. Variables in `data` section can't be retrieved directly, but it can store data of any size. Therefore, in general, `data` section can be used to store complex data structures, such as arrays and strings, etc., because these data exceed 256 bits. Even if stored in `topic` section of the event, it is stored in the hash way. Besides, Variables in `data` part consume less gas on storage compared to `topic`.
+### Emit events
 
-We can emit events in functions. In the following example, each time the `_transfer()` function is used to transfer token, `Transfer` event will be emitted and corresponding variables will be recorded.
+We can emit events in functions. In the following example, each time the `_transfer()` function is called, `Transfer` events will be emitted and corresponding parameters will be recorded.
 ```solidity
     // define _transfer function，execute transfer logic
     function _transfer(
@@ -58,23 +56,52 @@ We can emit events in functions. In the following example, each time the `_trans
     }
 ```
 
-### Remix demo
-Take `Event.sol` contract for example，compile and deploy.
+## EVM Log
 
-Then call `_transfer` function.
-![](img/12-1_en.jpg)
+EVM uses "Log" to store Solidity events. Each log contains two parts: `topics` and `log`.
 
-Click transaction on the right to view details of the log
-![](img/12-2_en.jpg)
+![](img/12-3.jpg)
+
+### `Topics`
+
+`Topics` is used to decribe events. Each event contains a maximum of 4 `topics`. Typically, the first `topic` is the event hash: the hash of the event signature. The event hash of `Transfer` event is calculated as follows:
+
+```solidity
+keccak256("Transfer(addrses,address,uint256)")
+
+//0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+```
+
+Besides event hash, `topics` can include 3 `indexed` parameters, such as the `from` and `to` parameters in `Transfer` event. The anonymous event is special: it does not have a event name and can have 4 `indexed` parameters at maximum.
+
+`indexed` parameters can be understood as the indexed "key" for events, which can be easily queried by programs. The size of each `indexed` parameter is 32 bytes. For the parameter is larger than 32 bytes, such as `array` and `string`, the hash of the underlying data is stored.
+
+### `Data`
+
+Non-indexed parameters will be stored in the `data` section of the log. They can be interpreted as "value" of the event and can't be retrieved directly. But they can store data with larger size. Therefore, `data` section can be used to store complex data structures, such as arrays and strings. Moreovrer, `data` consumes less gas on storage compared to `topic`.
+
+## Remix Demo
+Let's take `Event.sol` contract as an example.
+
+1. Deploy the `Event` contract.
+
+2. Call `_transfer` function to emit `Transfer` event.
+
+![](./img/12-1_en.jpg)
+
+3. Check transaction details to check the emitted event.
+
+![](./img/12-1_en.jpg)
 
 ### Query event on etherscan
-We try to transfer 100 tokens on `Rinkeby` test network by `_transfer()` function, and the corresponding `tx` can be queried on `etherscan`：[URL](https://rinkeby.etherscan.io/tx/0x8cf87215b23055896d93004112bbd8ab754f081b4491cb48c37592ca8f8a36c7)
 
-Click `Logs` button to see details of the event：
+Etherscan is a block explorer that lets you view public data on transactions, smart contracts, and more on the Ethereum blockchain. First, I deployed the contract to an ethereum testnet (Rinkeby or Goerli). Second, I called the `_transfer` function to transfer 100 tokens. After that, you can check the transaction details on `etherscan`：[URL](https://rinkeby.etherscan.io/tx/0x8cf87215b23055896d93004112bbd8ab754f081b4491cb48c37592ca8f8a36c7)
+
+Click `Logs` button to check the details of the event：
 
 ![details of event](https://images.mirror-media.xyz/publication-images/gx6_wDMYEl8_Gc_JkTIKn.png?height=980&width=1772)
 
-There are three elements in `Topics`, `[0]` is hash of the event, `[1]` and `[2]` are the information of two variables marked with `indexed` we defined, namely outgoing address and receiving address of the transfer. The remaining element in `Data` is variable without `indexed`, namely the transfer number.
+There are 3 elements in `Topics`: `[0]` is hash of the event, `[1]` and `[2]` are the `indexed` parameters defined in `Transfer` event (`from` and `to`). The element in `Data` is the non-indexed parameter `amount`.
 
 ## Summary
-In this lecture, we introduced how to use and query events in `solidity`. Many on-chain Analysis tools, including `Nansen` and `Dune Analysis`, are based on events.
+In this lecture, we introduced how to use and query events in `solidity`. Many on-chain analysis tools are based on solidity events, such as `Dune Analytics`.

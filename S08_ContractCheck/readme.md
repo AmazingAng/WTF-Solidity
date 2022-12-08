@@ -109,7 +109,7 @@ contract NotContract {
 
 ## 预防办法
 
-你可以使用 `(tx.origin == msg.sender)` 来检测调用者是否为合约。如果调用者为 EOA，那么`tx.origin`和`msg.sender`相等；如果它们俩不想等，调用者为合约。
+你可以使用 `(tx.origin == msg.sender)` 来检测调用者是否为合约。如果调用者为 EOA，那么`tx.origin`和`msg.sender`相等；如果它们俩不相等，调用者为合约。
 
 ```
 function realContract(address account) public view returns (bool) {

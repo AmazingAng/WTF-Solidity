@@ -1,22 +1,25 @@
 # WTF Solidity Tutorial: 9. Constant and Immutable
 
-Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
-Everyone is welcomed to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-WTF Academy Discord: [Link](https://discord.gg/5akcruXrsk)
+Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+
 
 -----
 
-In this section, we will introduce two keywords in Solidity, `constant` and `immutable`. After the state variable declares these two keywords, you cannot change the values after the contract is compiled and it will help to save on `gas`. In addition, only the numeric variables can declare them as `constant` and `immutable`; the `string` and `bytes` variables can be declared as `constant`, but not as `immutable`.
+In this section, we will introduce two keywords in Solidity, `constant` and `immutable`. After the state variable are declared with them, you cannot change the values after the contract is compiled. They will restrict the modication of variables and save `gas`. 
+
+Value-typed variables can declare them as `constant` and `immutable`; `string` and `bytes` can be declared as `constant`, but not as `immutable`.
 
 ## Constant and immutable
 
 ### Constant
 
-The `constant` variable must be initialized when declared and cannot be changed after that. Any attempt at changes will cause the contract to fail its compilation step. 
+The `constant` variable must be initialized when declared and cannot be changed afterwards. Any modification attempt will cause errors at compilation. 
 
 ``` solidity
     // The constant variable must be initialized when declared and cannot be changed after that
@@ -28,7 +31,7 @@ The `constant` variable must be initialized when declared and cannot be changed 
 
 ### Immutable
 
-The `immutable` variable can be initialized at declaration or in the constructor, so it is more flexible to work with.
+The `immutable` variable can be initialized at declaration or in the constructor, so it is more flexible.
 
 ``` solidity
     // The immutable variable can be initialized in the constructor and cannot be changed later
@@ -57,20 +60,20 @@ You can initialize the `immutable` variable using a global variable such as `add
 
 ## Verify on Remix
 
-1. After the contract is deployed, initialized values of the `constant` and `immutable` variables can be obtained through the `getter` function on the Remix. 
+1. After the contract is deployed, initialized values of the `constant` and `immutable` variables can be obtained through the `getter` function. 
 
    ![9-1.png](./img/9-1.png)   
    
-2. After the `constant` variable is initialized, the contract cannot be compiled if there is an attempt to change its value and the compiler will issue an error of `TypeError: Cannot assign to a constant variable.`
+2. After the `constant` variable is initialized, the contract cannot be compiled if there is an attempt to change its value. The compiler will throw: `TypeError: Cannot assign to a constant variable.`
 
    ![9-2.png](./img/9-2.png)   
    
-3. After the `immutable` variable is initialized, the contract cannot be compiled if there is an attempt to change its value and the compiler will issue an error of `TypeError: Immutable state variable already initialized.`
+3. After the `immutable` variable is initialized, the contract cannot be compiled if there is an attempt to change its value. The compiler will throw: `TypeError: Immutable state variable already initialized.`
 
    ![9-3.png](./img/9-3.png)
 
 ## Summary
 
-In this section, we introduced two keywords in Solidity, `constant` and `immutable`, to keep the variables that should not be changed. It will help to save `gas` while improving the contract's security.
+In this section, we introduced two keywords in Solidity, `constant` and `immutable`. They keep the variables that should not be changed unchanged. It will help to save `gas` while improving the contract's security.
 
 
