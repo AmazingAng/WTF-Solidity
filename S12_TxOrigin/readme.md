@@ -1,12 +1,12 @@
 ---
-title: S15. tx.origin钓鱼攻击
+title: S12. tx.origin钓鱼攻击
 tags:
   - solidity
   - security
   - tx.origin
 ---
 
-# WTF Solidity 合约安全: S15. tx.origin钓鱼攻击
+# WTF Solidity 合约安全: S12. tx.origin钓鱼攻击
 
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
@@ -26,7 +26,7 @@ tags:
 
 在`solidity`中，使用`tx.origin`可以获得启动交易的原始地址，它与`msg.sender`十分相似，下面我们用一个例子来区分它们之间不同的地方。
 
-如果用户A调用了B合约，再通过B合约调用了C合约，那么在C合约看来，`msg.sender`就是B合约，而`tx.origin`就是用户A。如果你不了解`call`，可以阅读[WTF Solidity极简教程第22讲：Call](https://github.com/AmazingAng/WTF-Solidity/blob/main/22_Call/readme.md)。
+如果用户A调用了B合约，再通过B合约调用了C合约，那么在C合约看来，`msg.sender`就是B合约，而`tx.origin`就是用户A。如果你不了解`call`的机制，可以阅读[WTF Solidity极简教程第22讲：Call](https://github.com/AmazingAng/WTF-Solidity/blob/main/22_Call/readme.md)。
 
 ![](./img/S15_1.jpg)
 
@@ -62,7 +62,9 @@ contract Bank {
 
 ### 攻击合约
 
-然后是攻击合约，它的攻击逻辑非常简单，就是构造出一个将`address(bank).balance`全部转账给`hacker`的`attack()`函数。它有`2`个状态变量`hacker`和`bank`，分别用来记录黑客地址和要攻击的银行合约地址。它包含`2`个函数：
+然后是攻击合约，它的攻击逻辑非常简单，就是构造出一个`attack()`函数进行钓鱼，将银行合约拥有者的余额转账给黑客。它有`2`个状态变量`hacker`和`bank`，分别用来记录黑客地址和要攻击的银行合约地址。
+
+它包含`2`个函数：
 
 - 构造函数:初始化`bank`合约地址.
 - `attack()`：攻击函数，该函数需要银行合约的`owner`地址调用，`owner`调用攻击合约，攻击合约再调用银行合约的`transfer()`函数，确认`tx.origin == owner`后，将银行合约内的余额全部转移到黑客地址中。
@@ -121,7 +123,7 @@ function transfer(address payable _to, uint256 _amount) public {
 
 ### 2.检验`tx.origin == msg.sender`
 
-如果一定要使用`tx.origin`，那么可以再检验`tx.origin`是否等于`msg.sender`，这样也可以避免整个调用过程中混入外部攻击合约对当前合约的调用
+如果一定要使用`tx.origin`，那么可以再检验`tx.origin`是否等于`msg.sender`，这样也可以避免整个调用过程中混入外部攻击合约对当前合约的调用。但是副作用是其他合约将不能调用这个函数。
 
 ```solidity
     function transfer(address payable _to, uint _amount) public {
@@ -134,4 +136,4 @@ function transfer(address payable _to, uint256 _amount) public {
 
 ## 总结
 
-这一讲，我们介绍了智能合约中的`tx.origin`钓鱼攻击，目前有两种方法可以预防它：一种是使用`msg.sender`代替`tx.origin`；另一种是同时检验`tx.origin == msg.sender`。这一合约漏洞比较难以察觉，在实际开发中也容易被忽略。
+这一讲，我们介绍了智能合约中的`tx.origin`钓鱼攻击，目前有两种方法可以预防它：一种是使用`msg.sender`代替`tx.origin`；另一种是同时检验`tx.origin == msg.sender`。推荐使用第一种方法预防，因为后者会拒绝所有来自其他合约的调用。
