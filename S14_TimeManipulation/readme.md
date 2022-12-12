@@ -52,7 +52,7 @@ contract TimeMnipulation is ERC721 {
 
 ## Foundry复现攻击
 
-攻击者只需操纵区块时间，将它设为能被 170 整除的数字，就可以成功铸造 NFT。我们选择 Foundry 来复现这个攻击，因为它提供了修改区块时间的作弊码（cheatcodes）。如果你不了解作弊码，可以阅读 [Foundry Book](https://book.getfoundry.sh/forge/cheatcodes)。
+攻击者只需操纵区块时间，将它设为能被 170 整除的数字，就可以成功铸造 NFT。我们选择 Foundry 来复现这个攻击，因为它提供了修改区块时间的作弊码（cheatcodes）。如果你不了解 Foundry/作弊码，可以阅读 [Foundry教程](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md) 和 [Foundry Book](https://book.getfoundry.sh/forge/cheatcodes)。
 
 代码大致逻辑
 
