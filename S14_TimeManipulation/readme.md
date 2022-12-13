@@ -107,7 +107,15 @@ contract TimeManipulationTest is Test {
 
 ```
 
-使用Foundry启动测试用例：
+在安装好 Foundry 之后，在命令行输入下列命令启动新项目，并安装 openzeppelin 库：
+
+```shell
+forge init TimeMnipulation
+cd TimeMnipulation
+forge install Openzeppelin/openzeppelin-contracts
+```
+
+将这一讲的代码分别复制到`src`和`test`目录下，然后使用下列命令启动测试用例：
 
 ```shell
 forge test -vv --match-test testMint
