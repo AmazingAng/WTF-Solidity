@@ -44,38 +44,24 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 ### 数据位置和赋值规则
 在不同存储类型相互赋值时候，有时会产生独立的副本（修改新变量不会影响原变量），有时会产生引用（修改新变量会影响原变量）。规则如下：
 
-1. `storage`（合约的状态变量）赋值给本地`storage`（函数里的）时候，会创建引用，改变新变量会影响原变量。例子：
-```solidity
-    uint[] x = [1,2,3]; // 状态变量：数组 x
+- 赋值本质上是创建**引用**指向本体，因此修改本体或者是引用，变化可以被同步：
+
+	- `storage`（合约的状态变量）赋值给本地`storage`（函数里的）时候，会创建引用，改变新变量会影响原变量。例子：
+	```solidity
+	uint[] x = [1,2,3]; // 状态变量：数组 x
 
     function fStorage() public{
         //声明一个storage的变量 xStorage，指向x。修改xStorage也会影响x
         uint[] storage xStorage = x;
         xStorage[0] = 100;
     }
-```
-**Example:**
-![5-2.png](./img/5-2.png)
+	```
+	**Example:**
+	![5-2.png](./img/5-2.png)
 
-2. `storage`赋值给`memory`，会创建独立的副本，修改其中一个不会影响另一个；反之亦然。例子：
-```solidity
-    uint[] x = [1,2,3]; // 状态变量：数组 x
-    
-    function fMemory() public view{
-        //声明一个Memory的变量xMemory，复制x。修改xMemory不会影响x
-        uint[] memory xMemory = x;
-        xMemory[0] = 100;
-        xMemory[1] = 200;
-        uint[] memory xMemory2 = x;
-        xMemory2[0] = 300;
-    }
-```
-**Example:**
-![5-3.png](./img/5-3.png)
+	- `memory`赋值给`memory`，会创建引用，改变新变量会影响原变量。
 
-3. `memory`赋值给`memory`，会创建引用，改变新变量会影响原变量。
-
-4. 其他情况，变量赋值给`storage`，会创建独立的副本，修改其中一个不会影响另一个。
+- 其他情况下，赋值创建的是本体的副本，即对二者之一的修改，并不会同步到另一方
 
 ## 变量的作用域
 `Solidity`中变量按作用域划分有三种，分别是状态变量（state variable），局部变量（local variable）和全局变量(global variable)
