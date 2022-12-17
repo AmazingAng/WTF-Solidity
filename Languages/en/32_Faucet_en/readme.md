@@ -10,7 +10,7 @@ tags:
 
 # Solidity Minimalist Tutorial: 32. Token Faucet
 
-Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
+Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly.
 
 Everyone is welcomed to follow my Twitter：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
@@ -30,7 +30,7 @@ The earliest token faucet is the Bitcoin (BTC) faucet: now a BTC costs \$30,000,
 
 ## The contract of ERC20 faucet
 
-Here, we implement a simplified version of the `ERC20` faucet, the logic is very simple: we transfer some `ERC20` tokens to the faucet contract, and the user can receive `100` units of tokens through the `requestToken()` function of the contract Coins can only be claimed once per address.
+Here, we implement a simplified version of the ERC20 faucet. The logic is very simple: we transfer some ERC20 tokens to the faucet contract, and the user can receive 100 units of tokens through the requestToken() function of the contract. Each address can only receive once.
 
 ### State variables
 
@@ -93,12 +93,12 @@ function requestTokens() external {
 
 3. Use the `transfer()` function of the `ERC20` token contract to transfer 10,000 units of tokens to the `Faucet` contract address.
     ![transfer funds to the `Faucet` faucet contract](./img/32-3.png)
-    
+
 4. Change to a new account, call the `Faucet` contract `requestTokens()` function, and receive tokens. You can see the `SendToken` event being released in the terminal.
     ![switch account](./img/32-4.png)
-    
+
     ![requestToken](./img/32-5.png)
-    
+
 5. Use `balanceOf` on the `ERC20` token contract to query the account balance of the faucet, and you can see that the balance has changed to `100`, and the claim is successful!
     ![the claim is successful](./img/32-6.png)
 
