@@ -94,7 +94,7 @@ function requestTokens() external {
 3. Use the `transfer()` function of the `ERC20` token contract to transfer 10,000 units of tokens to the `Faucet` contract address.
     ![transfer funds to the `Faucet` faucet contract](./img/32-3.png)
 
-4. Change to a new account, call the `Faucet` contract `requestTokens()` function, and receive tokens. You can see the `SendToken` event being released in the terminal.
+4. Change to a new account, call the `Faucet` contract `requestTokens()` function, and receive tokens. You can see the `SendToken` event being released in the terminal.                 
     ![switch account](./img/32-4.png)
 
     ![requestToken](./img/32-5.png)
