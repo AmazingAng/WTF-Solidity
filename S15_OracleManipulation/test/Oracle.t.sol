@@ -45,9 +45,9 @@ contract wtfsolidity_safe is Test {
         console.log("2. after attack: price: %s", priceAfter); 
         // 3. 铸造oUSD
         ousd.mint{value: 1 ether}();
-        console.log("3. minted %s oUSD with 1 ETH", ousd.balanceOf(address(this))/10e18); 
-        console.log("BUSD balance (after attack): %s", busd.balanceOf(address(this))/10e18);
-        console.log("WETH balance (after attack): %s", weth.balanceOf(address(this))/10e18);
+        console.log("3. minted %s oUSD with 1 ETH", ousd.balanceOf(alice)/10e18); 
+        console.log("BUSD balance (after attack): %s", busd.balanceOf(alice)/10e18);
+        console.log("WETH balance (after attack): %s", weth.balanceOf(alice)/10e18);
     }
 
     // Swap BUSD to WETH
@@ -66,7 +66,7 @@ contract wtfsolidity_safe is Test {
             amountIn,
             amountOutMin,
             path,
-            msg.sender,
+            alice,
             block.timestamp
         );
 
@@ -90,7 +90,7 @@ contract wtfsolidity_safe is Test {
             amountIn,
             amountOutMin,
             path,
-            msg.sender,
+            alice,
             block.timestamp
         );
 
