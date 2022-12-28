@@ -119,7 +119,7 @@ contract Attack {
     bool success = payable(msg.sender).send(balance);
     require(success, "Failed Sending ETH!")
     ```
-2. 合约转账`ETH`时，使用 `call()`，并做好冲入保护。
+2. 合约转账`ETH`时，使用 `call()`，并做好重入保护。
 
 3. 使用`OpenZeppelin`的[Address库](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol)，它将检查返回值的低级调用封装好了。
 
