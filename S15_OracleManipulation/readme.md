@@ -92,7 +92,7 @@ contract oUSD is ERC20{
     function swap() external payable returns (uint256 amount){
         // 获取价格
         uint price = getPrice();
-        // 计算mint数量
+        // 计算兑换数量
         amount = price * msg.value;
         // 铸造代币
         _mint(msg.sender, amount);
@@ -106,7 +106,7 @@ contract oUSD is ERC20{
 
 1. 准备一些 `BUSD`，可以是自有资金，也可以是闪电贷借款。在实现中，我们利用 Foundry 的 `deal` cheatcode 在本地网络上给自己铸造了 `1_000_000 BUSD`
 2. 在 UniswapV2 的 `WETH-BUSD` 池中大量买入 `WETH`。具体实现见攻击代码的 `swapBUSDtoWETH()` 函数。
-3. `WETH` 瞬时价格暴涨，这时我们调用 `mint()` 函数将 `ETH` 转换为 `oUSD`。
+3. `WETH` 瞬时价格暴涨，这时我们调用 `swap()` 函数将 `ETH` 转换为 `oUSD`。
 4. **可选:** 在 UniswapV2 的 `WETH-BUSD` 池中卖出第2步买入的 `WETH`，收回本金。
 
 这4步可以在一个交易中完成。
@@ -194,7 +194,7 @@ contract OracleTest is Test {
         uint256 priceAfter = ousd.getPrice();
         console.log("3. ETH price (after attack): %s", priceAfter); 
         // 4. 铸造oUSD
-        ousd.mint{value: 1 ether}();
+        ousd.swap{value: 1 ether}();
         console.log("4. Minted %s oUSD with 1 ETH (after attack)", ousd.balanceOf(address(this))/10e18); 
     }
 

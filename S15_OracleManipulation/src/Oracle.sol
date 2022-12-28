@@ -29,7 +29,7 @@ contract oUSD is ERC20{
     function swap() external payable returns (uint256 amount){
         // 获取价格
         uint price = getPrice();
-        // 计算mint数量
+        // 计算兑换数量
         amount = price * msg.value;
         // 铸造代币
         _mint(msg.sender, amount);
