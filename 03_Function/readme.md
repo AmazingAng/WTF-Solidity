@@ -26,7 +26,7 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
 
 1. `function`：声明函数时的固定用法，想写函数，就要以function关键字开头。
 
-2. ` <function name>`：函数名。
+2. `<function name>`：函数名。
 
 3. `(<parameter types>)`：圆括号里写函数的参数，也就是要输入到函数的变量类型和名字。
 
