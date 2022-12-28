@@ -158,6 +158,8 @@
 
 **S14：操纵区块时间**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S14_TimeManipulation) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S14_TimeManipulation/readme.md)
 
+**S15：操纵预言机**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S15_OracleManipulation) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S15_OracleManipulation/readme.md)
+
 ## 主题
 ### `工具`
 **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/ninjak.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
@@ -172,7 +174,7 @@
 
 **第6讲：Hardhat，以太坊开发环境** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL06_Hardhat/readme.md)】
 
-**第7讲：Foundry，以Solidity为中心的开发工具包** 【[代码](./Topics/Tools/TOOL07_Foundry)】【[文章](./Topics/Tools/TOOL07_Foundry/readme.md)】
+**第7讲：Foundry，以Solidity为中心的开发工具包** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry)】【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md)】
 
 ### `ERC721`
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
