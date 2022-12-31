@@ -14,7 +14,7 @@
 
 - [x] 512 :star: 发布官网: [wtf.academy](https://wtf.academy)
 
-- [ ] 1024 :star: 发课程认证（`Soulbound Token`）
+- [x] 1024 :star: 发课程认证`SBT`: [Learning Center](https://wtf.academy/learning-center)
 
 - [ ] 2048 :star: 发社群NFT
 
@@ -159,6 +159,8 @@
 **S14：操纵区块时间**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S14_TimeManipulation) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S14_TimeManipulation/readme.md)
 
 **S15：操纵预言机**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S15_OracleManipulation) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S15_OracleManipulation/readme.md)
+
+**S15：NFT重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy/readme.md)
 
 ## 主题
 ### `工具`
