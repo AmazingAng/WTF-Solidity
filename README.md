@@ -160,7 +160,7 @@
 
 **S15：操纵预言机**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S15_OracleManipulation) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S15_OracleManipulation/readme.md)
 
-**S15：NFT重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy/readme.md)
+**S16：NFT重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy/readme.md)
 
 ## 主题
 ### `工具`
