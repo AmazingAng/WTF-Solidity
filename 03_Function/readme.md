@@ -41,7 +41,7 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
     
     **Note 2**: `public|private|internal` 也可用于修饰状态变量。 `public`变量会自动生成同名的`getter`函数，用于查询数值。
     
-    **Note 2**: 没有标明可见性类型的状态变量，默认为`internal`。
+    **Note 3**: 没有标明可见性类型的状态变量，默认为`internal`。
 
 5. `[pure|view|payable]`：决定函数权限/功能的关键字。`payable`（可支付的）很好理解，带着它的函数，运行的时候可以给合约转入`ETH`。`pure`和`view`的介绍见下一节。
 
