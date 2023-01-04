@@ -577,7 +577,7 @@ interface ERC721Metadata /* is ERC721 */ {
 这个**0x5b5e139f** 的计算就是:
 
 ```solidity
-bytes4(keccak256(ERC721Metadata.name.selector)^keccak256(ERC721Metadata.symbol.selector)^keccak256(ERC721Metadata.tokenURI.selector))
+IERC721Metadata.name.selector ^ IERC721Metadata.symbol.selector ^ IERC721Metadata.tokenURI.selector
 ```
 
 solamte实现的ERC721.sol是怎么完成这些ERC165要求的特性的呢？
