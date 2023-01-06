@@ -37,5 +37,5 @@
 
 ### `链上威胁分析&开发POC`
 
-**第1讲：工具篇** 【中文 | English】
+**第1讲：工具篇** 【[中文](https://github.com/SunWeb3Sec/WTF-Solidity/blob/main/Topics/Onchain_debug/) | [English](https://github.com/SunWeb3Sec/WTF-Solidity/tree/main/Topics/Onchain_debug/en/)】
 
