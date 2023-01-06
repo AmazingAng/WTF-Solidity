@@ -14,7 +14,11 @@
 
 **第7讲：Foundry，以Solidity为中心的开发工具包** 【[代码](./Tools/TOOL07_Foundry/readme.md)】
 
-### `ERC721`
+### `链上威胁分析`
+
+**第1讲：工具篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Onchain_debug/)】 | 【[English](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Onchain_debug/en/)】
+
+### `NFT`
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
 
 **第2讲：ERC721相关接口** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/4mPkMgHViRjx8OM7TAI-M-2oMfRle36ULzqlpC6S7IQ)】
@@ -34,8 +38,4 @@
 **第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/Consensys2020)】 【[Mirror](https://mirror.xyz/ninjak.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
 
 **第2讲：深入EVM**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017)】
-
-### `链上威胁分析`
-
-**第1讲：工具篇** 【[中文](https://github.com/SunWeb3Sec/WTF-Solidity/blob/main/Topics/Onchain_debug/) | [English](https://github.com/SunWeb3Sec/WTF-Solidity/tree/main/Topics/Onchain_debug/en/)】
 
