@@ -195,6 +195,10 @@
 
 **第2讲：深入EVM**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017)】
 
+### `链上威胁分析&开发POC`
+
+**第1讲：工具篇** 【[中文](https://github.com/SunWeb3Sec/WTF-Solidity/blob/main/Topics/Onchain_debug/) | [English](https://github.com/SunWeb3Sec/WTF-Solidity/tree/main/Topics/Onchain_debug/en/)】
+
 ## WTF贡献者
 <div align="center">
   <h4 align="center">
