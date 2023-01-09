@@ -4,6 +4,10 @@ Author: [Sun](https://twitter.com/1nf0s3cpt)
 
 Translation: Helen
 
+Community [Discord](https://discord.gg/3y3d9DMQ)
+
+This article is published on XREX and [WTF Academy](https://github.com/AmazingAng/WTF-Solidity#%E9%93%BE%E4%B8%8A%E5%A8%81%E8%83%81%E5%88%86%E6%9E%90)
+
 On-chain data can include simple one-time transfers, interactions with one DeFi contract or multiple DeFi contracts, flash loan arbitrage, governance proposals, cross-chain transactions, and more. In this section, let’s begin with a simple start.
 I will introduce on BlockChain Explorer - Etherscan what we are interested in, and then use [Phalcon](https://phalcon.blocksec.com/) to compare the differences between these transaction function calls: Assets transfer, swap on UniSWAP, increase liquidity on Curve 3pool, Compound proposals, Uniswap Flashswap.
 
@@ -23,7 +27,7 @@ I will introduce on BlockChain Explorer - Etherscan what we are interested in, a
 ## Assets transfer
 
 ![圖片](https://user-images.githubusercontent.com/52526645/211021954-6c5828be-7293-452b-8ef6-a268db54b932.png)
-The following can be derived from the [Etherscan](https://etherscan.io/tx/0x96a3fdd23fc5052d99b4be0ac55dc9b0eeff888fba447cce6b4dce1743497ad1) example above:
+The following can be derived from the [Etherscan](https://etherscan.io/tx/0x836ef3d01a52c4b9304c3d683f6ff2b296c7331b6fee86e3b116732ce1d5d124) example above:
 
 - From: This transaction's source EOA wallet address
 - Interacted With (To): Tether USD (USDT) Contract
@@ -34,7 +38,7 @@ According to [Phalcon](https://phalcon.blocksec.com/tx/eth/0x836ef3d01a52c4b9304
 
 - There is only one ''Call USDT.transfer''. However, you should pay attention to the "Value".Because the Ethereum Virtual Machine (EVM) does not support floating-point operations, decimals representation is used instead.
 - Each token has its own precision, the number of decimal places used to represent the value of the token. In ERC-20 tokens, the decimals are usually 18 digits, while USDT has 6 digits. If the precision of the token is not handled properly, problems will arise.
-- You can query it on the Etherscan token contract.
+- You can query it on the Etherscan [token contract](https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7).
 
 ![圖片](https://user-images.githubusercontent.com/52526645/211123692-d7224ced-bc0b-47a1-a876-2af086e2fce9.png)
 
@@ -57,12 +61,14 @@ According to [Phalcon](https://phalcon.blocksec.com/tx/eth/0x1cd5ceda7e2b2d8c66f
 
 ![圖片](https://user-images.githubusercontent.com/52526645/211029737-4a606d32-2c96-41e9-aef7-82fe1fb4b21d.png)
 
-## Foundry
+### Foundry
 
 We use Foundry to simulate the operation of using 1BTC to exchange for DAI in Uniswap.
 
 - [Sample code reference](https://github.com/SunWeb3Sec/DeFiLabs/blob/main/src/test/Uniswapv2.sol), execute the following command:
- forge test --contracts ./src/test/Uniswapv2.sol -vvvv
+```sh
+forge test --contracts ./src/test/Uniswapv2.sol -vvvv
+```
 - According to the figure - we swap 1 BTC to 16,788 DAI by calling the Uniswap\_v2\_router.[swapExactTokensForTokens](https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02#swapexacttokensfortokens) function.
 
 ![圖片](https://user-images.githubusercontent.com/52526645/211143644-6ed295f0-e0d8-458b-a6a7-71b2da8a5baa.png)
@@ -102,13 +108,15 @@ According to [Phalcon](https://phalcon.blocksec.com/tx/eth/0xba69b455c511c500e0b
 
 ![圖片](https://user-images.githubusercontent.com/52526645/211034346-a600cbf4-eed9-47ca-8b5a-88232808f3a3.png)
 
-**Uniswap Flashswap**
+## Uniswap Flashswap
 
 Here we use Foundry to simulate operations - how to use flash loans on Uniswap. [Official Flash swap introduction](https://docs.uniswap.org/contracts/v2/guides/smart-contract-integration/using-flash-swaps)
 
 - [Sample Code](https://github.com/SunWeb3Sec/DeFiLabs/blob/main/src/test/Uniswapv2_flashswap.sol) Reference, execute the following command:
 
-forge test --contracts ./src/test/Uniswapv2\_flashswap.sol -vv
+```sh
+forge test --contracts ./src/test/Uniswapv2_flashswap.sol -vv
+```
 
 ![圖片](https://user-images.githubusercontent.com/52526645/211125357-695c3fd0-4a56-4a70-9c98-80bac65586b8.png)
 
@@ -119,10 +127,10 @@ forge test --contracts ./src/test/Uniswapv2\_flashswap.sol -vv
 
 - Further Introduction to Flashloan and Flashswap:
 
-A. Common points:
+  - A. Common points:
 Both can lend Tokens without collateralizing assets, and they need to be returned in the same block, otherwise the transaction fails.
 
-B. The difference:
+  - B. The difference:
 If token0 is borrowed through Flashloan token0/token1, token0 must be returned. Flashswap lends token0, and you can return token0 or token1, which is more flexible.
 
 For more DeFi basic operations, please refer to [DeFiLab](https://github.com/SunWeb3Sec/DeFiLabs).
@@ -133,10 +141,10 @@ Foundry's cheatcodes are essential for conducting chain analysis. Here, I will i
 
 - createSelectFork: Specifies a network and block height to copy for testing. Must include the RPC for each chain in [foundry.toml](https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/foundry.toml).
 - deal: Sets the balance of a test wallet.
-  - Set ETH balance: deal(address(this), 3 ether);
-  - Set Token balance: deal(address(USDC), address(this), 1 \* 1e18);
+  - Set ETH balance:  `deal(address(this), 3 ether);`
+  - Set Token balance: `deal(address(USDC), address(this), 1 * 1e18);`
 - prank: Simulate the identity of a specified wallet. It is only effective for the next call and will set the msg.sender to the specified wallet address. Such as simulating a transfer from a whale wallet.
-- startPrank: Simulate the identity of a specified wallet. It will set the msg.sender to the specified wallet address for all calls until stopPrank() is executed.
+- startPrank: Simulate the identity of a specified wallet. It will set the msg.sender to the specified wallet address for all calls until `stopPrank()` is executed.
 - label: Labels a wallet address for improved readability when using Foundry debug.
 - roll: Adjusts the block height.
 - warp: Adjusts the block timestamp.
