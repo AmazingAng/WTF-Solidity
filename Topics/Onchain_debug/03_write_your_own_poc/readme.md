@@ -6,9 +6,9 @@ Author: [▓▓▓▓▓▓](https://twitter.com/h0wsO1)
 
 同步发表: XREX | WTF Academy 
 
-在 [01_Tools](/tutorials/onchain_debug/01_tools/readme.md) 教学中，我们学到了如何使用 Debug Tools 来观察一笔交易和智能合约互动的过程。
+在 [01_Tools](/Topics/Onchain_debug/01_tools/readme.md) 教学中，我们学到了如何使用 Debug Tools 来观察一笔交易和智能合约互动的过程。
 
-在 [02_Warm](/tutorials/onchain_debug/02_warm/readme.md) 教学中，我们实际分析了一笔与 DEX 互动的交易，并且使用 Foundry 与 DEX 互动。
+在 [02_Warm](/Topics/Onchain_debug/02_warmup/readme.md) 教学中，我们实际分析了一笔与 DEX 互动的交易，并且使用 Foundry 与 DEX 互动。
 
 在本次教学中，我们将带你实际分析一个攻击事件，并逐步带你利用 Foundry 测试框架撰写代码，完成 Reproduce PoC。
 
