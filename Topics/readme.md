@@ -18,7 +18,7 @@
 
 **第1讲：工具篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug//01_tools/)】 | 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/01_tools/en/)】
 
-**第2讲：热身篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/02_warmup/)】
+**第2讲：热身篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/02_warmup/)】 | 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/02_warmup/en/)】
 
 ### `NFT`
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/ninjak.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
