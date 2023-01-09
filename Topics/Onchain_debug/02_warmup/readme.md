@@ -18,7 +18,7 @@ Author: [Sun](https://twitter.com/1nf0s3cpt)
 
 ## 链上转帐
 ![图片](https://user-images.githubusercontent.com/52526645/211021954-6c5828be-7293-452b-8ef6-a268db54b932.png)
-从上图[例子](https://etherscan.io/tx/0x836ef3d01a52c4b9304c3d683f6ff2b296c7331b6fee86e3b116732ce1d5d124) 可以解读为:
+从上图[例子](https://etherscan.io/tx/0x836ef3d01a52c4b9304c3d683f6ff2b296c7331b6fee86e3b116732ce1d5d124)可以解读为:
 
 From: 发送这笔交易的来源钱包地址
 
