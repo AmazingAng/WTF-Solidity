@@ -108,7 +108,7 @@ uint256 ETH_Price = UniV2_USDC_Reserve / UniV2_ETH_Reserve;
 8. Vulnerable snippet
 9. Audit History
 
-> Tips: 建议使用 DeFiHackLabs 提供的 [Exploit-Template.sol](script/Exploit-template.sol) 模板。
+> Tips: 建议使用 DeFiHackLabs 提供的 [Exploit-Template.sol](https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/script/Exploit-template.sol) 模板。
 
 ---
 
