@@ -53,6 +53,16 @@ contract StructTypes {
         student.id = 1;
         student.score = 80;
     }
+    
+    // 方法3:构造函数式
+    function initStudent3() external {
+        student = Student(3, 90);
+    }
+
+    // 方法4:key value
+    function initStudent4() external {
+        student = Student({id: 4, score: 60});
+    }
 }
 
 pragma solidity ^0.8.4;

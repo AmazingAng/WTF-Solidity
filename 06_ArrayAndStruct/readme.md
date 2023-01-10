@@ -90,7 +90,7 @@ contract C {
 ```solidity
     Student student; // 初始一个student结构体
 ```
-给结构体赋值的两种方法：
+给结构体赋值的四种方法：
 ```solidity
     //  给结构体赋值
     // 方法1:在函数中创建一个storage的struct引用
@@ -113,6 +113,23 @@ contract C {
 **Example:**
 ![6-3.png](./img/6-3.png)
 
+```solidity
+    // 方法3:构造函数式
+    function initStudent3() external {
+        student = Student(3, 90);
+    }
+```
+**Example:**
+![6-4.png](./img/6-4.png)
+
+```solidity
+     // 方法4:key value
+    function initStudent4() external {
+        student = Student({id: 4, score: 60});
+    }
+```
+**Example:**
+![6-5.png](./img/6-5.png)
 ## 总结
 这一讲，我们介绍了solidity中数组（`array`）和结构体（`struct`）的基本用法。下一讲我们将介绍solidity中的哈希表——映射（`mapping`）。
 
