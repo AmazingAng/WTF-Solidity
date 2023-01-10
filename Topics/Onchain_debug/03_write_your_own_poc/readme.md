@@ -91,8 +91,6 @@ uint256 ETH_Price = UniV2_USDC_Reserve / UniV2_ETH_Reserve;
 
 当攻击发生时，通常 Twitter 会是安全分析师的主战场，会有各路大佬在 Twitter 上发布自己对于攻击事件的最新发现。
 
-> Tips: 加入 [DeFiHackLabs Discord](https://discord.gg/vG4FePvr) security-alert 频道，即时收到各路 DeFi 安全大佬们的消息！
-
 攻击事件刚发生时，肯定是各种混乱，先找个文件整理你所发现到的资讯吧！
 
 1. Transaction ID
