@@ -1,10 +1,7 @@
 # OnChain Transaction Debugging: 3. Write Your Own PoC
 
-Author: [▓▓▓▓▓▓](https://twitter.com/h0wsO1)
+Author: [Ghost](https://twitter.com/h0wsO1)
 
-社群 [Discord](https://discord.gg/3y3d9DMQ)
-
-同步发表: XREX | WTF Academy 
 
 在 [01_Tools](/Topics/Onchain_debug/01_tools/readme.md) 教学中，我们学到了如何使用 Debug Tools 来观察一笔交易和智能合约互动的过程。
 
@@ -576,6 +573,7 @@ Test result: ok. 1 passed; 0 failed; finished in 1.66s
 > Attacker Stack Tx: 0x4a66d01a017158ff38d6a88db98ba78435c606be57ca6df36033db4d9514f9f8
 
 第三课分享就先到这边，想学更多可以参考以下学习资源。
+
 ---
 ## 学习资源
 [samczsun's eth txn explorer and vscode extension](https://www.youtube.com/watch?v=HXgu239mPBc)
