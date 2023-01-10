@@ -52,7 +52,7 @@ tags:
 ## 映射的原理
 - **原理1**: 映射不储存任何键（`Key`）的资讯，也没有length的资讯。
 
-- **原理2**: 映射使用`keccak256(key)`当成offset存取value。
+- **原理2**: 映射使用`keccak256(abi.encodePacked(key, slot))`当成offset存取value，其中`slot`是映射变量定义所在的插槽位置。
 
 - **原理3**: 因为Ethereum会定义所有未使用的空间为0，所以未赋值（`Value`）的键（`Key`）初始值都是各个type的默认值，如uint的默认值是0。
 
