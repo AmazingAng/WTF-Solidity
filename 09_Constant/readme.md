@@ -54,6 +54,8 @@ tags:
     }
 ```
 
+注，在solidity 0.8.4版本中，字符串类型不支持immutable关键字。请同学们使用时核对自己的solidity版本，并参考官方文档。
+
 ## 在remix上验证
 1. 部署好合约之后，通过remix上的`getter`函数，能获取到`constant`和`immutable`变量初始化好的值。
 
