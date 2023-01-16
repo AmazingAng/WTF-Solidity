@@ -12,12 +12,13 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 ## WTF is Solidity?
 
-Solidity is the programming language for Ethereum's virtual machine (EVM), used in smart contract development. I believe that Solidity is an important skill to navigate the on-chain ecosystems and projects. Blockchain projects are mostly open source and once you understand the underlying code, you are better equipped to avoid rugpull and shady projects. 
+`Solidity` is a programming language used for creating smart contracts on the Ethereum Virtual Machine (EVM). It's a necessary skill for working on blockchain projects. Moreover, as many of them are open-source, understanding the code can help in avoiding money-losing projects.
 
-Solidity has 2 features:
 
-1. Object-oriented.
-2. High-level: If you can write smart contract in Solidity, you are the first class citizen of Ethereum.
+`Solidity` has two characteristics:
+
+1. Object-oriented: After learning it, you can use it to make money by finding the right projects.
+2. Advanced: If you can write smart contract in Solidity, you are the first class citizen of Ethereum.
 
 ## Development tool: Remix
 
