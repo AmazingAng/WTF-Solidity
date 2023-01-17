@@ -1,8 +1,9 @@
 ![](../../img/logo2.jpeg)
 
+**[中文版本](https://github.com/AmazingAng/WTF-Solidity)**
+
 # WTF Solidity
 
-[中文](https://github.com/AmazingAng/WTF-Solidity)  / English
 
 Recently, I have been relearning Solidity, consolidating the finer details, and writing a "WTF Solidity Tutorial" for newbies. Lectures are updated 1~3 times weekly. 
 
