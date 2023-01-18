@@ -22,13 +22,15 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 ## Development tool: Remix
 
-I will use `Remix` to demostrate smart contract development with Solidity. Remix is the integrated development environment (IDE) recommended by Ethereum Foundatoin and is newbie-friendly. The IDE allows you to quickly deploy and test smart contracts in the browser: no need to download any application to your computer. 
+In this tutorial, we will be using `Remix` to run `solidity` contracts. `Remix` is an smart contract development IDE (Integrated Development Environment) recommended by Ethereum official. It is suitable for beginners, allows for quick deployment and testing of smart contracts in the browser, without needing to install any programs on your local machine.
 
 Website: [remix.ethereum.org](https://remix.ethereum.org)
 
+Upon entering `Remix`, you can see that the menu on the left-hand side has three buttons, corresponding to the file (where you write the code), compile (where you run the code), and deploy (where you deploy to the chain). By clicking the "Create New File" button, you can create a blank `solidity` contract.
+
 Within Remix, we can see that there are four buttons on the leftmost vertical menu, corresponding to FILE EXPLORER (where to write code), SEARCH IN FILES (find and replace files), SOLIDITY COMPILER (to run code), and DEPLOY & RUN TRANSACTIONS (on-chain deployment). We can create a blank Solidity contract by clicking the `Create New File` button.
 
-   ![Remix Menu](./img/1-1.png)
+![Remix Menu](./img/1-1.png)
 
 ## The first Solidity program
 
