@@ -2,11 +2,6 @@
 
 Author: [gbaleeee](https://twitter.com/gbaleeeee)
 
-社群 [Discord](https://discord.gg/Fjyngakf3h)
-
-同步发表: XREX | [WTF Academy](https://github.com/AmazingAng/WTF-Solidity#%E9%93%BE%E4%B8%8A%E5%A8%81%E8%83%81%E5%88%86%E6%9E%90)
-
-
 在本次教学中，我们将带你实际分析一个重入攻击事件，并逐步带你利用 Foundry 测试框架撰写代码，完成 Reproduce PoC。
 
 ## 在学习撰写 Reproduce PoC 之前，会需要具备的知识
