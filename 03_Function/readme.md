@@ -1,12 +1,12 @@
 ---
-title: 3. 函数类型
+title: 3. 函数
 tags:
   - solidity
   - basic
   - wtfacademy
 ---
 
-# WTF Solidity极简入门: 3. 函数类型
+# WTF Solidity极简入门: 3. 函数
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
@@ -18,7 +18,7 @@ tags:
 -----
 
 ## Solidity中的函数
-solidity官方文档里把函数归到数值类型，但我觉得差别很大，所以单独分一类。我们先看一下solidity中函数的形式：
+Solidity官方文档里把函数归到数值类型，但我觉得差别很大，所以单独分一类。我们先看一下solidity中函数的形式：
 ```solidity
     function <function name>(<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
 ```
@@ -30,14 +30,14 @@ solidity官方文档里把函数归到数值类型，但我觉得差别很大，
 
 3. `(<parameter types>)`：圆括号里写函数的参数，也就是要输入到函数的变量类型和名字。
 
-4. `{internal|external|public|private}`：函数可见性说明符，一共4种。合约中定义的函数需明确指定可见性，它们没有默认值。合约之外的函数，即"自由函数"，始终具有隐含`internal`可见性。
+4. `{internal|external|public|private}`：函数可见性说明符，一共4种。
 
     - `public`: 内部外部均可见。
     - `private`: 只能从本合约内部访问，继承的合约也不能用。
     - `external`: 只能从合约外部访问（但是可以用`this.f()`来调用，`f`是函数名）。
     - `internal`: 只能从合约内部访问，继承的合约可以用。
 
-    **Note 1**: 合约中定义的函数明确指定可见性，它们没有默认值。
+    **Note 1**: 合约中定义的函数需要明确指定可见性，它们没有默认值。
     
     **Note 2**: `public|private|internal` 也可用于修饰状态变量。 `public`变量会自动生成同名的`getter`函数，用于查询数值。
     

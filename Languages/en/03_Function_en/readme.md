@@ -1,4 +1,4 @@
-#  WTF Solidity Tutorial: 3. Function type
+#  WTF Solidity Tutorial: 3. Function
 
 Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
@@ -11,23 +11,24 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 ---
 
-## Function in Solidity
+## Function
 
-Function is classified into values type by solidity document, but I put it a separate category, since there is a big difference. Let's take a look at solidity functions:
+Here's the format of a function in Solidity:
 
 ```solidity
     function <function name>(<parameter types>) [internal|external] [pure|view|payable] [returns (<return types>)]
 ```
 
-kind of complicated, let's move forward one by one (keyword in square brackets is optional):
+It may seem complex, but let's break it down piece by piece (square brackets indicate optional keywords):
 
-1. `function`: Start with the keyword `function`.
 
-2. `<function name>`: Name of the function.
+1. `function`: To write a function, you need to start with the keyword `function`.
 
-3. `(<parameter types>)`: The input parameter types and names of the function.
+2. `<function name>`: The name of the function.
 
-3. `[internal|external|public|private]`: Function visibility specifiers. There are 4 kinds. `public` is the default visibility if left empty:
+3. `(<parameter types>)`: The input parameter types and names.
+
+3. `[internal|external|public|private]`: Function visibility specifiers. There are 4 kinds of them `public` is the default visibility if left empty:
 
    - `public`: Visible to all.
 
