@@ -25,7 +25,7 @@
 
 **第2讲：数值类型**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/02_ValueTypes/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/XHZVpWe8_sHBHgg6kkrNH2nAWYmQgoB7fKW8hoXnoyI)
 
-**第3讲：函数类型 (external/internal/public/private, pure/view, payable)**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/03_Function) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/03_Function/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/FWI887JBea4VpNiMlJ2ICyJ5aWUREReGo9Bz0X8iEVc)
+**第3讲：函数 (external/internal/public/private, pure/view, payable)**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/03_Function) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/03_Function/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/FWI887JBea4VpNiMlJ2ICyJ5aWUREReGo9Bz0X8iEVc)
 
 **第4讲：函数输出（returns/return）**：[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/04_Return) | [文章](https://github.com/AmazingAng/WTFSolidity/tree/main/04_Return/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/FIGf9tF7wiBlLnQGXfEjVkJ0efzKBNltJS1fRxPKYTk)
 
