@@ -136,6 +136,80 @@ contract Variables {
 
 **Example:**
 ![5-4.png](./img/5-4.png)
+
+### 4. 全局变量-以太单位与时间单位
+#### 以太单位
+`Solidity`中不存在小数点，以`0`代替为小数点，来确保交易的精确度，并且防止精度的损失，利用以太单位可以避免误算的问题，方便程序员在合约中处理货币交易。
+- `wei`: 1
+- `gwei`: 1e9 = 1000000000
+- `ether`: 1e18 = 1000000000000000000
+
+```solidity
+    function weiUnit() external pure returns(uint) {
+        assert(1 wei == 1e0);
+        assert(1 wei == 1);
+        return 1 wei;
+    }
+
+    function gweiUnit() external pure returns(uint) {
+        assert(1 gwei == 1e9);
+        assert(1 gwei == 1000000000);
+        return 1 gwei;
+    }
+
+    function etherUnit() external pure returns(uint) {
+        assert(1 ether == 1e18);
+        assert(1 ether == 1000000000000000000);
+        return 1 ether;
+    }
+```
+
+**Example:**
+![5-5.png](./img/5-5.png)
+
+#### 时间单位
+可以在合约中规定一个操作必须在一周内完成，或者某个事件在一个月后发生。这样就能让合约的执行可以更加精确，不会因为技术上的误差而影响合约的结果。因此，时间单位在`Solidity`中是一个重要的概念，有助于提高合约的可读性和可维护性。
+- `seconds`: 1
+- `minutes`: 60 seconds = 60
+- `hours`: 60 minutes = 3600
+- `days`: 24 hours = 86400
+- `weeks`: 7 days = 604800
+
+```solidity
+    function secondsUnit() external pure returns(uint) {
+        assert(1 seconds == 1);
+        return 1 seconds;
+    }
+
+    function minutesUnit() external pure returns(uint) {
+        assert(1 minutes == 60);
+        assert(1 minutes == 60 seconds);
+        return 1 minutes;
+    }
+
+    function hoursUnit() external pure returns(uint) {
+        assert(1 hours == 3600);
+        assert(1 hours == 60 minutes);
+        return 1 hours;
+    }
+
+    function daysUnit() external pure returns(uint) {
+        assert(1 days == 86400);
+        assert(1 days == 24 hours);
+        return 1 days;
+    }
+
+    function weeksUnit() external pure returns(uint) {
+        assert(1 weeks == 604800);
+        assert(1 weeks == 7 days);
+        return 1 weeks;
+    }
+```
+
+**Example:**
+![5-6.png](./img/5-6.png)
+
+
 ## 总结
 在这一讲，我们介绍了`solidity`中的引用类型，数据位置和变量的作用域。重点是`storage`, `memory`和`calldata`三个关键字的用法。他们出现的原因是为了节省链上有限的存储空间和降低`gas`。下一讲我们会介绍引用类型中的数组。
 
