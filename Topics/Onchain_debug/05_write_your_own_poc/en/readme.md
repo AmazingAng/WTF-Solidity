@@ -1,4 +1,4 @@
-# OnChain Transaction Debugging: 6. Write Your Own PoC (Reentrancy)
+# OnChain Transaction Debugging: 5. Write Your Own PoC (Reentrancy)
 
 Author: [gbaleeee](https://twitter.com/gbaleeeee)
 
