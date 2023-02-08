@@ -1,4 +1,4 @@
-# OnChain Transaction Debugging: 5. Analysis for CirculateBUSD Project Rugpull, Loss of $2.27 Million!
+# OnChain Transaction Debugging: 6. Analysis for CirculateBUSD Project Rugpull, Loss of $2.27 Million!
 
 Author: [Numen Cyber Technology](https://twitter.com/numencyber)
 
