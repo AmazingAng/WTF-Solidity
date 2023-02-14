@@ -83,7 +83,7 @@ contract Faucet {
 
     // 用户领取代币函数
     function requestTokens() external {
-        require(requestedAddress[msg.sender] == false, "Can't Request Multiple Times!"); // 每个地址只能领一次
+        require(!requestedAddress[msg.sender], "Can't Request Multiple Times!"); // 每个地址只能领一次
         IERC20 token = IERC20(tokenContract); // 创建IERC20合约对象
         require(token.balanceOf(address(this)) >= amountAllowed, "Faucet Empty!"); // 水龙头空了
 
