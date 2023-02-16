@@ -6,7 +6,7 @@ import './Yeye.sol';
 // 通过`全局符号`导入特定的合约
 import {Yeye} from './Yeye.sol';
 // 通过网址引用
-import '@openzeppelin/contracts/utils/Address.sol';
+import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
 // 引用oppenzepplin合约
 import '@openzeppelin/contracts/access/Ownable.sol';
 
