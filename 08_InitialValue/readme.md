@@ -31,8 +31,8 @@ tags:
 - `enum`: 枚举中的第一个元素
 - `address`: `0x0000000000000000000000000000000000000000` (或 `address(0)`)
 - `function`
-    - `internal`: 空白方程
-    - `external`: 空白方程
+    - `internal`: 空白函数
+    - `external`: 空白函数
 
 可以用`public`变量的`getter`函数验证上面写的初始值是否正确：
 ```solidity
@@ -45,8 +45,8 @@ tags:
     enum ActionSet { Buy, Hold, Sell}
     ActionSet public _enum; // 第1个内容Buy的索引0
 
-    function fi() internal{} // internal空白方程 
-    function fe() external{} // external空白方程 
+    function fi() internal{} // internal空白函数
+    function fe() external{} // external空白函数 
 ```
 
 ### 引用类型初始值

@@ -21,11 +21,11 @@ In Solidity, variables declared but not assigned have their initial/default valu
 - `string`: `""`
 - `int`: `0`
 - `uint`: `0`
-- `enum`: first element in enumeration
+- `enum`: first element in enumeration 
 - `address`: `0x0000000000000000000000000000000000000000` (or `address(0)`)
 - `function`
-    - `internal`: blank equation
-    - `external`: blank equation
+    - `internal`: blank function
+    - `external`: blank function
 
 You can use `getter` function of `public` variables to confirm the above initial values:
 
@@ -39,8 +39,8 @@ You can use `getter` function of `public` variables to confirm the above initial
     enum ActionSet {Buy, Hold, Sell}
     ActionSet public _enum; // first element 0
 
-    function fi() internal{} // internal blank equation
-    function fe() external{} // external blank equation
+    function fi() internal{} // internal blank function
+    function fe() external{} // external blank function
 ```
 
 ### Initial values of reference types
