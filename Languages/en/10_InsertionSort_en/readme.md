@@ -11,7 +11,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 -----
 
-In this section, we will introduce control flow in Solidity, and how to use Solidity to implement insertion sort (`InsertionSort`), a program that looks simple but is actually bug-prone.
+In this section, we will introduce control flow in Solidity, and write a insertion sort (`InsertionSort`), a program that looks simple but is actually bug-prone.
 
 ## Control Flow
 
@@ -71,7 +71,7 @@ function doWhileTest() public pure returns(uint256){
 
 5. Conditional (`ternary`) operator
 
-The `ternary` operator is the only operator in Solidity that accepts three operands：a condition followed by a question mark (`?`), then an expression `x` to execute if the condition is true followed by a colon (`:`), and finally the expression `y`to execute if the condition is false: `condition ? x : y`. 
+The `ternary` operator is the only operator in Solidity that accepts three operands：a condition followed by a question mark (`?`), then an expression `x` to execute if the condition is true followed by a colon (`:`), and finally the expression `y` to execute if the condition is false: `condition ? x : y`. 
 
 This operator is frequently used as an alternative to an `if-else` statement.
 
@@ -87,19 +87,21 @@ In addition, there are `continue` (immediately enter the next loop) and `break` 
 
 ## `Solidity` Implementation of Insertion Sort
 
-**Note**: Over 90% of people who write the insertion algorithm with Solidity will get it wrong at first try.
+**Note**: Over 90% of people who write the insertion algorithm with Solidity will get it wrong at the first try.
 
 ### Insertion Sort
 
-The problem solved by the sorting algorithm is to arrange an unordered set of numbers from small to large, such as sorting `[2, 5, 3, 1]` to `[1, 2, 3, 5]`. Insertion Sort (`InsertionSort`) is the simplest sorting algorithm and the first algorithm many people learn in their computer science class. The idea of `InsertionSort` is very simple: from begin to the end, compare each number with the number in front of it. If it is smaller than the number in front, switch their positions. 
+The sorting algorithm solves the problem of arranging an unordered set of numbers from small to large, for example, sorting `[2, 5, 3, 1]` to `[1, 2, 3, 5]`. Insertion Sort (`InsertionSort`) is the simplest and first sorting algorithm that most developers learn in their computer science class. The logic of `InsertionSort`: 
 
-The schematic is shown below:
+1. from the begining of the array `x` to the end, compare the element `x[i]` with the element in front of it `x[i-1]`; if `x[i]` is smaller, switch their positions, compare it with `x[i-2]`, and continue this process. 
 
-	![InsertionSort](https://i.pinimg.com/originals/92/b0/34/92b034385c440e08bc8551c97df0a2e3.gif)
+The schematic of insertion sort:
 
-### Python's Implimentation of `InsertionSort`
+![InsertionSort](https://i.pinimg.com/originals/92/b0/34/92b034385c440e08bc8551c97df0a2e3.gif)
 
-We will first look at the Python implimentation of Insertion Sort：
+### Python Implimentation
+
+Let's first look at the Python implimentation of the insertion sort：
 
 ```python
 # Python program for implementation of Insertion Sort
@@ -111,16 +113,16 @@ def insertionSort(arr):
 				arr[j+1] = arr[j]
 				j -= 1
 		arr[j+1] = key
+    return arr
 ```
 
-### Bug shows up after rewriting to Solidity! 
+### Solidity Implementation (with Bug)
 
-Python version of Insertion Sort takes up 8 lines. We can rewrite it into Solidity by converting functions, variables, loops accordingly. It only takes up 9 lines of code:
+Python version of Insertion Sort takes up 9 lines. Let's rewrite it into Solidity by replacing `functions`, `variables`, and `loops` with solidity syntax accordingly. It only takes up 9 lines of code:
 
 ``` solidity
     // Insertion Sort (Wrong version）
     function insertionSortWrong(uint[] memory a) public pure returns(uint[] memory) {
-        
         for (uint i = 1;i < a.length;i++){
             uint temp = a[i];
             uint j=i-1;
@@ -134,17 +136,17 @@ Python version of Insertion Sort takes up 8 lines. We can rewrite it into Solidi
     }
 ```
 
-But when we compile the modified version and try to sort `[2, 5, 3, 1]`. *BOOM!* There are bugs! After long-time debugging, I still could not find where the bug is. I googled "Solidity insertion sort", and found that the insertion algorithm written with Solidity are all wrong, such as: [Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
+But when we compile the modified version and try to sort `[2, 5, 3, 1]`. *BOOM!* There are bugs! After 3-hour debugging, I still could not find where the bug was. I googled "Solidity insertion sort", and found that all the insertion algorithms written with Solidity are all wrong, such as: [Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
 
 Errors occured in `Remix decoded output`:
 
 ![10-1](./img/10-1.jpg)
 
-### Correct Version of Solidity `InsertionSort`
+### Solidity Implementation (Correct)
 
-After a few hours, with the help of a friend in the `Dapp-Learning` community, we finally found the problem. The most commonly used variable type in Solidity is `uint`, which represent a positive integer. If it takes a negative value, an error `underflow` will be reported. In the above code, the variable `j` may get `-1`, resulting in the corresponding error.
+With the help of a friend from `Dapp-Learning` community, we finally found the problem. The most commonly used variable type in Solidity is `uint`, which represent a non-negative integer. If it takes a negative value, we will encounter an `underflow` error. In the above code, the variable `j` will get `-1`, causing the bug.
 
-So, we just need to add 1 to `j` so that it can never take a negative value. The correct version of Insertion Sort:
+So, we need to add `1` to `j` so it can never take a negative value. The correct insertion sort solidity code:
 
 ```solidity
     // Insertion Sort（Correct Version）
@@ -163,13 +165,13 @@ So, we just need to add 1 to `j` so that it can never take a negative value. The
     }
 ```
 
-Result of the correct code：
+Result:
 
    !["Input [2,5,3,1] Output[1,2,3,5]"](https://images.mirror-media.xyz/publication-images/S-i6rwCMeXoi8eNJ0fRdB.png?height=300&width=554)
 
 ## Summary
 
-In this lecture, we introduced control flow in Insertion Sort algorithm in Solidity. Solidity looks simple but have many traps. Every month, projects lose millions of dollars because of small bugs in their smart contract. To write a safe contract, we need to master the basics of the Solidity and keep practicing.
+In this lecture, we introduced control flow in Solidity and wrote a simple but bug-prone sorting algorithm. Solidity looks simple but have many traps. Every month, projects get hacked and lose millions of dollars because of small bugs in the smart contract. To write a safe contract, we need to master the basics of the Solidity and keep practicing.
 
 
 
