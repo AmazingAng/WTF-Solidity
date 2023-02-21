@@ -28,7 +28,7 @@ There are two types of arrays: fixed-sized and dynamically-sized arrays.：
     address[100] array3;
 ```
 
-- Dynamically-sized array（dynamic array）：Length of the array is not specified during declaration.  It uses the format of `T[]`, where `T` is the element type. `bytes` is special case, it is a dynamic array, but you don't need to add `[]` to it.
+- Dynamically-sized array（dynamic array）：Length of the array is not specified during declaration.  It uses the format of `T[]`, where `T` is the element type. 
 
 ```solidity
     // variable-length array
@@ -37,6 +37,8 @@ There are two types of arrays: fixed-sized and dynamically-sized arrays.：
     address[] array6;
     bytes array7;
 ```
+
+**Notice**: `bytes` is special case, it is a dynamic array, but you don't need to add `[]` to it. You can use either `bytes` or `bytes1[]` to declare byte array, but not `byte[]`. `bytes` is recommended and consumes less gas than `bytes1[]`.
 
 ### Rules for creating arrays
 
@@ -74,7 +76,7 @@ In Solidity, there are some rules for creating arrays：
 
 ## Struct
 
-You can define new types in the form of `struct` in Solidity:
+You can define new types in the form of `struct` in Solidity. Elements of `struct` can be primitive types or reference types. And `struct` can be the element for `array` or `mapping`.
 
 ```solidity
     // struct
@@ -86,7 +88,7 @@ You can define new types in the form of `struct` in Solidity:
     Student student; // Initially a student structure
 ```
 
-Elements of `struct` can be primitive types or reference types. And `struct` can be the element for `array` or `mapping`. There are two ways to assign values to `struct`:
+ There are 4 ways to assign values to `struct`:
 
 ```solidity
     //  assign value to structure
@@ -113,6 +115,19 @@ Elements of `struct` can be primitive types or reference types. And `struct` can
 **Example:**
 
 ![6-3.png](./img/6-3.png)
+
+```solidity
+    // Method 3: struct constructor
+    function initStudent3() external {
+        student = Student(3, 90);
+    }
+    
+    // Method 4: key value
+    function initStudent4() external {
+        student = Student({id: 4, score: 60});
+    }
+```
+
 
 ## Summary
 
