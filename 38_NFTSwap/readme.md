@@ -280,7 +280,7 @@ contract NFTSwap is IERC721Receiver{
 
 `_tokenId`: `_tokenId`为NFT的id，本案例中为上述mint的`0`Id。
 
-`_wei`: `_wei`为支付的`ETH`数量，本案例中为1 `wei`。
+`_wei`: `_wei`为支付的`ETH`数量，本案例中为77 `wei`。
 
 ![](./img/38-11.png)
 
