@@ -9,7 +9,7 @@ Recently, I have been relearning Solidity, consolidating the finer details, and 
 
 Twitter: [@WTFAcademy_](https://twitter.com/WTFAcademy_) |  [@0xAA_Science](https://twitter.com/0xAA_Science)
 
-Community: [Discord](https://discord.wtf.academy) | [Website: wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk) | [Website: wtf.academy](https://wtf.academy)
 
 Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
