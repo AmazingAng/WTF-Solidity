@@ -87,6 +87,7 @@ contract Variables {
     uint public x = 1;
     uint public y;
     string public z;
+}
 ```
 
 我们可以在函数里更改状态变量的值：
