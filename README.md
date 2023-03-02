@@ -117,6 +117,8 @@
 
 **第45讲：时间锁**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/45_Timelock) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/45_Timelock/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/o8nvAnljLf7l4AGNRSdec17Knp3PsKTWyTXVSx1olM4)
 
+## Degen
+
 **第46讲：代理合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/v4ov2J0xjtMnVflsLpbbh7S55fiyPljttbDh3Xhiqis)
 
 **第47讲：可升级合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/47_Upgrade) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/47_Upgrade/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/p1WBSV9yQ5Zfcui8kaWEoVq71rirv7-I4VqLFAhz4J0)
@@ -127,6 +129,8 @@
 **第49讲：通用可升级代理UUPS**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/49_UUPS) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/49_UUPS/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/KPwXlRDdL2XfBWi7Z9uk8eccbWKG3hffC-RjTgiTLi8)
 
 **第50讲：多签钱包**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/DeediQG7FbXhCK68f2iPUoQkpN-gLdiuKhDV99gHpgg)
+
+**第51讲：ERC4626 代币化金库**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/51_ERC4626) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/51_ERC4626/readme.md)
 
 ## 合约安全
 
