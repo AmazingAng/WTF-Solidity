@@ -79,6 +79,55 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 30: Try-Catch**：[Code](./30_TryCatch_en) | [Tutorial](./30_TryCatch_en/readme.md)
 
+## Application
+
+**Chapter 31: ERC20**：[Code](./31_ERC20_en/) | [Tutorial](./31_ERC20_en/readme.md)
+
+**Chapter 32: Token Faucet**：[Code](./32_Faucet_en/) | [Tutorial](./32_Faucet_en/readme.md)
+
+**Chapter 32: Airdrop**：[Code](./33_Airdrop_en/) | [Tutorial](./33_Airdrop_en/readme.md)
+
+**Chapter 34: ERC721**：[Code](./34_ERC721_en/) | [Tutorial](./34_ERC721_en/readme.md)
+
+**Chapter 35: Dutch Auction**：[Code](./35_DutchAuction_en/) | [Tutorial](./35_DutchAuction_en/readme.md)
+
+**Chapter 36: Merkle Tree**：[Code](./36_MerkleTree_en/) | [Tutorial](./36_MerkleTree_en/readme.md)
+
+**Chapter 37: Siganture**：[Code](./37_Signature_en/) | [Tutorial](./37_Signature_en/readme.md)
+
+**Chapter 38: NFT Swap**：[Code](./38_NFTSwap_en/) | [Tutorial](./38_NFTSwap_en/readme.md)
+
+**Chapter 39: Random Number**：[Code](./39_Random_en/) | [Tutorial](./39_Random_en/readme.md)
+
+**Chapter 40: ERC1155**：[Code](./40_ERC1155_en/) | [Tutorial](./40_ERC1155_en/readme.md)
+
+**Chapter 41: WETH**：[Code](./41_WETH_en/) | [Tutorial](./41_WETH_en/readme.md) 
+
+**Chapter 42: Payment Split**：[Code](./42_PaymentSplit_en/) | [Tutorial](./42_PaymentSplit_en/readme.md)
+
+**Chapter 43: Linear Vesting**：[Code](./43_TokenVesting_en/) | [Tutorial](./43_TokenVesting_en/readme.md)
+
+**Chapter 44: Token Lock**：[Code](./44_TokenLocker_en/) | [Tutorial](./44_TokenLocker_en/readme.md)
+
+**Chapter: Time Lock**：[Code](./45_Timelock_en/) | [Tutorial](./45_Timelock_en/readme.md)
+
+## Degen
+
+**Chapter 46: Proxy Contract**：[Code](./46_ProxyContract_en/) | [Tutorial](./46_ProxyContract_en/readme.md)
+
+**Chapter 47: Upgradeable Contract**：[Code](./47_Upgrade_en/) | [Tutorial](./47_Upgrade_en/readme.md)
+
+
+**Chapter 48: Transparent Proxy**：[Code](./48_TransparentProxy_en/) | [Tutorial](./48_TransparentProxy_en/readme.md)
+
+**Chapter 49: UUPS**：[Code](./49_UUPS_en/) | [Tutorial](./49_UUPS_en/readme.md)
+
+**Chapter 50: Multisig Wallet**：[Code](./50_MultisigWallet_en/) | [Tutorial](./50_MultisigWallet_en/readme.md)
+
+**Chapter 51: ERC4626 Tokenized Vault**：[Code](./51_ERC4626_en/) | [Tutorial](./51_ERC4626_en/readme.md)
+
+
+
 ## WTF Contributors
 <div align="center">
   <h4 align="center">
