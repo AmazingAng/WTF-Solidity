@@ -109,7 +109,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 44: Token Lock**：[Code](./44_TokenLocker_en/) | [Tutorial](./44_TokenLocker_en/readme.md)
 
-**Chapter: Time Lock**：[Code](./45_Timelock_en/) | [Tutorial](./45_Timelock_en/readme.md)
+**Chapter 45: Time Lock**：[Code](./45_Timelock_en/) | [Tutorial](./45_Timelock_en/readme.md)
 
 ## Degen
 
