@@ -2,100 +2,100 @@
 pragma solidity ^0.8.4;
 
 /**
- * 分账合约 
- * @dev 这个合约会把收到的ETH按事先定好的份额分给几个账户。收到ETH会存在分账合约中，需要每个受益人调用release()函数来领取。
+ * PaymentSplit 
+ * * @dev This contract will distribute the received ETH to several accounts according to the pre-determined share. Received ETH will be stored in the account sharing contract, and each beneficiary needs to call the release() function to receive it.
  */
 contract PaymentSplit{
-    // 事件
-    event PayeeAdded(address account, uint256 shares); // 增加受益人事件
-    event PaymentReleased(address to, uint256 amount); // 受益人提款事件
-    event PaymentReceived(address from, uint256 amount); // 合约收款事件
+    // event 
+    event PayeeAdded(address account, uint256 shares); // addition of beneficiary event
+    event PaymentReleased(address to, uint256 amount); // payee withdrawal event
+    event PaymentReceived(address from, uint256 amount); // receipt of payment event
 
-    uint256 public totalShares; // 总份额
-    uint256 public totalReleased; // 总支付
+    uint256 public totalShares; // total share
+    uint256 public totalReleased; // total payment
 
-    mapping(address => uint256) public shares; // 每个受益人的份额
-    mapping(address => uint256) public released; // 支付给每个受益人的金额
-    address[] public payees; // 受益人数组
+    mapping(address => uint256) public shares; // each beneficiary's share
+    mapping(address => uint256) public released; // aount paid to each beneficiary
+    address[] public payees; // beneficiary array
 
     /**
-     * @dev 初始化受益人数组_payees和分账份额数组_shares
-     * 数组长度不能为0，两个数组长度要相等。_shares中元素要大于0，_payees中地址不能为0地址且不能有重复地址
+     * @dev Initialize beneficiary array _payees and share share array _shares
+     * The length of the array cannot be 0, and the lengths of the two arrays must be equal. The elements in _shares must be greater than 0, and the address in _payees cannot be 0 and cannot have duplicate addresses
      */
     constructor(address[] memory _payees, uint256[] memory _shares) payable {
-        // 检查_payees和_shares数组长度相同，且不为0
+        // Check that the _payees and _shares arrays have the same length and are not 0
         require(_payees.length == _shares.length, "PaymentSplitter: payees and shares length mismatch");
         require(_payees.length > 0, "PaymentSplitter: no payees");
-        // 调用_addPayee，更新受益人地址payees、受益人份额shares和总份额totalShares
+        // Call _addPayee to update beneficiary address payees, beneficiary shares shares and total shares totalShares
         for (uint256 i = 0; i < _payees.length; i++) {
             _addPayee(_payees[i], _shares[i]);
         }
     }
 
     /**
-     * @dev 回调函数，收到ETH释放PaymentReceived事件
+     * @dev Callback function, receive ETH release PaymentReceived event
      */
     receive() external payable virtual {
         emit PaymentReceived(msg.sender, msg.value);
     }
 
     /**
-     * @dev 为有效受益人地址_account分帐，相应的ETH直接发送到受益人地址。任何人都可以触发这个函数，但钱会打给account地址。
-     * 调用了releasable()函数。
+     * @dev For valid beneficiary address _account, the corresponding ETH is sent directly to the beneficiary address. Anyone can trigger this function, but the money will be sent to the account address.
+     * The releasable() function is called.
      */
     function release(address payable _account) public virtual {
-        // account必须是有效受益人
+        // account must be a valid beneficiary
         require(shares[_account] > 0, "PaymentSplitter: account has no shares");
-        // 计算account应得的eth
+        // calculate the amount of ETH that the account is entitled to
         uint256 payment = releasable(_account);
-        // 应得的eth不能为0
+        // deserved eth cannot be 0
         require(payment != 0, "PaymentSplitter: account is not due payment");
-        // 更新总支付totalReleased和支付给每个受益人的金额released
+        // update the total payment totalReleased and the amount paid to each beneficiary released
         totalReleased += payment;
         released[_account] += payment;
-        // 转账
+        // transfer
         _account.transfer(payment);
         emit PaymentReleased(_account, payment);
     }
 
     /**
-     * @dev 计算一个账户能够领取的eth。
-     * 调用了pendingPayment()函数。
+     * @dev Calculate the eth that an account can receive.
+     * The pendingPayment() function is called.
      */
     function releasable(address _account) public view returns (uint256) {
-        // 计算分账合约总收入totalReceived
+        // calculate the total revenue of the split contract totalReceived
         uint256 totalReceived = address(this).balance + totalReleased;
-        // 调用_pendingPayment计算account应得的ETH
+        // call _pendingPayment to calculate the ETH due to the account
         return pendingPayment(_account, totalReceived, released[_account]);
     }
 
     /**
-     * @dev 根据受益人地址`_account`, 分账合约总收入`_totalReceived`和该地址已领取的钱`_alreadyReleased`，计算该受益人现在应分的`ETH`。
+     * @dev According to the beneficiary's address `_account`, the total income of the distribution contract `_totalReceived` and the money received by the address `_alreadyReleased`, calculate the `ETH` that the beneficiary should share now.
      */
     function pendingPayment(
         address _account,
         uint256 _totalReceived,
         uint256 _alreadyReleased
     ) public view returns (uint256) {
-        // account应得的ETH = 总应得ETH - 已领到的ETH
+        //  ETH to be received in the account = Total ETH to be received - ETH already received
         return (_totalReceived * shares[_account]) / totalShares - _alreadyReleased;
     }
 
     /**
-     * @dev 新增受益人_account以及对应的份额_accountShares。只能在构造器中被调用，不能修改。
+     * @dev Add beneficiary_account and corresponding share_accountShares. It can only be called in the constructor and cannot be modified.
      */
     function _addPayee(address _account, uint256 _accountShares) private {
-        // 检查_account不为0地址
+        // check that _account is not 0 address
         require(_account != address(0), "PaymentSplitter: account is the zero address");
-        // 检查_accountShares不为0
+        // check that _accountShares is not 0
         require(_accountShares > 0, "PaymentSplitter: shares are 0");
-        // 检查_account不重复
+        // check that _account is not duplicated
         require(shares[_account] == 0, "PaymentSplitter: account already has shares");
-        // 更新payees，shares和totalShares
+        // update payees, shares and totalShares
         payees.push(_account);
         shares[_account] = _accountShares;
         totalShares += _accountShares;
-        // 释放增加受益人事件
+        // emit add beneficiary event
         emit PayeeAdded(_account, _accountShares);
     }
 }
