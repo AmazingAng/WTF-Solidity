@@ -2,54 +2,60 @@
 // wtf.academy
 pragma solidity ^0.8.4;
 
-// 简单的可升级合约，管理员可以通过升级函数更改逻辑合约地址，从而改变合约的逻辑。
-// 教学演示用，不要用在生产环境
+// simple upgradeable contract, the admin could change the logic contract's address by calling upgrade function, thus change the contract logic
+// FOR TEACHING PURPOSE ONLY, DO NOT USE IN PRODUCTION
 contract SimpleUpgrade {
-    address public implementation; // 逻辑合约地址
-    address public admin; // admin地址
-    string public words; // 字符串，可以通过逻辑合约的函数改变
+    // logic contract's address
+    address public implementation; 
 
-    // 构造函数，初始化admin和逻辑合约地址
+    // admin address
+    address public admin;
+
+    // string variable, could be changed by logic contract's function
+    string public words; 
+
+    // constructor, initializing admin address and logic contract's address
     constructor(address _implementation){
         admin = msg.sender;
         implementation = _implementation;
     }
 
-    // fallback函数，将调用委托给逻辑合约
+    // fallback function, delegates function call to logic contract
     fallback() external payable {
         (bool success, bytes memory data) = implementation.delegatecall(msg.data);
     }
 
-    // 升级函数，改变逻辑合约地址，只能由admin调用
+    // upgrade function, changes the logic contract's address, can only by called by admin
     function upgrade(address newImplementation) external {
         require(msg.sender == admin);
         implementation = newImplementation;
     }
 }
 
-// 逻辑合约1
+// first logic contract
 contract Logic1 {
-    // 状态变量和proxy合约一致，防止插槽冲突
+    // State variables consistent with Proxy contract to prevent slot conflicts
     address public implementation; 
-    address public admin; 
-    string public words; // 字符串，可以通过逻辑合约的函数改变
+    address public admin;
+    // String that can be changed through the function of the logic contract  
+    string public words; 
 
-    // 改变proxy中状态变量，选择器： 0xc2985578
-    function foo() public{
+    // Change state variables in Proxy contract, selector: 0xc2985578
+    function foo() public {
         words = "old";
     }
 }
 
-// 逻辑合约2
+// second logic contract
 contract Logic2 {
-    // 状态变量和proxy合约一致，防止插槽冲突
+    // State variables consistent with proxy contract to prevent slot collisions
     address public implementation; 
-    address public admin; 
-    string public words; // 字符串，可以通过逻辑合约的函数改变
+    address public admin;
+    // String that can be changed through the function of the logic contract  
+    string public words; 
 
-    // 改变proxy中状态变量，选择器：0xc2985578
+    // Change state variables in Proxy contract, selector: 0xc2985578
     function foo() public{
         words = "new";
     }
 }
-
