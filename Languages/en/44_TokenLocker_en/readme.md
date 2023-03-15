@@ -15,7 +15,7 @@ You are also welcome to join the WTF Scientists community and find information o
 
 All of the code and tutorials are open source and can be found on Github (I will provide a course certification for 1024 stars and a community NFT for 2048 stars): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 
 ### Token Lock
 
@@ -47,9 +47,18 @@ There are two events in the `TokenLocker` contract.
 - `Release`: This event is triggered when the beneficiary withdraws the tokens. It records the beneficiary address, token address, release time, and token amount.
 
 ```solidity
-    // 事件
-    event TokenLockStart(address indexed beneficiary, address indexed token, uint256 startTime, uint256 lockTime);
-    event Release(address indexed beneficiary, address indexed token, uint256 releaseTime, uint256 amount);
+    event TokenLockStart(
+        address indexed beneficiary,
+        address indexed token,
+        uint256 startTime,
+        uint256 lockTime
+    );
+    event Release(
+        address indexed beneficiary,
+        address indexed token,
+        uint256 releaseTime,
+        uint256 amount
+    );
 ```
 
 ### State Variables
@@ -62,13 +71,13 @@ There are a total of 4 state variables in the `TokenLocker` contract:
 - `startTime`: the timestamp when the lock-up period starts (in seconds).
 
 ```solidity
-    // The ERC20 token contract which is being locked
+    // Locked ERC20 token contracts
     IERC20 public immutable token;
-    // The beneficiary's address
+    // Beneficiary address
     address public immutable beneficiary;
-    // Lock time (in seconds)
+    // Lockup time (seconds)
     uint256 public immutable lockTime;
-    // Start timestamp of the lock (in seconds)
+    // Lockup start timestamp (seconds)
     uint256 public immutable startTime;
 ```
 
@@ -81,30 +90,34 @@ There are `2` functions in the `TokenLocker` contract.
 
 ```solidity
     /**
-     * @dev 部署时间锁合约，初始化代币合约地址，受益人地址和锁仓时间。
-     * @param token_: 被锁仓的ERC20代币合约
-     * @param beneficiary_: 受益人地址
-     * @param lockTime_: 锁仓时间(秒)
+     * @dev Deploy the time lock contract, initialize the token contract address, beneficiary address and lock time.
+     * @param token_: Locked ERC20 token contract
+     * @param beneficiary_: Beneficiary address
+     * @param lockTime_: Lockup time (seconds)
      */
-    constructor(
-        IERC20 token_,
-        address beneficiary_,
-        uint256 lockTime_
-    ) {
+    constructor(IERC20 token_, address beneficiary_, uint256 lockTime_) {
         require(lockTime_ > 0, "TokenLock: lock time should greater than 0");
         token = token_;
         beneficiary = beneficiary_;
         lockTime = lockTime_;
         startTime = block.timestamp;
 
-        emit TokenLockStart(beneficiary_, address(token_), block.timestamp, lockTime_);
+        emit TokenLockStart(
+            beneficiary_,
+            address(token_),
+            block.timestamp,
+            lockTime_
+        );
     }
 
     /**
-     * @dev 在锁仓时间过后，将代币释放给受益人。
+     * @dev After the lockup time, the tokens are released to the beneficiaries.
      */
     function release() public {
-        require(block.timestamp >= startTime+lockTime, "TokenLock: current time is before release time");
+        require(
+            block.timestamp >= startTime + lockTime,
+            "TokenLock: current time is before release time"
+        );
 
         uint256 amount = token.balanceOf(address(this));
         require(amount > 0, "TokenLock: no tokens to release");
@@ -117,25 +130,25 @@ There are `2` functions in the `TokenLocker` contract.
 
 ## `Remix` Demonstration
 
-### 1. Deploy the `ERC20` contract in [Lesson 31](../31_ERC20/readme.md), and mint `10000` tokens for yourself.
+### 1. Deploy the `ERC20` contract in [Lesson 31](../31_ERC20/readme.md), and mint `10000` tokens for yourself
 
-![`Remix` Demonstration](./img/44-2.jpg)
+![`Remix` Demonstration](./img/44-2.png)
 
-### 2. Deploy the `TokenLocker` contract with the `ERC20` contract address, set yourself as the beneficiary, and set the lock-up period to `180` seconds.
+### 2. Deploy the `TokenLocker` contract with the `ERC20` contract address, set yourself as the beneficiary, and set the lock-up period to `180` seconds
 
-![`Remix` Demonstration](./img/44-3.jpg)
+![`Remix` Demonstration](./img/44-3.png)
 
-### 3. Transfer `10000` tokens to the contract.
+### 3. Transfer `10000` tokens to the contract
 
-![`Remix` Demonstration](./img/44-4.jpg)
+![`Remix` Demonstration](./img/44-4.png)
 
-### 4. Within the lock-up period of `180` seconds, call the `release()` function, but you won't be able to withdraw the tokens.
+### 4. Within the lock-up period of `180` seconds, call the `release()` function, but you won't be able to withdraw the tokens
 
-![`Remix` Demonstration](./img/44-5.jpg)
+![`Remix` Demonstration](./img/44-5.png)
 
-### 5. After the lock-up period, call the `release()` function again, and successfully withdraw the tokens.
+### 5. After the lock-up period, call the `release()` function again, and successfully withdraw the tokens
 
-![`Remix` Demo](./img/44-6.jpg)
+![`Remix` Demo](./img/44-6.png)
 
 ## Summary
 
