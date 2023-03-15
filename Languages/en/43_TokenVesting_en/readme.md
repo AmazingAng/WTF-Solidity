@@ -4,7 +4,6 @@ tags:
   - solidity
   - application
   - ERC20
-
 ---
 
 # WTF Simplified Solidity: 43. Linear Release
@@ -17,7 +16,7 @@ Community: [Discord](https://discord.gg/5akcruXrsk)｜[WeChat Group](https://doc
 
 All code and tutorials are open-sourced on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 
 In this lesson, we will introduce token vesting clauses and write a contract for linearly releasing ERC20 tokens. The code is simplified from OpenZeppelin's VestingWallet contract.
 
@@ -40,31 +39,36 @@ Now, let's write a contract TokenVesting for locking and linearly releasing ERC2
 ### Events
 
 There is `1` event in the Linear Release contract.
+
 - `ERC20Released`: withdrawal event, triggered when the beneficiary withdraws the released tokens.
 
 ```solidity
 
 contract TokenVesting {
-    // 事件
-    event ERC20Released(address indexed token, uint256 amount); // 提币事件
+    // Event
+    event ERC20Released(address indexed token, uint256 amount); // Withdraw event
+
 ```
 
-### State Variables 
+### State Variables
+
 There are `4` state variables in the linear release contract.
+
 - `beneficiary`: the beneficiary address.
 - `start`: the starting timestamp of the vesting period.
 - `duration`: the duration of the vesting period in seconds.
 - `erc20Released`: a mapping of token address to the amount released, which records the amount of tokens the beneficiary has already claimed.
 
 ```solidity
-    // 状态变量
-    mapping(address => uint256) public erc20Released; // 代币地址->释放数量的映射，记录已经释放的代币
-    address public immutable beneficiary; // 受益人地址
-    uint256 public immutable start; // 起始时间戳
-    uint256 public immutable duration; // 归属期
+    // State variables
+    mapping(address => uint256) public erc20Released; // Token address -> release amount mapping, recording the number of tokens the beneficiary has received
+    address public immutable beneficiary; // Beneficiary address
+    uint256 public immutable start; // Start timestamp
+    uint256 public immutable duration; // Duration
 ```
 
 ### Functions
+
 There are `3` functions in the LinearVesting contract.
 
 - Constructor: initializes the beneficiary address, duration in seconds and starting timestamp. The constructor takes `beneficiaryAddress` and `durationSeconds` as input parameters. The starting timestamp is set to the deployment blockchain timestamp `block.timestamp` for convenience.
@@ -73,42 +77,47 @@ There are `3` functions in the LinearVesting contract.
 
 ```solidity
     /**
-     * @dev 初始化受益人地址，释放周期(秒), 起始时间戳(当前区块链时间戳)
+     * @dev Initialize the beneficiary address,release duration (seconds),start timestamp (current blockchain timestamp)
      */
-    constructor(
-        address beneficiaryAddress,
-        uint256 durationSeconds
-    ) {
-        require(beneficiaryAddress != address(0), "VestingWallet: beneficiary is zero address");
+    constructor(address beneficiaryAddress, uint256 durationSeconds) {
+        require(
+            beneficiaryAddress != address(0),
+            "VestingWallet: beneficiary is zero address"
+        );
         beneficiary = beneficiaryAddress;
         start = block.timestamp;
         duration = durationSeconds;
     }
 
     /**
-     * @dev 受益人提取已释放的代币。
-     * 调用vestedAmount()函数计算可提取的代币数量，然后transfer给受益人。
-     * 释放 {ERC20Released} 事件.
+     * @dev Beneficiary withdraws the released tokens.
+     * Calls the vestedAmount() function to calculate the amount of tokens that can be withdrawn, then transfer them to the beneficiary.
+     * Emit an {ERC20Released} event.
      */
     function release(address token) public {
-        // 调用vestedAmount()函数计算可提取的代币数量
-        uint256 releasable = vestedAmount(token, uint256(block.timestamp)) - erc20Released[token];
-        // 更新已释放代币数量   
-        erc20Released[token] += releasable; 
-        // 转代币给受益人
+        // Calls the vestedAmount() function to calculate the amount of tokens that can be withdrawn.
+        uint256 releasable = vestedAmount(token, uint256(block.timestamp)) -
+            erc20Released[token];
+        // Updates the amount of tokens that have been released.
+        erc20Released[token] += releasable;
+        // Transfers the tokens to the beneficiary.
         emit ERC20Released(token, releasable);
         IERC20(token).transfer(beneficiary, releasable);
     }
 
     /**
-     * @dev 根据线性释放公式，计算已经释放的数量。开发者可以通过修改这个函数，自定义释放方式。
-     * @param token: 代币地址
-     * @param timestamp: 查询的时间戳
+     * @dev According to the linear release formula, calculate the released quantity. Developers can customize the release method by modifying this function.
+     * @param token: Token address
+     * @param timestamp: Query timestamp
      */
-    function vestedAmount(address token, uint256 timestamp) public view returns (uint256) {
-        // 合约里总共收到了多少代币（当前余额 + 已经提取）
-        uint256 totalAllocation = IERC20(token).balanceOf(address(this)) + erc20Released[token];
-        // 根据线性释放公式，计算已经释放的数量
+    function vestedAmount(
+        address token,
+        uint256 timestamp
+    ) public view returns (uint256) {
+        // Total amount of tokens received in the contract (current balance + withdrawn)
+        uint256 totalAllocation = IERC20(token).balanceOf(address(this)) +
+            erc20Released[token];
+        // According to the linear release formula, calculate the released quantity
         if (timestamp < start) {
             return 0;
         } else if (timestamp > start + duration) {
@@ -121,17 +130,17 @@ There are `3` functions in the LinearVesting contract.
 
 ## `Remix` Demo
 
-### 1. Deploy the `ERC20` contract in [Lesson 31](../31_ERC20/readme.md), and mint yourself `10000` tokens.
+### 1. Deploy the `ERC20` contract in [Lesson 31](../31_ERC20/readme.md), and mint yourself `1000` tokens.
 
 ![Deploy ERC20](./img/43-2.png)
 
-![Mint 10000 tokens](./img/43-3.png)
+![Mint 1000 tokens](./img/43-3.png)
 
 ### 2. Deploy the `TokenVesting` contract for linear release, set yourself as the beneficiary, and set the vesting period to `100` seconds.
 
 ![Deploy TokenVesting](./img/43-4.png)
 
-### 3. Transfer `10000` `ERC20` tokens to the linear release contract.
+### 3. Transfer `1000` `ERC20` tokens to the linear release contract.
 
 ![Transfer tokens](./img/43-5.png)
 
