@@ -4,39 +4,46 @@ pragma solidity ^0.8.4;
 
 /// 基于签名的多签钱包，由gnosis safe合约简化而来，教学使用。
 contract MultisigWallet {
-    event ExecutionSuccess(bytes32 txHash);    // 交易成功事件
-    event ExecutionFailure(bytes32 txHash);    // 交易失败事件
-    address[] public owners;                   // 多签持有人数组 
-    mapping(address => bool) public isOwner;   // 记录一个地址是否为多签
-    uint256 public ownerCount;                 // 多签持有人数量
-    uint256 public threshold;                  // 多签执行门槛，交易至少有n个多签人签名才能被执行。
-    uint256 public nonce;                      // nonce，防止签名重放攻击
+    event ExecutionSuccess(bytes32 txHash); // succeeded transaction event
+    event ExecutionFailure(bytes32 txHash); // failed transaction event
+
+    address[] public owners; // multisig owners array
+    mapping(address => bool) public isOwner; // check if an address is a multisig owner
+    uint256 public ownerCount; // the count of multisig owners
+    uint256 public threshold; // minimum number of signatures required for multisig execution
+    uint256 public nonce; // nonce，prevent signature replay attack
 
     receive() external payable {}
 
-    // 构造函数，初始化owners, isOwner, ownerCount, threshold 
-    constructor(        
-        address[] memory _owners,
-        uint256 _threshold
-    ) {
+    // 构造函数，初始化owners, isOwner, ownerCount, threshold
+    // constructor, initializes owners, isOwner, ownerCount, threshold
+    constructor(address[] memory _owners, uint256 _threshold) {
         _setupOwners(_owners, _threshold);
     }
 
-    /// @dev 初始化owners, isOwner, ownerCount,threshold 
-    /// @param _owners: 多签持有人数组
-    /// @param _threshold: 多签执行门槛，至少有几个多签人签署了交易
-    function _setupOwners(address[] memory _owners, uint256 _threshold) internal {
-        // threshold没被初始化过
+    /// @dev Initialize owners, isOwner, ownerCount, threshold
+    /// @param _owners: Array of multisig owners
+    /// @param _threshold: Minimum number of signatures required for multisig execution
+    function _setupOwners(
+        address[] memory _owners,
+        uint256 _threshold
+    ) internal {
+        // If threshold was not initialized
         require(threshold == 0, "WTF5000");
-        // 多签执行门槛 小于 多签人数
+        // multisig execution threshold is less than the number of multisig owners
         require(_threshold <= _owners.length, "WTF5001");
-        // 多签执行门槛至少为1
+        // multisig execution threshold is at least 1
         require(_threshold >= 1, "WTF5002");
 
         for (uint256 i = 0; i < _owners.length; i++) {
             address owner = _owners[i];
-            // 多签人不能为0地址，本合约地址，不能重复
-            require(owner != address(0) && owner != address(this) && !isOwner[owner], "WTF5003");
+            // multisig owners cannot be zero address, contract address, and cannot be repeated
+            require(
+                owner != address(0) &&
+                    owner != address(this) &&
+                    !isOwner[owner],
+                "WTF5003"
+            );
             owners.push(owner);
             isOwner[owner] = true;
         }
@@ -44,50 +51,58 @@ contract MultisigWallet {
         threshold = _threshold;
     }
 
-    /// @dev 在收集足够的多签签名后，执行交易
-    /// @param to 目标合约地址
-    /// @param value msg.value，支付的以太坊
+    /// @dev After collecting enough signatures from the multisig, execute transaction
+    /// @param to Target contract address
+    /// @param value msg.value, ether paid
     /// @param data calldata
-    /// @param signatures 打包的签名，对应的多签地址由小到达，方便检查。 ({bytes32 r}{bytes32 s}{uint8 v}) (第一个多签的签名, 第二个多签的签名 ... )
+    /// @param signatures packed signatures, corresponding to the multisig address in ascending order, for easy checking ({bytes32 r}{bytes32 s}{uint8 v}) (signature of the first multisig, signature of the second multisig...)
     function execTransaction(
         address to,
         uint256 value,
         bytes memory data,
         bytes memory signatures
     ) public payable virtual returns (bool success) {
-        // 编码交易数据，计算哈希
-        bytes32 txHash = encodeTransactionData(to, value, data, nonce, block.chainid);
-        nonce++;  // 增加nonce
-        checkSignatures(txHash, signatures); // 检查签名
-        // 利用call执行交易，并获取交易结果
+        // Encode transaction data and compute hash
+        bytes32 txHash = encodeTransactionData(
+            to,
+            value,
+            data,
+            nonce,
+            block.chainid
+        );
+        // Increase nonce
+        nonce++;
+        // Check signatures
+        checkSignatures(txHash, signatures);
+        // Execute transaction using call and get transaction result
         (success, ) = to.call{value: value}(data);
-        require(success , "WTF5004");
+        require(success, "WTF5004");
         if (success) emit ExecutionSuccess(txHash);
         else emit ExecutionFailure(txHash);
     }
 
     /**
-     * @dev 检查签名和交易数据是否对应。如果是无效签名，交易会revert
-     * @param dataHash 交易数据哈希
-     * @param signatures 几个多签签名打包在一起
+     * @dev checks if the hash of the signature and transaction data matches. if signature is invalid, transaction will revert
+     * @param dataHash hash of transaction data
+     * @param signatures bundles multiple multisig signature together
      */
     function checkSignatures(
         bytes32 dataHash,
         bytes memory signatures
     ) public view {
-        // 读取多签执行门槛
+        // get multisig threshold
         uint256 _threshold = threshold;
         require(_threshold > 0, "WTF5005");
 
-        // 检查签名长度足够长
+        // checks if signature length is enough
         require(signatures.length >= _threshold * 65, "WTF5006");
 
-        // 通过一个循环，检查收集的签名是否有效
-        // 大概思路：
-        // 1. 用ecdsa先验证签名是否有效
-        // 2. 利用 currentOwner > lastOwner 确定签名来自不同多签（多签地址递增）
-        // 3. 利用 isOwner[currentOwner] 确定签名者为多签持有人
-        address lastOwner = address(0); 
+        // checks if collected signatures are valid
+        // procedure:
+        // 1. use ECDSA to verify if signatures are valid
+        // 2. use currentOwner > lastOwner to make sure that signatures are from different multisig owners
+        // 3. use isOwner[currentOwner] to make sure that current signature is from a multisig owner
+        address lastOwner = address(0);
         address currentOwner;
         uint8 v;
         bytes32 r;
@@ -95,26 +110,34 @@ contract MultisigWallet {
         uint256 i;
         for (i = 0; i < _threshold; i++) {
             (v, r, s) = signatureSplit(signatures, i);
-            // 利用ecrecover检查签名是否有效
-            currentOwner = ecrecover(keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", dataHash)), v, r, s);
-            require(currentOwner > lastOwner && isOwner[currentOwner], "WTF5007");
+            // use ECDSA to verify if signature is valid
+            currentOwner = ecrecover(
+                keccak256(
+                    abi.encodePacked(
+                        "\x19Ethereum Signed Message:\n32",
+                        dataHash
+                    )
+                ),
+                v,
+                r,
+                s
+            );
+            require(
+                currentOwner > lastOwner && isOwner[currentOwner],
+                "WTF5007"
+            );
             lastOwner = currentOwner;
         }
     }
-    
-    /// 将单个签名从打包的签名分离出来
-    /// @param signatures 打包的多签
-    /// @param pos 要读取的多签index.
-    function signatureSplit(bytes memory signatures, uint256 pos)
-        internal
-        pure
-        returns (
-            uint8 v,
-            bytes32 r,
-            bytes32 s
-        )
-    {
-        // 签名的格式：{bytes32 r}{bytes32 s}{uint8 v}
+
+    /// split a single signature from a packed signature.
+    /// @param signatures Packed signatures.
+    /// @param pos Index of the multisig.
+    function signatureSplit(
+        bytes memory signatures,
+        uint256 pos
+    ) internal pure returns (uint8 v, bytes32 r, bytes32 s) {
+        // signature format: {bytes32 r}{bytes32 s}{uint8 v}
         assembly {
             let signaturePos := mul(0x41, pos)
             r := mload(add(signatures, add(signaturePos, 0x20)))
@@ -123,13 +146,13 @@ contract MultisigWallet {
         }
     }
 
-    /// @dev 编码交易数据
-    /// @param to 目标合约地址
-    /// @param value msg.value，支付的以太坊
+    /// @dev hash transaction data
+    /// @param to target contract's address
+    /// @param value msg.value eth to be paid
     /// @param data calldata
-    /// @param _nonce 交易的nonce.
-    /// @param chainid 链id
-    /// @return 交易哈希bytes.
+    /// @param _nonce nonce of the transaction
+    /// @param chainid chainid
+    /// @return bytes of transaction hash
     function encodeTransactionData(
         address to,
         uint256 value,
@@ -137,16 +160,9 @@ contract MultisigWallet {
         uint256 _nonce,
         uint256 chainid
     ) public pure returns (bytes32) {
-        bytes32 safeTxHash =
-            keccak256(
-                abi.encode(
-                    to,
-                    value,
-                    keccak256(data),
-                    _nonce,
-                    chainid
-                )
-            );
+        bytes32 safeTxHash = keccak256(
+            abi.encode(to, value, keccak256(data), _nonce, chainid)
+        );
         return safeTxHash;
     }
 }
