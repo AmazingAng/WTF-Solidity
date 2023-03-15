@@ -352,7 +352,7 @@ contract ERC4626 is ERC20, IERC4626 {
         _burn(owner, shares);
         _asset.transfer(receiver, assets);
 
-        // 释放 Withdraw 函数
+        // 释放 Withdraw 事件
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
     }
 
@@ -374,7 +374,7 @@ contract ERC4626 is ERC20, IERC4626 {
         _burn(owner, shares);
         _asset.transfer(receiver, assets);
 
-        // 释放 Withdraw 函数        
+        // 释放 Withdraw 事件       
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
     }
 
@@ -424,7 +424,7 @@ contract ERC4626 is ERC20, IERC4626 {
     }
 
     /*//////////////////////////////////////////////////////////////
-                     DEPOSIT/WITHDRAWAL LIMIT LOGIC
+                     存款/提款限额逻辑
     //////////////////////////////////////////////////////////////*/
     /** @dev See {IERC4626-maxDeposit}. */
     function maxDeposit(address) public view virtual returns (uint256) {
@@ -450,19 +450,29 @@ contract ERC4626 is ERC20, IERC4626 {
 
 ## `Remix`演示
 
+**注意:** 以下运行示例使用了remix中第二个账户,即`0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2`, 来部署合约, 调用合约方法.
+
 1. 部署 `ERC20` 代币合约，将代币名称和符号均设为 `WTF`，并给自己铸造 `10000` 代币。
+![](./img/51-2-1.png)
+![](./img/51-2-2.png)
 
 2. 部署 `ERC4626` 代币合约，将基础资产的合约地址设为 `WTF` 的地址，名称和符号均设为 `vWTF`。
+![](./img/51-3.png)
 
 3. 调用 `ERC20` 合约的 `approve()` 函数，将代币授权给 `ERC4626` 合约。
+![](./img/51-4.png)
 
 4. 调用 `ERC4626` 合约的 `deposit()` 函数，存款 `1000` 枚代币。然后调用 `balanceOf()` 函数，查看自己的金库份额变为 `1000`。
+![](./img/51-5.png)
 
 5. 调用 `ERC4626` 合约的 `mint()` 函数，存款 `1000` 枚代币。然后调用 `balanceOf()` 函数查看自己的金库份额变为 `2000`。
+![](./img/51-6.png)
 
 6. 调用 `ERC4626` 合约的 `withdraw()` 函数，取款 `1000` 枚代币。然后调用 `balanceOf()` 函数查看自己的金库份额变为 `1000`。
+![](./img/51-7.png)
 
 7. 调用 `ERC4626` 合约的 `redeem()` 函数，取款 `1000` 枚代币。然后调用 `balanceOf()` 函数查看自己的金库份额变为 `0`。
+![](./img/51-8.png)
 
 ## 总结
 
