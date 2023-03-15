@@ -19,6 +19,8 @@ All code and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSoli
 
 -----
 
+in this lesson, we'll introduce Upgradeable Contract, the sample contracts used for teaching are simplified from `OpenZeppelin` contracts, they may pose security issues, DO NOT USE IN PRODUCTION.
+
 ## Upgradeable Contract
 
 If you understand proxy contracts, it is easy to understand upgradeable contracts. It is a proxy contract that can change the logic contract.
@@ -31,7 +33,7 @@ Below we implement a simple upgradeable contract that includes 3 contracts: the 
 
 ### Proxy Contract
 
-This proxy contract is simpler than that in [Lecture 46](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md). We didn't use inline assembly in its `fallback()` function, but only used `implementation.delegatecall(msg.data);`. Therefore, the callback function does not return a value, but it is sufficient for teaching purposes.
+This proxy contract is simpler than that in [Lecture 46](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/46_ProxyContract_en/readme.md). We didn't use inline assembly in its `fallback()` function, but only used `implementation.delegatecall(msg.data);`. Therefore, the callback function does not return a value, but it is sufficient for teaching purposes.
 
 It contains 3 variables:
 - `implementation`: The logic contract address.
@@ -42,32 +44,37 @@ It contains `3` functions:
 
 - Constructor: Initializes admin and logic contract addresses.
 - `fallback()`: Callback function, delegates the call to the logic contract.
-- `upgrade()`: Upgrade function, changes the logic contract address, can only be called by `admin`.
+- `upgrade()`: Upgrade function, changes the logic contract's address, can only be called by `admin`.
 
 ```solidity
 // SPDX-License-Identifier: MIT
 // wtf.academy
 pragma solidity ^0.8.4;
 
-// 简单的可升级合约，管理员可以通过升级函数更改逻辑合约地址，从而改变合约的逻辑。
-// 教学演示用，不要用在生产环境
+// simple upgradeable contract, the admin could change the logic contract's address by calling upgrade function, thus change the contract logic
+// FOR TEACHING PURPOSE ONLY, DO NOT USE IN PRODUCTION
 contract SimpleUpgrade {
-    address public implementation; // 逻辑合约地址
-    address public admin; // admin地址
-    string public words; // 字符串，可以通过逻辑合约的函数改变
+    // logic contract's address
+    address public implementation; 
 
-    // 构造函数，初始化admin和逻辑合约地址
+    // admin address
+    address public admin;
+
+    // string variable, could be changed by logic contract's function
+    string public words; 
+
+    // constructor, initializing admin address and logic contract's address
     constructor(address _implementation){
         admin = msg.sender;
         implementation = _implementation;
     }
 
-    // fallback函数，将调用委托给逻辑合约
+    // fallback function, delegates function call to logic contract
     fallback() external payable {
         (bool success, bytes memory data) = implementation.delegatecall(msg.data);
     }
 
-    // 升级函数，改变逻辑合约地址，只能由admin调用
+    // upgrade function, changes the logic contract's address, can only by called by admin
     function upgrade(address newImplementation) external {
         require(msg.sender == admin);
         implementation = newImplementation;
@@ -84,8 +91,9 @@ This logic contract includes `3` state variables and is consistent with the prox
 contract Logic1 {
     // State variables consistent with Proxy contract to prevent slot conflicts
     address public implementation; 
-    address public admin; 
-    string public words; // String that can be changed through the function of the logic contract 
+    address public admin;
+    // String that can be changed through the function of the logic contract  
+    string public words; 
 
     // Change state variables in Proxy contract, selector: 0xc2985578
     function foo() public {
@@ -103,10 +111,11 @@ This logic contract contains `3` state variables, consistent with the proxy cont
 contract Logic2 {
     // State variables consistent with proxy contract to prevent slot collisions
     address public implementation; 
-    address public admin; 
-    string public words; // A string that can be modified through the function in the Logic contract
+    address public admin;
+    // String that can be changed through the function of the logic contract  
+    string public words; 
 
-    // Modify state variables in the proxy contract. Selector: 0xc2985578
+    // Change state variables in Proxy contract, selector: 0xc2985578
     function foo() public{
         words = "new";
     }
