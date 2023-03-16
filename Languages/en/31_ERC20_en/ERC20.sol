@@ -11,20 +11,20 @@ contract ERC20 is IERC20 {
 
     mapping(address => mapping(address => uint256)) public override allowance;
 
-    uint256 public override totalSupply;   // 代币总供给
+    uint256 public override totalSupply;   // total supply of the token
 
-    string public name;   // 名称
-    string public symbol;  // 符号
+    string public name;   // the name of the token
+    string public symbol;  // the symbol of the token
     
-    uint8 public decimals = 18; // 小数位数
+    uint8 public decimals = 18; // decimal places of the token
 
-    // @dev 在合约部署的时候实现合约名称和符号
+    // @dev Sets the values for name and symbol during deployment.
     constructor(string memory name_, string memory symbol_){
         name = name_;
         symbol = symbol_;
     }
 
-    // @dev 实现`transfer`函数，代币转账逻辑
+    // @dev Implements the `transfer` function, which handles token transfers logic.
     function transfer(address recipient, uint amount) external override returns (bool) {
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;
@@ -32,14 +32,14 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    // @dev 实现 `approve` 函数, 代币授权逻辑
+    // @dev Implements `approve` function, which handles token authorization logic.
     function approve(address spender, uint amount) external override returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
     }
 
-    // @dev 实现`transferFrom`函数，代币授权转账逻辑
+    // @dev Implements `transferFrom` function，which handles token authorized transfer logic.
     function transferFrom(
         address sender,
         address recipient,
@@ -52,14 +52,14 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    // @dev 铸造代币，从 `0` 地址转账给 调用者地址
+    // @dev Creates tokens, transfers `amouont` of tokens from `0` address to caller's address.
     function mint(uint amount) external {
         balanceOf[msg.sender] += amount;
         totalSupply += amount;
         emit Transfer(address(0), msg.sender, amount);
     }
 
-    // @dev 销毁代币，从 调用者地址 转账给  `0` 地址
+    // @dev Destroys tokens，transfers `amouont` of tokens from caller's address to `0` address.
     function burn(uint amount) external {
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;
