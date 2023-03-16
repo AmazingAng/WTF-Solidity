@@ -10,13 +10,13 @@ tags:
 
 # WTF Solidity Quick Start: 31. ERC20
 
-I'm currently relearning Solidity to reinforce my understanding of the details and to write a "WTF Solidity Primers" for beginners (programming experts can find other tutorials), updated weekly with 1-3 lectures.
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
-Don't forget to follow me on Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-Join the WTF Scientists community, where you can find a way to add a WeChat group: [link](https://discord.gg/5akcruXrsk).
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-All code and tutorials are open-source on GitHub (1024 stars for course certification, 2048 stars for community NFTs): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
@@ -33,11 +33,11 @@ ERC20 is a token standard on Ethereum, which originated from the `EIP20` propose
 - Token Information (optional): name, symbol, decimal
 
 ## IERC20
-IERC20 is the interface contract of the ERC20 token standard, which specifies the functions and events that ERC20 tokens need to implement. The reason for defining an interface is that with the standard, there are universal function names, input and output parameters for all ERC20 tokens. In the interface functions, only the function name, input parameters, and output parameters need to be defined, and it does not matter how the function is implemented internally. Therefore, the functions are divided into two contents: internal implementation and external interface, focusing on implementation and shared data through agreement. This is why we need two files `ERC20.sol` and `IERC20.sol` to implement a contract.
+`IERC20` is the interface contract of the `ERC20` token standard, which specifies the functions and events that `ERC20` tokens need to implement. The reason for defining an interface is that with the standard, there are universal function names, input and output parameters for all `ERC20` tokens. In the interface functions, only the function name, input parameters, and output parameters need to be defined, and it does not matter how the function is implemented internally. Therefore, the functions are divided into two contents: internal implementation and external interface, focusing on implementation and agreement of shared data between interfaces. This is why we need two files `ERC20.sol` and `IERC20.sol` to implement a contract.
 
 ### Event
 
-The `IERC20` defines two events: the `Transfer` event and the `Approval` event, which are emitted during token transfers and approvals, respectively.
+The `IERC20` defines `2` events: the `Transfer` event and the `Approval` event, which are emitted during token transfers and approvals, respectively.
 
 ```solidity
     /**
@@ -58,7 +58,7 @@ The `IERC20` defines two events: the `Transfer` event and the `Approval` event, 
 
 ```solidity
     /**
-     * @dev 返回代币总供给.
+     * @dev Returns the total amount of tokens.
      */
     function totalSupply() external view returns (uint256);
 ```
@@ -67,7 +67,7 @@ The `IERC20` defines two events: the `Transfer` event and the `Approval` event, 
 
 ```solidity
     /**
-     * @dev 返回账户`account`所持有的代币数.
+     * @dev Returns the amount of tokens owned by `account`.
      */
     function balanceOf(address account) external view returns (uint256);
 ```
@@ -78,7 +78,7 @@ The `IERC20` defines two events: the `Transfer` event and the `Approval` event, 
     /**
      * @dev Transfers `amount` tokens from the caller's account to the recipient `to`.
      *
-     * Returns a boolean value indicating whether the operation succeeded.
+     * Returns a boolean value indicating whether the operation succeeded or not.
      *
      * Emits a {Transfer} event.
      */
@@ -89,9 +89,9 @@ The `allowance()` function returns the authorized amount.
 
 ```solidity
     /**
-     * @dev 返回`owner`账户授权给`spender`账户的额度，默认为0。
+     * @dev Returns the amount authorized by the `owner` account to the `spender` account, default is 0.
      *
-     * 当{approve} 或 {transferFrom} 被调用时，`allowance`会改变.
+     * When {approve} or {transferFrom} is invoked，`allowance` will be changed.
      */
     function allowance(address owner, address spender) external view returns (uint256);
 ```
@@ -116,7 +116,7 @@ function approve(address spender, uint256 amount) external returns (bool);
  * @dev Transfer `amount` of tokens from `from` account to `to` account, subject to the caller's
  * allowance. The caller must have allowance for `from` account balance.
  *
- * Returns `true` if the operation was successful.
+ * Returns `true` if the operation is successful.
  *
  * Emits a {Transfer} event.
  */
@@ -129,22 +129,25 @@ function transferFrom(
 
 ## Implementation of ERC20
 
-Now we will write an `ERC20` contract and implement the functions defined in `IERC20` interface.
+Now we will write an `ERC20` contract and implement the functions defined in the `IERC20` interface.
 
 ### State Variables
-We need state variables to record account balances, allowances, and token information. Among them, `balanceOf`, `allowance`, and `totalSupply` are of type `public`, which will automatically generate a same-name `getter` function, implementing `balanceOf()`, `allowance()`, and `totalSupply()` functions defined in `IERC20`. `name`, `symbol`, and `decimals` correspond to the name, symbol, and decimal places of tokens.
+We need state variables to record account balances, allowances, and token information. Among them, `balanceOf`, `allowance`, and `totalSupply` are of type `public`, which will automatically generate a same-name `getter` function, implementing `balanceOf()`, `allowance()` and `totalSupply()` functions defined in `IERC20`. `name`, `symbol`, and `decimals` correspond to the name, symbol, and decimal places of tokens.
 
 **Note**: adding `override` modifier to `public` variables will override the same-name `getter` function inherited from the parent contract, such as `balanceOf()` function in `IERC20`.
 
-This is a contract written in Solidity language for a token. 
+```solidity
+    mapping(address => uint256) public override balanceOf;
 
-The code defines two mappings which are used to keep track of the balance of each address that holds this token and the allowance for a certain address from another address. 
+    mapping(address => mapping(address => uint256)) public override allowance;
 
-The total supply of the token is also defined as a public variable. 
+    uint256 public override totalSupply;   // total supply of the token
 
-Additionally, the name and symbol of the token are also defined as public variables. 
-
-Lastly, the decimals variable is set to 18, which means that the token has 18 decimal places.
+    string public name;   // the name of the token
+    string public symbol;  // the symbol of the token
+    
+    uint8 public decimals = 18; // decimal places of the token
+```
 
 ### Functions
 - Constructor Function: Initializes the token name and symbol.
@@ -156,7 +159,7 @@ Lastly, the decimals variable is set to 18, which means that the token has 18 de
     }
 ```
 
-- `transfer()` function: Implements the `transfer` function in `IERC20`, which handles token transfers. The caller deducts `amount` tokens and the recipient receives the corresponding tokens. Shiba Inu Coin will modify this function to include logic such as taxation, dividends, lottery, etc.
+- `transfer()` function: Implements the `transfer` function in `IERC20`, which handles token transfers. The caller deducts `amount` tokens and the recipient receives the corresponding tokens. Some coins will modify this function to include logic such as taxation, dividends, lottery, etc.
 
 ```solidity
     function transfer(address recipient, uint amount) external override returns (bool) {
@@ -177,11 +180,21 @@ Lastly, the decimals variable is set to 18, which means that the token has 18 de
     }
 ```
 
-- `transferFrom()` function: Implements the `transferFrom` function in `IERC20`, which is the logic for authorized transfer. The authorized party transfers `amount` of tokens from sender `sender` to recipient `recipient`.
+- `transferFrom()` function: Implements the `transferFrom` function in `IERC20`, which is the logic for authorized transfer. The authorized party transfers `amount` of tokens from `sender` to `recipient`.
 
-This function transfers tokens from one address to another, given that the sender has previously granted permission to the caller to do so. The `sender` parameter specifies the address to transfer from, `recipient` specifies the address to receive the tokens, and `amount` specifies the amount of tokens to transfer. 
-
-The function first subtracts the `amount` from the allowance granted by the `sender` to the caller `msg.sender`. Then, it subtracts the `amount` from the `balanceOf` the `sender`, and adds it to the `balanceOf` the `recipient`. Finally, it emits a `Transfer` event to indicate the transfer, and returns `true` to signify that the transfer was successful.
+```solidity
+    function transferFrom(
+        address sender,
+        address recipient,
+        uint amount
+    ) external override returns (bool) {
+        allowance[sender][msg.sender] -= amount;
+        balanceOf[sender] -= amount;
+        balanceOf[recipient] += amount;
+        emit Transfer(sender, recipient, amount);
+        return true;
+    }
+```
 
 - `mint()` function: Token minting function, not included in the `IERC20` standard. For the sake of the tutorial, anyone can mint any amount of tokens. In actual applications, permission management will be added, and only the `owner` can mint tokens.
 
@@ -213,7 +226,7 @@ Compile the `ERC20` contract in `Remix`, enter the constructor's parameters in t
 
 Now, we have created the `WTF` token. We need to run the `mint()` function to mint some tokens for ourselves. Open up the `ERC20` contract in the `Deployed Contract` section, enter `100` in the `mint` function area, and click the `mint` button to mint `100` `WTF` tokens for ourselves.
 
-You can click on the Debug button on the right to view the logs below.
+You can click on the Debug button on the right to view the logs like below.
 
 There are four key pieces of information:
 - The `Transfer` event
@@ -223,12 +236,12 @@ There are four key pieces of information:
 
 ![Minting tokens](./img/31-2.png)
 
-We use the `balanceOf()` function to check the account balance. By inputting our current account, we can see the balance change to `100` and the minting is successful.
+We use the `balanceOf()` function to check the account balance. By inputting our current account, we can see the balance of our account is `100` which means minting is successful.
 
-The account information is shown on the left side of the image, and the details of the function execution are indicated on the right side.
+The account information is shown on the left like below image, and the details of the function execution are indicated on the right side.
 
 ![Check Balance](./img/31-3.png)
 
 ## Summary
 
-In this lesson, we learned about the ERC20 standard and its implementation on the Ethereum network, and issued our own test token. The ERC20 token standard proposed at the end of 2015 greatly lowered the threshold for issuing tokens on the Ethereum network and ushered in the era of ICOs. When investing, carefully read the project's token contract to effectively avoid risks and increase investment success rate.
+In this lesson, we learned about the `ERC20` standard and its implementation on the Ethereum network, and issued our own test token. The `ERC20` token standard proposed at the end of 2015 greatly lowered the threshold for issuing tokens on the Ethereum network and ushered in the era of `ICO`. When investing, carefully read the project's token contract to effectively avoid risks and increase investment success rate.
