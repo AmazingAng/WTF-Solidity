@@ -1,4 +1,3 @@
-
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
@@ -6,11 +5,12 @@ import {IERC4626} from "./IERC4626.sol";
 import {ERC20, IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 /**
- * @dev ERC4626 "代币化金库标准"合约，仅供教学使用，不要用于生产
+ * @dev ERC4626 "Tokenized Vaults Standard" contract. 
+ * FOR TEACHING PURPOSE ONLY, DO NOT USE IN PRODUCTION
  */
 contract ERC4626 is ERC20, IERC4626 {
     /*//////////////////////////////////////////////////////////////
-                    状态变量
+                            state variables
     //////////////////////////////////////////////////////////////*/
     ERC20 private immutable _asset; // 
     uint8 private immutable _decimals;
@@ -38,31 +38,31 @@ contract ERC4626 is ERC20, IERC4626 {
     }
 
     /*//////////////////////////////////////////////////////////////
-                        存款/提款逻辑
+                        deposit/withdrawal logic
     //////////////////////////////////////////////////////////////*/
     /** @dev See {IERC4626-deposit}. */
     function deposit(uint256 assets, address receiver) public virtual returns (uint256 shares) {
-        // 利用 previewDeposit() 计算将获得的金库份额
+        // use previewDeposit() to calculate vault share to be retained
         shares = previewDeposit(assets);
-
-        // 先 transfer 后 mint，防止重入
+        
+        // transfer first then mint, prevent reentrancy attack
         _asset.transferFrom(msg.sender, address(this), assets);
         _mint(receiver, shares);
 
-        // 释放 Deposit 事件
+        // emit Deposit event
         emit Deposit(msg.sender, receiver, assets, shares);
     }
 
     /** @dev See {IERC4626-mint}. */
     function mint(uint256 shares, address receiver) public virtual returns (uint256 assets) {
-        // 利用 previewMint() 计算需要存款的基础资产数额
+        // use previewDeposit() to calculate amount of underlyting asset that needs to be deposited
         assets = previewMint(shares);
 
-        // 先 transfer 后 mint，防止重入
+        // transfer first then mint, prevent reentrancy attack
         _asset.transferFrom(msg.sender, address(this), assets);
         _mint(receiver, shares);
 
-        // 释放 Deposit 事件
+        // emit Deposit event
         emit Deposit(msg.sender, receiver, assets, shares);
 
     }
@@ -73,19 +73,19 @@ contract ERC4626 is ERC20, IERC4626 {
         address receiver,
         address owner
     ) public virtual returns (uint256 shares) {
-        // 利用 previewWithdraw() 计算将销毁的金库份额
+        // use previewWithdraw() to calculate vault share that will be burnt
         shares = previewWithdraw(assets);
 
-        // 如果调用者不是 owner，则检查并更新授权
+        // if caller is not owner,  check and update allownance
         if (msg.sender != owner) {
             _spendAllowance(owner, msg.sender, shares);
         }
 
-        // 先销毁后 transfer，防止重入
+        // burn first then transfer, prevent reentrancy attack
         _burn(owner, shares);
         _asset.transfer(receiver, assets);
 
-        // 释放 Withdraw 函数
+        // emit Withdraw event
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
     }
 
@@ -95,44 +95,44 @@ contract ERC4626 is ERC20, IERC4626 {
         address receiver,
         address owner
     ) public virtual returns (uint256 assets) {
-        // 利用 previewRedeem() 计算能赎回的基础资产数额
+        // use previewRedeem() to calculate the amount of underlying asset that can be redeemed
         assets = previewRedeem(shares);
 
-        // 如果调用者不是 owner，则检查并更新授权
+        // if caller is not owner, check and update allownance
         if (msg.sender != owner) {
             _spendAllowance(owner, msg.sender, shares);
         }
 
-        // 先销毁后 transfer，防止重入
+        // burn first then transfer, prevent reentrancy attack
         _burn(owner, shares);
         _asset.transfer(receiver, assets);
 
-        // 释放 Withdraw 函数        
+        // emit Withdraw event
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
     }
 
     /*//////////////////////////////////////////////////////////////
-                            会计逻辑
+                            accounting logic
     //////////////////////////////////////////////////////////////*/
     /** @dev See {IERC4626-totalAssets}. */
     function totalAssets() public view virtual returns (uint256){
-        // 返回合约中基础资产持仓
+        // returns balance of underlying asset for this contract
         return _asset.balanceOf(address(this));
     }
 
     /** @dev See {IERC4626-convertToShares}. */
     function convertToShares(uint256 assets) public view virtual returns (uint256) {
         uint256 supply = totalSupply();
-        // 如果 supply 为 0，那么 1:1 铸造金库份额
-        // 如果 supply 不为0，那么按比例铸造
+        // if supply is 0, then mint vault share at 1:1 ratio
+        // if supply is not 0, then mint vault share at actual ratio
         return supply == 0 ? assets : assets * supply / totalAssets();
     }
 
     /** @dev See {IERC4626-convertToAssets}. */
     function convertToAssets(uint256 shares) public view virtual returns (uint256) {
         uint256 supply = totalSupply();
-        // 如果 supply 为 0，那么 1:1 赎回基础资产
-        // 如果 supply 不为0，那么按比例赎回
+        // if supply is 0, then redeem underlying asset at 1:1 ratio
+        // if supply is not 0, then redeem underlying asset at actual ratio
         return supply == 0 ? shares : shares * totalAssets() / supply;
     }
 
