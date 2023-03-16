@@ -3,54 +3,55 @@
 pragma solidity ^0.8.4;
 
 /**
- * @dev Proxy合约的所有调用都通过`delegatecall`操作码委托给另一个合约执行。后者被称为逻辑合约（Implementation）。
+ * @dev all invocations through Proxy contract are delegated to another contract, which is called logic contract(Implementation), by `delegatecall` opcode. 
  *
- * 委托调用的返回值，会直接返回给Proxy的调用者
+ * the return value of delegation call is directly returned to the caller of proxy
  */
 contract Proxy {
-    address public implementation; // 逻辑合约地址。implementation合约同一个位置的状态变量类型必须和Proxy合约的相同，不然会报错。
+    // Address of the logic contract. The data type of the implementation contract has to be the same as that of the Proxy contract at the same position or an error will occur.
+    address public implementation; 
 
     /**
-     * @dev 初始化逻辑合约地址
+     * @dev Initializes the address of the logic contract.
      */
-    constructor(address implementation_){
+    constructor(address implementation_) {
         implementation = implementation_;
     }
 
     /**
-     * @dev 回调函数，调用`_delegate()`函数将本合约的调用委托给 `implementation` 合约
+     * @dev fallback function, delegates invocations of current contract to `implementation` contract
+     * with inline assembly, it gives fallback function a return value
      */
     fallback() external payable {
-        _delegate();
-    }
-
-    /**
-     * @dev 将调用委托给逻辑合约运行
-     */
-    function _delegate() internal {
+        address _implementation = implementation;
         assembly {
-            // Copy msg.data. We take full control of memory in this inline assembly
-            // block because it will not return to Solidity code. We overwrite the
-            // 读取位置为0的storage，也就是implementation地址。
-            let _implementation := sload(0)
-
+            // copy msg.data to memory
+            // the parameters of opcode calldatacopy: start position of memory, start position of calldata, length of calldata
             calldatacopy(0, 0, calldatasize())
 
-            // 利用delegatecall调用implementation合约
-            // delegatecall操作码的参数分别为：gas, 目标合约地址，input mem起始位置，input mem长度，output area mem起始位置，output area mem长度
-            // output area起始位置和长度位置，所以设为0
-            // delegatecall成功返回1，失败返回0
-            let result := delegatecall(gas(), _implementation, 0, calldatasize(), 0, 0)
+            // use delegatecall to call implementation contract
+            // the parameters of opcode delegatecall: gas, target contract address, start position of input memory, length of input memory, start position of output memory, length of output memory
+            // set start position of output memory and length of output memory to 0
+            // delegatecall returns 1 if success, 0 if fail
+            let result := delegatecall(
+                gas(),
+                _implementation,
+                0,
+                calldatasize(),
+                0,
+                0
+            )
 
-            // 将起始位置为0，长度为returndatasize()的returndata复制到mem位置0
+            // copy returndata to memory
+            // the parameters of opcode returndata: start position of memory, start position of returndata, length of retundata
             returndatacopy(0, 0, returndatasize())
 
             switch result
-            // 如果delegate call失败，revert
+            // if delegate call fails, then revert
             case 0 {
                 revert(0, returndatasize())
             }
-            // 如果delegate call成功，返回mem起始位置为0，长度为returndatasize()的数据（格式为bytes）
+            // if delegate call succeeds, then return memory data(as bytes format) starting from 0 with length of returndatasize()
             default {
                 return(0, returndatasize())
             }
@@ -59,15 +60,15 @@ contract Proxy {
 }
 
 /**
- * @dev 逻辑合约，执行被委托的调用
+ * @dev Logic contract, executes delegated calls
  */
 contract Logic {
-    address public implementation; // 与Proxy保持一致，防止插槽冲突
-    uint public x = 99; 
-    event CallSuccess();
+    address public implementation; // Keep consistency with the Proxy to prevent slot collision
+    uint public x = 99;
+    event CallSuccess(); // Event emitted on successful function call
 
-    // 这个函数会释放LogicCalled并返回一个uint。
-    // 函数selector: 0xd09de08a
+    // This function emits CallSuccess event and returns a uint
+    // Function selector: 0xd09de08a
     function increment() external returns(uint) {
         emit CallSuccess();
         return x + 1;
@@ -75,17 +76,17 @@ contract Logic {
 }
 
 /**
- * @dev Caller合约，调用代理合约，并获取执行结果
+ * @dev Caller contract, call the proxy contract and get the result of execution
  */
 contract Caller{
-    address public proxy; // 代理合约地址
+    address public proxy; // proxy contract address
 
     constructor(address proxy_){
         proxy = proxy_;
     }
 
-    // 通过代理合约调用 increase()函数
-    function increase() external returns(uint) {
+    // Call the increment() function using the proxy contract
+    function increment() external returns(uint) {
         ( , bytes memory data) = proxy.call(abi.encodeWithSignature("increment()"));
         return abi.decode(data,(uint));
     }
