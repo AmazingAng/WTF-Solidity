@@ -88,7 +88,7 @@ contract UUPS1{
     }
 
     // 升级函数，改变逻辑合约地址，只能由admin调用。选择器：0x0900f010
-    // UUPS中，逻辑函数中必须包含升级函数，不然就不能再升级了。
+    // UUPS中，逻辑合约中必须包含升级函数，不然就不能再升级了。
     function upgrade(address newImplementation) external {
         require(msg.sender == admin);
         implementation = newImplementation;
@@ -108,7 +108,7 @@ contract UUPS2{
     }
 
     // 升级函数，改变逻辑合约地址，只能由admin调用。选择器：0x0900f010
-    // UUPS中，逻辑函数中必须包含升级函数，不然就不能再升级了。
+    // UUPS中，逻辑合约中必须包含升级函数，不然就不能再升级了。
     function upgrade(address newImplementation) external {
         require(msg.sender == admin);
         implementation = newImplementation;
