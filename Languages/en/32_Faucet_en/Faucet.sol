@@ -10,19 +10,19 @@ contract ERC20 is IERC20 {
 
     mapping(address => mapping(address => uint256)) public override allowance;
 
-    uint256 public override totalSupply;   // 代币总供给
+    uint256 public override totalSupply;   // total supply of the token
 
-    string public name;   // 名称
-    string public symbol;  // 符号
+    string public name;   // the name of the token
+    string public symbol;  // the symbol of the token
     
-    uint8 public decimals = 18; // 小数位数
-
+    uint8 public decimals = 18; // decimal places of the token
+    
     constructor(string memory name_, string memory symbol_){
         name = name_;
         symbol = symbol_;
     }
 
-    // @dev 实现`transfer`函数，代币转账逻辑
+    // @dev Implements the `transfer` function, which handles token transfers logic.
     function transfer(address recipient, uint amount) external override returns (bool) {
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;
@@ -30,14 +30,14 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    // @dev 实现 `approve` 函数, 代币授权逻辑
+    // @dev Implements `approve` function, which handles token authorization logic.
     function approve(address spender, uint amount) external override returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
     }
 
-    // @dev 实现`transferFrom`函数，代币授权转账逻辑
+    // @dev Implements `transferFrom` function，which handles token authorized transfer logic.
     function transferFrom(
         address sender,
         address recipient,
@@ -50,14 +50,14 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    // @dev 铸造代币，从 `0` 地址转账给 调用者地址
+    // @dev Creates tokens, transfers `amouont` of tokens from `0` address to caller's address.
     function mint(uint amount) external {
         balanceOf[msg.sender] += amount;
         totalSupply += amount;
         emit Transfer(address(0), msg.sender, amount);
     }
 
-    // @dev 销毁代币，从 调用者地址 转账给  `0` 地址
+    // @dev Destroys tokens，transfers `amouont` of tokens from caller's address to `0` address.
     function burn(uint amount) external {
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;
@@ -66,30 +66,30 @@ contract ERC20 is IERC20 {
 
 }
 
-// ERC20代币的水龙头合约
+// The faucet contract of the ERC20 token
 contract Faucet {
 
-    uint256 public amountAllowed = 100; // 每次领 100单位代币
-    address public tokenContract;   // token合约地址
-    mapping(address => bool) public requestedAddress;   // 记录领取过代币的地址
+    uint256 public amountAllowed = 100; // the allowed amount for each request is 100
+    address public tokenContract;   // contract address of the token
+    mapping(address => bool) public requestedAddress;   // a map contains requested address
 
-    // SendToken事件    
+    // Event SendToken
     event SendToken(address indexed Receiver, uint256 indexed Amount); 
 
-    // 部署时设定ERC2代币合约
+    // Set the ERC20'S contract address during deployment
     constructor(address _tokenContract) {
         tokenContract = _tokenContract; // set token contract
     }
 
-    // 用户领取代币函数
+    // Function for users to request tokens
     function requestTokens() external {
-        require(!requestedAddress[msg.sender], "Can't Request Multiple Times!"); // 每个地址只能领一次
-        IERC20 token = IERC20(tokenContract); // 创建IERC20合约对象
-        require(token.balanceOf(address(this)) >= amountAllowed, "Faucet Empty!"); // 水龙头空了
+        require(requestedAddress[msg.sender] == false, "Can't Request Multiple Times!"); // Only one request per address
+        IERC20 token = IERC20(tokenContract); // Create an IERC20 contract object
+        require(token.balanceOf(address(this)) >= amountAllowed, "Faucet Empty!"); // Faucet is empty
 
-        token.transfer(msg.sender, amountAllowed); // 发送token
-        requestedAddress[msg.sender] = true; // 记录领取地址 
+        token.transfer(msg.sender, amountAllowed); // Send token
+        requestedAddress[msg.sender] = true; // Record the requested address
         
-        emit SendToken(msg.sender, amountAllowed); // 释放SendToken事件
+        emit SendToken(msg.sender, amountAllowed); // Emit SendToken event
     }
 }

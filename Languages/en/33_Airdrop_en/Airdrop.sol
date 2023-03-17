@@ -4,49 +4,50 @@ pragma solidity ^0.8.4;
 
 import "./IERC20.sol"; //import IERC20
 
-/// @notice 向多个地址转账ERC20代币
+/// @notice Transfer ERC20 tokens to multiple addresses
 contract Airdrop {
-    /// @notice 向多个地址转账ERC20代币，使用前需要先授权
+    /// @notice Transfer ERC20 tokens to multiple addresses, authorization is required before use
     ///
-    /// @param _token 转账的ERC20代币地址
-    /// @param _addresses 空投地址数组
-    /// @param _amounts 代币数量数组（每个地址的空投数量）
+    /// @param _token The address of ERC20 token for transfer
+    /// @param _addresses The array of airdrop addresses
+    /// @param _amounts The array of amount of tokens (airdrop amount for each address)
     function multiTransferToken(
         address _token,
         address[] calldata _addresses,
         uint256[] calldata _amounts
         ) external {
-        // 检查：_addresses和_amounts数组的长度相等
+        // Check: The length of _addresses array should be equal to the length of _amounts array
         require(_addresses.length == _amounts.length, "Lengths of Addresses and Amounts NOT EQUAL");
-        IERC20 token = IERC20(_token); // 声明IERC合约变量
-        uint _amountSum = getSum(_amounts); // 计算空投代币总量
-        // 检查：授权代币数量 > 空投代币总量
-        require(token.allowance(msg.sender, address(this)) > _amountSum, "Need Approve ERC20 token");
+        IERC20 token = IERC20(_token); // Declare IERC contract variable
+        uint _amountSum = getSum(_amounts); // Calculate the total amount of airdropped tokens
+        // Check: The authorized amount of tokens should be greater than or equal to the total amount of airdropped tokens
+        require(token.allowance(msg.sender, address(this)) >= _amountSum, "Need Approve ERC20 token");
         
-        // for循环，利用transferFrom函数发送空投
+        // for loop, use transferFrom function to send airdrops
         for (uint256 i; i < _addresses.length; i++) {
             token.transferFrom(msg.sender, _addresses[i], _amounts[i]);
         }
     }
 
-    /// 向多个地址转账ETH
+    /// Transfer ETH to multiple addresses
     function multiTransferETH(
         address payable[] calldata _addresses,
         uint256[] calldata _amounts
     ) public payable {
-        // 检查：_addresses和_amounts数组的长度相等
+        // Check: _addresses and _amounts arrays should have the same length
         require(_addresses.length == _amounts.length, "Lengths of Addresses and Amounts NOT EQUAL");
-        uint _amountSum = getSum(_amounts); // 计算空投ETH总量
-        // 检查转入ETH等于空投总量
+        // Calculate total amount of ETH to be airdropped
+        uint _amountSum = getSum(_amounts);
+        // Check: transferred ETH should equal total amount
         require(msg.value == _amountSum, "Transfer amount error");
-        // for循环，利用transfer函数发送ETH
+        // Use a for loop to transfer ETH using transfer function
         for (uint256 i = 0; i < _addresses.length; i++) {
             _addresses[i].transfer(_amounts[i]);
         }
     }
 
 
-    // 数组求和函数
+    // sum function for arrays
     function getSum(uint256[] calldata _arr) public pure returns(uint sum)
     {
         for(uint i = 0; i < _arr.length; i++)
@@ -55,26 +56,26 @@ contract Airdrop {
 }
 
 
-// ERC20代币合约
+// The contract of ERC20 token 
 contract ERC20 is IERC20 {
 
     mapping(address => uint256) public override balanceOf;
 
     mapping(address => mapping(address => uint256)) public override allowance;
 
-    uint256 public override totalSupply;   // 代币总供给
+    uint256 public override totalSupply;   // total supply of the token
 
-    string public name;   // 名称
-    string public symbol;  // 符号
+    string public name;   // the name of the token
+    string public symbol;  // the symbol of the token
     
-    uint8 public decimals = 18; // 小数位数
-
+    uint8 public decimals = 18; // decimal places of the token
+    
     constructor(string memory name_, string memory symbol_){
         name = name_;
         symbol = symbol_;
     }
 
-    // @dev 实现`transfer`函数，代币转账逻辑
+    // @dev Implements the `transfer` function, which handles token transfers logic.
     function transfer(address recipient, uint amount) external override returns (bool) {
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;
@@ -82,14 +83,14 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    // @dev 实现 `approve` 函数, 代币授权逻辑
+    // @dev Implements `approve` function, which handles token authorization logic.
     function approve(address spender, uint amount) external override returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
     }
 
-    // @dev 实现`transferFrom`函数，代币授权转账逻辑
+    // @dev Implements `transferFrom` function，which handles token authorized transfer logic.
     function transferFrom(
         address sender,
         address recipient,
@@ -102,14 +103,14 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    // @dev 铸造代币，从 `0` 地址转账给 调用者地址
+    // @dev Creates tokens, transfers `amouont` of tokens from `0` address to caller's address.
     function mint(uint amount) external {
         balanceOf[msg.sender] += amount;
         totalSupply += amount;
         emit Transfer(address(0), msg.sender, amount);
     }
 
-    // @dev 销毁代币，从 调用者地址 转账给  `0` 地址
+    // @dev Destroys tokens，transfers `amouont` of tokens from caller's address to `0` address.
     function burn(uint amount) external {
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;
