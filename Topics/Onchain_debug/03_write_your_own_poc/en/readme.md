@@ -68,7 +68,7 @@ Please see the figure for a full explanation of Skim().
 ![截圖 2023-01-11 下午5 08 07](https://user-images.githubusercontent.com/107821372/211970534-67370756-d99e-4411-9a49-f8476a84bef1.png)
 Image source / [Uniswap V2 Core whitepaper](https://uniswap.org/whitepaper.pdf)
 
-* For more information, you could following bellow the resources
+* For more information, you could following below the resources
   * Uniswap V2 AMM mechanisms: [Smart Contract Programmer](https://www.youtube.com/watch?v=Ar4Ik7Bov0U).
   * Oracle manipulation: [WTFSolidity](https://github.com/WTFAcademy/WTF-Solidity/blob/main/S15_OracleManipulation/readme.md).
 

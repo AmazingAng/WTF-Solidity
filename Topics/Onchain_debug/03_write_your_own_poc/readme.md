@@ -87,7 +87,7 @@ uint256 ETH_Price = UniV2_USDC_Reserve / UniV2_ETH_Reserve;
 
 ## 手把手撰写 PoC - 以 EGD Finance 为例
 
-### Step1: Infomation gathering
+### Step1: Information gathering
 
 当攻击发生时，通常 Twitter 会是安全分析师的主战场，会有各路大佬在 Twitter 上发布自己对于攻击事件的最新发现。
 

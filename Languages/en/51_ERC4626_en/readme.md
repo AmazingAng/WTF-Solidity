@@ -234,7 +234,7 @@ interface IERC4626 is IERC20, IERC20Metadata {
                     deposit/widthdrawal limit logic
     //////////////////////////////////////////////////////////////*/
     /**
-     * @dev retruns the maximum amount of underlying asset that can be deposited in a single transaction for a given user address.
+     * @dev returns the maximum amount of underlying asset that can be deposited in a single transaction for a given user address.
      * - if there is max deposit limit, return value should be a finite value
      * - return value should not be greater than 2 ** 256 - 1 
      * - cannot revert
@@ -242,7 +242,7 @@ interface IERC4626 is IERC20, IERC20Metadata {
     function maxDeposit(address receiver) external view returns (uint256 maxAssets);
 
     /**
-     * @dev retruns the maximum vault amount that can be minted in a single transaction for a given user address.
+     * @dev returns the maximum vault amount that can be minted in a single transaction for a given user address.
      * - f there is max mint limit, return value should be a finite value
      * - return value should not be greater than 2 ** 256 - 1 
      * - cannot revert

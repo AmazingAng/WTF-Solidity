@@ -12,7 +12,7 @@ contract Foo {
 }
 
 
-// FOR TEACHING PURPOSE ONLY, DO NOT UES IN PRODUCTION
+// FOR TEACHING PURPOSE ONLY, DO NOT USE IN PRODUCTION
 contract TransparentProxy {
     // logic contract's address
     address implementation; 

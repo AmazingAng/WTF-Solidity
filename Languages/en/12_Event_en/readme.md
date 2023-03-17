@@ -22,7 +22,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 In this section, we introduce `event` in Solidity, using transfer events in ERC20 tokens as an example .
 
 ## Events
-The event in `solidity` are the transaction logs stored on the `EVM` (Ethereum Virtual Machine). They can be emited during function calls and are accessible with the contract address. Events have two characteristics：
+The event in `solidity` are the transaction logs stored on the `EVM` (Ethereum Virtual Machine). They can be emitted during function calls and are accessible with the contract address. Events have two characteristics：
 
 - Responsive: Applications (e.g. [`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18)) can subscribe and listen to these events through `RPC` interface and respond at frontend.
 - Economical: It is cheap to store data in events, costing about 2,000 `gas` each. In comparison, store a new variable on-chain takes at least 20,000 `gas`.
@@ -64,7 +64,7 @@ EVM uses `Log` to store Solidity events. Each log contains two parts: `topics` a
 
 ### `Topics`
 
-`Topics` is used to decribe events. Each event contains a maximum of 4 `topics`. Typically, the first `topic` is the event hash: the hash of the event signature. The event hash of `Transfer` event is calculated as follows:
+`Topics` is used to describe events. Each event contains a maximum of 4 `topics`. Typically, the first `topic` is the event hash: the hash of the event signature. The event hash of `Transfer` event is calculated as follows:
 
 ```solidity
 keccak256("Transfer(addrses,address,uint256)")
