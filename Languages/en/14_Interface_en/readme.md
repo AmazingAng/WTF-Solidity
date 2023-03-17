@@ -100,7 +100,7 @@ interface IERC721 is IERC165 {
 - `getApproved`: Get the approved address for a single NFT.
 - `setApprovalForAll`: Enable or disable approval for a third party to manage all your NFTs in this contract.
 - `isApprovedForAll`: Query if an address is an authorized operator for another address.
-- `safeTransferFrom`: Overloaded function for safe transfer, containing `data` in its paramters.
+- `safeTransferFrom`: Overloaded function for safe transfer, containing `data` in its parameters.
 
 
 ### When to use an interface?

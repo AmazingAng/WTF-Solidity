@@ -93,7 +93,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 36: Merkle Tree**：[Code](./36_MerkleTree_en/) | [Tutorial](./36_MerkleTree_en/readme.md)
 
-**Chapter 37: Siganture**：[Code](./37_Signature_en/) | [Tutorial](./37_Signature_en/readme.md)
+**Chapter 37: Signature**：[Code](./37_Signature_en/) | [Tutorial](./37_Signature_en/readme.md)
 
 **Chapter 38: NFT Swap**：[Code](./38_NFTSwap_en/) | [Tutorial](./38_NFTSwap_en/readme.md)
 

@@ -62,7 +62,7 @@ Then we call `deleteContract().` The contract will self-destruct and all variabl
 
 ### Attention
 
-1. When providing the contract destruction function externally, it is best to declare the function to only be called by the contract onwer such as using the  function modifier `onlyOwner`.
+1. When providing the contract destruction function externally, it is best to declare the function to only be called by the contract owner such as using the  function modifier `onlyOwner`.
 2. When the contract is destructed, the interaction with the smart contract can also succeed and return `0` .
 3. Security and trust issues often arise when there is a `selfdestruct` function in a contract. The function of  `selfdestruct`  in the contract opens up attack vectors for attackers. For example, using `selfdestruct` to frequently transfer tokens to a contract to attack, this will greatly save the cost of GAS, although few people do this. In addition, this `selfdestruct`  feature reduces users' confidence in the contract.
 

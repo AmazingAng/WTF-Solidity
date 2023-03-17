@@ -93,15 +93,15 @@ In addition, there are `continue` (immediately enter the next loop) and `break` 
 
 The sorting algorithm solves the problem of arranging an unordered set of numbers from small to large, for example, sorting `[2, 5, 3, 1]` to `[1, 2, 3, 5]`. Insertion Sort (`InsertionSort`) is the simplest and first sorting algorithm that most developers learn in their computer science class. The logic of `InsertionSort`: 
 
-1. from the begining of the array `x` to the end, compare the element `x[i]` with the element in front of it `x[i-1]`; if `x[i]` is smaller, switch their positions, compare it with `x[i-2]`, and continue this process. 
+1. from the beginning of the array `x` to the end, compare the element `x[i]` with the element in front of it `x[i-1]`; if `x[i]` is smaller, switch their positions, compare it with `x[i-2]`, and continue this process. 
 
 The schematic of insertion sort:
 
 ![InsertionSort](https://i.pinimg.com/originals/92/b0/34/92b034385c440e08bc8551c97df0a2e3.gif)
 
-### Python Implimentation
+### Python Implementation
 
-Let's first look at the Python implimentation of the insertion sort：
+Let's first look at the Python Implementation of the insertion sort：
 
 ```python
 # Python program for implementation of Insertion Sort
@@ -138,7 +138,7 @@ Python version of Insertion Sort takes up 9 lines. Let's rewrite it into Solidit
 
 But when we compile the modified version and try to sort `[2, 5, 3, 1]`. *BOOM!* There are bugs! After 3-hour debugging, I still could not find where the bug was. I googled "Solidity insertion sort", and found that all the insertion algorithms written with Solidity are all wrong, such as: [Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
 
-Errors occured in `Remix decoded output`:
+Errors occurred in `Remix decoded output`:
 
 ![10-1](./img/10-1.jpg)
 

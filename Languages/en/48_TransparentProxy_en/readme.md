@@ -65,7 +65,7 @@ It contains `3` functions:
 - `upgrade()`: An upgrade function that changes the logic contract address and can only be called by the `admin`.
 
 ```solidity
-// FOR TEACHING PURPOSE ONLY, DO NOT UES IN PRODUCTION
+// FOR TEACHING PURPOSE ONLY, DO NOT USE IN PRODUCTION
 contract TransparentProxy {
     // logic contract's address
     address implementation; 
