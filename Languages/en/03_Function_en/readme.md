@@ -73,7 +73,7 @@ The following statements are considered modifying the state:
 
 I drew a Mario cartton to visualize `pure` and `view`. In the picture, the state variable is represented by Princess Peach, keywards are represented by three different characters.
 
-![WTH is pure and view in solidity?](https://images.mirror-media.xyz/publication-images/1B9kHsTYnDY_QURSWMmPb.png?height=1028&width=1758)
+![WHAT is pure and view in solidity?](https://images.mirror-media.xyz/publication-images/1B9kHsTYnDY_QURSWMmPb.png?height=1028&width=1758)
 
 - `pure` : Functions containing `pure` keyword cannot read nor write state variables on-chain. Just like the little monster, it can't see or touch Princess Peach.
 
@@ -156,7 +156,7 @@ Here we defined an `internal minus()` function, `number` will decrease 1 each ti
     }
 ```
 
-We defined an `external payable minusPayable()` function, which calls `minus()` and return `ETH` balance of the current contract (`this` keyword can let us query current contract address). Since the funciton is `payable`, we can send 1 `ETH` to the contract when calling `minusPayable()`.
+We defined an `external payable minusPayable()` function, which calls `minus()` and return `ETH` balance of the current contract (`this` keyword can let us query current contract address). Since the function is `payable`, we can send 1 `ETH` to the contract when calling `minusPayable()`.
 
 ![](https://images.mirror-media.xyz/publication-images/ETDPN8myq7jFfAL8CUAFt.png?height=148&width=588)
 

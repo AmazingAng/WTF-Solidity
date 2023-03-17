@@ -361,7 +361,7 @@ contract C {
 
 为了处理构造函数中的参数，部署代码将 ABI 参数从 `calldata`​ 的末尾复制到内存中，然后从内存复制到堆栈中。
 
-## A Contract That Creats Contracts
+## A Contract That Creates Contracts
 
 `FooFactory`​ 合约可以通过调用 `makeNewFoo`​ 创建新的 `Foo`​ 实例：
 

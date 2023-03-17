@@ -34,7 +34,7 @@ There are two important keywards for inheritance in Solidity:
 
 **Note 1**: If a function both overrides and is expected to be overridden, it should be labeled as `virtual override`.
 
-**Note 2**: If a `public` state variable is labeled as `override`, its `getter` function will be overriden. For example:
+**Note 2**: If a `public` state variable is labeled as `override`, its `getter` function will be overridden. For example:
 
 ```solidity
 mapping(address => uint256) public override balanceOf;
@@ -92,7 +92,7 @@ A solidity contract can inherit multiple contracts. The rules are:
 
 1. For multiple inheritance, parent contracts should be ordered by seniority, from the highest to the lowest. For example: `contract Son is Gatherfather, Father`. A error will be thrown if the order is not correct.
 
-2. If a function exists in multiple parent contracts, it must be overriden in the child contract, otherwise an error will occur.
+2. If a function exists in multiple parent contracts, it must be overridden in the child contract, otherwise an error will occur.
 
 3. When a function exists in multiple parent contracts, you need to put all parent contract names after the `override` keyword. For example: `override(Grandfather, Father)`.
 
@@ -113,7 +113,7 @@ After deploying the contract, we can see that we successfully rewrote the `hip()
 
 ### Inheritance of modifiers
 
-Likewise, modifiers in Solidity can be inherited as well. Rules for modifier inheritence are similar as the function inheritance, using the `virtual` and `override` keywords.
+Likewise, modifiers in Solidity can be inherited as well. Rules for modifier inheritance are similar as the function inheritance, using the `virtual` and `override` keywords.
 
 ```solidity
 contract Base1 {

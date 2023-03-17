@@ -13,7 +13,7 @@ abstract contract Script {
     Vm public constant vm = Vm(VM_ADDRESS);
 
     /// @dev Compute the address a contract will be deployed at for a given deployer address and nonce
-    /// @notice adapated from Solmate implementation (https://github.com/transmissions11/solmate/blob/main/src/utils/LibRLP.sol)
+    /// @notice adapted from Solmate implementation (https://github.com/transmissions11/solmate/blob/main/src/utils/LibRLP.sol)
     function computeCreateAddress(address deployer, uint256 nonce) internal pure returns (address) {
         // The integer zero is treated as an empty byte string, and as a result it only has a length prefix, 0x80, computed via 0x80 + 0.
         // A one byte integer uses its own value as its length prefix, there is no additional "0x80 + length" prefix that comes before it.

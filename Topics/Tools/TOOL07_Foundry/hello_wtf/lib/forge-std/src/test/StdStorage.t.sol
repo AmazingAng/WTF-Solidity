@@ -192,7 +192,7 @@ contract StdStorageTest is Test {
     }
 
     function testFailStorageCheckedWriteMapPacked() public {
-        // expect PackedSlot error but not external call so cant expectRevert
+        // expect PackedSlot error but not external call so can't expectRevert
         stdstore.target(address(test)).sig(test.read_struct_lower.selector).with_key(address(uint160(1337))).checked_write(100);
     }
 
