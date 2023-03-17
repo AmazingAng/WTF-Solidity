@@ -10,13 +10,13 @@ tags:
 
 # WTF Solidity Crash Course: 32. Token Faucet
 
-I have been relearning Solidity recently to solidify my understanding of the language and to create a "WTF Solidity Crash Course" for beginners (advanced programmers can find other tutorials). I will update it weekly with 1-3 lessons.
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
-Feel free to follow me on Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-You are also welcome to join the WTF Scientists community and find information on how to join the WeChat group: [link](https://discord.gg/5akcruXrsk)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-All of the code and tutorials are open source and can be found on Github (I will provide a course certification for 1024 stars and a community NFT for 2048 stars): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
@@ -26,7 +26,7 @@ In lesson 31, we learned about the `ERC20` token standard. In this lesson, we wi
 
 When a person is thirsty, they go to a faucet to get water. When a person wants free tokens, they go to a token faucet to receive them. A token faucet is a website or application that allows users to receive tokens for free.
 
-The earliest token faucet was the Bitcoin (BTC) faucet. In 2010, the price of BTC was less than \$0.1, and there were few holders of the currency. To increase its popularity, Gavin Andresen, a member of the Bitcoin community, created the BTC faucet, allowing others to receive BTC for free. Many people took advantage of the opportunity, and some became BTC enthusiasts. The BTC faucet gave away over 19,700 BTC, which is now worth approximately \$600 million!
+The earliest token faucet was the Bitcoin (BTC) faucet. In 2010, the price of BTC was less than \$0.1, and there were few holders of the currency. To increase its popularity, Gavin Andresen, a member of the Bitcoin community, created the BTC faucet, allowing others to receive BTC for free. Many people took advantage of the opportunity, and some of them became BTC enthusiasts. The BTC faucet gave away over 19,700 BTC, which is now worth approximately \$600 million!
 
 ## ERC20 Faucet Contract
 
@@ -34,16 +34,16 @@ Here, we will implement a simplified version of an `ERC20` faucet. The logic is 
 
 ### State Variables
 
-We define 3 state variables in the faucet contract:
+We define `3` state variables in the faucet contract:
 
 - `amountAllowed` sets the amount of tokens that can be claimed per request (default value is `100`, not 100 tokens as tokens may have decimal places).
 - `tokenContract` stores the address of the `ERC20` token contract.
 - `requestedAddress` keeps track of the addresses that have already claimed tokens.
 
 ```solidity
-uint256 public amountAllowed = 100; // 每次领 100 单位代币
-address public tokenContract;   // token合约地址
-mapping(address => bool) public requestedAddress;   // 记录领取过代币的地址
+uint256 public amountAllowed = 100; // the allowed amount for each request is 100
+address public tokenContract;   // contract address of the token
+mapping(address => bool) public requestedAddress;   // a map contains requested address
 ```
 
 ### Event
@@ -51,18 +51,18 @@ mapping(address => bool) public requestedAddress;   // 记录领取过代币的�
 The faucet contract defines a `SendToken` event that records the address and amount of tokens claimed each time the `requestTokens()` function is called.
 
 ```solidity
-// SendToken事件    
+// Event SendToken
 event SendToken(address indexed Receiver, uint256 indexed Amount); 
 ```
 
 ### Functions
 
-There are only two functions in the contract:
+There are only `2` functions in the contract:
 
 - Constructor: Initializes the `tokenContract` state variable and determines the address of the issued `ERC20` tokens.
 
 ```solidity
-// 部署时设定ERC2代币合约
+// Set the ERC20'S contract address during deployment
 constructor(address _tokenContract) {
 	tokenContract = _tokenContract; // set token contract
 }
@@ -80,29 +80,27 @@ function requestTokens() external {
     token.transfer(msg.sender, amountAllowed); // Send token
     requestedAddress[msg.sender] = true; // Record the requested address
     
-    emit SendToken(msg.sender, amountAllowed); // Trigger SendToken event
+    emit SendToken(msg.sender, amountAllowed); // Emit SendToken event
 }
 ```
 
 ## Remix Demonstration
 
-1. First, deploy the `ERC20` token contract with the name and symbol `WTF`, and `mint` yourself 10000 token units.
+1. First, deploy the `ERC20` token contract with the name and symbol `WTF`, and `mint` yourself 10000 tokens.
     ![Deploy `ERC20`](./img/32-1.png)
 
-2. Deploy the `Faucet` faucet contract, and fill in the initialized parameters with the address of the `ERC20` token contract above.
+2. Deploy the `Faucet` contract, and fill in the initialized parameters with the address of the `ERC20` token contract above.
     ![Deploy `Faucet` faucet contract](./img/32-2.png)
 
-3. Use the `transfer()` function of the `ERC20` token contract to transfer 10000 token units to the `Faucet` contract address.
+3. Use the `transfer()` function of the `ERC20` token contract to transfer 10000 tokens to the `Faucet` contract address.
     ![Transfer](./img/32-3.png)
 
-4. Switch to a new account and call the `requestTokens()` function of the `Faucet` contract to receive tokens. You can see that the `SendToken` event is released in the terminal.
-    ![Switch account](./img/32-4.png)
-    
-    ![requestToken](./img/32-5.png)
+4. Switch to a new account and call the `requestTokens()` function of the `Faucet` contract to receive tokens. You can see that the `SendToken` event is released in the terminal.    
+    ![requestToken](./img/32-4.png)
 
-5. Use the `balanceOf` function on the `ERC20` token contract to query the balance of the account that received tokens from the faucet. The balance should now be `100`, indicating a successful faucet withdrawal!
-    ![Withdrawal success](./img/32-6.png)
+5. Use the `balanceOf` function on the `ERC20` token contract to query the balance of the account that received tokens from the faucet. The balance should now be `100`, indicating a successful request!
+    ![Withdrawal success](./img/32-5.png)
 
 ## Conclusion
 
-In this lecture, we introduced the history of token faucets and the ERC20 faucet contract. Where do you think the next BTC faucet will be?
+In this lecture, we introduced the history of token faucets and the `ERC20` faucet contract. Where do you think the next BTC faucet will be?
