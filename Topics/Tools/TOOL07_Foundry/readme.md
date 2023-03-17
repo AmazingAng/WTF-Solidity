@@ -293,7 +293,7 @@ Test result: ok. 2 passed; 0 failed; finished in 9.98ms
 
 <!--
 
-  TODO: For foundry advanced useage ...
+  TODO: For foundry advanced usage ...
 
   We need cover: 
   
@@ -551,7 +551,7 @@ cast wallet new  ~/Downloads
 第一条命令行结果输出：
 
 ```shell
-Successfully created new keypair.
+Successfully created new key pair.
 Address: 0xDD20b18E001A80d8b27B8Caa94EeAC884D1c****
 Private Key: edb4444199bddea91879c0214af27c0c7f99****bf18e46ba4078a39ccdbe0bc
 ```

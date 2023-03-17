@@ -94,7 +94,7 @@ We input binary encoding of `abi.encode` into `decode`, which will decode the or
 - compare and verify the similarities and differences of four encoding functions
 ![](./img/27-2_en.png)
 
-- check the decodeing result of `abi.decode`
+- check the decoding result of `abi.decode`
 ![](./img/27-3_en.png)
 
 ## ABI的使用场景

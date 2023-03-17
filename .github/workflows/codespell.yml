@@ -1,0 +1,19 @@
+name: Codespell
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  codespell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run CodeSpell
+        uses: codespell-project/actions-codespell@v1.0
+        with:
+          check_filenames: true
+          ignore_words_file: .codespellignore
+          skip: ./.git

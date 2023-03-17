@@ -16,7 +16,7 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 ## Data location
 There are three types of data storage locations in solidity: `storage`, `memory` and `calldata`. Gas costs are different for different storage locations. 
 
-The data of a `storage` variable is stored on-chain, similar to the hard disk of a computer, and consumes a lot of `gas`; while the data of `memory` and `calldata` varialbes are temporarily stored in memory, consumes less `gas`. 
+The data of a `storage` variable is stored on-chain, similar to the hard disk of a computer, and consumes a lot of `gas`; while the data of `memory` and `calldata` variables are temporarily stored in memory, consumes less `gas`. 
 
 General usage:
 

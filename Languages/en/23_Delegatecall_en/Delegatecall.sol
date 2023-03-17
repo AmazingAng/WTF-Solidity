@@ -22,7 +22,7 @@ contract B {
     uint public num;
     address public sender;
 
-    // call setVars() of C with call, the state variabes of contract C will be changed
+    // call setVars() of C with call, the state variables of contract C will be changed
     function callSetVars(address _addr, uint _num) external payable{
         // call setVars()
         (bool success, bytes memory data) = _addr.call(

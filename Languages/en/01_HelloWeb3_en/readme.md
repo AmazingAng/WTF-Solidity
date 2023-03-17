@@ -43,7 +43,7 @@ contract HelloWeb3{
     string public _string = "Hello Web3!";}
 ```
 
-Now, we will breakdown and analyze the source code in detail, understanding the basic strucutre: 
+Now, we will breakdown and analyze the source code in detail, understanding the basic structure: 
 
 1. The first line is a comment, which denotes the software license (license identifier) used by the program. We are using the MIT license. If you do not indicate the license used, the program can compile successfully but will report an warning during compilation. Solidity's comments are denoted with "//", followed by the content of the comment (which will not be run by the program).
 

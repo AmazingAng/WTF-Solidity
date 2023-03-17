@@ -10,7 +10,7 @@ error SendFailed(); // error when sending with Send
 error CallFailed(); // error when seding with Call
 
 contract SendETH {
-    // Constractor, make it payable so we can transfer ETH at depolyment
+    // Constructor, make it payable so we can transfer ETH at depolyment
     constructor() payable{}
     // receive function, called when receiving ETH
     receive() external payable{}

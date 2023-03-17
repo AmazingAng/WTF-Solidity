@@ -81,7 +81,7 @@ contract Election {
 （将来，`Solidity` 会有浮点类型，这会让这更容易。）
 ```
 // bad
-uint x = 5 / 2; // Result is 2, all integer divison rounds DOWN to the nearest integer
+uint x = 5 / 2; // Result is 2, all integer division rounds DOWN to the nearest integer
 ```
 使用乘数可以防止四舍五入，在将来使用 x 时需要考虑这个乘数：
 ```
