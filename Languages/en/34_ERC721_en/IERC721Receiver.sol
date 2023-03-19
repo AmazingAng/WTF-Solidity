@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// ERC721接收者接口：合约必须实现这个接口来通过安全转账接收ERC721
+// ERC721 receiver interface: Contracts must implement this interface to receive ERC721 tokens via safe transfers.
 interface IERC721Receiver {
     function onERC721Received(
         address operator,
