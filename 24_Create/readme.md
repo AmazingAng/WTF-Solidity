@@ -61,7 +61,7 @@ contract Pair{
 ```
 `Pair`合约很简单，包含3个状态变量：`factory`，`token0`和`token1`。
 
-构造函数`constructor`在部署时将`factory`赋值为工厂合约地址。`initialize`函数会在`Pair`合约创建的时候被工厂合约调用一次，将`token0`和`token1`更新为币对中两种代币的地址。
+构造函数`constructor`在部署时将`factory`赋值为工厂合约地址。`initialize`函数会由工厂合约在部署完成后手动调用以初始化代币地址，将`token0`和`token1`更新为币对中两种代币的地址。
 
 > **提问**：为什么`uniswap`不在`constructor`中将`token0`和`token1`地址更新好？
 >
