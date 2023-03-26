@@ -35,9 +35,9 @@ Because through the leaf `L1` we can calculate `Hash 0-0`, we also know `Hash 0-
 
 ## Generating a `Merkle Tree`
 
-We can use the [webpage] (https://lab.miguelmota.com/merkletreejs/example/) or the Javascript library [merkletreejs](https://github.com/miguelmota/merkletreejs) to generate a `Merkle Tree`.
+We can use a [webpage](https://lab.miguelmota.com/merkletreejs/example/) or the Javascript library [merkletreejs](https://github.com/miguelmota/merkletreejs) to generate a `Merkle Tree`.
 
-Here we use a webpage to generate a `Merkle Tree` with `4` addresses as the leaf nodes. Leaf node input:
+Here we use the webpage to generate a `Merkle Tree` with `4` addresses as the leaf nodes. Leaf node input:
 
 ```solidity
     [
@@ -51,13 +51,13 @@ Here we use a webpage to generate a `Merkle Tree` with `4` addresses as the leaf
 Select the `Keccak-256`, `hashLeaves`, and `sortPairs` options in the menu, then click `Compute`, and the `Merkle Tree` will be generated. The `Merkle Tree` expands to:
 
 ```
-└─ 根: eeefd63003e0e702cb41cd0043015a6e26ddb38073cc6ffeb0ba3e808ba8c097
+└─ Root: eeefd63003e0e702cb41cd0043015a6e26ddb38073cc6ffeb0ba3e808ba8c097
    ├─ 9d997719c0a5b5f6db9b8ac69a988be57cf324cb9fffd51dc2c37544bb520d65
-   │  ├─ 叶子0：5931b4ed56ace4c46b68524cb5bcbf4195f1bbaacbe5228fbd090546c88dd229
-   │  └─ 叶子1：999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb
+   │  ├─ Leaf0：5931b4ed56ace4c46b68524cb5bcbf4195f1bbaacbe5228fbd090546c88dd229
+   │  └─ Leaf1：999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb
    └─ 4726e4102af77216b09ccd94f40daa10531c87c4d60bba7f3b3faf5ff9f19b3c
-      ├─ 叶子2：04a10bfd00977f54cc3450c9b25c9b3a502a089eba0097ba35fc33c4ea5fcb54
-      └─ 叶子3：dfbe3e504ac4e35541bebad4d0e7574668e16fefa26cd4172f93e18b59ce9486
+      ├─ Leaf2：04a10bfd00977f54cc3450c9b25c9b3a502a089eba0097ba35fc33c4ea5fcb54
+      └─ Leaf3：dfbe3e504ac4e35541bebad4d0e7574668e16fefa26cd4172f93e18b59ce9486
 ```
 
 ![Generating Merkle Tree](./img/36-3.png)
@@ -77,8 +77,8 @@ We use the `MerkleProof` library for verification:
 ```solidity
 library MerkleProof {
     /**
-     * @dev 当通过`proof`和`leaf`重建出的`root`与给定的`root`相等时，返回`true`，数据有效。
-     * 在重建时，叶子节点对和元素对都是排序过的。
+     * @dev Returns `true` when the `root` reconstructed from `proof` and `leaf` equals to the given `root`, meaning the data is valid.
+     * During reconstruction, both the leaf node pairs and element pairs are sorted.
      */
     function verify(
         bytes32[] memory proof,
@@ -89,8 +89,9 @@ library MerkleProof {
     }
 
     /**
-     * @dev Returns 通过Merkle树用`leaf`和`proof`计算出`root`. 当重建出的`root`和给定的`root`相同时，`proof`才是有效的。
-     * 在重建时，叶子节点对和元素对都是排序过的。
+     * @dev Returns the `root` of the Merkle tree computed from a `leaf` and a `proof`.
+     * The `proof` is only valid when the reconstructed `root` equals to the given `root`.
+     * During reconstruction, both the leaf node pairs and element pairs are sorted.
      */
     function processProof(bytes32[] memory proof, bytes32 leaf) internal pure returns (bytes32) {
         bytes32 computedHash = leaf;
@@ -125,34 +126,35 @@ Here, we introduce how to use the `MerkleTree` contract to distribute NFT whitel
 
 ```solidity
 contract MerkleTree is ERC721 {
-    bytes32 immutable public root; // Merkle树的根
-    mapping(address => bool) public mintedAddress;   // 记录已经mint的地址
+    bytes32 immutable public root; // Root of the Merkle tree
+    mapping(address => bool) public mintedAddress;   // Record the address that has already been minted
 
-    // 构造函数，初始化NFT合集的名称、代号、Merkle树的根
+    // Constructor, initialize the name and symbol of the NFT collection, and the root of the Merkle tree
     constructor(string memory name, string memory symbol, bytes32 merkleroot)
     ERC721(name, symbol)
     {
         root = merkleroot;
     }
 
-    // 利用Merkle树验证地址并完成mint
+    // Use the Merkle tree to verify the address and mint
     function mint(address account, uint256 tokenId, bytes32[] calldata proof)
     external
     {
-        require(_verify(_leaf(account), proof), "Invalid merkle proof"); // Merkle检验通过
-        require(!mintedAddress[account], "Already minted!"); // 地址没有mint过
-        _mint(account, tokenId); // mint
-        mintedAddress[account] = true; // 记录mint过的地址
+        require(_verify(_leaf(account), proof), "Invalid merkle proof"); // Merkle verification passed
+        require(!mintedAddress[account], "Already minted!"); // Address has not been minted
+        
+        mintedAddress[account] = true; // Record the minted address
+        _mint(account, tokenId); // Mint
     }
 
-    // 计算Merkle树叶子的哈希值
+    // Calculate the hash value of the Merkle tree leaf
     function _leaf(address account)
     internal pure returns (bytes32)
     {
         return keccak256(abi.encodePacked(account));
     }
 
-    // Merkle树验证，调用MerkleProof库的verify()函数
+    // Merkle tree verification, call the verify() function of the MerkleProof library
     function _verify(bytes32 leaf, bytes32[] memory proof)
     internal view returns (bool)
     {
