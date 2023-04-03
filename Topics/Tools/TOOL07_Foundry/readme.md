@@ -205,9 +205,9 @@ contract CounterScript is Script {
 
     // 部署合约时会调用run()函数
     function run() public {
-        vm.startBroadcast(); // 开始部署
+        vm.startBroadcast(); // 开始记录脚本中合约的调用和创建
         new Counter(); // 创建合约
-        vm.stopBroadcast(); // 结束部署
+        vm.stopBroadcast(); // 结束记录
     }
 }
 ```
@@ -712,6 +712,7 @@ anvil_setStorageAt
 
 forge init <dir_name> 
 
+# 使用模板初始化项目
 forge init --template <template_path> <dir_name>
 
 ```
@@ -726,8 +727,10 @@ forge build -w
 ### 测试
 
 ```shell
-# 三个v会现实详细的log信息
+# 三个v会现实详细的log信息，还显示失败测试的堆栈跟踪
 forge test -vvv
+# 四个v显示所有测试的堆栈跟踪，并显示失败测试的设置（setup）跟踪。
+forge test -vvvv
 # 热更新模式
 forge test -vvv -w
 
@@ -756,14 +759,15 @@ function testNumberIs42() public {
     }
 ```
 
-改变状态
+改变 block.timestamp
 
 ```js
 
-function testCheatCode()public
-console2.Log("before:"block.timestamp);
-vm.warp(1000);
-console2.log("after:"block.timestamp);
+function testCheatCode()public {
+  console2.Log("before:"block.timestamp);
+  vm.warp(1000);
+  console2.log("after:"block.timestamp);
+}
 
 ```
 
@@ -782,7 +786,7 @@ vm.stopPrank()
 ```
 
 
-改变存储状态
+改变账户余额（也可以用于改变大多数ERC20代币余额）
 
 ```js
 function testCheatCode()public{
@@ -1076,7 +1080,7 @@ forge script script/Counter.s.sol --sig="someFunction(uint256 x)" 10
 ## 脚本部署合约
 
 编写部署脚本：
-```shell
+```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
@@ -1085,18 +1089,18 @@ import "forge-std/Script.sol";
 import "../src/Counter.sol";
 
 contract CounterScript is Script {
-    function setUp() public {
-        console2.log("setup ");
-    }
+  function setUp() public {
+    console2.log("setup ");
+  }
 
-    function run() public {
-        vm.startBroadcast();
-		//生成合约对象
-        Counter c = new Counter();
-
-        vm.stopBroadcast();
-    }
-
+  function run() public {
+    // 开始记录脚本中合约的调用和创建
+    vm.startBroadcast();
+    //生成合约对象
+    Counter c = new Counter();
+    // 结束记录
+    vm.stopBroadcast();
+  }
 }
 
 ```
@@ -1129,12 +1133,13 @@ uint256 mainnet = vm.createFork(rpc);
 ```shell
 forge test --gas-report
 
-forge inspect
+# 获取合约相关信息，例如abi、bytecode等等
+forge inspect <CONTRACT> <FIELD>
 
-# 对比gas是否减少
-
+# 生成gas快照
 forge snapshot
 
+# 当前快照文件与最新更改进行比较，对比gas是否减少
 forge snapshot --diff 
 
 # 交互式Debugger
