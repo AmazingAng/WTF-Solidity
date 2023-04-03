@@ -327,7 +327,7 @@ Test result: ok. 2 passed; 0 failed; finished in 9.98ms
 ### 查询区块
 
 ```shell
-# $PRC_MAIN 替换成需要的RPC地址
+# $RPC_MAIN 替换成需要的RPC地址
 cast block-number --rpc-url=$RPC_MAIN
 ```
 
@@ -337,7 +337,7 @@ cast block-number --rpc-url=$RPC_MAIN
 15769241
 ```
 
-> 将环境变量的`ETH_PRC_URL`设置为 `--rpc-url` 你就不需要在每个命令行后面增加  `--rpc-url=$RPC_MAIN`  我这里直接设置为主网
+> 将环境变量的`ETH_RPC_URL`设置为 `--rpc-url` 你就不需要在每个命令行后面增加  `--rpc-url=$RPC_MAIN`  我这里直接设置为主网
 
 ### 查询区块信息
 
@@ -644,8 +644,8 @@ cast --from-rlp
 
 ## Tips
 
-### 设置ETH_PRC_URL
-将环境变量的`ETH_PRC_URL`设置为 `--rpc-url` 你就不需要在每个命令行后面增加  `--rpc-url=$RPC_MAIN`  我这里直接设置为主网
+### 设置ETH_RPC_URL
+将环境变量的`ETH_RPC_URL`设置为 `--rpc-url` 你就不需要在每个命令行后面增加  `--rpc-url=$RPC_MAIN`  我这里直接设置为主网
 
 ### 设置ETHERSCAN_API_KEY
 设置`ETHERSCAN_API_KEY`环境变量可以直接代替 `--etherscan-api-key`
@@ -671,7 +671,7 @@ anvil --mnemonic=<MNEMONIC>
 anvil --fork-url=$RPC --fork-block-number=<BLOCK>
 ```
 
-### PRC的使用
+### RPC的使用
 
 ```shell
 anvil_* -> hardhat_* 
