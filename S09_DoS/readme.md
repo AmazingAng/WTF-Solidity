@@ -36,7 +36,7 @@ tags:
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-// 有DoS漏洞的游戏，玩家们先存钱，游戏结束后，调用deposit退钱。
+// 有DoS漏洞的游戏，玩家们先存钱，游戏结束后，调用refund退钱。
 contract DoSGame {
     bool public refundFinished;
     mapping(address => uint256) public balanceOf;
