@@ -137,3 +137,13 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
     <img src="https://contrib.rocks/image?repo=AmazingAng/WTFSolidity" />
   </a>
 </div>
+
+## Reference
+- [Solidity Docs](https://docs.soliditylang.org/en/v0.8.17/)
+- [Solidity By Example](https://solidity-by-example.org/)
+- [OpenZeppelin Contract](https://github.com/OpenZeppelin/openzeppelin-contracts)
+- [solmate](https://github.com/transmissions11/solmate)
+- [Chainlink Docs](https://docs.chain.link/)
+- [Safe Contracts](https://github.com/safe-global/safe-contracts)
+- [DeFi Hack Labs](https://github.com/SunWeb3Sec/DeFiHackLabs)
+- [rekt news](https://rekt.news/)
