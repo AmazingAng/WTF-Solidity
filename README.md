@@ -227,3 +227,13 @@
 
 - [Gitcoin](https://gitcoin.co/grants/6090/wtf-solidity)
 - [Mirror](https://mirror.xyz/ninjak.eth/collection)
+
+## 参考
+- [Solidity 官方文档](https://docs.soliditylang.org/en/v0.8.17/)
+- [Solidity By Example](https://solidity-by-example.org/)
+- [OpenZeppelin Contract](https://github.com/OpenZeppelin/openzeppelin-contracts)
+- [solmate](https://github.com/transmissions11/solmate)
+- [Chainlink Docs](https://docs.chain.link/)
+- [Safe Contracts](https://github.com/safe-global/safe-contracts)
+- [DeFi Hack Labs](https://github.com/SunWeb3Sec/DeFiHackLabs)
+- [rekt news](https://rekt.news/zh/)
