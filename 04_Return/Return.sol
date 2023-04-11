@@ -24,15 +24,14 @@ contract Return {
     }
 
     // 读取返回值，解构式赋值
-    function readReturn() public pure{
+    function readReturn() public pure returns(uint256 _number, bool _bool, uint256[3] memory _array){
         // 读取全部返回值
-        uint256 _number;
-        bool _bool;
-        bool _bool2;
-        uint256[3] memory _array;
+        _number;
+        _bool =true;
+        _array = [uint256(1),2,3];
         (_number, _bool, _array) = returnNamed();
         
         // 读取部分返回值，解构式赋值
-        (, _bool2, ) = returnNamed();
+        // (, _bool, ) = returnNamed();
     }
 }
