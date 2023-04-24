@@ -65,7 +65,7 @@ contract Pair{
 
 > **提问**：为什么`uniswap`不在`constructor`中将`token0`和`token1`地址更新好？
 >
-> **答**：因为`uniswap`使用的是`create2`创建合约，限制构造函数不能有参数。当使用`create`时，`Pair`合约允许构造函数有参数，可以在`constructor`中将`token0`和`token1`地址更新好。
+> **答**：因为`uniswap`使用的是`create2`创建合约，生成的合约地址可以实现预测，更多详情请阅读[第25讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/25_Create2/readme.md)。
 
 ### `PairFactory`
 ```solidity
