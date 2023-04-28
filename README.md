@@ -132,6 +132,8 @@
 
 **第51讲：ERC4626 代币化金库**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/51_ERC4626) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/51_ERC4626/readme.md)
 
+**第52讲：EIP712 类型化数据签名**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/52_EIP712) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/52_EIP712/readme.md)
+
 ## 合约安全
 
 **S01：重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S01_ReentrancyAttack) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S01_ReentrancyAttack/readme.md) | [Mirror](https://mirror.xyz/ninjak.eth/SrNu6LLzwH7qlTVKbJY6lkTpmadGqUXw0L8iUMzfMxo)
