@@ -51,7 +51,7 @@ Contract x = new Contract{salt: _salt, value: _value}(params)
 
 ## 极简Uniswap2
 
-跟[上一讲](https://mirror.xyz/ninjak.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)类似，我们用`Create2`来实现极简`Uniswap`。
+跟[上一讲](https://mirror.xyz/wtfacademy.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)类似，我们用`Create2`来实现极简`Uniswap`。
 
 ### `Pair`
 ```solidity
