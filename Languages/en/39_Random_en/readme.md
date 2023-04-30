@@ -205,62 +205,79 @@ In addition to the constructor function, the contract defines 5 other functions:
 - `fulfillRandomness()`: the callback function for `VRF`, which is automatically called by the `VRF` contract after verifying the authenticity of the random number. It uses the returned off-chain random number to mint an NFT.
 
 ```solidity
-    /** 
-    * 输入uint256数字，返回一个可以mint的tokenId
-    * 算法过程可理解为：totalSupply个空杯子（0初始化的ids）排成一排，每个杯子旁边放一个球，编号为[0, totalSupply - 1]。
-    每次从场上随机拿走一个球（球可能在杯子旁边，这是初始状态；也可能是在杯子里，说明杯子旁边的球已经被拿走过，则此时新的球从末尾被放到了杯子里）
-    再把末尾的一个球（依然是可能在杯子里也可能在杯子旁边）放进被拿走的球的杯子里，循环totalSupply次。相比传统的随机排列，省去了初始化ids[]的gas。
-    */
-    function pickRandomUniqueId(uint256 random) private returns (uint256 tokenId) {
-        uint256 len = totalSupply - mintCount++; // 可mint数量
-        require(len > 0, "mint close"); // 所有tokenId被mint完了
-        uint256 randomIndex = random % len; // 获取链上随机数
-        
-        //随机数取模，得到tokenId，作为数组下标，同时记录value为len-1，如果取模得到的值已存在，则tokenId取该数组下标的value
-        tokenId = ids[randomIndex] != 0 ? ids[randomIndex] : randomIndex; // 获取tokenId
-        ids[randomIndex] = ids[len - 1] == 0 ? len - 1 : ids[len - 1]; // 更新ids 列表
-        ids[len - 1] = 0; // 删除最后一个元素，能返还gas
+    /**
+     * Input a uint256 number and return a tokenId that can be mint
+     * The algorithm process can be understood as: totalSupply empty cups (0-initialized ids) are lined up in a row, and a ball is placed next to each cup, numbered [0, totalSupply - 1].
+     Every time a ball is randomly taken from the field (the ball may be next to the cup, which is the initial state; it may also be in the cup, indicating that the ball next to the cup has been taken away, then a new ball is placed from the end at this time into the cup)
+     Then put the last ball (still may be in the cup or next to the cup) into the cup of the removed ball, and loop totalSupply times. Compared with the traditional random arrangement, the gas for initializing ids[] is omitted.
+     */
+    function pickRandomUniqueId(
+        uint256 random
+    ) private returns (uint256 tokenId) {
+        // Calculate the subtraction first, then calculate ++, pay attention to the difference between (a++, ++a)
+        uint256 len = totalSupply - mintCount++; // mint quantity
+        require(len > 0, "mint close"); // all tokenIds are mint finished
+        uint256 randomIndex = random % len; // get the random number on the chain
+
+        // Take the modulus of the random number to get the tokenId as an array subscript, and record the value as len-1 at the same time. If the value obtained by taking the modulus already exists, then tokenId takes the value of the array subscript
+        tokenId = ids[randomIndex] != 0 ? ids[randomIndex] : randomIndex; // get tokenId
+        ids[randomIndex] = ids[len - 1] == 0 ? len - 1 : ids[len - 1]; // update ids list
+        ids[len - 1] = 0; // delete the last element, can return gas
     }
 
-    /** 
-    * 链上伪随机数生成
-    * keccak256(abi.encodePacked()中填上一些链上的全局变量/自定义变量
-    * 返回时转换成uint256类型
-    */
-    function getRandomOnchain() public view returns(uint256){
-        // remix跑blockhash会报错
-        bytes32 randomBytes = keccak256(abi.encodePacked(block.number, msg.sender, blockhash(block.timestamp-1)));
+    /**
+     * On-chain pseudo-random number generation
+     * keccak256(abi.encodePacked() fill in some global variables/custom variables on the chain
+     * Convert to uint256 type when returning
+     */
+    function getRandomOnchain() public view returns (uint256) {
+        /*
+         * In this case, randomness on the chain only depends on block hash, caller address, and block time,
+         * If you want to improve the randomness, you can add some attributes such as nonce, etc., but it cannot fundamentally solve the security problem
+         */
+        bytes32 randomBytes = keccak256(
+            abi.encodePacked(
+                blockhash(block.number - 1),
+                msg.sender,
+                block.timestamp
+            )
+        );
         return uint256(randomBytes);
     }
 
-    // 利用链上伪随机数铸造NFT
+    // Use the pseudo-random number on the chain to cast NFT
     function mintRandomOnchain() public {
-        uint256 _tokenId = pickRandomUniqueId(getRandomOnchain()); // 利用链上随机数生成tokenId
+        uint256 _tokenId = pickRandomUniqueId(getRandomOnchain()); // Use the random number on the chain to generate tokenId
         _mint(msg.sender, _tokenId);
     }
 
-    /** 
-     * 调用VRF获取随机数，并mintNFT
-     * 要调用requestRandomness()函数获取，消耗随机数的逻辑写在VRF的回调函数fulfillRandomness()中
-     * 调用前，把LINK代币转到本合约里
+    /**
+     * Call VRF to get random number and mintNFT
+     * To call the requestRandomness() function to obtain, the logic of consuming random numbers is written in the VRF callback function fulfillRandomness()
+     * Before calling, transfer LINK tokens to this contract
      */
     function mintRandomVRF() public returns (bytes32 requestId) {
-        // 检查合约中LINK余额
-        require(LINK.balanceOf(address(this)) >= fee, "Not enough LINK - fill contract with faucet");
-        // 调用requestRandomness获取随机数
+        // Check the LINK balance in the contract
+        require(
+            LINK.balanceOf(address(this)) >= fee,
+            "Not enough LINK - fill contract with faucet"
+        );
+        // Call requestRandomness to get a random number
         requestId = requestRandomness(keyHash, fee);
         requestToSender[requestId] = msg.sender;
         return requestId;
     }
 
     /**
-     * VRF的回调函数，由VRF Coordinator调用
-     * 消耗随机数的逻辑写在本函数中
+     * VRF callback function, called by VRF Coordinator
+     * The logic of consuming random numbers is written in this function
      */
-    function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
-        address sender = requestToSender[requestId]; // 从requestToSender中获取minter用户地址
-        uint256 _tokenId = pickRandomUniqueId(randomness); // 利用VRF返回的随机数生成tokenId
-
+    function fulfillRandomness(
+        bytes32 requestId,
+        uint256 randomness
+    ) internal override {
+        address sender = requestToSender[requestId]; // Get minter user address from requestToSender
+        uint256 _tokenId = pickRandomUniqueId(randomness); // Use the random number returned by VRF to generate tokenId
         _mint(sender, _tokenId);
     }
 ```

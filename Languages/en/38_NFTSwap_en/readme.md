@@ -44,12 +44,12 @@ The contract includes four events corresponding to the actions of listing (list)
 An `NFT` order is abstracted as the `Order` structure, which contains information about the listing price (`price`) and the owner (`owner`). The `nftList` mapping records the `NFT` series (contract address) and `tokenId` information that the order corresponds to.
 
 ```solidity
-    // 定义order结构体
+    // Define the order structure
     struct Order{
         address owner;
         uint256 price; 
     }
-    // NFT Order映射
+    // NFT Order mapping
     mapping(address => mapping(uint256 => Order)) public nftList;
 ```
 
