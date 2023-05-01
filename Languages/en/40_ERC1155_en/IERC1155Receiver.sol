@@ -21,7 +21,7 @@ interface IERC1155Receiver is IERC165 {
 
     /**
      * @dev accept ERC1155 batch safe transfer `safeBatchTransferFrom`
-     * need to return 0xbc197c81 or `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))`
+     * Need to return 0xbc197c81 or `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))`
      */
     function onERC1155BatchReceived(
         address operator,
