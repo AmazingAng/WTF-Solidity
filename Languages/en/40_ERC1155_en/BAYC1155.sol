@@ -10,19 +10,19 @@ contract BAYC1155 is ERC1155 {
     // Constructor
     constructor() ERC1155("BAYC1155", "BAYC1155") {}
 
-    //BAYC's baseURI is ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/
+    // BAYC's baseURI is ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/
     function _baseURI() internal pure override returns (string memory) {
         return "ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/";
     }
 
-    // casting function
+    // Mint function
     function mint(address to, uint256 id, uint256 amount) external {
         // id cannot exceed 10,000
         require(id < MAX_ID, "id overflow");
         _mint(to, id, amount, "");
     }
 
-    // batch casting function
+    // Batch mint function
     function mintBatch(
         address to,
         uint256[] memory ids,
