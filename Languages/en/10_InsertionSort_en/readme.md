@@ -172,8 +172,3 @@ Result:
 ## Summary
 
 In this lecture, we introduced control flow in Solidity and wrote a simple but bug-prone sorting algorithm. Solidity looks simple but have many traps. Every month, projects get hacked and lose millions of dollars because of small bugs in the smart contract. To write a safe contract, we need to master the basics of the Solidity and keep practicing.
-
-
-
-
-
