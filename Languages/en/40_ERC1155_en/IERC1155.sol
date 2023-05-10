@@ -48,7 +48,7 @@ interface IERC1155 is IERC165 {
     event URI(string value, uint256 indexed id);
 
     /**
-     * @dev Position query, returns the position of the token of `id` type owned by `account`
+     * @dev Balance inquiry, returns the position of the token of `id` type owned by `account`
      */
     function balanceOf(
         address account,
@@ -56,7 +56,7 @@ interface IERC1155 is IERC165 {
     ) external view returns (uint256);
 
     /**
-     * @dev Batch position query, the length of `accounts` and `ids` arrays have to wait.
+     * @dev Batch balance inquiry, the length of `accounts` and `ids` arrays have to wait.
      */
     function balanceOfBatch(
         address[] calldata accounts,
@@ -70,7 +70,7 @@ interface IERC1155 is IERC165 {
     function setApprovalForAll(address operator, bool approved) external;
 
     /**
-     * @dev Batch authorization query, if the authorization address `operator` is authorized by `account`, return `true`
+     * @dev Batch authorization query function, if the authorization address `operator` is authorized by `account`, return `true`
      * See {setApprovalForAll} function.
      */
     function isApprovedForAll(
