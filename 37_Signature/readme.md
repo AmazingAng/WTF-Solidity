@@ -110,7 +110,7 @@ ethereum.request({method: "personal_sign", params: [account, hash]})
 ![浏览器console调用metamask进行签名](./img/37-4.jpg)
 
 **3-2. 利用web3.py签名：** 批量调用中更倾向于使用代码进行签名，以下是基于web3.py的实现。
-```
+```py
 from web3 import Web3, HTTPProvider
 from eth_account.messages import encode_defunct
 
