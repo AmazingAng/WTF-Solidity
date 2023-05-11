@@ -62,7 +62,7 @@ discord：[WTF Academy](https://discord.gg/5akcruXrsk)
 
 `ERC721`的安全转账函数会检查接收合约是否实现了`onERC721Received()`函数，并返回正确的选择器`selector`。用户下单之后，需要将`NFT`发送给`NFTSwap`合约。因此`NFTSwap`继承`IERC721Receiver`接口，并实现`onERC721Received()`函数：
 
-```
+```solidity
 contract NFTSwap is IERC721Receiver{
 
     // 实现{IERC721Receiver}的onERC721Received，能够接收ERC721代币
