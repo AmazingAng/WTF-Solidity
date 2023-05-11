@@ -44,7 +44,6 @@ tags:
 - `ERC20Released`：提币事件，当受益人提取释放代币时释放。
 
 ```solidity
-
 contract TokenVesting {
     // 事件
     event ERC20Released(address indexed token, uint256 amount); // 提币事件
