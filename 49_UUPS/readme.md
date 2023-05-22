@@ -33,7 +33,7 @@ UUPS（universal upgradeable proxy standard，通用可升级代理）将升级�
 
 ## UUPS合约
 
-首先我们要复习一下[WTF Solidity极简教程第23讲：Delegatecall](https://github.com/AmazingAng/WTFSolidity/blob/main/23_Delegatecall/readme.md)。如果用户A通过合约B（代理合约）去`delegatecall`合约C（逻辑合约），语境仍是合约B的语境，`msg.sender`仍是用户A而不是合约B。因此，UUPS合约可以将升级函数放在逻辑合约中，并检查调用者是否为管理员。
+首先我们要复习一下[WTF Solidity极简教程第23讲：Delegatecall](https://github.com/AmazingAng/WTFSolidity/blob/main/23_Delegatecall/readme.md)。如果用户A通过合约B（代理合约）去`delegatecall`合约C（逻辑合约），上下文仍是合约B的上下文，`msg.sender`仍是用户A而不是合约B。因此，UUPS合约可以将升级函数放在逻辑合约中，并检查调用者是否为管理员。
 
 ![delegatecall](./img/49-2.png)
 

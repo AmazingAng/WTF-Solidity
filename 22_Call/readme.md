@@ -32,9 +32,9 @@ tags:
 ### `call`的使用规则
 `call`的使用规则如下：
 ```
-目标合约地址.call(二进制编码);
+目标合约地址.call(字节码);
 ```
-其中`二进制编码`利用结构化编码函数`abi.encodeWithSignature`获得：
+其中`字节码`利用结构化编码函数`abi.encodeWithSignature`获得：
 ```
 abi.encodeWithSignature("函数签名", 逗号分隔的具体参数)
 ```
@@ -43,7 +43,7 @@ abi.encodeWithSignature("函数签名", 逗号分隔的具体参数)
 另外`call`在调用合约时可以指定交易发送的`ETH`数额和`gas`：
 
 ```
-目标合约地址.call{value:发送数额, gas:gas数额}(二进制编码);
+目标合约地址.call{value:发送数额, gas:gas数额}(字节码);
 ```
 
 看起来有点复杂，下面我们举个`call`应用的例子。
