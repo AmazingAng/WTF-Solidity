@@ -1,12 +1,12 @@
 ---
-title: 1. HelloWeb3 (三行代码)
+title: 1. Hello Web3 (三行代码)
 tags:
   - solidity
   - basic
   - wtfacademy
 ---
 
-# WTF Solidity极简入门: 1. HelloWeb3 (三行代码)
+# WTF Solidity极简入门: 1. Hello Web3 (三行代码)
 
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
@@ -29,9 +29,9 @@ tags:
 
 ## 开发工具：Remix
 
-本教程中，我们将使用 `Remix` 运行 `Solidity` 合约。`Remix` 是以太坊官方推荐的智能合约集成开发环境（IDE），适合新手，在浏览器中快速部署和测试智能合约，无需在本地安装任何程序。
+本教程中，我们将使用 `Remix` 运行 `Solidity` 合约。`Remix` 是以太坊官方推荐的智能合约集成开发环境（IDE），适合新手，可以在浏览器中快速开发和部署合约，无需在本地安装任何程序。
 
-网址：[remix.ethereum.org](https://remix.ethereum.org)
+网址：[https://remix.ethereum.org](https://remix.ethereum.org)
 
 在 `Remix` 中，左侧菜单有三个按钮，分别对应文件（编写代码）、编译（运行代码）和部署（将合约部署到链上）。点击“创建新文件”（`Create New File`）按钮，即可创建一个空白的 `Solidity` 合约。
 
@@ -90,6 +90,6 @@ contract HelloWeb3{
 本节课程中，我们简要介绍了 `Solidity` 和 `Remix` 工具，并完成了第一个 `Solidity` 程序 —— `HelloWeb3`。接下来，我们将继续深入学习 `Solidity`！
 
 ### 中文 Solidity 资料推荐：
-1. [Solidity中文文档](https://solidity-cn.readthedocs.io/zh/develop/introduction-to-smart-contracts.html)（官方文档的中文翻译）
+1. [Solidity中文文档](https://docs.soliditylang.org/zh/v0.8.19/index.html)（官方文档的中文翻译）
 
 2. [崔棉大师solidity教程](https://space.bilibili.com/286084162) web3技术教学博主，我看他视频学到了很多 
