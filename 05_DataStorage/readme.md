@@ -20,9 +20,10 @@ tags:
 -----
 
 ## Solidity中的引用类型
-**引用类型(Reference Type)**：包括数组（`array`），结构体（`struct`）和映射（`mapping`），这类变量占空间大，赋值时候直接传递地址（类似指针）。由于这类变量比较复杂，占用存储空间大，我们在使用时必须要声明数据存储的位置。
+**引用类型(Reference Type)**：包括数组（`array`）和结构体（`struct`），由于这类变量比较复杂，占用存储空间大，我们在使用时必须要声明数据存储的位置。
 
 ## 数据位置
+
 solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同存储位置的`gas`成本不同。`storage`类型的数据存在链上，类似计算机的硬盘，消耗`gas`多；`memory`和`calldata`类型的临时存在内存里，消耗`gas`少。大致用法：
 
 1. `storage`：合约里的状态变量默认都是`storage`，存储在链上。
@@ -46,7 +47,7 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 
 1. `storage`（合约的状态变量）赋值给本地`storage`（函数里的）时候，会创建引用，改变新变量会影响原变量。例子：
 ```solidity
-    uint[] x = [1,2,3]; // 状态变量：数组 x
+    uint[] public x = [1,2,3]; // 状态变量：数组 x
 
     function fStorage() public{
         //声明一个storage的变量 xStorage，指向x。修改xStorage也会影响x
@@ -59,7 +60,7 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 
 2. `storage`赋值给`memory`，会创建独立的副本，修改其中一个不会影响另一个；反之亦然。例子：
 ```solidity
-    uint[] x = [1,2,3]; // 状态变量：数组 x
+    uint[] public x = [1,2,3]; // 状态变量：数组 x
     
     function fMemory() public view{
         //声明一个Memory的变量xMemory，复制x。修改xMemory不会影响x

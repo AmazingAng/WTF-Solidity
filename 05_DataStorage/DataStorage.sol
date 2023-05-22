@@ -5,7 +5,7 @@ contract DataStorage {
     // The data location of x is storage.
     // This is the only place where the
     // data location can be omitted.
-    uint[] x = [1,2,3];
+    uint[] public x = [1,2,3];
 
     function fStorage() public{
         //声明一个storage的变量xStorage，指向x。修改xStorage也会影响x
