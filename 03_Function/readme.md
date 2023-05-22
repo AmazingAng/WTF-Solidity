@@ -7,6 +7,7 @@ tags:
 ---
 
 # WTF Solidity极简入门: 3. 函数
+
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
@@ -18,12 +19,17 @@ tags:
 -----
 
 ## 函数
-Solidity官方文档将函数归类为数值类型，但由于它们之间存在显著差异，因此我们将函数单独分类。让我们先了解一下Solidity中函数的形式：
+
+Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教程中，我们将会概述函数的基础概念，并通过一些示例演示如何使用函数。
+
+我们先看一下 Solidity 中函数的形式:
 
 ```solidity
     function <function name>(<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
 ```
-虽然看起来有些复杂，但我们可以从前往后逐个分析（方括号中的内容为可选关键字）：
+
+看着有一些复杂，让我们从前往后逐个解释(方括号中的是可写可不
+写的关键字)：
 
 1. `function`：声明函数时的固定用法。要编写函数，就需要以 `function` 关键字开头。
 
