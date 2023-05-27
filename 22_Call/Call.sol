@@ -52,7 +52,7 @@ contract Call{
     }
 
     function callNonExist(address _addr) external{
-        // call getX()
+        // call 不存在的函数
         (bool success, bytes memory data) = _addr.call(
             abi.encodeWithSignature("foo(uint256)")
         );
