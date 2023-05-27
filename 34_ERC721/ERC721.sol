@@ -180,7 +180,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         address owner = ownerOf(tokenId);
         require(
             _isApprovedOrOwner(owner, msg.sender, tokenId),
-            "not owner nor approved"
+            "not owner or approved"
         );
         _safeTransfer(owner, from, to, tokenId, _data);
     }
