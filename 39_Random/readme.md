@@ -326,7 +326,7 @@ contract Random is ERC721, VRFConsumerBaseV2{
 
 ### 5. 利用链上随机数铸造`NFT`
 
-在`remix`界面中，点击左侧橙色函数`mintRandomOnchain`![mintOnchain](./img/39-6-1.png)，在弹出的小狐狸钱包中点击确认，利用链上随机数铸造交易就开始了
+在`remix`界面中，点击左侧橙色函数`mintRandomOnchain`![mintOnchain](./img/39-6-1.png)在弹出的小狐狸钱包中点击确认，利用链上随机数铸造交易就开始了
 
 ![链上随机数铸造](./img/39-6.png)
 
