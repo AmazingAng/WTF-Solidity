@@ -54,45 +54,61 @@ discord：[WTF Academy](https://discord.gg/5akcruXrsk)
 ### `Chainlink VRF`使用步骤
 ![Chainlnk VRF](./img/39-1.png)
 
-我们将用一个简单的合约介绍使用`Chainlink VRF`的步骤。`RandomNumberConsumer`合约可以向`VRF`请求一个随机数，并存储在状态变量`randomResult`中。
+我们将用一个简单的合约介绍使用`Chainlink VRF`的步骤。`RandomNumberConsumer`合约可以向`VRF`请求随机数，并存储在状态变量`randomWords`中。
 
-**1. 用户合约继承`VRFConsumerBase`并转入`LINK`代币** 
+**1. 申请Subscription并fund`Link`代币’** 
+在Chainlink VRF网站[这里](https://vrf.chain.link/)上创建一个`Subscription`，其中邮箱和项目名都是选填
 
-为了使用`VRF`获取随机数，合约需要继承`VRFConsumerBase`合约，并在构造函数中初始化`VRF Coordinator`地址，`LINK`代币地址，唯一标识符`Key Hash`，和使用费用`fee`。
+创建完成后往`Subscription`中fund一些`Link`代币。测试网的`LINK`代币可以从[LINK水龙头](https://faucets.chain.link/)领取。
 
-**注意:** 不同链对应不同的参数，在[这里](https://docs.chain.link/docs/vrf-contracts/v1/)查询。
+**1. 用户合约继承`VRFConsumerBaseV2`并转入`LINK`代币** 
 
-教程中我们使用`Rinkeby`测试网。部署好合约后，用户需要向合约转一些`LINK`代币，测试网的`LINK`代币可以从[LINK水龙头](https://faucets.chain.link/)领取。
+为了使用`VRF`获取随机数，合约需要继承`VRFConsumerBaseV2`合约，并在构造函数中初始化`VRFCoordinatorV2Interface`和`Subscription Id`。
+
+**注意:** 不同链对应不同的参数，在[这里](https://docs.chain.link/vrf/v2/subscription/supported-networks)查询。
+
+教程中我们使用`Sepolia`测试网。
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 
-contract RandomNumberConsumer is VRFConsumerBase {
+contract RandomNumberConsumer is VRFConsumerBaseV2{
+
+    //请求随机数需要调用VRFCoordinatorV2Interface接口
+    VRFCoordinatorV2Interface COORDINATOR;
     
-    bytes32 internal keyHash; // VRF唯一标识符
-    uint256 internal fee; // VRF使用手续费
-    
-    uint256 public randomResult; // 存储随机数
+    // 申请后的subId
+    uint64 subId;
+
+    //存放得到的 requestId 和 随机数
+    uint256 public requestId;
+    uint256[] public randomWords;
     
     /**
-     * 使用chainlink VRF，构造函数需要继承 VRFConsumerBase 
+     * 使用chainlink VRF，构造函数需要继承 VRFConsumerBaseV2
      * 不同链参数填的不一样
-     * 网络: Rinkeby测试网
-     * Chainlink VRF Coordinator 地址: 0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B
+     * 具体可以看：https://docs.chain.link/vrf/v2/subscription/supported-networks
+     * 网络: Sepolia测试网
+     * Chainlink VRF Coordinator 地址: 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
      * LINK 代币地址: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
-     * Key Hash: 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311
+     * 30 gwei Key Hash: 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c
+     * Minimum Confirmations 最小确认块数 : 3 （数字大安全性高，一般填12）
+     * callbackGasLimit gas限制 : 最大 2,500,000
+     * Maximum Random Values 一次可以得到的随机数个数 : 最大 500          
      */
-    constructor() 
-        VRFConsumerBase(
-            0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B, // VRF Coordinator
-            0x01BE23585060835E02B77ef475b0Cc51aA1e0709  // LINK Token
-        )
-    {
-        keyHash = 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311;
-        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkeby测试网)
+    address vrfCoordinator = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
+    bytes32 keyHash = 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
+    uint16 requestConfirmations = 3;
+    uint32 callbackGasLimit = 200_000;
+    uint32 numWords = 3;
+    
+    constructor(uint64 s_subId) VRFConsumerBaseV2(vrfCoordinator){
+        COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
+        subId = s_subId;
     }
 ```
 **2. 用户合约申请随机数** 
