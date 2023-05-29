@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EIP-712 Signature Example</title>
+  <title>ERC20Permit Signature Example</title>
 </head>
 <body>
-  <h1>EIP-712 Signature Example</h1>
+  <h1>ERC20Permit Signature Example</h1>
 
   <label for="name">Name:</label>
-  <input id="name" value="EIP712Storage">
+  <input id="name" value="WTFPermit">
   <br>
   <label for="chainId">Chain ID:</label>
   <input id="chainId" value="1">
@@ -20,18 +20,27 @@
   <label for="spender">Spender:</label>
   <input id="spender" value="0x5B38Da6a701c568545dCfcB03FcB875f56beddC4">
   <br>
-  <label for="number">number:</label>
-  <input id="number" value="100">
+  <label for="value">Amount:</label>
+  <input id="value" value="100">
+  <br>
+  <label for="nonce">Nonce:</label>
+  <input id="nonce" value="0">
+  <br>
+  <label for="deadline">Deadline:</label>
+  <input id="deadline" value="115792089237316195423570985008687907853269984665640564039457584007913129639935">
   <br>
   <button id="connectButton">Connect MetaMask</button>
-  <button id="signPermitButton" disabled>Sign Permit</button>
+  <button id="signPermitButton" disabled>Sign ERC20Permit</button>
   <br>
   <pre id="signatureOutput"></pre>
-
+  
   <h5>钱包地址: <span class="showAccount"></span></h5>
   <h5>ChainID: <span class="showChainID"></span></h5>
   <h5>ETH 余额: <span class="showETHBalance"></span></h5>
   <h5>签名数据: <span class="showSignature"></span></h5>
+  <h5>v: <span class="SignatureV"></span></h5>
+  <h5>r: <span class="SignatureR"></span></h5>
+  <h5>s: <span class="SignatureS"></span></h5>
 
   <script type = "module">
     import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.3.0/ethers.js";      const ethereumButton = document.querySelector('.connect');
@@ -39,6 +48,9 @@
     const showChainID = document.querySelector('.showChainID');
     const showETHBalance = document.querySelector('.showETHBalance');
     const showSignature = document.querySelector('.showSignature');
+    const SignatureV = document.querySelector('.SignatureV');
+    const SignatureR = document.querySelector('.SignatureR');
+    const SignatureS = document.querySelector('.SignatureS');
     const connectButton = document.getElementById("connectButton");
     const signPermitButton = document.getElementById("signPermitButton");
 
@@ -74,7 +86,10 @@
       const chainId = parseInt(document.getElementById('chainId').value);
       const contractAddress = document.getElementById('contractAddress').value;
       const spender = document.getElementById('spender').value;
-      const number = document.getElementById('number').value;
+      const value = document.getElementById('value').value;
+      const nonce = document.getElementById('nonce').value;
+      const deadline = document.getElementById('deadline').value;
+
       const provider = new ethers.BrowserProvider(window.ethereum)
       const signer = await provider.getSigner()
       const owner = await signer.getAddress();
@@ -87,21 +102,31 @@
       };
 
       const types = {
-        Storage: [
+        Permit: [
+          { name: "owner", type: "address" },
           { name: "spender", type: "address" },
-          { name: "number", type: "uint256" },
+          { name: "value", type: "uint256" },
+          { name: "nonce", type: "uint256" },
+          { name: "deadline", type: "uint256" },
         ],
       };
 
       const message = {
+        owner: owner,
         spender: spender,
-        number: number,
+        value: value,
+        nonce: nonce,
+        deadline: deadline,
       };
 
       try {
         console.log(message)
         const signature = await signer.signTypedData(domain, types, message);
+        const sig = ethers.Signature.from(signature);
         console.log("Signature:", signature);
+        SignatureV.innerHTML = `${sig.v}`;
+        SignatureR.innerHTML = `${sig.r}`;
+        SignatureS.innerHTML = `${sig.s}`;
         showSignature.innerHTML = `${signature}`;
       } catch (error) {
         console.error("Error signing permit:", error);
