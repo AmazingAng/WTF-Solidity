@@ -1,43 +1,50 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-/**
-* 从github和npm导入
-* 导入文件存放于当前工作区的.deps目录下
-*/
-import "../34_ERC721/ERC721.sol";
-import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
+import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/ERC721.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 
-contract RandomNumber is ERC721, VRFConsumerBase{
-    // NFT参数
+contract Random is ERC721, VRFConsumerBaseV2{
+    // NFT相关
     uint256 public totalSupply = 100; // 总供给
-    uint256[100] public ids; // 用于计算可以mint的tokenId
-    uint256 public mintCount; // 已mint数量, 默认值为0
-    // chainlink VRF参数
-    bytes32 internal keyHash;
-    uint256 internal fee;
+    uint256[100] public ids; // 用于计算可供mint的tokenId
+    uint256 public mintCount; // 已mint数量
 
-    // 记录VRF申请标识对应的mint地址
-    mapping(bytes32 => address) public requestToSender;
-    /**
-     * 使用chainlink VRF，构造函数需要继承 VRFConsumerBase 
-     * 不同链参数填的不一样
-     * 网络: Rinkeby测试网
-     * Chainlink VRF Coordinator 地址: 0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B
-     * LINK 代币地址: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
-     * Key Hash: 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311
-     */
-    constructor() 
-        VRFConsumerBase(
-            0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B, // VRF Coordinator
-            0x01BE23585060835E02B77ef475b0Cc51aA1e0709  // LINK Token
-        )
-        ERC721("WTF Random", "WTF")
-    {
-        keyHash = 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311;
-        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkeby测试网)
-    }
+    // chainlink VRF参数
     
+    //VRFCoordinatorV2Interface
+    VRFCoordinatorV2Interface COORDINATOR;
+    
+    /**
+     * 使用chainlink VRF，构造函数需要继承 VRFConsumerBaseV2
+     * 不同链参数填的不一样
+     * 网络: Sepolia测试网
+     * Chainlink VRF Coordinator 地址: 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
+     * LINK 代币地址: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
+     * 30 gwei Key Hash: 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c
+     * Minimum Confirmations 最小确认块数 : 3 （数字大安全性高，一般填12）
+     * callbackGasLimit gas限制 : 最大 2,500,000
+     * Maximum Random Values 一次可以得到的随机数个数 : 最大 500          
+     */
+    address vrfCoordinator = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
+    bytes32 keyHash = 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
+    uint16 requestConfirmations = 3;
+    uint32 callbackGasLimit = 1_000_000;
+    uint32 numWords = 1;
+    uint64 subId;
+    uint256 public requestId;
+    
+    // 记录VRF申请标识对应的mint地址
+    mapping(uint256 => address) public requestToSender;
+
+    constructor(uint64 s_subId) 
+        VRFConsumerBaseV2(vrfCoordinator)
+        ERC721("WTF Random", "WTF"){
+            COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
+            subId = s_subId;
+    }
+
     /** 
     * 输入uint256数字，返回一个可以mint的tokenId
     */
@@ -76,24 +83,27 @@ contract RandomNumber is ERC721, VRFConsumerBase{
     /** 
      * 调用VRF获取随机数，并mintNFT
      * 要调用requestRandomness()函数获取，消耗随机数的逻辑写在VRF的回调函数fulfillRandomness()中
-     * 调用前，把LINK代币转到本合约里
+     * 调用前，需要在Subscriptions中fund足够的Link
      */
-    function mintRandomVRF() public returns (bytes32 requestId) {
-        // 检查合约中LINK余额
-        require(LINK.balanceOf(address(this)) >= fee, "Not enough LINK - fill contract with faucet");
+    function mintRandomVRF() public {
         // 调用requestRandomness获取随机数
-        requestId = requestRandomness(keyHash, fee);
+        requestId = COORDINATOR.requestRandomWords(
+            keyHash,
+            subId,
+            requestConfirmations,
+            callbackGasLimit,
+            numWords
+        );
         requestToSender[requestId] = msg.sender;
-        return requestId;
     }
 
     /**
      * VRF的回调函数，由VRF Coordinator调用
      * 消耗随机数的逻辑写在本函数中
      */
-    function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
+    function fulfillRandomWords(uint256 requestId, uint256[] memory s_randomWords) internal override{
         address sender = requestToSender[requestId]; // 从requestToSender中获取minter用户地址
-        uint256 _tokenId = pickRandomUniqueId(randomness); // 利用VRF返回的随机数生成tokenId
-        _mint(sender, _tokenId);
+        uint256 tokenId = pickRandomUniqueId(s_randomWords[0]); // 利用VRF返回的随机数生成tokenId
+        _mint(sender, tokenId);
     }
 }
