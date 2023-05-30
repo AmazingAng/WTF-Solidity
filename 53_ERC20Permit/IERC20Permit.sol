@@ -40,7 +40,7 @@ interface IERC20Permit {
     function nonces(address owner) external view returns (uint256);
 
     /**
-     * @dev 返回用于编码 {permit} 的签名的域分隔符（domain seperator），如 {EIP712} 所定义。
+     * @dev 返回用于编码 {permit} 的签名的域分隔符（domain separator），如 {EIP712} 所定义。
      */
     // solhint-disable-next-line func-name-mixedcase
     function DOMAIN_SEPARATOR() external view returns (bytes32);
