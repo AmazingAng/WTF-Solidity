@@ -52,7 +52,7 @@ EIP-2612 提出了 ERC20Permit，扩展了 ERC20 标准，添加了一个 `permi
 
 - `nonces()`: 返回 `owner` 的当前 nonce。每次为 `permit()` 函数生成签名时，都必须包括此值。每次成功调用 `permit()` 函数都会将 `owner` 的 nonce 增加 1，防止多次使用同一个签名。
 
-- `DOMAIN_SEPARATOR()`: 返回用于编码 `permit()` 函数的签名的域分隔符（domain seperator），如 [EIP712](https://github.com/AmazingAng/WTF-Solidity/blob/main/52_EIP712/readme.md) 所定义。
+- `DOMAIN_SEPARATOR()`: 返回用于编码 `permit()` 函数的签名的域分隔符（domain separator），如 [EIP712](https://github.com/AmazingAng/WTF-Solidity/blob/main/52_EIP712/readme.md) 所定义。
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -81,7 +81,7 @@ interface IERC20Permit {
     function nonces(address owner) external view returns (uint256);
 
     /**
-     * @dev 返回用于编码 {permit} 的签名的域分隔符（domain seperator）
+     * @dev 返回用于编码 {permit} 的签名的域分隔符（domain separator）
      */
     // solhint-disable-next-line func-name-mixedcase
     function DOMAIN_SEPARATOR() external view returns (bytes32);
