@@ -13,7 +13,7 @@ tags:
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -44,9 +44,9 @@ tags:
 
 以太坊的人得罪了天神，天神震怒。天后赫拉为了惩罚以太坊的人，在以太坊的峭崖上降下一个名叫斯芬克斯的人面狮身的女妖。她向每一个路过悬崖的以太坊用户提出一个谜语：“什么东西在早晨用四只脚走路，中午两只脚走路，晚间三只脚走路，在一切生物中这是唯一的用不同数目的脚走路的生物。脚最多的时候，正是速度和力量最小的时候。”对于这个奥妙费解的谜语，凡猜中者即可活命，凡猜不中者一律被吃掉。过路的人全被斯芬克斯吃了，以太坊用户陷入恐惧之中。斯芬克斯用选择器`0x10cd2dc7`来验证答案是否正确。
 
-有一天上午，俄狄浦斯路过此地，会见了女妖，并猜中了这神秘奥妙之谜。他说：“这是`"function men()"`啊！在生命的早晨，他是个孩子，用两条腿和两只手爬行；到了生命的中午，他变成壮年，只用两条腿走路；到了生命的傍晚，他年老体衰，必须借助拐杖走路，所以被称为三只脚。”谜语被猜中后，俄狄浦斯得以生还。
+有一天上午，俄狄浦斯路过此地，会见了女妖，并猜中了这神秘奥妙之谜。他说：“这是`"function man()"`啊！在生命的早晨，他是个孩子，用两条腿和两只手爬行；到了生命的中午，他变成壮年，只用两条腿走路；到了生命的傍晚，他年老体衰，必须借助拐杖走路，所以被称为三只脚。”谜语被猜中后，俄狄浦斯得以生还。
 
-那一天下午，`0xAA`路过此地，会见了女妖，并猜中了这神秘奥妙之谜。他说：“这是`"fucntion peopleLduohW(uint256)"`啊！在生命的早晨，他是个孩子，用两条腿和两只手爬行；到了生命的中午，他变成壮年，只用两条腿走路；到了生命的傍晚，他年老体衰，必须借助拐杖走路，所以被称为三只脚。”谜语再次被猜中后，斯芬克斯气急败坏，脚下一打滑就从巍峨的峭崖上掉下去摔死了。
+那一天下午，`0xAA`路过此地，会见了女妖，并猜中了这神秘奥妙之谜。他说：“这是`"function peopleLduohW(uint256)"`啊！在生命的早晨，他是个孩子，用两条腿和两只手爬行；到了生命的中午，他变成壮年，只用两条腿走路；到了生命的傍晚，他年老体衰，必须借助拐杖走路，所以被称为三只脚。”谜语再次被猜中后，斯芬克斯气急败坏，脚下一打滑就从巍峨的峭崖上掉下去摔死了。
 
 ![](./img/S02-2.png)
 
@@ -82,12 +82,12 @@ contract SelectorClash {
 
 我们的目标是利用`executeCrossChainTx()`函数调用合约中的`putCurEpochConPubKeyBytes()`，目标函数的选择器为：`0x41973cd9`。观察到`executeCrossChainTx()`中是利用`_method`参数和`"(bytes,bytes,uint64)"`作为函数签名计算的选择器。因此，我们只需要选择恰当的`_method`，让这里算出的选择器等于`0x41973cd9`，通过选择器碰撞调用目标函数。
 
-Poly Network黑客事件中，黑客碰撞出的`_method`为 `f1121318093`，即`f1121318093(bytes,bytes,uint64)`的哈希前`4`位也是`0x41973cd9`，可以成功的调用函数。接下来我们要做的就是将`f1121318093`转换为`bytes`类型：`0x6631313231333138303933`，然后作为参数输入到`executeCrossChainTx()`中。`executeCrossChainTx()`函数另`3`个参数不重要，都填 `0x` 就可以。
+Poly Network黑客事件中，黑客碰撞出的`_method`为 `f1121318093`，即`f1121318093(bytes,bytes,uint64)`的哈希前`4`位也是`0x41973cd9`，可以成功的调用函数。接下来我们要做的就是将`f1121318093`转换为`bytes`类型：`0x6631313231333138303933`，然后作为参数输入到`executeCrossChainTx()`中。`executeCrossChainTx()`函数另`3`个参数不重要，填 `0x`, `0x`, `0` 就可以。
 
 ## `Remix`演示
 
 1. 部署`SelectorClash`合约。
-2. 调用`executeCrossChainTx()`，参数填`0x6631313231333138303933`，`0x`，`0x`，`0x`，发起攻击。
+2. 调用`executeCrossChainTx()`，参数填`0x6631313231333138303933`，`0x`，`0x`，`0`，发起攻击。
 3. 查看`solved`变量的值，被修改为`ture`，攻击成功。
 
 ## 总结

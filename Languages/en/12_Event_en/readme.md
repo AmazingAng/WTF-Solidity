@@ -13,19 +13,19 @@ Recently, I have been revisiting Solidity, consolidating the finer details, and 
 
 Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
 Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
-In this section, we introduce `event` in `solidity` using transferring ERC20 tokens as an example .
+In this section, we introduce `event` in Solidity, using transfer events in ERC20 tokens as an example .
 
 ## Events
-The event in `solidity` are the transaction logs stored on the `EVM` (Ethereum Virtual Machine). They can be emited during function calls and are accessible with the contract address. Events have two characteristics：
+The event in `solidity` are the transaction logs stored on the `EVM` (Ethereum Virtual Machine). They can be emitted during function calls and are accessible with the contract address. Events have two characteristics：
 
 - Responsive: Applications (e.g. [`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18)) can subscribe and listen to these events through `RPC` interface and respond at frontend.
-- Economical: It is cheap to store data with events, costing about 2,000 `gas` each; By comparison, it takes at least 20,000 `gas` to store a new variable on-chain.
+- Economical: It is cheap to store data in events, costing about 2,000 `gas` each. In comparison, store a new variable on-chain takes at least 20,000 `gas`.
 
 ### Declare events
 The events are declared with the `event` keyword, followed by event name, then the type and name of each parameter to be recorded. Let's take the `Transfer` event from the `ERC20` token contract as an example：
@@ -58,13 +58,13 @@ We can emit events in functions. In the following example, each time the `_trans
 
 ## EVM Log
 
-EVM uses "Log" to store Solidity events. Each log contains two parts: `topics` and `log`.
+EVM uses `Log` to store Solidity events. Each log contains two parts: `topics` and `data`.
 
 ![](img/12-3.jpg)
 
 ### `Topics`
 
-`Topics` is used to decribe events. Each event contains a maximum of 4 `topics`. Typically, the first `topic` is the event hash: the hash of the event signature. The event hash of `Transfer` event is calculated as follows:
+`Topics` is used to describe events. Each event contains a maximum of 4 `topics`. Typically, the first `topic` is the event hash: the hash of the event signature. The event hash of `Transfer` event is calculated as follows:
 
 ```solidity
 keccak256("Transfer(addrses,address,uint256)")
@@ -78,7 +78,7 @@ Besides event hash, `topics` can include 3 `indexed` parameters, such as the `fr
 
 ### `Data`
 
-Non-indexed parameters will be stored in the `data` section of the log. They can be interpreted as "value" of the event and can't be retrieved directly. But they can store data with larger size. Therefore, `data` section can be used to store complex data structures, such as arrays and strings. Moreovrer, `data` consumes less gas on storage compared to `topic`.
+Non-indexed parameters will be stored in the `data` section of the log. They can be interpreted as "value" of the event and can't be retrieved directly. But they can store data with larger size. Therefore, `data` section can be used to store complex data structures, such as `array` and `string`. Moreovrer, `data` consumes less gas compared to `topic`.
 
 ## Remix Demo
 Let's take `Event.sol` contract as an example.

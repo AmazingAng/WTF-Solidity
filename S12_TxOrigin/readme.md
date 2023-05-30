@@ -12,7 +12,7 @@ tags:
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -28,7 +28,7 @@ tags:
 
 如果用户A调用了B合约，再通过B合约调用了C合约，那么在C合约看来，`msg.sender`就是B合约，而`tx.origin`就是用户A。如果你不了解`call`的机制，可以阅读[WTF Solidity极简教程第22讲：Call](https://github.com/AmazingAng/WTF-Solidity/blob/main/22_Call/readme.md)。
 
-![](./img/S15_1.jpg)
+![](./img/S12_1.jpg)
 
 因此如果一个银行合约使用了`tx.origin`做身份认证，那么黑客就有可能先部署一个攻击合约，然后再诱导银行合约的拥有者调用，即使`msg.sender`是攻击合约地址，但`tx.origin`是银行合约拥有者地址，那么转账就有可能成功。
 
@@ -94,15 +94,15 @@ contract Attack {
 
 **1.** 先将`value`设置为10ETH，再部署 `Bank` 合约，拥有者地址 `owner` 被初始化为部署合约地址。
 
-![](./img/S15-2.jpg)
+![](./img/S12-2.jpg)
 
 **2.** 切换到另一个钱包作为黑客钱包，填入要攻击的银行合约地址，再部署 `Attack` 合约，黑客地址 `hacker` 被初始化为部署合约地址。
 
-![](./img/S15-3.jpg)
+![](./img/S12-3.jpg)
 
 **3.** 切换回`owner`地址，此时我们被诱导调用了`Attack`合约的`attack()`函数，可以看到`Bank`合约余额被掏空了，同时黑客地址多了10ETH.
 
-![](./img/S15-4.jpg)
+![](./img/S12-4.jpg)
 
 ## 预防办法
 

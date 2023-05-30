@@ -12,7 +12,7 @@ tags:
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -31,8 +31,8 @@ tags:
 - `enum`: 枚举中的第一个元素
 - `address`: `0x0000000000000000000000000000000000000000` (或 `address(0)`)
 - `function`
-    - `internal`: 空白方程
-    - `external`: 空白方程
+    - `internal`: 空白函数
+    - `external`: 空白函数
 
 可以用`public`变量的`getter`函数验证上面写的初始值是否正确：
 ```solidity
@@ -45,8 +45,8 @@ tags:
     enum ActionSet { Buy, Hold, Sell}
     ActionSet public _enum; // 第1个内容Buy的索引0
 
-    function fi() internal{} // internal空白方程 
-    function fe() external{} // external空白方程 
+    function fi() internal{} // internal空白函数
+    function fe() external{} // external空白函数 
 ```
 
 ### 引用类型初始值

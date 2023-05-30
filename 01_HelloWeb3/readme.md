@@ -1,42 +1,46 @@
 ---
-title: 1. HelloWeb3 (三行代码)
+title: 1. Hello Web3 (三行代码)
 tags:
   - solidity
   - basic
   - wtfacademy
 ---
 
-# WTF Solidity极简入门: 1. HelloWeb3 (三行代码)
+# WTF Solidity极简入门: 1. Hello Web3 (三行代码)
 
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
-## Solidity简述
-`Solidity`是以太坊虚拟机（`EVM`）智能合约的语言。同时，我认为`solidity`是玩链上项目必备的技能：区块链项目大部分是开源的，如果你能读懂代码，就可以规避很多亏钱项目。
+## Solidity 简介
 
-`Solidity`具有两个特点：
+`Solidity` 是一种用于编写以太坊虚拟机（`EVM`）智能合约的编程语言。我认为掌握 `Solidity` 是参与链上项目的必备技能：区块链项目大部分是开源的，如果你能读懂代码，就可以规避很多亏钱项目。
 
-1. 基于对象：学会之后，能帮你挣钱找对象。
-2. 高级：不会`solidity`，在币圈显得很low。
+`Solidity` 具有两个特点：
 
-## 开发工具：remix
-本教程中，我会用`remix`来跑`solidity`合约。`remix`是以太坊官方推荐的智能合约开发IDE（集成开发环境），适合新手，可以在浏览器中快速部署测试智能合约，你不需要在本地安装任何程序。
+1. "基于对象"：学会 `Solidity` 之后，可以助你在区块链领域找到好工作，挣钱找对象。
+2. "高级"：不会 `Solidity`，在币圈会显得很 low。
 
-网址：[remix.ethereum.org](https://remix.ethereum.org)
+## 开发工具：Remix
 
-进入`remix`，我们可以看到最左边的菜单有三个按钮，分别对应文件（写代码的地方），编译（跑代码），部署（部署到链上）。我们点新建（`Create New File`）按钮，就可以创建一个空白的`solidity`合约。
+本教程中，我们将使用 `Remix` 运行 `Solidity` 合约。`Remix` 是以太坊官方推荐的智能合约集成开发环境（IDE），适合新手，可以在浏览器中快速开发和部署合约，无需在本地安装任何程序。
 
-![remix面板](./img/1-1.png)
+网址：[https://remix.ethereum.org](https://remix.ethereum.org)
 
-## 第一个Solidity程序
-很简单，只有1行注释+3行代码：
+在 `Remix` 中，左侧菜单有三个按钮，分别对应文件（编写代码）、编译（运行代码）和部署（将合约部署到链上）。点击“创建新文件”（`Create New File`）按钮，即可创建一个空白的 `Solidity` 合约。
+
+![Remix 面板](./img/1-1.png)
+
+## 第一个 Solidity 程序
+
+这个简单的程序只有 1 行注释和 3 行代码：
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
@@ -44,41 +48,48 @@ contract HelloWeb3{
     string public _string = "Hello Web3!";
 }
 ```
-我们拆开分析，学习solidity代码源文件的结构：
-1. 第1行是注释，会写一下这个代码所用的软件许可（license），这里用的是MIT license。如果不写许可，编译时会警告（warning），但程序可以运行。solidity的注释由“//”开头，后面跟注释的内容（不会被程序运行）。
-```solidity
-// SPDX-License-Identifier: MIT
-```
-2. 第2行声明源文件所用的solidity版本，因为不同版本语法有差别。这行代码意思是源文件将不允许小于 0.8.4 版本或大于等于 0.9.0 的编译器编译（第二个条件由`^`提供）。Solidity 语句以分号（;）结尾。
-```solidity
-pragma solidity ^0.8.4;
-```
+
+我们拆解程序，学习 Solidity 代码源文件的结构：
+
+1. 第 1 行是注释，说明代码所使用的软件许可（license），这里使用的是 MIT 许可。如果不写许可，编译时会出现警告（warning），但程序仍可运行。Solidity 注释以“//”开头，后面跟注释内容，注释不会被程序执行。
+
+  ```solidity
+  // SPDX-License-Identifier: MIT
+  ```
+
+2. 第 2 行声明源文件所使用的 Solidity 版本，因为不同版本的语法有差异。这行代码表示源文件将不允许小于 0.8.4 版本或大于等于 0.9.0 的编译器编译（第二个条件由 `^` 提供）。Solidity 语句以分号（;）结尾。
+  ```solidity
+  pragma solidity ^0.8.4;
+  ```
     
-3. 第3-4行是合约部分，第3行创建合约（contract），并声明合约的名字 HelloWeb3。第4行是合约的内容，我们声明了一个string（字符串）变量_string，并给他赋值 “Hello Web3!”。
-```solidity
-contract HelloWeb3{
-    string public _string = "Hello Web3!";
-}
-```
-以后我们会更细的介绍solidity中的变量。
+3. 第 3-4 行是合约部分。第 3 行创建合约（contract），并声明合约名为 `HelloWeb3`。第 4 行是合约内容，声明了一个 string（字符串）变量 `_string`，并赋值为 "Hello Web3!"。
+
+  ```solidity
+  contract HelloWeb3 {
+      string public _string = "Hello Web3!";
+  }
+  ```
+
+后续我们会更详细地介绍 Solidity 中的变量。
 
 ## 编译并部署代码
-在编辑代码的页面，按ctrl+S就可以编译代码，非常方便。
 
-编译好之后，点击左侧菜单的“部署”按钮，进入部署页面。
+在 Remix 编辑代码的页面，按 Ctrl + S 即可编译代码，非常方便。
+
+编译完成后，点击左侧菜单的“部署”按钮，进入部署页面。
 
 ![](./img/1-2.png)
 
-在默认情况下，remix会用JS虚拟机来模拟以太坊链，运行智能合约，类似在浏览器里跑一条测试链。并且remix会分配几个测试账户给你，每个里面有100 ETH（测试代币），可劲儿用。你点Deploy（黄色按钮），就可以部署咱们写好的合约了。
+默认情况下，`Remix` 会使用 `Remix` 虚拟机（以前称为 JavaScript 虚拟机）来模拟以太坊链，运行智能合约，类似在浏览器里运行一条测试链。`Remix` 还会为你分配一些测试账户，每个账户里有 100 ETH（测试代币），随意使用。点击 `Deploy`（黄色按钮），即可部署我们编写的合约。
 
 ![](./img/1-3.png)
 
-部署成功后，你会在下面看到名为`HelloWeb3`的合约，点击`_string`，就能看到我们代码中写的 “Hello Web3!” 了。
+部署成功后，在下方会看到名为 `HelloWeb3` 的合约。点击 `_string`，即可看到 "Hello Web3!"。
 
 ## 总结
-这一讲，我们简单介绍了`solidity`，`remix`工具，并完成了第一个`solidity`程序--`HelloWeb3`。下面我们将继续`solidity`旅程！
+本节课程中，我们简要介绍了 `Solidity` 和 `Remix` 工具，并完成了第一个 `Solidity` 程序 —— `HelloWeb3`。接下来，我们将继续深入学习 `Solidity`！
 
-### 中文solidity资料推荐：
-1. [Solidity中文文档](https://solidity-cn.readthedocs.io/zh/develop/introduction-to-smart-contracts.html)（官方文档的中文翻译）
+### 中文 Solidity 资料推荐：
+1. [Solidity中文文档](https://docs.soliditylang.org/zh/v0.8.19/index.html)（官方文档的中文翻译）
 
 2. [崔棉大师solidity教程](https://space.bilibili.com/286084162) web3技术教学博主，我看他视频学到了很多 

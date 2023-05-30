@@ -39,7 +39,7 @@ discord：[WTF Academy](https://discord.gg/5akcruXrsk)
 
 2. 取款：拆包装，用户销毁`WETH`，并获得等量的`ETH`。
 
-```
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 

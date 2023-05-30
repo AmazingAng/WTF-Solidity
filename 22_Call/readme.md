@@ -14,7 +14,7 @@ tags:
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -32,9 +32,9 @@ tags:
 ### `call`的使用规则
 `call`的使用规则如下：
 ```
-目标合约地址.call(二进制编码);
+目标合约地址.call(字节码);
 ```
-其中`二进制编码`利用结构化编码函数`abi.encodeWithSignature`获得：
+其中`字节码`利用结构化编码函数`abi.encodeWithSignature`获得：
 ```
 abi.encodeWithSignature("函数签名", 逗号分隔的具体参数)
 ```
@@ -43,7 +43,7 @@ abi.encodeWithSignature("函数签名", 逗号分隔的具体参数)
 另外`call`在调用合约时可以指定交易发送的`ETH`数额和`gas`：
 
 ```
-目标合约地址.call{value:发送数额, gas:gas数额}(二进制编码);
+目标合约地址.call{value:发送数额, gas:gas数额}(字节码);
 ```
 
 看起来有点复杂，下面我们举个`call`应用的例子。
@@ -140,7 +140,7 @@ function callGetX(address _addr) external returns(uint256){
 
 ```solidity
 function callNonExist(address _addr) external{
-	// call getX()
+	// call 不存在的函数
 	(bool success, bytes memory data) = _addr.call(
 		abi.encodeWithSignature("foo(uint256)")
 	);

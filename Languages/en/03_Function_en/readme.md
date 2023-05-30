@@ -1,33 +1,34 @@
-#  WTF Solidity Tutorial: 3. Function type
+#  WTF Solidity Tutorial: 3. Function
 
 Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
 Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
 Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 
 ---
 
-## Function in Solidity
+## Function
 
-Function is classified into values type by solidity document, but I put it a separate category, since there is a big difference. Let's take a look at solidity functions:
+Here's the format of a function in Solidity:
 
 ```solidity
     function <function name>(<parameter types>) [internal|external] [pure|view|payable] [returns (<return types>)]
 ```
 
-kind of complicated, let's move forward one by one (keyword in square brackets is optional):
+It may seem complex, but let's break it down piece by piece (square brackets indicate optional keywords):
 
-1. `function`: Start with the keyword `function`.
 
-2. `<function name>`: Name of the function.
+1. `function`: To write a function, you need to start with the keyword `function`.
 
-3. `(<parameter types>)`: The input parameter types and names of the function.
+2. `<function name>`: The name of the function.
 
-3. `[internal|external|public|private]`: Function visibility specifiers. There are 4 kinds. `public` is the default visibility if left empty:
+3. `(<parameter types>)`: The input parameter types and names.
+
+3. `[internal|external|public|private]`: Function visibility specifiers. There are 4 kinds of them `public` is the default visibility if left empty:
 
    - `public`: Visible to all.
 
@@ -72,7 +73,7 @@ The following statements are considered modifying the state:
 
 I drew a Mario cartton to visualize `pure` and `view`. In the picture, the state variable is represented by Princess Peach, keywards are represented by three different characters.
 
-![WTH is pure and view in solidity?](https://images.mirror-media.xyz/publication-images/1B9kHsTYnDY_QURSWMmPb.png?height=1028&width=1758)
+![WHAT is pure and view in solidity?](https://images.mirror-media.xyz/publication-images/1B9kHsTYnDY_QURSWMmPb.png?height=1028&width=1758)
 
 - `pure` : Functions containing `pure` keyword cannot read nor write state variables on-chain. Just like the little monster, it can't see or touch Princess Peach.
 
@@ -155,7 +156,7 @@ Here we defined an `internal minus()` function, `number` will decrease 1 each ti
     }
 ```
 
-We defined an `external payable minusPayable()` function, which calls `minus()` and return `ETH` balance of the current contract (`this` keyword can let us query current contract address). Since the funciton is `payable`, we can send 1 `ETH` to the contract when calling `minusPayable()`.
+We defined an `external payable minusPayable()` function, which calls `minus()` and return `ETH` balance of the current contract (`this` keyword can let us query current contract address). Since the function is `payable`, we can send 1 `ETH` to the contract when calling `minusPayable()`.
 
 ![](https://images.mirror-media.xyz/publication-images/ETDPN8myq7jFfAL8CUAFt.png?height=148&width=588)
 

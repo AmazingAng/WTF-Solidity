@@ -33,14 +33,13 @@ tags:
 ### CREATE2如何计算地址
 `CREATE2`的目的是为了让合约地址独立于未来的事件。不管未来区块链上发生了什么，你都可以把合约部署在事先计算好的地址上。用`CREATE2`创建的合约地址由4个部分决定：
 - `0xFF`：一个常数，避免和`CREATE`冲突
-- 创建者地址
-- `salt`（盐）：一个创建者给定的数值
-- 待部署合约的字节码（`bytecode`）
-
+- `CreatorAddress`: 调用 Create2 的当前合约（创建合约）地址。
+- `salt`（盐）：一个创建者指定的 uint256 类型的值，的主要目的是用来影响新创建的合约的地址。
+- `initcode`: 新合约的初始字节码（合约的Creation Code和构造函数的参数）。
 ```
-新地址 = hash("0xFF",创建者地址, salt, bytecode)
+新地址 = hash("0xFF",创建者地址, salt, initcode)
 ```
-`CREATE2` 确保，如果创建者使用 `CREATE2` 和提供的 `salt` 部署给定的合约`bytecode`，它将存储在 `新地址` 中。
+`CREATE2` 确保，如果创建者使用 `CREATE2` 和提供的 `salt` 部署给定的合约`initcode`，它将存储在 `新地址` 中。
 
 ## 如何使用`CREATE2`
 `CREATE2`的用法和之前讲的`Create`类似，同样是`new`一个合约，并传入新合约构造函数所需的参数，只不过要多传一个`salt`参数：
@@ -51,7 +50,7 @@ Contract x = new Contract{salt: _salt, value: _value}(params)
 
 ## 极简Uniswap2
 
-跟[上一讲](https://mirror.xyz/ninjak.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)类似，我们用`Create2`来实现极简`Uniswap`。
+跟[上一讲](https://mirror.xyz/wtfacademy.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)类似，我们用`Create2`来实现极简`Uniswap`。
 
 ### `Pair`
 ```solidity
@@ -141,7 +140,7 @@ BSC链上的PEOPLE地址:
 例如当create2合约时：
 > Pair pair = new Pair{salt: salt}(address(this)); 
 
-计算时，需要将参数和bytecode一起进行打包：
+计算时，需要将参数和initcode一起进行打包：
 > ~~keccak256(type(Pair).creationCode)~~
 > => keccak256(abi.encodePacked(type(Pair).creationCode, abi.encode(address(this))))
 ```solidity

@@ -54,18 +54,14 @@ contract StructTypes {
         student.id = 1;
         student.score = 80;
     }
-  
-}
 
-pragma solidity ^0.8.4;
-contract EnumTypes {
-    // Represent uint 0, 1, 2 as Buy, Hold, Sell
-    enum ActionSet { Buy, Hold, Sell }
-    // Create enum variable action
-    ActionSet action = ActionSet.Buy;
-
-    // enum can be explicitly converted to uint
-    function enumToUint() external view returns(uint){
-        return uint(action);
+    // Method 3: struct constructor
+    function initStudent3() external {
+        student = Student(3, 90);
+    }
+    
+    // Method 4: key value
+    function initStudent4() external {
+        student = Student({id: 4, score: 60});
     }
 }

@@ -63,7 +63,7 @@ const provider = new ethers.providers.JsonRpcProvider(`https://mainnet.infura.io
 
 ### `Metamask`小狐狸钱包
 
-进入小狐狸钱包设置 **Setting** 页面，点击网络 **Netowrk**，点击添加网络 **Add Network**。你可以利用下面的参数在小狐狸中添加`Optimism` Layer2链：
+进入小狐狸钱包设置 **Setting** 页面，点击网络 **Network**，点击添加网络 **Add Network**。你可以利用下面的参数在小狐狸中添加`Optimism` Layer2链：
 
 ```
 网络名称（Network Name）: Optimism

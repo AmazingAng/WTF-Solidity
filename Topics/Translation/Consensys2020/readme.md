@@ -81,7 +81,7 @@ contract Election {
 （将来，`Solidity` 会有浮点类型，这会让这更容易。）
 ```
 // bad
-uint x = 5 / 2; // Result is 2, all integer divison rounds DOWN to the nearest integer
+uint x = 5 / 2; // Result is 2, all integer division rounds DOWN to the nearest integer
 ```
 使用乘数可以防止四舍五入，在将来使用 x 时需要考虑这个乘数：
 ```
@@ -100,7 +100,7 @@ uint denominator = 2;
 接口和抽象合约都为智能合约提供了一种可定制和可重用的方法。`Solidity 0.4.11`中引入的接口类似于抽象合约，但不能实现任何功能。接口也有限制，例如不能访问存储或从其他接口继承，这通常使抽象合约更实用。虽然，接口对于在实现之前设计合约肯定有用。此外，重要的是要记住，如果合约继承自抽象合约，它必须通过覆盖实现所有未实现的功能，否则它也将是抽象的。
 
 ## 5. Fallback function 后备函数
-> 0xAA注：`Solidity 0.5.0`时还没有`receive`函数且`fallback`函数当时也直接声明为`function()`。关于最新版本的`fallback`函数教程，请看[链接](https://mirror.xyz/ninjak.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)
+> 0xAA注：`Solidity 0.5.0`时还没有`receive`函数且`fallback`函数当时也直接声明为`function()`。关于最新版本的`fallback`函数教程，请看[链接](https://mirror.xyz/wtfacademy.eth/EroVZqHW1lfJFai3umiu4tb9r1ZbDVPOYC-puaZklAw)
 ### 保持fallback function简单
 当合约被发送一个没有参数的消息（或者没有函数匹配）或，`fallback function`会被调用。当被`.send()`或`.transfer`触发时，`fallback function`只能访问`2300 gas`。如果您希望能够从`send()`或`.transfer()`接收`ETH`，那么您在后备函数中最多可以做的就是记录一个事件。如果需要计算更多`gas`，请使用适当的函数。
 ```

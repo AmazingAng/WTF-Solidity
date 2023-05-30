@@ -248,7 +248,7 @@ interface Vm {
     // ----
     // In case the returned value is a JSON object, it's encoded as a ABI-encoded tuple. As JSON objects
     // don't have the notion of ordered, but tuples do, they JSON object is encoded with it's fields ordered in
-    // ALPHABETICAL ordser. That means that in order to succesfully decode the tuple, we need to define a tuple that
+    // ALPHABETICAL ordser. That means that in order to successfully decode the tuple, we need to define a tuple that
     // encodes the fields in the same order, which is alphabetical. In the case of Solidity structs, they are encoded
     // as tuples, with the attributes in the order in which they are defined.
     // For example: json = { 'a': 1, 'b': 0xa4tb......3xs}

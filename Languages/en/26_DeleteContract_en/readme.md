@@ -13,7 +13,7 @@ Recently, I have been revisiting Solidity, consolidating the finer details, and 
 
 Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
 Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 ---
@@ -62,7 +62,7 @@ Then we call `deleteContract().` The contract will self-destruct and all variabl
 
 ### Attention
 
-1. When providing the contract destruction function externally, it is best to declare the function to only be called by the contract onwer such as using the  function modifier `onlyOwner`.
+1. When providing the contract destruction function externally, it is best to declare the function to only be called by the contract owner such as using the  function modifier `onlyOwner`.
 2. When the contract is destructed, the interaction with the smart contract can also succeed and return `0` .
 3. Security and trust issues often arise when there is a `selfdestruct` function in a contract. The function of  `selfdestruct`  in the contract opens up attack vectors for attackers. For example, using `selfdestruct` to frequently transfer tokens to a contract to attack, this will greatly save the cost of GAS, although few people do this. In addition, this `selfdestruct`  feature reduces users' confidence in the contract.
 
