@@ -12,7 +12,7 @@ tags:
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -119,7 +119,7 @@ contract Attack {
     bool success = payable(msg.sender).send(balance);
     require(success, "Failed Sending ETH!")
     ```
-2. 合约转账`ETH`时，使用 `call()`，并做好冲入保护。
+2. 合约转账`ETH`时，使用 `call()`，并做好重入保护。
 
 3. 使用`OpenZeppelin`的[Address库](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol)，它将检查返回值的低级调用封装好了。
 

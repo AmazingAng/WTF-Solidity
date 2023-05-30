@@ -36,7 +36,7 @@ tags:
     address[] array6;
     bytes array7;
 ```
-**注意**：`bytes`比较特殊，是数组，但是不用加`[]`。另外，不能用`byte[]`声明单字节数组，可以使用`bytes`或`bytes1[]`。在gas上，`bytes`比`bytes1[]`便宜。因为`bytes1[]`在`memory`中要增加31个字节进行填充，会产生额外的gas。但是在`storage`中，由于内存紧密打包，不存在字节填充。
+**注意**：`bytes`比较特殊，是数组，但是不用加`[]`。另外，不能用`byte[]`声明单字节数组，可以使用`bytes`或`bytes1[]`。`bytes` 比 `bytes1[]` 省gas。
 
 ### 创建数组的规则
 在solidity里，创建数组有一些规则：
@@ -47,8 +47,10 @@ tags:
     uint[] memory array8 = new uint[](5);
     bytes memory array9 = new bytes(9);
 ```
-- 数组字面常数(Array Literals)是写作表达式形式的数组，用方括号包着来初始化array的一种方式，并且里面每一个元素的type是以第一个元素为准的，例如`[1,2,3]`里面所有的元素都是uint8类型，因为在solidity中如果一个值没有指定type的话，默认就是最小单位的该type，这里int的默认最小单位类型就是uint8。而`[uint(1),2,3]`里面的元素都是uint类型，因为第一个元素指定了是uint类型了，我们都以第一个元素为准。
-下面的合约中，对于f函数里面的调用，如果我们没有显式对第一个元素进行uint强转的话，是会报错的，因为如上所述我们其实是传入了uint8类型的array，可是g函数需要的却是uint类型的array，就会报错了。
+- 数组字面常数(Array Literals)是写作表达式形式的数组，用方括号包着来初始化array的一种方式，并且里面每一个元素的type是以第一个元素为准的，例如`[1,2,3]`里面所有的元素都是`uint8`类型，因为在solidity中如果一个值没有指定type的话，默认就是最小单位的该type，这里 `uint` 的默认最小单位类型就是`uint8`。而`[uint(1),2,3]`里面的元素都是`uint`类型，因为第一个元素指定了是`uint`类型了，我们都以第一个元素为准。
+
+下面的例子中，如果没有对传入 `g()` 函数的数组进行 `uint` 转换，是会报错的。
+
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.4.16 <0.9.0;
@@ -71,26 +73,27 @@ contract C {
 ```
 ### 数组成员
 - `length`: 数组有一个包含元素数量的`length`成员，`memory`数组的长度在创建后是固定的。
-- `push()`: `动态数组`和`bytes`拥有`push()`成员，可以在数组最后添加一个`0`元素。
-- `push(x)`: `动态数组`和`bytes`拥有`push(x)`成员，可以在数组最后添加一个`x`元素。
-- `pop()`: `动态数组`和`bytes`拥有`pop()`成员，可以移除数组最后一个元素。
+- `push()`: `动态数组`拥有`push()`成员，可以在数组最后添加一个`0`元素，并返回该元素的引用。
+- `push(x)`: `动态数组`拥有`push(x)`成员，可以在数组最后添加一个`x`元素。
+- `pop()`: `动态数组`拥有`pop()`成员，可以移除数组最后一个元素。
 
 **Example:**
 ![6-1.png](./img/6-1.png)
 
 ## 结构体 struct
-`Solidity`支持通过构造结构体的形式定义新的类型。创建结构体的方法：
+`Solidity`支持通过构造结构体的形式定义新的类型。结构体中的元素可以是原始类型，也可以是引用类型；结构体可以作为数组或映射的元素。创建结构体的方法：
 ```solidity
     // 结构体
     struct Student{
         uint256 id;
         uint256 score; 
     }
-```
-```solidity
+
     Student student; // 初始一个student结构体
 ```
-给结构体赋值的两种方法：
+
+给结构体赋值的四种方法：
+
 ```solidity
     //  给结构体赋值
     // 方法1:在函数中创建一个storage的struct引用
@@ -113,6 +116,23 @@ contract C {
 **Example:**
 ![6-3.png](./img/6-3.png)
 
+```solidity
+    // 方法3:构造函数式
+    function initStudent3() external {
+        student = Student(3, 90);
+    }
+```
+**Example:**
+![6-4.png](./img/6-4.png)
+
+```solidity
+     // 方法4:key value
+    function initStudent4() external {
+        student = Student({id: 4, score: 60});
+    }
+```
+**Example:**
+![6-5.png](./img/6-5.png)
 ## 总结
 这一讲，我们介绍了solidity中数组（`array`）和结构体（`struct`）的基本用法。下一讲我们将介绍solidity中的哈希表——映射（`mapping`）。
 

@@ -1,8 +1,7 @@
 // provider.on("pending", listener)
 import { ethers, utils } from "ethers";
 
-// 1. 创建provider和wallet，监听事件时候推荐用wss连接而不是http
-// 准备 alchemy API 可以参考https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md 
+// 1. 创建provider
 var url = "http://127.0.0.1:8545";
 const provider = new ethers.providers.WebSocketProvider(url);
 let network = provider.getNetwork()
@@ -18,8 +17,7 @@ const privateKey = '0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cd
 const wallet = new ethers.Wallet(privateKey, provider)
 
 const main = async () => {
-    // 4. 监听pending的uniswapV3交易，获取交易详情，然后解码。
-    //  网络不活跃的时候，可能需要等待几分钟才能监听到一笔。
+    // 4. 监听pending的mint交易，获取交易详情，然后解码。
     console.log("\n4. 监听pending交易，获取txHash，并输出交易详情。")
     provider.on("pending", async (txHash) => {
         if (txHash) {
@@ -39,7 +37,7 @@ const main = async () => {
                     console.log("raw transaction")
                     console.log(tx);
 
-                    // 构建新tx
+                    // 构建抢跑tx
                     const txFrontrun = {
                         to: tx.to,
                         value: tx.value,
@@ -48,6 +46,7 @@ const main = async () => {
                         gasLimit: tx.gasLimit * 2,
                         data: tx.data
                     }
+                    // 发送抢跑交易
                     var txResponse = await wallet.sendTransaction(txFrontrun)
                     console.log(`正在frontrun交易`)
                     await txResponse.wait()

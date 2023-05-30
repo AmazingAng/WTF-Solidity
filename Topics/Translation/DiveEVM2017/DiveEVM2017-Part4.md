@@ -562,7 +562,7 @@ ethereum.abi.encode_abi(
   [[[0xa1, 0xa2, 0xa3], [0xb1, 0xb2, 0xb3], [0xc1, 0xc2, 0xc3]]]
 ).hex()
 
-// arg1: The outter array is at position 0x20.
+// arg1: The outer array is at position 0x20.
 0000000000000000000000000000000000000000000000000000000000000020
 
 // 0x20. Each element is the position of an inner array.

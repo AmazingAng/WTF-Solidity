@@ -4,7 +4,7 @@ Recently, I have been revisiting Solidity, consolidating the finer details, and 
 
 Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
 Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -12,22 +12,25 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 ## WTF is Solidity?
 
-Solidity is the programming language for Ethereum's virtual machine (EVM), used in smart contract development. I believe that Solidity is an important skill to navigate the on-chain ecosystems and projects. Blockchain projects are mostly open source and once you understand the underlying code, you are better equipped to avoid rugpull and shady projects. 
+`Solidity` is a programming language used for creating smart contracts on the Ethereum Virtual Machine (EVM). It's a necessary skill for working on blockchain projects. Moreover, as many of them are open-source, understanding the code can help in avoiding money-losing projects.
 
-Solidity has 2 features:
 
-1. Object-oriented.
-2. High-level: If you can write smart contract in Solidity, you are the first class citizen of Ethereum.
+`Solidity` has two characteristics:
+
+1. Object-oriented: After learning it, you can use it to make money by finding the right projects.
+2. Advanced: If you can write smart contract in Solidity, you are the first class citizen of Ethereum.
 
 ## Development tool: Remix
 
-I will use `Remix` to demostrate smart contract development with Solidity. Remix is the integrated development environment (IDE) recommended by Ethereum Foundatoin and is newbie-friendly. The IDE allows you to quickly deploy and test smart contracts in the browser: no need to download any application to your computer. 
+In this tutorial, we will be using `Remix` to run `solidity` contracts. `Remix` is an smart contract development IDE (Integrated Development Environment) recommended by Ethereum official. It is suitable for beginners, allows for quick deployment and testing of smart contracts in the browser, without needing to install any programs on your local machine.
 
 Website: [remix.ethereum.org](https://remix.ethereum.org)
 
+Upon entering `Remix`, you can see that the menu on the left-hand side has three buttons, corresponding to the file (where you write the code), compile (where you run the code), and deploy (where you deploy to the chain). By clicking the "Create New File" button, you can create a blank `solidity` contract.
+
 Within Remix, we can see that there are four buttons on the leftmost vertical menu, corresponding to FILE EXPLORER (where to write code), SEARCH IN FILES (find and replace files), SOLIDITY COMPILER (to run code), and DEPLOY & RUN TRANSACTIONS (on-chain deployment). We can create a blank Solidity contract by clicking the `Create New File` button.
 
-   ![Remix Menu](./img/1-1.png)
+![Remix Menu](./img/1-1.png)
 
 ## The first Solidity program
 
@@ -40,7 +43,7 @@ contract HelloWeb3{
     string public _string = "Hello Web3!";}
 ```
 
-Now, we will breakdown and analyze the source code in detail, understanding the basic strucutre: 
+Now, we will breakdown and analyze the source code in detail, understanding the basic structure: 
 
 1. The first line is a comment, which denotes the software license (license identifier) used by the program. We are using the MIT license. If you do not indicate the license used, the program can compile successfully but will report an warning during compilation. Solidity's comments are denoted with "//", followed by the content of the comment (which will not be run by the program).
 

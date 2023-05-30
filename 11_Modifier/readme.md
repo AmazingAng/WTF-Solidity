@@ -14,7 +14,7 @@ tags:
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -66,8 +66,8 @@ contract Parents {
 ```
 我们定义了一个`changeOwner`函数，运行他可以改变合约的`owner`，但是由于`onlyOwner`修饰符的存在，只有原先的`owner`可以调用，别人调用就会报错。这也是最常用的控制智能合约权限的方法。
 
-### OppenZepplin的Ownable标准实现：
-`OppenZepplin`是一个维护`solidity`标准化代码库的组织，他的`Ownable`标准实现如下：
+### OpenZeppelin的Ownable标准实现：
+`OpenZeppelin`是一个维护`solidity`标准化代码库的组织，他的`Ownable`标准实现如下：
 [https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol)
 
 ## Remix 演示示例

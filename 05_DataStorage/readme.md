@@ -13,16 +13,17 @@ tags:
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
 ## Solidity中的引用类型
-**引用类型(Reference Type)**：包括数组（`array`），结构体（`struct`）和映射（`mapping`），这类变量占空间大，赋值时候直接传递地址（类似指针）。由于这类变量比较复杂，占用存储空间大，我们在使用时必须要声明数据存储的位置。
+**引用类型(Reference Type)**：包括数组（`array`）和结构体（`struct`），由于这类变量比较复杂，占用存储空间大，我们在使用时必须要声明数据存储的位置。
 
 ## 数据位置
+
 solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同存储位置的`gas`成本不同。`storage`类型的数据存在链上，类似计算机的硬盘，消耗`gas`多；`memory`和`calldata`类型的临时存在内存里，消耗`gas`少。大致用法：
 
 1. `storage`：合约里的状态变量默认都是`storage`，存储在链上。
@@ -50,18 +51,20 @@ solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 	```solidity
 	uint[] x = [1,2,3]; // 状态变量：数组 x
 
-    function fStorage() public{
-        //声明一个storage的变量 xStorage，指向x。修改xStorage也会影响x
-        uint[] storage xStorage = x;
-        xStorage[0] = 100;
-    }
+  function fStorage() public{
+      //声明一个storage的变量 xStorage，指向x。修改xStorage也会影响x
+      uint[] storage xStorage = x;
+      xStorage[0] = 100;
+  }
 	```
 	**Example:**
 	![5-2.png](./img/5-2.png)
 
+
+
 	- `memory`赋值给`memory`，会创建引用，改变新变量会影响原变量。
 
-- 其他情况下，赋值创建的是本体的副本，即对二者之一的修改，并不会同步到另一方
+  - 其他情况下，赋值创建的是本体的副本，即对二者之一的修改，并不会同步到另一方
 
 ## 变量的作用域
 `Solidity`中变量按作用域划分有三种，分别是状态变量（state variable），局部变量（local variable）和全局变量(global variable)
@@ -73,6 +76,7 @@ contract Variables {
     uint public x = 1;
     uint public y;
     string public z;
+}
 ```
 
 我们可以在函数里更改状态变量的值：
@@ -122,6 +126,80 @@ contract Variables {
 
 **Example:**
 ![5-4.png](./img/5-4.png)
+
+### 4. 全局变量-以太单位与时间单位
+#### 以太单位
+`Solidity`中不存在小数点，以`0`代替为小数点，来确保交易的精确度，并且防止精度的损失，利用以太单位可以避免误算的问题，方便程序员在合约中处理货币交易。
+- `wei`: 1
+- `gwei`: 1e9 = 1000000000
+- `ether`: 1e18 = 1000000000000000000
+
+```solidity
+    function weiUnit() external pure returns(uint) {
+        assert(1 wei == 1e0);
+        assert(1 wei == 1);
+        return 1 wei;
+    }
+
+    function gweiUnit() external pure returns(uint) {
+        assert(1 gwei == 1e9);
+        assert(1 gwei == 1000000000);
+        return 1 gwei;
+    }
+
+    function etherUnit() external pure returns(uint) {
+        assert(1 ether == 1e18);
+        assert(1 ether == 1000000000000000000);
+        return 1 ether;
+    }
+```
+
+**Example:**
+![5-5.png](./img/5-5.png)
+
+#### 时间单位
+可以在合约中规定一个操作必须在一周内完成，或者某个事件在一个月后发生。这样就能让合约的执行可以更加精确，不会因为技术上的误差而影响合约的结果。因此，时间单位在`Solidity`中是一个重要的概念，有助于提高合约的可读性和可维护性。
+- `seconds`: 1
+- `minutes`: 60 seconds = 60
+- `hours`: 60 minutes = 3600
+- `days`: 24 hours = 86400
+- `weeks`: 7 days = 604800
+
+```solidity
+    function secondsUnit() external pure returns(uint) {
+        assert(1 seconds == 1);
+        return 1 seconds;
+    }
+
+    function minutesUnit() external pure returns(uint) {
+        assert(1 minutes == 60);
+        assert(1 minutes == 60 seconds);
+        return 1 minutes;
+    }
+
+    function hoursUnit() external pure returns(uint) {
+        assert(1 hours == 3600);
+        assert(1 hours == 60 minutes);
+        return 1 hours;
+    }
+
+    function daysUnit() external pure returns(uint) {
+        assert(1 days == 86400);
+        assert(1 days == 24 hours);
+        return 1 days;
+    }
+
+    function weeksUnit() external pure returns(uint) {
+        assert(1 weeks == 604800);
+        assert(1 weeks == 7 days);
+        return 1 weeks;
+    }
+```
+
+**Example:**
+![5-6.png](./img/5-6.png)
+
+
 ## 总结
 在这一讲，我们介绍了`solidity`中的引用类型，数据位置和变量的作用域。重点是`storage`, `memory`和`calldata`三个关键字的用法。他们出现的原因是为了节省链上有限的存储空间和降低`gas`。下一讲我们会介绍引用类型中的数组。
 

@@ -12,7 +12,7 @@ tags:
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -36,7 +36,7 @@ tags:
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-// 有DoS漏洞的游戏，玩家们先存钱，游戏结束后，调用deposit退钱。
+// 有DoS漏洞的游戏，玩家们先存钱，游戏结束后，调用refund退钱。
 contract DoSGame {
     bool public refundFinished;
     mapping(address => uint256) public balanceOf;
@@ -102,12 +102,12 @@ contract Attack {
 **2.** 调用 `DoSGame` 合约的 `deposit()`，进行存款并参与游戏。
 ![](./img/S09-2.png)
 **3.** 此时，如果游戏结束调用 `refund()` 退款的话是可以正常退款的。
-![](./img/S09-3.png)
+![](./img/S09-3.jpg)
 **3.** 重新部署 `DoSGame` 合约，并部署 `Attack` 合约。
 **4.** 调用 `Attack` 合约的 `attack()`，进行存款并参与游戏。
-![](./img/S09-4.png)
+![](./img/S09-4.jpg)
 **5.** 调用 `DoSGame` 合约`refund()`，进行退款，发现不能正常运行，攻击成功。
-![](./img/S09-5.png)
+![](./img/S09-5.jpg)
 
 ## 预防方法
 

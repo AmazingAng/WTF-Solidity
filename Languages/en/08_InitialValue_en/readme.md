@@ -4,7 +4,7 @@ Recently, I have been revisiting Solidity, consolidating the finer details, and 
 
 Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
 Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
@@ -21,11 +21,11 @@ In Solidity, variables declared but not assigned have their initial/default valu
 - `string`: `""`
 - `int`: `0`
 - `uint`: `0`
-- `enum`: first element in enumeration
+- `enum`: first element in enumeration 
 - `address`: `0x0000000000000000000000000000000000000000` (or `address(0)`)
 - `function`
-    - `internal`: blank equation
-    - `external`: blank equation
+    - `internal`: blank function
+    - `external`: blank function
 
 You can use `getter` function of `public` variables to confirm the above initial values:
 
@@ -39,8 +39,8 @@ You can use `getter` function of `public` variables to confirm the above initial
     enum ActionSet {Buy, Hold, Sell}
     ActionSet public _enum; // first element 0
 
-    function fi() internal{} // internal blank equation
-    function fe() external{} // external blank equation
+    function fi() internal{} // internal blank function
+    function fe() external{} // external blank function
 ```
 
 ### Initial values of reference types

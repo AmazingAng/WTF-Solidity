@@ -14,13 +14,13 @@ Recently, I have been revisiting Solidity, consolidating the finer details, and 
 
 Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
 Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
-In this section, we use the interface contract of `ERC721` as an example to introduce the `abstract` and `interface` in `solidity`. This will also help you better understand the `ERC721` token standard.
+In this section, we will introduce the `abstract` and `interface` contracts in Solidity, using the interface of `ERC721` as an example. They are used to write contract templates and reduce code redundancy.
 
 ## Abstract contract
 
@@ -33,19 +33,20 @@ abstract contract InsertionSort{
     function insertionSort(uint[] memory a) public pure virtual returns(uint[] memory);
 }
 ```
+
 ## Interface
 
-The `interface` contract is similar to the `abstract` contract, but it requires no functions are implemented in the contract. Rules of the interface contract are as follows:
+The `interface` contract is similar to the `abstract` contract, but it requires no functions are implemented. Rules of the interface:
 
 1. Cannot contain state variables.
 2. Cannot contain constructors.
-3. Cannot inherit other contracts except interface contracts.
+3. Cannot inherit non-interface contracts.
 4. All functions must be external and cannot have contents in the function body.
-5. The contract that inherits the interface contract must implement all the functions defined in the interface.
+5. The contract that inherits the interface contract must implement all the functions defined in it.
 
 Although the interface does not implement any functionality, it is the skeleton of smart contracts. Interface 
 defines what the contract does and how to interact with them: if a smart contract implements an interface (like `ERC20` or `ERC721`), 
-other Dapps and smart contracts know how to interact with it. Because the interface provides two important pieces of information:
+other Dapps and smart contracts will know how to interact with it. Because it provides two important pieces of information:
 
 1. The `bytes4` selector for each function in the contract, and the function signatures `function name (parameter type)`.
 2. Interface id (see [EIP165](https://eips.ethereum.org/EIPS/eip-165) for more information)
@@ -54,8 +55,8 @@ In addition, the interface is equivalent to the contract `ABI` (Application Bina
 and they can be converted to each other: compiling the interface contract will give you the contract `ABI`, 
 and [abi-to-sol tool](https://gnidan.github.io/ abi-to-sol/) will convert the `ABI` back to the interface contract.
 
-We take `IERC721` contract, the interface contract for the `ERC721` token standard,  as an example. It consists of 3 events and 9 functions, 
-which all `ERC721` contracts need to implement. In interface contract, each function ends with `;` instead of the function body `{ }`. Moreover, every function in interface contract is by default `virtual`, so you do not need to label function as `virtual` explicitly.
+We take `IERC721` contract, the interface for the `ERC721` token standard, as an example. It consists of 3 events and 9 functions, 
+which all `ERC721` contracts need to implement. In interface, each function ends with `;` instead of the function body `{ }`. Moreover, every function in interface contract is by default `virtual`, so you do not need to label function as `virtual` explicitly.
 
 ```solidity
 interface IERC721 is IERC165 {
@@ -99,7 +100,7 @@ interface IERC721 is IERC165 {
 - `getApproved`: Get the approved address for a single NFT.
 - `setApprovalForAll`: Enable or disable approval for a third party to manage all your NFTs in this contract.
 - `isApprovedForAll`: Query if an address is an authorized operator for another address.
-- `safeTransferFrom`: Overloaded function for safe transfer, containing `data` in its paramters.
+- `safeTransferFrom`: Overloaded function for safe transfer, containing `data` in its parameters.
 
 
 ### When to use an interface?
@@ -127,11 +128,11 @@ contract interactBAYC {
 ```
 
 ## Remix demo
-- Abstract example:
+1. Abstract example:
   ![14-1](./img/14-1.png)
-- Interface example:
+2. Interface example:
   ![14-2](./img/14-2.png)
 
 ## Summary
-In this chapter, we introduced the `abstract` and `interface` contracts in `solidity`, which can be used to write contract templates and reduce code redundancy.
-We also learned the interface contract of `ERC721` token standard and how to interact with the `BAYC` contract using interface contract.
+In this chapter, we introduced the `abstract` and `interface` contracts in Solidity, which are used to write contract templates and reduce code redundancy.
+We also learned the interface of `ERC721` token standard and how to interact with the `BAYC` contract using interface.

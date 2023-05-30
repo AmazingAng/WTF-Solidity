@@ -4,30 +4,30 @@ Recently, I have been revisiting Solidity, consolidating the finer details, and 
 
 Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-Community: [Discord](https://discord.wtf.academy)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
 Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 
 -----
 
-### Variable Types in Solidity
+## Variable Types
 
-1. **Value Type**：This include boolean, integer, etc. Varialbes of these types will always be passed by value (i.e. always create a new copy when used as function arguments or in assignments).
+1. **Value Type**：This include boolean, integer, etc. These variables directly pass values when assigned.
 
-2. **Reference Type**：This includes arrays and structs. Variables of these types take up a large amount of storage, will be passed by pointers during assignment, and can be modified through multiple variable names. 
+2. **Reference Type**：including arrays and structures. These variables take up more space, directly pass addresses (similar to pointers) when assigned, and can be modified with multiple variable names.
 
-3. **Mapping Type**: These are similar to hash tables for Solidity.
+3. **Mapping Type**: hash tables in Solidity.
 
-4. **Function Type**：The Solidity documentation classifies functions into value types, but I think they are very different. So I will classify them separately. 
+4. **Function Type**：The Solidity documentation classifies functions into value types. But its very different from other types, and I put it in a separate category.
 
-Only the most common types will be introduced here. In this chapter, we will introduce value types.
+Only the commonly used types will be introduced here. In this chapter, we will introduce value types.
 
 ## Value types
 
 ### 1. Boolean
 
-The value of a Boolean is binary, either `true` or `false`.
+Boolean is a binary variable, and its values are `true` or `false`.
 
 ```solidity
     // Boolean
@@ -53,40 +53,43 @@ Code：
     bool public _bool5 = _bool != _bool1; // inequality
 ```
 
-From the above source code：the value of the variable `_bool` is `true`；so `_bool1` is not`_bool`，which yields `false`；`_bool && _bool1``s value is `false`；`_bool || _bool1``s value is `true`；`_bool == _bool1``s value is `false`；and `_bool != _bool1``s value is `true`.
+From the above source code：the value of the variable `_bool` is `true`; `_bool1` is not`_bool`, which yields `false`; `_bool && _bool1` is `false`；`_bool || _bool1` is `true`；`_bool == _bool1` is `false`；and `_bool != _bool1` is `true`.
 
-**Important note：** The `&&` and `||` operator follows a short-circuit evaluation rule. This means that for an expression such as `f(x) || g(y)`，if `f(x)` is `true`，then `g(y)` will not be computed; even if its result is the opposite of `f(x)`.
+**Important note：** The `&&` and `||` operator follows a short-circuit evaluation rule. This means that for an expression such as `f(x) || g(y)`, if `f(x)` is `true`, `g(y)` will not be evaluated.
 
 ### 2. Integers
 
-Integers are the whole numbers in Solidity，most frequently used examples include:
+Integers types in Solidity includes signed integer `int` and unsigned integer `uint`. It can store up to a 256-bit integers or data units.
 
 ```solidity
     // Integer
     int public _int = -1; // integers including negative numbers
-    uint public _uint = 1; // positive numbers
+    uint public _uint = 1; // non-negative numbers
     uint256 public _number = 20220330; // 256-bit positive integers
 ```
-Some commonly used integer operators include:
+Commonly used integer operators include:
 
-- Inequality operator (which returns a Boolean)： `<=`， `<`， `==`， `!=`， `>=`， `>` 
-- Arithmetic operator： `+`， `-`， unary operators `-`， `+`， `*`， `/`， `%` (modulo)，`**` (exponent)
+- Inequality operator (which returns a Boolean)： `<=`,  `<`,  `==`,  `!=`,  `>=`,  `>` 
+- Arithmetic operator： `+`,  `-`,  `*`,  `/`,  `%` (modulo), `**` (exponent)
 
 Code：
 
 ```solidity
-    // Integer operators
-    uint256 public _number1 = _number + 1; // +，-，*，/
+    // Integer operations
+    uint256 public _number1 = _number + 1; // +, -, *, /
     uint256 public _number2 = 2**2; // Exponent
     uint256 public _number3 = 7 % 2; // Modulo (Modulus)
     bool public _numberbool = _number2 > _number3; // Great than
 ```
 
-You can run the above code and check the values of the variables.
+You can run the above code and check the values of each variable.
 
 ### 3. Addresses
 
-Address type stores a 20-bit value, the same as the size of an Ethereum address. Address types also have member variables and functions. There are two types of address: plain addresses and `payable` addresses. The `payable` address has two members, `balance()` and `transfer()`, making it easy to check `ETH` balances and transfer funds. You are not supposed to send `ETH` to plain addresses.
+Addresses have following 2 types: 
+- `address`: Holds a 20 byte value (size of an Ethereum address).
+
+- `address payable`: Same as `address`, but with the additional members `transfer` and `send` to allow ETH transfers.
 
 Code:
 
@@ -100,7 +103,11 @@ Code:
 
 ### 4. Fixed-size byte arrays
 
-There are two types of byte arrays (`bytes`): fixe-sized (`byte`, `bytes8`, `bytes32`) and dynamically-sized (`bytes`, `string`). The fixe-sized byte arrays belong to value type, and the dynamically-sized belong to reference type. The fixe-sized byte arrays can store data, and consumes less `gas`.
+Byte arrays in Solidity come in two types:
+
+- Fixed-length byte arrays: belong to value types, including `byte`, `bytes8`, `bytes32`, etc, depending on the size of each element (maximum 32 bytes). The length of the array can not be modified after declaration.
+- Variable-length byte arrays: belong to reference type, including `bytes`, etc. The length of the array can be modified after declaration. We will learn more detail in later chapters
+
 
 Code：
 
@@ -110,9 +117,9 @@ Code：
     bytes1 public _byte = _byte32[0]; 
 ```
 
-We assign value `MiniSolidity` to the variable `_byte32`, or in `hexadecimal`: `0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
+In the above code, we assigned value `MiniSolidity` to the variable `_byte32`, or in hexadecimal: `0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
 
-On the other hand, the `_byte` variable stores the first byte of the `_byte32` variable, which is `0x4d`.
+And `_byte` takes the value of the first byte of `_byte32`, which is `0x4d`.
 
 ### 5. Enumeration
 
@@ -121,7 +128,7 @@ Enumeration (`enum`) is a user-defined data type within Solidity. It is mainly u
 Code:
 
 ```solidity
-    // Let uint 0， 1， 2 represent Buy, Hold, Sell
+    // Let uint 0,  1,  2 represent Buy, Hold, Sell
     enum ActionSet { Buy, Hold, Sell }
     // Create an enum variable called action
     ActionSet action = ActionSet.Buy;
@@ -138,9 +145,9 @@ It can be converted to `uint` easily:
 
 `enum` is a less popular type in Solidity. 
 
-## Example with Remix
+## Demo in Remix
 
-- After deploying the contract, you can cehck the values of each variable:
+- After deploying the contract, you can check the values of each variable:
 
    ![2-1.png](./img/2-1.png)
   
@@ -152,4 +159,4 @@ It can be converted to `uint` easily:
 
 ## Summary 
 
-In this chapter, we introduced the variable types in Solidity and explained the boolean, integer, address, fixed-length byte array, and enumeration in value types. We will cover several other types in the subsequent tutorials.
+In this chapter, we introduced the variable types in Solidity, they are value type, reference type, mapping type, and function type. Then we introduced commonly used types: boolean, integer, address, fixed-length byte array, and enumeration in value types. We will cover other types in the subsequent tutorials.
