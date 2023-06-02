@@ -134,7 +134,7 @@
 
 **第52讲：EIP712 类型化数据签名**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/52_EIP712) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/52_EIP712/readme.md)
 
-**第53讲：ERC-2612 ERC20Permit**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/53_ERC20Permit) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/53_ERC20Permit/readme.md)
+**第53讲：ERC2612 ERC20Permit**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/53_ERC20Permit) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/53_ERC20Permit/readme.md)
 
 ## 合约安全
 
