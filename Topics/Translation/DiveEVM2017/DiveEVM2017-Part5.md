@@ -68,7 +68,7 @@ solc --bin --asm c.sol
 
 打开 Etherscan，您应该看到该交易的输入数据是 Solidity 编译器生成的字节码。
 
-在处理此交易时，EVM 会将输入数据作为代码执行。*Voila*，合同诞生了。
+在处理此交易时，EVM 会将输入数据作为代码执行。*Voila*，合约诞生了。
 
 ## What The Bytecode Is Doing
 
