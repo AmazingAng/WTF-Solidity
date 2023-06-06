@@ -136,7 +136,7 @@
 
 **第53讲：ERC2612 ERC20Permit**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/53_ERC20Permit) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/53_ERC20Permit/readme.md)
 
-**第54讲：跨链桥**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/54_CrossChain) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/54_CrossChain/readme.md)
+**第54讲：跨链桥**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/54_CrossChainBridge) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/54_CrossChainBridge/readme.md)
 
 ## 合约安全
 
