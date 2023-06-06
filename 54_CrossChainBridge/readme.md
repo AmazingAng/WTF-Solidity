@@ -65,6 +65,8 @@ contract CrossChainToken is ERC20, Ownable {
     
     // Bridge event
     event Bridge(address indexed user, uint256 amount);
+    // Mint event
+    event Mint(address indexed to, uint256 amount);
 
     /**
      * @param name Token Name
@@ -93,6 +95,7 @@ contract CrossChainToken is ERC20, Ownable {
      */
     function mint(address to, uint amount) external onlyOwner {
         _mint(to, amount);
+        emit  Mint(to, amount);
     }
 }
 ```
@@ -101,9 +104,9 @@ contract CrossChainToken is ERC20, Ownable {
 
 - `constructor()`: 构造函数，在部署合约时会被调用一次，用于初始化代币的名字、符号和总供应量。
 
-- `bridge()`: 用户调用此函数进行跨链转移，它会销毁用户指定数量的代币，并触发一个`Bridge`事件。
+- `bridge()`: 用户调用此函数进行跨链转移，它会销毁用户指定数量的代币，并释放`Bridge`事件。
 
-- `mint()`: 只有合约的所有者才能调用此函数，用于处理跨链事件，当用户在另一条链调用`bridge()`函数销毁代币，脚本会监听`Bridge`事件，并给用户在目标链铸造代币。
+- `mint()`: 只有合约的所有者才能调用此函数，用于处理跨链事件，并释放`Mint`事件。当用户在另一条链调用`bridge()`函数销毁代币，脚本会监听`Bridge`事件，并给用户在目标链铸造代币。
 
 ### 3.2 跨链脚本
 
@@ -193,4 +196,4 @@ main();
 
 ## 总结
 
-这一讲我们介绍了跨链桥，它允许在两个或多个区块链之间移动数字资产和信息，方便用户在多链操作资产。同时，它也有很大的风险，近两年针对跨链桥的攻击已造成超过**20亿美元**的用户资产损失。我们搭建一个简单的跨链桥，并实现Goerli测试网和Sepolia测试网之间的ERC20代币转移。相信通过本教程，你对跨链桥会有更深的理解。
+这一讲我们介绍了跨链桥，它允许在两个或多个区块链之间移动数字资产和信息，方便用户在多链操作资产。同时，它也有很大的风险，近两年针对跨链桥的攻击已造成超过**20亿美元**的用户资产损失。在本教程中，我们搭建一个简单的跨链桥，并实现Goerli测试网和Sepolia测试网之间的ERC20代币转移。相信通过本教程，你对跨链桥会有更深的理解。
