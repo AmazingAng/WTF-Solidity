@@ -8,6 +8,8 @@ contract CrossChainToken is ERC20, Ownable {
     
     // Bridge event
     event Bridge(address indexed user, uint256 amount);
+    // Mint event
+    event Mint(address indexed to, uint256 amount);
 
     /**
      * @param name Token Name
@@ -36,6 +38,7 @@ contract CrossChainToken is ERC20, Ownable {
      */
     function mint(address to, uint amount) external onlyOwner {
         _mint(to, amount);
+        emit Mint(to, amount);
     }
 }
 
