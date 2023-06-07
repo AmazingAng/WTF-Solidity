@@ -36,7 +36,7 @@ tags:
     address[] array6;
     bytes array7;
 ```
-**注意**：`bytes`比较特殊，是数组，但是不用加`[]`。另外，不能用`byte[]`声明单字节数组，可以使用`bytes`或`bytes1[]`。`bytes` 比 `bytes1[]` 省gas。
+**注意**：`bytes`比较特殊，是数组，但是不用加`[]`。另外，不能用`bytes[]`声明单字节数组，可以使用`bytes`或`bytes1[]`。`bytes` 比 `bytes1[]` 省gas。
 
 ### 创建数组的规则
 在solidity里，创建数组有一些规则：
