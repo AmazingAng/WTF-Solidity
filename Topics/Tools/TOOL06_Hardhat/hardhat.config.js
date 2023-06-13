@@ -8,4 +8,7 @@ module.exports = {
       accounts: ["PRIVATE_KEY"],
     },
   },
+  etherscan: {
+    apiKey: "YOUR_ETHERSCAN_API_KEY",
+  },
 };
