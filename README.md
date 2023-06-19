@@ -237,6 +237,7 @@
 ## 参考
 - [Solidity 官方文档](https://docs.soliditylang.org/en/v0.8.17/)
 - [Solidity By Example](https://solidity-by-example.org/)
+  - [中文版](https://github.com/Web3-Club/solidity-by-example_Chinese)   
 - [OpenZeppelin Contract](https://github.com/OpenZeppelin/openzeppelin-contracts)
 - [solmate](https://github.com/transmissions11/solmate)
 - [Chainlink Docs](https://docs.chain.link/)
