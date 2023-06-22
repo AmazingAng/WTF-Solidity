@@ -138,6 +138,8 @@
 
 **第54讲：跨链桥**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/54_CrossChainBridge) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/54_CrossChainBridge/readme.md)
 
+**第55讲：多重调用**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/55_MultiCall) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/55_MultiCall/readme.md)
+
 ## 合约安全
 
 **S01：重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S01_ReentrancyAttack) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S01_ReentrancyAttack/readme.md) | [Mirror](https://mirror.xyz/wtfacademy.eth/SrNu6LLzwH7qlTVKbJY6lkTpmadGqUXw0L8iUMzfMxo)
