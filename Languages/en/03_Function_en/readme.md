@@ -28,7 +28,7 @@ It may seem complex, but let's break it down piece by piece (square brackets ind
 
 3. `(<parameter types>)`: The input parameter types and names.
 
-3. `[internal|external|public|private]`: Function visibility specifiers. There are 4 kinds of them `public` is the default visibility if left empty:
+3. `[internal|external|public|private]`: Function visibility specifiers. There is no default visibility, so you must specify it for each function. There are 4 kinds of them:
 
    - `public`: Visible to all.
 
