@@ -182,7 +182,7 @@ function removeLiquidity(uint liquidity) external returns (uint amount0, uint am
 
 ### 交易
 
-在Swap合约中，用户可以使用一种代币交易另一种。那么我用 $\Delta{x}$单位的代币0，可以交换多少单位的代币1呢？下面我们来简单推导一下。
+在Swap合约中，用户可以使用一种代币交易另一种。那么我用 $\Delta{x}$单位的 token0，可以交换多少单位的 token1 呢？下面我们来简单推导一下。
 
 根据恒定乘积公式，交易前：
 
