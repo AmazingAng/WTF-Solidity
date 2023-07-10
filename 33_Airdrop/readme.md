@@ -8,17 +8,17 @@ tags:
   - airdrop
 ---
 
-# WTF Solidity极简入门: 33. 发送空投
+# WTF Solidity 极简入门: 33. 发送空投
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 solidity，巩固一下细节，也写一个“WTF Solidity 极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
 欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-欢迎加入WTF科学家社区，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
+欢迎加入 WTF 科学家社区，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
 
-所有代码和教程开源在github（1024个star发课程认证，2048个star发社群NFT）: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github（1024 个 star 发课程认证，2048 个 star 发社群 NFT）: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 
 在币圈，最开心的一件事就是领空投，空手套白狼。这一讲，我们将学习如何使用智能合约发送`ERC20`代币空投。
 
@@ -34,68 +34,76 @@ tags:
 
 - `getSum()`函数：返回`uint`数组的和。
 
-    ```solidity
-    // 数组求和函数
-    function getSum(uint256[] calldata _arr) public pure returns(uint sum)
-    {
-        for(uint i = 0; i < _arr.length; i++)
-            sum = sum + _arr[i];
-    }
-    ```
+  ```solidity
+  // 数组求和函数
+  function getSum(uint256[] calldata _arr) public pure returns(uint sum)
+  {
+      for(uint i = 0; i < _arr.length; i++)
+          sum = sum + _arr[i];
+  }
+  ```
 
 - `multiTransferToken()`函数：发送`ERC20`代币空投，包含`3`个参数：
-    - `_token`：代币合约地址（`address`类型）
-    - `_addresses`：接收空投的用户地址数组（`address[]`类型）
-    - `_amounts`：空投数量数组，对应`_addresses`里每个地址的数量（`uint[]`类型）
 
-    该函数有两个检查：第一个`require`检查了`_addresses`和`_amounts`两个数组长度是否相等；第二个`require`检查了空投合约的授权额度大于要空投的代币数量总和。
+  - `_token`：代币合约地址（`address`类型）
+  - `_addresses`：接收空投的用户地址数组（`address[]`类型）
+  - `_amounts`：空投数量数组，对应`_addresses`里每个地址的数量（`uint[]`类型）
 
-    ```solidity
-    /// @notice 向多个地址转账ERC20代币，使用前需要先授权
-    ///
-    /// @param _token 转账的ERC20代币地址
-    /// @param _addresses 空投地址数组
-    /// @param _amounts 代币数量数组（每个地址的空投数量）
-    function multiTransferToken(
-        address _token,
-        address[] calldata _addresses,
-        uint256[] calldata _amounts
-        ) external {
-        // 检查：_addresses和_amounts数组的长度相等
-        require(_addresses.length == _amounts.length, "Lengths of Addresses and Amounts NOT EQUAL");
-        IERC20 token = IERC20(_token); // 声明IERC合约变量
-        uint _amountSum = getSum(_amounts); // 计算空投代币总量
-        // 检查：授权代币数量 >= 空投代币总量
-        require(token.allowance(msg.sender, address(this)) >= _amountSum, "Need Approve ERC20 token");
-        
-        // for循环，利用transferFrom函数发送空投
-        for (uint8 i; i < _addresses.length; i++) {
-            token.transferFrom(msg.sender, _addresses[i], _amounts[i]);
-        }
-    }
-    ```
+  该函数有两个检查：第一个`require`检查了`_addresses`和`_amounts`两个数组长度是否相等；第二个`require`检查了空投合约的授权额度大于要空投的代币数量总和。
+
+  ```solidity
+  /// @notice 向多个地址转账ERC20代币，使用前需要先授权
+  ///
+  /// @param _token 转账的ERC20代币地址
+  /// @param _addresses 空投地址数组
+  /// @param _amounts 代币数量数组（每个地址的空投数量）
+  function multiTransferToken(
+      address _token,
+      address[] calldata _addresses,
+      uint256[] calldata _amounts
+      ) external {
+      // 检查：_addresses和_amounts数组的长度相等
+      require(_addresses.length == _amounts.length, "Lengths of Addresses and Amounts NOT EQUAL");
+      IERC20 token = IERC20(_token); // 声明IERC合约变量
+      uint _amountSum = getSum(_amounts); // 计算空投代币总量
+      // 检查：授权代币数量 >= 空投代币总量
+      require(token.allowance(msg.sender, address(this)) >= _amountSum, "Need Approve ERC20 token");
+
+      // for循环，利用transferFrom函数发送空投
+      for (uint8 i; i < _addresses.length; i++) {
+          token.transferFrom(msg.sender, _addresses[i], _amounts[i]);
+      }
+  }
+  ```
 
 - `multiTransferETH()`函数：发送`ETH`空投，包含`2`个参数：
-    - `_addresses`：接收空投的用户地址数组（`address[]`类型）
-    - `_amounts`：空投数量数组，对应`_addresses`里每个地址的数量（`uint[]`类型）
 
-    ```solidity
-    /// 向多个地址转账ETH
-    function multiTransferETH(
-        address payable[] calldata _addresses,
-        uint256[] calldata _amounts
-    ) public payable {
-        // 检查：_addresses和_amounts数组的长度相等
-        require(_addresses.length == _amounts.length, "Lengths of Addresses and Amounts NOT EQUAL");
-        uint _amountSum = getSum(_amounts); // 计算空投ETH总量
-        // 检查转入ETH等于空投总量
-        require(msg.value == _amountSum, "Transfer amount error");
-        // for循环，利用transfer函数发送ETH
-        for (uint256 i = 0; i < _addresses.length; i++) {
-            _addresses[i].transfer(_amounts[i]);
-        }
-    }
-    ```
+  - `_addresses`：接收空投的用户地址数组（`address[]`类型）
+  - `_amounts`：空投数量数组，对应`_addresses`里每个地址的数量（`uint[]`类型）
+
+  ```solidity
+  /// 向多个地址转账ETH
+  function multiTransferETH(
+      address payable[] calldata _addresses,
+      uint256[] calldata _amounts
+  ) public payable {
+      // 检查：_addresses和_amounts数组的长度相等
+      require(_addresses.length == _amounts.length, "Lengths of Addresses and Amounts NOT EQUAL");
+      uint _amountSum = getSum(_amounts); // 计算空投ETH总量
+      // 检查转入ETH等于空投总量
+      require(msg.value == _amountSum, "Transfer amount error");
+      // for循环，利用transfer函数发送ETH
+      for (uint256 i = 0; i < _addresses.length; i++) {
+          // 注释代码有Dos攻击风险, 并且transfer 也是不推荐写法
+          // Dos攻击 具体参考 https://github.com/AmazingAng/WTF-Solidity/blob/main/S09_DoS/readme.md
+          // _addresses[i].transfer(_amounts[i]);
+          (bool success, ) = _addresses[i].call{value: _amounts[i]}("");
+          if (!success) {
+              failTransferList[_addresses[i]] = _amounts[i];
+          }
+      }
+  }
+  ```
 
 ### 空投实践
 
@@ -109,7 +117,7 @@ tags:
 
 ![部署`Airdrop`合约](./img/33-3.png)
 
-3. 利用`ERC20`代币合约中的`approve()`函数，给`Airdrop`空投合约授权10000 单位代币。
+3. 利用`ERC20`代币合约中的`approve()`函数，给`Airdrop`空投合约授权 10000 单位代币。
 
 ![授权`Airdrop`合约](./img/33-4.png)
 
