@@ -251,8 +251,6 @@
 
 ## WTF 贡献者
 
-  贡献者是WTF学院的基石
-
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
