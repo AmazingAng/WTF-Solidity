@@ -249,7 +249,7 @@
 - [DeFi Hack Labs](https://github.com/SunWeb3Sec/DeFiHackLabs)
 - [rekt news](https://rekt.news/zh/)
 
-## WTF 贡献者
+## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
