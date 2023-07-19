@@ -1,0 +1,28 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "jakebolam",
+      "name": "Jake Bolam",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3534236?v=4",
+      "profile": "https://jakebolam.com",
+      "contributions": [
+        "infra",
+        "test",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "WTF-Solidity",
+  "projectOwner": "AmazingAng"
+}
