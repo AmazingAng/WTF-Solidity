@@ -199,7 +199,12 @@
   **第7讲：Foundry，以Solidity为中心的开发工具包** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry)】【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md)】
 </details>
 
-### `链上威胁分析`
+<details>
+  <summary>
+    <h3>
+    链上威胁分析
+    </h3>
+  </summary>
 
 **第1讲：工具篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug//01_tools/)】 | 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/01_tools/en/)】
 
@@ -212,8 +217,15 @@
 **第5讲：漏洞概念验证-下篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/05_write_your_own_poc/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/05_write_your_own_poc/en/)】  
 
 **第6讲：Rugpull 分析** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/en/)】
+</details>
 
-### `NFT`
+<details>
+  <summary>
+    <h3>
+    NFT
+    </h3>
+  </summary>
+
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/wtfacademy.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
 
 **第2讲：ERC721相关接口** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/wtfacademy.eth/4mPkMgHViRjx8OM7TAI-M-2oMfRle36ULzqlpC6S7IQ)】
@@ -223,12 +235,19 @@
 **第4讲：BAYC主合约和严重漏洞**【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721/BAYC.sol)】 【[文章](https://mirror.xyz/wtfacademy.eth/_buBOQflWtHDpLbg18Fp8zLe8AmLiPka2y-UhppK_u0)】
 
 **第5讲：Loot**【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721/5_Loot/Loot.sol)】 【[文章](https://mirror.xyz/wtfacademy.eth/-Bc_vjP9EX-wg6chtUFAz0zm5v-jaIekMlOlqHJ_IhE)】
+</details>
 
-### `翻译`
+<details>
+  <summary>
+    <h3>
+    翻译
+    </h3>
+  </summary>
 
 **第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/Consensys2020)】 【[Mirror](https://mirror.xyz/wtfacademy.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
 
 **第2讲：深入EVM**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017)】
+</details>
 
 ## WTF贡献者
 <div align="center">
@@ -255,14 +274,3 @@
 - [Safe Contracts](https://github.com/safe-global/safe-contracts)
 - [DeFi Hack Labs](https://github.com/SunWeb3Sec/DeFiHackLabs)
 - [rekt news](https://rekt.news/zh/)
-
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
