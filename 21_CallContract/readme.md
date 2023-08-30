@@ -167,6 +167,8 @@ contract CallContract {
 }
 ```
 
+![call contract7 in remix](./img/21-10.png)
+
 
 
 ## 总结
