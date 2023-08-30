@@ -64,7 +64,7 @@ event Transfer(address indexed from, address indexed to, uint256 value);
 
 日志的第一部分是主题数组，用于描述事件，长度不能超过`4`。它的第一个元素是事件的签名（哈希）。对于上面的`Transfer`事件，它的签名就是：
 ```solidity
-keccak256("Transfer(addrses,address,uint256)")
+keccak256("Transfer(address,address,uint256)")
 
 //0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
 ```
