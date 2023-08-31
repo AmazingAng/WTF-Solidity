@@ -88,7 +88,7 @@ We input binary encoding of `abi.encode` into `decode`, which will decode the or
 ![](https://images.mirror-media.xyz/publication-images/jboRaaq0U57qVYjmsOgbv.png?height=408&width=624)
 
 ## 在remix上验证
-- deploy contract to check the encodeing result of `abi.encode`
+- deploy contract to check the encoding result of `abi.encode`
 ![](./img/27-1_en.png)
 
 - compare and verify the similarities and differences of four encoding functions
