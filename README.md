@@ -138,6 +138,10 @@
 
 **第54讲：跨链桥**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/54_CrossChainBridge) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/54_CrossChainBridge/readme.md)
 
+**第55讲：多重调用**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/55_MultiCall) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/55_MultiCall/readme.md)
+
+**第56讲：去中心化交易所**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/56_Swap) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/56_Swap/readme.md)
+
 ## 合约安全
 
 **S01：重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S01_ReentrancyAttack) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S01_ReentrancyAttack/readme.md) | [Mirror](https://mirror.xyz/wtfacademy.eth/SrNu6LLzwH7qlTVKbJY6lkTpmadGqUXw0L8iUMzfMxo)
@@ -173,22 +177,34 @@
 **S16：NFT重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy/readme.md)
 
 ## 主题
-### `工具`
-**第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/wtfacademy.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
+<details>
+  <summary>
+    <h3>
+    开发工具
+    </h3>
+  </summary>
 
-**第2讲：Infura, 连接链下与链上的桥梁** 【[文章](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL02_Infura/readme.md)】
+  **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/wtfacademy.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
 
-**第3讲：Ganache，搭建本地测试网络** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL03_Ganache/readme.md)】
+  **第2讲：Infura, 连接链下与链上的桥梁** 【[文章](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL02_Infura/readme.md)】
 
-**第4讲：Alchemy, 区块链API和节点基础设施** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】
+  **第3讲：Ganache，搭建本地测试网络** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL03_Ganache/readme.md)】
 
-**第5讲：Dune，使用Dune可视化区块链数据** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL05_Dune/readme.md)】
+  **第4讲：Alchemy, 区块链API和节点基础设施** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】
 
-**第6讲：Hardhat，以太坊开发环境** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL06_Hardhat/readme.md)】
+  **第5讲：Dune，使用Dune可视化区块链数据** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL05_Dune/readme.md)】
 
-**第7讲：Foundry，以Solidity为中心的开发工具包** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry)】【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md)】
+  **第6讲：Hardhat，以太坊开发环境** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL06_Hardhat/readme.md)】
 
-### `链上威胁分析`
+  **第7讲：Foundry，以Solidity为中心的开发工具包** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry)】【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md)】
+</details>
+
+<details>
+  <summary>
+    <h3>
+    链上威胁分析
+    </h3>
+  </summary>
 
 **第1讲：工具篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug//01_tools/)】 | 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/01_tools/en/)】
 
@@ -201,8 +217,15 @@
 **第5讲：漏洞概念验证-下篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/05_write_your_own_poc/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/05_write_your_own_poc/en/)】  
 
 **第6讲：Rugpull 分析** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/en/)】
+</details>
 
-### `NFT`
+<details>
+  <summary>
+    <h3>
+    NFT
+    </h3>
+  </summary>
+
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/wtfacademy.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
 
 **第2讲：ERC721相关接口** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/wtfacademy.eth/4mPkMgHViRjx8OM7TAI-M-2oMfRle36ULzqlpC6S7IQ)】
@@ -212,12 +235,19 @@
 **第4讲：BAYC主合约和严重漏洞**【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721/BAYC.sol)】 【[文章](https://mirror.xyz/wtfacademy.eth/_buBOQflWtHDpLbg18Fp8zLe8AmLiPka2y-UhppK_u0)】
 
 **第5讲：Loot**【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721/5_Loot/Loot.sol)】 【[文章](https://mirror.xyz/wtfacademy.eth/-Bc_vjP9EX-wg6chtUFAz0zm5v-jaIekMlOlqHJ_IhE)】
+</details>
 
-### `翻译`
+<details>
+  <summary>
+    <h3>
+    翻译
+    </h3>
+  </summary>
 
 **第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/Consensys2020)】 【[Mirror](https://mirror.xyz/wtfacademy.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
 
 **第2讲：深入EVM**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017)】
+</details>
 
 ## WTF贡献者
 <div align="center">
@@ -237,6 +267,7 @@
 ## 参考
 - [Solidity 官方文档](https://docs.soliditylang.org/en/v0.8.17/)
 - [Solidity By Example](https://solidity-by-example.org/)
+  - [中文版](https://github.com/Web3-Club/solidity-by-example_Chinese)   
 - [OpenZeppelin Contract](https://github.com/OpenZeppelin/openzeppelin-contracts)
 - [solmate](https://github.com/transmissions11/solmate)
 - [Chainlink Docs](https://docs.chain.link/)
