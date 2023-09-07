@@ -217,6 +217,8 @@
 **第5讲：漏洞概念验证-下篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/05_write_your_own_poc/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/05_write_your_own_poc/en/)】  
 
 **第6讲：Rugpull 分析** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/en/)】
+
+**第7讲：Nomad 跨链桥事件分析** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/07_analysis_bridge/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/07_analysis_bridge/en/)】
 </details>
 
 <details>
