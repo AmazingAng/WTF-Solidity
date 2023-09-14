@@ -35,7 +35,7 @@ function returnMultiple() public pure returns(uint256, bool, uint256[3] memory){
     }
 ```
 
-在上述代码中，我们利用 `returns` 关键字声明了有多个返回值的 `returnMultiple()` 函数，然后我们在函数主体中使用 `return(1, true, [uint256(1),2,5])` 确定了返回值。
+在上述代码中，我们利用 `returns` 关键字声明了有多个返回值的 `returnMultiple()` 函数，然后我们在函数主体中使用 `return(1, true, [uint256(1),2,5])` 确定了返回值。你可能会疑惑 uint256[3] memory 和 [uint256(1), 2,5] 这两个写法，你可以先在网上搜一下相关的说明或者带着这个疑惑继续学习后面的章节，你就会得到答案了。
 
 ## 命名式返回
 
