@@ -59,7 +59,7 @@ contract C {
     function f() public pure {
         g([uint(1), 2, 3]);
     }
-    function g(uint[3] memory) public pure {
+    function g(uint[3] memory _data) public pure {
         // ...
     }
 }
