@@ -178,6 +178,59 @@
 
 **S16：NFT重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy/readme.md)
 
+## EVM 操作码
+
+**Opcodes01：Hello Opcodes**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/01_HelloOpcodes) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/01_HelloOpcodes/readme.md)
+
+**Opcodes02：Opcodes分类**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/02_Categories) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/02_Categories/readme.md)
+
+**Opcodes03：堆栈指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/03_StackOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/03_StackOp/readme.md)
+
+**Opcodes04：算数指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/04_ArithmeticOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/04_ArithmeticOp/readme.md)
+
+**Opcodes05：比较指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/05_ComparisonOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/05_ComparisonOp/readme.md)
+
+**Opcodes06：位级指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/06_BitwiseOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/06_BitwiseOp/readme.md)
+
+**Opcodes07：内存指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/07_MemoryOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/07_MemoryOp/readme.md)
+
+**Opcodes08：存储指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/08_StorageOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/08_StorageOp/readme.md)
+
+**Opcodes09：控制流指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/09_FlowOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/09_FlowOp/readme.md)
+
+**Opcodes10：区块信息指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/10_BlockOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/10_BlockOp/readme.md)
+
+**Opcodes11：堆栈指令2**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/11_StackOp2) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/11_StackOp2/readme.md)
+
+**Opcodes12：SHA3指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/12_SHA3) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/12_SHA3/readme.md)
+
+**Opcodes13：账户指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/13_AccountOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/13_AccountOp/readme.md)
+
+**Opcodes14：交易指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/14_TxOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/14_TxOp/readme.md)
+
+**Opcodes15：Log指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/15_LogOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/15_LogOp/readme.md)
+
+**Opcodes16：Return指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/16_ReturnOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/16_ReturnOp/readme.md)
+
+**Opcodes17：Revert指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/17_RevertOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/17_RevertOp/readme.md)
+
+**Opcodes18：Call指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/18_CallOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/18_CallOp/readme.md)
+
+**Opcodes19：Delegatecall指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/19_DelegatecallOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/19_DelegatecallOp/readme.md)
+
+**Opcodes20：Staticcall指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/20_StaticcallOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/20_StaticcallOp/readme.md)
+
+**Opcodes21：Create指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/21_Create) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/21_Create/readme.md)
+
+**Opcodes22：Create2指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/22_Create2) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/22_Create2/readme.md)
+
+**Opcodes23：Selfdestruct指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/23_SelfdestructOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/23_SelfdestructOp/readme.md)
+
+**Opcodes24：Gas指令**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/24_GasOp) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/24_GasOp/readme.md)
+
+**Opcodes25：优化最小代理合约 EIP-7511**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/25_MinimalProxy) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/25_MinimalProxy/readme.md)
+
+
 ## 主题
 <details>
   <summary>
