@@ -140,7 +140,7 @@
 
 **第55讲：多重调用**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/55_MultiCall) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/55_MultiCall/readme.md)
 
-**第56讲：去中心化交易所**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/56_Swap) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/56_Swap/readme.md)
+**第56讲：去中心化交易所**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/56_DEX) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/56_DEX/readme.md)
 
 **第57讲：闪电贷**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/57_Flashloan) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/57_Flashloan/readme.md)
 
