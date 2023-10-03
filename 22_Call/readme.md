@@ -49,7 +49,7 @@ abi.encodeWithSignature("函数签名", 逗号分隔的具体参数)
 看起来有点复杂，下面我们举个`call`应用的例子。
 
 ### 目标合约
-我们先写一个简单的目标合约`OtherContract`并部署，代码与第19讲中基本相同，只是多了`fallback`函数。
+我们先写一个简单的目标合约`OtherContract`并部署，代码与第21讲中基本相同，只是多了`fallback`函数。
 
 ```solidity
 contract OtherContract {
