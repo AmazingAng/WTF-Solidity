@@ -396,7 +396,7 @@ contract ERC721 is IERC721, IERC721Metadata{
      */
     function _mint(address to, uint tokenId) internal virtual {
         require(to != address(0), "mint to zero address");
-        require(_owners[tokenId] == address(0), "token already minted");
+        require(_owners[tokenId] != address(0), "token already minted");
 
         _balances[to] += 1;
         _owners[tokenId] = to;
