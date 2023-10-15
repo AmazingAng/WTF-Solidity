@@ -27,7 +27,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 5: Data Location (storage/memory/calldata)**：[Code](./05_DataStorage_en) | [Tutorial](./05_DataStorage_en/readme.md)
 
-**Chapter 6: Array and Sruct**：[Code](./06_ArrayAndStruct_en) | [Tutorial](./06_ArrayAndStruct_en/readme.md)
+**Chapter 6: Array and Struct**：[Code](./06_ArrayAndStruct_en) | [Tutorial](./06_ArrayAndStruct_en/readme.md)
 
 **Chapter 7: Mapping**：[Code](./07_Mapping_en) | [Tutorial](./07_Mapping_en/readme.md)
 

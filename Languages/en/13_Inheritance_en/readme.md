@@ -26,7 +26,7 @@ Inheritance is one of the core concepts in object-oriented programming, which ca
 
 ### Rules
 
-There are two important keywards for inheritance in Solidity:
+There are two important keywords for inheritance in Solidity:
 
 - `virtual`: If the functions in the parent contract are expected to be overridden in its child contracts, they should be declared as `virtual`.
 

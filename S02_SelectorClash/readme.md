@@ -88,7 +88,7 @@ Poly Network黑客事件中，黑客碰撞出的`_method`为 `f1121318093`，即
 
 1. 部署`SelectorClash`合约。
 2. 调用`executeCrossChainTx()`，参数填`0x6631313231333138303933`，`0x`，`0x`，`0`，发起攻击。
-3. 查看`solved`变量的值，被修改为`ture`，攻击成功。
+3. 查看`solved`变量的值，被修改为`true`，攻击成功。
 
 ## 总结
 
