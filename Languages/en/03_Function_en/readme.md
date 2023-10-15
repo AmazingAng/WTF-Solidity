@@ -71,7 +71,7 @@ The following statements are considered modifying the state:
 8. Using inline assembly that contains certain opcodes.
 
 
-I drew a Mario cartton to visualize `pure` and `view`. In the picture, the state variable is represented by Princess Peach, keywards are represented by three different characters.
+I drew a Mario cartton to visualize `pure` and `view`. In the picture, the state variable is represented by Princess Peach, keywords are represented by three different characters.
 
 ![WHAT is pure and view in solidity?](https://images.mirror-media.xyz/publication-images/1B9kHsTYnDY_QURSWMmPb.png?height=1028&width=1758)
 

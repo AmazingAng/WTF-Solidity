@@ -74,7 +74,7 @@ contract C {
 }
 ```
 ### Call Initizalization Contract B
-First, contract `B` must have the same state variable layout as target contract `C`, 2 variabels and the order is `num` and `sender`.
+First, contract `B` must have the same state variable layout as target contract `C`, 2 variables and the order is `num` and `sender`.
 
 ```solidity
 contract B {
@@ -137,5 +137,5 @@ While function `delegatecallSetVars` calls `setVars` via `delegatecall`. Similar
 ![resultdelegatecall.png](./img/23-8.png)
 
 ## Summary
-In this lecture we introduce another low level function in `Solidity`, `delegatecall`. Similar to `call`, `delegatecall` can be used to call another contract; the difference of `delegatecall` and `call` is `execution context`, the `execution context` is `C` if `B` `call` `C`; but the `execution context` is `B` if `B` `delegatecall` `C`. The major use cases for delegatecall is `proxy contract` and `EIP-2535 Diamons`.
+In this lecture we introduce another low level function in `Solidity`, `delegatecall`. Similar to `call`, `delegatecall` can be used to call another contract; the difference of `delegatecall` and `call` is `execution context`, the `execution context` is `C` if `B` `call` `C`; but the `execution context` is `B` if `B` `delegatecall` `C`. The major use cases for delegatecall is `proxy contract` and `EIP-2535 Diamonds`.
 

@@ -152,7 +152,7 @@ contract Attack {
 
 1. 部署`Bank`合约，调用`deposit()`函数，转入`20 ETH`。
 2. 切换到攻击者钱包，部署`Attack`合约。
-3. 调用`Atack`合约的`attack()`函数发动攻击，调用时需转账`1 ETH`。
+3. 调用`Attack`合约的`attack()`函数发动攻击，调用时需转账`1 ETH`。
 4. 调用`Bank`合约的`getBalance()`函数，发现余额已被提空。
 5. 调用`Attack`合约的`getBalance()`函数，可以看到余额变为`21 ETH`，重入攻击成功。
 
