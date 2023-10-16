@@ -170,7 +170,7 @@ contract DutchAuction is Ownable, ERC721 {
 2. 荷兰拍卖：随后，可以通过`getAuctionPrice()`函数获取到**当前**的拍卖价格。可以观察到，拍卖开始前的价格为`起拍价 AUCTION_START_PRICE`随着拍卖进行，拍卖价格在逐渐降低，直到降低至`地板价 AUCTION_END_PRICE`后不再变化。
 ![荷兰拍卖价格变化](./img/35-3.png)
 
-3. Mint操作：通过`auctionMin()`函数，完成mint，可以看见本例中，由于时间已经超过拍卖时间，因此仅耗费了`地板价`就完成了拍卖。
+3. Mint操作：通过`auctionMint()`函数，完成mint，可以看见本例中，由于时间已经超过拍卖时间，因此仅耗费了`地板价`就完成了拍卖。
 ![完成荷兰拍卖](./img/35-4.png)
 
 4. 提取`ETH`：直接通过`withdrawMoney()`函数，便能将筹集到的`ETH`通过`call()`发送到合约创建者的地址。
