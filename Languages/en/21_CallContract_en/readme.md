@@ -21,7 +21,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 ## Interact with deployed contract
 
-Interactions between contracts not only make the programs re-usable on the blockchain, also enrich the Ethereum ecosystem. Many `web3` Dapps rely on other contract to work, for example `yield farming`. In this tutorial, we will talk about how to interact with contract that source code (or ABI) and address are available.
+Interactions between contracts not only make the programs reusable on the blockchain, also enrich the Ethereum ecosystem. Many `web3` Dapps rely on other contract to work, for example `yield farming`. In this tutorial, we will talk about how to interact with contract that source code (or ABI) and address are available.
 
 ## Target Contract
 Lets write a simple contract `OtherContract` to work with.

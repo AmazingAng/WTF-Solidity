@@ -265,6 +265,8 @@ npx hardhat run --network hardhat  scripts/deploy.js
 [点击申请](https://goerlifaucet.com/) 登录alchemy账号每天可以领取0.2个代币
 3. 导出私钥
 因为需要把合约部署到Goerli测试网络，所以该测试账号中留有一定的测试代币。导出已有测试代币的账户的私钥，用于部署合约
+4. 申请 etherscan 的 api key，用于验证合约
+[点击申请](https://etherscan.io/myapikey)
 
 ### 配置网络
 
@@ -285,6 +287,9 @@ const ALCHEMY_API_KEY = "KEY";
 //注意:永远不要把真正的以太放入测试帐户
 const GOERLI_PRIVATE_KEY = "YOUR GOERLI PRIVATE KEY";
 
+// 申请etherscan的api key
+const ETHERSCAN_API_KEY = "YOUR_ETHERSCAN_API_KEY";
+
 module.exports = {
   solidity: "0.8.9", // solidity的编译版本
   networks: {
@@ -292,7 +297,10 @@ module.exports = {
       url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
       accounts: [GOERLI_PRIVATE_KEY]
     }
-  }
+  },
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
+  },
 };
 ```
 
@@ -317,6 +325,12 @@ npx hardhat run --network goerli scripts/deploy.js
 可以通过[etherscan](https://etherscan.io/)查看合约部署情况
 
 同理你也可以配置多个网络，比如`mainnet`，`rinkeby`等。
+
+最后验证你的合约：
+
+```shell
+npx hardhat verify --network goerli DEPLOYED_CONTRACT_ADDRESS "Constructor argument 1"
+```
 
 
 ## 总结

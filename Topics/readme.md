@@ -28,6 +28,8 @@
 
 **第6讲：Rugpull 分析** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/en/)】
 
+**第7讲：Nomad 跨链桥事件分析** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/07_analysis_bridge/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/07_analysis_bridge/en/)】
+
 ### `NFT`
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/wtfacademy.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
 

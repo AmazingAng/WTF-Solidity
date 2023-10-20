@@ -212,7 +212,7 @@ contract Adam is God {
 contract Eve is God {
     function foo() public virtual override {
         emit Log("Eve.foo called");
-        Eve.foo();
+        God.foo();
     }
 
     function bar() public virtual override {
