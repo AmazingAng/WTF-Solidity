@@ -28,7 +28,7 @@ It may seem complex, but let's break it down piece by piece (square brackets ind
 
 3. `(<parameter types>)`: The input parameter types and names.
 
-3. `[internal|external|public|private]`: Function visibility specifiers. There are 4 kinds of them `public` is the default visibility if left empty:
+3. `[internal|external|public|private]`: Function visibility specifiers. There is no default visibility, so you must specify it for each function. There are 4 kinds of them:
 
    - `public`: Visible to all.
 
@@ -71,7 +71,7 @@ The following statements are considered modifying the state:
 8. Using inline assembly that contains certain opcodes.
 
 
-I drew a Mario cartton to visualize `pure` and `view`. In the picture, the state variable is represented by Princess Peach, keywards are represented by three different characters.
+I drew a Mario cartton to visualize `pure` and `view`. In the picture, the state variable is represented by Princess Peach, keywords are represented by three different characters.
 
 ![WHAT is pure and view in solidity?](https://images.mirror-media.xyz/publication-images/1B9kHsTYnDY_QURSWMmPb.png?height=1028&width=1758)
 

@@ -114,7 +114,7 @@ library MerkleProof {
 
 3.  `_hashPair()`函数：用`keccak256()`函数计算非根节点对应的两个子节点的哈希（排序后）。
 
-我们将`地址0`，`root`和对应的`proof`输入到`verify()`函数，将返回`ture`。因为`地址0`在根为`root`的`Merkle Tree`中，且`proof`正确。如果改变了其中任意一个值，都将返回`false`。
+我们将`地址0`，`root`和对应的`proof`输入到`verify()`函数，将返回`true`。因为`地址0`在根为`root`的`Merkle Tree`中，且`proof`正确。如果改变了其中任意一个值，都将返回`false`。
 
 ## 利用`Merkle Tree`发放`NFT`白名单
 

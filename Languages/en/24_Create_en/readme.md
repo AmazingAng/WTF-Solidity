@@ -18,7 +18,7 @@ Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.goog
 Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 -----
 
-On Ethereum, user (Externally-owned account, `EOA`) can create smart contracts, a smart contract can also create new smart contracts. The decentralized exchange `Uniswap` creates an infinite number of `Pair` contracts with its `Factory` contract. In this lecture, I will explain how to create new smart contracts in an existed smart contract by using a simplied version of `Uniswap`.
+On Ethereum, user (Externally-owned account, `EOA`) can create smart contracts, a smart contract can also create new smart contracts. The decentralized exchange `Uniswap` creates an infinite number of `Pair` contracts with its `Factory` contract. In this lecture, I will explain how to create new smart contracts in an existed smart contract by using a simplified version of `Uniswap`.
 
 ## `create` and `create2`
 There are two ways to create a new contract in an existed contract, `create` and `create2`, this lecture will introduce `create`, next lecture will introduce `create2`.
@@ -61,7 +61,7 @@ contract Pair{
 ```
 `Pair` contract is very simple, including 3 state variables: `factory`, `token0` and `token1`.
 
-The `constructor` assigns Factory contract's address to `factory` at the time of delpoyment. `initialize` function will be called once by the `Factory` contract when the `Pair` contract is created, and update `token0` and `token1` with the addresses of 2 tokens in the token pair.
+The `constructor` assigns Factory contract's address to `factory` at the time of deployment. `initialize` function will be called once by the `Factory` contract when the `Pair` contract is created, and update `token0` and `token1` with the addresses of 2 tokens in the token pair.
 
 > **Ask**: Why doesn't `Uniswap` set the addresses of `token0` and `token1` in the `constructor`?
 >
