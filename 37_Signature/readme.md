@@ -76,7 +76,7 @@ tags:
      * 以及`EIP191`:https://eips.ethereum.org/EIPS/eip-191`
      * 添加"\x19Ethereum Signed Message:\n32"字段，防止签名的是可执行交易。
      */
-    function toEthSignedMessageHash(bytes32 hash) internal pure returns (bytes32) {
+    function toEthSignedMessageHash(bytes32 hash) public pure returns (bytes32) {
         // 哈希的长度为32
         return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
     }
