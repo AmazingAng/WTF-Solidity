@@ -68,11 +68,11 @@ contract DeleteContract {
 ###  在remix上验证
 1. 部署合约并且转入1ETH，查看合约状态
 
-![image](https://github.com/epitaphial/WTF-Solidity/assets/35803206/7739c15e-64c7-4a56-a389-5caaa30d4248)
+![26-1.png](./img/26-1.png)
 
 2. 销毁合约，查看合约状态
 
-![image](https://github.com/epitaphial/WTF-Solidity/assets/35803206/d7c77d4e-220b-4e76-a48f-a351bef9e951)
+![26-2.png](./img/26-2.png)
 
 从测试中观察合约状态可以发现合约销毁后的ETH返回给了指定的地址，在合约销毁后再次调用合约函数进行交互则会失败。
 
