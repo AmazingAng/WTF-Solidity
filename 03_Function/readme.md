@@ -94,7 +94,7 @@ contract FunctionTypes{
 定义一个 `add()` 函数，每次调用会让 `number` 增加 1。
 
 ```solidity
-// 默认
+// 默认function
 function add() external{
     number = number + 1;
 }
