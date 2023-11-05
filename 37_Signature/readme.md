@@ -32,7 +32,7 @@ tags:
 
 1. **身份认证**：证明签名方是私钥的持有人。
 2. **不可否认**：发送方不能否认发送过这个消息。
-3. **完整性**：消息在传输过程中无法被修改。
+3. **完整性**：通过验证针对传输消息生成的数字签名，可以验证消息是否在传输过程中被篡改。
 
 ## `ECDSA`合约
 
@@ -76,7 +76,7 @@ tags:
      * 以及`EIP191`:https://eips.ethereum.org/EIPS/eip-191`
      * 添加"\x19Ethereum Signed Message:\n32"字段，防止签名的是可执行交易。
      */
-    function toEthSignedMessageHash(bytes32 hash) internal pure returns (bytes32) {
+    function toEthSignedMessageHash(bytes32 hash) public pure returns (bytes32) {
         // 哈希的长度为32
         return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
     }

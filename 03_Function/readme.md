@@ -95,7 +95,7 @@ Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教
         number = number + 1;
     }
 ```
-如果 `add()` 函数被标记为 `pure`，比如 `function add() pure external`，就会报错。因为 `pure` 是不配读取合约里的状态变量的，更不配改写。那 `pure` 函数能做些什么？举个例子，你可以给函数传递一个参数 `_number`，然后让他返回 `_number + 1`，这个操作不会读取或写入状态变量。
+如果 `add()` 函数被标记为 `pure`，比如 `function add() external pure`，就会报错。因为 `pure` 是不配读取合约里的状态变量的，更不配改写。那 `pure` 函数能做些什么？举个例子，你可以给函数传递一个参数 `_number`，然后让他返回 `_number + 1`，这个操作不会读取或写入状态变量。
 ```solidity
     // pure:
     function addPure(uint256 _number) external pure returns(uint256 new_number){
@@ -105,7 +105,7 @@ Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教
 
 ![3-3.png](./img/3-3.png)
 
-如果 `add()` 函数被标记为 `view`，比如 `function add() view external`，也会报错。因为 `view` 能读取，但不能够改写状态变量。我们可以稍微改写下函数，读取但是不改写 `number`，返回一个新的变量。
+如果 `add()` 函数被标记为 `view`，比如 `function add() external view`，也会报错。因为 `view` 能读取，但不能够改写状态变量。我们可以稍微改写下函数，读取但是不改写 `number`，返回一个新的变量。
 ```solidity
     // view: 看客
     function addView() external view returns(uint256 new_number) {
