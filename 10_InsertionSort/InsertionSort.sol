@@ -50,7 +50,6 @@ contract InsertionSort {
 
     // 插入排序 错误版
     function insertionSortWrong(uint[] memory a) public pure returns(uint[] memory) {
-        // note that uint can not take negative value
         for (uint i = 1;i < a.length;i++){
             uint temp = a[i];
             uint j=i-1;
