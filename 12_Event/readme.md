@@ -62,13 +62,13 @@ event Transfer(address indexed from, address indexed to, uint256 value);
 
 ### 主题 `topics`
 
-日志的第一部分是主题数组，用于描述事件，长度不能超过`4`。它的第一个元素是事件的签名（哈希）。对于上面的`Transfer`事件，它的签名就是：
+日志的第一部分是主题数组，用于描述事件，长度不能超过`4`。它的第一个元素是事件哈希。对于上面的`Transfer`事件，它的事件哈希就是：
 ```solidity
 keccak256("Transfer(address,address,uint256)")
 
 //0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
 ```
-除了事件签名，主题还可以包含至多`3`个`indexed`参数，也就是`Transfer`事件中的`from`和`to`。
+除了事件哈希，主题还可以包含至多`3`个`indexed`参数，也就是`Transfer`事件中的`from`和`to`。
 
 `indexed`标记的参数可以理解为检索事件的索引“键”，方便之后搜索。每个 `indexed` 参数的大小为固定的256比特，如果参数太大了（比如字符串），就会自动计算哈希存储在主题中。
 
