@@ -8,7 +8,7 @@ tags:
 
 # WTF Solidity极简入门: 3. 函数
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
@@ -25,7 +25,7 @@ Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教
 我们先看一下 Solidity 中函数的形式:
 
 ```solidity
-    function <function name>(<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
+function <function name>(<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
 ```
 
 看着有一些复杂，让我们从前往后逐个解释(方括号中的是可写可不
@@ -53,6 +53,7 @@ Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教
 6. `[returns ()]`：函数返回的变量类型和名称。
 
 ## 到底什么是 `Pure` 和`View`？
+
 刚开始学习 `solidity` 时，`pure` 和 `view` 关键字可能令人费解，因为其他编程语言中没有类似的关键字。`solidity` 引入这两个关键字主要是因为 以太坊交易需要支付气费（gas fee）。合约的状态变量存储在链上，gas fee 很贵，如果计算不改变链上状态，就可以不用付 `gas`。包含 `pure` 和 `view` 关键字的函数是不改写链上状态的，因此用户直接调用它们是不需要付 gas 的（注意，合约中非 `pure`/`view` 函数调用 `pure`/`view` 函数时需要付gas）。
 
 在以太坊中，以下语句被视为修改链上状态：
@@ -68,7 +69,6 @@ Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教
 
 为了帮助大家理解，我画了一个马里奥插图。在这幅插图中，我将合约中的状态变量（存储在链上）比作碧琪公主，三种不同的角色代表不同的关键字。
 
-
 ![WTF is pure and view in solidity?](https://images.mirror-media.xyz/publication-images/1B9kHsTYnDY_QURSWMmPb.png?height=1028&width=1758)
 
 - `pure`，中文意思是“纯”，这里可以理解为”纯打酱油的”。`pure` 函数既不能读取也不能写入链上的状态变量。就像小怪一样，看不到也摸不到碧琪公主。
@@ -78,39 +78,46 @@ Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教
 - 非 `pure` 或 `view` 的函数既可以读取也可以写入状态变量。类似马里奥里的 `boss`，可以对碧琪公主为所欲为🐶。
 
 ## 代码
+
 ### 1. pure 和 view
 
 我们在合约里定义一个状态变量 `number`，初始化为 5。
+
 ```solidity
-    // SPDX-License-Identifier: MIT
-    pragma solidity ^0.8.4;
-    contract FunctionTypes{
-        uint256 public number = 5;
-    }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
+contract FunctionTypes{
+    uint256 public number = 5;
+}
 ```
+
 定义一个 `add()` 函数，每次调用会让 `number` 增加 1。
+
 ```solidity
-    // 默认
-    function add() external{
-        number = number + 1;
-    }
+// 默认function
+function add() external{
+    number = number + 1;
+}
 ```
+
 如果 `add()` 函数被标记为 `pure`，比如 `function add() external pure`，就会报错。因为 `pure` 是不配读取合约里的状态变量的，更不配改写。那 `pure` 函数能做些什么？举个例子，你可以给函数传递一个参数 `_number`，然后让他返回 `_number + 1`，这个操作不会读取或写入状态变量。
+
 ```solidity
-    // pure:
-    function addPure(uint256 _number) external pure returns(uint256 new_number){
-        new_number = _number + 1;
-    }
+// pure: 纯纯牛马
+function addPure(uint256 _number) external pure returns(uint256 new_number){
+    new_number = _number + 1;
+}
 ```
 
 ![3-3.png](./img/3-3.png)
 
 如果 `add()` 函数被标记为 `view`，比如 `function add() external view`，也会报错。因为 `view` 能读取，但不能够改写状态变量。我们可以稍微改写下函数，读取但是不改写 `number`，返回一个新的变量。
+
 ```solidity
-    // view: 看客
-    function addView() external view returns(uint256 new_number) {
-        new_number = number + 1;
-    }
+// view: 看客
+function addView() external view returns(uint256 new_number) {
+    new_number = number + 1;
+}
 ```
 
 ![3-4.png](./img/3-4.png)
@@ -118,37 +125,41 @@ Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教
 ### 2. internal v.s. external
 
 ```solidity
-    // internal: 内部函数
-    function minus() internal {
-        number = number - 1;
-    }
+// internal: 内部函数
+function minus() internal {
+    number = number - 1;
+}
 
-    // 合约内的函数可以调用内部函数
-    function minusCall() external {
-        minus();
-    }
+// 合约内的函数可以调用内部函数
+function minusCall() external {
+    minus();
+}
 ```
+
 我们定义一个 `internal` 的 `minus()` 函数，每次调用使得 `number` 变量减少 1。由于 `internal` 函数只能由合约内部调用，我们必须再定义一个 `external` 的 `minusCall()` 函数，通过它间接调用内部的 `minus()` 函数。
+
 ![3-1.png](./img/3-1.png)
 
 ### 3. payable
+
 ```solidity
-    // payable: 递钱，能给合约支付eth的函数
-    function minusPayable() external payable returns(uint256 balance) {
-        minus();    
-        balance = address(this).balance;
-    }
+// payable: 递钱，能给合约支付eth的函数
+function minusPayable() external payable returns(uint256 balance) {
+    minus();    
+    balance = address(this).balance;
+}
 ```
 
-我们定义一个 `external payable` 的 `minusPayable()` 函数，间接的调用 `minus()`，并且返回合约里的 ETH 余额（`this` 关键字可以让我们引用合约地址)。我们可以在调用 `minusPayable()` 时往合约里转入1个 ETH。
+我们定义一个 `external payable` 的 `minusPayable()` 函数，间接的调用 `minus()`，并且返回合约里的 ETH 余额（`this` 关键字可以让我们引用合约地址）。我们可以在调用 `minusPayable()` 时往合约里转入1个 ETH。
 
-![](https://images.mirror-media.xyz/publication-images/ETDPN8myq7jFfAL8CUAFt.png?height=148&width=588)
+![mirror-image-1](https://images.mirror-media.xyz/publication-images/ETDPN8myq7jFfAL8CUAFt.png?height=148&width=588)
 
 我们可以在返回的信息中看到，合约的余额变为 1 ETH。
 
-![](https://images.mirror-media.xyz/publication-images/nGZ2pz0MvzgXuKrENJPYf.png?height=128&width=1130)
+![mirror-image-2](https://images.mirror-media.xyz/publication-images/nGZ2pz0MvzgXuKrENJPYf.png?height=128&width=1130)
 
 ![3-2.png](./img/3-2.png)
 
 ## 总结
+
 在这一讲，我们介绍了 `Solidity` 中的函数。`pure` 和 `view` 关键字比较难理解，在其他语言中没出现过：`view` 函数可以读取状态变量，但不能改写；`pure` 函数既不能读取也不能改写状态变量。
