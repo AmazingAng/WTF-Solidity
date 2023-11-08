@@ -20,7 +20,7 @@ contract Events {
         _balances[from] -=  amount; // from地址减去转账数量
         _balances[to] += amount; // to地址加上转账数量
 
-        // 触发事件
+        // 释放事件
         emit Transfer(from, to, amount);
     }
 }
