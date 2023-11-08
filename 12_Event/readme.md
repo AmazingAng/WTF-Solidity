@@ -38,9 +38,9 @@ event Transfer(address indexed from, address indexed to, uint256 value);
 
 我们可以看到，`Transfer`事件共记录了3个变量`from`，`to`和`value`，分别对应代币的转账地址，接收地址和转账数量，其中`from`和`to`前面带有`indexed`关键字，他们会保存在以太坊虚拟机日志的`topics`中，方便之后检索。
 
-### 触发事件
+### 释放事件
 
-我们可以在函数里触发事件。在下面的例子中，每次用`_transfer()`函数进行转账操作的时候，都会触发`Transfer`事件，并记录相应的变量。
+我们可以在函数里释放事件。在下面的例子中，每次用`_transfer()`函数进行转账操作的时候，都会释放`Transfer`事件，并记录相应的变量。
 
 ```solidity
 // 定义_transfer函数，执行转账逻辑
@@ -55,7 +55,7 @@ function _transfer(
     _balances[from] -=  amount; // from地址减去转账数量
     _balances[to] += amount; // to地址加上转账数量
 
-    // 触发事件
+    // 释放事件
     emit Transfer(from, to, amount);
 }
 ```
