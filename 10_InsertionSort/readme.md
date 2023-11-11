@@ -7,7 +7,7 @@ tags:
   - if-else/for/while/ternary
 ---
 
-# WTF Solidity极简入门: 10. 控制流，用solidity实现插入排序
+# WTF Solidity极简入门: 10. 控制流，用Solidity实现插入排序
 
 我最近在重新学Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
