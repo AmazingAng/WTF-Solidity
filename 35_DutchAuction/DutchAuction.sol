@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "../34_ERC721/ERC721.sol";
 
 contract DutchAuction is Ownable, ERC721 {
-    uint256 public constant COLLECTOIN_SIZE = 10000; // NFT总数
+    uint256 public constant COLLECTION_SIZE = 10000; // NFT总数
     uint256 public constant AUCTION_START_PRICE = 1 ether; // 起拍价
     uint256 public constant AUCTION_END_PRICE = 0.1 ether; // 结束价（最低价）
     uint256 public constant AUCTION_TIME = 10 minutes; // 拍卖时间，为了测试方便设为10分钟
@@ -45,7 +45,7 @@ contract DutchAuction is Ownable, ERC721 {
         "sale has not started yet"
         ); // 检查是否设置起拍时间，拍卖是否开始
         require(
-        totalSupply() + quantity <= COLLECTOIN_SIZE,
+        totalSupply() + quantity <= COLLECTION_SIZE,
         "not enough remaining reserved for auction to support desired mint amount"
         ); // 检查是否超过NFT上限
 
