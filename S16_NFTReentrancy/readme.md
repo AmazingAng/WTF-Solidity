@@ -21,7 +21,7 @@ tags:
 
 -----
 
-这一讲，我们将介绍NFT合约的重入攻击漏洞，并攻击一个有漏洞的NFT合约，铸造100个NFT。
+这一讲，我们将介绍NFT合约的重入攻击漏洞，并攻击一个有漏洞的NFT合约，铸造10个NFT。
 
 ## NFT重入风险
 
@@ -88,7 +88,7 @@ contract Attack is IERC721Receiver{
         nft.mint();
     }
 
-    // ERC721的回调函数，会重复调用mint函数，铸造100个
+    // ERC721的回调函数，会重复调用mint函数，铸造10个
     function onERC721Received(address, address, uint256, bytes memory) public virtual override returns (bytes4) {
         if(nft.balanceOf(address(this)) < 10){
             nft.mint();
@@ -130,4 +130,4 @@ contract Attack is IERC721Receiver{
 
 ## 总结
 
-这一讲，我们介绍了NFT的重入攻击漏洞，并攻击了一个有漏洞的NFT合约，铸造了100个NFT。目前主要有两种预防重入攻击的办法：检查-影响-交互模式（checks-effect-interaction）和重入锁。
+这一讲，我们介绍了NFT的重入攻击漏洞，并攻击了一个有漏洞的NFT合约，铸造了10个NFT。目前主要有两种预防重入攻击的办法：检查-影响-交互模式（checks-effect-interaction）和重入锁。
