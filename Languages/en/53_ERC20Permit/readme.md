@@ -23,7 +23,7 @@ In this lecture, we introduce an extension of ERC20 tokens, ERC20Permit, which s
 
 ## ERC20
 
-We introduced ERC20, the most popular token standard in Ethereum, in [Lecture 31](https://github.com/AmazingAng/WTF-Solidity/blob/main/31_ERC20/readme.md). One of the main reasons for its popularity is that the two functions `approve` and `transferFrom` are used together, so that tokens can not only be transferred between externally owned accounts (EOA), but can also be used by other contracts.
+We introduced ERC20, the most popular token standard in Ethereum, in [Lecture 31](https://github.com/WTFAcademy/WTF-Solidity/blob/main/Languages/en/31_ERC20_en/readme.md). One of the main reasons for its popularity is that the two functions `approve` and `transferFrom` are used together, so that tokens can not only be transferred between externally owned accounts (EOA), but can also be used by other contracts.
 
 However, the `approve` function of ERC20 is restricted to be called only by the token owner, which means that all initial operations of `ERC20` tokens must be performed by `EOA`. For example, if user A uses `USDT` to exchange `ETH` on a decentralized exchange, two transactions must be completed: in the first step, user A calls `approve` to authorize `USDT` to the contract, and in the second step, user A calls `approve` to authorize `USDT` to the contract. Contracts are exchanged. Very cumbersome, and users must hold `ETH` to pay for the gas of the transaction.
 
