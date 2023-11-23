@@ -28,10 +28,10 @@
   <br>
   <pre id="signatureOutput"></pre>
 
-  <h5>钱包地址: <span class="showAccount"></span></h5>
-  <h5>ChainID: <span class="showChainID"></span></h5>
-  <h5>ETH 余额: <span class="showETHBalance"></span></h5>
-  <h5>签名数据: <span class="showSignature"></span></h5>
+  <h5>Wallet address: <span class="showAccount"></span></h5>
+   <h5>ChainID: <span class="showChainID"></span></h5>
+   <h5>ETH Balance: <span class="showETHBalance"></span></h5>
+   <h5>Signature data: <span class="showSignature"></span></h5>
 
   <script type = "module">
     import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.3.0/ethers.js";      const ethereumButton = document.querySelector('.connect');
@@ -46,26 +46,26 @@
     let signer;
 
     async function connectMetaMask() {
-        // 获得provider
-        const provider = new ethers.BrowserProvider(window.ethereum)
+       // Get provider
+         const provider = new ethers.BrowserProvider(window.ethereum)
         
-        // 读取钱包地址
-        const accounts = await provider.send("eth_requestAccounts", []);
-        const account = accounts[0]
-        console.log(`钱包地址: ${account}`)
-        showAccount.innerHTML = account;
+         //Read wallet address
+         const accounts = await provider.send("eth_requestAccounts", []);
+         const account = accounts[0]
+         console.log(`Wallet address: ${account}`)
+         showAccount.innerHTML = account;
         
-        // 读取chainid
-        const { chainId } = await provider.getNetwork()
-        console.log(`chainid: ${chainId}`)
-        showChainID.innerHTML = chainId;
+       //Read chainid
+         const { chainId } = await provider.getNetwork()
+         console.log(`chainid: ${chainId}`)
+         showChainID.innerHTML = chainId;
 
-        // 读取ETH余额
-        const signer = await provider.getSigner()
-        const balance = await provider.getBalance(signer.getAddress());
-        console.log(`以太坊余额： ${ethers.formatUnits(balance)}`)
-        showETHBalance.innerHTML = ethers.formatUnits(balance);
-        signPermitButton.disabled = false;
+         //Read ETH balance
+         const signer = await provider.getSigner()
+         const balance = await provider.getBalance(signer.getAddress());
+         console.log(`Ethereum balance: ${ethers.formatUnits(balance)}`)
+         showETHBalance.innerHTML = ethers.formatUnits(balance);
+         signPermitButton.disabled = false;
     }
 
     async function signPermit() {
