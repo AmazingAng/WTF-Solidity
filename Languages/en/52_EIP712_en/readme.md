@@ -1,43 +1,43 @@
 ---
-title: 52. EIP712 类型化数据签名
+title: 52. EIP712 Typed Data Signature
 tags:
-  - solidity
-  - erc20
-  - eip712
-  - openzepplin
+   - solidity
+   - erc20
+   -eip712
+   - openzepplin
 ---
 
-# WTF Solidity极简入门: 52. EIP712 类型化数据签名
+# WTF Solidity Minimalist Introduction: 52. EIP712 Typed Data Signature
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+I'm recently re-learning solidity, consolidating the details, and writing a "WTF Solidity Minimalist Introduction" for novices (programming experts can find another tutorial), updating 1-3 lectures every week.
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
-社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[WeChat Group](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link) |[Official website wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All codes and tutorials are open source on github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
-这一讲，我们介绍一种更先进、安全的签名方法，EIP712 类型化数据签名。
+In this lecture, we introduce a more advanced and secure signature method, EIP712 typed data signature.
 
 ## EIP712
 
-之前我们介绍了 [EIP191 签名标准（personal sign）](https://github.com/AmazingAng/WTFSolidity/blob/main/37_Signature/readme.md) ，它可以给一段消息签名。但是它过于简单，当签名数据比较复杂时，用户只能看到一串十六进制字符串（数据的哈希），无法核实签名内容是否与预期相符。
+Previously we introduced [EIP191 signature standard (personal sign)](https://github.com/AmazingAng/WTFSolidity/blob/main/37_Signature/readme.md), which can sign a message. But it is too simple. When the signature data is complex, the user can only see a string of hexadecimal strings (the hash of the data) and cannot verify whether the signature content is as expected.
 
 ![](./img/52-1.png)
 
-[EIP712类型化数据签名](https://eips.ethereum.org/EIPS/eip-712)是一种更高级、更安全的签名方法。当支持 EIP712 的 Dapp 请求签名时，钱包会展示签名消息的原始数据，用户可以在验证数据符合预期之后签名。
+[EIP712 Typed Data Signature](https://eips.ethereum.org/EIPS/eip-712) is a more advanced and more secure signature method. When an EIP712-enabled Dapp requests a signature, the wallet displays the original data of the signed message and the user can sign after verifying that the data meets expectations.
 
 ![](./img/52-2.png)
 
-## EIP712 使用方法
+## How to use EIP712
 
-EIP712 的应用一般包含链下签名（前端或脚本）和链上验证（合约）两部分，下面我们用一个简单的例子 `EIP712Storage` 来介绍 EIP712 的使用方法。`EIP712Storage` 合约有一个状态变量 `number`，需要验证 EIP712 签名才可以更改。
+The application of EIP712 generally includes two parts: off-chain signature (front-end or script) and on-chain verification (contract). Below we use a simple example `EIP712Storage` to introduce the use of EIP712. The `EIP712Storage` contract has a state variable `number`, which needs to be verified by the EIP712 signature before it can be changed.
 
-### 链下签名
+### Off-chain signature
 
-1. EIP712 签名必须包含一个 `EIP712Domain` 部分，它包含了合约的 name，version（一般约定为 “1”），chainId，和 verifyingContract（验证签名的合约地址）。
+1. The EIP712 signature must contain an `EIP712Domain` part, which contains the name of the contract, version (generally agreed to be "1"), chainId, and verifyingContract (the contract address to verify the signature).
 
     ```js
     EIP712Domain: [
@@ -48,7 +48,7 @@ EIP712 的应用一般包含链下签名（前端或脚本）和链上验证（�
     ]
     ```
 
-    这些信息会在用户签名时显示，并确保只有特定链的特定合约才能验证签名。你需要在脚本中传入相应参数。
+   This information is displayed when the user signs and ensures that only specific contracts for a specific chain can verify the signature. You need to pass in the corresponding parameters in the script.
 
     ```js
     const domain = {
@@ -59,7 +59,7 @@ EIP712 的应用一般包含链下签名（前端或脚本）和链上验证（�
     };
     ```
 
-2. 你需要根据使用场景自定义一个签名的数据类型，他要与合约匹配。在 `EIP712Storage` 例子中，我们定义了一个 `Storage` 类型，它有两个成员: `address` 类型的 `spender`，指定了可以修改变量的调用者；`uint256` 类型的 `number`，指定了变量修改后的值。
+2. You need to customize a signature data type according to the usage scenario, and it must match the contract. In the `EIP712Storage` example, we define a `Storage` type, which has two members: `spender` of type `address`, which specifies the caller who can modify the variable; `number` of type `uint256`, which specifies The modified value of the variable.
 
     ```js
     const types = {
@@ -69,7 +69,7 @@ EIP712 的应用一般包含链下签名（前端或脚本）和链上验证（�
         ],
     };
     ```
-3. 创建一个 `message` 变量，传入要被签名的类型化数据。
+3. Create a `message` variable and pass in the typed data to be signed.
 
     ```js
     const message = {
@@ -79,32 +79,32 @@ EIP712 的应用一般包含链下签名（前端或脚本）和链上验证（�
     ```
     ![](./img/52-3.png)
 
-4. 调用钱包对象的 `signTypedData()` 方法，传入前面步骤中的 `domain`，`types`，和 `message` 变量进行签名（这里使用 `ethersjs v6`）。
+4. Call the `signTypedData()` method of the wallet object, passing in the `domain`, `types`, and `message` variables from the previous step for signature (`ethersjs v6` is used here).
 
     ```js
-    // 获得provider
-    const provider = new ethers.BrowserProvider(window.ethereum)
-    // 获得signer后调用signTypedData方法进行eip712签名
-    const signature = await signer.signTypedData(domain, types, message);
-    console.log("Signature:", signature);
-    ```
-    ![](./img/52-4.png)
+    // Get provider
+     const provider = new ethers.BrowserProvider(window.ethereum)
+     // After obtaining the signer, call the signTypedData method for eip712 signature
+     const signature = await signer.signTypedData(domain, types, message);
+     console.log("Signature:", signature);
+     ```
+     ![](./img/52-4.png)
 
-### 链上验证
+### On-chain verification
 
-接下来就是 `EIP712Storage` 合约部分，它需要验证签名，如果通过，则修改 `number` 状态变量。它有 `5` 个状态变量。
+Next is the `EIP712Storage` contract part, which needs to verify the signature and, if passed, modify the `number` state variable. It has `5` state variables.
 
-1. `EIP712DOMAIN_TYPEHASH`: `EIP712Domain` 的类型哈希，为常量。
-2. `STORAGE_TYPEHASH`: `Storage` 的类型哈希，为常量。
-3. `DOMAIN_SEPARATOR`: 这是混合在签名中的每个域 (Dapp) 的唯一值，由 `EIP712DOMAIN_TYPEHASH` 以及 `EIP712Domain` （name, version, chainId, verifyingContract）组成，在 `constructor()` 中初始化。
-4. `number`: 合约中存储值的状态变量，可以被 `permitStore()` 方法修改。
-5. `owner`: 合约所有者，在 `constructor()` 中初始化，在 `permitStore()` 方法中验证签名的有效性。
+1. `EIP712DOMAIN_TYPEHASH`: The type hash of `EIP712Domain`, which is a constant.
+2. `STORAGE_TYPEHASH`: The type hash of `Storage`, which is a constant.
+3. `DOMAIN_SEPARATOR`: This is the unique value of each domain (Dapp) mixed in the signature, consisting of `EIP712DOMAIN_TYPEHASH` and `EIP712Domain` (name, version, chainId, verifyingContract), initialized in `constructor()` .
+4. `number`: The state variable that stores the value in the contract can be modified by the `permitStore()` method.
+5. `owner`: Contract owner, initialized in `constructor()`, and verify the validity of the signature in the `permitStore()` method.
 
-另外，`EIP712Storage` 合约有 `3` 个函数。
+In addition, the `EIP712Storage` contract has `3` functions.
 
-1. 构造函数: 初始化 `DOMAIN_SEPARATOR` 和 `owner`。
-2. `retrieve()`: 读取 `number` 的值。
-3. `permitStore`: 验证 EIP712 签名，并修改 `number` 的值。首先，它先将签名拆解为 `r`, `s`, `v`。然后用 `DOMAIN_SEPARATOR`, `STORAGE_TYPEHASH`, 调用者地址，和输入的 `_num` 参数拼出签名的消息文本 `digest`。最后利用 `ECDSA` 的 `recover()` 方法恢复出签名者地址，如果签名有效，则更新 `number` 的值。
+1. Constructor: Initialize `DOMAIN_SEPARATOR` and `owner`.
+2. `retrieve()`: Read the value of `number`.
+3. `permitStore`: Verify the EIP712 signature and modify the value of `number`. First, it breaks the signature into `r`, `s`, `v`. The signed message text `digest` is then spelled out using `DOMAIN_SEPARATOR`, `STORAGE_TYPEHASH`, the caller address, and the `_num` parameter entered. Finally, use the `recover()` method of `ECDSA` to recover the signer's address. If the signature is valid, update the value of `number`.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -136,40 +136,40 @@ contract EIP712Storage {
     /**
      * @dev Store value in variable
      */
-    function permitStore(uint256 _num, bytes memory _signature) public {
-        // 检查签名长度，65是标准r,s,v签名的长度
-        require(_signature.length == 65, "invalid signature length");
-        bytes32 r;
-        bytes32 s;
-        uint8 v;
-        // 目前只能用assembly (内联汇编)来从签名中获得r,s,v的值
-        assembly {
-            /*
-            前32 bytes存储签名的长度 (动态数组存储规则)
-            add(sig, 32) = sig的指针 + 32
-            等效为略过signature的前32 bytes
-            mload(p) 载入从内存地址p起始的接下来32 bytes数据
-            */
-            // 读取长度数据后的32 bytes
-            r := mload(add(_signature, 0x20))
-            // 读取之后的32 bytes
-            s := mload(add(_signature, 0x40))
-            // 读取最后一个byte
-            v := byte(0, mload(add(_signature, 0x60)))
+   function permitStore(uint256 _num, bytes memory _signature) public {
+         // Check the signature length, 65 is the length of the standard r, s, v signature
+         require(_signature.length == 65, "invalid signature length");
+         bytes32 r;
+         bytes32 s;
+         uint8 v;
+         // Currently only assembly (inline assembly) can be used to obtain the values of r, s, v from the signature
+         assembly {
+             /*
+             The first 32 bytes store the length of the signature (dynamic array storage rules)
+             add(sig, 32) = pointer to sig + 32
+             Equivalent to skipping the first 32 bytes of signature
+             mload(p) loads the next 32 bytes of data starting from memory address p
+             */
+             // Read the 32 bytes after length data
+             r := mload(add(_signature, 0x20))
+             //32 bytes after reading
+             s := mload(add(_signature, 0x40))
+             //Read the last byte
+             v := byte(0, mload(add(_signature, 0x60)))
         }
 
-        // 获取签名消息hash
-        bytes32 digest = keccak256(abi.encodePacked(
-            "\x19\x01",
-            DOMAIN_SEPARATOR,
-            keccak256(abi.encode(STORAGE_TYPEHASH, msg.sender, _num))
-        )); 
+        //Get signed message hash
+         bytes32 digest = keccak256(abi.encodePacked(
+             "\x19\x01",
+             DOMAIN_SEPARATOR,
+             keccak256(abi.encode(STORAGE_TYPEHASH, msg.sender, _num))
+         ));
         
-        address signer = digest.recover(v, r, s); // 恢复签名者
-        require(signer == owner, "EIP712Storage: Invalid signature"); // 检查签名
+         address signer = digest.recover(v, r, s); //Recover the signer
+         require(signer == owner, "EIP712Storage: Invalid signature"); // Check signature
 
-        // 修改状态变量
-        number = _num;
+         //Modify state variables
+         number = _num;
     }
 
     /**
@@ -182,21 +182,21 @@ contract EIP712Storage {
 }
 ```
 
-## Remix 复现
+## Remix Reappearance
 
-1. 部署 `EIP712Storage` 合约。
+1. Deploy the `EIP712Storage` contract.
 
-2. 运行 `eip712storage.html`，将 `Contract Address` 改为部署的 `EIP712Storage` 合约地址，然后依次点击 `Connect Metamask` 和 `Sign Permit` 按钮签名。签名要使用部署合约的钱包，比如 Remix 测试钱包：
+2. Run `eip712storage.html`, change the `Contract Address` to the deployed `EIP712Storage` contract address, and then click the `Connect Metamask` and `Sign Permit` buttons to sign. To sign, use the wallet that deploys the contract, such as the Remix test wallet:
 
-    ```js
-    public_key: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-    private_key: 503f38a9c967ed597e47fe25643985f032b072db8075426a92110f82df48dfcb
-    ```
+     ```js
+     public_key: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+     private_key: 503f38a9c967ed597e47fe25643985f032b072db8075426a92110f82df48dfcb
+     ```
 
-3. 调用合约的 `permitStore()` 方法，输入相应的 `_num` 和签名，修改 `number` 的值。
+3. Call the `permitStore()` method of the contract, enter the corresponding `_num` and signature, and modify the value of `number`.
 
-4. 调用合约的 `retrieve()` 方法，看到 `number` 的值已经改变。
+4. Call the `retrieve()` method of the contract and see that the value of `number` has changed.
 
-## 总结
+## Summary
 
-这一讲，我们介绍了 EIP712 类型化数据签名，一种更先进、安全的签名标准。在请求签名时，钱包会展示签名消息的原始数据，用户可以在验证数据后签名。该标准应用广泛，在 Metamask，Uniswap 代币对，DAI 稳定币等场景均有使用，希望大家好好掌握。
+In this lecture, we introduce EIP712 typed data signature, a more advanced and secure signature standard. When requesting a signature, the wallet displays the original data of the signed message and the user can sign after verifying the data. This standard is widely used and is used in Metamask, Uniswap token pairs, DAI stable currency and other scenarios. I hope everyone can master it.
