@@ -3,7 +3,7 @@ title: 52. EIP712 Typed Data Signature
 tags:
    - solidity
    - erc20
-   -eip712
+   - eip712
    - openzepplin
 ---
 
