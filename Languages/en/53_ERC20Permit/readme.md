@@ -7,63 +7,63 @@ tags:
   - openzepplin
 ---
 
-# WTF Solidity极简入门: 53. ERC-2612 ERC20Permit
+# WTF A simple introduction to Solidity: 53. ERC-2612 ERC20Permit
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+I'm recently re-learning solidity, consolidating the details, and writing a "WTF Solidity Minimalist Introduction" for novices (programming experts can find another tutorial), updating 1-3 lectures every week.
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
-社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[WeChat Group](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link) |[Official website wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All codes and tutorials are open source on github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
-这一讲，我们介绍 ERC20 代币的一个拓展，ERC20Permit，支持使用签名进行授权，改善用户体验。它在 EIP-2612 中被提出，已纳入以太坊标准，并被 `USDC`，`ARB` 等代币使用。
+In this lecture, we introduce an extension of ERC20 tokens, ERC20Permit, which supports the use of signatures for authorization and improves user experience. It was proposed in EIP-2612, has been incorporated into the Ethereum standard, and is used by tokens such as `USDC`, `ARB`, etc.
 
 ## ERC20
 
-我们在[31讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/31_ERC20/readme.md)中介绍了ERC20，以太坊最流行的代币标准。它流行的一个主要原因是 `approve` 和 `transferFrom` 两个函数搭配使用，使得代币不仅可以在外部拥有账户（EOA）之间转移，还可以被其他合约使用。
+We introduced ERC20, the most popular token standard in Ethereum, in [Lecture 31](https://github.com/AmazingAng/WTF-Solidity/blob/main/31_ERC20/readme.md). One of the main reasons for its popularity is that the two functions `approve` and `transferFrom` are used together, so that tokens can not only be transferred between externally owned accounts (EOA), but can also be used by other contracts.
 
-但是，ERC20的 `approve` 函数限制了只有代币所有者才能调用，这意味着所有 `ERC20` 代币的初始操作必须由 `EOA` 执行。举个例子，用户 A 在去中心化交易所使用 `USDT` 交换 `ETH`，必须完成两个交易：第一步用户 A 调用 `approve` 将 `USDT` 授权给合约，第二步用户 A 调用合约进行交换。非常麻烦，并且用户必须持有 `ETH` 用于支付交易的 gas。
+However, the `approve` function of ERC20 is restricted to be called only by the token owner, which means that all initial operations of `ERC20` tokens must be performed by `EOA`. For example, if user A uses `USDT` to exchange `ETH` on a decentralized exchange, two transactions must be completed: in the first step, user A calls `approve` to authorize `USDT` to the contract, and in the second step, user A calls `approve` to authorize `USDT` to the contract. Contracts are exchanged. Very cumbersome, and users must hold `ETH` to pay for the gas of the transaction.
 
 ## ERC20Permit
 
-EIP-2612 提出了 ERC20Permit，扩展了 ERC20 标准，添加了一个 `permit` 函数，允许用户通过 EIP-712 签名修改授权，而不是通过 `msg.sender`。这有两点好处：
+EIP-2612 proposes ERC20Permit, which extends the ERC20 standard by adding a `permit` function that allows users to modify authorization through EIP-712 signatures instead of through `msg.sender`. This has two benefits:
 
-1. 授权这步仅需用户在链下签名，减少一笔交易。
-2. 签名后，用户可以委托第三方进行后续交易，不需要持有 ETH：用户 A 可以将签名发送给 拥有gas的第三方 B，委托 B 来执行后续交易。
+1. The authorization step only requires the user to sign off the chain, reducing one transaction.
+2. After signing, the user can entrust a third party to perform subsequent transactions without holding ETH: User A can send the signature to a third party B who has gas, and entrust B to execute subsequent transactions.
 
 ![](./img/53-1.png)
 
-## 合约
+## Contract
 
-### IERC20Permit 接口合约
+### IERC20Permit interface contract
 
-首先，让我们学习下 ERC20Permit 的接口合约，它定义了 3 个函数：
+First, let us study the interface contract of ERC20Permit, which defines 3 functions:
 
-- `permit()`: 根据 `owner` 的签名, 将 `owenr` 的ERC20代币余额授权给 `spender`，数量为 `value`。要求：
+- `permit()`: Authorize the ERC20 token balance of `owenr` to `spender` according to the signature of `owner`, and the amount is `value`. Require:
  
-    - `spender` 不能是零地址。
-    - `deadline` 必须是未来的时间戳。
-    - `v`，`r` 和 `s` 必须是 `owner` 对 EIP712 格式的函数参数的有效 `secp256k1` 签名。
-    - 签名必须使用 `owner` 当前的 nonce。
+     - `spender` cannot be a zero address.
+     - `deadline` must be a timestamp in the future.
+     - `v`, `r` and `s` must be valid `secp256k1` signatures of the `owner` on function arguments in EIP712 format.
+     - The signature must use the current nonce of the `owner`.
 
 
-- `nonces()`: 返回 `owner` 的当前 nonce。每次为 `permit()` 函数生成签名时，都必须包括此值。每次成功调用 `permit()` 函数都会将 `owner` 的 nonce 增加 1，防止多次使用同一个签名。
+- `nonces()`: Returns the current nonce of `owner`. This value must be included every time you generate a signature for the `permit()` function. Each successful call to the `permit()` function will increase the `owner` nonce by 1 to prevent the same signature from being used multiple times.
 
-- `DOMAIN_SEPARATOR()`: 返回用于编码 `permit()` 函数的签名的域分隔符（domain separator），如 [EIP712](https://github.com/AmazingAng/WTF-Solidity/blob/main/52_EIP712/readme.md) 所定义。
+- `DOMAIN_SEPARATOR()`: Returns the domain separator used to encode the signature of the `permit()` function, such as [EIP712](https://github.com/AmazingAng/WTF-Solidity/blob/main /52_EIP712/readme.md).
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 /**
- * @dev ERC20 Permit 扩展的接口，允许通过签名进行批准，如 https://eips.ethereum.org/EIPS/eip-2612[EIP-2612]中定义。
- */
+ * @dev ERC20 Permit extended interface that allows approval via signatures, as defined in https://eips.ethereum.org/EIPS/eip-2612[EIP-2612].
+  */
 interface IERC20Permit {
-    /**
-     * @dev 根据owner的签名, 将 `owenr` 的ERC20余额授权给 `spender`，数量为 `value`
+     /**
+      * @dev Authorizes `owenr`’s ERC20 balance to `spender` based on the owner’s signature, the amount is `value`
      */
     function permit(
         address owner,
@@ -76,32 +76,32 @@ interface IERC20Permit {
     ) external;
 
     /**
-     * @dev 返回 `owner` 的当前 nonce。每次为 {permit} 生成签名时，都必须包括此值。
+     *@dev Returns the current nonce of `owner`. This value must be included every time you generate a signature for {permit}.
      */
     function nonces(address owner) external view returns (uint256);
 
     /**
-     * @dev 返回用于编码 {permit} 的签名的域分隔符（domain separator）
+     * @dev Returns the domain separator used to encode the signature of {permit}
      */
     // solhint-disable-next-line func-name-mixedcase
     function DOMAIN_SEPARATOR() external view returns (bytes32);
 }
 ```
 
-### ERC20Permit 合约
+### ERC20Permit Contract
 
-下面，让我们写一个简单的 ERC20Permit 合约，它实现了 IERC20Permit 定义的所有接口。合约包含 2 个状态变量:
+Next, let us write a simple ERC20Permit contract, which implements all interfaces defined by IERC20Permit. The contract contains 2 state variables:
 
-- `_nonces`: `address -> uint` 的映射，记录了所有用户当前的 nonce 值，
-- `_PERMIT_TYPEHASH`:  常量，记录了 `permit()` 函数的类型哈希。
+- `_nonces`: `address -> uint` mapping, records the current nonce values of all users,
+- `_PERMIT_TYPEHASH`: Constant, records the type hash of the `permit()` function.
 
-合约包含 5 个函数:
+The contract contains 5 functions:
 
-- 构造函数: 初始化代币的 `name` 和 `symbol`。
-- **`permit()`**: ERC20Permit 最核心的函数，实现了 IERC20Permit 的 `permit()` 。它首先检查签名是否过期，然后用 `_PERMIT_TYPEHASH`, `owner`, `spender`, `value`, `nonce`, `deadline` 还原签名消息，并验证签名是否有效。如果签名有效，则调用ERC20的 `_approve()` 函数进行授权操作。
-- `nonces()`: 实现了 IERC20Permit 的 `nonces()` 函数。
-- `DOMAIN_SEPARATOR()`: 实现了 IERC20Permit 的 `DOMAIN_SEPARATOR()` 函数。
-- `_useNonce()`: 消费 `nonce` 的函数，返回用户当前的 `nonce`，并增加 1。
+- Constructor: Initialize the `name` and `symbol` of the token.
+- **`permit()`**: The core function of ERC20Permit, which implements the `permit()` of IERC20Permit. It first checks whether the signature has expired, then restores the signed message using `_PERMIT_TYPEHASH`, `owner`, `spender`, `value`, `nonce`, `deadline` and verifies whether the signature is valid. If the signature is valid, the `_approve()` function of ERC20 is called to perform the authorization operation.
+- `nonces()`: Implements the `nonces()` function of IERC20Permit.
+- `DOMAIN_SEPARATOR()`: Implements the `DOMAIN_SEPARATOR()` function of IERC20Permit.
+- `_useNonce()`: A function that consumes `nonce`, returns the user's current `nonce`, and increases it by 1.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -113,10 +113,9 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
 
-/**
- * @dev ERC20 Permit 扩展的接口，允许通过签名进行批准，如 https://eips.ethereum.org/EIPS/eip-2612[EIP-2612]中定义。
- *
- * 添加了 {permit} 方法，可以通过帐户签名的消息更改帐户的 ERC20 余额（参见 {IERC20-allowance}）。通过不依赖 {IERC20-approve}，代币持有者的帐户无需发送交易，因此完全不需要持有 Ether。
+/*** @dev ERC20 Permit extended interface that allows approval via signatures, as defined in https://eips.ethereum.org/EIPS/eip-2612[EIP-2612].
+  *
+  * Added {permit} method to change an account's ERC20 balance via a message signed by the account (see {IERC20-allowance}). By not relying on {IERC20-approve}, token holders' accounts do not need to send transactions and therefore do not need to hold Ether at all.
  */
 contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
     mapping(address => uint) private _nonces;
@@ -125,7 +124,7 @@ contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
         keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
 
     /**
-     * @dev 初始化 EIP712 的 name 以及 ERC20 的 name 和 symbol
+     * @dev initializes the name of EIP712 and the name and symbol of ERC20
      */
     constructor(string memory name, string memory symbol) EIP712(name, "1") ERC20(name, symbol){}
 
@@ -141,19 +140,19 @@ contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
         bytes32 r,
         bytes32 s
     ) public virtual override {
-        // 检查 deadline
+        // Check deadline
         require(block.timestamp <= deadline, "ERC20Permit: expired deadline");
 
-        // 拼接 Hash
-        bytes32 structHash = keccak256(abi.encode(_PERMIT_TYPEHASH, owner, spender, value, _useNonce(owner), deadline));
-        bytes32 hash = _hashTypedDataV4(structHash);
+        // Splice Hash
+         bytes32 structHash = keccak256(abi.encode(_PERMIT_TYPEHASH, owner, spender, value, _useNonce(owner), deadline));
+         bytes32 hash = _hashTypedDataV4(structHash);
         
-        // 从签名和消息计算 signer，并验证签名
-        address signer = ECDSA.recover(hash, v, r, s);
-        require(signer == owner, "ERC20Permit: invalid signature");
+         // Calculate the signer from the signature and message, and verify the signature
+         address signer = ECDSA.recover(hash, v, r, s);
+         require(signer == owner, "ERC20Permit: invalid signature");
         
-        // 授权
-        _approve(owner, spender, value);
+         //Authorize
+         _approve(owner, spender, value);
     }
 
     /**
@@ -171,7 +170,7 @@ contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
     }
 
     /**
-     * @dev "消费nonce": 返回 `owner` 当前的 `nonce`，并增加 1。
+     * @dev "Consumption nonce": Returns the current `nonce` of the `owner` and increases it by 1.
      */
     function _useNonce(address owner) internal virtual returns (uint256 current) {
         current = _nonces[owner];
@@ -180,11 +179,11 @@ contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
 }
 ```
 
-## Remix 复现
+## Remix Reappearance
 
-1. 部署 `ERC20Permit` 合约，将 `name` 和 `symbol` 均设为 `WTFPermit`。
+1. Deploy the `ERC20Permit` contract and set both `name` and `symbol` to `WTFPermit`.
 
-2. 运行 `signERC20Permit.html`，将 `Contract Address` 改为部署的 `ERC20Permit` 合约地址，其他信息下面给出。然后依次点击 `Connect Metamask` 和 `Sign Permit` 按钮签名，并获取 `r`，`s`，`v`，用于合约验证。签名要使用部署合约的钱包，比如 Remix 测试钱包：
+2. Run `signERC20Permit.html` and change the `Contract Address` to the deployed `ERC20Permit` contract address. Other information is given below. Then click the `Connect Metamask` and `Sign Permit` buttons in sequence to sign, and obtain `r`, `s`, `v` for contract verification. To sign, use the wallet that deploys the contract, such as the Remix test wallet:
 
     ```js
     owner: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4    spender: 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
@@ -196,16 +195,16 @@ contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
 ![](./img/53-2.png)
 
 
-3. 调用合约的 `permit()` 方法，输入相应参数，进行授权。
+3. Call the `permit()` method of the contract, enter the corresponding parameters, and authorize.
 
-4. 调用合约的 `allance()` 方法，输入相应的 `owner` 和 `spender`，可以看到授权成功。
+4. Call the `allance()` method of the contract, enter the corresponding `owner` and `spender`, and you can see that the authorization is successful.
 
-## 安全注意
+## Safety Note
 
-ERC20Permit 利用链下签名进行授权给用户带来了便利，同时带来了风险。一些黑客会利用这一特性进行钓鱼攻击，骗取用户签名并盗取资产。2023年4月的一起针对 USDC 的签名[钓鱼攻击](https://twitter.com/0xAA_Science/status/1652880488095440897?s=20)让一位用户损失了 228w u 的资产。
+ERC20Permit uses off-chain signatures for authorization, which brings convenience to users but also brings risks. Some hackers will use this feature to conduct phishing attacks to deceive user signatures and steal assets. A signature [phishing attack] (https://twitter.com/0xAA_Science/status/1652880488095440897?s=20) targeting USDC in April 2023 caused a user to lose 228w u of assets.
 
-**签名时，一定要谨慎的阅读签名内容！**
+**When signing, be sure to read the signature carefully! **
 
-## 总结
+## Summary
 
-这一讲，我们介绍了 ERC20Permit，一个 ERC20 代币标准的拓展，支持用户使用链下签名进行授权操作，改善了用户体验，被很多项目采用。但同时，它也带来了更大的风险，一个签名就能将你的资产卷走。大家在签名时一定要更加谨慎。
+In this lecture, we introduced ERC20Permit, an extension of the ERC20 token standard, which supports users to use off-chain signatures for authorization operations, improves user experience, and is adopted by many projects. But at the same time, it also brings greater risks, and your assets can be swept away with just one signature. Everyone must be more careful when signing.
