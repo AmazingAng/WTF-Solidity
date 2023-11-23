@@ -28,38 +28,38 @@ contract EIP712Storage {
      * @dev Store value in variable
      */
     function permitStore(uint256 _num, bytes memory _signature) public {
-        // 检查签名长度，65是标准r,s,v签名的长度
+        // Check the signature length, 65 is the length of standard r, s, v signatures
         require(_signature.length == 65, "invalid signature length");
         bytes32 r;
         bytes32 s;
         uint8 v;
-        // 目前只能用assembly (内联汇编)来从签名中获得r,s,v的值
-        assembly {
-            /*
-            前32 bytes存储签名的长度 (动态数组存储规则)
-            add(sig, 32) = sig的指针 + 32
-            等效为略过signature的前32 bytes
-            mload(p) 载入从内存地址p起始的接下来32 bytes数据
+        // Currently, assembly (inline assembly) can only be used to obtain the values of r, s, and v from the signature.
+         assembly {
+             /*
+             The first 32 bytes store the length of the signature (dynamic array storage rules)
+             add(sig, 32) = pointer to sig + 32
+             Equivalent to skipping the first 32 bytes of signature
+             mload(p) loads the next 32 bytes of data starting from memory address p
             */
-            // 读取长度数据后的32 bytes
-            r := mload(add(_signature, 0x20))
-            // 读取之后的32 bytes
-            s := mload(add(_signature, 0x40))
-            // 读取最后一个byte
-            v := byte(0, mload(add(_signature, 0x60)))
+            // 32 bytes after reading the length data
+             r := mload(add(_signature, 0x20))
+             //32 bytes after reading
+             s := mload(add(_signature, 0x40))
+             //Read the last byte
+             v := byte(0, mload(add(_signature, 0x60)))
         }
 
-        // 获取签名消息hash
+        // Get signed message hash
         bytes32 digest = keccak256(abi.encodePacked(
             "\x19\x01",
             DOMAIN_SEPARATOR,
             keccak256(abi.encode(STORAGE_TYPEHASH, msg.sender, _num))
         )); 
         
-        address signer = digest.recover(v, r, s); // 恢复签名者
-        require(signer == owner, "EIP712Storage: Invalid signature"); // 检查签名
+        address signer = digest.recover(v, r, s); // Restore signer
+        require(signer == owner, "EIP712Storage: Invalid signature"); // Check signature
 
-        // 修改状态变量
+        // Modify state variables
         number = _num;
     }
 
