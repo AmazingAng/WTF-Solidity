@@ -3,7 +3,7 @@ title: 54. Cross-chain bridge
 tags:
    - solidity
    - erc20
-   -eip712
+   - eip712
    - openzepplin
 ---
 
