@@ -1,58 +1,57 @@
 ---
-title: 54. 跨链桥
+title: 54. Cross-chain bridge
 tags:
-  - solidity
-  - erc20
-  - eip712
-  - openzepplin
+   - solidity
+   - erc20
+   -eip712
+   - openzepplin
 ---
 
-# WTF Solidity极简入门: 54. 跨链桥
+# WTF Minimalist introduction to Solidity: 54. Cross-chain bridge
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+I'm recently re-learning solidity, consolidating the details, and writing a "WTF Solidity Minimalist Introduction" for novices (programming experts can find another tutorial), updating 1-3 lectures every week.
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
-社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[WeChat Group](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link) |[Official website wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
-
+All codes and tutorials are open source on github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 -----
 
-这一讲，我们介绍跨链桥，能将资产从一条区块链转移到另一条区块链的基础设施，并实现一个简单的跨链桥。
+In this lecture, we introduce cross-chain bridges, infrastructure that can transfer assets from one blockchain to another, and implement a simple cross-chain bridge.
 
 
-## 1. 什么是跨链桥
+## 1. What is a cross-chain bridge?
 
-跨链桥是一种区块链协议，它允许在两个或多个区块链之间移动数字资产和信息。例如，一个在以太坊主网上运行的ERC20代币，可以通过跨链桥转移到其他兼容以太坊的侧链或独立链。
+A cross-chain bridge is a blockchain protocol that allows digital assets and information to be moved between two or more blockchains. For example, an ERC20 token running on the Ethereum mainnet can be transferred to other Ethereum-compatible sidechains or independent chains through cross-chain bridges.
 
-同时，跨链桥不是区块链原生支持的，跨链操作需要可信第三方来执行，这也带来了风险。近两年，针对跨链桥的攻击已造成超过**20亿美元**的用户资产损失。
+At the same time, cross-chain bridges are not natively supported by the blockchain, and cross-chain operations require a trusted third party to perform, which also brings risks. In the past two years, attacks on cross-chain bridges have caused more than **$2 billion** in user asset losses.
 
-## 2. 跨链桥的种类
+## 2. Types of cross-chain bridges
 
-跨链桥主要有以下三种类型：
+There are three main types of cross-chain bridges:
 
-- **Burn/Mint**：在源链上销毁（burn）代币，然后在目标链上创建（mint）同等数量的代币。此方法好处是代币的总供应量保持不变，但是需要跨链桥拥有代币的铸造权限，适合项目方搭建自己的跨链桥。
+- **Burn/Mint**: Destroy (burn) tokens on the source chain, and then create (mint) the same number of tokens on the target chain. The advantage of this method is that the total supply of tokens remains unchanged, but the cross-chain bridge needs to have the permission to mint the tokens, which is suitable for project parties to build their own cross-chain bridges.
 
-    ![](./img/54-1.png)
+![](./img/54-1.png)
 
-- **Stake/Mint**：在源链上锁定（stake）代币，然后在目标链上创建（mint）同等数量的代币（凭证）。源链上的代币被锁定，当代币从目标链移回源链时再解锁。这是一般跨链桥使用的方案，不需要任何权限，但是风险也较大，当源链的资产被黑客攻击时，目标链上的凭证将变为空气。
+- **Stake/Mint**: Lock (stake) tokens on the source chain, and then create (mint) the same number of tokens (certificates) on the target chain. Tokens on the source chain are locked and unlocked when the tokens are moved from the target chain back to the source chain. This is a solution commonly used by cross-chain bridges. It does not require any permissions, but the risk is also high. When the assets of the source chain are hacked, the credentials on the target chain will become air.
 
-    ![](./img/54-2.png)
+     ![](./img/54-2.png)
 
-- **Stake/Unstake**：在源链上锁定（stake）代币，然后在目标链上释放（unstake）同等数量的代币，在目标链上的代币可以随时兑换回源链的代币。这个方法需要跨链桥在两条链都有锁定的代币，门槛较高，一般需要激励用户在跨链桥锁仓。
+- **Stake/Unstake**: Lock (stake) tokens on the source chain, and then release (unstake) the same number of tokens on the target chain. The tokens on the target chain can be exchanged back to the tokens on the source chain at any time. currency. This method requires the cross-chain bridge to have locked tokens on both chains, and the threshold is high. Users generally need to be encouraged to lock up on the cross-chain bridge.
 
     ![](./img/54-3.png)
 
-## 3. 搭建一个简单的跨链桥
+## 3. Build a simple cross-chain bridge
 
-为了更好理解这个跨链桥，我们将搭建一个简单的跨链桥，并实现Goerli测试网和Sepolia测试网之间的ERC20代币转移。我们使用的是burn/mint方式，源链上的代币将被销毁，并在目标链上创建。这个跨链桥由一个智能合约（部署在两条链上）和一个Ethers.js脚本组成。
+In order to better understand this cross-chain bridge, we will build a simple cross-chain bridge and implement ERC20 token transfer between the Goerli test network and the Sepolia test network. We use the burn/mint method, the tokens on the source chain will be destroyed and created on the target chain. This cross-chain bridge consists of a smart contract (deployed on both chains) and an Ethers.js script.
 
-> **请注意**，这是一个非常简单的跨链桥实现，仅用于教学目的。它没有处理一些可能出现的问题，如交易失败、链的重组等。在生产环境中，建议使用专业的跨链桥解决方案或其他经过充分测试和审计的框架。
+> **Please note**, this is a very simple cross-chain bridge implementation and is for educational purposes only. It does not deal with some possible problems, such as transaction failure, chain reorganization, etc. In a production environment, it is recommended to use a professional cross-chain bridge solution or other fully tested and audited frameworks.
 
-### 3.1 跨链代币合约
+### 3.1 Cross-chain token contract
 
-首先，我们需要在Goerli和Sepolia测试网上部署一个ERC20代币合约，`CrossChainToken`。这个合约中定义了代币的名字、符号和总供应量，还有一个用于跨链转移的`bridge()`函数。
+First, we need to deploy an ERC20 token contract, `CrossChainToken`, on the Goerli and Sepolia testnets. This contract defines the name, symbol, and total supply of the token, as well as a `bridge()` function for cross-chain transfers.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -100,32 +99,32 @@ contract CrossChainToken is ERC20, Ownable {
 }
 ```
 
-这个合约有三个主要的函数：
+This contract has three main functions:
 
-- `constructor()`: 构造函数，在部署合约时会被调用一次，用于初始化代币的名字、符号和总供应量。
+- `constructor()`: The constructor, which will be called once when deploying the contract, is used to initialize the name, symbol and total supply of the token.
 
-- `bridge()`: 用户调用此函数进行跨链转移，它会销毁用户指定数量的代币，并释放`Bridge`事件。
+- `bridge()`: The user calls this function to perform cross-chain transfer. It will destroy the number of tokens specified by the user and release the `Bridge` event.
 
-- `mint()`: 只有合约的所有者才能调用此函数，用于处理跨链事件，并释放`Mint`事件。当用户在另一条链调用`bridge()`函数销毁代币，脚本会监听`Bridge`事件，并给用户在目标链铸造代币。
+- `mint()`: Only the owner of the contract can call this function to handle cross-chain events and release the `Mint` event. When the user calls the `bridge()` function on another chain to destroy the token, the script will listen to the `Bridge` event and mint the token for the user on the target chain.
 
-### 3.2 跨链脚本
+### 3.2 Cross-chain script
 
-有了代币合约之后，我们需要一个服务器来处理跨链事件。我们可以编写一个ethers.js脚本（v6版本）监听`Bridge`事件，当事件被触发时，在目标链上创建同样数量的代币。如果你不了解Ethers.js，可以阅读[WTF Ethers极简教程](https://github.com/WTFAcademy/WTF-Ethers)。
+With the token contract in place, we need a server to handle cross-chain events. We can write an ethers.js script (v6 version) to listen to the `Bridge` event, and when the event is triggered, create the same number of tokens on the target chain. If you don’t know Ethers.js, you can read [WTF Ethers Minimalist Tutorial](https://github.com/WTFAcademy/WTF-Ethers).
 
 ```javascript
 import { ethers } from "ethers";
 
-// 初始化两条链的provider
+//Initialize the providers of the two chains
 const providerGoerli = new ethers.JsonRpcProvider("Goerli_Provider_URL");
 const providerSepolia = new ethers.JsonRpcProvider("Sepolia_Provider_URL://eth-sepolia.g.alchemy.com/v2/RgxsjQdKTawszh80TpJ-14Y8tY7cx5W2");
 
-// 初始化两条链的signer
-// privateKey填管理者钱包的私钥
+//Initialize the signers of the two chains
+// privateKey fills in the private key of the administrator's wallet
 const privateKey = "Your_Key";
 const walletGoerli = new ethers.Wallet(privateKey, providerGoerli);
 const walletSepolia = new ethers.Wallet(privateKey, providerSepolia);
 
-// 合约地址和ABI
+//Contract address and ABI
 const contractAddressGoerli = "0xa2950F56e2Ca63bCdbA422c8d8EF9fC19bcF20DD";
 const contractAddressSepolia = "0xad20993E1709ed13790b321bbeb0752E50b8Ce69";
 
@@ -135,30 +134,30 @@ const abi = [
     "function mint(address to, uint amount) external",
 ];
 
-// 初始化合约实例
+//Initialize contract instance
 const contractGoerli = new ethers.Contract(contractAddressGoerli, abi, walletGoerli);
 const contractSepolia = new ethers.Contract(contractAddressSepolia, abi, walletSepolia);
 
 const main = async () => {
-    try{
-        console.log(`开始监听跨链事件`)
+     try{
+         console.log(`Start listening to cross-chain events`)
 
-        // 监听chain Sepolia的Bridge事件，然后在Goerli上执行mint操作，完成跨链
-        contractSepolia.on("Bridge", async (user, amount) => {
-            console.log(`Bridge event on Chain Sepolia: User ${user} burned ${amount} tokens`);
+         // Listen to the Bridge event of chain Sepolia, and then perform the mint operation on Goerli to complete the cross-chain
+         contractSepolia.on("Bridge", async (user, amount) => {
+             console.log(`Bridge event on Chain Sepolia: User ${user} burned ${amount} tokens`);
 
-            // 在执行burn操作
-            let tx = await contractGoerli.mint(user, amount);
-            await tx.wait();
+             // Performing burn operation
+             let tx = await contractGoerli.mint(user, amount);
+             await tx.wait();
 
-            console.log(`Minted ${amount} tokens to ${user} on Chain Goerli`);
-        });
+             console.log(`Minted ${amount} tokens to ${user} on Chain Goerli`);
+         });
 
-        // 监听chain Sepolia的Bridge事件，然后在Goerli上执行mint操作，完成跨链
-        contractGoerli.on("Bridge", async (user, amount) => {
-            console.log(`Bridge event on Chain Goerli: User ${user} burned ${amount} tokens`);
+       // Listen to the Bridge event of chain Sepolia, and then perform the mint operation on Goerli to complete the cross-chain
+         contractGoerli.on("Bridge", async (user, amount) => {
+             console.log(`Bridge event on Chain Goerli: User ${user} burned ${amount} tokens`);
 
-            // 在执行burn操作
+             // Performing burn operation
             let tx = await contractSepolia.mint(user, amount);
             await tx.wait();
 
@@ -174,26 +173,26 @@ const main = async () => {
 main();
 ```
 
-## Remix 复现
+## Remix Reappearance
 
-1. 在Goerli和Sepolia测试链部署分别部署`CrossChainToken`合约，合约会自动给我们铸造 10000 枚代币
+1. Deploy the `CrossChainToken` contract on the Goerli and Sepolia test chains respectively. The contract will automatically mint 10,000 tokens for us.
 
-    ![](./img/54-4.png)
+     ![](./img/54-4.png)
 
-2. 补全跨链脚本 `crosschain.js` 中的RPC节点URL和管理员私钥，将部署在Goerli和Sepolia的代币合约地址填写到相应位置，并运行脚本。
+2. Complete the RPC node URL and administrator private key in the cross-chain script `crosschain.js`, fill in the token contract addresses deployed in Goerli and Sepolia into the corresponding locations, and run the script.
 
-3. 调用Goerli链上代币合约的`bridge()`函数，跨链100枚代币。
+3. Call the `bridge()` function of the token contract on the Goerli chain to cross-chain 100 tokens.
 
-    ![](./img/54-6.png)
+     ![](./img/54-6.png)
 
-4. 脚本监听到跨链事件，并在Sepolia链上铸造100枚代币。
+4. The script listens to the cross-chain event and mints 100 tokens on the Sepolia chain.
 
-    ![](./img/54-7.png)
+     ![](./img/54-7.png)
 
-5. 在Sepolia链上调用`balance()`查询余额，发现代币余额变为10100枚，跨链成功！
+5. Call `balance()` on the Sepolia chain to check the balance, and find that the token balance has changed to 10,100. The cross-chain is successful!
 
-    ![](./img/54-8.png)
+     ![](./img/54-8.png)
 
-## 总结
+## Summary
 
-这一讲我们介绍了跨链桥，它允许在两个或多个区块链之间移动数字资产和信息，方便用户在多链操作资产。同时，它也有很大的风险，近两年针对跨链桥的攻击已造成超过**20亿美元**的用户资产损失。在本教程中，我们搭建一个简单的跨链桥，并实现Goerli测试网和Sepolia测试网之间的ERC20代币转移。相信通过本教程，你对跨链桥会有更深的理解。
+In this lecture, we introduced the cross-chain bridge, which allows digital assets and information to be moved between two or more blockchains, making it convenient for users to operate assets on multiple chains. At the same time, it also carries great risks. Attacks on cross-chain bridges in the past two years have caused more than **2 billion US dollars** in user asset losses. In this tutorial, we build a simple cross-chain bridge and implement ERC20 token transfer between Goerli testnet and Sepolia testnet. I believe that through this tutorial, you will have a deeper understanding of cross-chain bridges.
