@@ -1,76 +1,76 @@
 ---
-title: 57. 闪电贷
+title: 57. Flash loan
 tags:
-  - solidity
-  - flashloan
-  - defi
-  - uniswap
-  - aave
+   - solidity
+   - flashloan
+   - Defi
+   - uniswap
+   - aave
 ---
 
-# WTF Solidity极简入门: 57. 闪电贷
+# WTF Minimalist introduction to Solidity: 57. Flash loan
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+I'm recently re-learning solidity, consolidating the details, and writing a "WTF Solidity Minimalist Introduction" for novices (programming experts can find another tutorial), updating 1-3 lectures every week.
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
-社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[WeChat Group](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link) |[Official website wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All codes and tutorials are open source on github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
-“闪电贷攻击”这个词大家一定听说过，但是什么是闪电贷？如何编写闪电贷合约？这一讲，我们将介绍区块链中的闪电贷，实现基于Uniswap V2，Uniswap V3，和AAVE V3的闪电贷合约，并使用Foundry进行测试。
+You must have heard the term “flash loan attack”, but what is a flash loan? How to write a flash loan contract? In this lecture, we will introduce flash loans in the blockchain, implement flash loan contracts based on Uniswap V2, Uniswap V3, and AAVE V3, and use Foundry for testing.
 
-## 闪电贷
+## Flash Loan
 
-你第一次听说"闪电贷"一定是在Web3，因为Web2没有这个东西。闪电贷（Flashloan）是DeFi的一种创新，它允许用户在一个交易中借出并迅速归还资金，而无需提供任何抵押。
+The first time you heard about "flash loan" must be in Web3, because Web2 does not have this thing. Flashloan is a DeFi innovation that allows users to lend and quickly return funds in one transaction without providing any collateral.
 
-想象一下，你突然在市场中发现了一个套利机会，但是需要准备100万u的资金才能完成套利。在Web2，你去银行申请贷款，需要审批，很可能错过套利的机会。另外，如果套利失败，你不光要支付利息，还需要归还损失的本金。
+Imagine that you suddenly find an arbitrage opportunity in the market, but you need to prepare 1 million U of funds to complete the arbitrage. In Web2, you go to the bank to apply for a loan, which requires approval, and you may miss the arbitrage opportunity. In addition, if the arbitrage fails, you not only have to pay interest, but also need to return the lost principal.
 
-而在Web3，你可以在DeFI平台（Uniswap，AAVE，Dodo）中进行闪电贷获取资金，就可以在无担保的情况下借100万u的代币，执行链上套利，最后再归还贷款和利息。
+In Web3, you can obtain funds through flash loans on the DeFI platform (Uniswap, AAVE, Dodo). You can borrow 1 million u tokens without guarantee, perform on-chain arbitrage, and finally return the loan and interest. .
 
-闪电贷利用了以太坊交易的原子性：一个交易（包括其中的所有操作）要么完全执行，要么完全不执行。如果一个用户尝试使用闪电贷并在同一个交易中没有归还资金，那么整个交易都会失败并被回滚，就像它从未发生过一样。因此，DeFi平台不需要担心借款人还不上款，因为还不上的话就意味着钱没借出去；同时，借款人也不用担心套利不成功，因为套利不成功的话就还不上款，也就意味着借钱没成功。
+Flash loans take advantage of the atomicity of Ethereum transactions: a transaction (including all operations within it) is either fully executed or not executed at all. If a user attempts to use a flash loan and does not return the funds in the same transaction, the entire transaction will fail and be rolled back as if it never happened. Therefore, the DeFi platform does not need to worry about the borrower not being able to repay the loan, because if it is not repaid, it means that the money has not been loaned out; at the same time, the borrower does not need to worry about the arbitrage being unsuccessful, because if the arbitrage is unsuccessful, the repayment will not be repaid, and It means that the loan was unsuccessful.
 
 ![](./img/57-1.png)
 
-## 闪电贷实战
+## Flash loan in action
 
-下面，我们分别介绍如何在Uniswap V2，Uniswap V3，和AAVE V3的实现闪电贷合约。
+Below, we introduce how to implement flash loan contracts in Uniswap V2, Uniswap V3, and AAVE V3.
 
-### 1. Uniswap V2闪电贷
+### 1. Uniswap V2 Flash Loan
 
-[Uniswap V2 Pair](https://github.com/Uniswap/v2-core/blob/master/contracts/UniswapV2Pair.sol#L159)合约的`swap()`函数支持闪电贷。与闪电贷业务相关的代码如下：
+[Uniswap V2 Pair](https://github.com/Uniswap/v2-core/blob/master/contracts/UniswapV2Pair.sol#L159) The `swap()` function of the contract supports flash loans. The code related to the flash loan business is as follows:
 
 ```solidity
 function swap(uint amount0Out, uint amount1Out, address to, bytes calldata data) external lock {
-    // 其他逻辑...
+     // Other logic...
 
-    // 乐观的发送代币到to地址
-    if (amount0Out > 0) _safeTransfer(_token0, to, amount0Out);
-    if (amount1Out > 0) _safeTransfer(_token1, to, amount1Out);
+     // Optimistically send tokens to the to address
+     if (amount0Out > 0) _safeTransfer(_token0, to, amount0Out);
+     if (amount1Out > 0) _safeTransfer(_token1, to, amount1Out);
 
-    // 调用to地址的回调函数uniswapV2Call
-    if (data.length > 0) IUniswapV2Callee(to).uniswapV2Call(msg.sender, amount0Out, amount1Out, data);
+     //Call the callback function uniswapV2Call of the to address
+     if (data.length > 0) IUniswapV2Callee(to).uniswapV2Call(msg.sender, amount0Out, amount1Out, data);
 
-    // 其他逻辑...
+     // Other logic...
 
-    // 通过k=x*y公式，检查闪电贷是否归还成功
-    require(balance0Adjusted.mul(balance1Adjusted) >= uint(_reserve0).mul(_reserve1).mul(1000**2), 'UniswapV2: K');
+     // Use the k=x*y formula to check whether the flash loan is returned successfully
+     require(balance0Adjusted.mul(balance1Adjusted) >= uint(_reserve0).mul(_reserve1).mul(1000**2), 'UniswapV2: K');
 }
 ```
 
-在`swap()`函数中：
+In the `swap()` function:
 
-1. 先将池子中的代币乐观的转移给了`to`地址。
-2. 如果传入的`data`长度大于`0`，就会调用`to`地址的回调函数`uniswapV2Call`，执行闪电贷逻辑。
-3. 最后通过`k=x*y`检查闪电贷是否归还成功，如果不成功，则回滚交易。
+1. First transfer the tokens in the pool to the `to` address optimistically.
+2. If the length of `data` passed in is greater than `0`, the callback function `uniswapV2Call` of the `to` address will be called to execute the flash loan logic.
+3. Finally, check whether the flash loan is returned successfully through `k=x*y`. If not, roll back the transaction.
 
-下面，我们完成闪电贷合约`UniswapV2Flashloan.sol`。我们让它继承`IUniswapV2Callee`，并将闪电贷的核心逻辑写在回调函数`uniswapV2Call`中。
+Next, we complete the flash loan contract `UniswapV2Flashloan.sol`. We let it inherit `IUniswapV2Callee` and write the core logic of flash loan in the callback function `uniswapV2Call`.
 
-整体逻辑很简单，在闪电贷函数`flashloan()`中，我们从Uniswap V2的`WETH-DAI`池子借`WETH`。触发闪电贷之后，回调函数`uniswapV2Call`会被Pair合约调用，我们不进行套利，仅在计算利息后归还闪电贷。Uniswap V2闪电贷的利息为每笔`0.3%`。
+The overall logic is very simple. In the flash loan function `flashloan()`, we borrow `WETH` from the `WETH-DAI` pool of Uniswap V2. After the flash loan is triggered, the callback function `uniswapV2Call` will be called by the Pair contract. We do not perform arbitrage and only return the flash loan after calculating the interest. The interest rate of Uniswap V2 flash loan is `0.3%` per transaction.
 
-**注意**：回调函数一定要做好权限控制，确保只有Uniswap的Pair合约可以调用，否则的话合约中的资金会被黑客盗光。
+**Note**: The callback function must have permission control to ensure that only Uniswap's Pair contract can be called. Otherwise, all the funds in the contract will be stolen by hackers.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -78,12 +78,12 @@ pragma solidity ^0.8.20;
 
 import "./Lib.sol";
 
-// UniswapV2闪电贷回调接口
+// Uniswap V2 flash loan callback interface
 interface IUniswapV2Callee {
     function uniswapV2Call(address sender, uint amount0, uint amount1, bytes calldata data) external;
 }
 
-// UniswapV2闪电贷合约
+// // Uniswap V2 Flash Loan Contract
 contract UniswapV2Flashloan is IUniswapV2Callee {
     address private constant UNISWAP_V2_FACTORY =
         0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f;
@@ -101,46 +101,45 @@ contract UniswapV2Flashloan is IUniswapV2Callee {
         pair = IUniswapV2Pair(factory.getPair(DAI, WETH));
     }
 
-    // 闪电贷函数
-    function flashloan(uint wethAmount) external {
-        // calldata长度大于1才能触发闪电贷回调函数
-        bytes memory data = abi.encode(WETH, wethAmount);
+// Flash loan function
+     function flashloan(uint wethAmount) external {
+         //The calldata length is greater than 1 to trigger the flash loan callback function
+         bytes memory data = abi.encode(WETH, wethAmount);
 
-        // amount0Out是要借的DAI, amount1Out是要借的WETH
-        pair.swap(0, wethAmount, address(this), data);
-    }
+         // amount0Out is the DAI to be borrowed, amount1Out is the WETH to be borrowed
+         pair.swap(0, wethAmount, address(this), data);
+     }
 
-    // 闪电贷回调函数，只能被 DAI/WETH pair 合约调用
+     // Flash loan callback function can only be called by the DAI/WETH pair contract
     function uniswapV2Call(
         address sender,
         uint amount0,
         uint amount1,
         bytes calldata data
     ) external {
-        // 确认调用的是 DAI/WETH pair 合约
-        address token0 = IUniswapV2Pair(msg.sender).token0(); // 获取token0地址
-        address token1 = IUniswapV2Pair(msg.sender).token1(); // 获取token1地址
+// Confirm that the call is DAI/WETH pair contract
+         address token0 = IUniswapV2Pair(msg.sender).token0(); // Get token0 address
+         address token1 = IUniswapV2Pair(msg.sender).token1(); // Get token1 address
         assert(msg.sender == factory.getPair(token0, token1)); // ensure that msg.sender is a V2 pair
 
-        // 解码calldata
-        (address tokenBorrow, uint256 wethAmount) = abi.decode(data, (address, uint256));
+//Decode calldata
+         (address tokenBorrow, uint256 wethAmount) = abi.decode(data, (address, uint256));
 
-        // flashloan 逻辑，这里省略
+         // flashloan logic, omitted here
         require(tokenBorrow == WETH, "token borrow != WETH");
 
-        // 计算flashloan费用
-        // fee / (amount + fee) = 3/1000
-        // 向上取整
-        uint fee = (amount1 * 3) / 997 + 1;
-        uint amountToRepay = amount1 + fee;
+// Calculate flashloan fees
+         // fee / (amount + fee) = 3/1000
+         // Rounded up
+         uint fee = (amount1 * 3) / 997 + 1;
+         uint amountToRepay = amount1 + fee;
 
-        // 归还闪电贷
-        weth.transfer(address(pair), amountToRepay);
-    }
+         //Repay flash loan
+         weth.transfer(address(pair), amountToRepay);
+     }
 }
-```
 
-Foundry测试合约`UniswapV2Flashloan.t.sol`：
+Foundry test contract `UniswapV2Flashloan.t.sol`:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -160,30 +159,30 @@ contract UniswapV2FlashloanTest is Test {
         flashloan = new UniswapV2Flashloan();
     }
 
-    function testFlashloan() public {
-        // 换weth，并转入flashloan合约，用做手续费
-        weth.deposit{value: 1e18}();
-        weth.transfer(address(flashloan), 1e18);
-        // 闪电贷借贷金额
-        uint amountToBorrow = 100 * 1e18;
-        flashloan.flashloan(amountToBorrow);
-    }
+function testFlashloan() public {
+         //Exchange weth and transfer it to the flashloan contract to use it as handling fee
+         weth.deposit{value: 1e18}();
+         weth.transfer(address(flashloan), 1e18);
+         // Flash loan loan amount
+         uint amountToBorrow = 100 * 1e18;
+         flashloan.flashloan(amountToBorrow);
+     }
 
-    // 手续费不足，会revert
-    function testFlashloanFail() public {
-        // 换weth，并转入flashloan合约，用做手续费
-        weth.deposit{value: 1e18}();
-        weth.transfer(address(flashloan), 3e17);
-        // 闪电贷借贷金额
-        uint amountToBorrow = 100 * 1e18;
-        // 手续费不足
-        vm.expectRevert();
-        flashloan.flashloan(amountToBorrow);
-    }
+     // If the handling fee is insufficient, it will be reverted.
+     function testFlashloanFail() public {
+         //Exchange weth and transfer it to the flashloan contract to use it as handling fee
+         weth.deposit{value: 1e18}();
+         weth.transfer(address(flashloan), 3e17);
+         // Flash loan loan amount
+         uint amountToBorrow = 100 * 1e18;
+         // Insufficient handling fee
+         vm.expectRevert();
+         flashloan.flashloan(amountToBorrow);
+     }
 }
 ```
 
-在测试合约中，我们分别测试了手续费充足和不足的情况，你可以在安装Foundry后使用下面的命令行进行测试（你可以将RPC换成其他以太坊RPC）：
+In the test contract, we tested the cases of sufficient and insufficient handling fees respectively. You can use the following command line to test after installing Foundry (you can change the RPC to other Ethereum RPC):
 
 ```shell
 FORK_URL=https://singapore.rpc.blxrbdn.com
@@ -192,7 +191,7 @@ forge test  --fork-url $FORK_URL --match-path test/UniswapV2Flashloan.t.sol -vv
 
 ### 2. Uniswap V3闪电贷
 
-与Uniswap V2在`swap()`交换函数中间接支持闪电贷不同，Uniswap V3在[Pool池合约](https://github.com/Uniswap/v3-core/blob/main/contracts/UniswapV3Pool.sol#L791C1-L835C1)中加入了`flash()`函数直接支持闪电贷，核心代码如下：
+Unlike Uniswap V2 which indirectly supports flash loans in the `swap()` exchange function, Uniswap V3 supports flash loans in [Pool Pool Contract](https://github.com/Uniswap/v3-core/blob/main/contracts/UniswapV3Pool.sol #L791C1-L835C1) has added the `flash()` function to directly support flash loans. The core code is as follows:
 
 ```solidity
 function flash(
@@ -203,14 +202,14 @@ function flash(
 ) external override lock noDelegateCall {
     // 其他逻辑...
 
-    // 乐观的发送代币到to地址
-    if (amount0 > 0) TransferHelper.safeTransfer(token0, recipient, amount0);
-    if (amount1 > 0) TransferHelper.safeTransfer(token1, recipient, amount1);
+// Optimistically send tokens to the to address
+     if (amount0 > 0) TransferHelper.safeTransfer(token0, recipient, amount0);
+     if (amount1 > 0) TransferHelper.safeTransfer(token1, recipient, amount1);
 
-    // 调用to地址的回调函数uniswapV3FlashCallback
-    IUniswapV3FlashCallback(msg.sender).uniswapV3FlashCallback(fee0, fee1, data);
+     //Call the callback function uniswapV3FlashCallback of the to address
+     IUniswapV3FlashCallback(msg.sender).uniswapV3FlashCallback(fee0, fee1, data);
 
-    // 检查闪电贷是否归还成功
+     // Check whether the flash loan is returned successfully
     uint256 balance0After = balance0();
     uint256 balance1After = balance1();
     require(balance0Before.add(fee0) <= balance0After, 'F0');
@@ -220,15 +219,15 @@ function flash(
     uint256 paid0 = balance0After - balance0Before;
     uint256 paid1 = balance1After - balance1Before;
 
-    // 其他逻辑...
+// Other logic...
 }
 ```
 
-下面，我们完成闪电贷合约`UniswapV3Flashloan.sol`。我们让它继承`IUniswapV3FlashCallback`，并将闪电贷的核心逻辑写在回调函数`uniswapV3FlashCallback`中。
+Next, we complete the flash loan contract `UniswapV3Flashloan.sol`. We let it inherit `IUniswapV3FlashCallback` and write the core logic of flash loan in the callback function `uniswapV3FlashCallback`.
 
-整体逻辑与V2的类似，在闪电贷函数`flashloan()`中，我们从Uniswap V3的`WETH-DAI`池子借`WETH`。触发闪电贷之后，回调函数`uniswapV3FlashCallback`会被Pool合约调用，我们不进行套利，仅在计算利息后归还闪电贷。Uniswap V3每笔闪电贷的手续费与交易手续费一致。
+The overall logic is similar to that of V2. In the flash loan function `flashloan()`, we borrow `WETH` from the `WETH-DAI` pool of Uniswap V3. After the flash loan is triggered, the callback function `uniswapV3FlashCallback` will be called by the Pool contract. We do not perform arbitrage and only return the flash loan after calculating the interest. The handling fee for each flash loan in Uniswap V3 is consistent with the transaction fee.
 
-**注意**：回调函数一定要做好权限控制，确保只有Uniswap的Pair合约可以调用，否则的话合约中的资金会被黑客盗光。
+**Note**: The callback function must have permission control to ensure that only Uniswap's Pair contract can be called. Otherwise, all the funds in the contract will be stolen by hackers.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -236,22 +235,22 @@ pragma solidity ^0.8.20;
 
 import "./Lib.sol";
 
-// UniswapV3闪电贷回调接口
-// 需要实现并重写uniswapV3FlashCallback()函数
+// UniswapV3 flash loan callback interface
+//Need to implement and rewrite the uniswapV3FlashCallback() function
 interface IUniswapV3FlashCallback {
-    /// 在实现中，你必须偿还池中由 flash 发送的代币及计算出的费用金额。
-    /// 调用此方法的合约必须经由官方 UniswapV3Factory 部署的 UniswapV3Pool 检查。
-    /// @param fee0 闪电贷结束时，应支付给池的 token0 的费用金额
-    /// @param fee1 闪电贷结束时，应支付给池的 token1 的费用金额
-    /// @param data 通过 IUniswapV3PoolActions#flash 调用由调用者传递的任何数据
-    function uniswapV3FlashCallback(
-        uint256 fee0,
-        uint256 fee1,
-        bytes calldata data
-    ) external;
+     /// In the implementation, you must repay the pool for the tokens sent by flash and the calculated fee amount.
+     /// The contract calling this method must be checked by the UniswapV3Pool deployed by the official UniswapV3Factory.
+     /// @param fee0 The fee amount of token0 that should be paid to the pool when the flash loan ends
+     /// @param fee1 The fee amount of token1 that should be paid to the pool when the flash loan ends
+     /// @param data Any data passed by the caller is called via IUniswapV3PoolActions#flash
+     function uniswapV3FlashCallback(
+         uint256 fee0,
+         uint256 fee1,
+         bytes calldata data
+     ) external;
 }
 
-// UniswapV3闪电贷合约
+// UniswapV3 flash loan contract
 contract UniswapV3Flashloan is IUniswapV3FlashCallback {
     address private constant UNISWAP_V3_FACTORY = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
 
@@ -279,34 +278,34 @@ contract UniswapV3Flashloan is IUniswapV3FlashCallback {
         return PoolAddress.computeAddress(UNISWAP_V3_FACTORY, poolKey);
     }
 
-    // 闪电贷函数
-    function flashloan(uint wethAmount) external {
-        bytes memory data = abi.encode(WETH, wethAmount);
-        IUniswapV3Pool(pool).flash(address(this), 0, wethAmount, data);
-    }
+// Flash loan function
+     function flashloan(uint wethAmount) external {
+         bytes memory data = abi.encode(WETH, wethAmount);
+         IUniswapV3Pool(pool).flash(address(this), 0, wethAmount, data);
+     }
 
-    // 闪电贷回调函数，只能被 DAI/WETH pair 合约调用
-    function uniswapV3FlashCallback(
-        uint fee0,
-        uint fee1,
-        bytes calldata data
-    ) external {
-        // 确认调用的是 DAI/WETH pair 合约
-        require(msg.sender == address(pool), "not authorized");
+     // Flash loan callback function can only be called by the DAI/WETH pair contract
+     function uniswapV3FlashCallback(
+         uint fee0,
+         uint fee1,
+         bytes calldata data
+     ) external {
+         // Confirm that the call is DAI/WETH pair contract
+         require(msg.sender == address(pool), "not authorized");
         
-        // 解码calldata
+         //Decode calldata
         (address tokenBorrow, uint256 wethAmount) = abi.decode(data, (address, uint256));
 
-        // flashloan 逻辑，这里省略
+        // flashloan logic, omitted here
         require(tokenBorrow == WETH, "token borrow != WETH");
 
-        // 归还闪电贷
+        //Repay flash loan
         weth.transfer(address(pool), wethAmount + fee1);
     }
 }
 ```
 
-Foundry测试合约`UniswapV3Flashloan.t.sol`：
+Foundry test contract `UniswapV3Flashloan.t.sol`:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -326,48 +325,48 @@ contract UniswapV2FlashloanTest is Test {
         flashloan = new UniswapV3Flashloan();
     }
 
-    function testFlashloan() public {
-        // 换weth，并转入flashloan合约，用做手续费
-        weth.deposit{value: 1e18}();
-        weth.transfer(address(flashloan), 1e18);
+function testFlashloan() public {
+         //Exchange weth and transfer it to the flashloan contract to use it as handling fee
+         weth.deposit{value: 1e18}();
+         weth.transfer(address(flashloan), 1e18);
                 
-        uint balBefore = weth.balanceOf(address(flashloan));
-        console2.logUint(balBefore);
-        // 闪电贷借贷金额
-        uint amountToBorrow = 1 * 1e18;
-        flashloan.flashloan(amountToBorrow);
+         uint balBefore = weth.balanceOf(address(flashloan));
+         console2.logUint(balBefore);
+         // Flash loan loan amount
+         uint amountToBorrow = 1 * 1e18;
+         flashloan.flashloan(amountToBorrow);
     }
 
-    // 手续费不足，会revert
-    function testFlashloanFail() public {
-        // 换weth，并转入flashloan合约，用做手续费
-        weth.deposit{value: 1e18}();
-        weth.transfer(address(flashloan), 1e17);
-        // 闪电贷借贷金额
-        uint amountToBorrow = 100 * 1e18;
-        // 手续费不足
-        vm.expectRevert();
-        flashloan.flashloan(amountToBorrow);
-    }
+// If the handling fee is insufficient, it will be reverted.
+     function testFlashloanFail() public {
+         //Exchange weth and transfer it to the flashloan contract to use it as handling fee
+         weth.deposit{value: 1e18}();
+         weth.transfer(address(flashloan), 1e17);
+         // Flash loan loan amount
+         uint amountToBorrow = 100 * 1e18;
+         // Insufficient handling fee
+         vm.expectRevert();
+         flashloan.flashloan(amountToBorrow);
+     }
 }
 ```
 
-在测试合约中，我们分别测试了手续费充足和不足的情况，你可以在安装Foundry后使用下面的命令行进行测试（你可以将RPC换成其他以太坊RPC）：
+In the test contract, we tested the cases of sufficient and insufficient handling fees respectively. You can use the following command line to test after installing Foundry (you can change the RPC to other Ethereum RPC):
 
 ```shell
 FORK_URL=https://singapore.rpc.blxrbdn.com
 forge test  --fork-url $FORK_URL --match-path test/UniswapV3Flashloan.t.sol -vv
 ```
 
-### 3. AAVE V3闪电贷
+### 3. AAVE V3 Flash Loan
 
-AAVE是去中心的借贷平台，它的[Pool合约](https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/Pool.sol#L424)通过`flashLoan()`和`flashLoanSimple()`两个函数支持单资产和多资产的闪电贷。这里，我们仅利用`flashLoan()`实现单个资产（`WETH`）的闪电贷。
+AAVE is a decentralized lending platform. Its [Pool contract](https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/Pool.sol#L424) passes `flashLoan The two functions ()` and `flashLoanSimple()` support single-asset and multi-asset flash loans. Here, we only use `flashLoan()` to implement flash loan of a single asset (`WETH`).
 
-下面，我们完成闪电贷合约`AaveV3Flashloan.sol`。我们让它继承`IFlashLoanSimpleReceiver`，并将闪电贷的核心逻辑写在回调函数`executeOperation`中。
+Next, we complete the flash loan contract `AaveV3Flashloan.sol`. We let it inherit `IFlashLoanSimpleReceiver` and write the core logic of flash loan in the callback function `executeOperation`.
 
-整体逻辑与V2的类似，在闪电贷函数`flashloan()`中，我们从AAVE V3的`WETH`池子借`WETH`。触发闪电贷之后，回调函数`executeOperation`会被Pool合约调用，我们不进行套利，仅在计算利息后归还闪电贷。AAVE V3闪电贷的手续费默认为每笔`0.05%`，比Uniswap的要低。
+The overall logic is similar to that of V2. In the flash loan function `flashloan()`, we borrow `WETH` from the `WETH` pool of AAVE V3. After the flash loan is triggered, the callback function `executeOperation` will be called by the Pool contract. We do not perform arbitrage and only return the flash loan after calculating the interest. The handling fee of AAVE V3 flash loan defaults to `0.05%` per transaction, which is lower than that of Uniswap.
 
-**注意**：回调函数一定要做好权限控制，确保只有AAVE的Pool合约可以调用，并且发起者是本合约，否则的话合约中的资金会被黑客盗光。
+**Note**: The callback function must have permission control to ensure that only AAVE's Pool contract can be called, and the initiator is this contract, otherwise the funds in the contract will be stolen by hackers.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -376,17 +375,17 @@ pragma solidity ^0.8.20;
 import "./Lib.sol";
 
 interface IFlashLoanSimpleReceiver {
-    /**
-    * @notice 在接收闪电借款资产后执行操作
-    * @dev 确保合约能够归还债务 + 额外费用，例如，具有
-    *      足够的资金来偿还，并已批准 Pool 提取总金额
-    * @param asset 闪电借款资产的地址
-    * @param amount 闪电借款资产的数量
-    * @param premium 闪电借款资产的费用
-    * @param initiator 发起闪电贷款的地址
-    * @param params 初始化闪电贷款时传递的字节编码参数
-    * @return 如果操作的执行成功则返回 True，否则返回 False
-    */
+     /**
+     * @notice performs operations after receiving flash loan assets
+     * @dev ensures that the contract can pay off the debt + additional fees, e.g. with
+     * Sufficient funds to repay and Pool has been approved to withdraw the total amount
+     * @param asset The address of the flash loan asset
+     * @param amount The amount of flash loan assets
+     * @param premium The fee for lightning borrowing assets
+     * @param initiator The address where flash loans are initiated
+     * @param params byte encoding parameters passed when initializing flash loan
+     * @return True if the operation is executed successfully, False otherwise
+     */
     function executeOperation(
         address asset,
         uint256 amount,
@@ -396,7 +395,7 @@ interface IFlashLoanSimpleReceiver {
     ) external returns (bool);
 }
 
-// AAVE V3闪电贷合约
+// AAVE V3 flash loan contract
 contract AaveV3Flashloan {
     address private constant AAVE_V3_POOL =
         0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2;
@@ -409,37 +408,37 @@ contract AaveV3Flashloan {
         aave = ILendingPool(AAVE_V3_POOL);
     }
 
-    // 闪电贷函数
-    function flashloan(uint256 wethAmount) external {
-        aave.flashLoanSimple(address(this), WETH, wethAmount, "", 0);
-    }
+// Flash loan function
+     function flashloan(uint256 wethAmount) external {
+         aave.flashLoanSimple(address(this), WETH, wethAmount, "", 0);
+     }
 
-    // 闪电贷回调函数，只能被 pool 合约调用
-    function executeOperation(address asset, uint256 amount, uint256 premium, address initiator, bytes calldata)
+     // Flash loan callback function can only be called by the pool contract
+     function executeOperation(address asset, uint256 amount, uint256 premium, address initiator, bytes calldata)
         external
         returns (bool)
     {   
-        // 确认调用的是 DAI/WETH pair 合约
-        require(msg.sender == AAVE_V3_POOL, "not authorized");
-        // 确认闪电贷发起者是本合约
-        require(initiator == address(this), "invalid initiator");
+// Confirm that the call is DAI/WETH pair contract
+         require(msg.sender == AAVE_V3_POOL, "not authorized");
+         // Confirm that the initiator of the flash loan is this contract
+         require(initiator == address(this), "invalid initiator");
 
-        // flashloan 逻辑，这里省略
+         // flashloan logic, omitted here
 
-        // 计算flashloan费用
-        // fee = 5/1000 * amount
-        uint fee = (amount * 5) / 10000 + 1;
-        uint amountToRepay = amount + fee;
+         // Calculate flashloan fees
+         // fee = 5/1000 * amount
+         uint fee = (amount * 5) / 10000 + 1;
+         uint amountToRepay = amount + fee;
 
-        // 归还闪电贷
-        IERC20(WETH).approve(AAVE_V3_POOL, amountToRepay);
+         //Repay flash loan
+         IERC20(WETH).approve(AAVE_V3_POOL, amountToRepay);
 
-        return true;
+         return true;
     }
 }
 ```
 
-Foundry测试合约`AaveV3Flashloan.t.sol`：
+Foundry test contract `AaveV3Flashloan.t.sol`:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -459,38 +458,38 @@ contract UniswapV2FlashloanTest is Test {
         flashloan = new AaveV3Flashloan();
     }
 
-    function testFlashloan() public {
-        // 换weth，并转入flashloan合约，用做手续费
-        weth.deposit{value: 1e18}();
-        weth.transfer(address(flashloan), 1e18);
-        // 闪电贷借贷金额
-        uint amountToBorrow = 100 * 1e18;
-        flashloan.flashloan(amountToBorrow);
-    }
+function testFlashloan() public {
+         //Exchange weth and transfer it to the flashloan contract to use it as handling fee
+         weth.deposit{value: 1e18}();
+         weth.transfer(address(flashloan), 1e18);
+         // Flash loan loan amount
+         uint amountToBorrow = 100 * 1e18;
+         flashloan.flashloan(amountToBorrow);
+     }
 
-    // 手续费不足，会revert
-    function testFlashloanFail() public {
-        // 换weth，并转入flashloan合约，用做手续费
-        weth.deposit{value: 1e18}();
-        weth.transfer(address(flashloan), 4e16);
-        // 闪电贷借贷金额
-        uint amountToBorrow = 100 * 1e18;
-        // 手续费不足
-        vm.expectRevert();
-        flashloan.flashloan(amountToBorrow);
-    }
+     // If the handling fee is insufficient, it will be reverted.
+     function testFlashloanFail() public {
+         //Exchange weth and transfer it to the flashloan contract to use it as handling fee
+         weth.deposit{value: 1e18}();
+         weth.transfer(address(flashloan), 4e16);
+         // Flash loan loan amount
+         uint amountToBorrow = 100 * 1e18;
+         // Insufficient handling fee
+         vm.expectRevert();
+         flashloan.flashloan(amountToBorrow);
+     }
 }
 ```
 
-在测试合约中，我们分别测试了手续费充足和不足的情况，你可以在安装Foundry后使用下面的命令行进行测试（你可以将RPC换成其他以太坊RPC）：
+In the test contract, we tested the cases of sufficient and insufficient handling fees respectively. You can use the following command line to test after installing Foundry (you can change the RPC to other Ethereum RPC):
 
 ```shell
 FORK_URL=https://singapore.rpc.blxrbdn.com
 forge test  --fork-url $FORK_URL --match-path test/AaveV3Flashloan.t.sol -vv
 ```
 
-## 总结
+## Summary
 
-这一讲，我们介绍了闪电贷，它允许用户在一个交易中借出并迅速归还资金，而无需提供任何抵押。并且，我们分别实现了Uniswap V2，Uniswap V3，和AAVE的闪电贷合约。
+In this lecture, we introduce flash loans, which allow users to lend and quickly return funds in one transaction without providing any collateral. Moreover, we have implemented Uniswap V2, Uniswap V3, and AAVE’s flash loan contracts respectively.
 
-通过闪电贷，我们能够无抵押的撬动海量资金进行无风险套利或漏洞攻击。你准备用闪电贷做些什么呢？
+Through flash loans, we can leverage massive amounts of funds without collateral for risk-free arbitrage or vulnerability attacks. What are you going to do with flash loans?
