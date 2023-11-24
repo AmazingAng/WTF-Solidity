@@ -189,7 +189,7 @@ FORK_URL=https://singapore.rpc.blxrbdn.com
 forge test  --fork-url $FORK_URL --match-path test/UniswapV2Flashloan.t.sol -vv
 ```
 
-### 2. Uniswap V3闪电贷
+### 2. Uniswap V3 Flash Loan
 
 Unlike Uniswap V2 which indirectly supports flash loans in the `swap()` exchange function, Uniswap V3 supports flash loans in [Pool Pool Contract](https://github.com/Uniswap/v3-core/blob/main/contracts/UniswapV3Pool.sol #L791C1-L835C1) has added the `flash()` function to directly support flash loans. The core code is as follows:
 
@@ -200,7 +200,7 @@ function flash(
     uint256 amount1,
     bytes calldata data
 ) external override lock noDelegateCall {
-    // 其他逻辑...
+    // Other logic...
 
 // Optimistically send tokens to the to address
      if (amount0 > 0) TransferHelper.safeTransfer(token0, recipient, amount0);
