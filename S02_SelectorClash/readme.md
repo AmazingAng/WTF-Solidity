@@ -38,7 +38,7 @@ tags:
 
 1. PowerClash: https://github.com/AmazingAng/power-clash
 
-相比之下，钱包的公钥有`256`字节，被碰撞出来的概率几乎为`0`，非常安全。
+相比之下，钱包的公钥有`64`字节，被碰撞出来的概率几乎为`0`，非常安全。
 
 ## `0xAA` 解决斯芬克斯之谜
 
