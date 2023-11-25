@@ -1,26 +1,29 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "forge-std/Test.sol";
-import "../src/AaveV3Flashloan.sol";
+import {Test, console2} from "forge-std/Test.sol";
+import "../src/UniswapV3Flashloan.sol";
 
 address constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
 
 contract UniswapV2FlashloanTest is Test {
     IWETH private weth = IWETH(WETH);
 
-    AaveV3Flashloan private flashloan;
+    UniswapV3Flashloan private flashloan;
 
     function setUp() public {
-        flashloan = new AaveV3Flashloan();
+        flashloan = new UniswapV3Flashloan();
     }
 
     function testFlashloan() public {
         // 换weth，并转入flashloan合约，用做手续费
         weth.deposit{value: 1e18}();
         weth.transfer(address(flashloan), 1e18);
+                
+        uint balBefore = weth.balanceOf(address(flashloan));
+        console2.logUint(balBefore);
         // 闪电贷借贷金额
-        uint amountToBorrow = 100 * 1e18;
+        uint amountToBorrow = 1 * 1e18;
         flashloan.flashloan(amountToBorrow);
     }
 
@@ -28,7 +31,7 @@ contract UniswapV2FlashloanTest is Test {
     function testFlashloanFail() public {
         // 换weth，并转入flashloan合约，用做手续费
         weth.deposit{value: 1e18}();
-        weth.transfer(address(flashloan), 4e16);
+        weth.transfer(address(flashloan), 1e17);
         // 闪电贷借贷金额
         uint amountToBorrow = 100 * 1e18;
         // 手续费不足
