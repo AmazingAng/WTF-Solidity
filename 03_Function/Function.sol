@@ -22,7 +22,7 @@ contract FunctionTypes{
         new_number = number + 1;
     }
 
-    // internal: 内部
+    // internal: 内部函数
     function minus() internal {
         number = number - 1;
     }
