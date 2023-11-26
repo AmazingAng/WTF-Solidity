@@ -48,7 +48,7 @@ contract StructTypes {
         _student.score = 100;
     }
 
-     // 方法2:直接引用状态变量的struct
+    // 方法2:直接引用状态变量的struct
     function initStudent2() external{
         student.id = 1;
         student.score = 80;

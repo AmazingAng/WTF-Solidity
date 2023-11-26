@@ -10,7 +10,7 @@ tags:
 
 # WTF Solidity极简入门: 14. 抽象合约和接口
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
@@ -20,15 +20,18 @@ tags:
 
 -----
 
-这一讲，我们用`ERC721`的接口合约为例介绍`solidity`中的抽象合约（`abstract`）和接口（`interface`），帮助大家更好的理解`ERC721`标准。
+这一讲，我们用`ERC721`的接口合约为例介绍`Solidity`中的抽象合约（`abstract`）和接口（`interface`），帮助大家更好的理解`ERC721`标准。
 
 ## 抽象合约
-如果一个智能合约里至少有一个未实现的函数，即某个函数缺少主体`{}`中的内容，则必须将该合约标为`abstract`，不然编译会报错；另外，未实现的函数需要加`virtual`，以便子合约重写。拿我们之前的[插入排序合约](https://github.com/AmazingAng/WTFSolidity/tree/main/07_InsertionSort)为例，如果我们还没想好具体怎么实现插入排序函数，那么可以把合约标为`abstract`，之后让别人补写上。
+
+如果一个智能合约里至少有一个未实现的函数，即某个函数缺少主体`{}`中的内容，则必须将该合约标为`abstract`，不然编译会报错；另外，未实现的函数需要加`virtual`，以便子合约重写。拿我们之前的[插入排序合约](https://github.com/AmazingAng/WTFSolidity/tree/main/10_InsertionSort)为例，如果我们还没想好具体怎么实现插入排序函数，那么可以把合约标为`abstract`，之后让别人补写上。
+
 ```solidity
 abstract contract InsertionSort{
     function insertionSort(uint[] memory a) public pure virtual returns(uint[] memory);
 }
 ```
+
 ## 接口
 
 接口类似于抽象合约，但它不实现任何功能。接口的规则：
@@ -45,7 +48,7 @@ abstract contract InsertionSort{
 
 2. 接口id（更多信息见[EIP165](https://eips.ethereum.org/EIPS/eip-165)）
 
-另外，接口与合约`ABI`（Application Binary Interface）等价，可以相互转换：编译接口可以得到合约的`ABI`，利用[abi-to-sol工具](https://gnidan.github.io/abi-to-sol/)也可以将`ABI json`文件转换为`接口sol`文件。
+另外，接口与合约`ABI`（Application Binary Interface）等价，可以相互转换：编译接口可以得到合约的`ABI`，利用[abi-to-sol工具](https://gnidan.github.io/abi-to-sol/)，也可以将`ABI json`文件转换为`接口sol`文件。
 
 我们以`ERC721`接口合约`IERC721`为例，它定义了3个`event`和9个`function`，所有`ERC721`标准的NFT都实现了这些函数。我们可以看到，接口和常规合约的区别在于每个函数都以`;`代替函数体`{ }`结尾。
 
@@ -76,12 +79,15 @@ interface IERC721 is IERC165 {
 ```
 
 ### IERC721事件
+
 `IERC721`包含3个事件，其中`Transfer`和`Approval`事件在`ERC20`中也有。
-- `Transfer`事件：在转账时被释放，记录代币的发出地址`from`，接收地址`to`和`tokenid`。
-- `Approval`事件：在授权时释放，记录授权地址`owner`，被授权地址`approved`和`tokenid`。
-- `ApprovalForAll`事件：在批量授权时释放，记录批量授权的发出地址`owner`，被授权地址`operator`和授权与否的`approved`。
+
+- `Transfer`事件：在转账时被释放，记录代币的发出地址`from`，接收地址`to`和`tokenId`。
+- `Approval`事件：在授权时被释放，记录授权地址`owner`，被授权地址`approved`和`tokenId`。
+- `ApprovalForAll`事件：在批量授权时被释放，记录批量授权的发出地址`owner`，被授权地址`operator`和授权与否的`approved`。
 
 ### IERC721函数
+
 - `balanceOf`：返回某地址的NFT持有量`balance`。
 - `ownerOf`：返回某`tokenId`的主人`owner`。
 - `transferFrom`：普通转账，参数为转出地址`from`，接收地址`to`和`tokenId`。
@@ -92,9 +98,8 @@ interface IERC721 is IERC165 {
 - `isApprovedForAll`：查询某地址的NFT是否批量授权给了另一个`operator`地址。
 - `safeTransferFrom`：安全转账的重载函数，参数里面包含了`data`。
 
-
-
 ### 什么时候使用接口？
+
 如果我们知道一个合约实现了`IERC721`接口，我们不需要知道它具体代码实现，就可以与它交互。
 
 无聊猿`BAYC`属于`ERC721`代币，实现了`IERC721`接口的功能。我们不需要知道它的源代码，只需知道它的合约地址，用`IERC721`接口就可以与它交互，比如用`balanceOf()`来查询某个地址的`BAYC`余额，用`safeTransferFrom()`来转账`BAYC`。
@@ -117,11 +122,14 @@ contract interactBAYC {
 ```
 
 ## 在Remix上验证
+
 - 抽象合约示例（简单的演示代码如图所示）
+
   ![14-1](./img/14-1.png)
 - 接口示例（简单的演示代码如图所示）
+
   ![14-2](./img/14-2.png)
 
 ## 总结
-这一讲，我介绍了`solidity`中的抽象合约（`abstract`）和接口（`interface`），他们都可以写模版并且减少代码冗余。我们还讲了`ERC721`接口合约`IERC721`，以及如何利用它与无聊猿`BAYC`合约进行交互。
 
+这一讲，我介绍了`Solidity`中的抽象合约（`abstract`）和接口（`interface`），他们都可以写模版并且减少代码冗余。我们还讲了`ERC721`接口合约`IERC721`，以及如何利用它与无聊猿`BAYC`合约进行交互。
