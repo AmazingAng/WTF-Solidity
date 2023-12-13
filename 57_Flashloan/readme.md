@@ -397,7 +397,7 @@ interface IFlashLoanSimpleReceiver {
 }
 
 // AAVE V3闪电贷合约
-contract AaveV3Flashloan {
+contract AaveV3Flashloan is IFlashLoanSimpleReceiver{
     address private constant AAVE_V3_POOL =
         0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2;
 
@@ -417,6 +417,7 @@ contract AaveV3Flashloan {
     // 闪电贷回调函数，只能被 pool 合约调用
     function executeOperation(address asset, uint256 amount, uint256 premium, address initiator, bytes calldata)
         external
+        override
         returns (bool)
     {   
         // 确认调用的是 DAI/WETH pair 合约
