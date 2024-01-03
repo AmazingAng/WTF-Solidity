@@ -41,9 +41,9 @@ tags:
 
 `Pixiu` 有一个状态变量`pair`，用于记录`uniswap`中 `Pixiu-ETH LP`的币对地址。它主要有三个函数：
 
-1. 构造函数：初始化代币的名称和代号，并根据 `uniswap` 和 `create2` 的原理计算`LP`合约地址，具体内容可以参考 [WTF Solidity 第25讲: Create2](https://github.com/AmazingAng/WTFSolidity/blob/main/25_Create2/readme.md)。这个地址会在 `_beforeTokenTransfer()` 函数中用到。
+1. 构造函数：初始化代币的名称和代号，并根据 `uniswap` 和 `create2` 的原理计算`LP`合约地址，具体内容可以参考 [WTF Solidity 第25讲: Create2](https://github.com/AmazingAng/WTFSolidity/blob/main/25_Create2/readme.md)。这个地址会在 `_update()` 函数中用到。
 2. `mint()`：铸造函数，仅 `owner` 地址可以调用，用于铸造 `Pixiu` 代币。
-3. `_beforeTokenTransfer()`：`ERC20`代币在被转账前会调用的函数。在其中，我们限制了当转账的目标地址 `to` 为 `LP` 的时候，也就是韭菜卖出的时候，交易会 `revert`；只有调用者为`owner`的时候能够成功。这也是貔貅合约的核心。
+3. `_update()`：`ERC20`代币在被转账前会调用的函数。在其中，我们限制了当转账的目标地址 `to` 为 `LP` 的时候，也就是韭菜卖出的时候，交易会 `revert`；只有调用者为`owner`的时候能够成功。这也是貔貅合约的核心。
 
 ```solidity
 // 极简貔貅ERC20代币，只能买，不能卖
@@ -74,20 +74,19 @@ contract HoneyPot is ERC20, Ownable {
     }
 
     /**
-     * @dev See {ERC20-_beforeTokenTransfer}.
+     * @dev See {ERC20-_update}.
      * 貔貅函数：只有合约拥有者可以卖出
-     */
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 amount
-    ) internal virtual override {
-        super._beforeTokenTransfer(from, to, amount);
-        // 当转账的目标地址为 LP 时，会revert
-        if(to == pair){
-            require(from == owner(), "Can not Transfer");
-        }
-    }
+    */
+    function _update(
+      address from,
+      address to,
+      uint256 amount
+  ) internal virtual override {
+     if(to == pair){
+        require(from == owner(), "Can not Transfer");
+      }
+      super._update(from, to, amount);
+  }
 }
 ```
 
