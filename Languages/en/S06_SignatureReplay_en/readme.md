@@ -8,9 +8,9 @@ tags:
 
 # WTF Solidity S06. Signature Replay
 
-Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies.
 
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
@@ -18,7 +18,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidi
 
 English translations by: [@to_22X](https://twitter.com/to_22X)
 
------
+---
 
 In this lesson, we will introduce the Signature Replay attack and how to prevent in smart contracts, which indirectly led to the theft of 20 million $OP tokens from the famous market maker Wintermute.
 
@@ -26,7 +26,7 @@ In this lesson, we will introduce the Signature Replay attack and how to prevent
 
 When I was in school, teachers often asked parents to sign documents. Sometimes, when parents were busy, I would "helpfully" copy their previous signatures. In a sense, this is similar to signature replay.
 
-In blockchain, digital signatures can be used to identify the signer of data and verify data integrity. When sending transactions, users sign the transactions with their private keys, allowing others to verify that the transaction was sent by the corresponding account. Smart contracts can also use the `ECDSA` algorithm to verify signatures created off-chain by users and then execute logic such as minting or transferring tokens. For more information about digital signatures, please refer to [WTF Solidity 37: Digital Signatures](https://github.com/AmazingAng/WTFSolidity/blob/main/37_Signature/readme.md).
+In blockchain, digital signatures can be used to identify the signer of data and verify data integrity. When sending transactions, users sign the transactions with their private keys, allowing others to verify that the transaction was sent by the corresponding account. Smart contracts can also use the `ECDSA` algorithm to verify signatures created off-chain by users and then execute logic such as minting or transferring tokens. For more information about digital signatures, please refer to [WTF Solidity 37: Digital Signatures](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/37_Signature_en/readme.md).
 
 There are generally two common types of replay attacks on digital signatures:
 
@@ -57,7 +57,7 @@ contract SigReplay is ERC20 {
     constructor() ERC20("SigReplay", "Replay") {
         signer = msg.sender;
     }
-    
+
     /**
      * Mint function with signature replay vulnerability
      * to: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
@@ -82,7 +82,7 @@ contract SigReplay is ERC20 {
 
     /**
      * @dev Get the Ethereum signed message hash
-     * `hash`: Message hash 
+     * `hash`: Message hash
      * Follows the Ethereum signature standard: https://eth.wiki/json-rpc/API#eth_sign[`eth_sign`]
      * and `EIP191`: https://eips.ethereum.org/EIPS/eip-191`
      * Adds the "\x19Ethereum Signed Message:\n32" field to prevent signing of executable transactions.
@@ -133,32 +133,32 @@ There are two main methods to prevent signature replay attacks:
 
 1. Keep a record of used signatures, such as recording the addresses that have already minted tokens in the `mintedAddress` mapping, to prevent the reuse of signatures:
 
-    ```solidity
-    mapping(address => bool) public mintedAddress;   // Records addresses that have already minted
-    
-    function goodMint(address to, uint amount, bytes memory signature) public {
-        bytes32 _msgHash = toEthSignedMessageHash(getMessageHash(to, amount));
-        require(verify(_msgHash, signature), "Invalid Signer!");
-        // Check if the address has already minted
-        require(!mintedAddress[to], "Already minted");
-        // Record the address minted
-        mintedAddress[to] = true;
-        _mint(to, amount);
-    }
-    ```
+   ```solidity
+   mapping(address => bool) public mintedAddress;   // Records addresses that have already minted
+
+   function goodMint(address to, uint amount, bytes memory signature) public {
+       bytes32 _msgHash = toEthSignedMessageHash(getMessageHash(to, amount));
+       require(verify(_msgHash, signature), "Invalid Signer!");
+       // Check if the address has already minted
+       require(!mintedAddress[to], "Already minted");
+       // Record the address minted
+       mintedAddress[to] = true;
+       _mint(to, amount);
+   }
+   ```
 
 2. Include `nonce` (incremented for each transaction) and `chainid` (chain ID) in the signed message to prevent both regular replay and cross-chain replay attacks:
 
-    ```solidity
-    uint nonce;
+   ```solidity
+   uint nonce;
 
-    function nonceMint(address to, uint amount, bytes memory signature) public {
-        bytes32 _msgHash = toEthSignedMessageHash(keccak256(abi.encodePacked(to, amount, nonce, block.chainid)));
-        require(verify(_msgHash, signature), "Invalid Signer!");
-        _mint(to, amount);
-        nonce++;
-    }
-    ```
+   function nonceMint(address to, uint amount, bytes memory signature) public {
+       bytes32 _msgHash = toEthSignedMessageHash(keccak256(abi.encodePacked(to, amount, nonce, block.chainid)));
+       require(verify(_msgHash, signature), "Invalid Signer!");
+       _mint(to, amount);
+       nonce++;
+   }
+   ```
 
 ## Summary
 
