@@ -9,9 +9,9 @@ tags:
 
 # WTF Solidity S01. Reentrancy Attack
 
-Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies.
 
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
@@ -19,7 +19,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidi
 
 English translations by: [@to_22X](https://twitter.com/to_22X)
 
------
+---
 
 In this lesson, we will introduce the most common type of smart contract attack - reentrancy attack, which has led to the Ethereum fork into ETH and ETC (Ethereum Classic), and discuss how to prevent it.
 
@@ -48,6 +48,7 @@ The bank on Ethereum is operated by robots controlled by smart contracts. When a
 3. Update the user's balance to `0`.
 
 One day, the hacker `0xAA` came to the bank and had the following conversation with the robot teller:
+
 - 0xAA: I want to withdraw `1 ETH`.
 - Robot: Checking your balance: `1 ETH`. Transferring `1 ETH` to your account. Have you received the money?
 - 0xAA: Wait, I want to withdraw `1 ETH`.
@@ -66,6 +67,7 @@ In the end, `0xAA` emptied the bank's assets through the vulnerability of reentr
 ### Bank Contract
 
 The bank contract is very simple and includes `1` state variable `balanceOf` to record the Ethereum balance of all users. It also includes `3` functions:
+
 - `deposit()`: Deposit function that allows users to deposit `ETH` into the bank contract and updates their balances.
 - `withdraw()`: Withdraw function that transfers the caller's balance to them. The steps are the same as in the story above: check balance, transfer funds, update balance. **Note: This function has a reentrancy vulnerability!**
 - `getBalance()`: Get the `ETH` balance in the bank contract.
@@ -99,7 +101,7 @@ contract Bank {
 
 ### Attack Contract
 
-One vulnerability point of reentrancy attack is the transfer of `ETH` in the contract: if the target address of the transfer is a contract, it will trigger the fallback function of the contract, potentially causing a loop. If you are not familiar with fallback functions, you can read [WTF Solidity: 19: Receive ETH](https://github.com/AmazingAng/WTFSolidity/blob/main/19_Fallback/readme.md). The `Bank` contract has an `ETH` transfer in the `withdraw()` function:
+One vulnerability point of reentrancy attack is the transfer of `ETH` in the contract: if the target address of the transfer is a contract, it will trigger the fallback function of the contract, potentially causing a loop. If you are not familiar with fallback functions, you can read [WTF Solidity: 19: Receive ETH](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/19_Fallback_en/readme.md). The `Bank` contract has an `ETH` transfer in the `withdraw()` function:
 
 ```
 (bool success, ) = msg.sender.call{value: balance}("");
@@ -128,7 +130,7 @@ contract Attack {
     constructor(Bank _bank) {
         bank = _bank;
     }
-    
+
     // Callback function used for reentrancy attack on the Bank contract, repeatedly calling the target's withdraw function
     receive() external payable {
         if (bank.getBalance() >= 1 ether) {
@@ -180,7 +182,7 @@ function withdraw() external {
 
 ### Reentrant Lock
 
-The reentrant lock is a modifier that prevents reentrancy attacks. It includes a state variable `_status` that is initially set to `0`. Functions decorated with the `nonReentrant` modifier will check if `_status` is `0` on the first call, then set `_status` to `1`. After the function call completes, `_status` is set back to `0`. This prevents reentrancy attacks by causing an error if the attacking contract attempts a second call before the first call completes. If you are not familiar with modifiers, you can read [WTF Solidity: 11. Modifier](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Modifier/readme.md).
+The reentrant lock is a modifier that prevents reentrancy attacks. It includes a state variable `_status` that is initially set to `0`. Functions decorated with the `nonReentrant` modifier will check if `_status` is `0` on the first call, then set `_status` to `1`. After the function call completes, `_status` is set back to `0`. This prevents reentrancy attacks by causing an error if the attacking contract attempts a second call before the first call completes. If you are not familiar with modifiers, you can read [WTF Solidity: 11. Modifier](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/11_Modifier_en/readme.md).
 
 ```solidity
 uint256 private _status; // Reentrant lock

@@ -1,16 +1,16 @@
 ---
 title: S14. Block Timestamp Manipulation
 tags:
-- solidity
-- security
-- timestamp
+  - solidity
+  - security
+  - timestamp
 ---
 
 # WTF Solidity S14. Block Timestamp Manipulation
 
-Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies.
 
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
@@ -18,7 +18,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidi
 
 English translations by: [@to_22X](https://twitter.com/to_22X)
 
------
+---
 
 In this lesson, we will introduce the block timestamp manipulation attack on smart contracts and reproduce it using Foundry. Before the merge, Ethereum miners can manipulate the block timestamp. If the pseudo-random number of the lottery contract depends on the block timestamp, it may be attacked.
 
@@ -54,7 +54,7 @@ contract TimeManipulation is ERC721 {
 
 ## Reproduce on Foundry
 
-Attackers only need to manipulate the block timestamp and set it to a number that can be divided by 170, and they can successfully mint NFTs. We choose Foundry to reproduce this attack because it provides cheatcode to modify the block timestamp. If you are not familiar with Foundry/cheatcode, you can read the [Foundry tutorial](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md) and [Foundry Book](https://book.getfoundry.sh/forge/cheatcodes).
+Attackers only need to manipulate the block timestamp and set it to a number that can be divided by 170, and they can successfully mint NFTs. We choose Foundry to reproduce this attack because it provides cheatcode to modify the block timestamp. If you are not familiar with Foundry/cheatcode, you can read the [Foundry tutorial](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md) and [Foundry Book](https://book.getfoundry.sh/forge/cheatcodes).
 
 1. Create a `TimeManipulation` contract variable `nft`.
 2. Create a wallet address `alice`.

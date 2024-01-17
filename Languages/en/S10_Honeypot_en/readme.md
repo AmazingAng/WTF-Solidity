@@ -9,9 +9,9 @@ tags:
 
 # WTF Solidity S10. Honeypot / Pixiu
 
-Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies.
 
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
@@ -45,7 +45,7 @@ Here, we introduce a simple ERC20 token contract called `Pixiu`. In this contrac
 
 `Pixiu` has a state variable called `pair`, which records the address of the `Pixiu-ETH LP` pair on Uniswap. It mainly consists of three functions:
 
-1. Constructor: Initializes the token's name and symbol, and calculates the LP contract address based on the principles of Uniswap and `create2`. For more details, you can refer to [WTF Solidity 25: Create2](https://github.com/AmazingAng/WTFSolidity/blob/main/25_Create2/readme.md). This address will be used in the `_beforeTokenTransfer()` function.
+1. Constructor: Initializes the token's name and symbol, and calculates the LP contract address based on the principles of Uniswap and `create2`. For more details, you can refer to [WTF Solidity 25: Create2](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/25_Create2_en/readme.md). This address will be used in the `_beforeTokenTransfer()` function.
 2. `mint()`: A minting function that can only be called by the `owner` address to mint `Pixiu` tokens.
 3. `_beforeTokenTransfer()`: A function called before an ERC20 token transfer. In this function, we restrict the transfer when the destination address `to` is the LP address, which represents selling by investors. The transaction will `revert` unless the caller is the `owner`. This is the core of the Pixiu contract.
 
@@ -68,7 +68,7 @@ contract HoneyPot is ERC20, Ownable {
         hex'96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f'
         )))));
     }
-    
+
     /**
      * Mint function, can only be called by the contract owner
      */
@@ -99,22 +99,22 @@ contract HoneyPot is ERC20, Ownable {
 We will deploy the `Pixiu` contract on the `Goerli` testnet and demonstrate it on the `uniswap` exchange.
 
 1. Deploy the `Pixiu` contract.
-![](./img/S10-2.png)
+   ![](./img/S10-2.png)
 
 2. Call the `mint()` function to mint `100000` Pixiu tokens for yourself.
-![](./img/S10-3.png)
+   ![](./img/S10-3.png)
 
 3. Go to the [uniswap](https://app.uniswap.org/#/add/v2/ETH) exchange, create liquidity for Pixiu tokens (v2), and provide `10000` Pixiu tokens and `0.1` ETH.
-![](./img/S10-4.png)
+   ![](./img/S10-4.png)
 
 4. Sell `100` Pixiu tokens, the operation is successful.
-![](./img/S10-5.png)
+   ![](./img/S10-5.png)
 
 5. Switch to another account and buy Pixiu tokens with `0.01` ETH, the operation is successful.
-![](./img/S10-6.png)
+   ![](./img/S10-6.png)
 
 6. When selling Pixiu tokens, the transaction cannot be executed.
-![](./img/S10-7.png)
+   ![](./img/S10-7.png)
 
 ## How to Prevent
 

@@ -1,17 +1,17 @@
 ---
 title: S02. Selector Clash
 tags:
-    - solidity
-    - security
-    - selector
-    - abi encode
+  - solidity
+  - security
+  - selector
+  - abi encode
 ---
 
 # WTF Solidity S02. Selector Clash
 
-Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies.
 
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
@@ -19,13 +19,13 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidi
 
 English translations by: [@to_22X](https://twitter.com/to_22X)
 
------
+---
 
 In this lesson, we will introduce the selector clash attack, which is one of the reasons behind the hack of the cross-chain bridge Poly Network. In August 2021, the cross-chain bridge contracts of Poly Network on ETH, BSC, and Polygon were hacked, resulting in a loss of up to $611 million ([summary](https://rekt.news/zh/polynetwork-rekt/)). This is the largest blockchain hack of 2021 and the second-largest in history, second only to the Ronin bridge hack.
 
 ## Selector Clash
 
-In Ethereum smart contracts, the function selector is the first 4 bytes (8 hexadecimal digits) of the hash value of the function signature `"<function name>(<function input types>)"`. When a user calls a function in a contract, the first 4 bytes of the `calldata` represent the selector of the target function, determining which function to call. If you are not familiar with it, you can read the [WTF Solidity Tutorial #29: Function Selectors](https://github.com/AmazingAng/WTFSolidity/blob/main/29_Selector/readme.md).
+In Ethereum smart contracts, the function selector is the first 4 bytes (8 hexadecimal digits) of the hash value of the function signature `"<function name>(<function input types>)"`. When a user calls a function in a contract, the first 4 bytes of the `calldata` represent the selector of the target function, determining which function to call. If you are not familiar with it, you can read the [WTF Solidity 29: Function Selectors](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/29_Selector_en/readme.md).
 
 Due to the limited length of the function selector (4 bytes), it is very easy to collide: that is, we can easily find two different functions that have the same function selector. For example, `transferFrom(address,address,uint256)` and `gasprice_bit_ether(int128)` have the same selector: `0x23b872dd`. Of course, you can also write a script to brute force it.
 
@@ -51,7 +51,6 @@ One morning, Oedipus passes by and encounters the Sphinx. He solves the mysterio
 Later that afternoon, `0xAA` passes by and encounters the Sphinx. He also solves the mysterious riddle and says, "It is `function peopleLduohW(uint256)`. In the morning of life, he is a child who crawls on two legs and two hands. At noon, he becomes an adult who walks on two legs. In the evening, he grows old and weak, and needs a cane to walk, hence he is called three-legged." Once again, the riddle is guessed correctly, and the Sphinx becomes furious. In a fit of anger, the Sphinx slips and falls from the towering cliff to its death.
 
 ![](./img/S02-2.png)
-
 
 ## Vulnerable Contract Example
 

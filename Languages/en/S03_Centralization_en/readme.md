@@ -1,16 +1,16 @@
 ---
 title: S03. Centralization Risks
 tags:
-    - solidity
-    - security
-    - multisig
+  - solidity
+  - security
+  - multisig
 ---
 
 # WTF Solidity S03. Centralization Risks
 
-Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies.
 
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
@@ -18,7 +18,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidi
 
 English translations by: [@to_22X](https://twitter.com/to_22X)
 
------
+---
 
 In this lesson, we will discuss the risks of centralization and pseudo-decentralization in smart contracts. The `Ronin` bridge and `Harmony` bridge were hacked due to these vulnerabilities, resulting in the theft of $624 million and $100 million, respectively.
 
@@ -67,11 +67,11 @@ contract Centralization is ERC20, Ownable {
 
 ## How to Reduce Centralization/Pseudo-Decentralization Risks?
 
-1. Use a multi-signature wallet to manage the treasury and control contract parameters. To balance efficiency and decentralization, you can choose a 4/7 or 6/9 multi-signature setup. If you are not familiar with multi-signature wallets, you can read [WTF Solidity 50: Multi-Signature Wallet](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet/readme.md).
+1. Use a multi-signature wallet to manage the treasury and control contract parameters. To balance efficiency and decentralization, you can choose a 4/7 or 6/9 multi-signature setup. If you are not familiar with multi-signature wallets, you can read [WTF Solidity 50: Multi-Signature Wallet](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/50_MultisigWallet_en/readme.md).
 
 2. Diversify the holders of the multi-signature wallet, spreading them among the founding team, investors, and community leaders, and do not authorize each other's signatures.
 
-3. Use time locks to control the contract, giving the project team and community some time to respond and minimize losses in case of hacking or insider manipulation of contract parameters/asset theft. If you are not familiar with time lock contracts, you can read [WTF Solidity 45: Time Lock](https://github.com/AmazingAng/WTFSolidity/blob/main/45_Timelock/readme.md).
+3. Use time locks to control the contract, giving the project team and community some time to respond and minimize losses in case of hacking or insider manipulation of contract parameters/asset theft. If you are not familiar with time lock contracts, you can read [WTF Solidity 45: Time Lock](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/45_Timelock_en/readme.md).
 
 ## Summary
 
