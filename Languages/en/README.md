@@ -126,7 +126,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 ## Security
 
-**Chapter S1: Reentrancy Attack**：[Code](./S01_ProxyContract_en/) | [Tutorial](./S01_ProxyContract_en/readme.md)
+**Chapter S1: Reentrancy Attack**：[Code](./S01_ReentrancyAttack_en/) | [Tutorial](./S01_ReentrancyAttack_en/readme.md)
 
 **Chapter S2: Selector Clash**：[Code](./S02_SelectorClash_en/) | [Tutorial](./S02_SelectorClash_en/readme.md)
 
