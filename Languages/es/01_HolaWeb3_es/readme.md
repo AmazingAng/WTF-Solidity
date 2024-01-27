@@ -1,4 +1,4 @@
-# WTF Solidity Tutorial: 1. HelloWeb3 (Solidity in 3 lines)
+# WTF Solidity Tutorial: 1. Hola Web3 (Solidity in 3 lines)
 
 Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
