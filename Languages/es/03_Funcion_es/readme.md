@@ -112,10 +112,10 @@ Si `add()` contiene la palabra clave `pure`, por ejemplo, `function add() pure e
     }
 ```
 
-**Example:**
+**Ejemplo:**
 ![3-3.png](./img/3-3.png)
 
-If `add()` contains `view` , i.e. `function add() view external`, it will also result in error. Because `view` can read, but cannot write state variable. We can modify the function as follows:
+Si `add()` contiene `view`, es decir, `function add() view external`, también resultará en un error. Esto se debe a que `view` puede leer, pero no puede escribir variables de estado. Podemos modificar la función de la siguiente manera:
 
 ```solidity
     // view
@@ -127,7 +127,7 @@ If `add()` contains `view` , i.e. `function add() view external`, it will also r
 **Example:**
 ![3-4.png](./img/3-4.png)
 
-### 2. internal v.s. external
+### 2. Internal v.s. external
 
 ```solidity
     // internal
@@ -141,12 +141,12 @@ If `add()` contains `view` , i.e. `function add() view external`, it will also r
     }
 ```
 
-Here we defined an `internal minus()` function, `number` will decrease 1 each time function is called. Since `internal` function can only be called within the contract itself. Therefore, we need to define an `external` `minusCall()` function to call `minus()` internally.
+Aquí definimos una función `internal minus()`, `number` disminuirá en 1 cada vez que se llame a la función. Dado que la función `internal` solo puede ser llamada dentro del propio contrato, necesitamos definir una función `external minusCall()` para llamar internamente a `minus()`.
 
-**Example:**
+**Ejemplo:**
 ![3-1.png](./img/3-1.png)
 
-### 3. payable
+### 3. Payable
 
 ```solidity
     // payable: money (ETH) can be sent to the contract via this function
@@ -156,17 +156,17 @@ Here we defined an `internal minus()` function, `number` will decrease 1 each ti
     }
 ```
 
-We defined an `external payable minusPayable()` function, which calls `minus()` and return `ETH` balance of the current contract (`this` keyword can let us query current contract address). Since the function is `payable`, we can send 1 `ETH` to the contract when calling `minusPayable()`.
+Definimos una función `external payable minusPayable()`, la cual llama a `minus()` y devuelve el `balance de ETH` del contrato actual (la palabra clave`this` nos permite consultar la dirección del contrato actual). Dado que la función es `payable`, podemos enviar 1 `ETH` al contrato al llamar a `minusPayable()`.
 
-![](https://images.mirror-media.xyz/publication-images/ETDPN8myq7jFfAL8CUAFt.png?height=148&width=588)
+![](./img/3-5.png)
 
-We can see that contract balance is 1 `ETH` in return message.
+Podemos ver que el balance del contrato es 1 `ETH` en el mensaje de retorno.
 
-![](https://images.mirror-media.xyz/publication-images/nGZ2pz0MvzgXuKrENJPYf.png?height=128&width=1130)
+![](./img/3-6.png)
 
-**Example:**
+**Ejemplo:**
 ![3-2.png](./img/3-2.png)
 
-## Summary
+## Resumen
 
-In this section, we introduced `solidity` function type. `pure` and `view` keywords are difficult to understand, since they are not common in other languages. You don't need to pay gas fees for calling `pure` or `view` functions, since they don't modify the on-chain data.
+En esta sección, introducimos el tipo de función en `Solidity`. Las palabras clave `pure` y `view` son difíciles de entender, ya que no son comunes en otros lenguajes de programación. No necesitas pagar tarifas de gas por llamar a funciones `pure` o `view`, ya que no modifican los datos en la cadena de bloques.
