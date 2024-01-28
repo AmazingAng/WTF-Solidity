@@ -1,4 +1,4 @@
-# Tutorial WTM Solidity: 2. Tipos de valor (Value Types)
+# Tutorial WTF Solidity: 2. Tipos de valor (Value Types)
 
 Recientemente, he estado revisando Solidity y escribiendo tutoriales en "WTF Solidity" para principiantes.
 
@@ -22,7 +22,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 4. **Tipo Función**：La documentación de Solidity clasifica las funciones en tipo de variables, pero son diferentes de otros tipos. 
 Las voy a colocar en una categoría diferente.
 
-Solo se presentaran los tipos más comúnmente usandos. En este capitulo introduciremos los siguientes tipos de variables.
+Solo se presentaran los tipos más comúnmente usados. En este capitulo introduciremos los siguientes tipos de variables.
 
 ## Tipos de variables (Value types)
 
@@ -54,9 +54,9 @@ Código：
     bool public _bool5 = _bool != _bool1; // desigualdad
 ```
 
-Del anterior código: el valor the la variable `_bool` es `true`; `bool1` es no `_bool` que es `false`; `_bool || _bool1` es `true`; `bool == _bool1` es `false`; y  `_bool != _bool1` is `true`. 
+Del anterior código: el valor de la variable `_bool` es `true`; `bool1` es no `_bool` que es `false`; `_bool || _bool1` es `true`; `bool == _bool1` es `false`; y  `_bool != _bool1` es `true`. 
 
-**Nota：** Los operadores `&&` and `||` siguen la regla de evaluación de cortocircuito. 
+**Nota：** Los operadores `&&` y `||` siguen la regla de evaluación de cortocircuito. 
 
 
 ### 2. Enteros (Integers)
@@ -71,10 +71,10 @@ Código:
     uint public _uint = 1; // Entero sin signo
     uint256 public _number = 20220330; // 256-bit enteros positivos
 ```
-Operatores más usados en variables de tipo enteras:
+Operadores más usados en variables de tipo enteras:
 
 - Operadores de desigualdad (Los cuales retornan booleans)： `<=`,  `<`,  `==`,  `!=`,  `>=`,  `>` 
-- Operadores aritmeticos： `+`,  `-`,  `*`,  `/`,  `%` (modulo), `**` (exponent)
+- Operadores aritméticos： `+`,  `-`,  `*`,  `/`,  `%` (modulo), `**` (exponente)
 
 Código：
 
@@ -94,7 +94,7 @@ Tipos de direcciones:
 
 - `address`: Contienen un valor de 20 bytes (tamaño de una dirección de Etherehum).
 
-- `address payable`: Igual que `address`, pero con metodos adicionales `transfer` y `send`.
+- `address payable`: Igual que `address`, pero con métodos adicionales `transfer` y `send`.
 
 Código:
 
@@ -128,7 +128,7 @@ y `_byte` toma el valor del primer byte de `_byte32` que es `0x4d`
 
 La enumeración (`enum`) es un tipo de dato definido por el usuario en Solidity. Se utiliza principalmente para asignar nombre a `uint`, para mantener el código más legible.
 
-Code:
+Código:
 
 ```solidity
     // Let uint 0,  1,  2 Representa Buy, Hold, Sell
@@ -150,7 +150,7 @@ Se puede convertir fácilmente a `uint`:
 
 ## Demostración en Remix
 
-- Despues de desplegar el contrato, puedes verificar los valores de cada variable.
+- Después de desplegar el contrato, puedes verificar los valores de cada variable.
 
 
    ![2-1.png](./img/2-1.png)
@@ -165,4 +165,4 @@ Se puede convertir fácilmente a `uint`:
 
 En este capitulo, introdujimos los tipos de variable en Solidity: tipo valor, tipo referencia, mapping y funciones. Luego presentamos los tipo de variables más comúnmente usados:
 Booleano, entero, dirección, arreglo de bytes de tamaño fijo y enumeración.
-Cubriremos otros tipos de variables en tutoriales posterioes.
+Cubriremos otros tipos de variables en tutoriales posteriores.
