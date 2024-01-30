@@ -20,7 +20,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 -----
 
 ## `delegatecall`
-`delegatecall` is similar to `call`, is a low level function in `Solidity`. `delegate` meas entrust/represent, so what does `delegatecall`entrust?
+`delegatecall` is similar to `call`, is a low level function in `Solidity`. `delegate` means entrust/represent, so what does `delegatecall` entrust?
 
 When user `A` `call` contract `C` via contract `B`, the executed functions are from contract `C`, the `execution context` (the environment including state and variable) is in contract `C`: `msg.sender` is contract `B`'s address, and if state variables are changed due to function call, the affected state variables are in contract `C`.
 
@@ -47,7 +47,7 @@ abi.encodeWithSignature("function signature", parameters separated by comma)
 
 Unlike `call`, `delegatecall` can specify the value of `gas` when calling smart contract, but the value of `ETH` can't be specified.
 
-> **Attention**: using delegatecall could incur risk, make sure the storage layout of state variables of current contract and target cotnract is same, and target contract is safe, otherwise could cause loss of funds.
+> **Attention**: using delegatecall could incur risk, make sure the storage layout of state variables of current contract and target contract is same, and target contract is safe, otherwise could cause loss of funds.
 
 ## `delegatecall` use cases?
 Currently there are 2 major use cases for delegatecall:
@@ -73,7 +73,7 @@ contract C {
     }
 }
 ```
-### Call Initizalization Contract B
+### Call Initialization Contract B
 First, contract `B` must have the same state variable layout as target contract `C`, 2 variables and the order is `num` and `sender`.
 
 ```solidity
