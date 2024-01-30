@@ -29,7 +29,7 @@ Solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同
 
 1. `storage`：合约里的状态变量默认都是`storage`，存储在链上。
 
-2. `memory`：函数里的参数和临时变量一般用`memory`，存储在内存中，不上链。
+2. `memory`：函数里的参数和临时变量一般用`memory`，存储在内存中，不上链。尤其是如果返回数据类型是变长的情况下，必须加memory修饰，例如：string, bytes, array和自定义结构。
 
 3. `calldata`：和`memory`类似，存储在内存中，不上链。与`memory`的不同点在于`calldata`变量不能修改（`immutable`），一般用于函数的参数。例子：
 
