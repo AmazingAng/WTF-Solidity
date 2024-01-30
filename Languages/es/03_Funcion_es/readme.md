@@ -28,7 +28,7 @@ Puede parecer complejo, pero desglosémoslo pieza por pieza (los corchetes cuadr
 
 3. `(<parameter types>)`: Los tipos y nombres de los parámetros de entrada.
 
-3. `[internal|external|public|private]`: Especificadores de visibilidad de la función. Especificar explicitamente la visibilidad es una buena práctica, por lo que debes especificarla para cada función. Hay 4 tipos de ellos:
+3. `[internal|external|public|private]`: Especificadores de visibilidad de la función. Especificar explícitamente la visibilidad es una buena práctica, por lo que se debe especificar en cada función. Hay 4 tipos de ellos:
 
    - `public`: Visible para todos.
 
@@ -44,13 +44,13 @@ Puede parecer complejo, pero desglosémoslo pieza por pieza (los corchetes cuadr
     
     **Note 3**: La visibilidad predeterminada para las variables de estado es `internal`.
 
-4. `[pure|view|payable]`: Son palabras clave que dictan el comportamiento de las funciones de Solidity. `payable` (pagable) is facil de entender. Se puede enviar `ETH` a un contrato con funciones `payable` (pagables). `pure` y `view` se introducen en la próxima sección.
+4. `[pure|view|payable]`: Son palabras clave que dictan el comportamiento de las funciones de Solidity. `payable` (pagable) es fácil de entender. Se puede enviar `ETH` a un contrato con funciones `payable` (pagables). `pure` y `view` se introducen en la próxima sección.
 
 5. `[returns (<tipos de retorno>)]`: Tipos y nombres de las variables de retorno.
 
 ## WTF es `Pure` y `View`?
 
-Cuando empecé a aprender `Solidity`, no entendía en absoluto las palabras clave `pure` y `view`, ya que no son comunes en otros lenguajes. `Solidity` agregó estas dos palabras clave debido al costo del gas `(gas fee)`. Las variables de estado del contrato se almacenan en la cadena de bloques, y el costo del gas `(gas fee)` es muy elevado. Si no reescribes estas variables, no necesitas pagar `gas`. No necesitas pagar gas por llamar a funciones `pure` y `view`.
+Cuando empecé a aprender `Solidity`, no entendía en absoluto las palabras clave `pure` y `view`, ya que no son comunes en otros lenguajes. `Solidity` agregó estas dos palabras clave debido al costo del gas `(gas fee)`. Las variables de estado del contrato se almacenan en la cadena de bloques, y el costo del gas `(gas fee)` es muy elevado. Si no se reescriben estas funciones no se debe pagar gas `gas`, tampoco se debe pagar gas por llamar a funciones `pure` y `view`.
 
 Las siguientes acciones se consideran modificaciones del estado:
 
@@ -71,7 +71,7 @@ Las siguientes acciones se consideran modificaciones del estado:
 8. Usar código assembly en líneas de código que contienen ciertos `opcodes`.
 
 
-Hice un dibujo para visualizar `pure` and `view`. En la imagen, la variable de estado está representada por la Princesa Peach, y las palabras clave están representadas por tres personajes diferentes.
+Hice un dibujo para visualizar `pure` y `view`. En la imagen, la variable de estado está representada por la Princesa Peach, y las palabras clave están representadas por tres personajes diferentes.
 
 ![WHAT is pure and view in solidity?](https://images.mirror-media.xyz/publication-images/1B9kHsTYnDY_QURSWMmPb.png?height=1028&width=1758)
 
@@ -124,7 +124,7 @@ Si `add()` contiene `view`, es decir, `function add() view external`, también r
     }
 ```
 
-**Example:**
+**Ejemplo:**
 ![3-4.png](./img/3-4.png)
 
 ### 2. Internal v.s. external
@@ -149,7 +149,7 @@ Aquí definimos una función `internal minus()`, `number` disminuirá en 1 cada 
 ### 3. Payable
 
 ```solidity
-    // payable: money (ETH) can be sent to the contract via this function
+    // payable: dinero (ETH) puede ser enviado al contrato por medio de esta función
     function minusPayable() external payable returns(uint256 balance) {
         minus();
         balance = address(this).balance;
