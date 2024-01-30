@@ -18,7 +18,7 @@ contract ValueTypes{
     // Operatores para variables de tipo entero
     uint256 public _number1 = _number + 1; // +，-，*，/
     uint256 public _number2 = 2**2; // exponente
-    uint256 public _number3 = 7 % 2; // modulo
+    uint256 public _number3 = 7 % 2; // módulo
     bool public _numberbool = _number2 > _number3; // mayor que
 
 
@@ -29,7 +29,7 @@ contract ValueTypes{
     uint256 public balance = _address1.balance; // saldo en la dirección
     
     
-    // Fixed-size byte arrays
+    // Arreglos de bytes de tamaño fijo
     bytes32 public _byte32 = "MiniSolidity"; // bytes32: 0x4d696e69536f6c69646974790000000000000000000000000000000000000000
     bytes1 public _byte = _byte32[0]; // bytes1: 0x4d
     
