@@ -98,7 +98,7 @@ ganache -f https://eth-mainnet.alchemyapi.io/v2/YOUR_API_KEY --wallet.accounts=A
 
 Ganache 允许我们通过 RPC 调用（方法 `evm_increaseTime` 和 `evm_setTime` ）来推进区块链上的时间。
 
-大多数情况下我们无法等到这个时间，我们可以使用 `evm_increaseTime` 将区块链当前时间戳**增加指定的时间量**（以秒为单位）（以十六进制格式传入）。这将返回以毫秒为单位调整的总时间。
+大多数情况下我们无法等到这个时间，我们可以使用 `evm_increaseTime` 将区块链当前时间戳**增加指定的时间量**（以秒为单位）（以十六进制格式传入）。这将返回以秒为单位调整的总时间。
 
 ```
 curl -H 'Content-Type: application/json' --data' {"jsonrpc": "2.0", "id": 1, "method": "evm_increaseTime", "params": ["0x15180"] }' http://localhost:8545

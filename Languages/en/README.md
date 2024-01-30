@@ -4,10 +4,9 @@
 
 # WTF Solidity
 
+Recently, I have been relearning Solidity, consolidating the finer details, and writing a "WTF Solidity Tutorial" for newbies. Lectures are updated 1~3 times weekly.
 
-Recently, I have been relearning Solidity, consolidating the finer details, and writing a "WTF Solidity Tutorial" for newbies. Lectures are updated 1~3 times weekly. 
-
-Twitter: [@WTFAcademy_](https://twitter.com/WTFAcademy_) |  [@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@WTFAcademy\_](https://twitter.com/WTFAcademy_) | [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Community: [Discord](https://discord.gg/5akcruXrsk) | [Website: wtf.academy](https://wtf.academy)
 
@@ -23,7 +22,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 3: Function (external/internal/public/private, pure/view, payable)**：[Code](./03_Function_en) | [Tutorial](./03_Function_en/readme.md)
 
-**Chapter 4: Function Return (returns/return)**：[Code](./04_Return_en) | [Tutorial](./04_Return_en/readme.md) 
+**Chapter 4: Function Return (returns/return)**：[Code](./04_Return_en) | [Tutorial](./04_Return_en/readme.md)
 
 **Chapter 5: Data Location (storage/memory/calldata)**：[Code](./05_DataStorage_en) | [Tutorial](./05_DataStorage_en/readme.md)
 
@@ -55,7 +54,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 18: Import**：[Code](./18_Import_en) | [Tutorial](./18_Import_en/readme.md)
 
-**Chapter 19: Receive ETH (fallback/receive)**：[Code](./19_Fallback_en) | [Tutorial](./19_Fallback_en/readme.md) 
+**Chapter 19: Receive ETH (fallback/receive)**：[Code](./19_Fallback_en) | [Tutorial](./19_Fallback_en/readme.md)
 
 **Chapter 20: Send ETH (transfer/send/call)**：[Code](./20_SendETH_en) | [Tutorial](./20_SendETH_en/readme.md)
 
@@ -101,7 +100,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 40: ERC1155**：[Code](./40_ERC1155_en/) | [Tutorial](./40_ERC1155_en/readme.md)
 
-**Chapter 41: WETH**：[Code](./41_WETH_en/) | [Tutorial](./41_WETH_en/readme.md) 
+**Chapter 41: WETH**：[Code](./41_WETH_en/) | [Tutorial](./41_WETH_en/readme.md)
 
 **Chapter 42: Payment Split**：[Code](./42_PaymentSplit_en/) | [Tutorial](./42_PaymentSplit_en/readme.md)
 
@@ -117,7 +116,6 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 47: Upgradeable Contract**：[Code](./47_Upgrade_en/) | [Tutorial](./47_Upgrade_en/readme.md)
 
-
 **Chapter 48: Transparent Proxy**：[Code](./48_TransparentProxy_en/) | [Tutorial](./48_TransparentProxy_en/readme.md)
 
 **Chapter 49: UUPS**：[Code](./49_UUPS_en/) | [Tutorial](./49_UUPS_en/readme.md)
@@ -126,9 +124,42 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 
 **Chapter 51: ERC4626 Tokenized Vault**：[Code](./51_ERC4626_en/) | [Tutorial](./51_ERC4626_en/readme.md)
 
+## Security
 
+**Chapter S1: Reentrancy Attack**：[Code](./S01_ReentrancyAttack_en/) | [Tutorial](./S01_ReentrancyAttack_en/readme.md)
+
+**Chapter S2: Selector Clash**：[Code](./S02_SelectorClash_en/) | [Tutorial](./S02_SelectorClash_en/readme.md)
+
+**Chapter S3: Centralization**：[Code](./S03_Centralization_en/) | [Tutorial](./S03_Centralization_en/readme.md)
+
+**Chapter S4: Centralization Risks**：[Code](./S04_Centralization_en/) | [Tutorial](./S04_Centralization_en/readme.md)
+
+**Chapter S5: Integer Overflow**：[Code](./S05_Overflow_en/) | [Tutorial](./S05_Overflow_en/readme.md)
+
+**Chapter S6: Signature Replay**：[Code](./S06_SignatureReplay_en/) | [Tutorial](./S06_SignatureReplay_en/readme.md)
+
+**Chapter S7: Bad Randomness**：[Code](./S07_BadRandomness_en/) | [Tutorial](./S07_BadRandomness_en/readme.md)
+
+**Chapter S8: Contract Length Check Bypassing**：[Code](./S08_ContractCheck_en/) | [Tutorial](./S08_ContractCheck_en/readme.md)
+
+**Chapter S9: Denial of Service (DoS)**：[Code](./S09_DoS_en/) | [Tutorial](./S09_DoS_en/readme.md)
+
+**Chapter S10: Honeypot / Pixiu**：[Code](./S10_Honeypot_en/) | [Tutorial](./S10_Honeypot_en/readme.md)
+
+**Chapter S11: Front-running**：[Code](./S11_Frontrun_en/) | [Tutorial](./S11_Frontrun_en/readme.md)
+
+**Chapter S12: tx.origin Phishing Attack**：[Code](./S12_TxOrigin_en/) | [Tutorial](./S12_TxOrigin_en/readme.md)
+
+**Chapter S13: Unchecked Low-Level Calls**：[Code](./S13_UncheckedCall_en/) | [Tutorial](./S13_UncheckedCall_en/readme.md)
+
+**Chapter S14: Block Timestamp Manipulation**：[Code](./S14_TimeManipulation_en/) | [Tutorial](./S14_TimeManipulation_en/readme.md)
+
+**Chapter S15: Oracle Manipulation**：[Code](./S15_OracleManipulation_en/) | [Tutorial](./S15_OracleManipulation_en/readme.md)
+
+**Chapter S16: NFT Reentrancy Attack**：[Code](./S16_NFTReentrancy_en/) | [Tutorial](./S16_NFTReentrancy_en/readme.md)
 
 ## WTF Contributors
+
 <div align="center">
   <h4 align="center">
     Contributors are the basis of WTF Academy
@@ -139,6 +170,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
 </div>
 
 ## Reference
+
 - [Solidity Docs](https://docs.soliditylang.org/en/v0.8.17/)
 - [Solidity By Example](https://solidity-by-example.org/)
 - [OpenZeppelin Contract](https://github.com/OpenZeppelin/openzeppelin-contracts)
