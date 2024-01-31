@@ -6,13 +6,17 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](http
 
 Comunidad: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Sitio web wtf.academy](https://wtf.academy)
 
+La traducción al español ha sido realizada por Jonathan Díaz con el objetivo de hacer estos recursos accesibles a la comunidad de habla hispana.
+
+Twitter: [@jonthdiaz](https://twitter.com/jonthdiaz)
+
 Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
-## WTF is Solidity?
+## WTF es Solidity?
 
-`Solidity` es un lenguaje de programación utilizado para crear contractos inteligentes en la Ethereum Virtual Machine. Es una habilidad necesaria para trabajar en proyectos  de blockchain. Además, como muchos de ellos son de código abierto, entender el código puede ayudar a evitar proyectos que impliquen pérdida de dinero. 
+`Solidity` es un lenguaje de programación utilizado para crear contratos inteligentes en la Ethereum Virtual Machine. Es una habilidad necesaria para trabajar en proyectos blockchain. Además, como muchos de ellos son de código abierto, entender el código puede ayudar a evitar proyectos que impliquen pérdida de dinero. 
 
 
 `Solidity` tiene dos características:
@@ -22,7 +26,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 ## Herramienta de desarrollo: Remix
 
-En este tutorial, se usara `Remix` para ejecutar contratos de `solidity`. `Remix` es un IDE (Entorno de desarrollo integrado) de desarrollo de contratos inteligentes recomendado oficialmente por Ethereum. Es adecuado para principiantes, ya que permite la implementación y pruebas rápidas de contratos inteligentes en el navegador, sin necesidad de instalar programas en tu máquina local. 
+En este tutorial, se usara `Remix` para ejecutar contratos de `solidity`. `Remix` es un IDE (Entorno de desarrollo integrado) de desarrollo de contratos inteligentes recomendado oficialmente por Ethereum. Es adecuado para principiantes, ya que permite la implementación y pruebas rápidas de contratos inteligentes en el navegador, sin necesidad de instalar programas en la máquina local. 
 
 Sitio Web: [remix.ethereum.org](https://remix.ethereum.org)
 
@@ -36,7 +40,7 @@ Dentro de Remix, observamos que hay cuatro botones en el menú vertical a mano i
 
 ## El primer programa en Solidity
 
-Este primero programa es sencillo, el programa solo contiene 1 linea con un comentario y 3 lineas de código.
+Este primer programa es sencillo, el programa solo contiene 1 linea con un comentario y 3 lineas de código.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -65,11 +69,11 @@ pragma solidity ^0.8.4;
 contract HolaWeb3{
     string public _string = "Hola Web3!";}
 ```
-Se introducirá los diferentes tipos de variable en Solidity luego.
+Se introducirán los diferentes tipos de variable en Solidity luego.
 
 ## Compilar el código y desplegar
 
-En el editor, presionar CTRL+S para compilar el código.
+En el editor, presionar CTRL+S para compilar el código, o dar click en el botón de compilar.
 
 Después de compilar, clic en el botón de `Deploy` en el menú de mano izquierda para entrar en la página de despliegue. 
 
@@ -79,7 +83,7 @@ Por defecto, Remix utiliza la máquina virtual de Javascript para simular la cad
 
    ![](./img/1-3.png)
 
-Después de un despliegue exitoso, se vera un contrato llamado `HolaWeb3` debajo. Al hacer clic en la variable `_string`, imprimiera su valor: "Hola Web3!".
+Después de un despliegue exitoso, se verá un contrato llamado `HolaWeb3` debajo. Al hacer clic en la variable `_string`, imprimirá su valor: "Hola Web3!".
 
 ## Resumen
 
@@ -87,5 +91,5 @@ En este turorial, brevemente introdujimos Solidity, El IDE `Remix` y completamos
 
 ### Materiales recomendados en Solidity:
 
-1. [Solidity Documentación](https://docs.soliditylang.org/en/latest/)
-2. [Solidity Tutorial por freeCodeCamp](https://www.youtube.com/watch?v=ipwxYa-F1uY)
+1. [Documentación de Solidity](https://docs.soliditylang.org/en/latest/)
+2. [Tutorial de Solidity por freeCodeCamp](https://www.youtube.com/watch?v=ipwxYa-F1uY)
