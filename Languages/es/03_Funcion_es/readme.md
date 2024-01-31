@@ -6,6 +6,10 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](http
 
 Comunidad: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
+La traducción al español ha sido realizada por Sebas G con el objetivo de hacer estos recursos accesibles a la comunidad de habla hispana.
+
+Twitter: [@scguaquetam](https://twitter.com/scguaquetam)
+
 Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 
@@ -62,7 +66,7 @@ Las siguientes acciones se consideran modificaciones del estado:
 
 4. Usar `selfdestruct`.
 
-5. Enviar Ether mediante llamadas.
+5. Enviar Ether mediante llamadas a funciones pagables (payable).
 
 6. Llamar a cualquier función que no esté marcada como view o pure.
 
