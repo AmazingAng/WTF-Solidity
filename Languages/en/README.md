@@ -1,6 +1,6 @@
 ![](../../img/logo2.jpeg)
 
-**[中文版本](https://github.com/AmazingAng/WTF-Solidity)**
+**[中文](https://github.com/AmazingAng/WTF-Solidity) / [Español](../es/README.md)**
 
 # WTF Solidity
 
