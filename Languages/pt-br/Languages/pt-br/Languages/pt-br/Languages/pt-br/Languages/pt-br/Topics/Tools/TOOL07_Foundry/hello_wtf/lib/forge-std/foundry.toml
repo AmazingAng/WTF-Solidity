@@ -1,0 +1,2 @@
+[profile.default]
+fs_permissions = [{ access = "read-write", path = "./"}]
