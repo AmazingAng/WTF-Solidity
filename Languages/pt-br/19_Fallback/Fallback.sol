@@ -16,11 +16,13 @@ receive()存在?   fallback()
 receive()  fallback   
     */
 
-    // 定义事件
+    // Define event
     event receivedCalled(address Sender, uint Value);
     event fallbackCalled(address Sender, uint Value, bytes Data);
 
-    // 接收ETH时释放Received事件
+    // When receiving ETH, release the Received event
+
+Quando receber ETH, libere o evento Recebido.
     receive() external payable {
         emit receivedCalled(msg.sender, msg.value);
     }
