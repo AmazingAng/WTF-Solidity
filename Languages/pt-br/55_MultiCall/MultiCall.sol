@@ -2,33 +2,33 @@
 pragma solidity ^0.8.19;
 
 contract Multicall {
-    // Call结构体，包含目标合约target，是否允许调用失败allowFailure，和call data
+    // Estrutura Call, contendo o contrato alvo target, se é permitido chamadas que falhem allowFailure, e os dados da chamada
     struct Call {
         address target;
         bool allowFailure;
         bytes callData;
     }
 
-    // Result结构体，包含调用是否成功和return data
+    // Estrutura Result, que inclui se a chamada foi bem-sucedida e os dados de retorno
     struct Result {
         bool success;
         bytes returnData;
     }
 
-    /// @notice 将多个调用（支持不同合约/不同方法/不同参数）合并到一次调用
-    /// @param calls Call结构体组成的数组
-    /// @return returnData Result结构体组成的数组
+    /// @notice Combine várias chamadas (suportando diferentes contratos / métodos diferentes / parâmetros diferentes) em uma única chamada
+    /// @param calls Array de estruturas Chamada
+    /// @return returnData Array composto por estruturas de dados Result
     function multicall(Call[] calldata calls) public returns (Result[] memory returnData) {
         uint256 length = calls.length;
         returnData = new Result[](length);
         Call calldata calli;
         
-        // 在循环中依次调用
+        // Chame sequencialmente no loop
         for (uint256 i = 0; i < length; i++) {
             Result memory result = returnData[i];
             calli = calls[i];
             (result.success, result.returnData) = calli.target.call(calli.callData);
-            // 如果 calli.allowFailure 和 result.success 均为 false，则 revert
+            // Se calli.allowFailure e result.success forem ambos falsos, reverter
             if (!(calli.allowFailure || result.success)){
                 revert("Multicall: call failed");
             }
