@@ -15,7 +15,7 @@ contract Identifier is Base1 {
         return getExactDividedBy2And3WithoutModifier(_dividend);
     }
 
-    //Calculate the value of a number divided by 2 and divided by 3, respectively
+    //Calcular del valor de un número devidido por 2 y dividido por 3, respectivamente
     function getExactDividedBy2And3WithoutModifier(uint _dividend) public pure returns(uint, uint){
         uint div2 = _dividend / 2;
         uint div3 = _dividend / 3;

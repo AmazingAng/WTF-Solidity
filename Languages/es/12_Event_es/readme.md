@@ -23,12 +23,12 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-En esta sección, se introducirá el concepto de `event` en Solidity, utilizando ERC20 token como ejemplos.
+En esta sección, se introducirá el concepto de `event` en Solidity, utilizando tokes de tipo ERC20 como ejemplos.
 
 ## Eventos
 Eventos en `solidity` son registros de transacciones almacenados en la `EVM` (Ethereum Virtual Machine). Los eventos pueden emitirse durante las llamadas a funciones y son accesibles con la dirección del contrato inteligente. Los eventos tienen dos características.
 
-- Responsivo: Las aplicaciones (por ejemplo [`ether.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18)) pueden suscribirse y escuchar estos eventos usando la interfaz `RPC` y enviar una respuesta al frontend.  
+- Responsivo: Las aplicaciones (por ejemplo [`ethers.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18)) pueden suscribirse y escuchar estos eventos usando la interfaz `RPC` y enviar una respuesta al frontend.  
 - Económicos: Es barato almacenar datos en eventos, costando alrededor de 2,000 `gas` cada uno. En comparación con almacenar una nueva variable en la cadena que requiere al menos 20,000 `gas`. 
 
 ### Declarar eventos 
@@ -36,20 +36,20 @@ Los eventos se declaran con la palabra clave `event`, seguida del nombre del eve
 ```solidity
 event Transfer(address indexed from, address indexed to, uint256 value);
 ```
-El evento `Transfer` registra tres parámetros `from`, `to` y `value`, que corresponden a la dirección de donde se envían los tokens, la dirección que recibe y la cantidad de tokens transferidos. Los parámetros `from` y `to` están marcados con la palabra clave `indexed`, lo que significa que se almacenera en una estructura de datos especial conocida como `topics`, estos valores se pueden consultar fácilmente por otras aplicaciones.
+El evento `Transfer` registra tres parámetros `from`, `to` y `value`, que corresponden a la dirección de donde se envían los tokens, la dirección que recibe y la cantidad de tokens transferidos. Los parámetros `from` y `to` están marcados con la palabra clave `indexed`, lo que significa que se almacenará en una estructura de datos especial conocida como `topics`, estos valores se pueden consultar fácilmente por otras aplicaciones.
 
 
 ### Emitir eventos
 Se pueden emitir eventos en funciones. En el siguiente ejemplo, cada vez que se llama a la función `_transfer()`, se emitirán eventos `Transfer` y se almacenaran los parámetros correspondientes.
 ```solidity
-    // definir _transfer function，execute transfer logic
+    // definir la función _transfer y ejecutar la lógica de la función
     function _transfer(
         address from,
         address to,
         uint256 amount
     ) external {
 
-        _balances[from] = 10000000; // dar unos tokens iniciales para transferir
+        _balances[from] = 10000000; // Emitir unos tokens iniciales para transferir
 
         _balances[from] -=  amount; // la dirección `from` resta el valor a transferir
         _balances[to] += amount; // la dirección `to` suma el valor a transferir
@@ -65,9 +65,9 @@ EVM utiliza `Log` para almacenar eventos en Solidity. Cada registro contiene dos
 
 ![](img/12-3.jpg)
 
-### `Topicos`
+### `Tópicos` (topics)
 
-Los `Topicos` se utilizan para describir eventos. Cada evento contiene un máximo de 4 `topics`. Normalmente, el primer `topic` es el hash del evento. 
+Los `Topics` se utilizan para describir eventos. Cada evento contiene un máximo de 4 `topics`. Normalmente, el primer `topic` es el hash del evento. 
 El hash del evento `Transfer` se calcula de la siguiente manera:
 
 ```solidity
@@ -76,7 +76,7 @@ keccak256("Transfer(addrses,address,uint256)")
 //0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
 ```
 
-Además del hash del evento, los `topics` pueden incluir 3 parámetros `indexed` como son los parámetros `from` y `to` en el evento `Transfer`. El evento anónimo es especial, no tiene nombre de evento y puede tener un máximo de 4 parámetros `indexed`.
+Además del hash del evento, los `topics` pueden incluir 3 parámetros `indexed` como son los parámetros `from` y `to` en el evento `Transfer`. Un evento anónimo es especial, no tiene nombre de evento y puede tener un máximo de 4 parámetros `indexed`.
 
 Los parámetros `indexed` se pueden entender como la clave "indexada" para los eventos, estos parámetros se pueden consultar fácilmente por programas. El tamaño de cada parámetro `indexed` es de 32 bytes. Cuando el parámetro es mayor de 32 bytes, como son `array` y `string`, se almacena el hash.
 
@@ -99,7 +99,7 @@ Tomemos el contrato `Event.sol` como ejemplo.
 
 ### Consultar el evento en etherscan
 
-Etherscan es un explorador de bloques que permite ver datos públicos sobre transacciones, contratos inteligentes y más en la blockchain de Ethereum. Primero, Desplegar el contrato en una red de pruebas (Sepolia o Goerli). Segundo llamar a la función `_transfer` para transferir 100 tokens. Después de eso, se puede verificar los detalles de la transacción en `etherscan`：[URL](https://rinkeby.etherscan.io/tx/0x8cf87215b23055896d93004112bbd8ab754f081b4491cb48c37592ca8f8a36c7)
+Etherscan es un explorador de bloques que permite ver datos públicos sobre transacciones, contratos inteligentes y más en la blockchain de Ethereum. Primero, Desplegar el contrato en una red de pruebas (Sepolia o Goerli). Segundo, llamar a la función `_transfer` para transferir 100 tokens. Después de eso, se puede verificar los detalles de la transacción en `etherscan`：[URL](https://rinkeby.etherscan.io/tx/0x8cf87215b23055896d93004112bbd8ab754f081b4491cb48c37592ca8f8a36c7)
 
 Hacer clic en el botón `Logs` para verificar los detalles del evento:
 

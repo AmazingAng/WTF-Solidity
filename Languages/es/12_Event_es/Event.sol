@@ -8,14 +8,14 @@ contract Events {
     event Transfer(address indexed from, address indexed to, uint256 value);
 
 
-    // definir _transfer function，execute transfer logic
+    // definir función _transfer，ejecutar la lógica de la función
     function _transfer(
         address from,
         address to,
         uint256 amount
     ) external {
 
-        _balances[from] = 10000000; // dar unos tokens iniciales para transferir
+        _balances[from] = 10000000; // Emitir unos tokens iniciales para transferir
 
         _balances[from] -=  amount; // la dirección `from` resta el valor a transferir
         _balances[to] += amount; // la dirección `to` suma el valor a transferir
