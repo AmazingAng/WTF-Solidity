@@ -97,7 +97,7 @@ Un contrato en solidity puede heredar de múltiples contratos. Las reglas son:
 
 2. Si una función existe en múltiples contratos padres, la función debe ser sobrescrita en el contrato hijo, de lo contrario se producirá un error.
 
-3. Cuando una función existe en múltiples contratos padres, se debe colocar todos los nombres de los contratos padres después de la palabra clave `override`. Por ejemplo: `override(Grandfather, Father)`
+3. Cuando una función existe en múltiples contratos padres, se deben colocar todos los nombres de los contratos padres después de la palabra clave `override`. Por ejemplo: `override(Grandfather, Father)`
 
 Ejemplo：
 ```solidity
@@ -127,12 +127,12 @@ contract Base1 {
 }
 
 contract Identifier is Base1 {
-    // Calcular _dividend/ y _dividend/3, pero el _dividend debe ser multiplo de 2 y 3
+    //Calcular el valor de un número dividido por 2 y dividido por 3, respectivamente, pero los parámetros pasados deben ser múltiplos de 2 y 3
     function getExactDividedBy2And3(uint _dividend) public exactDividedBy2And3(_dividend) pure returns(uint, uint) {
         return getExactDividedBy2And3WithoutModifier(_dividend);
     }
 
-    // Calcular _dividend/2 y _dividend/3
+    //Calcular del valor de un número devidido por 2 y dividido por 3, respectivamente
     function getExactDividedBy2And3WithoutModifier(uint _dividend) public pure returns(uint, uint){
         uint div2 = _dividend / 2;
         uint div3 = _dividend / 3;
@@ -141,7 +141,7 @@ contract Identifier is Base1 {
 }
 ```
 
-El contrato `Identifier` puede usar directamente el modificador `exactDividedBy2And3`, por que hereda del contrato `Base1`. También podemos reescribir el modificar del contrato.
+El contrato `Identifier` puede usar directamente el modificador `exactDividedBy2And3`, por que hereda del contrato `Base1`. También podemos reescribir el modificador del contrato.
 
 ```solidity
     modifier exactDividedBy2And3(uint _a) override {
@@ -261,7 +261,7 @@ contract people is Adam, Eve {
 
 En este ejemplo, llamar la función `super.bar()` en el contrato `people` llamará la función `bar()` de los contratos `Eve`, `Adam` y `God`, lo cual es diferente de la herencia múltiple ordinaria.
 
-Aunque `Eve` y `Adam` son ambos contratos hijos del contrato padre `God` el contrato `God` solo se llamará una vez en todo el proceso. Esto se debe a que Solidity toma prestado el paradigma de Python, forzando un DAG (grafo dirigido acíclico) compuesto por clases base para garantizar un orden especifico basado en la linearización C3. para obtener más información sobre la herencia y la linearización, se puede leer la documentación oficial de Solidity [Solidity aquí](https://docs.soliditylang.org/en/v0.8.17/contracts.html#multiple-inheritance-and-linearization).
+Aunque `Eve` y `Adam` son ambos contratos hijos del contrato padre `God` el contrato `God` solo se llamará una vez en todo el proceso. Esto se debe a que Solidity toma prestado el paradigma de Python, forzando un DAG (grafo dirigido acíclico) compuesto por clases base para garantizar un orden especifico basado en la linearización C3. Para obtener más información sobre la herencia y la linearización, se puede leer la documentación oficial de Solidity [Aca](https://docs.soliditylang.org/en/v0.8.17/contracts.html#multiple-inheritance-and-linearization).
 
 
 ## Verificación en Remix
@@ -296,4 +296,4 @@ Aunque `Eve` y `Adam` son ambos contratos hijos del contrato padre `God` el cont
    ![13-10](./img/13-10.png)
 
 ## Resumen
-En este tutorial, se presento los usos básicos de la herencia en Solidity, incluyendo herencia simple, herencia múltiple, herencia de los modificadores y constructores, además se presento el llamado a funciones desde contratos padres.
+En este tutorial, se presentaron los usos básicos de la herencia en Solidity, incluyendo herencia simple, herencia múltiple, herencia de los modificadores y constructores, además se presentó el llamado a funciones desde contratos padres.

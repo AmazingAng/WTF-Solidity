@@ -24,13 +24,13 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-En esta sección, se introducirá los contratos `abstract` y `interface` en Solidity, se usara como ejemplo la interfaz `ERC721`. Este tipo de contratos permitir crear plantillas y reducir la redundancia de código.
+En esta sección, se introducirá los contratos `abstract` y `interface` en Solidity, se usara como ejemplo la interfaz `ERC721`. Este tipo de contratos permite crear plantillas y reducir la redundancia de código.
 
 ## Contrato Abstracto
 
 Si un contrato contiene al menos una función no implementada (sin contenido en el cuerpo de la función, `{}`) debe ser marcado con la palabra clave `abstract`; de lo contrario, no se compilará. Además, la función no implementada necesita usar la palabra clave `virtual`
 Se toma el contrato [Contrato de Ordenación por Inserción](https://github.com/AmazingAng/WTFSolidity/tree/main/07_InsertionSort) anterior como ejemplo, 
-si no se ha descubierto cómo implementar la función de ordenación por inserción, se puede marcar el contrato como `abstract` y permitir que otros lo sobrescriban en el futuro.
+si no se ha averiguado cómo implementar la función de ordenación por inserción, se puede marcar el contrato como `abstract` y permitir que otros lo sobrescriban en el futuro.
 
 
 
@@ -42,7 +42,7 @@ abstract contract InsertionSort{
 
 ## Interfaz
 
-El contrato de tipo `interface` es similar al contrato de tipo `abstract`, pero requiere que no tenga contenido en el cuerpo de las funciones. Reglas de las interfaces:
+El contrato de tipo `interface` es similar al contrato de tipo `abstract`, pero requiere que no tenga contenido en el cuerpo de las funciones. Las reglas de las interfaces:
 
 1. No puede contener variables de estado.
 2. No puede contener constructores.
@@ -51,7 +51,7 @@ El contrato de tipo `interface` es similar al contrato de tipo `abstract`, pero 
 5. El contrato que hereda del contrato interfaz debe implementar todas las funciones definidas en él.
 
 Aunque la interfaz no implementa ninguna funcionalidad, es el esqueleto de los contratos inteligentes.
-La interfaz define qué hace el contrato y cómo interactuar con ellos: si un contrato inteligente implementa una interfaz (como `ERC20` o `ERC721`),
+La interfaz define qué hace el contrato y cómo interactuar con el: si un contrato inteligente implementa una interfaz (como `ERC20` o `ERC721`),
 otras Dapps y contratos inteligentes sabrán cómo interactuar con él. Por que proporciona dos piezas importantes de información:
 
 1. El selector `bytes4` para cada función en el contrato, y las firmas de las funciones `function name (parameter type)`.
@@ -68,6 +68,7 @@ que todos los contratos `ERC721` necesitan implementar. En la interfaz, cada fun
 ```solidity
 interface IERC721 is IERC165 {
     event Traproved, uint256 indexed tokenId);
+    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
     
     function balanceOf(address owner) external view returns (uint256 balance);
@@ -141,4 +142,4 @@ contract interactBAYC {
 
 ## Resumen
 En este capítulo, se introdujo los contratos tipo `abstract` e `interface` en Solidity, que se utilizan para escribir plantillas de contratos y reducir la redundancia de código.
-También se aprendió la interfaz estándar para el token `ERC721` y cómo interactuar con el contrato `BAYC` usando la interfaz.
+También se aprendió sobre interfaz estándar para el token `ERC721` y cómo interactuar con el contrato `BAYC` usando la interfaz.
