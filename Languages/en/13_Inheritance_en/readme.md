@@ -83,14 +83,14 @@ contract Father is Grandfather{
 }
 ```
 
-After deploying the contract, we can see that `Father` contract contains 4 functions. The outputs of `hip()` and `pop()` are successfully rewritten with output `"Father"`, while the output of the inherited `grandfather()` function is still `"Gatherfather"`.
+After deploying the contract, we can see that `Father` contract contains 4 functions. The outputs of `hip()` and `pop()` are successfully rewritten with output `"Father"`, while the output of the inherited `grandfather()` function is still `"Grandfather"`.
 
 
 ### Multiple inheritance
 
 A solidity contract can inherit multiple contracts. The rules are:
 
-1. For multiple inheritance, parent contracts should be ordered by seniority, from the highest to the lowest. For example: `contract Son is Gatherfather, Father`. A error will be thrown if the order is not correct.
+1. For multiple inheritance, parent contracts should be ordered by seniority, from the highest to the lowest. For example: `contract Son is Grandfather, Father`. A error will be thrown if the order is not correct.
 
 2. If a function exists in multiple parent contracts, it must be overridden in the child contract, otherwise an error will occur.
 
