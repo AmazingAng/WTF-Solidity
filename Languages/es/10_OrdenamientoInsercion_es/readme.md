@@ -19,7 +19,7 @@ En esta sección, introduciremos el flujo de control en Solidity y escribiremos 
 
 ## Flujo de Control
 
-Solidity's control flow is similar to other languages, mainly including the following components:
+El flujo de control en Solidity es similar al de otros lenguajes, e incluye principalmente los siguientes componentes:
 
 1. `if-else`
 
@@ -33,7 +33,7 @@ function ifElseTest(uint256 _number) public pure returns(bool){
 }
 ```
 
-2. `for loop`
+2. `bucle for`
 
 ```solidity
 function forLoopTest() public pure returns(uint256){
@@ -45,7 +45,7 @@ function forLoopTest() public pure returns(uint256){
 }
 ```
 
-3. `while loop`
+3. `bucle while`
 
 ```solidity
 function whileTest() public pure returns(uint256){
@@ -59,7 +59,7 @@ function whileTest() public pure returns(uint256){
 }
 ```
 
-4. `do-while loop`
+4. `bucle do-while`
 
 ```solidity
 function doWhileTest() public pure returns(uint256){
@@ -73,42 +73,44 @@ function doWhileTest() public pure returns(uint256){
 }
 ```
 
-5. Conditional (`ternary`) operator
+5. Operador condicional (`ternario`)
 
-The `ternary` operator is the only operator in Solidity that accepts three operands：a condition followed by a question mark (`?`), then an expression `x` to execute if the condition is true followed by a colon (`:`), and finally the expression `y` to execute if the condition is false: `condition ? x : y`. 
+El operador `ternario` es el único operador en Solidity que acepta tres operandos: una condición seguida por un signo de interrogación (`?`), luego una expresión `x` para ejecutar si la condición es verdadera seguida por dos puntos (`:`), y finalmente la expresión `y` para ejecutar si la condición es falsa: `condición ? x : y`.
 
-This operator is frequently used as an alternative to an `if-else` statement.
+Este operador se usa frecuentemente como una alternativa a una declaración `if-else`.
 
 ```solidity
-// ternary/conditional operator
+// operador ternario/condicional
 function ternaryTest(uint256 x, uint256 y) public pure returns(uint256){
-    // return the max of x and y
-    return x >= y ? x: y; 
+    // devuelve el máximo entre x e y, si x es mayor que y, devuelve x, de lo contrario, devuelve y
+    return x >= y ? x : y; 
 }
 ```
 
-In addition, there are `continue` (immediately enter the next loop) and `break` (break out of the current loop) keywords that can be used.
+Además, hay palabras clave `continue` (ingresar inmediatamente al siguiente bucle) y `break` (salir del bucle actual) que se pueden usar.
 
-## `Solidity` Implementation of Insertion Sort
+## Implementación de Ordenamiento por Inserción en `Solidity`.
 
-**Note**: Over 90% of people who write the insertion algorithm with Solidity will get it wrong at the first try.
+**Nota**: Más del 90% de las personas que escriben el algoritmo de inserción con Solidity lo harán mal en el primer intento.
 
-### Insertion Sort
+### Ordenamiento por Inserción
 
-The sorting algorithm solves the problem of arranging an unordered set of numbers from small to large, for example, sorting `[2, 5, 3, 1]` to `[1, 2, 3, 5]`. Insertion Sort (`InsertionSort`) is the simplest and first sorting algorithm that most developers learn in their computer science class. The logic of `InsertionSort`: 
+El algoritmo de ordenamiento resuelve el problema de ordenar un conjunto desordenado de números de menor a mayor, por ejemplo, ordenar `[2, 5, 3, 1]` a `[1, 2, 3, 5]`. El ordenamiento por Inserción (`InsertionSort`) es el algoritmo de ordenamiento más simple y el primero que la mayoría de los desarrolladores aprenden en su clase de ciencias de la computación. La lógica de `InsertionSort`:
 
-1. from the beginning of the array `x` to the end, compare the element `x[i]` with the element in front of it `x[i-1]`; if `x[i]` is smaller, switch their positions, compare it with `x[i-2]`, and continue this process. 
+1. Desde el primer elemento del arreglo `x` hasta el último, compara el elemento `x[i]` con el elemento frente a él `x[i-1]`; si `x[i]` es más pequeño, cambia sus posiciones, luego lo compara con `x[i-2]`, y repite el proceso.
 
-The schematic of insertion sort:
+El esquema del ordenamiento por inserción:
+- Sorted = Ordenado
+- Unsorted = No ordenado
 
 ![InsertionSort](https://i.pinimg.com/originals/92/b0/34/92b034385c440e08bc8551c97df0a2e3.gif)
 
-### Python Implementation
+### Implementación en Python
 
-Let's first look at the Python Implementation of the insertion sort：
+Veamos primero la implementación en Python del ordenamiento por inserción:
 
 ```python
-# Python program for implementation of Insertion Sort
+# Programa en Python para la implementación del Ordenamiento por Inserción
 def insertionSort(arr):
 	for i in range(1, len(arr)):
 		key = arr[i]
@@ -120,12 +122,12 @@ def insertionSort(arr):
     return arr
 ```
 
-### Solidity Implementation (with Bug)
+### Implementación en Solidity (con Error)
 
-Python version of Insertion Sort takes up 9 lines. Let's rewrite it into Solidity by replacing `functions`, `variables`, and `loops` with solidity syntax accordingly. It only takes up 9 lines of code:
+La versión en Python del Ordenamiento por Inserción ocupa 9 líneas. Reescribámoslo en Solidity reemplazando `funciones`, `variables` y `bucles` con la sintaxis de Solidity correspondiente. Esta solo ocupa 9 líneas de código:
 
 ``` solidity
-    // Insertion Sort (Wrong version）
+    // Ordenamiento por Inserción (Versión incorrecta)
     function insertionSortWrong(uint[] memory a) public pure returns(uint[] memory) {
         for (uint i = 1;i < a.length;i++){
             uint temp = a[i];
@@ -140,22 +142,22 @@ Python version of Insertion Sort takes up 9 lines. Let's rewrite it into Solidit
     }
 ```
 
-But when we compile the modified version and try to sort `[2, 5, 3, 1]`. *BOOM!* There are bugs! After 3-hour debugging, I still could not find where the bug was. I googled "Solidity insertion sort", and found that all the insertion algorithms written with Solidity are all wrong, such as: [Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
+Pero cuando compilamos la versión modificada y tratamos de ordenar `[2, 5, 3, 1]`. *BOOM!* ¡Hay errores! Después de 3 horas de depuración, aún no pude encontrar dónde estaba el error. Busqué "Solidity insertion sort" en Google, y encontré que todos los algoritmos de inserción escritos con Solidity estaban equivocados, como: [Ordenamiento en Solidity sin Comparación](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d) 
 
-Errors occurred in `Remix decoded output`:
+Aquí los errores en la consola de `Remix`:
 
 ![10-1](./img/10-1.jpg)
 
-### Solidity Implementation (Correct)
+### Implementación en Solidity (Correcta)
 
-With the help of a friend from `Dapp-Learning` community, we finally found the problem. The most commonly used variable type in Solidity is `uint`, which represent a non-negative integer. If it takes a negative value, we will encounter an `underflow` error. In the above code, the variable `j` will get `-1`, causing the bug.
+Con la ayuda de un amigo de la comunidad `Dapp-Learning`, finalmente encontramos el problema. El tipo de variable más utilizado en Solidity es `uint`, que representa un entero no negativo. Si intenta tomar un valor negativo, se producirá un error de  `underflow`. En el código anterior, la variable `j` tomará `-1`, causando el error.
 
-So, we need to add `1` to `j` so it can never take a negative value. The correct insertion sort solidity code:
+Por lo tanto, necesitamos agregar `1` a `j` para que nunca tome un valor negativo. El código correcto de ordenamiento por inserción en Solidity:
 
 ```solidity
-    // Insertion Sort（Correct Version）
+    // Ordenamiento por Inserción (Versión Correcta)
     function insertionSort(uint[] memory a) public pure returns(uint[] memory) {
-        // note that uint can not take negative value
+        // nota que uint no puede tomar valor negativo
         for (uint i = 1;i < a.length;i++){
             uint temp = a[i];
             uint j=i;
@@ -169,10 +171,10 @@ So, we need to add `1` to `j` so it can never take a negative value. The correct
     }
 ```
 
-Result:
+Resultado:
 
    !["Input [2,5,3,1] Output[1,2,3,5]"](https://images.mirror-media.xyz/publication-images/S-i6rwCMeXoi8eNJ0fRdB.png?height=300&width=554)
 
-## Summary
+## Resumen
 
-In this lecture, we introduced control flow in Solidity and wrote a simple but bug-prone sorting algorithm. Solidity looks simple but have many traps. Every month, projects get hacked and lose millions of dollars because of small bugs in the smart contract. To write a safe contract, we need to master the basics of the Solidity and keep practicing.
+En esta lección, introducimos el flujo de control en Solidity y escribimos un algoritmo de ordenamiento simple pero propenso a errores. Solidity parece simple pero tiene muchas trampas. Cada mes, proyectos son hackeados y pierden millones de dólares debido a pequeños errores en el contrato inteligente. Para escribir un contrato seguro, necesitamos dominar los fundamentos de Solidity y seguir practicando.

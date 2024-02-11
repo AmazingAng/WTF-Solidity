@@ -10,7 +10,7 @@ contract InsertionSort {
         }
     }
 
-    // for loop
+    // bucle for
     function forLoopTest() public pure returns(uint256){
         uint sum = 0;
         for(uint i = 0; i < 10; i++){
@@ -41,16 +41,16 @@ contract InsertionSort {
         return(sum);
     }
 
-    // Ternary/Conditional operator
+    // Operador Ternario/Condicional
     function ternaryTest(uint256 x, uint256 y) public pure returns(uint256){
-        // return the max of x and y
+        // devuelve el máximo entre x e y
         return x >= y ? x: y; 
     }
 
 
-    // Insertion Sort(Wrong version）
+    // Ordenamiento por Inserción (Versión incorrecta)
     function insertionSortWrong(uint[] memory a) public pure returns(uint[] memory) {
-        // note that uint can not take negative value
+        // nota que uint no puede tomar valor negativo
         for (uint i = 1;i < a.length;i++){
             uint temp = a[i];
             uint j=i-1;
@@ -63,9 +63,9 @@ contract InsertionSort {
         return(a);
     }
 
-    // Insertion Sort（Correct Version）
+    // Ordenamiento por Inserción (Versión Correcta)
     function insertionSort(uint[] memory a) public pure returns(uint[] memory) {
-        // note that uint can not take negative value
+        // nota que uint no puede tomar valor negativo
         for (uint i = 1;i < a.length;i++){
             uint temp = a[i];
             uint j=i;
