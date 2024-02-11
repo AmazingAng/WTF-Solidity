@@ -16,10 +16,10 @@ contract InitialValue {
     function fe() external{} // Función externa vacía 
 
     // Tipos de valores de referencia
-    uint[8] public _staticArray; //Un arreglo estático donde todos los miembros se configuran con su valor por defecto[0,0,0,0,0,0,0,0]
+    uint[8] public _staticArray; // Un arreglo estático donde todos los elementos se configuran con su valor por defecto[0,0,0,0,0,0,0,0]
     uint[] public _dynamicArray; // `[]`
-    mapping(uint => address) public _mapping; // Un mapeo donde todos los miembros se configuran con su valor por defecto
-     // Una estructura donde todos los miembros se configuran con su valor por defecto 0, 0
+    mapping(uint => address) public _mapping; // Un mapeo donde todos los elementos se configuran con su valor por defecto
+     // Una estructura donde todos los elementos se configuran con su valor por defecto 0, 0
     struct Student{
         uint256 id;
         uint256 score; 
