@@ -1,4 +1,4 @@
-# WTF Solidity Tutorial: 8. Valor inicial de las variables
+# WTF Tutorial Solidity: 8. Valor inicial de las variables
 
 Recientemente, he estado revisando Solidity, consolidando detalles y escribiendo tutoriales "WTF Solidity" para principiantes.
 

@@ -1,4 +1,4 @@
-# WTF Solidity Tutorial: 9. Constante e Inmutable
+# WTF Tutorial Solidity: 9. Constante e Inmutable
 
 Recientemente, he estado revisando Solidity, consolidando detalles y escribiendo tutoriales "WTF Solidity" para principiantes.
 
