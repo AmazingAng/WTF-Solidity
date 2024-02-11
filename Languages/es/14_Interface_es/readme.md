@@ -28,7 +28,7 @@ En esta sección, se introducirá los contratos `abstract` y `interface` en Soli
 
 ## Contrato Abstracto
 
-Si un contrato contiene al menos una función no implementada (sin contenido en el cuerpo de la función, `{}`) debe ser marcado con la palabra clave `abstract`; de lo contrario, no se compilará. Además, la función no implementada necesita usar la palabra clave `virtual`
+Si un contrato contiene al menos una función no implementada (sin contenido en el cuerpo de la función, `{}`) debe ser marcado con la palabra clave `abstract`; de lo contrario, no se compilará. Además, la función no implementada necesita usar la palabra clave `virtual`.
 Se toma el contrato [Contrato de Ordenación por Inserción](https://github.com/AmazingAng/WTFSolidity/tree/main/07_InsertionSort) anterior como ejemplo, 
 si no se ha averiguado cómo implementar la función de ordenación por inserción, se puede marcar el contrato como `abstract` y permitir que otros lo sobrescriban en el futuro.
 
@@ -98,7 +98,7 @@ interface IERC721 is IERC165 {
 - Evento `ApprovalForAll`: emitido durante la aprobación en lote, registra la dirección del propietario `owner` de la aprobación del lote, la dirección aprobada `operator` y si la aprobación esta habilitada o deshabilitada `approved`.
 
 ### Función IERC721
-`IERC721` contiene 3 eventos.
+`IERC721` contiene 9 funciones.
 - `balanceOf`: Cuenta todos los NFTs que posee un propietario.
 - `ownerOf`: Encuentra el propietario de un NFT (`tokenId`).
 - `transferFrom`: Transfiere la propiedad de un NFT con `tokenId` de `from` a `to`.
@@ -142,4 +142,4 @@ contract interactBAYC {
 
 ## Resumen
 En este capítulo, se introdujo los contratos tipo `abstract` e `interface` en Solidity, que se utilizan para escribir plantillas de contratos y reducir la redundancia de código.
-También se aprendió sobre interfaz estándar para el token `ERC721` y cómo interactuar con el contrato `BAYC` usando la interfaz.
+También se aprendió sobre la interfaz estándar para el token `ERC721` y cómo interactuar con el contrato `BAYC` usando esta interfaz.
