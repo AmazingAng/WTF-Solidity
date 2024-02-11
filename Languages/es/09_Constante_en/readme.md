@@ -17,7 +17,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 En esta sección, introduciremos dos palabras clave para restringir modificaciones a su estado en Solidity: `constant` e `immutable`. Si una variable de estado se declara con `constant` o `immutable`, su valor no puede modificarse después de la compilación del contrato.
 
-Las variables de tipo pueden declararse como `constant` o `immutable`; `string` y `bytes` pueden declararse como `constant`, pero no como `immutable`.
+Las variables de tipo de valor pueden declararse como `constant` o `immutable`; `string` y `bytes` pueden declararse como `constant`, pero no como `immutable`.
 
 ## Constante e Inmutable
 
@@ -35,7 +35,7 @@ La variable `constant` debe inicializarse durante la declaración y no puede cam
 
 ### Inmutable
 
-La variable `immutable` puede inicializarse durante la declaración o en el constructor, esto la hace más flexible, luego de esto no puede ser cambiada.
+La variable `immutable` puede inicializarse durante la declaración o en el constructor, esto la hace más flexible. Una vez inicializada, no puede ser cambiada..
 
 ``` solidity
     // La variable inmutable puede inicializarse en el constructor y no puede cambiarse después
@@ -47,7 +47,7 @@ La variable `immutable` puede inicializarse durante la declaración o en el cons
 
 Puedes inicializar la variable `immutable` usando una variable global como `address(this)`, `block`.`number`, o una función personalizada. En el siguiente ejemplo, usamos la función `test()` para inicializar la variable `IMMUTABLE_TEST` a un valor de `9`:
 
-``` solidity
+``` solidity`
     // Las variables inmutables se inicializan con constructor, para que puedan ser usadas
     constructor(){
         IMMUTABLE_ADDRESS = address(this);
