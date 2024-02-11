@@ -86,14 +86,14 @@ contract Father is Grandfather{
 }
 ```
 
-Después de desplegar el contrato, se puede ver que el contrato `Father` contiene 4 funciones. Las salidas de `hip()` y `pop` se reescriben con el el valor `"Father"`, mientras la salida de la funcione heredada `grandfather` sigue siendo `"Grandfather"`
+Después de desplegar el contrato, se puede ver que el contrato `Father` contiene 4 funciones. Las salidas de `hip()` y `pop` se reescriben con el el valor `"Father"`, mientras la salida de la funcion heredada `grandfather` sigue siendo `"Grandfather"`
 
 
 ### Herencia múltiple
 
-Un contrato en solidity puede heredar de múltiples contratos. Las reglas son:
+Un contrato en solidity puede heredar de múltiples contratos. Las reglas son las siguientes:
 
-1. Para la herencia múltiple, los contratos padres deben estar ordenados por antigüedad, desde el más alto al más bajo. Por ejemplo: `contract Son is Grandfather, Father`. La anterior definición lanzara un error si el orden no es correcto.
+1. Para la herencia múltiple, los contratos padres deben estar ordenados por antigüedad, desde el más prioritario al menos prioritario. Por ejemplo: `contract Son is Grandfather, Father`. La anterior definición lanzará un error si el orden no es correcto.
 
 2. Si una función existe en múltiples contratos padres, la función debe ser sobrescrita en el contrato hijo, de lo contrario se producirá un error.
 
@@ -112,7 +112,7 @@ contract Son is Grandfather, Father{
     }
 ```
 
-Después de desplegar el contrato, se puede ver que hemos reescrito con éxito las funciones `hip()` y `pop()` en el contrato `Son`, cambiando la salida `"Son"`. Mientras que las funciones `grandfather` y `father` heredadas de sus contratos padres permanecen sin cambios.
+Después de desplegar el contrato, se puede ver que hemos reescrito con éxito las funciones `hip()` y `pop()` en el contrato `Son`, cambiando la salida a `"Son"`. Mientras que las funciones `grandfather` y `father` heredadas de sus contratos padres permanecen sin cambios.
 
 ### Herencia en los modificadores
 

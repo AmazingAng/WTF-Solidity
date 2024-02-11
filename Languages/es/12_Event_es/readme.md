@@ -23,10 +23,10 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-En esta sección, se introducirá el concepto de `event` en Solidity, utilizando tokes de tipo ERC20 como ejemplos.
+En esta sección, se introducirá el concepto de `event` en Solidity, utilizando tokens de tipo ERC20 como ejemplos.
 
 ## Eventos
-Eventos en `solidity` son registros de transacciones almacenados en la `EVM` (Ethereum Virtual Machine). Los eventos pueden emitirse durante las llamadas a funciones y son accesibles con la dirección del contrato inteligente. Los eventos tienen dos características.
+Eventos en `solidity` son registros de transacciones almacenados en la `EVM` (Ethereum Virtual Machine). Los eventos pueden emitirse durante las llamadas a funciones y son accesibles a través de la dirección del contrato inteligente. Los eventos tienen dos características.
 
 - Responsivo: Las aplicaciones (por ejemplo [`ethers.js`](https://learnblockchain.cn/docs/ethers.js/api-contract.html#id18)) pueden suscribirse y escuchar estos eventos usando la interfaz `RPC` y enviar una respuesta al frontend.  
 - Económicos: Es barato almacenar datos en eventos, costando alrededor de 2,000 `gas` cada uno. En comparación con almacenar una nueva variable en la cadena que requiere al menos 20,000 `gas`. 
@@ -36,7 +36,7 @@ Los eventos se declaran con la palabra clave `event`, seguida del nombre del eve
 ```solidity
 event Transfer(address indexed from, address indexed to, uint256 value);
 ```
-El evento `Transfer` registra tres parámetros `from`, `to` y `value`, que corresponden a la dirección de donde se envían los tokens, la dirección que recibe y la cantidad de tokens transferidos. Los parámetros `from` y `to` están marcados con la palabra clave `indexed`, lo que significa que se almacenará en una estructura de datos especial conocida como `topics`, estos valores se pueden consultar fácilmente por otras aplicaciones.
+El evento `Transfer` registra tres parámetros `from`, `to` y `value`, que corresponden a la dirección de donde se envían los tokens, la dirección que recibe y la cantidad de tokens transferidos. Los parámetros `from` y `to` están marcados con la palabra clave `indexed`, lo que significa que se almacenaran en una estructura de datos especial conocida como `topics`, estos valores se pueden consultar fácilmente por otras aplicaciones.
 
 
 ### Emitir eventos
@@ -71,7 +71,7 @@ Los `Topics` se utilizan para describir eventos. Cada evento contiene un máximo
 El hash del evento `Transfer` se calcula de la siguiente manera:
 
 ```solidity
-keccak256("Transfer(addrses,address,uint256)")
+keccak256("Transfer(address,address,uint256)")
 
 //0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
 ```
