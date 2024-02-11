@@ -17,7 +17,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 ## Valores iniciales de las variables
 
-En Solidity, las variables que son declaradas pero no asignadas tienen valores definidos por defecto. En este tutorial, introduciremos los valores iniciales de tipos comunes de variables.
+En Solidity, las variables que son declaradas pero no asignadas tienen valores definidos por defecto. En este tutorial, introduciremos los valores iniciales de los tipos más comunes de variables.
 
 ### Valores de variables por defecto
 
@@ -31,7 +31,7 @@ En Solidity, las variables que son declaradas pero no asignadas tienen valores d
     - `internal`: función vacía
     - `external`: función vacía
 
-Puedes usar la función `getter` de una variable `pública` para confirmar los valores iniciales anteriores:
+Se puede usar la función `getter` de una variable `pública` para confirmar los valores iniciales anteriores:
 
 ```solidity
     bool public _bool; // false
@@ -54,16 +54,16 @@ Puedes usar la función `getter` de una variable `pública` para confirmar los v
 
 - `array`
     - arreglo dinámico: `[]` vacío por defecto.
-    - arreglo estático（de longitud fija): un arreglo estático donde todos los miembros se establecen en sus valores por defecto.
+    - arreglo estático（de longitud fija): un arreglo estático donde todos los elementos se establecen en sus valores por defecto.
 
 Puedes usar la función `getter` de una variable `pública` para confirmar los valores iniciales anteriores:
 
 ```solidity
     // tipos de referencia
-    uint[8] public _staticArray; // un arreglo estático donde todos los miembros se establecen en sus valores por defecto [0,0,0,0,0,0,0,0]
+    uint[8] public _staticArray; // un arreglo estático donde todos los elementos se establecen en sus valores por defecto [0,0,0,0,0,0,0,0]
     uint[] public _dynamicArray; // `[]`
-    mapping(uint => address) public _mapping; // un mapping donde todos los miembros se establecen en sus valores por defecto
-    // un struct donde todos los miembros se establecen en sus valores por defecto 0, 0
+    mapping(uint => address) public _mapping; // un mapping donde todos los elementos se establecen con sus valores por defecto
+    // un struct donde todos los elementos se establecen en sus valores por defecto 0, 0
     struct Student{
         uint256 id;
         uint256 score; 
@@ -73,7 +73,7 @@ Puedes usar la función `getter` de una variable `pública` para confirmar los v
 
 ### Operador `delete`
 
-`delete a` cambiará el valor de la variable a a su valor inicial.
+`delete a` cambiará el valor de la variable `a` a su valor inicial.
 
 ```solidity
     // operador delete
@@ -85,7 +85,7 @@ Puedes usar la función `getter` de una variable `pública` para confirmar los v
 
 ## Verificar en Remix
 
-- Despliega `InitialValue.sol` y verifica los valores iniciales de los diferentes tipos.
+- Desplegar `InitialValue.sol` y verificar los valores iniciales de los diferentes tipos.
 
     ![](./img/8-1_es.png)
 
