@@ -50,6 +50,7 @@ function transferOwner1(uint256 tokenId, address newOwner) public {
 La función `transferOwner1()` verificará si el usuario que ejecuta la transacción es el propietario del token; si no lo es, lanzará un error `TransferNotOwner` y revertirá la transacción.
 
 ### Requerir (Require)
+=======
 La declaración `require` era el método más comúnmente utilizado para el manejo de errores antes de la versión solidity `0.8`. Todavía es bastante popular entre los desarrolladores.
 
 Sintaxis de `require`: 
