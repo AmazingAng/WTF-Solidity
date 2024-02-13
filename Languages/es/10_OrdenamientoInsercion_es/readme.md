@@ -150,7 +150,7 @@ Aquí los errores en la consola de `Remix`:
 
 ### Implementación en Solidity (Correcta)
 
-Con la ayuda de un amigo de la comunidad `Dapp-Learning`, finalmente encontramos el problema. El tipo de variable más utilizado en Solidity es `uint`, que representa un entero no negativo. Si intenta tomar un valor negativo, se producirá un error de  `underflow`. En el código anterior, la variable `j` tomará `-1`, causando el error.
+Con la ayuda de un amigo de la comunidad `Dapp-Learning`, finalmente encontramos el problema. El tipo de variable más utilizado en Solidity es `uint`, que representa un entero no negativo. Si se intenta tomar un valor negativo, se producirá un error de  `underflow`. En el código anterior, la variable `j` tomaba `-1`, causando el error.
 
 Por lo tanto, necesitamos agregar `1` a `j` para que nunca tome un valor negativo. El código correcto de ordenamiento por inserción en Solidity:
 
