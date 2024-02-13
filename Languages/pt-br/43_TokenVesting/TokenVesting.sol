@@ -5,24 +5,24 @@ pragma solidity ^0.8.0;
 import "../31_ERC20/ERC20.sol";
 
 /**
- * @title ERC20代币线性释放
- * @dev 这个合约会将ERC20代币线性释放给给受益人`_beneficiary`。
- * 释放的代币可以是一种，也可以是多种。释放周期由起始时间`_start`和时长`_duration`定义。
- * 所有转到这个合约上的代币都会遵循同样的线性释放周期，并且需要受益人调用`release()`函数提取。
- * 合约是从OpenZeppelin的VestingWallet简化而来。
+ * @title Liberação linear de tokens ERC20
+ * @dev Este contrato libera tokens ERC20 de forma linear para o beneficiário `_beneficiary`.
+ * Os tokens liberados podem ser de um único tipo ou de vários tipos. O período de liberação é definido pelo tempo inicial `_start` e pela duração `_duration`.
+ * Todos os tokens transferidos para este contrato seguirão o mesmo período de liberação linear e o beneficiário precisará chamar a função `release()` para resgatá-los.
+ * O contrato é uma simplificação da VestingWallet da OpenZeppelin.
  */
 contract TokenVesting {
-    // 事件
-    event ERC20Released(address indexed token, uint256 amount); // 提币事件
+    // Eventos
+    // Evento de retirada de moedas
 
-    // 状态变量
-    mapping(address => uint256) public erc20Released; // 代币地址->释放数量的映射，记录受益人已领取的代币数量
-    address public immutable beneficiary; // 受益人地址
-    uint256 public immutable start; // 归属期起始时间戳
-    uint256 public immutable duration; // 归属期 (秒)
+    // Variável de estado
+    // Mapeamento do endereço do token para a quantidade liberada, registrando a quantidade de tokens que o beneficiário já recebeu
+    // Endereço do beneficiário
+    // Data de início do período de pertencimento
+    // Período de Atribuição (em segundos)
 
     /**
-     * @dev 初始化受益人地址，释放周期(秒), 起始时间戳(当前区块链时间戳)
+     * @dev Inicializa o endereço do beneficiário, o período de liberação (em segundos) e o carimbo de data/hora de início (carimbo de data/hora atual da blockchain)
      */
     constructor(
         address beneficiaryAddress,
@@ -35,29 +35,29 @@ contract TokenVesting {
     }
 
     /**
-     * @dev 受益人提取已释放的代币。
-     * 调用vestedAmount()函数计算可提取的代币数量，然后transfer给受益人。
-     * 释放 {ERC20Released} 事件.
+     * @dev Beneficiário retira tokens liberados.
+     * Chama a função vestedAmount() para calcular a quantidade de tokens que podem ser retirados e, em seguida, transfere para o beneficiário.
+     * Emite o evento {ERC20Released}.
      */
     function release(address token) public {
-        // 调用vestedAmount()函数计算可提取的代币数量
+        // Chame a função vestedAmount() para calcular a quantidade de tokens que podem ser retirados
         uint256 releasable = vestedAmount(token, uint256(block.timestamp)) - erc20Released[token];
-        // 更新已释放代币数量   
+        // Atualizando a quantidade de tokens liberados
         erc20Released[token] += releasable; 
-        // 转代币给受益人
+        // Transferir tokens para o beneficiário
         emit ERC20Released(token, releasable);
         IERC20(token).transfer(beneficiary, releasable);
     }
 
     /**
-     * @dev 根据线性释放公式，计算已经释放的数量。开发者可以通过修改这个函数，自定义释放方式。
-     * @param token: 代币地址
-     * @param timestamp: 查询的时间戳
+     * @dev De acordo com a fórmula de liberação linear, calcula a quantidade já liberada. Os desenvolvedores podem personalizar o método de liberação modificando esta função.
+     * @param token: endereço do token
+     * @param timestamp: timestamp consultado
      */
     function vestedAmount(address token, uint256 timestamp) public view returns (uint256) {
-        // 合约里总共收到了多少代币（当前余额 + 已经提取）
+        // Quantos tokens foram recebidos no contrato (saldo atual + já retirados)
         uint256 totalAllocation = IERC20(token).balanceOf(address(this)) + erc20Released[token];
-        // 根据线性释放公式，计算已经释放的数量
+        // De acordo com a fórmula de liberação linear, calcule a quantidade já liberada
         if (timestamp < start) {
             return 0;
         } else if (timestamp > start + duration) {

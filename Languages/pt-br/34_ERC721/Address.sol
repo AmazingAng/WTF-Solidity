@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.1;
 
-// Address库
+// Biblioteca de Endereços
 library Address {
-    // 利用extcodesize判断一个地址是否为合约地址
+    // Usando extcodesize para verificar se um endereço é um contrato
     function isContract(address account) internal view returns (bool) {
         uint size;
         assembly {

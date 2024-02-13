@@ -2,36 +2,36 @@
 pragma solidity ^0.8.4;
 
 contract Timelock{
-    // 事件
-    // 交易取消事件
+    // Eventos
+    // Evento de cancelamento de transação
     event CancelTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature,  bytes data, uint executeTime);
-    // 交易执行事件
+    // Evento de execução de transação
     event ExecuteTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature,  bytes data, uint executeTime);
-    // 交易创建并进入队列 事件
+    // Evento de criação e entrada de transação na fila
     event QueueTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature, bytes data, uint executeTime);
-    // 修改管理员地址的事件
+    // Evento para alterar o endereço do administrador
     event NewAdmin(address indexed newAdmin);
 
-    // 状态变量
-    address public admin; // 管理员地址
-    uint public constant GRACE_PERIOD = 7 days; // 交易有效期，过期的交易作废
-    uint public delay; // 交易锁定时间 （秒）
-    mapping (bytes32 => bool) public queuedTransactions; // txHash到bool，记录所有在时间锁队列中的交易
+    // Variável de estado
+    // Endereço do administrador
+    // Prazo de validade da transação, transações expiradas serão canceladas
+    // Tempo de bloqueio da transação (em segundos)
+    // txHash para bool, registra todas as transações na fila de bloqueio de tempo
     
-    // onlyOwner modifier
+    // modificador onlyOwner
     modifier onlyOwner() {
         require(msg.sender == admin, "Timelock: Caller not admin");
         _;
     }
 
-    // onlyTimelock modifier
+    // modificador onlyTimelock
     modifier onlyTimelock() {
         require(msg.sender == address(this), "Timelock: Caller not Timelock");
         _;
     }
 
     /**
-     * @dev 构造函数，初始化交易锁定时间 （秒）和管理员地址
+     * @dev Construtor, inicializa o tempo de bloqueio da transação (em segundos) e o endereço do administrador
      */
     constructor(uint delay_) {
         delay = delay_;
@@ -39,7 +39,7 @@ contract Timelock{
     }
 
     /**
-     * @dev 改变管理员地址，调用者必须是Timelock合约。
+     * @dev Altera o endereço do administrador, o chamador deve ser o contrato Timelock.
      */
     function changeAdmin(address newAdmin) public onlyTimelock {
         admin = newAdmin;
@@ -48,21 +48,21 @@ contract Timelock{
     }
 
     /**
-     * @dev 创建交易并添加到时间锁队列中。
-     * @param target: 目标合约地址
-     * @param value: 发送eth数额
-     * @param signature: 要调用的函数签名（function signature）
-     * @param data: call data，里面是一些参数
-     * @param executeTime: 交易执行的区块链时间戳
+     * @dev Cria uma transação e a adiciona à fila de bloqueio de tempo.
+     * @param target: Endereço do contrato de destino
+     * @param value: Quantidade de eth a ser enviada
+     * @param signature: Assinatura da função a ser chamada
+     * @param data: Dados da chamada, contendo os parâmetros
+     * @param executeTime: Timestamp da blockchain para a execução da transação
      *
-     * 要求：executeTime 大于 当前区块链时间戳+delay
+     * Requisito: executeTime deve ser maior que o timestamp atual da blockchain + delay
      */
     function queueTransaction(address target, uint256 value, string memory signature, bytes memory data, uint256 executeTime) public onlyOwner returns (bytes32) {
-        // 检查：交易执行时间满足锁定时间
+        // Verificação: O tempo de execução da transação atende ao tempo de bloqueio
         require(executeTime >= getBlockTimestamp() + delay, "Timelock::queueTransaction: Estimated execution block must satisfy delay.");
-        // 计算交易的唯一识别符：一堆东西的hash
+        // Calcular o identificador único da transação: o hash de um conjunto de coisas
         bytes32 txHash = getTxHash(target, value, signature, data, executeTime);
-        // 将交易添加到队列
+        // Adicionar transação à fila
         queuedTransactions[txHash] = true;
 
         emit QueueTransaction(txHash, target, value, signature, data, executeTime);
@@ -70,49 +70,49 @@ contract Timelock{
     }
 
     /**
-     * @dev 取消特定交易。
+     * @dev Cancelar uma transação específica.
      *
-     * 要求：交易在时间锁队列中
+     * Requisitos: A transação está na fila de bloqueio de tempo.
      */
     function cancelTransaction(address target, uint256 value, string memory signature, bytes memory data, uint256 executeTime) public onlyOwner{
-        // 计算交易的唯一识别符：一堆东西的hash
+        // Calcular o identificador único da transação: o hash de um conjunto de coisas
         bytes32 txHash = getTxHash(target, value, signature, data, executeTime);
-        // 检查：交易在时间锁队列中
+        // Verificando: a transação está na fila de bloqueio de tempo
         require(queuedTransactions[txHash], "Timelock::cancelTransaction: Transaction hasn't been queued.");
-        // 将交易移出队列
+        // Remover a transação da fila
         queuedTransactions[txHash] = false;
 
         emit CancelTransaction(txHash, target, value, signature, data, executeTime);
     }
 
     /**
-     * @dev 执行特定交易。
+     * @dev Executa uma transação específica.
      *
-     * 要求：
-     * 1. 交易在时间锁队列中
-     * 2. 达到交易的执行时间
-     * 3. 交易没过期
+     * Requisitos:
+     * 1. A transação está na fila de bloqueio de tempo.
+     * 2. Chegou a hora de executar a transação.
+     * 3. A transação não está expirada.
      */
     function executeTransaction(address target, uint256 value, string memory signature, bytes memory data, uint256 executeTime) public payable onlyOwner returns (bytes memory) {
         bytes32 txHash = getTxHash(target, value, signature, data, executeTime);
-        // 检查：交易是否在时间锁队列中
+        // Verificando se a transação está na fila de bloqueio de tempo
         require(queuedTransactions[txHash], "Timelock::executeTransaction: Transaction hasn't been queued.");
-        // 检查：达到交易的执行时间
+        // Verificação: Verificar o tempo de execução da transação
         require(getBlockTimestamp() >= executeTime, "Timelock::executeTransaction: Transaction hasn't surpassed time lock.");
-        // 检查：交易没过期
+        // Verificar: A transação não expirou
        require(getBlockTimestamp() <= executeTime + GRACE_PERIOD, "Timelock::executeTransaction: Transaction is stale.");
-        // 将交易移出队列
+        // Remover a transação da fila
         queuedTransactions[txHash] = false;
 
-        // 获取call data
+        // Obter dados de chamada
         bytes memory callData;
         if (bytes(signature).length == 0) {
             callData = data;
         } else {
-// 这里如果采用encodeWithSignature的编码方式来实现调用管理员的函数，请将参数data的类型改为address。不然会导致管理员的值变为类似"0x0000000000000000000000000000000000000020"的值。其中的0x20是代表字节数组长度的意思.
+// Aqui, se o método encodeWithSignature for usado para chamar a função do administrador, por favor, altere o tipo do parâmetro 'data' para 'address'. Caso contrário, o valor do administrador será alterado para um valor semelhante a "0x0000000000000000000000000000000000000020", onde 0x20 representa o comprimento do array de bytes.
             callData = abi.encodePacked(bytes4(keccak256(bytes(signature))), data);
         }
-        // 利用call执行交易
+        // Usando call para executar uma transação
         (bool success, bytes memory returnData) = target.call{value: value}(callData);
         require(success, "Timelock::executeTransaction: Transaction execution reverted.");
 
@@ -122,14 +122,14 @@ contract Timelock{
     }
 
     /**
-     * @dev 获取当前区块链时间戳
+     * @dev Obter o timestamp atual da blockchain
      */
     function getBlockTimestamp() public view returns (uint) {
         return block.timestamp;
     }
 
     /**
-     * @dev 将一堆东西拼成交易的标识符
+     * @dev Cria um identificador de transação juntando um monte de coisas
      */
     function getTxHash(
         address target,

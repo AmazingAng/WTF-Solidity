@@ -5,7 +5,7 @@ pragma experimental ABIEncoderV2;
 import "./Script.sol";
 import "ds-test/test.sol";
 
-// Wrappers around Cheatcodes to avoid footguns
+// Invólucros em torno de Cheatcodes para evitar armas de fogo
 abstract contract Test is DSTest, Script {
     using stdStorage for StdStorage;
 
@@ -14,7 +14,7 @@ abstract contract Test is DSTest, Script {
 
     StdStorage internal stdstore;
 
-    /*//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
                                     STD-LOGS
     //////////////////////////////////////////////////////////////////////////*/
 
@@ -25,11 +25,11 @@ abstract contract Test is DSTest, Script {
     event log_named_array(string key, int256[] val);
     event log_named_array(string key, address[] val);
 
-    /*//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
                                     STD-CHEATS
     //////////////////////////////////////////////////////////////////////////*/
 
-    // Skip forward or rewind time by the specified number of seconds
+    // Pular para frente ou voltar no tempo pelo número especificado de segundos
     function skip(uint256 time) internal {
         vm.warp(block.timestamp + time);
     }
@@ -38,7 +38,7 @@ abstract contract Test is DSTest, Script {
         vm.warp(block.timestamp - time);
     }
 
-    // Setup a prank from an address that has some ether
+    // Configurar uma brincadeira a partir de um endereço que possui algum ether
     function hoax(address who) internal {
         vm.deal(who, 1 << 128);
         vm.prank(who);
@@ -59,7 +59,7 @@ abstract contract Test is DSTest, Script {
         vm.prank(who, origin);
     }
 
-    // Start perpetual prank from an address that has some ether
+    // Iniciar uma brincadeira perpétua a partir de um endereço que possui algum ether
     function startHoax(address who) internal {
         vm.deal(who, 1 << 128);
         vm.startPrank(who);
@@ -70,8 +70,8 @@ abstract contract Test is DSTest, Script {
         vm.startPrank(who);
     }
 
-    // Start perpetual prank from an address that has some ether
-    // tx.origin is set to the origin parameter
+    // Iniciar uma brincadeira perpétua a partir de um endereço que possui algum ether
+    // tx.origin é definido como o parâmetro origin
     function startHoax(address who, address origin) internal {
         vm.deal(who, 1 << 128);
         vm.startPrank(who, origin);
@@ -87,19 +87,19 @@ abstract contract Test is DSTest, Script {
         vm.startPrank(who);
     }
 
-    // creates a labeled address and the corresponding private key
+    // cria um endereço rotulado e a chave privada correspondente
     function makeAddrAndKey(string memory name) internal returns(address addr, uint256 privateKey) {
         privateKey = uint256(keccak256(abi.encodePacked(name)));
         addr = vm.addr(privateKey);
         vm.label(addr, name);
     }
 
-    // creates a labeled address
+    // cria um endereço rotulado
     function makeAddr(string memory name) internal returns(address addr) {
         (addr,) = makeAddrAndKey(name);
     }
 
-    // DEPRECATED: Use `deal` instead
+    // DEPRECIADO: Use `deal` em vez disso
     function tip(address token, address to, uint256 give) internal {
         emit log_named_string("WARNING", "Test tip(address,address,uint256): The `tip` stdcheat has been deprecated. Use `deal` instead.");
         stdstore
@@ -109,31 +109,31 @@ abstract contract Test is DSTest, Script {
             .checked_write(give);
     }
 
-    // The same as Vm's `deal`
-    // Use the alternative signature for ERC20 tokens
+    // O mesmo que `deal` do Vm
+    // Use a assinatura alternativa para tokens ERC20
     function deal(address to, uint256 give) internal {
         vm.deal(to, give);
     }
 
-    // Set the balance of an account for any ERC20 token
-    // Use the alternative signature to update `totalSupply`
+    // Defina o saldo de uma conta para qualquer token ERC20
+    // Use a assinatura alternativa para atualizar `totalSupply`
     function deal(address token, address to, uint256 give) internal {
         deal(token, to, give, false);
     }
 
     function deal(address token, address to, uint256 give, bool adjust) internal {
-        // get current balance
+        // obter saldo atual
         (, bytes memory balData) = token.call(abi.encodeWithSelector(0x70a08231, to));
         uint256 prevBal = abi.decode(balData, (uint256));
 
-        // update balance
+        // atualizar saldo
         stdstore
             .target(token)
             .sig(0x70a08231)
             .with_key(to)
             .checked_write(give);
 
-        // update total supply
+        // atualizar fornecimento total
         if(adjust){
             (, bytes memory totSupData) = token.call(abi.encodeWithSelector(0x18160ddd));
             uint256 totSup = abi.decode(totSupData, (uint256));
@@ -164,7 +164,7 @@ abstract contract Test is DSTest, Script {
         }
         else
         {
-            ++size; // make `max` inclusive
+            // tornar `max` inclusivo
             uint256 mod = x % size;
             result = min + mod;
         }
@@ -172,9 +172,9 @@ abstract contract Test is DSTest, Script {
         emit log_named_uint("Bound Result", result);
     }
 
-    // Deploy a contract by fetching the contract bytecode from
-    // the artifacts directory
-    // e.g. `deployCode(code, abi.encode(arg1,arg2,arg3))`
+    // Implante um contrato buscando o bytecode do contrato de
+    // o diretório de artefatos
+    // por exemplo, `deployCode(código, abi.encode(arg1,arg2,arg3))`
     function deployCode(string memory what, bytes memory args)
         internal
         returns (address addr)
@@ -207,7 +207,7 @@ abstract contract Test is DSTest, Script {
         );
     }
 
-    /// deploy contract with value on construction
+    /// implantar contrato com valor na construção
     function deployCode(string memory what, bytes memory args, uint256 val)
         internal
         returns (address addr)
@@ -240,7 +240,7 @@ abstract contract Test is DSTest, Script {
         );
     }
 
-    /*//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
                                     STD-ASSERTIONS
     //////////////////////////////////////////////////////////////////////////*/
 
@@ -399,9 +399,9 @@ abstract contract Test is DSTest, Script {
     function assertApproxEqRel(
         uint256 a,
         uint256 b,
-        uint256 maxPercentDelta // An 18 decimal fixed point number, where 1e18 == 100%
+        // Um número de ponto fixo decimal de 18 casas decimais, onde 1e18 == 100%
     ) internal virtual {
-        if (b == 0) return assertEq(a, b); // If the expected is 0, actual must be too.
+        // Se o esperado for 0, o atual também deve ser.
 
         uint256 percentDelta = stdMath.percentDelta(a, b);
 
@@ -418,10 +418,10 @@ abstract contract Test is DSTest, Script {
     function assertApproxEqRel(
         uint256 a,
         uint256 b,
-        uint256 maxPercentDelta, // An 18 decimal fixed point number, where 1e18 == 100%
+        // Um número de ponto fixo decimal de 18 casas decimais, onde 1e18 == 100%
         string memory err
     ) internal virtual {
-        if (b == 0) return assertEq(a, b, err); // If the expected is 0, actual must be too.
+        // Se o esperado for 0, o atual também deve ser.
 
         uint256 percentDelta = stdMath.percentDelta(a, b);
 
@@ -436,7 +436,7 @@ abstract contract Test is DSTest, Script {
         int256 b,
         uint256 maxPercentDelta
     ) internal virtual {
-        if (b == 0) return assertEq(a, b); // If the expected is 0, actual must be too.
+        // Se o esperado for 0, o atual também deve ser.
 
         uint256 percentDelta = stdMath.percentDelta(a, b);
 
@@ -456,7 +456,7 @@ abstract contract Test is DSTest, Script {
         uint256 maxPercentDelta,
         string memory err
     ) internal virtual {
-        if (b == 0) return assertEq(a, b); // If the expected is 0, actual must be too.
+        // Se o esperado for 0, o atual também deve ser.
 
         uint256 percentDelta = stdMath.percentDelta(a, b);
 
@@ -466,13 +466,13 @@ abstract contract Test is DSTest, Script {
         }
     }
 
-    /*//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
                               JSON PARSING
     //////////////////////////////////////////////////////////////*/
 
-   // Data structures to parse Transaction objects from the broadcast artifact
-   // that conform to EIP1559. The Raw structs is what is parsed from the JSON
-   // and then converted to the one that is used by the user for better UX.
+   // Estruturas de dados para analisar objetos de Transação do artefato de transmissão
+   // que estão em conformidade com o EIP1559. As estruturas Raw são o que é analisado do JSON
+   // e então convertido para aquele que é usado pelo usuário para uma melhor experiência do usuário.
 
    struct RawTx1559 {
         string[] arguments;
@@ -483,7 +483,7 @@ abstract contract Test is DSTest, Script {
         bytes32 hash;
         // json value name = tx
         RawTx1559Detail txDetail;
-        // json value name = type
+        // json valor nome = tipo
         string opcode;
     }
 
@@ -519,9 +519,9 @@ abstract contract Test is DSTest, Script {
         uint256 value;
     }
 
-   // Data structures to parse Transaction objects from the broadcast artifact
-   // that DO NOT conform to EIP1559. The Raw structs is what is parsed from the JSON
-   // and then converted to the one that is used by the user for better UX.
+   // Estruturas de dados para analisar objetos de Transação do artefato de transmissão
+   // que NÃO estão em conformidade com o EIP1559. As estruturas Raw são o que é analisado do JSON
+   // e então convertido para aquele que é usado pelo usuário para uma melhor experiência do usuário.
 
     struct TxLegacy{
         string[] arguments;
@@ -556,9 +556,9 @@ abstract contract Test is DSTest, Script {
         bytes32[] storageKeys;
     }
 
-    // Data structures to parse Receipt objects from the broadcast artifact.
-    // The Raw structs is what is parsed from the JSON
-    // and then converted to the one that is used by the user for better UX.
+    // Estruturas de dados para analisar objetos de Recibo do artefato de transmissão.
+    // As estruturas Raw são o que é analisado do JSON
+    // e então convertido para aquele que é usado pelo usuário para uma melhor experiência do usuário.
 
     struct RawReceipt {
         bytes32 blockHash;
@@ -592,8 +592,8 @@ abstract contract Test is DSTest, Script {
         uint256 transactionIndex;
     }
 
-    // Data structures to parse the entire broadcast artifact, assuming the
-    // transactions conform to EIP1559.
+    // Estruturas de dados para analisar todo o artefato de transmissão, assumindo o
+    // transações conformam-se ao EIP1559.
 
     struct EIP1559ScriptArtifact {
         string[] libraries;
@@ -616,7 +616,7 @@ abstract contract Test is DSTest, Script {
     }
 
     struct RawReceiptLog {
-        // json value = address
+        // json value = endereço
         address logAddress;
         bytes32 blockHash;
         bytes blockNumber;
@@ -630,7 +630,7 @@ abstract contract Test is DSTest, Script {
     }
 
     struct ReceiptLog {
-        // json value = address
+        // json value = endereço
         address logAddress;
         bytes32 blockHash;
         uint256 blockNumber;
@@ -733,7 +733,7 @@ abstract contract Test is DSTest, Script {
     }
 
 
-    // Analogous to readTransactions, but for receipts.
+    // Análogo ao readTransactions, mas para recibos.
     function readReceipts(string memory path)
         internal
         returns (Receipt[] memory)
@@ -817,7 +817,7 @@ abstract contract Test is DSTest, Script {
 
 }
 
-/*//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
                                 STD-ERRORS
 //////////////////////////////////////////////////////////////////////////*/
 
@@ -831,11 +831,11 @@ library stdError {
     bytes public constant indexOOBError = abi.encodeWithSignature("Panic(uint256)", 0x32);
     bytes public constant memOverflowError = abi.encodeWithSignature("Panic(uint256)", 0x41);
     bytes public constant zeroVarError = abi.encodeWithSignature("Panic(uint256)", 0x51);
-    // DEPRECATED: Use Vm's `expectRevert` without any arguments instead
-    bytes public constant lowLevelError = bytes(""); // `0x`
+    // DEPRECIADO: Use `expectRevert` do Vm sem nenhum argumento em vez disso
+    // `0x`
 }
 
-/*//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
                                 STD-STORAGE
 //////////////////////////////////////////////////////////////////////////*/
 
@@ -869,12 +869,12 @@ library stdStorage {
         return bytes4(keccak256(bytes(sigStr)));
     }
 
-    /// @notice find an arbitrary storage slot given a function sig, input data, address of the contract and a value to check against
-    // slot complexity:
-    //  if flat, will be bytes32(uint256(uint));
-    //  if map, will be keccak256(abi.encode(key, uint(slot)));
-    //  if deep map, will be keccak256(abi.encode(key1, keccak256(abi.encode(key0, uint(slot)))));
-    //  if map struct, will be bytes32(uint256(keccak256(abi.encode(key1, keccak256(abi.encode(key0, uint(slot)))))) + structFieldDepth);
+    /// @notice encontre um slot de armazenamento arbitrário dado uma assinatura de função, dados de entrada, endereço do contrato e um valor para verificar
+    // complexidade do slot:
+    //  se for plano, será bytes32(uint256(uint));
+    //  if map, será keccak256(abi.encode(key, uint(slot)));
+    //  se o mapa for profundo, será keccak256(abi.encode(key1, keccak256(abi.encode(key0, uint(slot)))));
+    //  if map struct, será bytes32(uint256(keccak256(abi.encode(key1, keccak256(abi.encode(key0, uint(slot)))))) + structFieldDepth);
     function find(
         StdStorage storage self
     )
@@ -886,7 +886,7 @@ library stdStorage {
         uint256 field_depth = self._depth;
         bytes32[] memory ins = self._keys;
 
-        // calldata to test against
+        // calldata para testar contra
         if (self.finds[who][fsig][keccak256(abi.encodePacked(ins, field_depth))]) {
             return self.slots[who][fsig][keccak256(abi.encodePacked(ins, field_depth))];
         }
@@ -926,7 +926,7 @@ library stdStorage {
                 }
 
                 if (success && fdat == bytes32(hex"1337")) {
-                    // we found which of the slots is the actual one
+                    // encontramos qual dos slots é o verdadeiro
                     emit SlotFound(who, fsig, keccak256(abi.encodePacked(ins, field_depth)), uint256(reads[i]));
                     self.slots[who][fsig][keccak256(abi.encodePacked(ins, field_depth))] = uint256(reads[i]);
                     self.finds[who][fsig][keccak256(abi.encodePacked(ins, field_depth))] = true;
@@ -1091,7 +1091,7 @@ library stdStorage {
 }
 
 
-/*//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
                                 STD-MATH
 //////////////////////////////////////////////////////////////////////////*/
 
@@ -1099,7 +1099,7 @@ library stdMath {
     int256 private constant INT256_MIN = -57896044618658097711785492504343953926634992332820282019728792003956564819968;
 
     function abs(int256 a) internal pure returns (uint256) {
-        // Required or it will fail when `a = type(int256).min`
+        // Necessário, caso contrário ocorrerá falha quando `a = type(int256).min`
         if (a == INT256_MIN)
             return 57896044618658097711785492504343953926634992332820282019728792003956564819968;
 
@@ -1113,13 +1113,13 @@ library stdMath {
     }
 
     function delta(int256 a, int256 b) internal pure returns (uint256) {
-        // a and b are of the same sign
-        // this works thanks to two's complement, the left-most bit is the sign bit
+        // a e b têm o mesmo sinal
+        // isso funciona graças ao complemento de dois, o bit mais à esquerda é o bit de sinal
         if ((a ^ b) > -1) {
             return delta(abs(a), abs(b));
         }
 
-        // a and b are of opposite signs
+        // a e b têm sinais opostos
         return abs(a) + abs(b);
     }
 

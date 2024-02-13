@@ -80,134 +80,134 @@ contract DemoTest is DSTest {
 
     function test_asserts() public {
         string memory err = "this test has failed!";
-        emit log("## assertTrue(bool)\n");
+        ## assertTrue(bool)\n
         assertTrue(false);
         emit log("\n");
         assertTrue(false, err);
 
-        emit log("\n## assertEq(address,address)\n");
+        ## assertEq(endereço,endereço)\n")
         assertEq(address(this), msg.sender);
         emit log("\n");
         assertEq(address(this), msg.sender, err);
 
-        emit log("\n## assertEq32(bytes32,bytes32)\n");
+        ## assertEq32(bytes32,bytes32)\n");
         assertEq32("bytes 1", "bytes 2");
         emit log("\n");
         assertEq32("bytes 1", "bytes 2", err);
 
-        emit log("\n## assertEq(bytes32,bytes32)\n");
+        ## assertEq(bytes32,bytes32)\n");
         assertEq32("bytes 1", "bytes 2");
         emit log("\n");
         assertEq32("bytes 1", "bytes 2", err);
 
-        emit log("\n## assertEq(uint,uint)\n");
+        ## assertEq(uint,uint)\n")
         assertEq(uint(0), 1);
         emit log("\n");
         assertEq(uint(0), 1, err);
 
-        emit log("\n## assertEq(int,int)\n");
+        ## assertEq(int,int)\n"
         assertEq(-1, -2);
         emit log("\n");
         assertEq(-1, -2, err);
 
-        emit log("\n## assertEqDecimal(int,int,uint)\n");
+        ## assertEqDecimal(int,int,uint)\n")
         assertEqDecimal(-1.0e18, -1.1e18, 18);
         emit log("\n");
         assertEqDecimal(-1.0e18, -1.1e18, 18, err);
 
-        emit log("\n## assertEqDecimal(uint,uint,uint)\n");
+        ## assertEqDecimal(uint,uint,uint)\n");
         assertEqDecimal(uint(1.0e18), 1.1e18, 18);
         emit log("\n");
         assertEqDecimal(uint(1.0e18), 1.1e18, 18, err);
 
-        emit log("\n## assertGt(uint,uint)\n");
+        ## assertGt(uint,uint)\n")
         assertGt(uint(0), 0);
         emit log("\n");
         assertGt(uint(0), 0, err);
 
-        emit log("\n## assertGt(int,int)\n");
+        ## assertGt(int,int)\n"
         assertGt(-1, -1);
         emit log("\n");
         assertGt(-1, -1, err);
 
-        emit log("\n## assertGtDecimal(int,int,uint)\n");
+        ## assertGtDecimal(int,int,uint)\n")
         assertGtDecimal(-2.0e18, -1.1e18, 18);
         emit log("\n");
         assertGtDecimal(-2.0e18, -1.1e18, 18, err);
 
-        emit log("\n## assertGtDecimal(uint,uint,uint)\n");
+        ## assertGtDecimal(uint,uint,uint)\n");
         assertGtDecimal(uint(1.0e18), 1.1e18, 18);
         emit log("\n");
         assertGtDecimal(uint(1.0e18), 1.1e18, 18, err);
 
-        emit log("\n## assertGe(uint,uint)\n");
+        ## assertGe(uint,uint)\n")
         assertGe(uint(0), 1);
         emit log("\n");
         assertGe(uint(0), 1, err);
 
-        emit log("\n## assertGe(int,int)\n");
+        ## assertGe(int, int)\n
         assertGe(-1, 0);
         emit log("\n");
         assertGe(-1, 0, err);
 
-        emit log("\n## assertGeDecimal(int,int,uint)\n");
+        ## assertGeDecimal(int,int,uint)\n")
         assertGeDecimal(-2.0e18, -1.1e18, 18);
         emit log("\n");
         assertGeDecimal(-2.0e18, -1.1e18, 18, err);
 
-        emit log("\n## assertGeDecimal(uint,uint,uint)\n");
+        ## assertGeDecimal(uint,uint,uint)\n");
         assertGeDecimal(uint(1.0e18), 1.1e18, 18);
         emit log("\n");
         assertGeDecimal(uint(1.0e18), 1.1e18, 18, err);
 
-        emit log("\n## assertLt(uint,uint)\n");
+        ## assertLt(uint,uint)\n")
         assertLt(uint(0), 0);
         emit log("\n");
         assertLt(uint(0), 0, err);
 
-        emit log("\n## assertLt(int,int)\n");
+        ## assertLt(int,int)\n")
         assertLt(-1, -1);
         emit log("\n");
         assertLt(-1, -1, err);
 
-        emit log("\n## assertLtDecimal(int,int,uint)\n");
+        ## assertLtDecimal(int,int,uint)\n")
         assertLtDecimal(-1.0e18, -1.1e18, 18);
         emit log("\n");
         assertLtDecimal(-1.0e18, -1.1e18, 18, err);
 
-        emit log("\n## assertLtDecimal(uint,uint,uint)\n");
+        ## assertLtDecimal(uint,uint,uint)\n");
         assertLtDecimal(uint(2.0e18), 1.1e18, 18);
         emit log("\n");
         assertLtDecimal(uint(2.0e18), 1.1e18, 18, err);
 
-        emit log("\n## assertLe(uint,uint)\n");
+        ## assertLe(uint,uint)\n");
         assertLe(uint(1), 0);
         emit log("\n");
         assertLe(uint(1), 0, err);
 
-        emit log("\n## assertLe(int,int)\n");
+        ## assertLe(int,int)\n"
         assertLe(0, -1);
         emit log("\n");
         assertLe(0, -1, err);
 
-        emit log("\n## assertLeDecimal(int,int,uint)\n");
+        ## assertLeDecimal(int,int,uint)\n")
         assertLeDecimal(-1.0e18, -1.1e18, 18);
         emit log("\n");
         assertLeDecimal(-1.0e18, -1.1e18, 18, err);
 
-        emit log("\n## assertLeDecimal(uint,uint,uint)\n");
+        ## assertLeDecimal(uint,uint,uint)\n");
         assertLeDecimal(uint(2.0e18), 1.1e18, 18);
         emit log("\n");
         assertLeDecimal(uint(2.0e18), 1.1e18, 18, err);
 
-        emit log("\n## assertEq(string,string)\n");
+        ## assertEq(string,string)\n");
         string memory s1 = "string 1";
         string memory s2 = "string 2";
         assertEq(s1, s2);
         emit log("\n");
         assertEq(s1, s2, err);
 
-        emit log("\n## assertEq0(bytes,bytes)\n");
+        ## assertEq0(bytes, bytes)\n");
         assertEq0(hex"abcdef01", hex"abcdef02");
         emit log("\n");
         assertEq0(hex"abcdef01", hex"abcdef02", err);

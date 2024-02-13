@@ -1,61 +1,61 @@
 // SPDX-License-Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.5.0) (utils/Address.sol)
+// Contratos OpenZeppelin (última atualização v4.5.0) (utils/Address.sol)
 
 pragma solidity ^0.8.1;
 
 /**
- * @dev Collection of functions related to the address type
+ * @dev Coleção de funções relacionadas ao tipo de endereço
  */
 library Address {
     /**
-     * @dev Returns true if `account` is a contract.
+     * @dev Retorna verdadeiro se `conta` for um contrato.
      *
-     * [IMPORTANT]
+     * [IMPORTANTE]
      * ====
-     * It is unsafe to assume that an address for which this function returns
-     * false is an externally-owned account (EOA) and not a contract.
+     * Não é seguro assumir que um endereço para o qual esta função retorna
+     * falso é uma conta de propriedade externa (EOA) e não um contrato.
      *
-     * Among others, `isContract` will return false for the following
-     * types of addresses:
+     * Entre outros, `isContract` retornará falso para os seguintes
+     * tipos de endereços:
      *
-     *  - an externally-owned account
-     *  - a contract in construction
-     *  - an address where a contract will be created
-     *  - an address where a contract lived, but was destroyed
+     *  - uma conta de propriedade externa
+     *  - um contrato em construção
+     *  - um endereço onde um contrato será criado
+     *  - um endereço onde um contrato viveu, mas foi destruído
      * ====
      *
-     * [IMPORTANT]
+     * [IMPORTANTE]
      * ====
-     * You shouldn't rely on `isContract` to protect against flash loan attacks!
+     * Você não deve confiar em `isContract` para se proteger contra ataques de empréstimo instantâneo!
      *
-     * Preventing calls from contracts is highly discouraged. It breaks composability, breaks support for smart wallets
-     * like Gnosis Safe, and does not provide security since it can be circumvented by calling from a contract
-     * constructor.
+     * Impedir chamadas de contratos é altamente desencorajado. Isso quebra a composabilidade, quebra o suporte para carteiras inteligentes
+     * como Gnosis Safe, e não fornece segurança, pois pode ser contornado chamando de um contrato
+     * construtor.
      * ====
      */
     function isContract(address account) internal view returns (bool) {
-        // This method relies on extcodesize/address.code.length, which returns 0
-        // for contracts in construction, since the code is only stored at the end
-        // of the constructor execution.
+        // Este método depende de extcodesize/address.code.length, que retorna 0
+        // para contratos na construção civil, uma vez que o código é armazenado apenas no final
+        // da execução do construtor.
 
         return account.code.length > 0;
     }
 
     /**
-     * @dev Replacement for Solidity's `transfer`: sends `amount` wei to
-     * `recipient`, forwarding all available gas and reverting on errors.
+     * @dev Substituição para o `transfer` do Solidity: envia `amount` wei para
+     * `recipient`, encaminhando todo o gás disponível e revertendo em caso de erros.
      *
-     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] increases the gas cost
-     * of certain opcodes, possibly making contracts go over the 2300 gas limit
-     * imposed by `transfer`, making them unable to receive funds via
-     * `transfer`. {sendValue} removes this limitation.
+     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] aumenta o custo de gás
+     * de certas opcodes, possivelmente fazendo com que contratos ultrapassem o limite de gás de 2300
+     * imposto pelo `transfer`, tornando-os incapazes de receber fundos via
+     * `transfer`. {sendValue} remove essa limitação.
      *
-     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Learn more].
+     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Saiba mais].
      *
-     * IMPORTANT: because control is transferred to `recipient`, care must be
-     * taken to not create reentrancy vulnerabilities. Consider using
-     * {ReentrancyGuard} or the
-     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].
+     * IMPORTANTE: porque o controle é transferido para `recipient`, é necessário ter cuidado
+     * para não criar vulnerabilidades de reentrância. Considere usar
+     * {ReentrancyGuard} ou o
+     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[padrão checks-effects-interactions].
      */
     function sendValue(address payable recipient, uint256 amount) internal {
         require(address(this).balance >= amount, "Address: insufficient balance");
@@ -65,32 +65,32 @@ library Address {
     }
 
     /**
-     * @dev Performs a Solidity function call using a low level `call`. A
-     * plain `call` is an unsafe replacement for a function call: use this
-     * function instead.
+     * @dev Executa uma chamada de função Solidity usando um `call` de baixo nível. Um
+     * `call` simples é uma substituição insegura para uma chamada de função: use esta
+     * função em vez disso.
      *
-     * If `target` reverts with a revert reason, it is bubbled up by this
-     * function (like regular Solidity function calls).
+     * Se `target` reverter com uma razão de revert, ela é propagada por esta
+     * função (como chamadas de função Solidity regulares).
      *
-     * Returns the raw returned data. To convert to the expected return value,
+     * Retorna os dados brutos retornados. Para converter para o valor de retorno esperado,
      * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `target` must be a contract.
-     * - calling `target` with `data` must not revert.
+     * - `target` deve ser um contrato.
+     * - chamar `target` com `data` não deve reverter.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCall(address target, bytes memory data) internal returns (bytes memory) {
         return functionCall(target, data, "Address: low-level call failed");
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`], but with
-     * `errorMessage` as a fallback revert reason when `target` reverts.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`], mas com
+     * `errorMessage` como motivo de fallback de revert quando `target` reverte.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCall(
         address target,
@@ -101,15 +101,15 @@ library Address {
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
-     * but also transferring `value` wei to `target`.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * mas também transfere `value` wei para `target`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - the calling contract must have an ETH balance of at least `value`.
-     * - the called Solidity function must be `payable`.
+     * - o contrato chamador deve ter um saldo de ETH de pelo menos `value`.
+     * - a função Solidity chamada deve ser `payable`.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCallWithValue(
         address target,
@@ -120,10 +120,10 @@ library Address {
     }
 
     /**
-     * @dev Same as {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], but
-     * with `errorMessage` as a fallback revert reason when `target` reverts.
+     * @dev Mesmo que {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], mas
+     * com `errorMessage` como motivo de fallback de revert quando `target` reverte.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCallWithValue(
         address target,
@@ -139,20 +139,20 @@ library Address {
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
-     * but performing a static call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * mas realizando uma chamada estática.
      *
-     * _Available since v3.3._
+     * _Disponível desde a versão 3.3._
      */
     function functionStaticCall(address target, bytes memory data) internal view returns (bytes memory) {
         return functionStaticCall(target, data, "Address: low-level static call failed");
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
-     * but performing a static call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
+     * mas realizando uma chamada estática.
      *
-     * _Available since v3.3._
+     * _Disponível desde a versão 3.3._
      */
     function functionStaticCall(
         address target,
@@ -166,20 +166,20 @@ library Address {
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
-     * but performing a delegate call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * mas realizando uma chamada de delegado.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function functionDelegateCall(address target, bytes memory data) internal returns (bytes memory) {
         return functionDelegateCall(target, data, "Address: low-level delegate call failed");
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
-     * but performing a delegate call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
+     * mas realizando uma chamada de delegado.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function functionDelegateCall(
         address target,
@@ -193,10 +193,10 @@ library Address {
     }
 
     /**
-     * @dev Tool to verifies that a low level call was successful, and revert if it wasn't, either by bubbling the
-     * revert reason using the provided one.
+     * @dev Ferramenta para verificar se uma chamada de baixo nível foi bem-sucedida e reverter se não foi, seja
+     * propagando o motivo de reversão usando o fornecido.
      *
-     * _Available since v4.3._
+     * _Disponível desde a versão 4.3._
      */
     function verifyCallResult(
         bool success,
@@ -206,9 +206,9 @@ library Address {
         if (success) {
             return returndata;
         } else {
-            // Look for revert reason and bubble it up if present
+            // Procurar motivo de reversão e propagá-lo se estiver presente
             if (returndata.length > 0) {
-                // The easiest way to bubble the revert reason is using memory via assembly
+                // A maneira mais fácil de bolhar a razão de reverter é usando memória via assembly
 
                 assembly {
                     let returndata_size := mload(returndata)

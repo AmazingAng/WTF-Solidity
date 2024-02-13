@@ -1,26 +1,26 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 contract Events {
-    // 定义_balances映射变量，记录每个地址的持币数量
+    // Definir a variável de mapeamento _balances para registrar a quantidade de tokens detidos por cada endereço
     mapping(address => uint256) public _balances;
 
-    // 定义Transfer event，记录transfer交易的转账地址，接收地址和转账数量
+    // Definir evento de Transferência, registrando o endereço de envio, o endereço de recebimento e a quantidade transferida da transação de transferência
     event Transfer(address indexed from, address indexed to, uint256 value);
 
 
-    // 定义_transfer函数，执行转账逻辑
+    // Definir a função _transfer, que executa a lógica de transferência de fundos
     function _transfer(
         address from,
         address to,
         uint256 amount
     ) external {
 
-        _balances[from] = 10000000; // 给转账地址一些初始代币
+        // Dê alguns tokens iniciais para o endereço de transferência
 
-        _balances[from] -=  amount; // from地址减去转账数量
-        _balances[to] += amount; // to地址加上转账数量
+        // Subtrair a quantidade de transferência do endereço de origem
+        // Adicione a quantidade de transferência ao endereço de destino
 
-        // 释放事件
+        // Liberar evento
         emit Transfer(from, to, amount);
     }
 }

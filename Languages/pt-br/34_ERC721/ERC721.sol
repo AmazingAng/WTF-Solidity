@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// by 0xAA
+// por 0xAA
 pragma solidity ^0.8.4;
 
 import "./IERC165.sol";
@@ -10,31 +10,31 @@ import "./Address.sol";
 import "./String.sol";
 
 contract ERC721 is IERC721, IERC721Metadata{
-    using Address for address; // 使用Address库，用isContract来判断地址是否为合约
-    using Strings for uint256; // 使用String库，
+    // Usando a biblioteca Address, use isContract para verificar se um endereço é um contrato
+    // Importando a biblioteca String,
 
-    // Token名称
+    // Token nome
     string public override name;
-    // Token代号
+    // Token código
     string public override symbol;
-    // tokenId 到 owner address 的持有人映射
+    // Mapeamento do tokenId para o endereço do proprietário
     mapping(uint => address) private _owners;
-    // address 到 持仓数量 的持仓量映射
+    // mapeamento da quantidade de posições de 'address' para a quantidade de posições em '持仓数量'
     mapping(address => uint) private _balances;
-    // tokenID 到 授权地址 的授权映射
+    // Mapeamento de autorização do tokenID para o endereço autorizado
     mapping(uint => address) private _tokenApprovals;
-    //  owner地址。到operator地址 的批量授权映射
+    // Mapeamento de autorização em lote do endereço do proprietário para o endereço do operador.
     mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     /**
-     * 构造函数，初始化`name` 和`symbol` .
+     * Construtor, inicializa `name` e `symbol`.
      */
     constructor(string memory name_, string memory symbol_) {
         name = name_;
         symbol = symbol_;
     }
 
-    // 实现IERC165接口supportsInterface
+    // Implementação do método supportsInterface da interface IERC165
     function supportsInterface(bytes4 interfaceId)
         external
         pure
@@ -47,19 +47,19 @@ contract ERC721 is IERC721, IERC721Metadata{
             interfaceId == type(IERC721Metadata).interfaceId;
     }
 
-    // 实现IERC721的balanceOf，利用_balances变量查询owner地址的balance。
+    // Implementação do balanceOf do IERC721, utilizando a variável _balances para consultar o saldo do endereço do proprietário.
     function balanceOf(address owner) external view override returns (uint) {
         require(owner != address(0), "owner = zero address");
         return _balances[owner];
     }
 
-    // 实现IERC721的ownerOf，利用_owners变量查询tokenId的owner。
+    // Implementação do ownerOf do IERC721, utilizando a variável _owners para consultar o proprietário do tokenId.
     function ownerOf(uint tokenId) public view override returns (address owner) {
         owner = _owners[tokenId];
         require(owner != address(0), "token doesn't exist");
     }
 
-    // 实现IERC721的isApprovedForAll，利用_operatorApprovals变量查询owner地址是否将所持NFT批量授权给了operator地址。
+    // Implementação do isApprovedForAll do IERC721, utilizando a variável _operatorApprovals para verificar se o endereço do proprietário concedeu autorização em lote para o endereço do operador para os NFTs que ele possui.
     function isApprovedForAll(address owner, address operator)
         external
         view
@@ -69,19 +69,19 @@ contract ERC721 is IERC721, IERC721Metadata{
         return _operatorApprovals[owner][operator];
     }
 
-    // 实现IERC721的setApprovalForAll，将持有代币全部授权给operator地址。调用_setApprovalForAll函数。
+    // Implemente o setApprovalForAll do IERC721, autorizando todos os tokens detidos para o endereço do operador. Chame a função _setApprovalForAll.
     function setApprovalForAll(address operator, bool approved) external override {
         _operatorApprovals[msg.sender][operator] = approved;
         emit ApprovalForAll(msg.sender, operator, approved);
     }
 
-    // 实现IERC721的getApproved，利用_tokenApprovals变量查询tokenId的授权地址。
+    // Implemente o método getApproved da IERC721, utilizando a variável _tokenApprovals para consultar o endereço autorizado do tokenId.
     function getApproved(uint tokenId) external view override returns (address) {
         require(_owners[tokenId] != address(0), "token doesn't exist");
         return _tokenApprovals[tokenId];
     }
      
-    // 授权函数。通过调整_tokenApprovals来，授权 to 地址操作 tokenId，同时释放Approval事件。
+    // Função de autorização. Através da manipulação de _tokenApprovals, autoriza o endereço a operar o tokenId e emite o evento Approval.
     function _approve(
         address owner,
         address to,
@@ -91,7 +91,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         emit Approval(owner, to, tokenId);
     }
 
-    // 实现IERC721的approve，将tokenId授权给 to 地址。条件：to不是owner，且msg.sender是owner或授权地址。调用_approve函数。
+    // Implemente o método approve do IERC721 para autorizar o tokenId para o endereço 'to'. Condições: 'to' não é o proprietário e 'msg.sender' é o proprietário ou um endereço autorizado. Chame a função _approve.
     function approve(address to, uint tokenId) external override {
         address owner = _owners[tokenId];
         require(
@@ -101,7 +101,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         _approve(owner, to, tokenId);
     }
 
-    // 查询 spender地址是否可以使用tokenId（需要是owner或被授权地址）
+    // Verifique se o endereço do spender pode usar o tokenId (deve ser o proprietário ou um endereço autorizado)
     function _isApprovedOrOwner(
         address owner,
         address spender,
@@ -113,10 +113,10 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     /*
-     * 转账函数。通过调整_balances和_owner变量将 tokenId 从 from 转账给 to，同时释放Transfer事件。
-     * 条件:
-     * 1. tokenId 被 from 拥有
-     * 2. to 不是0地址
+     * Função de transferência. Transfere o tokenId de from para to, ajustando as variáveis _balances e _owner, e emite o evento Transfer.
+     * Condições:
+     * 1. tokenId é possuído por from
+     * 2. to não é um endereço 0
      */
     function _transfer(
         address owner,
@@ -136,7 +136,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         emit Transfer(from, to, tokenId);
     }
     
-    // 实现IERC721的transferFrom，非安全转账，不建议使用。调用_transfer函数
+    // Implementação do transferFrom do IERC721, uma transferência não segura, não recomendada para uso. Chama a função _transfer.
     function transferFrom(
         address from,
         address to,
@@ -151,11 +151,11 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     /**
-     * 安全转账，安全地将 tokenId 代币从 from 转移到 to，会检查合约接收者是否了解 ERC721 协议，以防止代币被永久锁定。调用了_transfer函数和_checkOnERC721Received函数。条件：
-     * from 不能是0地址.
-     * to 不能是0地址.
-     * tokenId 代币必须存在，并且被 from拥有.
-     * 如果 to 是智能合约, 他必须支持 IERC721Receiver-onERC721Received.
+     * Transferência segura, transferindo com segurança o token de tokenId de from para to, verificando se o receptor do contrato entende o protocolo ERC721 para evitar que o token seja bloqueado permanentemente. Chama a função _transfer e _checkOnERC721Received. Condições:
+     * from não pode ser um endereço 0.
+     * to não pode ser um endereço 0.
+     * O token de tokenId deve existir e ser de propriedade de from.
+     * Se to for um contrato inteligente, ele deve suportar IERC721Receiver-onERC721Received.
      */
     function _safeTransfer(
         address owner,
@@ -169,7 +169,7 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     /**
-     * 实现IERC721的safeTransferFrom，安全转账，调用了_safeTransfer函数。
+     * Implementa o safeTransferFrom do IERC721, uma transferência segura que chama a função _safeTransfer.
      */
     function safeTransferFrom(
         address from,
@@ -185,7 +185,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         _safeTransfer(owner, from, to, tokenId, _data);
     }
 
-    // safeTransferFrom重载函数
+    // Função sobrecarregada safeTransferFrom
     function safeTransferFrom(
         address from,
         address to,
@@ -194,12 +194,12 @@ contract ERC721 is IERC721, IERC721Metadata{
         safeTransferFrom(from, to, tokenId, "");
     }
 
-    /** 
-     * 铸造函数。通过调整_balances和_owners变量来铸造tokenId并转账给 to，同时释放Transfer事件。铸造函数。通过调整_balances和_owners变量来铸造tokenId并转账给 to，同时释放Transfer事件。
-     * 这个mint函数所有人都能调用，实际使用需要开发人员重写，加上一些条件。
-     * 条件:
-     * 1. tokenId尚不存在。
-     * 2. to不是0地址.
+    /**
+     * Função de cunhagem. Cunha o tokenId ajustando as variáveis _balances e _owners e transfere para o endereço 'to', liberando o evento Transfer. 
+     * Esta função de cunhagem pode ser chamada por qualquer pessoa, mas é recomendado que os desenvolvedores a reescrevam e adicionem algumas condições.
+     * Condições:
+     * 1. O tokenId ainda não existe.
+     * 2. 'to' não é um endereço 0.
      */
     function _mint(address to, uint tokenId) internal virtual {
         require(to != address(0), "mint to zero address");
@@ -211,7 +211,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         emit Transfer(address(0), to, tokenId);
     }
 
-    // 销毁函数，通过调整_balances和_owners变量来销毁tokenId，同时释放Transfer事件。条件：tokenId存在。
+    // Função de destruição, destrói o tokenId ajustando as variáveis _balances e _owners, e libera o evento Transfer. Condição: tokenId existe.
     function _burn(uint tokenId) internal virtual {
         address owner = ownerOf(tokenId);
         require(msg.sender == owner, "not owner of token");
@@ -224,7 +224,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         emit Transfer(owner, address(0), tokenId);
     }
 
-    // _checkOnERC721Received：函数，用于在 to 为合约的时候调用IERC721Receiver-onERC721Received, 以防 tokenId 被不小心转入黑洞。
+    // _checkOnERC721Received: função usada para chamar o onERC721Received do IERC721Receiver quando 'to' é um contrato, evitando que o tokenId seja acidentalmente enviado para o vazio.
     function _checkOnERC721Received(
         address from,
         address to,
@@ -245,7 +245,7 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     /**
-     * 实现IERC721Metadata的tokenURI函数，查询metadata。
+     * Implementa a função tokenURI da interface IERC721Metadata para consultar metadados.
      */
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_owners[tokenId] != address(0), "Token Not Exist");
@@ -255,8 +255,8 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     /**
-     * 计算{tokenURI}的BaseURI，tokenURI就是把baseURI和tokenId拼接在一起，需要开发重写。
-     * BAYC的baseURI为ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/ 
+     * Calculando o BaseURI de {tokenURI}, onde tokenURI é a concatenação de baseURI e tokenId, que precisa ser reescrito pelo desenvolvedor.
+     * O baseURI do BAYC é ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/
      */
     function _baseURI() internal view virtual returns (string memory) {
         return "";

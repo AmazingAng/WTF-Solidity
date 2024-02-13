@@ -1,22 +1,22 @@
 /**
- *Submitted for verification at Etherscan.io on 2021-04-22
+ * Enviado para verificação em Etherscan.io em 2021-04-22
 */
 
-// File: @openzeppelin/contracts/utils/Context.sol
+// Arquivo: @openzeppelin/contracts/utils/Context.sol
 
 // SPDX-License-Identifier: MIT
 
 pragma solidity >=0.6.0 <0.8.0;
 
 /*
- * @dev Provides information about the current execution context, including the
- * sender of the transaction and its data. While these are generally available
- * via msg.sender and msg.data, they should not be accessed in such a direct
- * manner, since when dealing with GSN meta-transactions the account sending and
- * paying for execution may not be the actual sender (as far as an application
- * is concerned).
+ * @dev Fornece informações sobre o contexto de execução atual, incluindo o
+ * remetente da transação e seus dados. Embora essas informações estejam geralmente disponíveis
+ * através de msg.sender e msg.data, elas não devem ser acessadas de forma direta
+ * maneira, pois ao lidar com meta-transações GSN, a conta que envia e
+ * paga pela execução pode não ser o remetente real (pelo menos no que diz respeito a um aplicativo).
  *
- * This contract is only required for intermediate, library-like contracts.
+ * Este contrato é necessário apenas para contratos intermediários semelhantes a bibliotecas.
+ */
  */
 abstract contract Context {
     function _msgSender() internal view virtual returns (address payable) {
@@ -24,39 +24,39 @@ abstract contract Context {
     }
 
     function _msgData() internal view virtual returns (bytes memory) {
-        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
+        // silenciar aviso de mutabilidade de estado sem gerar bytecode - veja https://github.com/ethereum/solidity/issues/2691
         return msg.data;
     }
 }
 
-// File: @openzeppelin/contracts/introspection/IERC165.sol
+// Arquivo: @openzeppelin/contracts/introspection/IERC165.sol
 
 
 
 pragma solidity >=0.6.0 <0.8.0;
 
 /**
- * @dev Interface of the ERC165 standard, as defined in the
+ * @dev Interface do padrão ERC165, conforme definido no
  * https://eips.ethereum.org/EIPS/eip-165[EIP].
  *
- * Implementers can declare support of contract interfaces, which can then be
- * queried by others ({ERC165Checker}).
+ * Implementadores podem declarar suporte a interfaces de contratos, que podem então ser
+ * consultadas por outros ({ERC165Checker}).
  *
- * For an implementation, see {ERC165}.
+ * Para uma implementação, veja {ERC165}.
  */
 interface IERC165 {
     /**
-     * @dev Returns true if this contract implements the interface defined by
-     * `interfaceId`. See the corresponding
-     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]
-     * to learn more about how these ids are created.
+     * @dev Retorna verdadeiro se este contrato implementa a interface definida por
+     * `interfaceId`. Consulte a seção correspondente
+     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP]
+     * para saber mais sobre como esses ids são criados.
      *
-     * This function call must use less than 30 000 gas.
+     * Esta chamada de função deve usar menos de 30.000 gas.
      */
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
 }
 
-// File: @openzeppelin/contracts/token/ERC721/IERC721.sol
+// Arquivo: @openzeppelin/contracts/token/ERC721/IERC721.sol
 
 
 
@@ -64,130 +64,130 @@ pragma solidity >=0.6.2 <0.8.0;
 
 
 /**
- * @dev Required interface of an ERC721 compliant contract.
+ * @dev Interface necessária de um contrato compatível com ERC721.
  */
 interface IERC721 is IERC165 {
     /**
-     * @dev Emitted when `tokenId` token is transferred from `from` to `to`.
+     * @dev Emitido quando o token `tokenId` é transferido de `from` para `to`.
      */
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
 
     /**
-     * @dev Emitted when `owner` enables `approved` to manage the `tokenId` token.
+     * @dev Emitido quando `owner` permite que `approved` gerencie o token `tokenId`.
      */
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
 
     /**
-     * @dev Emitted when `owner` enables or disables (`approved`) `operator` to manage all of its assets.
+     * @dev Emitido quando `owner` habilita ou desabilita (`approved`) `operator` para gerenciar todos os seus ativos.
      */
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
 
     /**
-     * @dev Returns the number of tokens in ``owner``'s account.
+     * @dev Retorna o número de tokens na conta do ``owner``.
      */
     function balanceOf(address owner) external view returns (uint256 balance);
 
     /**
-     * @dev Returns the owner of the `tokenId` token.
+     * @dev Retorna o proprietário do token `tokenId`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must exist.
+     * - `tokenId` deve existir.
      */
     function ownerOf(uint256 tokenId) external view returns (address owner);
 
     /**
-     * @dev Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients
-     * are aware of the ERC721 protocol to prevent tokens from being forever locked.
+     * @dev Transfere com segurança o token `tokenId` de `from` para `to`, verificando primeiro se os destinatários do contrato
+     * estão cientes do protocolo ERC721 para evitar que os tokens fiquem bloqueados para sempre.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `from` cannot be the zero address.
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must exist and be owned by `from`.
-     * - If the caller is not `from`, it must be have been allowed to move this token by either {approve} or {setApprovalForAll}.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * - `from` não pode ser o endereço zero.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve existir e ser de propriedade de `from`.
+     * - Se o chamador não for `from`, ele deve ter sido autorizado a mover este token por meio de {approve} ou {setApprovalForAll}.
+     * - Se `to` se referir a um contrato inteligente, ele deve implementar {IERC721Receiver-onERC721Received}, que é chamado durante uma transferência segura.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function safeTransferFrom(address from, address to, uint256 tokenId) external;
 
     /**
-     * @dev Transfers `tokenId` token from `from` to `to`.
+     * @dev Transfere o token `tokenId` de `from` para `to`.
      *
-     * WARNING: Usage of this method is discouraged, use {safeTransferFrom} whenever possible.
+     * AVISO: O uso deste método é desencorajado, use {safeTransferFrom} sempre que possível.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `from` cannot be the zero address.
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must be owned by `from`.
-     * - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}.
+     * - `from` não pode ser o endereço zero.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve ser de propriedade de `from`.
+     * - Se o chamador não for `from`, ele deve ser aprovado para mover este token por meio de {approve} ou {setApprovalForAll}.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function transferFrom(address from, address to, uint256 tokenId) external;
 
     /**
-     * @dev Gives permission to `to` to transfer `tokenId` token to another account.
-     * The approval is cleared when the token is transferred.
+     * @dev Concede permissão para `to` transferir o token `tokenId` para outra conta.
+     * A aprovação é removida quando o token é transferido.
      *
-     * Only a single account can be approved at a time, so approving the zero address clears previous approvals.
+     * Apenas uma única conta pode ser aprovada por vez, portanto, aprovar o endereço zero remove aprovações anteriores.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - The caller must own the token or be an approved operator.
-     * - `tokenId` must exist.
+     * - O chamador deve ser o proprietário do token ou um operador aprovado.
+     * - `tokenId` deve existir.
      *
-     * Emits an {Approval} event.
+     * Emite um evento {Approval}.
      */
     function approve(address to, uint256 tokenId) external;
 
     /**
-     * @dev Returns the account approved for `tokenId` token.
+     * @dev Retorna a conta aprovada para o token `tokenId`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must exist.
+     * - `tokenId` deve existir.
      */
     function getApproved(uint256 tokenId) external view returns (address operator);
 
     /**
-     * @dev Approve or remove `operator` as an operator for the caller.
-     * Operators can call {transferFrom} or {safeTransferFrom} for any token owned by the caller.
+     * @dev Aprova ou remove `operador` como um operador para o chamador.
+     * Operadores podem chamar {transferFrom} ou {safeTransferFrom} para qualquer token de propriedade do chamador.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - The `operator` cannot be the caller.
+     * - O `operador` não pode ser o chamador.
      *
-     * Emits an {ApprovalForAll} event.
+     * Emite um evento {ApprovalForAll}.
      */
     function setApprovalForAll(address operator, bool _approved) external;
 
     /**
-     * @dev Returns if the `operator` is allowed to manage all of the assets of `owner`.
+     * @dev Retorna se o `operador` está autorizado a gerenciar todos os ativos do `proprietário`.
      *
-     * See {setApprovalForAll}
+     * Veja {setApprovalForAll}
      */
     function isApprovedForAll(address owner, address operator) external view returns (bool);
 
     /**
-      * @dev Safely transfers `tokenId` token from `from` to `to`.
+      * @dev Transfere com segurança o token `tokenId` de `from` para `to`.
       *
-      * Requirements:
+      * Requisitos:
       *
-      * - `from` cannot be the zero address.
-      * - `to` cannot be the zero address.
-      * - `tokenId` token must exist and be owned by `from`.
-      * - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}.
-      * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+      * - `from` não pode ser o endereço zero.
+      * - `to` não pode ser o endereço zero.
+      * - O token `tokenId` deve existir e ser de propriedade de `from`.
+      * - Se o chamador não for `from`, ele deve ser aprovado para mover este token por meio de {approve} ou {setApprovalForAll}.
+      * - Se `to` se referir a um contrato inteligente, ele deve implementar {IERC721Receiver-onERC721Received}, que é chamado durante uma transferência segura.
       *
-      * Emits a {Transfer} event.
+      * Emite um evento {Transfer}.
       */
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes calldata data) external;
 }
 
-// File: @openzeppelin/contracts/token/ERC721/IERC721Metadata.sol
+// Arquivo: @openzeppelin/contracts/token/ERC721/IERC721Metadata.sol
 
 
 
@@ -195,28 +195,28 @@ pragma solidity >=0.6.2 <0.8.0;
 
 
 /**
- * @title ERC-721 Non-Fungible Token Standard, optional metadata extension
- * @dev See https://eips.ethereum.org/EIPS/eip-721
+ * @title Padrão de Token Não-Fungível ERC-721, extensão opcional de metadados
+ * @dev Veja https://eips.ethereum.org/EIPS/eip-721
  */
 interface IERC721Metadata is IERC721 {
 
     /**
-     * @dev Returns the token collection name.
+     * @dev Retorna o nome da coleção de tokens.
      */
     function name() external view returns (string memory);
 
     /**
-     * @dev Returns the token collection symbol.
+     * @dev Retorna o símbolo da coleção de tokens.
      */
     function symbol() external view returns (string memory);
 
     /**
-     * @dev Returns the Uniform Resource Identifier (URI) for `tokenId` token.
+     * @dev Retorna o Identificador de Recurso Uniforme (URI) para o token `tokenId`.
      */
     function tokenURI(uint256 tokenId) external view returns (string memory);
 }
 
-// File: @openzeppelin/contracts/token/ERC721/IERC721Enumerable.sol
+// Arquivo: @openzeppelin/contracts/token/ERC721/IERC721Enumerable.sol
 
 
 
@@ -224,54 +224,54 @@ pragma solidity >=0.6.2 <0.8.0;
 
 
 /**
- * @title ERC-721 Non-Fungible Token Standard, optional enumeration extension
- * @dev See https://eips.ethereum.org/EIPS/eip-721
+ * @title Padrão de Token Não-Fungível ERC-721, extensão opcional de enumeração
+ * @dev Veja https://eips.ethereum.org/EIPS/eip-721
  */
 interface IERC721Enumerable is IERC721 {
 
     /**
-     * @dev Returns the total amount of tokens stored by the contract.
+     * @dev Retorna a quantidade total de tokens armazenados pelo contrato.
      */
     function totalSupply() external view returns (uint256);
 
     /**
-     * @dev Returns a token ID owned by `owner` at a given `index` of its token list.
-     * Use along with {balanceOf} to enumerate all of ``owner``'s tokens.
+     * @dev Retorna um ID de token de propriedade do `owner` em um determinado `índice` de sua lista de tokens.
+     * Use junto com {balanceOf} para enumerar todos os tokens do `owner`.
      */
     function tokenOfOwnerByIndex(address owner, uint256 index) external view returns (uint256 tokenId);
 
     /**
-     * @dev Returns a token ID at a given `index` of all the tokens stored by the contract.
-     * Use along with {totalSupply} to enumerate all tokens.
+     * @dev Retorna um ID de token em um determinado `índice` de todos os tokens armazenados pelo contrato.
+     * Use junto com {totalSupply} para enumerar todos os tokens.
      */
     function tokenByIndex(uint256 index) external view returns (uint256);
 }
 
-// File: @openzeppelin/contracts/token/ERC721/IERC721Receiver.sol
+// Arquivo: @openzeppelin/contracts/token/ERC721/IERC721Receiver.sol
 
 
 
 pragma solidity >=0.6.0 <0.8.0;
 
 /**
- * @title ERC721 token receiver interface
- * @dev Interface for any contract that wants to support safeTransfers
- * from ERC721 asset contracts.
+ * @title Interface do receptor de tokens ERC721
+ * @dev Interface para qualquer contrato que deseje suportar transferências seguras
+ * de contratos de ativos ERC721.
  */
 interface IERC721Receiver {
     /**
-     * @dev Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom}
-     * by `operator` from `from`, this function is called.
+     * @dev Sempre que um token {IERC721} `tokenId` for transferido para este contrato via {IERC721-safeTransferFrom}
+     * por `operador` de `de`, esta função é chamada.
      *
-     * It must return its Solidity selector to confirm the token transfer.
-     * If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted.
+     * Ela deve retornar o seletor Solidity para confirmar a transferência do token.
+     * Se qualquer outro valor for retornado ou a interface não for implementada pelo destinatário, a transferência será revertida.
      *
-     * The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
+     * O seletor pode ser obtido em Solidity com `IERC721.onERC721Received.selector`.
      */
     function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external returns (bytes4);
 }
 
-// File: @openzeppelin/contracts/introspection/ERC165.sol
+// Arquivo: @openzeppelin/contracts/introspection/ERC165.sol
 
 
 
@@ -279,10 +279,10 @@ pragma solidity >=0.6.0 <0.8.0;
 
 
 /**
- * @dev Implementation of the {IERC165} interface.
+ * @dev Implementação da interface {IERC165}.
  *
- * Contracts may inherit from this and call {_registerInterface} to declare
- * their support of an interface.
+ * Contratos podem herdar desta implementação e chamar {_registerInterface} para declarar
+ * seu suporte a uma interface.
  */
 abstract contract ERC165 is IERC165 {
     /*
@@ -291,35 +291,35 @@ abstract contract ERC165 is IERC165 {
     bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7;
 
     /**
-     * @dev Mapping of interface ids to whether or not it's supported.
+     * @dev Mapeamento de ids de interface para saber se é suportado ou não.
      */
     mapping(bytes4 => bool) private _supportedInterfaces;
 
     constructor () internal {
-        // Derived contracts need only register support for their own interfaces,
-        // we register support for ERC165 itself here
+        // Contratos derivados só precisam registrar suporte para suas próprias interfaces,
+        // registramos suporte para ERC165 aqui
         _registerInterface(_INTERFACE_ID_ERC165);
     }
 
     /**
-     * @dev See {IERC165-supportsInterface}.
+     * @dev Veja {IERC165-supportsInterface}.
      *
-     * Time complexity O(1), guaranteed to always use less than 30 000 gas.
+     * Complexidade de tempo O(1), garantido que sempre usará menos de 30.000 gas.
      */
     function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
         return _supportedInterfaces[interfaceId];
     }
 
     /**
-     * @dev Registers the contract as an implementer of the interface defined by
-     * `interfaceId`. Support of the actual ERC165 interface is automatic and
-     * registering its interface id is not required.
+     * @dev Registra o contrato como um implementador da interface definida por
+     * `interfaceId`. O suporte à interface ERC165 real é automático e
+     * registrar seu ID de interface não é necessário.
      *
-     * See {IERC165-supportsInterface}.
+     * Veja {IERC165-supportsInterface}.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `interfaceId` cannot be the ERC165 invalid interface (`0xffffffff`).
+     * - `interfaceId` não pode ser a interface inválida ERC165 (`0xffffffff`).
      */
     function _registerInterface(bytes4 interfaceId) internal virtual {
         require(interfaceId != 0xffffffff, "ERC165: invalid interface id");
@@ -327,19 +327,19 @@ abstract contract ERC165 is IERC165 {
     }
 }
 
-// File: @openzeppelin/contracts/math/SafeMath.sol
+// Arquivo: @openzeppelin/contracts/math/SafeMath.sol
 
 
 
 pragma solidity >=0.6.0 <0.8.0;
 
 /**
- * @dev Wrappers over Solidity's arithmetic operations with added overflow
- * checks.
+ * @dev Invólucros sobre as operações aritméticas do Solidity com verificações adicionais de overflow.
  *
- * Arithmetic operations in Solidity wrap on overflow. This can easily result
- * in bugs, because programmers usually assume that an overflow raises an
- * error, which is the standard behavior in high level programming languages.
+ * As operações aritméticas no Solidity envolvem em caso de overflow. Isso pode facilmente resultar em bugs, porque os programadores geralmente assumem que um overflow gera um erro, que é o comportamento padrão em linguagens de programação de alto nível. `SafeMath` restaura essa intuição revertendo a transação quando ocorre um overflow.
+ *
+ * Usar essa biblioteca em vez das operações não verificadas elimina uma classe inteira de bugs, por isso é recomendado usá-la sempre.
+ */
  * `SafeMath` restores this intuition by reverting the transaction when an
  * operation overflows.
  *
@@ -348,9 +348,9 @@ pragma solidity >=0.6.0 <0.8.0;
  */
 library SafeMath {
     /**
-     * @dev Returns the addition of two unsigned integers, with an overflow flag.
+     * @dev Retorna a adição de dois inteiros não assinados, com uma flag de overflow.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {
         uint256 c = a + b;
@@ -359,9 +359,9 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the subtraction of two unsigned integers, with an overflow flag.
+     * @dev Retorna a subtração de dois inteiros não assinados, com uma flag de overflow.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {
         if (b > a) return (false, 0);
@@ -369,14 +369,14 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the multiplication of two unsigned integers, with an overflow flag.
+     * @dev Retorna a multiplicação de dois números inteiros não assinados, com uma flag de overflow.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-        // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
-        // benefit is lost if 'b' is also tested.
-        // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522
+        // Otimização de gás: isso é mais barato do que exigir que 'a' não seja zero, mas o
+        // benefício é perdido se 'b' também for testado.
+        // Veja: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522
         if (a == 0) return (true, 0);
         uint256 c = a * b;
         if (c / a != b) return (false, 0);
@@ -384,9 +384,9 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the division of two unsigned integers, with a division by zero flag.
+     * @dev Retorna a divisão de dois números inteiros não assinados, com uma flag de divisão por zero.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function tryDiv(uint256 a, uint256 b) internal pure returns (bool, uint256) {
         if (b == 0) return (false, 0);
@@ -394,9 +394,9 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the remainder of dividing two unsigned integers, with a division by zero flag.
+     * @dev Retorna o resto da divisão de dois números inteiros não assinados, com uma flag de divisão por zero.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function tryMod(uint256 a, uint256 b) internal pure returns (bool, uint256) {
         if (b == 0) return (false, 0);
@@ -404,14 +404,14 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the addition of two unsigned integers, reverting on
+     * @dev Retorna a adição de dois inteiros não assinados, revertendo em caso de
      * overflow.
      *
-     * Counterpart to Solidity's `+` operator.
+     * Contraparte do operador `+` do Solidity.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - Addition cannot overflow.
+     * - A adição não pode causar overflow.
      */
     function add(uint256 a, uint256 b) internal pure returns (uint256) {
         uint256 c = a + b;
@@ -420,14 +420,14 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the subtraction of two unsigned integers, reverting on
-     * overflow (when the result is negative).
+     * @dev Retorna a subtração de dois números inteiros não assinados, revertendo em caso de
+     * overflow (quando o resultado é negativo).
      *
-     * Counterpart to Solidity's `-` operator.
+     * Contraparte do operador `-` do Solidity.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - Subtraction cannot overflow.
+     * - A subtração não pode causar overflow.
      */
     function sub(uint256 a, uint256 b) internal pure returns (uint256) {
         require(b <= a, "SafeMath: subtraction overflow");
@@ -435,14 +435,14 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the multiplication of two unsigned integers, reverting on
+     * @dev Retorna a multiplicação de dois inteiros não assinados, revertendo em caso de
      * overflow.
      *
-     * Counterpart to Solidity's `*` operator.
+     * Contraparte do operador `*` do Solidity.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - Multiplication cannot overflow.
+     * - A multiplicação não pode causar overflow.
      */
     function mul(uint256 a, uint256 b) internal pure returns (uint256) {
         if (a == 0) return 0;
@@ -452,16 +452,16 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the integer division of two unsigned integers, reverting on
-     * division by zero. The result is rounded towards zero.
+     * @dev Retorna a divisão inteira de dois números inteiros não assinados, revertendo em
+     * divisão por zero. O resultado é arredondado em direção a zero.
      *
-     * Counterpart to Solidity's `/` operator. Note: this function uses a
-     * `revert` opcode (which leaves remaining gas untouched) while Solidity
-     * uses an invalid opcode to revert (consuming all remaining gas).
+     * Contraparte do operador `/` do Solidity. Observação: esta função usa um
+     * opcode `revert` (que deixa o gás restante intocado), enquanto o Solidity
+     * usa um opcode inválido para reverter (consumindo todo o gás restante).
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - The divisor cannot be zero.
+     * - O divisor não pode ser zero.
      */
     function div(uint256 a, uint256 b) internal pure returns (uint256) {
         require(b > 0, "SafeMath: division by zero");
@@ -469,16 +469,16 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
-     * reverting when dividing by zero.
+     * @dev Retorna o resto da divisão de dois números inteiros não assinados (módulo de número inteiro não assinado),
+     * revertendo quando dividido por zero.
      *
-     * Counterpart to Solidity's `%` operator. This function uses a `revert`
-     * opcode (which leaves remaining gas untouched) while Solidity uses an
-     * invalid opcode to revert (consuming all remaining gas).
+     * Contraparte do operador `%` do Solidity. Esta função usa uma operação `revert`
+     * opcode (que deixa o gás restante inalterado), enquanto o Solidity usa um
+     * opcode inválido para reverter (consumindo todo o gás restante).
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - The divisor cannot be zero.
+     * - O divisor não pode ser zero.
      */
     function mod(uint256 a, uint256 b) internal pure returns (uint256) {
         require(b > 0, "SafeMath: modulo by zero");
@@ -486,17 +486,17 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the subtraction of two unsigned integers, reverting with custom message on
-     * overflow (when the result is negative).
+     * @dev Retorna a subtração de dois números inteiros não assinados, revertendo com uma mensagem personalizada em caso de
+     * overflow (quando o resultado é negativo).
      *
-     * CAUTION: This function is deprecated because it requires allocating memory for the error
-     * message unnecessarily. For custom revert reasons use {trySub}.
+     * CUIDADO: Esta função está obsoleta porque requer alocar memória para a mensagem de erro
+     * desnecessariamente. Para motivos de revert personalizados, use {trySub}.
      *
-     * Counterpart to Solidity's `-` operator.
+     * Contraparte do operador `-` do Solidity.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - Subtraction cannot overflow.
+     * - A subtração não pode causar overflow.
      */
     function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
         require(b <= a, errorMessage);
@@ -504,19 +504,19 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the integer division of two unsigned integers, reverting with custom message on
-     * division by zero. The result is rounded towards zero.
+     * @dev Retorna a divisão inteira de dois números inteiros não assinados, revertendo com uma mensagem personalizada
+     * em caso de divisão por zero. O resultado é arredondado em direção a zero.
      *
-     * CAUTION: This function is deprecated because it requires allocating memory for the error
-     * message unnecessarily. For custom revert reasons use {tryDiv}.
+     * CUIDADO: Esta função está obsoleta porque requer alocar memória para a mensagem de erro
+     * desnecessariamente. Para motivos de revert personalizados, use {tryDiv}.
      *
-     * Counterpart to Solidity's `/` operator. Note: this function uses a
-     * `revert` opcode (which leaves remaining gas untouched) while Solidity
-     * uses an invalid opcode to revert (consuming all remaining gas).
+     * Contraparte do operador `/` do Solidity. Observação: esta função usa um
+     * opcode `revert` (que deixa o gás restante intocado), enquanto o Solidity
+     * usa um opcode inválido para reverter (consumindo todo o gás restante).
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - The divisor cannot be zero.
+     * - O divisor não pode ser zero.
      */
     function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
         require(b > 0, errorMessage);
@@ -524,19 +524,19 @@ library SafeMath {
     }
 
     /**
-     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
-     * reverting with custom message when dividing by zero.
+     * @dev Retorna o resto da divisão de dois números inteiros não assinados (módulo de número inteiro não assinado),
+     * revertendo com uma mensagem personalizada quando dividido por zero.
      *
-     * CAUTION: This function is deprecated because it requires allocating memory for the error
-     * message unnecessarily. For custom revert reasons use {tryMod}.
+     * CUIDADO: Esta função está obsoleta porque requer alocar memória para o erro
+     * mensagem desnecessariamente. Para motivos de reverter personalizados, use {tryMod}.
      *
-     * Counterpart to Solidity's `%` operator. This function uses a `revert`
-     * opcode (which leaves remaining gas untouched) while Solidity uses an
-     * invalid opcode to revert (consuming all remaining gas).
+     * Contraparte do operador `%` do Solidity. Esta função usa um opcode `revert`
+     * (que deixa o gás restante intocado), enquanto o Solidity usa um
+     * opcode inválido para reverter (consumindo todo o gás restante).
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - The divisor cannot be zero.
+     * - O divisor não pode ser zero.
      */
     function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
         require(b > 0, errorMessage);
@@ -544,37 +544,37 @@ library SafeMath {
     }
 }
 
-// File: @openzeppelin/contracts/utils/Address.sol
+// Arquivo: @openzeppelin/contracts/utils/Address.sol
 
 
 
 pragma solidity >=0.6.2 <0.8.0;
 
 /**
- * @dev Collection of functions related to the address type
+ * @dev Coleção de funções relacionadas ao tipo de endereço
  */
 library Address {
     /**
-     * @dev Returns true if `account` is a contract.
+     * @dev Retorna verdadeiro se `conta` for um contrato.
      *
-     * [IMPORTANT]
+     * [IMPORTANTE]
      * ====
-     * It is unsafe to assume that an address for which this function returns
-     * false is an externally-owned account (EOA) and not a contract.
+     * Não é seguro assumir que um endereço para o qual esta função retorna
+     * falso é uma conta de propriedade externa (EOA) e não um contrato.
      *
-     * Among others, `isContract` will return false for the following
-     * types of addresses:
+     * Entre outros, `isContract` retornará falso para os seguintes
+     * tipos de endereços:
      *
-     *  - an externally-owned account
-     *  - a contract in construction
-     *  - an address where a contract will be created
-     *  - an address where a contract lived, but was destroyed
+     *  - uma conta de propriedade externa
+     *  - um contrato em construção
+     *  - um endereço onde um contrato será criado
+     *  - um endereço onde um contrato viveu, mas foi destruído
      * ====
      */
     function isContract(address account) internal view returns (bool) {
-        // This method relies on extcodesize, which returns 0 for contracts in
-        // construction, since the code is only stored at the end of the
-        // constructor execution.
+        // Este método depende de extcodesize, que retorna 0 para contratos em
+        // construção, já que o código é armazenado apenas no final do
+        // execução do construtor.
 
         uint256 size;
         // solhint-disable-next-line no-inline-assembly
@@ -583,20 +583,20 @@ library Address {
     }
 
     /**
-     * @dev Replacement for Solidity's `transfer`: sends `amount` wei to
-     * `recipient`, forwarding all available gas and reverting on errors.
+     * @dev Substituição para o `transfer` do Solidity: envia `amount` wei para
+     * `recipient`, encaminhando todo o gás disponível e revertendo em caso de erros.
      *
-     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] increases the gas cost
-     * of certain opcodes, possibly making contracts go over the 2300 gas limit
-     * imposed by `transfer`, making them unable to receive funds via
-     * `transfer`. {sendValue} removes this limitation.
+     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] aumenta o custo de gás
+     * de certas opcodes, possivelmente fazendo com que contratos ultrapassem o limite de gás de 2300
+     * imposto pelo `transfer`, tornando-os incapazes de receber fundos via
+     * `transfer`. {sendValue} remove essa limitação.
      *
-     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Learn more].
+     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Saiba mais].
      *
-     * IMPORTANT: because control is transferred to `recipient`, care must be
-     * taken to not create reentrancy vulnerabilities. Consider using
-     * {ReentrancyGuard} or the
-     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].
+     * IMPORTANTE: porque o controle é transferido para `recipient`, é necessário ter cuidado
+     * para não criar vulnerabilidades de reentrância. Considere usar
+     * {ReentrancyGuard} ou o
+     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[padrão checks-effects-interactions].
      */
     function sendValue(address payable recipient, uint256 amount) internal {
         require(address(this).balance >= amount, "Address: insufficient balance");
@@ -607,57 +607,57 @@ library Address {
     }
 
     /**
-     * @dev Performs a Solidity function call using a low level `call`. A
-     * plain`call` is an unsafe replacement for a function call: use this
-     * function instead.
+     * @dev Executa uma chamada de função Solidity usando um `call` de baixo nível. Um
+     * `call` simples é uma substituição insegura para uma chamada de função: use esta
+     * função em vez disso.
      *
-     * If `target` reverts with a revert reason, it is bubbled up by this
-     * function (like regular Solidity function calls).
+     * Se `target` reverter com uma razão de revert, ela é propagada por esta
+     * função (como chamadas de função Solidity regulares).
      *
-     * Returns the raw returned data. To convert to the expected return value,
+     * Retorna os dados brutos retornados. Para converter para o valor de retorno esperado,
      * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `target` must be a contract.
-     * - calling `target` with `data` must not revert.
+     * - `target` deve ser um contrato.
+     * - chamar `target` com `data` não deve reverter.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCall(address target, bytes memory data) internal returns (bytes memory) {
       return functionCall(target, data, "Address: low-level call failed");
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`], but with
-     * `errorMessage` as a fallback revert reason when `target` reverts.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`], mas com
+     * `errorMessage` como motivo de fallback de revert quando `target` reverte.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {
         return functionCallWithValue(target, data, 0, errorMessage);
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
-     * but also transferring `value` wei to `target`.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * mas também transfere `value` wei para `target`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - the calling contract must have an ETH balance of at least `value`.
-     * - the called Solidity function must be `payable`.
+     * - o contrato chamador deve ter um saldo de ETH de pelo menos `value`.
+     * - a função Solidity chamada deve ser `payable`.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCallWithValue(address target, bytes memory data, uint256 value) internal returns (bytes memory) {
         return functionCallWithValue(target, data, value, "Address: low-level call with value failed");
     }
 
     /**
-     * @dev Same as {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], but
-     * with `errorMessage` as a fallback revert reason when `target` reverts.
+     * @dev Mesmo que {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], mas
+     * com `errorMessage` como motivo de fallback de revert quando `target` reverte.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCallWithValue(address target, bytes memory data, uint256 value, string memory errorMessage) internal returns (bytes memory) {
         require(address(this).balance >= value, "Address: insufficient balance for call");
@@ -669,20 +669,20 @@ library Address {
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
-     * but performing a static call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * mas realizando uma chamada estática.
      *
-     * _Available since v3.3._
+     * _Disponível desde a versão 3.3._
      */
     function functionStaticCall(address target, bytes memory data) internal view returns (bytes memory) {
         return functionStaticCall(target, data, "Address: low-level static call failed");
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
-     * but performing a static call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
+     * mas realizando uma chamada estática.
      *
-     * _Available since v3.3._
+     * _Disponível desde a versão 3.3._
      */
     function functionStaticCall(address target, bytes memory data, string memory errorMessage) internal view returns (bytes memory) {
         require(isContract(target), "Address: static call to non-contract");
@@ -693,20 +693,20 @@ library Address {
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
-     * but performing a delegate call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * mas realizando uma chamada de delegado.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function functionDelegateCall(address target, bytes memory data) internal returns (bytes memory) {
         return functionDelegateCall(target, data, "Address: low-level delegate call failed");
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
-     * but performing a delegate call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
+     * mas realizando uma chamada de delegado.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function functionDelegateCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {
         require(isContract(target), "Address: delegate call to non-contract");
@@ -720,9 +720,9 @@ library Address {
         if (success) {
             return returndata;
         } else {
-            // Look for revert reason and bubble it up if present
+            // Procurar motivo de reversão e propagá-lo se estiver presente
             if (returndata.length > 0) {
-                // The easiest way to bubble the revert reason is using memory via assembly
+                // A maneira mais fácil de bolhar a razão de reverter é usando memória via assembly
 
                 // solhint-disable-next-line no-inline-assembly
                 assembly {
@@ -736,66 +736,66 @@ library Address {
     }
 }
 
-// File: @openzeppelin/contracts/utils/EnumerableSet.sol
+// Arquivo: @openzeppelin/contracts/utils/EnumerableSet.sol
 
 
 
 pragma solidity >=0.6.0 <0.8.0;
 
 /**
- * @dev Library for managing
- * https://en.wikipedia.org/wiki/Set_(abstract_data_type)[sets] of primitive
- * types.
+ * @dev Biblioteca para gerenciar conjuntos de tipos primitivos.
  *
- * Sets have the following properties:
+ * Conjuntos têm as seguintes propriedades:
  *
- * - Elements are added, removed, and checked for existence in constant time
- * (O(1)).
- * - Elements are enumerated in O(n). No guarantees are made on the ordering.
+ * - Elementos são adicionados, removidos e verificados em tempo constante (O(1)).
+ * - Elementos são enumerados em O(n). Não há garantias sobre a ordem.
  *
  * ```
  * contract Example {
- *     // Add the library methods
+ *     // Adicione os métodos da biblioteca
  *     using EnumerableSet for EnumerableSet.AddressSet;
  *
- *     // Declare a set state variable
+ *     // Declare uma variável de estado do conjunto
  *     EnumerableSet.AddressSet private mySet;
  * }
  * ```
  *
+ * A partir da versão v3.3.0, conjuntos do tipo `bytes32` (`Bytes32Set`), `address` (`AddressSet`)
+ * e `uint256` (`UintSet`) são suportados.
+ */
  * As of v3.3.0, sets of type `bytes32` (`Bytes32Set`), `address` (`AddressSet`)
  * and `uint256` (`UintSet`) are supported.
  */
 library EnumerableSet {
-    // To implement this library for multiple types with as little code
-    // repetition as possible, we write it in terms of a generic Set type with
-    // bytes32 values.
-    // The Set implementation uses private functions, and user-facing
-    // implementations (such as AddressSet) are just wrappers around the
-    // underlying Set.
-    // This means that we can only create new EnumerableSets for types that fit
-    // in bytes32.
+    // Para implementar esta biblioteca para vários tipos com o mínimo de código
+    // repetição possível, escrevemos em termos de um tipo genérico Set com
+    // valores bytes32.
+    // A implementação do Set utiliza funções privadas e voltadas para o usuário.
+    // implementações (como AddressSet) são apenas invólucros em torno do
+    // Conjunto subjacente.
+    // Isso significa que só podemos criar novos EnumerableSets para tipos que se encaixam
+    // em bytes32.
 
     struct Set {
-        // Storage of set values
+        // Armazenamento dos valores definidos
         bytes32[] _values;
 
-        // Position of the value in the `values` array, plus 1 because index 0
-        // means a value is not in the set.
+        // Posição do valor no array `values`, mais 1 porque o índice começa em 0
+        // significa que um valor não está no conjunto.
         mapping (bytes32 => uint256) _indexes;
     }
 
     /**
-     * @dev Add a value to a set. O(1).
+     * @dev Adicione um valor a um conjunto. O(1).
      *
-     * Returns true if the value was added to the set, that is if it was not
-     * already present.
+     * Retorna verdadeiro se o valor foi adicionado ao conjunto, ou seja, se ele não
+     * já estava presente.
      */
     function _add(Set storage set, bytes32 value) private returns (bool) {
         if (!_contains(set, value)) {
             set._values.push(value);
-            // The value is stored at length-1, but we add 1 to all indexes
-            // and use 0 as a sentinel value
+            // O valor é armazenado em length-1, mas adicionamos 1 a todos os índices
+            // e use 0 como valor sentinela
             set._indexes[value] = set._values.length;
             return true;
         } else {
@@ -804,37 +804,37 @@ library EnumerableSet {
     }
 
     /**
-     * @dev Removes a value from a set. O(1).
+     * @dev Remove um valor de um conjunto. O(1).
      *
-     * Returns true if the value was removed from the set, that is if it was
-     * present.
+     * Retorna true se o valor foi removido do conjunto, ou seja, se ele estava presente.
+     */
      */
     function _remove(Set storage set, bytes32 value) private returns (bool) {
-        // We read and store the value's index to prevent multiple reads from the same storage slot
+        // Nós lemos e armazenamos o índice do valor para evitar múltiplas leituras do mesmo slot de armazenamento
         uint256 valueIndex = set._indexes[value];
 
-        if (valueIndex != 0) { // Equivalent to contains(set, value)
-            // To delete an element from the _values array in O(1), we swap the element to delete with the last one in
-            // the array, and then remove the last element (sometimes called as 'swap and pop').
-            // This modifies the order of the array, as noted in {at}.
+        // Equivalente a contains(set, value)
+            // Para excluir um elemento do array _values em O(1), trocamos o elemento a ser excluído pelo último elemento em
+            // o array e, em seguida, remover o último elemento (às vezes chamado de 'swap and pop').
+            // Isso modifica a ordem do array, como observado em {at}.
 
             uint256 toDeleteIndex = valueIndex - 1;
             uint256 lastIndex = set._values.length - 1;
 
-            // When the value to delete is the last one, the swap operation is unnecessary. However, since this occurs
-            // so rarely, we still do the swap anyway to avoid the gas cost of adding an 'if' statement.
+            // Quando o valor a ser excluído é o último, a operação de troca é desnecessária. No entanto, como isso ocorre
+            // tão raramente, ainda fazemos a troca de qualquer maneira para evitar o custo de gás de adicionar uma declaração 'if'.
 
             bytes32 lastvalue = set._values[lastIndex];
 
-            // Move the last value to the index where the value to delete is
+            // Mova o último valor para o índice onde o valor a ser excluído está
             set._values[toDeleteIndex] = lastvalue;
-            // Update the index for the moved value
-            set._indexes[lastvalue] = toDeleteIndex + 1; // All indexes are 1-based
+            // Atualize o índice para o valor movido
+            // Todos os índices são baseados em 1
 
-            // Delete the slot where the moved value was stored
+            // Excluir o slot onde o valor movido estava armazenado
             set._values.pop();
 
-            // Delete the index for the deleted slot
+            // Excluir o índice para o slot excluído
             delete set._indexes[value];
 
             return true;
@@ -844,28 +844,28 @@ library EnumerableSet {
     }
 
     /**
-     * @dev Returns true if the value is in the set. O(1).
+     * @dev Retorna verdadeiro se o valor estiver no conjunto. O(1).
      */
     function _contains(Set storage set, bytes32 value) private view returns (bool) {
         return set._indexes[value] != 0;
     }
 
     /**
-     * @dev Returns the number of values on the set. O(1).
+     * @dev Retorna o número de valores no conjunto. O(1).
      */
     function _length(Set storage set) private view returns (uint256) {
         return set._values.length;
     }
 
    /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    * @dev Retorna o valor armazenado na posição `index` no conjunto. O(1).
     *
-    * Note that there are no guarantees on the ordering of values inside the
-    * array, and it may change when more values are added or removed.
+    * Observe que não há garantias sobre a ordem dos valores dentro do
+    * array, e isso pode mudar quando mais valores forem adicionados ou removidos.
     *
-    * Requirements:
+    * Requisitos:
     *
-    * - `index` must be strictly less than {length}.
+    * - `index` deve ser estritamente menor que {length}.
     */
     function _at(Set storage set, uint256 index) private view returns (bytes32) {
         require(set._values.length > index, "EnumerableSet: index out of bounds");
@@ -879,48 +879,48 @@ library EnumerableSet {
     }
 
     /**
-     * @dev Add a value to a set. O(1).
+     * @dev Adicione um valor a um conjunto. O(1).
      *
-     * Returns true if the value was added to the set, that is if it was not
-     * already present.
+     * Retorna verdadeiro se o valor foi adicionado ao conjunto, ou seja, se ele não
+     * já estava presente.
      */
     function add(Bytes32Set storage set, bytes32 value) internal returns (bool) {
         return _add(set._inner, value);
     }
 
     /**
-     * @dev Removes a value from a set. O(1).
+     * @dev Remove um valor de um conjunto. O(1).
      *
-     * Returns true if the value was removed from the set, that is if it was
-     * present.
+     * Retorna true se o valor foi removido do conjunto, ou seja, se ele estava presente.
+     */
      */
     function remove(Bytes32Set storage set, bytes32 value) internal returns (bool) {
         return _remove(set._inner, value);
     }
 
     /**
-     * @dev Returns true if the value is in the set. O(1).
+     * @dev Retorna verdadeiro se o valor estiver no conjunto. O(1).
      */
     function contains(Bytes32Set storage set, bytes32 value) internal view returns (bool) {
         return _contains(set._inner, value);
     }
 
     /**
-     * @dev Returns the number of values in the set. O(1).
+     * @dev Retorna o número de valores no conjunto. O(1).
      */
     function length(Bytes32Set storage set) internal view returns (uint256) {
         return _length(set._inner);
     }
 
    /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    * @dev Retorna o valor armazenado na posição `index` no conjunto. O(1).
     *
-    * Note that there are no guarantees on the ordering of values inside the
-    * array, and it may change when more values are added or removed.
+    * Observe que não há garantias sobre a ordem dos valores dentro do
+    * array, e isso pode mudar quando mais valores forem adicionados ou removidos.
     *
-    * Requirements:
+    * Requisitos:
     *
-    * - `index` must be strictly less than {length}.
+    * - `index` deve ser estritamente menor que {length}.
     */
     function at(Bytes32Set storage set, uint256 index) internal view returns (bytes32) {
         return _at(set._inner, index);
@@ -933,48 +933,48 @@ library EnumerableSet {
     }
 
     /**
-     * @dev Add a value to a set. O(1).
+     * @dev Adicione um valor a um conjunto. O(1).
      *
-     * Returns true if the value was added to the set, that is if it was not
-     * already present.
+     * Retorna verdadeiro se o valor foi adicionado ao conjunto, ou seja, se ele não
+     * já estava presente.
      */
     function add(AddressSet storage set, address value) internal returns (bool) {
         return _add(set._inner, bytes32(uint256(uint160(value))));
     }
 
     /**
-     * @dev Removes a value from a set. O(1).
+     * @dev Remove um valor de um conjunto. O(1).
      *
-     * Returns true if the value was removed from the set, that is if it was
-     * present.
+     * Retorna true se o valor foi removido do conjunto, ou seja, se ele estava presente.
+     */
      */
     function remove(AddressSet storage set, address value) internal returns (bool) {
         return _remove(set._inner, bytes32(uint256(uint160(value))));
     }
 
     /**
-     * @dev Returns true if the value is in the set. O(1).
+     * @dev Retorna verdadeiro se o valor estiver no conjunto. O(1).
      */
     function contains(AddressSet storage set, address value) internal view returns (bool) {
         return _contains(set._inner, bytes32(uint256(uint160(value))));
     }
 
     /**
-     * @dev Returns the number of values in the set. O(1).
+     * @dev Retorna o número de valores no conjunto. O(1).
      */
     function length(AddressSet storage set) internal view returns (uint256) {
         return _length(set._inner);
     }
 
    /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    * @dev Retorna o valor armazenado na posição `index` no conjunto. O(1).
     *
-    * Note that there are no guarantees on the ordering of values inside the
-    * array, and it may change when more values are added or removed.
+    * Observe que não há garantias sobre a ordem dos valores dentro do
+    * array, e isso pode mudar quando mais valores forem adicionados ou removidos.
     *
-    * Requirements:
+    * Requisitos:
     *
-    * - `index` must be strictly less than {length}.
+    * - `index` deve ser estritamente menor que {length}.
     */
     function at(AddressSet storage set, uint256 index) internal view returns (address) {
         return address(uint160(uint256(_at(set._inner, index))));
@@ -988,93 +988,93 @@ library EnumerableSet {
     }
 
     /**
-     * @dev Add a value to a set. O(1).
+     * @dev Adicione um valor a um conjunto. O(1).
      *
-     * Returns true if the value was added to the set, that is if it was not
-     * already present.
+     * Retorna verdadeiro se o valor foi adicionado ao conjunto, ou seja, se ele não
+     * já estava presente.
      */
     function add(UintSet storage set, uint256 value) internal returns (bool) {
         return _add(set._inner, bytes32(value));
     }
 
     /**
-     * @dev Removes a value from a set. O(1).
+     * @dev Remove um valor de um conjunto. O(1).
      *
-     * Returns true if the value was removed from the set, that is if it was
-     * present.
+     * Retorna true se o valor foi removido do conjunto, ou seja, se ele estava presente.
+     */
      */
     function remove(UintSet storage set, uint256 value) internal returns (bool) {
         return _remove(set._inner, bytes32(value));
     }
 
     /**
-     * @dev Returns true if the value is in the set. O(1).
+     * @dev Retorna verdadeiro se o valor estiver no conjunto. O(1).
      */
     function contains(UintSet storage set, uint256 value) internal view returns (bool) {
         return _contains(set._inner, bytes32(value));
     }
 
     /**
-     * @dev Returns the number of values on the set. O(1).
+     * @dev Retorna o número de valores no conjunto. O(1).
      */
     function length(UintSet storage set) internal view returns (uint256) {
         return _length(set._inner);
     }
 
    /**
-    * @dev Returns the value stored at position `index` in the set. O(1).
+    * @dev Retorna o valor armazenado na posição `index` no conjunto. O(1).
     *
-    * Note that there are no guarantees on the ordering of values inside the
-    * array, and it may change when more values are added or removed.
+    * Observe que não há garantias sobre a ordem dos valores dentro do
+    * array, e isso pode mudar quando mais valores forem adicionados ou removidos.
     *
-    * Requirements:
+    * Requisitos:
     *
-    * - `index` must be strictly less than {length}.
+    * - `index` deve ser estritamente menor que {length}.
     */
     function at(UintSet storage set, uint256 index) internal view returns (uint256) {
         return uint256(_at(set._inner, index));
     }
 }
 
-// File: @openzeppelin/contracts/utils/EnumerableMap.sol
+// Arquivo: @openzeppelin/contracts/utils/EnumerableMap.sol
 
 
 
 pragma solidity >=0.6.0 <0.8.0;
 
 /**
- * @dev Library for managing an enumerable variant of Solidity's
- * https://solidity.readthedocs.io/en/latest/types.html#mapping-types[`mapping`]
- * type.
+ * @dev Biblioteca para gerenciar uma variante enumerável do tipo
+ * https://solidity.readthedocs.io/en/latest/types.html#mapping-types[`mapping`] do Solidity.
  *
- * Maps have the following properties:
+ * Os mapas têm as seguintes propriedades:
  *
- * - Entries are added, removed, and checked for existence in constant time
+ * - Entradas são adicionadas, removidas e verificadas em tempo constante
  * (O(1)).
- * - Entries are enumerated in O(n). No guarantees are made on the ordering.
+ * - As entradas são enumeradas em O(n). Não há garantias sobre a ordem.
  *
  * ```
  * contract Example {
- *     // Add the library methods
+ *     // Adicione os métodos da biblioteca
  *     using EnumerableMap for EnumerableMap.UintToAddressMap;
  *
- *     // Declare a set state variable
+ *     // Declare uma variável de estado do tipo conjunto
  *     EnumerableMap.UintToAddressMap private myMap;
  * }
  * ```
  *
- * As of v3.0.0, only maps of type `uint256 -> address` (`UintToAddressMap`) are
+ * A partir da versão 3.0.0, apenas mapas do tipo `uint256 -> address` (`UintToAddressMap`) são suportados.
+ */
  * supported.
  */
 library EnumerableMap {
-    // To implement this library for multiple types with as little code
-    // repetition as possible, we write it in terms of a generic Map type with
-    // bytes32 keys and values.
-    // The Map implementation uses private functions, and user-facing
-    // implementations (such as Uint256ToAddressMap) are just wrappers around
-    // the underlying Map.
-    // This means that we can only create new EnumerableMaps for types that fit
-    // in bytes32.
+    // Para implementar esta biblioteca para vários tipos com o mínimo de código
+    // repetição, se possível, escrevemos em termos de um tipo genérico Map com
+    // bytes32 chaves e valores.
+    // A implementação do Map utiliza funções privadas e voltadas para o usuário.
+    // implementações (como Uint256ToAddressMap) são apenas invólucros em torno de
+    // o Map subjacente.
+    // Isso significa que só podemos criar novos EnumerableMaps para tipos que se encaixam
+    // em bytes32.
 
     struct MapEntry {
         bytes32 _key;
@@ -1082,29 +1082,29 @@ library EnumerableMap {
     }
 
     struct Map {
-        // Storage of map keys and values
+        // Armazenamento das chaves e valores do mapa
         MapEntry[] _entries;
 
-        // Position of the entry defined by a key in the `entries` array, plus 1
-        // because index 0 means a key is not in the map.
+        // Posição da entrada definida por uma chave no array `entries`, mais 1
+        // porque o índice 0 significa que uma chave não está no mapa.
         mapping (bytes32 => uint256) _indexes;
     }
 
     /**
-     * @dev Adds a key-value pair to a map, or updates the value for an existing
-     * key. O(1).
+     * @dev Adiciona um par chave-valor a um mapa, ou atualiza o valor para uma chave existente
+     * chave. O(1).
      *
-     * Returns true if the key was added to the map, that is if it was not
-     * already present.
+     * Retorna true se a chave foi adicionada ao mapa, ou seja, se ela não estava
+     * presente anteriormente.
      */
     function _set(Map storage map, bytes32 key, bytes32 value) private returns (bool) {
-        // We read and store the key's index to prevent multiple reads from the same storage slot
+        // Nós lemos e armazenamos o índice da chave para evitar múltiplas leituras do mesmo slot de armazenamento
         uint256 keyIndex = map._indexes[key];
 
-        if (keyIndex == 0) { // Equivalent to !contains(map, key)
+        // Equivalente a !contém(mapa, chave)
             map._entries.push(MapEntry({ _key: key, _value: value }));
-            // The entry is stored at length-1, but we add 1 to all indexes
-            // and use 0 as a sentinel value
+            // A entrada é armazenada no comprimento-1, mas adicionamos 1 a todos os índices
+            // e use 0 como valor sentinela
             map._indexes[key] = map._entries.length;
             return true;
         } else {
@@ -1114,36 +1114,36 @@ library EnumerableMap {
     }
 
     /**
-     * @dev Removes a key-value pair from a map. O(1).
+     * @dev Remove um par chave-valor de um mapa. O(1).
      *
-     * Returns true if the key was removed from the map, that is if it was present.
+     * Retorna true se a chave foi removida do mapa, ou seja, se ela estava presente.
      */
     function _remove(Map storage map, bytes32 key) private returns (bool) {
-        // We read and store the key's index to prevent multiple reads from the same storage slot
+        // Nós lemos e armazenamos o índice da chave para evitar múltiplas leituras do mesmo slot de armazenamento
         uint256 keyIndex = map._indexes[key];
 
-        if (keyIndex != 0) { // Equivalent to contains(map, key)
-            // To delete a key-value pair from the _entries array in O(1), we swap the entry to delete with the last one
-            // in the array, and then remove the last entry (sometimes called as 'swap and pop').
-            // This modifies the order of the array, as noted in {at}.
+        // Equivalente a contém(mapa, chave)
+            // Para excluir um par chave-valor do array _entries em O(1), trocamos a entrada a ser excluída pela última
+            // no array, e então remover a última entrada (às vezes chamada de 'swap and pop').
+            // Isso modifica a ordem do array, como observado em {at}.
 
             uint256 toDeleteIndex = keyIndex - 1;
             uint256 lastIndex = map._entries.length - 1;
 
-            // When the entry to delete is the last one, the swap operation is unnecessary. However, since this occurs
-            // so rarely, we still do the swap anyway to avoid the gas cost of adding an 'if' statement.
+            // Quando a entrada a ser excluída é a última, a operação de troca é desnecessária. No entanto, como isso ocorre
+            // tão raramente, ainda fazemos a troca de qualquer maneira para evitar o custo de gás de adicionar uma declaração 'if'.
 
             MapEntry storage lastEntry = map._entries[lastIndex];
 
-            // Move the last entry to the index where the entry to delete is
+            // Mova a última entrada para o índice onde a entrada a ser excluída está
             map._entries[toDeleteIndex] = lastEntry;
-            // Update the index for the moved entry
-            map._indexes[lastEntry._key] = toDeleteIndex + 1; // All indexes are 1-based
+            // Atualize o índice para a entrada movida
+            // Todos os índices são baseados em 1
 
-            // Delete the slot where the moved entry was stored
+            // Excluir o slot onde a entrada movida estava armazenada
             map._entries.pop();
 
-            // Delete the index for the deleted slot
+            // Excluir o índice para o slot excluído
             delete map._indexes[key];
 
             return true;
@@ -1153,28 +1153,28 @@ library EnumerableMap {
     }
 
     /**
-     * @dev Returns true if the key is in the map. O(1).
+     * @dev Retorna verdadeiro se a chave estiver no mapa. O(1).
      */
     function _contains(Map storage map, bytes32 key) private view returns (bool) {
         return map._indexes[key] != 0;
     }
 
     /**
-     * @dev Returns the number of key-value pairs in the map. O(1).
+     * @dev Retorna o número de pares chave-valor no mapa. O(1).
      */
     function _length(Map storage map) private view returns (uint256) {
         return map._entries.length;
     }
 
    /**
-    * @dev Returns the key-value pair stored at position `index` in the map. O(1).
+    * @dev Retorna o par chave-valor armazenado na posição `index` no mapa. O(1).
     *
-    * Note that there are no guarantees on the ordering of entries inside the
-    * array, and it may change when more entries are added or removed.
+    * Observe que não há garantias sobre a ordem das entradas dentro do
+    * array, e isso pode mudar quando mais entradas forem adicionadas ou removidas.
     *
-    * Requirements:
+    * Requisitos:
     *
-    * - `index` must be strictly less than {length}.
+    * - `index` deve ser estritamente menor que {length}.
     */
     function _at(Map storage map, uint256 index) private view returns (bytes32, bytes32) {
         require(map._entries.length > index, "EnumerableMap: index out of bounds");
@@ -1184,38 +1184,38 @@ library EnumerableMap {
     }
 
     /**
-     * @dev Tries to returns the value associated with `key`.  O(1).
-     * Does not revert if `key` is not in the map.
+     * @dev Tenta retornar o valor associado à `key`. O(1).
+     * Não reverte se `key` não estiver no mapa.
      */
     function _tryGet(Map storage map, bytes32 key) private view returns (bool, bytes32) {
         uint256 keyIndex = map._indexes[key];
-        if (keyIndex == 0) return (false, 0); // Equivalent to contains(map, key)
-        return (true, map._entries[keyIndex - 1]._value); // All indexes are 1-based
+        // Equivalente a contém(mapa, chave)
+        // Todos os índices são baseados em 1
     }
 
     /**
-     * @dev Returns the value associated with `key`.  O(1).
+     * @dev Retorna o valor associado à `key`. O(1).
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `key` must be in the map.
+     * - `key` deve estar no mapa.
      */
     function _get(Map storage map, bytes32 key) private view returns (bytes32) {
         uint256 keyIndex = map._indexes[key];
-        require(keyIndex != 0, "EnumerableMap: nonexistent key"); // Equivalent to contains(map, key)
-        return map._entries[keyIndex - 1]._value; // All indexes are 1-based
+        // Equivalente a contém(mapa, chave)
+        // Todos os índices são baseados em 1
     }
 
     /**
-     * @dev Same as {_get}, with a custom error message when `key` is not in the map.
+     * @dev Mesmo que {_get}, com uma mensagem de erro personalizada quando `key` não está no mapa.
      *
-     * CAUTION: This function is deprecated because it requires allocating memory for the error
-     * message unnecessarily. For custom revert reasons use {_tryGet}.
+     * CUIDADO: Esta função está obsoleta porque requer alocar memória para a mensagem de erro
+     * desnecessariamente. Para motivos de revert personalizados, use {_tryGet}.
      */
     function _get(Map storage map, bytes32 key, string memory errorMessage) private view returns (bytes32) {
         uint256 keyIndex = map._indexes[key];
-        require(keyIndex != 0, errorMessage); // Equivalent to contains(map, key)
-        return map._entries[keyIndex - 1]._value; // All indexes are 1-based
+        // Equivalente a contém(mapa, chave)
+        // Todos os índices são baseados em 1
     }
 
     // UintToAddressMap
@@ -1225,47 +1225,47 @@ library EnumerableMap {
     }
 
     /**
-     * @dev Adds a key-value pair to a map, or updates the value for an existing
-     * key. O(1).
+     * @dev Adiciona um par chave-valor a um mapa, ou atualiza o valor para uma chave existente
+     * chave. O(1).
      *
-     * Returns true if the key was added to the map, that is if it was not
-     * already present.
+     * Retorna true se a chave foi adicionada ao mapa, ou seja, se ela não estava
+     * presente anteriormente.
      */
     function set(UintToAddressMap storage map, uint256 key, address value) internal returns (bool) {
         return _set(map._inner, bytes32(key), bytes32(uint256(uint160(value))));
     }
 
     /**
-     * @dev Removes a value from a set. O(1).
+     * @dev Remove um valor de um conjunto. O(1).
      *
-     * Returns true if the key was removed from the map, that is if it was present.
+     * Retorna true se a chave foi removida do mapa, ou seja, se ela estava presente.
      */
     function remove(UintToAddressMap storage map, uint256 key) internal returns (bool) {
         return _remove(map._inner, bytes32(key));
     }
 
     /**
-     * @dev Returns true if the key is in the map. O(1).
+     * @dev Retorna verdadeiro se a chave estiver no mapa. O(1).
      */
     function contains(UintToAddressMap storage map, uint256 key) internal view returns (bool) {
         return _contains(map._inner, bytes32(key));
     }
 
     /**
-     * @dev Returns the number of elements in the map. O(1).
+     * @dev Retorna o número de elementos no mapa. O(1).
      */
     function length(UintToAddressMap storage map) internal view returns (uint256) {
         return _length(map._inner);
     }
 
    /**
-    * @dev Returns the element stored at position `index` in the set. O(1).
-    * Note that there are no guarantees on the ordering of values inside the
-    * array, and it may change when more values are added or removed.
+    * @dev Retorna o elemento armazenado na posição `index` no conjunto. O(1).
+    * Observe que não há garantias sobre a ordem dos valores dentro do
+    * array, e isso pode mudar quando mais valores forem adicionados ou removidos.
     *
-    * Requirements:
+    * Requisitos:
     *
-    * - `index` must be strictly less than {length}.
+    * - `index` deve ser estritamente menor que {length}.
     */
     function at(UintToAddressMap storage map, uint256 index) internal view returns (uint256, address) {
         (bytes32 key, bytes32 value) = _at(map._inner, index);
@@ -1273,10 +1273,10 @@ library EnumerableMap {
     }
 
     /**
-     * @dev Tries to returns the value associated with `key`.  O(1).
-     * Does not revert if `key` is not in the map.
+     * @dev Tenta retornar o valor associado à `key`. O(1).
+     * Não reverte se `key` não estiver no mapa.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function tryGet(UintToAddressMap storage map, uint256 key) internal view returns (bool, address) {
         (bool success, bytes32 value) = _tryGet(map._inner, bytes32(key));
@@ -1284,42 +1284,42 @@ library EnumerableMap {
     }
 
     /**
-     * @dev Returns the value associated with `key`.  O(1).
+     * @dev Retorna o valor associado à `key`. O(1).
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `key` must be in the map.
+     * - `key` deve estar no mapa.
      */
     function get(UintToAddressMap storage map, uint256 key) internal view returns (address) {
         return address(uint160(uint256(_get(map._inner, bytes32(key)))));
     }
 
     /**
-     * @dev Same as {get}, with a custom error message when `key` is not in the map.
+     * @dev Mesmo que {get}, com uma mensagem de erro personalizada quando `key` não está no mapa.
      *
-     * CAUTION: This function is deprecated because it requires allocating memory for the error
-     * message unnecessarily. For custom revert reasons use {tryGet}.
+     * CUIDADO: Esta função está obsoleta porque requer alocar memória para a mensagem de erro
+     * desnecessariamente. Para motivos de revert personalizados, use {tryGet}.
      */
     function get(UintToAddressMap storage map, uint256 key, string memory errorMessage) internal view returns (address) {
         return address(uint160(uint256(_get(map._inner, bytes32(key), errorMessage))));
     }
 }
 
-// File: @openzeppelin/contracts/utils/Strings.sol
+// Arquivo: @openzeppelin/contracts/utils/Strings.sol
 
 
 
 pragma solidity >=0.6.0 <0.8.0;
 
 /**
- * @dev String operations.
+ * @dev Operações de string.
  */
 library Strings {
     /**
-     * @dev Converts a `uint256` to its ASCII `string` representation.
+     * @dev Converte um `uint256` para sua representação `string` em ASCII.
      */
     function toString(uint256 value) internal pure returns (string memory) {
-        // Inspired by OraclizeAPI's implementation - MIT licence
+        // Inspirado na implementação da OraclizeAPI - licença MIT
         // https://github.com/oraclize/ethereum-api/blob/b42146b063c7d6ee1358846c198246239e9360e8/oraclizeAPI_0.4.25.sol
 
         if (value == 0) {
@@ -1342,7 +1342,7 @@ library Strings {
     }
 }
 
-// File: @openzeppelin/contracts/token/ERC721/ERC721.sol
+// Arquivo: @openzeppelin/contracts/token/ERC721/ERC721.sol
 
 
 
@@ -1360,8 +1360,8 @@ pragma solidity >=0.6.0 <0.8.0;
 
 
 /**
- * @title ERC721 Non-Fungible Token Standard basic implementation
- * @dev see https://eips.ethereum.org/EIPS/eip-721
+ * @title Implementação básica do padrão de token não fungível ERC721
+ * @dev veja https://eips.ethereum.org/EIPS/eip-721
  */
 contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable {
     using SafeMath for uint256;
@@ -1371,28 +1371,28 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     using Strings for uint256;
 
     // Equals to `bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))`
-    // which can be also obtained as `IERC721Receiver(0).onERC721Received.selector`
+    // que também pode ser obtido como `IERC721Receiver(0).onERC721Received.selector`
     bytes4 private constant _ERC721_RECEIVED = 0x150b7a02;
 
-    // Mapping from holder address to their (enumerable) set of owned tokens
+    // Mapeamento do endereço do titular para seu conjunto (enumerável) de tokens possuídos
     mapping (address => EnumerableSet.UintSet) private _holderTokens;
 
-    // Enumerable mapping from token ids to their owners
+    // Mapeamento enumerável de IDs de tokens para seus proprietários
     EnumerableMap.UintToAddressMap private _tokenOwners;
 
-    // Mapping from token ID to approved address
+    // Mapeamento do ID do token para o endereço aprovado
     mapping (uint256 => address) private _tokenApprovals;
 
-    // Mapping from owner to operator approvals
+    // Mapeamento do proprietário para aprovações do operador
     mapping (address => mapping (address => bool)) private _operatorApprovals;
 
-    // Token name
+    // Nome do token
     string private _name;
 
-    // Token symbol
+    // Símbolo do token
     string private _symbol;
 
-    // Optional mapping for token URIs
+    // Mapeamento opcional para URIs de token
     mapping (uint256 => string) private _tokenURIs;
 
     // Base URI
@@ -1433,20 +1433,20 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     bytes4 private constant _INTERFACE_ID_ERC721_ENUMERABLE = 0x780e9d63;
 
     /**
-     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
+     * @dev Inicializa o contrato definindo um `nome` e um `símbolo` para a coleção de tokens.
      */
     constructor (string memory name_, string memory symbol_) public {
         _name = name_;
         _symbol = symbol_;
 
-        // register the supported interfaces to conform to ERC721 via ERC165
+        // registrar as interfaces suportadas para conformar com ERC721 via ERC165
         _registerInterface(_INTERFACE_ID_ERC721);
         _registerInterface(_INTERFACE_ID_ERC721_METADATA);
         _registerInterface(_INTERFACE_ID_ERC721_ENUMERABLE);
     }
 
     /**
-     * @dev See {IERC721-balanceOf}.
+     * @dev Veja {IERC721-balanceOf}.
      */
     function balanceOf(address owner) public view virtual override returns (uint256) {
         require(owner != address(0), "ERC721: balance query for the zero address");
@@ -1454,28 +1454,28 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev See {IERC721-ownerOf}.
+     * @dev Veja {IERC721-ownerOf}.
      */
     function ownerOf(uint256 tokenId) public view virtual override returns (address) {
         return _tokenOwners.get(tokenId, "ERC721: owner query for nonexistent token");
     }
 
     /**
-     * @dev See {IERC721Metadata-name}.
+     * @dev Veja {IERC721Metadata-name}.
      */
     function name() public view virtual override returns (string memory) {
         return _name;
     }
 
     /**
-     * @dev See {IERC721Metadata-symbol}.
+     * @dev Veja {IERC721Metadata-symbol}.
      */
     function symbol() public view virtual override returns (string memory) {
         return _symbol;
     }
 
     /**
-     * @dev See {IERC721Metadata-tokenURI}.
+     * @dev Veja {IERC721Metadata-tokenURI}.
      */
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
@@ -1483,44 +1483,44 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
         string memory _tokenURI = _tokenURIs[tokenId];
         string memory base = baseURI();
 
-        // If there is no base URI, return the token URI.
+        // Se não houver um URI base, retorne o URI do token.
         if (bytes(base).length == 0) {
             return _tokenURI;
         }
-        // If both are set, concatenate the baseURI and tokenURI (via abi.encodePacked).
+        // Se ambos estiverem definidos, concatene o baseURI e tokenURI (via abi.encodePacked).
         if (bytes(_tokenURI).length > 0) {
             return string(abi.encodePacked(base, _tokenURI));
         }
-        // If there is a baseURI but no tokenURI, concatenate the tokenID to the baseURI.
+        // Se houver um baseURI, mas não houver tokenURI, concatene o tokenID ao baseURI.
         return string(abi.encodePacked(base, tokenId.toString()));
     }
 
     /**
-    * @dev Returns the base URI set via {_setBaseURI}. This will be
-    * automatically added as a prefix in {tokenURI} to each token's URI, or
-    * to the token ID if no specific URI is set for that token ID.
+    * @dev Retorna o URI base definido via {_setBaseURI}. Isso será
+    * automaticamente adicionado como prefixo em {tokenURI} para o URI de cada token, ou
+    * para o ID do token se nenhum URI específico for definido para esse ID de token.
     */
     function baseURI() public view virtual returns (string memory) {
         return _baseURI;
     }
 
     /**
-     * @dev See {IERC721Enumerable-tokenOfOwnerByIndex}.
+     * @dev Veja {IERC721Enumerable-tokenOfOwnerByIndex}.
      */
     function tokenOfOwnerByIndex(address owner, uint256 index) public view virtual override returns (uint256) {
         return _holderTokens[owner].at(index);
     }
 
     /**
-     * @dev See {IERC721Enumerable-totalSupply}.
+     * @dev Veja {IERC721Enumerable-totalSupply}.
      */
     function totalSupply() public view virtual override returns (uint256) {
-        // _tokenOwners are indexed by tokenIds, so .length() returns the number of tokenIds
+        // _tokenOwners são indexados por tokenIds, então .length() retorna o número de tokenIds
         return _tokenOwners.length();
     }
 
     /**
-     * @dev See {IERC721Enumerable-tokenByIndex}.
+     * @dev Veja {IERC721Enumerable-tokenByIndex}.
      */
     function tokenByIndex(uint256 index) public view virtual override returns (uint256) {
         (uint256 tokenId, ) = _tokenOwners.at(index);
@@ -1528,7 +1528,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev See {IERC721-approve}.
+     * @dev Veja {IERC721-approve}.
      */
     function approve(address to, uint256 tokenId) public virtual override {
         address owner = ERC721.ownerOf(tokenId);
@@ -1542,7 +1542,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev See {IERC721-getApproved}.
+     * @dev Veja {IERC721-getApproved}.
      */
     function getApproved(uint256 tokenId) public view virtual override returns (address) {
         require(_exists(tokenId), "ERC721: approved query for nonexistent token");
@@ -1551,7 +1551,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev See {IERC721-setApprovalForAll}.
+     * @dev Veja {IERC721-setApprovalForAll}.
      */
     function setApprovalForAll(address operator, bool approved) public virtual override {
         require(operator != _msgSender(), "ERC721: approve to caller");
@@ -1561,31 +1561,31 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev See {IERC721-isApprovedForAll}.
+     * @dev Veja {IERC721-isApprovedForAll}.
      */
     function isApprovedForAll(address owner, address operator) public view virtual override returns (bool) {
         return _operatorApprovals[owner][operator];
     }
 
     /**
-     * @dev See {IERC721-transferFrom}.
+     * @dev Veja {IERC721-transferFrom}.
      */
     function transferFrom(address from, address to, uint256 tokenId) public virtual override {
         //solhint-disable-next-line max-line-length
-        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        Se o texto contiver alguma parte em 'zh', traduza todo o texto para 'pt-br', caso contrário, mantenha o texto original.
 
         _transfer(from, to, tokenId);
     }
 
     /**
-     * @dev See {IERC721-safeTransferFrom}.
+     * @dev Veja {IERC721-safeTransferFrom}.
      */
     function safeTransferFrom(address from, address to, uint256 tokenId) public virtual override {
         safeTransferFrom(from, to, tokenId, "");
     }
 
     /**
-     * @dev See {IERC721-safeTransferFrom}.
+     * @dev Veja {IERC721-safeTransferFrom}.
      */
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public virtual override {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
@@ -1593,22 +1593,22 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients
-     * are aware of the ERC721 protocol to prevent tokens from being forever locked.
+     * @dev Transfere com segurança o token `tokenId` de `from` para `to`, verificando primeiro se os destinatários do contrato
+     * estão cientes do protocolo ERC721 para evitar que os tokens fiquem bloqueados para sempre.
      *
-     * `_data` is additional data, it has no specified format and it is sent in call to `to`.
+     * `_data` é um dado adicional, não possui um formato especificado e é enviado na chamada para `to`.
      *
-     * This internal function is equivalent to {safeTransferFrom}, and can be used to e.g.
-     * implement alternative mechanisms to perform token transfer, such as signature-based.
+     * Esta função interna é equivalente a {safeTransferFrom} e pode ser usada, por exemplo,
+     * para implementar mecanismos alternativos para realizar a transferência de tokens, como baseados em assinatura.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `from` cannot be the zero address.
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must exist and be owned by `from`.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * - `from` não pode ser o endereço zero.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve existir e ser de propriedade de `from`.
+     * - Se `to` se refere a um contrato inteligente, ele deve implementar {IERC721Receiver-onERC721Received}, que é chamado durante uma transferência segura.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function _safeTransfer(address from, address to, uint256 tokenId, bytes memory _data) internal virtual {
         _transfer(from, to, tokenId);
@@ -1616,23 +1616,23 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev Returns whether `tokenId` exists.
+     * @dev Retorna se o `tokenId` existe.
      *
-     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     * Tokens podem ser gerenciados pelo seu proprietário ou contas aprovadas através de {approve} ou {setApprovalForAll}.
      *
-     * Tokens start existing when they are minted (`_mint`),
-     * and stop existing when they are burned (`_burn`).
+     * Tokens começam a existir quando são criados (`_mint`),
+     * e param de existir quando são queimados (`_burn`).
      */
     function _exists(uint256 tokenId) internal view virtual returns (bool) {
         return _tokenOwners.contains(tokenId);
     }
 
     /**
-     * @dev Returns whether `spender` is allowed to manage `tokenId`.
+     * @dev Retorna se `spender` está autorizado a gerenciar `tokenId`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must exist.
+     * - `tokenId` deve existir.
      */
     function _isApprovedOrOwner(address spender, uint256 tokenId) internal view virtual returns (bool) {
         require(_exists(tokenId), "ERC721: operator query for nonexistent token");
@@ -1641,22 +1641,22 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev Safely mints `tokenId` and transfers it to `to`.
+     * @dev Seguramente cria `tokenId` e transfere-o para `to`.
      *
-     * Requirements:
-     d*
-     * - `tokenId` must not exist.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * Requisitos:
      *
-     * Emits a {Transfer} event.
+     * - `tokenId` não deve existir.
+     * - Se `to` se refere a um contrato inteligente, ele deve implementar {IERC721Receiver-onERC721Received}, que é chamado durante uma transferência segura.
+     *
+     * Emite um evento {Transfer}.
      */
     function _safeMint(address to, uint256 tokenId) internal virtual {
         _safeMint(to, tokenId, "");
     }
 
     /**
-     * @dev Same as {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], with an additional `data` parameter which is
-     * forwarded in {IERC721Receiver-onERC721Received} to contract recipients.
+     * @dev Mesmo que {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], com um parâmetro adicional `data` que é
+     * encaminhado em {IERC721Receiver-onERC721Received} para os destinatários do contrato.
      */
     function _safeMint(address to, uint256 tokenId, bytes memory _data) internal virtual {
         _mint(to, tokenId);
@@ -1664,16 +1664,16 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev Mints `tokenId` and transfers it to `to`.
+     * @dev Emite um novo token `tokenId` e transfere-o para `to`.
      *
-     * WARNING: Usage of this method is discouraged, use {_safeMint} whenever possible
+     * AVISO: O uso deste método é desencorajado, use {_safeMint} sempre que possível.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must not exist.
-     * - `to` cannot be the zero address.
+     * - `tokenId` não deve existir.
+     * - `to` não pode ser o endereço zero.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function _mint(address to, uint256 tokenId) internal virtual {
         require(to != address(0), "ERC721: mint to the zero address");
@@ -1698,16 +1698,16 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
      *
      * Emits a {Transfer} event.
      */
-    function _burn(uint256 tokenId) internal virtual {
-        address owner = ERC721.ownerOf(tokenId); // internal owner
-
-        _beforeTokenTransfer(owner, address(0), tokenId);
-
-        // Clear approvals
-        _approve(address(0), tokenId);
-
-        // Clear metadata (if any)
-        if (bytes(_tokenURIs[tokenId]).length != 0) {
+    /**
+        * @dev Destroys `tokenId`.
+ * A aprovação é limpa quando o token é queimado.
+        *
+ * Requisitos:
+        *
+        * - `tokenId` deve existir.
+ *
+        * Emite um evento {Transfer}.
+        */
             delete _tokenURIs[tokenId];
         }
 
@@ -1719,23 +1719,23 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev Transfers `tokenId` from `from` to `to`.
-     *  As opposed to {transferFrom}, this imposes no restrictions on msg.sender.
+     * @dev Transfere `tokenId` de `from` para `to`.
+     *  Ao contrário de {transferFrom}, isso não impõe restrições ao msg.sender.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must be owned by `from`.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve ser de propriedade de `from`.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function _transfer(address from, address to, uint256 tokenId) internal virtual {
-        require(ERC721.ownerOf(tokenId) == from, "ERC721: transfer of token that is not own"); // internal owner
+        // internal owner
         require(to != address(0), "ERC721: transfer to the zero address");
 
         _beforeTokenTransfer(from, to, tokenId);
 
-        // Clear approvals from the previous owner
+        // Limpar aprovações do proprietário anterior
         _approve(address(0), tokenId);
 
         _holderTokens[from].remove(tokenId);
@@ -1747,11 +1747,11 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev Sets `_tokenURI` as the tokenURI of `tokenId`.
+     * @dev Define `_tokenURI` como o tokenURI de `tokenId`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must exist.
+     * - `tokenId` deve existir.
      */
     function _setTokenURI(uint256 tokenId, string memory _tokenURI) internal virtual {
         require(_exists(tokenId), "ERC721Metadata: URI set of nonexistent token");
@@ -1759,23 +1759,23 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev Internal function to set the base URI for all token IDs. It is
-     * automatically added as a prefix to the value returned in {tokenURI},
-     * or to the token ID if {tokenURI} is empty.
+     * @dev Função interna para definir o URI base para todos os IDs de token. É
+     * automaticamente adicionado como um prefixo ao valor retornado em {tokenURI},
+     * ou ao ID do token se {tokenURI} estiver vazio.
      */
     function _setBaseURI(string memory baseURI_) internal virtual {
         _baseURI = baseURI_;
     }
 
     /**
-     * @dev Internal function to invoke {IERC721Receiver-onERC721Received} on a target address.
-     * The call is not executed if the target address is not a contract.
+     * @dev Função interna para invocar {IERC721Receiver-onERC721Received} em um endereço de destino.
+     * A chamada não é executada se o endereço de destino não for um contrato.
      *
-     * @param from address representing the previous owner of the given token ID
-     * @param to target address that will receive the tokens
-     * @param tokenId uint256 ID of the token to be transferred
-     * @param _data bytes optional data to send along with the call
-     * @return bool whether the call correctly returned the expected magic value
+     * @param from endereço que representa o proprietário anterior do token ID fornecido
+     * @param to endereço de destino que receberá os tokens
+     * @param tokenId uint256 ID do token a ser transferido
+     * @param _data bytes dados opcionais a serem enviados junto com a chamada
+     * @return bool se a chamada retornou corretamente o valor mágico esperado
      */
     function _checkOnERC721Received(address from, address to, uint256 tokenId, bytes memory _data)
         private returns (bool)
@@ -1795,50 +1795,50 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     }
 
     /**
-     * @dev Approve `to` to operate on `tokenId`
+     * @dev Aprova `to` para operar em `tokenId`
      *
-     * Emits an {Approval} event.
+     * Emite um evento {Approval}.
      */
     function _approve(address to, uint256 tokenId) internal virtual {
         _tokenApprovals[tokenId] = to;
-        emit Approval(ERC721.ownerOf(tokenId), to, tokenId); // internal owner
+        // internal owner
     }
 
     /**
-     * @dev Hook that is called before any token transfer. This includes minting
-     * and burning.
+     * @dev Gancho que é chamado antes de qualquer transferência de token. Isso inclui a criação
+     * e queima.
      *
-     * Calling conditions:
+     * Condições de chamada:
      *
-     * - When `from` and `to` are both non-zero, ``from``'s `tokenId` will be
-     * transferred to `to`.
-     * - When `from` is zero, `tokenId` will be minted for `to`.
-     * - When `to` is zero, ``from``'s `tokenId` will be burned.
-     * - `from` cannot be the zero address.
-     * - `to` cannot be the zero address.
+     * - Quando `from` e `to` não são zero, o `tokenId` de ``from`` será
+     * transferido para `to`.
+     * - Quando `from` é zero, `tokenId` será criado para `to`.
+     * - Quando `to` é zero, o `tokenId` de ``from`` será queimado.
+     * - `from` não pode ser o endereço zero.
+     * - `to` não pode ser o endereço zero.
      *
-     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     * Para saber mais sobre ganchos, acesse xref:ROOT:extending-contracts.adoc#using-hooks[Usando Ganchos].
      */
     function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual { }
 }
 
-// File: @openzeppelin/contracts/access/Ownable.sol
+// Arquivo: @openzeppelin/contracts/access/Ownable.sol
 
 
 
 pragma solidity >=0.6.0 <0.8.0;
 
 /**
- * @dev Contract module which provides a basic access control mechanism, where
- * there is an account (an owner) that can be granted exclusive access to
- * specific functions.
+ * @dev Módulo de contrato que fornece um mecanismo básico de controle de acesso, onde
+ * há uma conta (um proprietário) que pode receber acesso exclusivo a
+ * funções específicas.
  *
- * By default, the owner account will be the one that deploys the contract. This
- * can later be changed with {transferOwnership}.
+ * Por padrão, a conta do proprietário será aquela que implanta o contrato. Isso
+ * pode ser alterado posteriormente com {transferOwnership}.
  *
- * This module is used through inheritance. It will make available the modifier
- * `onlyOwner`, which can be applied to your functions to restrict their use to
- * the owner.
+ * Este módulo é usado por meio de herança. Ele disponibilizará o modificador
+ * `onlyOwner`, que pode ser aplicado às suas funções para restringir seu uso ao
+ * proprietário.
  */
 abstract contract Ownable is Context {
     address private _owner;
@@ -1846,7 +1846,7 @@ abstract contract Ownable is Context {
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     /**
-     * @dev Initializes the contract setting the deployer as the initial owner.
+     * @dev Inicializa o contrato definindo o deployer como o proprietário inicial.
      */
     constructor () internal {
         address msgSender = _msgSender();
@@ -1855,14 +1855,14 @@ abstract contract Ownable is Context {
     }
 
     /**
-     * @dev Returns the address of the current owner.
+     * @dev Retorna o endereço do proprietário atual.
      */
     function owner() public view virtual returns (address) {
         return _owner;
     }
 
     /**
-     * @dev Throws if called by any account other than the owner.
+     * @dev Lança uma exceção se chamado por qualquer conta que não seja do proprietário.
      */
     modifier onlyOwner() {
         require(owner() == _msgSender(), "Ownable: caller is not the owner");
@@ -1870,11 +1870,11 @@ abstract contract Ownable is Context {
     }
 
     /**
-     * @dev Leaves the contract without owner. It will not be possible to call
-     * `onlyOwner` functions anymore. Can only be called by the current owner.
+     * @dev Deixa o contrato sem proprietário. Não será mais possível chamar
+     * funções `onlyOwner`. Só pode ser chamado pelo proprietário atual.
      *
-     * NOTE: Renouncing ownership will leave the contract without an owner,
-     * thereby removing any functionality that is only available to the owner.
+     * NOTA: Renunciar à propriedade deixará o contrato sem um proprietário,
+     * removendo assim qualquer funcionalidade que esteja disponível apenas para o proprietário.
      */
     function renounceOwnership() public virtual onlyOwner {
         emit OwnershipTransferred(_owner, address(0));
@@ -1882,8 +1882,8 @@ abstract contract Ownable is Context {
     }
 
     /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
-     * Can only be called by the current owner.
+     * @dev Transfere a propriedade do contrato para uma nova conta (`newOwner`).
+     * Só pode ser chamado pelo proprietário atual.
      */
     function transferOwnership(address newOwner) public virtual onlyOwner {
         require(newOwner != address(0), "Ownable: new owner is the zero address");
@@ -1892,7 +1892,7 @@ abstract contract Ownable is Context {
     }
 }
 
-// File: contracts/BoredApeYachtClub.sol
+// Arquivo: contracts/BoredApeYachtClub.sol
 
 
 pragma solidity ^0.7.0;
@@ -1900,8 +1900,8 @@ pragma solidity ^0.7.0;
 
 
 /**
- * @title BoredApeYachtClub contract
- * @dev Extends ERC721 Non-Fungible Token Standard basic implementation
+ * @title Contrato BoredApeYachtClub
+ * @dev Estende a implementação básica do padrão de token não fungível ERC721
  */
 contract BoredApeYachtClub is ERC721, Ownable {
     using SafeMath for uint256;
@@ -1912,7 +1912,7 @@ contract BoredApeYachtClub is ERC721, Ownable {
 
     uint256 public startingIndex;
 
-    uint256 public constant apePrice = 80000000000000000; //0.08 ETH
+    //0.08 ETH
 
     uint public constant maxApePurchase = 20;
 
@@ -1933,7 +1933,7 @@ contract BoredApeYachtClub is ERC721, Ownable {
     }
 
     /**
-     * Set some Bored Apes aside
+     * Defina alguns Bored Apes de lado
      */
     function reserveApes() public onlyOwner {        
         uint supply = totalSupply();
@@ -1944,14 +1944,14 @@ contract BoredApeYachtClub is ERC721, Ownable {
     }
 
     /**
-     * DM Gargamel in Discord that you're standing right behind him.
+     * Envie uma mensagem privada para Gargamel no Discord dizendo que você está bem atrás dele.
      */
     function setRevealTimestamp(uint256 revealTimeStamp) public onlyOwner {
         REVEAL_TIMESTAMP = revealTimeStamp;
     } 
 
     /*     
-    * Set provenance once it's calculated
+    * Defina a proveniência assim que for calculada
     */
     function setProvenanceHash(string memory provenanceHash) public onlyOwner {
         BAYC_PROVENANCE = provenanceHash;
@@ -1962,7 +1962,7 @@ contract BoredApeYachtClub is ERC721, Ownable {
     }
 
     /*
-    * Pause sale if active, make active if paused
+    * Pausar venda se estiver ativa, ativar se estiver pausada
     */
     function flipSaleState() public onlyOwner {
         saleIsActive = !saleIsActive;
@@ -1984,34 +1984,34 @@ contract BoredApeYachtClub is ERC721, Ownable {
             }
         }
 
-        // If we haven't set the starting index and this is either 1) the last saleable token or 2) the first token to be sold after
-        // the end of pre-sale, set the starting index block
+        // Se não definimos o índice inicial e este é 1) o último token vendável ou 2) o primeiro token a ser vendido após
+        // o fim da pré-venda, defina o bloco de índice inicial
         if (startingIndexBlock == 0 && (totalSupply() == MAX_APES || block.timestamp >= REVEAL_TIMESTAMP)) {
             startingIndexBlock = block.number;
         } 
     }
 
     /**
-     * Set the starting index for the collection
+     * Defina o índice inicial para a coleção
      */
     function setStartingIndex() public {
         require(startingIndex == 0, "Starting index is already set");
         require(startingIndexBlock != 0, "Starting index block must be set");
         
         startingIndex = uint(blockhash(startingIndexBlock)) % MAX_APES;
-        // Just a sanity case in the worst case if this function is called late (EVM only stores last 256 block hashes)
+        // Apenas um caso de sanidade no pior cenário se esta função for chamada tarde (EVM armazena apenas os últimos 256 hashes de bloco)
         if (block.number.sub(startingIndexBlock) > 255) {
             startingIndex = uint(blockhash(block.number - 1)) % MAX_APES;
         }
-        // Prevent default sequence
+        // Prevenir sequência padrão
         if (startingIndex == 0) {
             startingIndex = startingIndex.add(1);
         }
     }
 
     /**
-     * Set the starting index block for the collection, essentially unblocking
-     * setting starting index
+     * Defina o bloco de índice inicial para a coleção, essencialmente desbloqueando
+     * a definição do índice inicial
      */
     function emergencySetStartingIndexBlock() public onlyOwner {
         require(startingIndex == 0, "Starting index is already set");

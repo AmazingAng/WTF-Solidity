@@ -154,7 +154,7 @@ contract StdCheatsTest is Test {
         assertEq(string(getCode(deployed)), string(getCode(address(this))));
     }
 
-    // We need that payable constructor in order to send ETH on construction
+    // Precisamos desse construtor pagável para enviar ETH durante a construção
     constructor() payable {}
 
     function testDeployCodeVal() public {
@@ -169,7 +169,7 @@ contract StdCheatsTest is Test {
 	assertEq(deployed.balance, 1 ether);
     }
 
-    // We need this so we can call "this.deployCode" rather than "deployCode" directly
+    // Precisamos disso para podermos chamar "this.deployCode" em vez de "deployCode" diretamente
     function deployCodeHelper(string memory what) external {
         deployCode(what);
     }
@@ -182,16 +182,16 @@ contract StdCheatsTest is Test {
     function getCode(address who) internal view returns (bytes memory o_code) {
         /// @solidity memory-safe-assembly
         assembly {
-            // retrieve the size of the code, this needs assembly
+            // recuperar o tamanho do código, isso requer assembly
             let size := extcodesize(who)
-            // allocate output byte array - this could also be done without assembly
-            // by using o_code = new bytes(size)
+            // alocar matriz de bytes de saída - isso também poderia ser feito sem assembly
+            // ao usar o_code = new bytes(size)
             o_code := mload(0x40)
-            // new "memory end" including padding
+            // novo "fim da memória" incluindo preenchimento
             mstore(0x40, add(o_code, and(add(add(size, 0x20), 0x1f), not(0x1f))))
-            // store length in memory
+            // armazene o comprimento na memória
             mstore(o_code, size)
-            // actually retrieve the code, this needs assembly
+            // na verdade, recupere o código, isso precisa ser montado
             extcodecopy(who, add(o_code, 0x20), 0, size)
         }
     }

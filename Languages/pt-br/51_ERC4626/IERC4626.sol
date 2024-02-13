@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Author: 0xAA from WTF Academy
+// Autor: 0xAA da WTF Academy
 
 pragma solidity ^0.8.0;
 
@@ -7,17 +7,17 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 
 /**
- * @dev ERC4626 "代币化金库标准"的接口合约
+ * @dev Contrato de interface para o padrão "Tesouraria Tokenizada" ERC4626
  * https://eips.ethereum.org/EIPS/eip-4626[ERC-4626].
  */
 interface IERC4626 is IERC20, IERC20Metadata {
-    /*//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
                                  事件
     //////////////////////////////////////////////////////////////*/
-    // 存款时触发
+    // Acionado ao fazer um depósito
     event Deposit(address indexed sender, address indexed owner, uint256 assets, uint256 shares);
 
-    // 取款时触发
+    // Ao fazer um saque
     event Withdraw(
         address indexed sender,
         address indexed receiver,
@@ -26,144 +26,144 @@ interface IERC4626 is IERC20, IERC20Metadata {
         uint256 shares
     );
 
-    /*//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
                             元数据
     //////////////////////////////////////////////////////////////*/
     /**
-     * @dev 返回金库的基础资产代币地址 （用于存款，取款）
-     * - 必须是 ERC20 代币合约地址.
-     * - 不能revert
+     * @dev Retorna o endereço do token de ativo base do cofre (para depósito e retirada)
+     * - Deve ser um endereço de contrato de token ERC20.
+     * - Não pode reverter.
      */
     function asset() external view returns (address assetTokenAddress);
 
-    /*//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
                         存款/提款逻辑
     //////////////////////////////////////////////////////////////*/
     /**
-     * @dev 存款函数: 用户向金库存入 assets 单位的基础资产，然后合约铸造 shares 单位的金库额度给 receiver 地址
+     * @dev Função de depósito: o usuário deposita ativos básicos na tesouraria na quantidade de 'assets' unidades e o contrato emite 'shares' unidades de crédito da tesouraria para o endereço do destinatário.
      *
-     * - 必须释放 Deposit 事件.
-     * - 如果资产不能存入，必须revert，比如存款数额大大于上限等。
+     * - Deve emitir o evento Deposit.
+     * - Se os ativos não puderem ser depositados, deve reverter, por exemplo, se o valor do depósito for muito maior que o limite.
      */
     function deposit(uint256 assets, address receiver) external returns (uint256 shares);
 
     /**
-     * @dev 铸造函数: 用户需要存入 assets 单位的基础资产，然后合约给 receiver 地址铸造 share 数量的金库额度
-     * - 必须释放 Deposit 事件.
-     * - 如果全部金库额度不能铸造，必须revert，比如铸造数额大大于上限等。
+     * @dev Função de cunhagem: o usuário precisa depositar ativos na unidade de base, e então o contrato cunha a quantidade de ações do cofre para o endereço do receptor
+     * - Deve emitir o evento Deposit.
+     * - Se não for possível cunhar todo o valor do cofre, deve reverter, por exemplo, se a quantidade a ser cunhada for maior que o limite.
      */
     function mint(uint256 shares, address receiver) external returns (uint256 assets);
 
     /**
-     * @dev 提款函数: owner 地址销毁 share 单位的金库额度，然后合约将 assets 单位的基础资产发送给 receiver 地址
-     * - 释放 Withdraw 事件
-     * - 如果全部基础资产不能提取，将revert
+     * @dev Função de saque: o endereço do proprietário destrói a quantidade de compartilhamento do cofre e, em seguida, o contrato envia a quantidade de ativos básicos para o endereço do receptor
+     * - Dispara o evento Withdraw
+     * - Se não for possível sacar todos os ativos básicos, ocorrerá um revert
      */
     function withdraw(uint256 assets, address receiver, address owner) external returns (uint256 shares);
 
     /**
-     * @dev 赎回函数: owner 地址销毁 shares 数量的金库额度，然后合约将 assets 单位的基础资产发给 receiver 地址
-     * - 释放 Withdraw 事件
-     * - 如果金库额度不能全部销毁，则revert
+     * @dev Função de resgate: o endereço do proprietário destrói a quantidade de ações do cofre e, em seguida, o contrato envia os ativos de base na quantidade de ativos para o endereço do receptor
+     * - Dispara o evento de retirada (Withdraw)
+     * - Se não for possível destruir todo o saldo do cofre, reverte a transação
      */
     function redeem(uint256 shares, address receiver, address owner) external returns (uint256 assets);
 
-    /*//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
                             会计逻辑
     //////////////////////////////////////////////////////////////*/
 
     /**
-     * @dev 返回金库中管理的基础资产代币总额
-     * - 要包含利息
-     * - 要包含费用
-     * - 不能revert
+     * @dev Retorna o total de tokens de ativos básicos gerenciados pelo cofre
+     * - Deve incluir juros
+     * - Deve incluir taxas
+     * - Não deve reverter
      */
     function totalAssets() external view returns (uint256 totalManagedAssets);
 
     /**
-     * @dev 返回利用一定数额基础资产可以换取的金库额度
-     * - 不要包含费用
-     * - 不包含滑点
-     * - 不能revert
+     * @dev Retorna o limite do cofre que pode ser obtido trocando uma certa quantidade de ativos básicos
+     * - Não inclui taxas
+     * - Não inclui deslizamento
+     * - Não pode reverter
      */
     function convertToShares(uint256 assets) external view returns (uint256 shares);
 
     /**
-     * @dev 返回利用一定数额金库额度可以换取的基础资产
-     * - 不要包含费用
-     * - 不包含滑点
-     * - 不能revert
+     * @dev Retorna os ativos básicos que podem ser trocados por uma determinada quantidade de saldo do cofre.
+     * - Não inclui taxas
+     * - Não inclui deslizamento
+     * - Não pode reverter
      */
     function convertToAssets(uint256 shares) external view returns (uint256 assets);
 
     /**
-     * @dev 用于链上和链下用户在当前链上环境模拟存款一定数额的基础资产能够获得的金库额度
-     * - 返回值要接近且不大于在同一交易进行存款得到的金库额度
-     * - 不要考虑 maxDeposit 等限制，假设用户的存款交易会成功
-     * - 要考虑费用
-     * - 不能revert
-     * NOTE: 可以利用 convertToAssets 和 previewDeposit 返回值的差值来计算滑点
+     * @dev Função para simular o valor do cofre que os usuários podem obter ao depositar uma certa quantidade de ativos básicos, tanto on-chain quanto off-chain, no ambiente atual da cadeia.
+     * - O valor retornado deve ser próximo e não maior do que o valor do cofre obtido ao fazer o depósito na mesma transação.
+     * - Não leve em consideração restrições como maxDeposit, suponha que a transação de depósito do usuário seja bem-sucedida.
+     * - Leve em consideração as taxas.
+     * - Não deve reverter.
+     * OBS: É possível calcular o slippage usando a diferença entre o valor retornado pela função convertToAssets e o valor retornado pela função previewDeposit.
      */
     function previewDeposit(uint256 assets) external view returns (uint256 shares);
 
     /**
-     * @dev 用于链上和链下用户在当前链上环境模拟铸造 shares 数额的金库额度需要存款的基础资产数量
-     * - 返回值要接近且不小于在同一交易进行铸造一定数额金库额度所需的存款数量
-     * - 不要考虑 maxMint 等限制，假设用户的存款交易会成功
-     * - 要考虑费用
-     * - 不能revert
+     * @dev Usado para simular a quantidade de ativos básicos que os usuários on-chain e off-chain precisam depositar para simular a criação de uma quantidade de ações no cofre nesta cadeia.
+     * - O valor de retorno deve ser próximo e não menor do que a quantidade de depósito necessária para criar uma certa quantidade de ações no cofre na mesma transação.
+     * - Não leve em consideração restrições como maxMint, suponha que a transação de depósito do usuário seja bem-sucedida.
+     * - Leve em consideração as taxas.
+     * - Não pode reverter.
      */
     function previewMint(uint256 shares) external view returns (uint256 assets);
 
     /**
-     * @dev 用于链上和链下用户在当前链上环境模拟提款 assets 数额的基础资产需要赎回的金库份额
-     * - 返回值要接近且不大于在同一交易进行提款一定数额基础资产所需赎回的金库份额
-     * - 不要考虑 maxWithdraw 等限制，假设用户的提款交易会成功
-     * - 要考虑费用
-     * - 不能revert
+     * @dev Função para simular a quantidade de cotas do cofre que precisam ser resgatadas para um determinado valor de ativos básicos, tanto para usuários on-chain quanto off-chain, no ambiente atual da cadeia.
+     * - O valor retornado deve ser próximo e não maior do que a quantidade de cotas do cofre necessárias para resgatar um determinado valor de ativos básicos na mesma transação de resgate.
+     * - Não leve em consideração restrições como maxWithdraw, suponha que a transação de resgate do usuário será bem-sucedida.
+     * - Leve em consideração as taxas.
+     * - Não deve reverter.
      */
     function previewWithdraw(uint256 assets) external view returns (uint256 shares);
 
     /**
-     * @dev 用于链上和链下用户在当前链上环境模拟销毁 shares 数额的金库额度能够赎回的基础资产数量
-     * - 返回值要接近且不小于在同一交易进行销毁一定数额的金库额度所能赎回的基础资产数量
-     * - 不要考虑 maxRedeem 等限制，假设用户的赎回交易会成功
-     * - 要考虑费用
-     * - 不能revert.
+     * @dev Função para simular a quantidade de ativos básicos que podem ser resgatados com base na quantidade de ações destruídas pelo usuário na cadeia e fora dela no ambiente atual da cadeia.
+     * - O valor de retorno deve ser próximo e não menor do que a quantidade de ativos básicos que podem ser resgatados com base na destruição de uma certa quantidade de ações na mesma transação.
+     * - Não leve em consideração restrições como maxRedeem, suponha que a transação de resgate do usuário seja bem-sucedida.
+     * - Leve em consideração as taxas.
+     * - Não pode reverter.
      */
     function previewRedeem(uint256 shares) external view returns (uint256 assets);
 
-    /*//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
                      存款/提款限额逻辑
     //////////////////////////////////////////////////////////////*/
     /**
-     * @dev 返回某个用户地址单次存款可存的最大基础资产数额。
-     * - 如果有存款上限，那么返回值应该是个有限值
-     * - 返回值不能超过 2 ** 256 - 1 
-     * - 不能revert
+     * @dev Retorna o valor máximo de ativos básicos que um endereço de usuário pode depositar de uma só vez.
+     * - Se houver um limite de depósito, o valor retornado deve ser um valor finito.
+     * - O valor retornado não pode exceder 2 ** 256 - 1.
+     * - Não pode reverter.
      */
     function maxDeposit(address receiver) external view returns (uint256 maxAssets);
 
     /**
-     * @dev 返回某个用户地址单次铸造可以铸造的最大金库额度
-     * - 如果有铸造上限，那么返回值应该是个有限值
-     * - 返回值不能超过 2 ** 256 - 1 
-     * - 不能revert
+     * @dev Retorna o limite máximo de tesouro que um endereço de usuário pode criar em uma única cunhagem
+     * - Se houver um limite de cunhagem, o valor retornado deve ser um valor finito
+     * - O valor retornado não pode exceder 2 ** 256 - 1
+     * - Não pode reverter
      */
     function maxMint(address receiver) external view returns (uint256 maxShares);
 
     /**
-     * @dev 返回某个用户地址单次取款可以提取的最大基础资产额度
-     * - 返回值应该是个有限值
-     * - 不能revert
+     * @dev Retorna o valor máximo de ativos básicos que um usuário pode sacar de uma só vez em um determinado endereço
+     * - O valor retornado deve ser um valor finito
+     * - Não deve reverter
      */
     function maxWithdraw(address owner) external view returns (uint256 maxAssets);
 
     /**
-     * @dev 返回某个用户地址单次赎回可以销毁的最大金库额度
-     * - 返回值应该是个有限值
-     * - 如果没有其他限制，返回值应该是 balanceOf(owner)
-     * - 不能revert
+     * @dev Retorna o limite máximo do tesouro que um endereço de usuário pode destruir em um único resgate.
+     * - O valor retornado deve ser um valor finito.
+     * - Se não houver outras restrições, o valor retornado deve ser balanceOf(owner).
+     * - Não pode reverter.
      */
     function maxRedeem(address owner) external view returns (uint256 maxShares);
 }

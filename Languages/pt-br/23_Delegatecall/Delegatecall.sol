@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-// delegatecall和call类似，都是低级函数
-// call: B call C, 上下文为 C (msg.sender = B, C中的状态变量受影响)
-// delegatecall: B delegatecall C, 上下文为B (msg.sender = A, B中的状态变量受影响)
-// 注意B和C的数据存储布局必须相同！变量类型、声明的前后顺序要相同，不然会搞砸合约。
+// delegatecall e call são funções de baixo nível semelhantes.
+// chamada: B chama C, o contexto é C (msg.sender = B, as variáveis de estado em C são afetadas)
+// delegatecall: B delegatecall C, contexto é B (msg.sender = A, variáveis de estado em B são afetadas)
+// Atenção: o layout de armazenamento dos dados de B e C deve ser o mesmo! Os tipos de variáveis e a ordem de declaração devem ser os mesmos, caso contrário o contrato será comprometido.
 
-// 被调用的合约C
+// Contrato C chamado
 contract C {
     uint public num;
     address public sender;
@@ -17,19 +17,19 @@ contract C {
     }
 }
 
-// 发起delegatecall的合约B
+// Contrato B que faz uma chamada delegatecall
 contract B {
     uint public num;
     address public sender;
 
-    // 通过call来调用C的setVars()函数，将改变合约C里的状态变量
+    // Ao chamar a função setVars() em C usando call, as variáveis de estado do contrato C serão alteradas.
     function callSetVars(address _addr, uint _num) external payable{
-        // call setVars()
+        // chamar setVars()
         (bool success, bytes memory data) = _addr.call(
             abi.encodeWithSignature("setVars(uint256)", _num)
         );
     }
-    // 通过delegatecall来调用C的setVars()函数，将改变合约B里的状态变量
+    // Ao chamar a função setVars() de C usando delegatecall, a variável de estado do contrato B será alterada.
     function delegatecallSetVars(address _addr, uint _num) external payable{
         // delegatecall setVars()
         (bool success, bytes memory data) = _addr.delegatecall(

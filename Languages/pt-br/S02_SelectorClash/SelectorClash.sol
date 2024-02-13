@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
-// by 0xAA
+// por 0xAA
 pragma solidity ^0.8.4;
 
 contract SelectorClash {
-    bool public solved; // 攻击是否成功
+    // O ataque foi bem-sucedido
 
     function putCurEpochConPubKeyBytes(bytes memory _bytes) public {
         require(msg.sender == address(this), "Not Owner");

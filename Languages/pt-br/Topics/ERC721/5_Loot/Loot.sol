@@ -1,5 +1,5 @@
 /**
- *Submitted for verification at Etherscan.io on 2021-08-27
+ * Enviado para verificação em Etherscan.io em 2021-08-27
 */
 
 // SPDX-License-Identifier: MIT
@@ -7,22 +7,22 @@
 pragma solidity ^0.8.0;
 
 /**
- * @dev Interface of the ERC165 standard, as defined in the
+ * @dev Interface do padrão ERC165, conforme definido no
  * https://eips.ethereum.org/EIPS/eip-165[EIP].
  *
- * Implementers can declare support of contract interfaces, which can then be
- * queried by others ({ERC165Checker}).
+ * Implementadores podem declarar suporte a interfaces de contratos, que podem então ser
+ * consultadas por outros ({ERC165Checker}).
  *
- * For an implementation, see {ERC165}.
+ * Para uma implementação, veja {ERC165}.
  */
 interface IERC165 {
     /**
-     * @dev Returns true if this contract implements the interface defined by
-     * `interfaceId`. See the corresponding
-     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]
-     * to learn more about how these ids are created.
+     * @dev Retorna verdadeiro se este contrato implementa a interface definida por
+     * `interfaceId`. Consulte a seção correspondente
+     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP]
+     * para saber mais sobre como esses ids são criados.
      *
-     * This function call must use less than 30 000 gas.
+     * Esta chamada de função deve usar menos de 30.000 gas.
      */
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
 }
@@ -33,51 +33,51 @@ interface IERC165 {
 
 
 /**
- * @dev Required interface of an ERC721 compliant contract.
+ * @dev Interface necessária de um contrato compatível com ERC721.
  */
 interface IERC721 is IERC165 {
     /**
-     * @dev Emitted when `tokenId` token is transferred from `from` to `to`.
+     * @dev Emitido quando o token `tokenId` é transferido de `from` para `to`.
      */
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
 
     /**
-     * @dev Emitted when `owner` enables `approved` to manage the `tokenId` token.
+     * @dev Emitido quando `owner` permite que `approved` gerencie o token `tokenId`.
      */
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
 
     /**
-     * @dev Emitted when `owner` enables or disables (`approved`) `operator` to manage all of its assets.
+     * @dev Emitido quando `owner` habilita ou desabilita (`approved`) `operator` para gerenciar todos os seus ativos.
      */
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
 
     /**
-     * @dev Returns the number of tokens in ``owner``'s account.
+     * @dev Retorna o número de tokens na conta do ``owner``.
      */
     function balanceOf(address owner) external view returns (uint256 balance);
 
     /**
-     * @dev Returns the owner of the `tokenId` token.
+     * @dev Retorna o proprietário do token `tokenId`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must exist.
+     * - `tokenId` deve existir.
      */
     function ownerOf(uint256 tokenId) external view returns (address owner);
 
     /**
-     * @dev Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients
-     * are aware of the ERC721 protocol to prevent tokens from being forever locked.
+     * @dev Transfere com segurança o token `tokenId` de `from` para `to`, verificando primeiro se os destinatários do contrato
+     * estão cientes do protocolo ERC721 para evitar que os tokens fiquem bloqueados para sempre.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `from` cannot be the zero address.
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must exist and be owned by `from`.
-     * - If the caller is not `from`, it must be have been allowed to move this token by either {approve} or {setApprovalForAll}.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * - `from` não pode ser o endereço zero.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve existir e ser de propriedade de `from`.
+     * - Se o chamador não for `from`, ele deve ter sido autorizado a mover este token por meio de {approve} ou {setApprovalForAll}.
+     * - Se `to` se referir a um contrato inteligente, ele deve implementar {IERC721Receiver-onERC721Received}, que é chamado durante uma transferência segura.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function safeTransferFrom(
         address from,
@@ -86,18 +86,18 @@ interface IERC721 is IERC165 {
     ) external;
 
     /**
-     * @dev Transfers `tokenId` token from `from` to `to`.
+     * @dev Transfere o token `tokenId` de `from` para `to`.
      *
-     * WARNING: Usage of this method is discouraged, use {safeTransferFrom} whenever possible.
+     * AVISO: O uso deste método é desencorajado, use {safeTransferFrom} sempre que possível.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `from` cannot be the zero address.
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must be owned by `from`.
-     * - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}.
+     * - `from` não pode ser o endereço zero.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve ser de propriedade de `from`.
+     * - Se o chamador não for `from`, ele deve ser aprovado para mover este token por meio de {approve} ou {setApprovalForAll}.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function transferFrom(
         address from,
@@ -106,60 +106,60 @@ interface IERC721 is IERC165 {
     ) external;
 
     /**
-     * @dev Gives permission to `to` to transfer `tokenId` token to another account.
-     * The approval is cleared when the token is transferred.
+     * @dev Concede permissão para `to` transferir o token `tokenId` para outra conta.
+     * A aprovação é removida quando o token é transferido.
      *
-     * Only a single account can be approved at a time, so approving the zero address clears previous approvals.
+     * Apenas uma única conta pode ser aprovada por vez, portanto, aprovar o endereço zero remove aprovações anteriores.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - The caller must own the token or be an approved operator.
-     * - `tokenId` must exist.
+     * - O chamador deve ser o proprietário do token ou um operador aprovado.
+     * - `tokenId` deve existir.
      *
-     * Emits an {Approval} event.
+     * Emite um evento {Approval}.
      */
     function approve(address to, uint256 tokenId) external;
 
     /**
-     * @dev Returns the account approved for `tokenId` token.
+     * @dev Retorna a conta aprovada para o token `tokenId`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must exist.
+     * - `tokenId` deve existir.
      */
     function getApproved(uint256 tokenId) external view returns (address operator);
 
     /**
-     * @dev Approve or remove `operator` as an operator for the caller.
-     * Operators can call {transferFrom} or {safeTransferFrom} for any token owned by the caller.
+     * @dev Aprova ou remove `operador` como um operador para o chamador.
+     * Operadores podem chamar {transferFrom} ou {safeTransferFrom} para qualquer token de propriedade do chamador.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - The `operator` cannot be the caller.
+     * - O `operador` não pode ser o chamador.
      *
-     * Emits an {ApprovalForAll} event.
+     * Emite um evento {ApprovalForAll}.
      */
     function setApprovalForAll(address operator, bool _approved) external;
 
     /**
-     * @dev Returns if the `operator` is allowed to manage all of the assets of `owner`.
+     * @dev Retorna se o `operador` está autorizado a gerenciar todos os ativos do `proprietário`.
      *
-     * See {setApprovalForAll}
+     * Veja {setApprovalForAll}
      */
     function isApprovedForAll(address owner, address operator) external view returns (bool);
 
     /**
-     * @dev Safely transfers `tokenId` token from `from` to `to`.
+     * @dev Transfere com segurança o token `tokenId` de `from` para `to`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `from` cannot be the zero address.
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must exist and be owned by `from`.
-     * - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * - `from` não pode ser o endereço zero.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve existir e ser de propriedade de `from`.
+     * - Se o chamador não for `from`, ele deve ser aprovado para mover este token por meio de {approve} ou {setApprovalForAll}.
+     * - Se `to` se referir a um contrato inteligente, ele deve implementar {IERC721Receiver-onERC721Received}, que é chamado durante uma transferência segura.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function safeTransferFrom(
         address from,
@@ -173,16 +173,16 @@ interface IERC721 is IERC165 {
 
 
 /**
- * @dev String operations.
+ * @dev Operações de string.
  */
 library Strings {
     bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
 
     /**
-     * @dev Converts a `uint256` to its ASCII `string` decimal representation.
+     * @dev Converte um `uint256` para sua representação decimal em `string` ASCII.
      */
     function toString(uint256 value) internal pure returns (string memory) {
-        // Inspired by OraclizeAPI's implementation - MIT licence
+        // Inspirado na implementação da OraclizeAPI - licença MIT
         // https://github.com/oraclize/ethereum-api/blob/b42146b063c7d6ee1358846c198246239e9360e8/oraclizeAPI_0.4.25.sol
 
         if (value == 0) {
@@ -204,7 +204,7 @@ library Strings {
     }
 
     /**
-     * @dev Converts a `uint256` to its ASCII `string` hexadecimal representation.
+     * @dev Converte um `uint256` para sua representação hexadecimal em `string` ASCII.
      */
     function toHexString(uint256 value) internal pure returns (string memory) {
         if (value == 0) {
@@ -220,7 +220,7 @@ library Strings {
     }
 
     /**
-     * @dev Converts a `uint256` to its ASCII `string` hexadecimal representation with fixed length.
+     * @dev Converte um `uint256` para sua representação hexadecimal `string` ASCII com comprimento fixo.
      */
     function toHexString(uint256 value, uint256 length) internal pure returns (string memory) {
         bytes memory buffer = new bytes(2 * length + 2);
@@ -239,14 +239,14 @@ library Strings {
 
 
 /*
- * @dev Provides information about the current execution context, including the
- * sender of the transaction and its data. While these are generally available
- * via msg.sender and msg.data, they should not be accessed in such a direct
- * manner, since when dealing with meta-transactions the account sending and
- * paying for execution may not be the actual sender (as far as an application
- * is concerned).
+ * @dev Fornece informações sobre o contexto de execução atual, incluindo o
+ * remetente da transação e seus dados. Embora essas informações estejam geralmente disponíveis
+ * através de msg.sender e msg.data, elas não devem ser acessadas de forma direta
+ * maneira, pois ao lidar com meta-transações, a conta que envia e
+ * paga pela execução pode não ser o remetente real (do ponto de vista de um aplicativo).
  *
- * This contract is only required for intermediate, library-like contracts.
+ * Este contrato é necessário apenas para contratos intermediários semelhantes a bibliotecas.
+ */
  */
 abstract contract Context {
     function _msgSender() internal view virtual returns (address) {
@@ -267,16 +267,16 @@ abstract contract Context {
 
 
 /**
- * @dev Contract module which provides a basic access control mechanism, where
- * there is an account (an owner) that can be granted exclusive access to
- * specific functions.
+ * @dev Módulo de contrato que fornece um mecanismo básico de controle de acesso, onde
+ * há uma conta (um proprietário) que pode receber acesso exclusivo a
+ * funções específicas.
  *
- * By default, the owner account will be the one that deploys the contract. This
- * can later be changed with {transferOwnership}.
+ * Por padrão, a conta do proprietário será aquela que implanta o contrato. Isso
+ * pode ser alterado posteriormente com {transferOwnership}.
  *
- * This module is used through inheritance. It will make available the modifier
- * `onlyOwner`, which can be applied to your functions to restrict their use to
- * the owner.
+ * Este módulo é usado por meio de herança. Ele disponibilizará o modificador
+ * `onlyOwner`, que pode ser aplicado às suas funções para restringir seu uso ao
+ * proprietário.
  */
 abstract contract Ownable is Context {
     address private _owner;
@@ -284,21 +284,21 @@ abstract contract Ownable is Context {
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     /**
-     * @dev Initializes the contract setting the deployer as the initial owner.
+     * @dev Inicializa o contrato definindo o deployer como o proprietário inicial.
      */
     constructor() {
         _setOwner(_msgSender());
     }
 
     /**
-     * @dev Returns the address of the current owner.
+     * @dev Retorna o endereço do proprietário atual.
      */
     function owner() public view virtual returns (address) {
         return _owner;
     }
 
     /**
-     * @dev Throws if called by any account other than the owner.
+     * @dev Lança uma exceção se chamado por qualquer conta que não seja do proprietário.
      */
     modifier onlyOwner() {
         require(owner() == _msgSender(), "Ownable: caller is not the owner");
@@ -306,19 +306,19 @@ abstract contract Ownable is Context {
     }
 
     /**
-     * @dev Leaves the contract without owner. It will not be possible to call
-     * `onlyOwner` functions anymore. Can only be called by the current owner.
+     * @dev Deixa o contrato sem proprietário. Não será mais possível chamar
+     * funções `onlyOwner`. Só pode ser chamado pelo proprietário atual.
      *
-     * NOTE: Renouncing ownership will leave the contract without an owner,
-     * thereby removing any functionality that is only available to the owner.
+     * NOTA: Renunciar à propriedade deixará o contrato sem um proprietário,
+     * removendo assim qualquer funcionalidade que esteja disponível apenas para o proprietário.
      */
     function renounceOwnership() public virtual onlyOwner {
         _setOwner(address(0));
     }
 
     /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
-     * Can only be called by the current owner.
+     * @dev Transfere a propriedade do contrato para uma nova conta (`newOwner`).
+     * Só pode ser chamado pelo proprietário atual.
      */
     function transferOwnership(address newOwner) public virtual onlyOwner {
         require(newOwner != address(0), "Ownable: new owner is the zero address");
@@ -337,33 +337,33 @@ abstract contract Ownable is Context {
 
 
 /**
- * @dev Contract module that helps prevent reentrant calls to a function.
+ * @dev Módulo de contrato que ajuda a prevenir chamadas reentrantes a uma função.
  *
- * Inheriting from `ReentrancyGuard` will make the {nonReentrant} modifier
- * available, which can be applied to functions to make sure there are no nested
- * (reentrant) calls to them.
+ * Herdar de `ReentrancyGuard` tornará o modificador {nonReentrant} disponível,
+ * que pode ser aplicado a funções para garantir que não haja chamadas aninhadas
+ * (reentrantes) para elas.
  *
- * Note that because there is a single `nonReentrant` guard, functions marked as
- * `nonReentrant` may not call one another. This can be worked around by making
- * those functions `private`, and then adding `external` `nonReentrant` entry
- * points to them.
+ * Observe que, como há apenas uma guarda `nonReentrant`, funções marcadas como
+ * `nonReentrant` não podem chamar umas às outras. Isso pode ser contornado tornando
+ * essas funções `private` e, em seguida, adicionando pontos de entrada `external` `nonReentrant` a elas.
  *
- * TIP: If you would like to learn more about reentrancy and alternative ways
- * to protect against it, check out our blog post
+ * DICA: Se você gostaria de aprender mais sobre reentrância e maneiras alternativas
+ * de se proteger contra ela, confira nosso post no blog
  * https://blog.openzeppelin.com/reentrancy-after-istanbul/[Reentrancy After Istanbul].
  */
+ */
 abstract contract ReentrancyGuard {
-    // Booleans are more expensive than uint256 or any type that takes up a full
-    // word because each write operation emits an extra SLOAD to first read the
-    // slot's contents, replace the bits taken up by the boolean, and then write
-    // back. This is the compiler's defense against contract upgrades and
-    // pointer aliasing, and it cannot be disabled.
+    // Booleans são mais caros do que uint256 ou qualquer tipo que ocupe um espaço completo.
+    // palavra porque cada operação de escrita emite uma SLOAD extra para ler primeiro o
+    // conteúdo do slot, substitua as partes ocupadas pelo booleano e, em seguida, escreva
+    // de volta. Esta é a defesa do compilador contra atualizações de contrato e
+    // ponteiro de aliasing, e não pode ser desativado.
 
-    // The values being non-zero value makes deployment a bit more expensive,
-    // but in exchange the refund on every call to nonReentrant will be lower in
-    // amount. Since refunds are capped to a percentage of the total
-    // transaction's gas, it is best to keep them low in cases like this one, to
-    // increase the likelihood of the full refund coming into effect.
+    // Os valores sendo diferentes de zero tornam a implantação um pouco mais cara,
+    // mas em troca, o reembolso em cada chamada para nãoReentrant será menor em
+    // quantidade. Como os reembolsos são limitados a uma porcentagem do total
+    // gás da transação, é melhor mantê-los baixos em casos como este, para
+    // aumentar a probabilidade de o reembolso total entrar em vigor.
     uint256 private constant _NOT_ENTERED = 1;
     uint256 private constant _ENTERED = 2;
 
@@ -374,22 +374,22 @@ abstract contract ReentrancyGuard {
     }
 
     /**
-     * @dev Prevents a contract from calling itself, directly or indirectly.
-     * Calling a `nonReentrant` function from another `nonReentrant`
-     * function is not supported. It is possible to prevent this from happening
-     * by making the `nonReentrant` function external, and make it call a
-     * `private` function that does the actual work.
+     * @dev Impede que um contrato se chame a si mesmo, diretamente ou indiretamente.
+     * Chamar uma função `nonReentrant` de outra função `nonReentrant` não é suportado.
+     * É possível evitar que isso aconteça tornando a função `nonReentrant` externa e
+     * fazendo-a chamar uma função `private` que realiza o trabalho real.
+     */
      */
     modifier nonReentrant() {
-        // On the first call to nonReentrant, _notEntered will be true
+        // Na primeira chamada para nonReentrant, _notEntered será verdadeiro
         require(_status != _ENTERED, "ReentrancyGuard: reentrant call");
 
-        // Any calls to nonReentrant after this point will fail
+        // Qualquer chamada a nonReentrant após este ponto falhará
         _status = _ENTERED;
 
         _;
 
-        // By storing the original value once again, a refund is triggered (see
+        // Ao armazenar o valor original mais uma vez, um reembolso é acionado (veja
         // https://eips.ethereum.org/EIPS/eip-2200)
         _status = _NOT_ENTERED;
     }
@@ -409,19 +409,19 @@ abstract contract ReentrancyGuard {
 
 
 /**
- * @title ERC721 token receiver interface
- * @dev Interface for any contract that wants to support safeTransfers
- * from ERC721 asset contracts.
+ * @title Interface do receptor de tokens ERC721
+ * @dev Interface para qualquer contrato que deseje suportar transferências seguras
+ * de contratos de ativos ERC721.
  */
 interface IERC721Receiver {
     /**
-     * @dev Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom}
-     * by `operator` from `from`, this function is called.
+     * @dev Sempre que um token {IERC721} `tokenId` for transferido para este contrato via {IERC721-safeTransferFrom}
+     * por `operador` de `de`, esta função é chamada.
      *
-     * It must return its Solidity selector to confirm the token transfer.
-     * If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted.
+     * Ela deve retornar o seletor Solidity para confirmar a transferência do token.
+     * Se qualquer outro valor for retornado ou a interface não for implementada pelo destinatário, a transferência será revertida.
      *
-     * The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
+     * O seletor pode ser obtido em Solidity com `IERC721.onERC721Received.selector`.
      */
     function onERC721Received(
         address operator,
@@ -438,22 +438,22 @@ interface IERC721Receiver {
 
 
 /**
- * @title ERC-721 Non-Fungible Token Standard, optional metadata extension
- * @dev See https://eips.ethereum.org/EIPS/eip-721
+ * @title Padrão de Token Não-Fungível ERC-721, extensão opcional de metadados
+ * @dev Veja https://eips.ethereum.org/EIPS/eip-721
  */
 interface IERC721Metadata is IERC721 {
     /**
-     * @dev Returns the token collection name.
+     * @dev Retorna o nome da coleção de tokens.
      */
     function name() external view returns (string memory);
 
     /**
-     * @dev Returns the token collection symbol.
+     * @dev Retorna o símbolo da coleção de tokens.
      */
     function symbol() external view returns (string memory);
 
     /**
-     * @dev Returns the Uniform Resource Identifier (URI) for `tokenId` token.
+     * @dev Retorna o Identificador de Recurso Uniforme (URI) para o token `tokenId`.
      */
     function tokenURI(uint256 tokenId) external view returns (string memory);
 }
@@ -463,30 +463,30 @@ interface IERC721Metadata is IERC721 {
 
 
 /**
- * @dev Collection of functions related to the address type
+ * @dev Coleção de funções relacionadas ao tipo de endereço
  */
 library Address {
     /**
-     * @dev Returns true if `account` is a contract.
+     * @dev Retorna verdadeiro se `conta` for um contrato.
      *
-     * [IMPORTANT]
+     * [IMPORTANTE]
      * ====
-     * It is unsafe to assume that an address for which this function returns
-     * false is an externally-owned account (EOA) and not a contract.
+     * Não é seguro assumir que um endereço para o qual esta função retorna
+     * falso é uma conta de propriedade externa (EOA) e não um contrato.
      *
-     * Among others, `isContract` will return false for the following
-     * types of addresses:
+     * Entre outros, `isContract` retornará falso para os seguintes
+     * tipos de endereços:
      *
-     *  - an externally-owned account
-     *  - a contract in construction
-     *  - an address where a contract will be created
-     *  - an address where a contract lived, but was destroyed
+     *  - uma conta de propriedade externa
+     *  - um contrato em construção
+     *  - um endereço onde um contrato será criado
+     *  - um endereço onde um contrato viveu, mas foi destruído
      * ====
      */
     function isContract(address account) internal view returns (bool) {
-        // This method relies on extcodesize, which returns 0 for contracts in
-        // construction, since the code is only stored at the end of the
-        // constructor execution.
+        // Este método depende de extcodesize, que retorna 0 para contratos em
+        // construção, já que o código é armazenado apenas no final do
+        // execução do construtor.
 
         uint256 size;
         assembly {
@@ -496,20 +496,20 @@ library Address {
     }
 
     /**
-     * @dev Replacement for Solidity's `transfer`: sends `amount` wei to
-     * `recipient`, forwarding all available gas and reverting on errors.
+     * @dev Substituição para o `transfer` do Solidity: envia `amount` wei para
+     * `recipient`, encaminhando todo o gás disponível e revertendo em caso de erros.
      *
-     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] increases the gas cost
-     * of certain opcodes, possibly making contracts go over the 2300 gas limit
-     * imposed by `transfer`, making them unable to receive funds via
-     * `transfer`. {sendValue} removes this limitation.
+     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] aumenta o custo de gás
+     * de certas opcodes, possivelmente fazendo com que contratos ultrapassem o limite de gás de 2300
+     * imposto pelo `transfer`, tornando-os incapazes de receber fundos via
+     * `transfer`. {sendValue} remove essa limitação.
      *
-     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Learn more].
+     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Saiba mais].
      *
-     * IMPORTANT: because control is transferred to `recipient`, care must be
-     * taken to not create reentrancy vulnerabilities. Consider using
-     * {ReentrancyGuard} or the
-     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].
+     * IMPORTANTE: porque o controle é transferido para `recipient`, é necessário ter cuidado
+     * para não criar vulnerabilidades de reentrância. Considere usar
+     * {ReentrancyGuard} ou o
+     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[padrão checks-effects-interactions].
      */
     function sendValue(address payable recipient, uint256 amount) internal {
         require(address(this).balance >= amount, "Address: insufficient balance");
@@ -519,32 +519,32 @@ library Address {
     }
 
     /**
-     * @dev Performs a Solidity function call using a low level `call`. A
-     * plain `call` is an unsafe replacement for a function call: use this
-     * function instead.
+     * @dev Executa uma chamada de função Solidity usando um `call` de baixo nível. Um
+     * `call` simples é uma substituição insegura para uma chamada de função: use esta
+     * função em vez disso.
      *
-     * If `target` reverts with a revert reason, it is bubbled up by this
-     * function (like regular Solidity function calls).
+     * Se `target` reverter com uma razão de revert, ela é propagada por esta
+     * função (como chamadas de função Solidity regulares).
      *
-     * Returns the raw returned data. To convert to the expected return value,
+     * Retorna os dados brutos retornados. Para converter para o valor de retorno esperado,
      * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `target` must be a contract.
-     * - calling `target` with `data` must not revert.
+     * - `target` deve ser um contrato.
+     * - chamar `target` com `data` não deve reverter.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCall(address target, bytes memory data) internal returns (bytes memory) {
         return functionCall(target, data, "Address: low-level call failed");
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`], but with
-     * `errorMessage` as a fallback revert reason when `target` reverts.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`], mas com
+     * `errorMessage` como motivo de fallback de revert quando `target` reverte.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCall(
         address target,
@@ -555,15 +555,15 @@ library Address {
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
-     * but also transferring `value` wei to `target`.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * mas também transfere `value` wei para `target`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - the calling contract must have an ETH balance of at least `value`.
-     * - the called Solidity function must be `payable`.
+     * - o contrato chamador deve ter um saldo de ETH de pelo menos `value`.
+     * - a função Solidity chamada deve ser `payable`.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCallWithValue(
         address target,
@@ -574,10 +574,10 @@ library Address {
     }
 
     /**
-     * @dev Same as {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], but
-     * with `errorMessage` as a fallback revert reason when `target` reverts.
+     * @dev Mesmo que {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], mas
+     * com `errorMessage` como motivo de fallback de revert quando `target` reverte.
      *
-     * _Available since v3.1._
+     * _Disponível desde a versão 3.1._
      */
     function functionCallWithValue(
         address target,
@@ -593,20 +593,20 @@ library Address {
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
-     * but performing a static call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * mas realizando uma chamada estática.
      *
-     * _Available since v3.3._
+     * _Disponível desde a versão 3.3._
      */
     function functionStaticCall(address target, bytes memory data) internal view returns (bytes memory) {
         return functionStaticCall(target, data, "Address: low-level static call failed");
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
-     * but performing a static call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
+     * mas realizando uma chamada estática.
      *
-     * _Available since v3.3._
+     * _Disponível desde a versão 3.3._
      */
     function functionStaticCall(
         address target,
@@ -620,20 +620,20 @@ library Address {
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
-     * but performing a delegate call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * mas realizando uma chamada de delegado.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function functionDelegateCall(address target, bytes memory data) internal returns (bytes memory) {
         return functionDelegateCall(target, data, "Address: low-level delegate call failed");
     }
 
     /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
-     * but performing a delegate call.
+     * @dev Mesmo que {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
+     * mas realizando uma chamada de delegado.
      *
-     * _Available since v3.4._
+     * _Disponível desde a versão 3.4._
      */
     function functionDelegateCall(
         address target,
@@ -654,9 +654,9 @@ library Address {
         if (success) {
             return returndata;
         } else {
-            // Look for revert reason and bubble it up if present
+            // Procurar motivo de reversão e propagá-lo se estiver presente
             if (returndata.length > 0) {
-                // The easiest way to bubble the revert reason is using memory via assembly
+                // A maneira mais fácil de bolhar a razão de reverter é usando memória via assembly
 
                 assembly {
                     let returndata_size := mload(returndata)
@@ -678,10 +678,10 @@ library Address {
 
 
 /**
- * @dev Implementation of the {IERC165} interface.
+ * @dev Implementação da interface {IERC165}.
  *
- * Contracts that want to implement ERC165 should inherit from this contract and override {supportsInterface} to check
- * for the additional interface id that will be supported. For example:
+ * Contratos que desejam implementar o ERC165 devem herdar deste contrato e substituir {supportsInterface} para verificar
+ * o ID de interface adicional que será suportado. Por exemplo:
  *
  * ```solidity
  * function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
@@ -689,11 +689,11 @@ library Address {
  * }
  * ```
  *
- * Alternatively, {ERC165Storage} provides an easier to use but more expensive implementation.
+ * Alternativamente, {ERC165Storage} fornece uma implementação mais fácil de usar, mas mais cara.
  */
 abstract contract ERC165 is IERC165 {
     /**
-     * @dev See {IERC165-supportsInterface}.
+     * @dev Veja {IERC165-supportsInterface}.
      */
     function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
         return interfaceId == type(IERC165).interfaceId;
@@ -702,34 +702,34 @@ abstract contract ERC165 is IERC165 {
 
 
 /**
- * @dev Implementation of https://eips.ethereum.org/EIPS/eip-721[ERC721] Non-Fungible Token Standard, including
- * the Metadata extension, but not including the Enumerable extension, which is available separately as
+ * @dev Implementação do https://eips.ethereum.org/EIPS/eip-721[Padrão de Token Não-Fungível ERC721], incluindo
+ * a extensão de Metadados, mas não incluindo a extensão Enumerável, que está disponível separadamente como
  * {ERC721Enumerable}.
  */
 contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     using Address for address;
     using Strings for uint256;
 
-    // Token name
+    // Nome do token
     string private _name;
 
-    // Token symbol
+    // Símbolo do token
     string private _symbol;
 
-    // Mapping from token ID to owner address
+    // Mapeamento do ID do token para o endereço do proprietário
     mapping(uint256 => address) private _owners;
 
-    // Mapping owner address to token count
+    // Mapeando o endereço do proprietário para a contagem de tokens
     mapping(address => uint256) private _balances;
 
-    // Mapping from token ID to approved address
+    // Mapeamento do ID do token para o endereço aprovado
     mapping(uint256 => address) private _tokenApprovals;
 
-    // Mapping from owner to operator approvals
+    // Mapeamento do proprietário para aprovações do operador
     mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     /**
-     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
+     * @dev Inicializa o contrato definindo um `nome` e um `símbolo` para a coleção de tokens.
      */
     constructor(string memory name_, string memory symbol_) {
         _name = name_;
@@ -737,7 +737,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC165-supportsInterface}.
+     * @dev Veja {IERC165-supportsInterface}.
      */
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, IERC165) returns (bool) {
         return
@@ -747,7 +747,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721-balanceOf}.
+     * @dev Veja {IERC721-balanceOf}.
      */
     function balanceOf(address owner) public view virtual override returns (uint256) {
         require(owner != address(0), "ERC721: balance query for the zero address");
@@ -755,7 +755,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721-ownerOf}.
+     * @dev Veja {IERC721-ownerOf}.
      */
     function ownerOf(uint256 tokenId) public view virtual override returns (address) {
         address owner = _owners[tokenId];
@@ -764,21 +764,21 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721Metadata-name}.
+     * @dev Veja {IERC721Metadata-name}.
      */
     function name() public view virtual override returns (string memory) {
         return _name;
     }
 
     /**
-     * @dev See {IERC721Metadata-symbol}.
+     * @dev Veja {IERC721Metadata-symbol}.
      */
     function symbol() public view virtual override returns (string memory) {
         return _symbol;
     }
 
     /**
-     * @dev See {IERC721Metadata-tokenURI}.
+     * @dev Veja {IERC721Metadata-tokenURI}.
      */
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
@@ -788,16 +788,16 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Base URI for computing {tokenURI}. If set, the resulting URI for each
-     * token will be the concatenation of the `baseURI` and the `tokenId`. Empty
-     * by default, can be overridden in child contracts.
+     * @dev URI base para calcular {tokenURI}. Se definido, o URI resultante para cada
+     * token será a concatenação do `baseURI` e do `tokenId`. Vazio
+     * por padrão, pode ser substituído em contratos filhos.
      */
     function _baseURI() internal view virtual returns (string memory) {
         return "";
     }
 
     /**
-     * @dev See {IERC721-approve}.
+     * @dev Veja {IERC721-approve}.
      */
     function approve(address to, uint256 tokenId) public virtual override {
         address owner = ERC721.ownerOf(tokenId);
@@ -812,7 +812,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721-getApproved}.
+     * @dev Veja {IERC721-getApproved}.
      */
     function getApproved(uint256 tokenId) public view virtual override returns (address) {
         require(_exists(tokenId), "ERC721: approved query for nonexistent token");
@@ -821,7 +821,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721-setApprovalForAll}.
+     * @dev Veja {IERC721-setApprovalForAll}.
      */
     function setApprovalForAll(address operator, bool approved) public virtual override {
         require(operator != _msgSender(), "ERC721: approve to caller");
@@ -831,14 +831,14 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721-isApprovedForAll}.
+     * @dev Veja {IERC721-isApprovedForAll}.
      */
     function isApprovedForAll(address owner, address operator) public view virtual override returns (bool) {
         return _operatorApprovals[owner][operator];
     }
 
     /**
-     * @dev See {IERC721-transferFrom}.
+     * @dev Veja {IERC721-transferFrom}.
      */
     function transferFrom(
         address from,
@@ -846,13 +846,13 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
         uint256 tokenId
     ) public virtual override {
         //solhint-disable-next-line max-line-length
-        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        Se o texto contiver alguma parte em 'zh', traduza todo o texto para 'pt-br', caso contrário, mantenha o texto original.
 
         _transfer(from, to, tokenId);
     }
 
     /**
-     * @dev See {IERC721-safeTransferFrom}.
+     * @dev Veja {IERC721-safeTransferFrom}.
      */
     function safeTransferFrom(
         address from,
@@ -863,7 +863,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721-safeTransferFrom}.
+     * @dev Veja {IERC721-safeTransferFrom}.
      */
     function safeTransferFrom(
         address from,
@@ -876,22 +876,22 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients
-     * are aware of the ERC721 protocol to prevent tokens from being forever locked.
+     * @dev Transfere com segurança o token `tokenId` de `from` para `to`, verificando primeiro se os destinatários do contrato
+     * estão cientes do protocolo ERC721 para evitar que os tokens fiquem bloqueados para sempre.
      *
-     * `_data` is additional data, it has no specified format and it is sent in call to `to`.
+     * `_data` é um dado adicional, não possui um formato especificado e é enviado na chamada para `to`.
      *
-     * This internal function is equivalent to {safeTransferFrom}, and can be used to e.g.
-     * implement alternative mechanisms to perform token transfer, such as signature-based.
+     * Esta função interna é equivalente a {safeTransferFrom} e pode ser usada, por exemplo,
+     * para implementar mecanismos alternativos para realizar a transferência de tokens, como baseados em assinatura.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `from` cannot be the zero address.
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must exist and be owned by `from`.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * - `from` não pode ser o endereço zero.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve existir e ser de propriedade de `from`.
+     * - Se `to` se refere a um contrato inteligente, ele deve implementar {IERC721Receiver-onERC721Received}, que é chamado durante uma transferência segura.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function _safeTransfer(
         address from,
@@ -904,23 +904,23 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Returns whether `tokenId` exists.
+     * @dev Retorna se o `tokenId` existe.
      *
-     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     * Tokens podem ser gerenciados pelo seu proprietário ou contas aprovadas através de {approve} ou {setApprovalForAll}.
      *
-     * Tokens start existing when they are minted (`_mint`),
-     * and stop existing when they are burned (`_burn`).
+     * Tokens começam a existir quando são criados (`_mint`),
+     * e param de existir quando são queimados (`_burn`).
      */
     function _exists(uint256 tokenId) internal view virtual returns (bool) {
         return _owners[tokenId] != address(0);
     }
 
     /**
-     * @dev Returns whether `spender` is allowed to manage `tokenId`.
+     * @dev Retorna se `spender` está autorizado a gerenciar `tokenId`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must exist.
+     * - `tokenId` deve existir.
      */
     function _isApprovedOrOwner(address spender, uint256 tokenId) internal view virtual returns (bool) {
         require(_exists(tokenId), "ERC721: operator query for nonexistent token");
@@ -929,22 +929,22 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Safely mints `tokenId` and transfers it to `to`.
+     * @dev Minta com segurança `tokenId` e transfere para `to`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must not exist.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * - `tokenId` não deve existir.
+     * - Se `to` se refere a um contrato inteligente, ele deve implementar {IERC721Receiver-onERC721Received}, que é chamado durante uma transferência segura.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function _safeMint(address to, uint256 tokenId) internal virtual {
         _safeMint(to, tokenId, "");
     }
 
     /**
-     * @dev Same as {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], with an additional `data` parameter which is
-     * forwarded in {IERC721Receiver-onERC721Received} to contract recipients.
+     * @dev Mesmo que {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], com um parâmetro adicional `data` que é
+     * encaminhado em {IERC721Receiver-onERC721Received} para os destinatários do contrato.
      */
     function _safeMint(
         address to,
@@ -959,16 +959,16 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Mints `tokenId` and transfers it to `to`.
+     * @dev Emite um novo token `tokenId` e transfere-o para `to`.
      *
-     * WARNING: Usage of this method is discouraged, use {_safeMint} whenever possible
+     * AVISO: O uso deste método é desencorajado, use {_safeMint} sempre que possível.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must not exist.
-     * - `to` cannot be the zero address.
+     * - `tokenId` não deve existir.
+     * - `to` não pode ser o endereço zero.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function _mint(address to, uint256 tokenId) internal virtual {
         require(to != address(0), "ERC721: mint to the zero address");
@@ -992,30 +992,30 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      *
      * Emits a {Transfer} event.
      */
-    function _burn(uint256 tokenId) internal virtual {
-        address owner = ERC721.ownerOf(tokenId);
-
-        _beforeTokenTransfer(owner, address(0), tokenId);
-
-        // Clear approvals
-        _approve(address(0), tokenId);
-
-        _balances[owner] -= 1;
-        delete _owners[tokenId];
+    /**
+        * @dev Destroys `tokenId`.
+ * A aprovação é limpa quando o token é queimado.
+        *
+ * Requisitos:
+        *
+        * - `tokenId` deve existir.
+ *
+        * Emite um evento {Transfer}.
+        */
 
         emit Transfer(owner, address(0), tokenId);
     }
 
     /**
-     * @dev Transfers `tokenId` from `from` to `to`.
-     *  As opposed to {transferFrom}, this imposes no restrictions on msg.sender.
+     * @dev Transfere `tokenId` de `from` para `to`.
+     *  Ao contrário de {transferFrom}, isso não impõe restrições ao msg.sender.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must be owned by `from`.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve ser de propriedade de `from`.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
     function _transfer(
         address from,
@@ -1027,7 +1027,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
 
         _beforeTokenTransfer(from, to, tokenId);
 
-        // Clear approvals from the previous owner
+        // Limpar aprovações do proprietário anterior
         _approve(address(0), tokenId);
 
         _balances[from] -= 1;
@@ -1038,9 +1038,9 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Approve `to` to operate on `tokenId`
+     * @dev Aprova `to` para operar em `tokenId`
      *
-     * Emits a {Approval} event.
+     * Emite um evento {Approval}.
      */
     function _approve(address to, uint256 tokenId) internal virtual {
         _tokenApprovals[tokenId] = to;
@@ -1048,14 +1048,14 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Internal function to invoke {IERC721Receiver-onERC721Received} on a target address.
-     * The call is not executed if the target address is not a contract.
+     * @dev Função interna para invocar {IERC721Receiver-onERC721Received} em um endereço de destino.
+     * A chamada não é executada se o endereço de destino não for um contrato.
      *
-     * @param from address representing the previous owner of the given token ID
-     * @param to target address that will receive the tokens
-     * @param tokenId uint256 ID of the token to be transferred
-     * @param _data bytes optional data to send along with the call
-     * @return bool whether the call correctly returned the expected magic value
+     * @param from endereço que representa o proprietário anterior do token ID fornecido
+     * @param to endereço de destino que receberá os tokens
+     * @param tokenId uint256 ID do token a ser transferido
+     * @param _data bytes dados opcionais a serem enviados junto com a chamada
+     * @return bool se a chamada retornou corretamente o valor mágico esperado
      */
     function _checkOnERC721Received(
         address from,
@@ -1081,18 +1081,18 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Hook that is called before any token transfer. This includes minting
-     * and burning.
+     * @dev Gancho que é chamado antes de qualquer transferência de token. Isso inclui a criação
+     * e queima de tokens.
      *
-     * Calling conditions:
+     * Condições de chamada:
      *
-     * - When `from` and `to` are both non-zero, ``from``'s `tokenId` will be
-     * transferred to `to`.
-     * - When `from` is zero, `tokenId` will be minted for `to`.
-     * - When `to` is zero, ``from``'s `tokenId` will be burned.
-     * - `from` and `to` are never both zero.
+     * - Quando `from` e `to` são ambos diferentes de zero, o `tokenId` de `from` será
+     * transferido para `to`.
+     * - Quando `from` é zero, `tokenId` será criado para `to`.
+     * - Quando `to` é zero, o `tokenId` de `from` será queimado.
+     * - `from` e `to` nunca são ambos zero.
      *
-     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     * Para saber mais sobre ganchos, acesse xref:ROOT:extending-contracts.adoc#using-hooks[Usando Ganchos].
      */
     function _beforeTokenTransfer(
         address from,
@@ -1108,56 +1108,56 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
 
 
 /**
- * @title ERC-721 Non-Fungible Token Standard, optional enumeration extension
- * @dev See https://eips.ethereum.org/EIPS/eip-721
+ * @title Padrão de Token Não-Fungível ERC-721, extensão opcional de enumeração
+ * @dev Veja https://eips.ethereum.org/EIPS/eip-721
  */
 interface IERC721Enumerable is IERC721 {
     /**
-     * @dev Returns the total amount of tokens stored by the contract.
+     * @dev Retorna a quantidade total de tokens armazenados pelo contrato.
      */
     function totalSupply() external view returns (uint256);
 
     /**
-     * @dev Returns a token ID owned by `owner` at a given `index` of its token list.
-     * Use along with {balanceOf} to enumerate all of ``owner``'s tokens.
+     * @dev Retorna um ID de token de propriedade do `owner` em um determinado `índice` de sua lista de tokens.
+     * Use junto com {balanceOf} para enumerar todos os tokens do `owner`.
      */
     function tokenOfOwnerByIndex(address owner, uint256 index) external view returns (uint256 tokenId);
 
     /**
-     * @dev Returns a token ID at a given `index` of all the tokens stored by the contract.
-     * Use along with {totalSupply} to enumerate all tokens.
+     * @dev Retorna um ID de token em um determinado `índice` de todos os tokens armazenados pelo contrato.
+     * Use junto com {totalSupply} para enumerar todos os tokens.
      */
     function tokenByIndex(uint256 index) external view returns (uint256);
 }
 
 
 /**
- * @dev This implements an optional extension of {ERC721} defined in the EIP that adds
- * enumerability of all the token ids in the contract as well as all token ids owned by each
- * account.
+ * @dev Isso implementa uma extensão opcional do {ERC721} definido no EIP que adiciona
+ * a enumerabilidade de todos os IDs de token no contrato, bem como todos os IDs de token possuídos por cada
+ * conta.
  */
 abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
-    // Mapping from owner to list of owned token IDs
+    // Mapeamento do proprietário para lista de IDs de tokens possuídos
     mapping(address => mapping(uint256 => uint256)) private _ownedTokens;
 
-    // Mapping from token ID to index of the owner tokens list
+    // Mapeamento do ID do token para o índice da lista de tokens do proprietário
     mapping(uint256 => uint256) private _ownedTokensIndex;
 
-    // Array with all token ids, used for enumeration
+    // Array com todos os IDs de token, usado para enumeração
     uint256[] private _allTokens;
 
-    // Mapping from token id to position in the allTokens array
+    // Mapeamento do id do token para a posição no array allTokens
     mapping(uint256 => uint256) private _allTokensIndex;
 
     /**
-     * @dev See {IERC165-supportsInterface}.
+     * @dev Veja {IERC165-supportsInterface}.
      */
     function supportsInterface(bytes4 interfaceId) public view virtual override(IERC165, ERC721) returns (bool) {
         return interfaceId == type(IERC721Enumerable).interfaceId || super.supportsInterface(interfaceId);
     }
 
     /**
-     * @dev See {IERC721Enumerable-tokenOfOwnerByIndex}.
+     * @dev Veja {IERC721Enumerable-tokenOfOwnerByIndex}.
      */
     function tokenOfOwnerByIndex(address owner, uint256 index) public view virtual override returns (uint256) {
         require(index < ERC721.balanceOf(owner), "ERC721Enumerable: owner index out of bounds");
@@ -1165,14 +1165,14 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
     }
 
     /**
-     * @dev See {IERC721Enumerable-totalSupply}.
+     * @dev Veja {IERC721Enumerable-totalSupply}.
      */
     function totalSupply() public view virtual override returns (uint256) {
         return _allTokens.length;
     }
 
     /**
-     * @dev See {IERC721Enumerable-tokenByIndex}.
+     * @dev Veja {IERC721Enumerable-tokenByIndex}.
      */
     function tokenByIndex(uint256 index) public view virtual override returns (uint256) {
         require(index < ERC721Enumerable.totalSupply(), "ERC721Enumerable: global index out of bounds");
@@ -1180,19 +1180,19 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
     }
 
     /**
-     * @dev Hook that is called before any token transfer. This includes minting
-     * and burning.
+     * @dev Gancho que é chamado antes de qualquer transferência de token. Isso inclui a criação
+     * e queima.
      *
-     * Calling conditions:
+     * Condições de chamada:
      *
-     * - When `from` and `to` are both non-zero, ``from``'s `tokenId` will be
-     * transferred to `to`.
-     * - When `from` is zero, `tokenId` will be minted for `to`.
-     * - When `to` is zero, ``from``'s `tokenId` will be burned.
-     * - `from` cannot be the zero address.
-     * - `to` cannot be the zero address.
+     * - Quando `from` e `to` não são zero, o `tokenId` de ``from`` será
+     * transferido para `to`.
+     * - Quando `from` é zero, `tokenId` será criado para `to`.
+     * - Quando `to` é zero, o `tokenId` de ``from`` será queimado.
+     * - `from` não pode ser o endereço zero.
+     * - `to` não pode ser o endereço zero.
      *
-     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     * Para saber mais sobre ganchos, acesse xref:ROOT:extending-contracts.adoc#using-hooks[Usando Ganchos].
      */
     function _beforeTokenTransfer(
         address from,
@@ -1214,9 +1214,9 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
     }
 
     /**
-     * @dev Private function to add a token to this extension's ownership-tracking data structures.
-     * @param to address representing the new owner of the given token ID
-     * @param tokenId uint256 ID of the token to be added to the tokens list of the given address
+     * @dev Função privada para adicionar um token às estruturas de dados de rastreamento de propriedade desta extensão.
+     * @param to endereço que representa o novo proprietário do ID do token fornecido
+     * @param tokenId uint256 ID do token a ser adicionado à lista de tokens do endereço fornecido
      */
     function _addTokenToOwnerEnumeration(address to, uint256 tokenId) private {
         uint256 length = ERC721.balanceOf(to);
@@ -1225,8 +1225,8 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
     }
 
     /**
-     * @dev Private function to add a token to this extension's token tracking data structures.
-     * @param tokenId uint256 ID of the token to be added to the tokens list
+     * @dev Função privada para adicionar um token às estruturas de dados de rastreamento de token desta extensão.
+     * @param tokenId uint256 ID do token a ser adicionado à lista de tokens
      */
     function _addTokenToAllTokensEnumeration(uint256 tokenId) private {
         _allTokensIndex[tokenId] = _allTokens.length;
@@ -1234,54 +1234,54 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
     }
 
     /**
-     * @dev Private function to remove a token from this extension's ownership-tracking data structures. Note that
-     * while the token is not assigned a new owner, the `_ownedTokensIndex` mapping is _not_ updated: this allows for
-     * gas optimizations e.g. when performing a transfer operation (avoiding double writes).
-     * This has O(1) time complexity, but alters the order of the _ownedTokens array.
-     * @param from address representing the previous owner of the given token ID
-     * @param tokenId uint256 ID of the token to be removed from the tokens list of the given address
+     * @dev Função privada para remover um token das estruturas de dados de controle de propriedade desta extensão. Observe que
+     * embora o token não seja atribuído a um novo proprietário, o mapeamento `_ownedTokensIndex` não é atualizado: isso permite
+     * otimizações de gás, por exemplo, ao realizar uma operação de transferência (evitando gravações duplicadas).
+     * Isso tem complexidade de tempo O(1), mas altera a ordem do array _ownedTokens.
+     * @param from endereço que representa o proprietário anterior do token ID fornecido
+     * @param tokenId uint256 ID do token a ser removido da lista de tokens do endereço fornecido
      */
     function _removeTokenFromOwnerEnumeration(address from, uint256 tokenId) private {
-        // To prevent a gap in from's tokens array, we store the last token in the index of the token to delete, and
-        // then delete the last slot (swap and pop).
+        // Para evitar uma lacuna no array de tokens do 'from', armazenamos o último token no índice do token a ser excluído, e
+        // então exclua o último slot (troque e remova).
 
         uint256 lastTokenIndex = ERC721.balanceOf(from) - 1;
         uint256 tokenIndex = _ownedTokensIndex[tokenId];
 
-        // When the token to delete is the last token, the swap operation is unnecessary
+        // Quando o token a ser excluído é o último token, a operação de troca é desnecessária
         if (tokenIndex != lastTokenIndex) {
             uint256 lastTokenId = _ownedTokens[from][lastTokenIndex];
 
-            _ownedTokens[from][tokenIndex] = lastTokenId; // Move the last token to the slot of the to-delete token
-            _ownedTokensIndex[lastTokenId] = tokenIndex; // Update the moved token's index
+            // Mova o último token para o espaço do token a ser excluído
+            // Atualize o índice do token movido
         }
 
-        // This also deletes the contents at the last position of the array
+        // Isso também exclui o conteúdo na última posição do array
         delete _ownedTokensIndex[tokenId];
         delete _ownedTokens[from][lastTokenIndex];
     }
 
     /**
-     * @dev Private function to remove a token from this extension's token tracking data structures.
-     * This has O(1) time complexity, but alters the order of the _allTokens array.
-     * @param tokenId uint256 ID of the token to be removed from the tokens list
+     * @dev Função privada para remover um token das estruturas de dados de rastreamento de token desta extensão.
+     * Isso tem complexidade de tempo O(1), mas altera a ordem do array _allTokens.
+     * @param tokenId uint256 ID do token a ser removido da lista de tokens
      */
     function _removeTokenFromAllTokensEnumeration(uint256 tokenId) private {
-        // To prevent a gap in the tokens array, we store the last token in the index of the token to delete, and
-        // then delete the last slot (swap and pop).
+        // Para evitar uma lacuna no array de tokens, armazenamos o último token no índice do token a ser excluído, e
+        // então exclua o último slot (troque e remova).
 
         uint256 lastTokenIndex = _allTokens.length - 1;
         uint256 tokenIndex = _allTokensIndex[tokenId];
 
-        // When the token to delete is the last token, the swap operation is unnecessary. However, since this occurs so
-        // rarely (when the last minted token is burnt) that we still do the swap here to avoid the gas cost of adding
-        // an 'if' statement (like in _removeTokenFromOwnerEnumeration)
+        // Quando o token a ser excluído é o último token, a operação de troca é desnecessária. No entanto, como isso ocorre tão frequentemente, é mais eficiente manter a operação de troca em todos os casos.
+        // raramente (quando o último token emitido é queimado) que ainda fazemos a troca aqui para evitar o custo de gás de adição
+        // uma declaração 'if' (como em _removeTokenFromOwnerEnumeration)
         uint256 lastTokenId = _allTokens[lastTokenIndex];
 
-        _allTokens[tokenIndex] = lastTokenId; // Move the last token to the slot of the to-delete token
-        _allTokensIndex[lastTokenId] = tokenIndex; // Update the moved token's index
+        // Mova o último token para o espaço do token a ser excluído
+        // Atualize o índice do token movido
 
-        // This also deletes the contents at the last position of the array
+        // Isso também exclui o conteúdo na última posição do array
         delete _allTokensIndex[tokenId];
         _allTokens.pop();
     }
@@ -1524,7 +1524,7 @@ contract Loot is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
         string[17] memory parts;
-        parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
+        //www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">
 
         parts[1] = getWeapon(tokenId);
 
@@ -1561,7 +1561,7 @@ contract Loot is ERC721Enumerable, ReentrancyGuard, Ownable {
         string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
         output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16]));
         
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Bag #', toString(tokenId), '", "description": "Loot is randomized adventurer gear generated and stored on chain. Stats, images, and other functionality are intentionally omitted for others to interpret. Feel free to use Loot in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+        #', toString(tokenId), '", "descrição": "Loot é um equipamento de aventureiro gerado e armazenado aleatoriamente na cadeia. Estatísticas, imagens e outras funcionalidades são intencionalmente omitidas para que outros possam interpretar. Sinta-se à vontade para usar o Loot da maneira que desejar.", "imagem": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
@@ -1578,7 +1578,7 @@ contract Loot is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
     
     function toString(uint256 value) internal pure returns (string memory) {
-    // Inspired by OraclizeAPI's implementation - MIT license
+    // Inspirado na implementação da OraclizeAPI - licença MIT
     // https://github.com/oraclize/ethereum-api/blob/b42146b063c7d6ee1358846c198246239e9360e8/oraclizeAPI_0.4.25.sol
 
         if (value == 0) {
@@ -1602,22 +1602,22 @@ contract Loot is ERC721Enumerable, ReentrancyGuard, Ownable {
     constructor() ERC721("Loot", "LOOT") Ownable() {}
 }
 
-/// [MIT License]
+/// [Licença MIT]
 /// @title Base64
-/// @notice Provides a function for encoding some bytes in base64
-/// @author Brecht Devos <brecht@loopring.org>
+/// @notice Fornece uma função para codificar alguns bytes em base64
+/// @autor Brecht Devos <brecht@loopring.org>
 library Base64 {
     bytes internal constant TABLE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-    /// @notice Encodes some bytes to the base64 representation
+    /// @notice Codifica alguns bytes para a representação base64
     function encode(bytes memory data) internal pure returns (string memory) {
         uint256 len = data.length;
         if (len == 0) return "";
 
-        // multiply by 4/3 rounded up
+        // multiplicar por 4/3 arredondado para cima
         uint256 encodedLen = 4 * ((len + 2) / 3);
 
-        // Add some extra buffer at the end
+        // Adicione um buffer extra no final
         bytes memory result = new bytes(encodedLen + 32);
 
         bytes memory table = TABLE;

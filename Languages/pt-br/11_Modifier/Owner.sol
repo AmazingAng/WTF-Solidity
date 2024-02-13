@@ -2,21 +2,21 @@
 pragma solidity ^0.8.4;
 
 contract Owner {
-   address public owner; // 定义owner变量
+   // Definir a variável owner
 
-   // 构造函数
+   // Construtor
    constructor() {
-      owner = msg.sender; // 在部署合约的时候，将owner设置为部署者的地址
+      // Ao implantar o contrato, defina o proprietário como o endereço do implantador.
    }
 
-   // 定义modifier
+   // Definir modificador
    modifier onlyOwner {
-      require(msg.sender == owner); // 检查调用者是否为owner地址
-      _; // 如果是的话，继续运行函数主体；否则报错并revert交易
+      // Verificar se o chamador é o endereço do proprietário
+      // Se for o caso, continue executando o corpo da função; caso contrário, ocorrerá um erro e a transação será revertida.
    }
 
-   // 定义一个带onlyOwner修饰符的函数
+   // Definir uma função com o modificador onlyOwner
    function changeOwner(address _newOwner) external onlyOwner{
-      owner = _newOwner; // 只有owner地址运行这个函数，并改变owner
+      // Apenas o endereço do proprietário pode executar esta função e alterar o proprietário
    }
 }

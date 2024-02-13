@@ -8,33 +8,33 @@ import "../src/TimeManipulation.sol";
 contract TimeManipulationTest is Test {
     TimeManipulation public nft;
 
-    // Computes address for a given private key
+    // Calcula o endereço para uma chave privada fornecida
     address alice = vm.addr(1);
 
     function setUp() public {
         nft = new TimeManipulation();
     }
 
-    // forge test -vv --match-test  testMint
+    // teste de forja -vv --match-test testMint
     function testMint() public {
-        console.log("Condition 1: block.timestamp % 170 != 0");
-        // Set block.timestamp to 169
+        console.log("Condição 1: block.timestamp % 170 != 0")
+        // Defina block.timestamp como 169
         vm.warp(169);
-        console.log("block.timestamp: %s", block.timestamp);
-        // Sets all subsequent calls' msg.sender to be the input address
-        // until `stopPrank` is called
+        console.log("block.timestamp: %s", block.timestamp)
+        // Define o endereço do remetente para todas as chamadas subsequentes como o endereço de entrada
+        // até que `stopPrank` seja chamado
         vm.startPrank(alice);
-        console.log("alice balance before mint: %s", nft.balanceOf(alice));
+        console.log("saldo de Alice antes da criação: %s", nft.balanceOf(alice))
         nft.luckyMint();
-        console.log("alice balance after mint: %s", nft.balanceOf(alice));
+        console.log("saldo de Alice após a criação: %s", nft.balanceOf(alice))
 
-        // Set block.timestamp to 17000
-        console.log("Condition 2: block.timestamp % 170 == 0");
+        // Defina block.timestamp como 17000
+        console.log("Condição 2: block.timestamp % 170 == 0")
         vm.warp(17000);
-        console.log("block.timestamp: %s", block.timestamp);
-        console.log("alice balance before mint: %s", nft.balanceOf(alice));
+        console.log("block.timestamp: %s", block.timestamp)
+        console.log("saldo de Alice antes da criação: %s", nft.balanceOf(alice))
         nft.luckyMint();
-        console.log("alice balance after mint: %s", nft.balanceOf(alice));
+        console.log("saldo de Alice após a criação: %s", nft.balanceOf(alice))
         vm.stopPrank();
     }
 }

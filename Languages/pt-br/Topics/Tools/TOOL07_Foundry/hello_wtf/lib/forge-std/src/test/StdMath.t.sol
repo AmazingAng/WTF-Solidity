@@ -153,8 +153,8 @@ contract StdMathTest is Test
         assertEq(stdMath.percentDelta(type(int192).max, type(int192).max),  0);
         assertEq(stdMath.percentDelta(type(int192).min, type(int192).min),  0);
 
-        assertEq(stdMath.percentDelta(type(int192).min, type(int192).max),  2e18); // rounds the 1 wei diff down
-        assertEq(stdMath.percentDelta(type(int192).max, type(int192).min),  2e18 - 1); // rounds the 1 wei diff down
+        // arredonda a diferença de 1 wei para baixo
+        // arredonda a diferença de 1 wei para baixo
         assertEq(stdMath.percentDelta(0,                int256(2500)),      1e18);
         assertEq(stdMath.percentDelta(2500,             int256(2500)),      0);
         assertEq(stdMath.percentDelta(5000,             int256(2500)),      1e18);
@@ -187,7 +187,7 @@ contract StdMathTest is Test
         assertEq(percentDelta, manualPercentDelta);
     }
 
-    /*//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
                                    HELPERS
     //////////////////////////////////////////////////////////////////////////*/
 

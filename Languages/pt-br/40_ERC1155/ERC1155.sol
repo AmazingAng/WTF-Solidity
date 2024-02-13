@@ -9,23 +9,23 @@ import "../34_ERC721/String.sol";
 import "../34_ERC721/IERC165.sol";
 
 /**
- * @dev ERC1155多代币标准
- * 见 https://eips.ethereum.org/EIPS/eip-1155
+ * @dev Padrão ERC1155 para múltiplos tokens
+ * Veja https://eips.ethereum.org/EIPS/eip-1155
  */
 contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
-    using Address for address; // 使用Address库，用isContract来判断地址是否为合约
-    using Strings for uint256; // 使用String库
-    // Token名称
+    // Usando a biblioteca Address, use isContract para verificar se um endereço é um contrato
+    // Usando a biblioteca String
+    // Token nome
     string public name;
-    // Token代号
+    // Token código
     string public symbol;
-    // 代币种类id 到 账户account 到 余额balances 的映射
+    // Mapeamento do ID do tipo de token para a conta do usuário para o saldo das contas
     mapping(uint256 => mapping(address => uint256)) private _balances;
-    // 发起方地址address 到 授权地址operator 到 是否授权bool 的批量授权映射
+    // Mapeamento de autorização em lote do endereço do remetente (address) para o endereço do operador (operator) e se está autorizado (bool)
     mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     /**
-     * 构造函数，初始化`name` 和`symbol`, uri_
+     * Construtor, inicializa `name`, `symbol` e uri_
      */
     constructor(string memory name_, string memory symbol_) {
         name = name_;
@@ -33,7 +33,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * @dev See {IERC165-supportsInterface}.
+     * @dev Veja {IERC165-supportsInterface}.
      */
     function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
         return
@@ -43,7 +43,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * @dev 持仓查询 实现IERC1155的balanceOf，返回account地址的id种类代币持仓量。
+     * @dev Consulta de posição. Implementa o balanceOf do IERC1155, retornando a quantidade de tokens de cada tipo de id detidos pelo endereço da conta.
      */
     function balanceOf(address account, uint256 id) public view virtual override returns (uint256) {
         require(account != address(0), "ERC1155: address zero is not a valid owner");
@@ -51,9 +51,9 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * @dev 批量持仓查询
-     * 要求:
-     * - `accounts` 和 `ids` 数组长度相等.
+     * @dev Consulta de posição em lote
+     * Requisitos:
+     * - Os arrays `accounts` e `ids` devem ter o mesmo tamanho.
      */
     function balanceOfBatch(address[] memory accounts, uint256[] memory ids)
         public view virtual override
@@ -68,9 +68,9 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * @dev 批量授权，调用者授权operator使用其所有代币
-     * 释放{ApprovalForAll}事件
-     * 条件：msg.sender != operator
+     * @dev Autorizações em lote, o chamador autoriza o operador a usar todos os seus tokens
+     * Emite o evento {ApprovalForAll}
+     * Condição: msg.sender != operador
      */
     function setApprovalForAll(address operator, bool approved) public virtual override {
         require(msg.sender != operator, "ERC1155: setting approval status for self");
@@ -79,19 +79,19 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * @dev 查询批量授权.
+     * @dev Consultar autorizações em lote.
      */
     function isApprovedForAll(address account, address operator) public view virtual override returns (bool) {
         return _operatorApprovals[account][operator];
     }
 
     /**
-     * @dev 安全转账，将`amount`单位的`id`种类代币从`from`转账到`to`
-     * 释放 {TransferSingle} 事件.
-     * 要求:
-     * - to 不能是0地址.
-     * - from拥有足够的持仓量，且调用者拥有授权
-     * - 如果 to 是智能合约, 他必须支持 IERC1155Receiver-onERC1155Received.
+     * @dev Transferência segura, transfere `amount` unidades do token de categoria `id` de `from` para `to`.
+     * Emite o evento {TransferSingle}.
+     * Requisitos:
+     * - to não pode ser um endereço 0.
+     * - from deve possuir saldo suficiente e o chamador deve ter autorização.
+     * - Se to for um contrato inteligente, ele deve suportar IERC1155Receiver-onERC1155Received.
      */
     function safeTransferFrom(
         address from,
@@ -101,34 +101,34 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         bytes memory data
     ) public virtual override {
         address operator = msg.sender;
-        // 调用者是持有者或是被授权
+        // O chamador é o proprietário ou está autorizado
         require(
             from == operator || isApprovedForAll(from, operator),
             "ERC1155: caller is not token owner nor approved"
         );
         require(to != address(0), "ERC1155: transfer to the zero address");
-        // from地址有足够持仓
+        // O endereço de origem tem saldo suficiente
         uint256 fromBalance = _balances[id][from];
         require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
-        // 更新持仓量
+        // Atualizar volume de posições
         unchecked {
             _balances[id][from] = fromBalance - amount;
         }
         _balances[id][to] += amount;
-        // 释放事件
+        // Liberar evento
         emit TransferSingle(operator, from, to, id, amount);
-        // 安全检查
+        // Verificação de segurança
         _doSafeTransferAcceptanceCheck(operator, from, to, id, amount, data);    
     }
 
     /**
-     * @dev 批量安全转账，将`amounts`数组单位的`ids`数组种类代币从`from`转账到`to`
-     * 释放 {TransferSingle} 事件.
-     * 要求:
-     * - to 不能是0地址.
-     * - from拥有足够的持仓量，且调用者拥有授权
-     * - 如果 to 是智能合约, 他必须支持 IERC1155Receiver-onERC1155BatchReceived.
-     * - ids和amounts数组长度相等
+     * @dev Transferência segura em lote, transfere tokens representados pelos elementos do array `ids` em quantidades representadas pelos elementos do array `amounts` da conta `from` para a conta `to`.
+     * Emite o evento {TransferSingle}.
+     * Requisitos:
+     * - `to` não pode ser o endereço 0.
+     * - `from` deve possuir saldo suficiente e o chamador deve estar autorizado.
+     * - Se `to` for um contrato inteligente, ele deve suportar a função `onERC1155BatchReceived` da interface IERC1155Receiver.
+     * - Os arrays `ids` e `amounts` devem ter o mesmo tamanho.
      */
     function safeBatchTransferFrom(
         address from,
@@ -138,7 +138,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         bytes memory data
     ) public virtual override {
         address operator = msg.sender;
-        // 调用者是持有者或是被授权
+        // O chamador é o proprietário ou está autorizado
         require(
             from == operator || isApprovedForAll(from, operator),
             "ERC1155: caller is not token owner nor approved"
@@ -146,7 +146,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         require(ids.length == amounts.length, "ERC1155: ids and amounts length mismatch");
         require(to != address(0), "ERC1155: transfer to the zero address");
 
-        // 通过for循环更新持仓  
+        // Atualizando a posição através de um loop for
         for (uint256 i = 0; i < ids.length; ++i) {
             uint256 id = ids[i];
             uint256 amount = amounts[i];
@@ -160,13 +160,13 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         }
 
         emit TransferBatch(operator, from, to, ids, amounts);
-        // 安全检查
+        // Verificação de segurança
         _doSafeBatchTransferAcceptanceCheck(operator, from, to, ids, amounts, data);    
     }
 
     /**
-     * @dev 铸造
-     * 释放 {TransferSingle} 事件.
+     * @dev Cunhar
+     * Disparar o evento {TransferSingle}.
      */
     function _mint(
         address to,
@@ -185,8 +185,8 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * @dev 批量铸造
-     * 释放 {TransferBatch} 事件.
+     * @dev Cunhagem em lote
+     * Dispara o evento {TransferBatch}.
      */
     function _mintBatch(
         address to,
@@ -209,7 +209,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * @dev 销毁
+     * @dev Destruir
      */
     function _burn(
         address from,
@@ -230,7 +230,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * @dev 批量销毁
+     * @dev Destruir em massa
      */
     function _burnBatch(
         address from,
@@ -256,7 +256,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         emit TransferBatch(operator, from, address(0), ids, amounts);
     }
 
-    // @dev ERC1155的安全转账检查
+    // @dev Verificação de transferência segura do ERC1155
     function _doSafeTransferAcceptanceCheck(
         address operator,
         address from,
@@ -278,7 +278,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         }
     }
 
-    // @dev ERC1155的批量安全转账检查
+    // @dev Verificação de transferência segura em lote para ERC1155
     function _doSafeBatchTransferAcceptanceCheck(
         address operator,
         address from,
@@ -303,7 +303,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * @dev 返回ERC1155的id种类代币的uri，存储metadata，类似ERC721的tokenURI.
+     * @dev Retorna o URI do token de uma categoria de ID do ERC1155, armazenando metadados, semelhante ao tokenURI do ERC721.
      */
     function uri(uint256 id) public view virtual override returns (string memory) {
         string memory baseURI = _baseURI();
@@ -311,7 +311,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * 计算{uri}的BaseURI，uri就是把baseURI和tokenId拼接在一起，需要开发重写.
+     * Calcula o BaseURI de {uri}, onde uri é a concatenação de baseURI e tokenId, precisa ser reescrito pelo desenvolvedor.
      */
     function _baseURI() internal view virtual returns (string memory) {
         return "";

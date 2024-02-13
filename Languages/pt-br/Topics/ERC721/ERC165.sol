@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
-// OpenZeppelin Contracts v4.4.1 (utils/introspection/ERC165.sol)
+// OpenZeppelin Contratos v4.4.1 (utils/introspection/ERC165.sol)
 
 pragma solidity ^0.8.0;
 
 import "./IERC165.sol";
 
 /**
- * @dev Implementation of the {IERC165} interface.
+ * @dev Implementação da interface {IERC165}.
  *
- * Contracts that want to implement ERC165 should inherit from this contract and override {supportsInterface} to check
- * for the additional interface id that will be supported. For example:
+ * Contratos que desejam implementar o ERC165 devem herdar deste contrato e substituir {supportsInterface} para verificar
+ * o ID de interface adicional que será suportado. Por exemplo:
  *
  * ```solidity
  * function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
@@ -17,11 +17,11 @@ import "./IERC165.sol";
  * }
  * ```
  *
- * Alternatively, {ERC165Storage} provides an easier to use but more expensive implementation.
+ * Alternativamente, {ERC165Storage} fornece uma implementação mais fácil de usar, mas mais cara.
  */
 abstract contract ERC165 is IERC165 {
     /**
-     * @dev See {IERC165-supportsInterface}.
+     * @dev Veja {IERC165-supportsInterface}.
      */
     function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
         return interfaceId == type(IERC165).interfaceId;

@@ -2,27 +2,25 @@
 pragma solidity ^0.8.4;
 
 contract Fallback {
-    /* 触发fallback() 还是 receive()?
-           接收ETH
+    /* Acionar fallback() ou receive()?
+           Receber ETH
               |
-         msg.data是空？
+         msg.data está vazio?
             /  \
-          是    否
+          Sim   Não
           /      \
-receive()存在?   fallback()
+receive() existe?   fallback()
         / \
-       是  否
+       Sim  Não
       /     \
 receive()  fallback   
     */
 
-    // Define event
+    // Definir evento
     event receivedCalled(address Sender, uint Value);
     event fallbackCalled(address Sender, uint Value, bytes Data);
 
-    // When receiving ETH, release the Received event
-
-Quando receber ETH, libere o evento Recebido.
+    // Receber o evento "Received" ao receber ETH
     receive() external payable {
         emit receivedCalled(msg.sender, msg.value);
     }

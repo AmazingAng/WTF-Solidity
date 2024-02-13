@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// WTF Solidity by 0xAA
+// WTF Solidity por 0xAA
 
 pragma solidity ^0.8.4;
 
@@ -11,20 +11,20 @@ contract ERC20 is IERC20 {
 
     mapping(address => mapping(address => uint256)) public override allowance;
 
-    uint256 public override totalSupply;   // 代币总供给
+    // Fornecimento total de tokens
 
-    string public name;   // 名称
-    string public symbol;  // 符号
+    // Nome
+    // Símbolos
     
-    uint8 public decimals = 18; // 小数位数
+    // Número de casas decimais
 
-    // @dev 在合约部署的时候实现代币名称和符号
+    // @dev Implement token name and symbol during contract deployment
     constructor(string memory name_, string memory symbol_){
         name = name_;
         symbol = symbol_;
     }
 
-    // @dev 实现`transfer`函数，代币转账逻辑
+    // @dev Implement the `transfer` function, logic for token transfer
     function transfer(address recipient, uint amount) external override returns (bool) {
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;
@@ -32,14 +32,14 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    // @dev 实现 `approve` 函数, 代币授权逻辑
+    // @dev Implement the `approve` function, token authorization logic
     function approve(address spender, uint amount) external override returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
     }
 
-    // @dev 实现`transferFrom`函数，代币授权转账逻辑
+    // @dev Implement the `transferFrom` function, which handles token transfer with authorization
     function transferFrom(
         address sender,
         address recipient,
@@ -52,14 +52,14 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    // @dev 铸造代币，从 `0` 地址转账给 调用者地址
+    // @dev Cunhar tokens e transferir do endereço `0` para o endereço do chamador
     function mint(uint amount) external {
         balanceOf[msg.sender] += amount;
         totalSupply += amount;
         emit Transfer(address(0), msg.sender, amount);
     }
 
-    // @dev 销毁代币，从 调用者地址 转账给  `0` 地址
+    // @dev Destruir tokens, transferindo-os do endereço do chamador para o endereço `0`
     function burn(uint amount) external {
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;

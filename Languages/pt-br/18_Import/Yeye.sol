@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-// 第10讲合约继承中的Yeye合约
+// Aula 10: Contrato Yeye na herança de contratos
 contract Yeye {
     event Log(string msg);
 
-    // 定义3个function: hip(), pop(), yeye()，Log值为Yeye。
+    // Definir 3 funções: hip(), pop(), yeye(), com o valor de Log sendo Yeye.
     function hip() public virtual{
         emit Log("Yeye");
     }

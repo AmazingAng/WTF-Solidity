@@ -1,55 +1,55 @@
 // SPDX-License-Identifier: MIT
-// by 0xAA
+// por 0xAA
 pragma solidity ^0.8.4;
 
 contract UncheckedBank {
-    mapping (address => uint256) public balanceOf;    // 余额mapping
+    // Mapeamento de saldo
 
-    // 存入ether，并更新余额
+    // Depositar ether e atualizar o saldo
     function deposit() external payable {
         balanceOf[msg.sender] += msg.value;
     }
 
-    // 提取msg.sender的全部ether
+    // Extrair todos os ether do msg.sender
     function withdraw() external {
-        // 获取余额
+        // Obter saldo
         uint256 balance = balanceOf[msg.sender];
         require(balance > 0, "Insufficient balance");
         balanceOf[msg.sender] = 0;
-        // Unchecked low-level call
+        // Chamada de baixo nível não verificada
         bool success = payable(msg.sender).send(balance);
     }
 
-    // 获取银行合约的余额
+    // Obter o saldo do contrato bancário
     function getBalance() external view returns (uint256) {
         return address(this).balance;
     }
 }
 
 contract Attack {
-    UncheckedBank public bank; // Bank合约地址
+    // Endereço do contrato Bank
 
-    // 初始化Bank合约地址
+    // Inicializando o endereço do contrato Bank
     constructor(UncheckedBank _bank) {
         bank = _bank;
     }
     
-    // 回调函数，转账ETH时会失败
+    // Função de retorno, a transferência de ETH falhará
     receive() external payable {
         revert();
     }
 
-    // 存款函数，调用时 msg.value 设为存款数量
+    // Função de depósito, quando chamada, defina msg.value como a quantidade a ser depositada
     function deposit() external payable {
         bank.deposit{value: msg.value}();
     }
 
-    // 取款函数，虽然调用成功，但实际上取款失败
+    // Função de saque, embora a chamada tenha sido bem-sucedida, na realidade o saque falhou
     function withdraw() external payable {
         bank.withdraw();
     }
 
-    // 获取本合约的余额
+    // Obter o saldo deste contrato
     function getBalance() external view returns (uint256) {
         return address(this).balance;
     }

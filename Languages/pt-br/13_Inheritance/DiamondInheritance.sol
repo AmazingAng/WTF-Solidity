@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-/* 继承树：
-  God
+/* Árvore de herança:
+  Deus
  /  \
-Adam Eve
+Adão Eva
  \  /
-people
+pessoas
 */
 
 contract God {

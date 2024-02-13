@@ -16,22 +16,22 @@ contract UniswapV2FlashloanTest is Test {
     }
 
     function testFlashloan() public {
-        // 换weth，并转入flashloan合约，用做手续费
+        // Trocar weth e transferir para o contrato flashloan como taxa de transação
         weth.deposit{value: 1e18}();
         weth.transfer(address(flashloan), 1e18);
-        // 闪电贷借贷金额
+        // Empréstimo de valor do empréstimo relâmpago
         uint amountToBorrow = 100 * 1e18;
         flashloan.flashloan(amountToBorrow);
     }
 
-    // 手续费不足，会revert
+    // Taxa insuficiente, será revertido
     function testFlashloanFail() public {
-        // 换weth，并转入flashloan合约，用做手续费
+        // Trocar weth e transferir para o contrato flashloan como taxa de transação
         weth.deposit{value: 1e18}();
         weth.transfer(address(flashloan), 4e16);
-        // 闪电贷借贷金额
+        // Empréstimo de valor do empréstimo relâmpago
         uint amountToBorrow = 100 * 1e18;
-        // 手续费不足
+        // Taxa insuficiente
         vm.expectRevert();
         flashloan.flashloan(amountToBorrow);
     }

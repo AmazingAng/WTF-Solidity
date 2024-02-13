@@ -4,7 +4,7 @@ pragma solidity ^0.8.4;
 contract Hash{
     bytes32 _msg = keccak256(abi.encodePacked("0xAA"));
 
-    // 唯一数字标识
+    // Identificador único de número
     function hash(
         uint _num,
         string memory _string,
@@ -13,14 +13,14 @@ contract Hash{
         return keccak256(abi.encodePacked(_num, _string, _addr));
     }
 
-    // 弱抗碰撞性
+    // Resistência fraca a impactos
     function weak(
         string memory string1
     )public view returns (bool){
         return keccak256(abi.encodePacked(string1)) == _msg;
     }
 
-    // 强抗碰撞性
+    // Forte resistência ao impacto
     function strong(
         string memory string1,
         string memory string2

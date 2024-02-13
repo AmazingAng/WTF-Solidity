@@ -2,8 +2,8 @@
 // wtf.academy
 pragma solidity ^0.8.4;
 
-// 选择器冲突的例子
-// 去掉注释后，合约不会通过编译，因为两个函数有着相同的选择器
+// Exemplo de conflito de seletor
+// Após remover os comentários, o contrato não será compilado, pois as duas funções têm o mesmo seletor.
 contract Foo {
     bytes4 public selector1 = bytes4(keccak256("burn(uint256)"));
     bytes4 public selector2 = bytes4(keccak256("collate_propagate_storage(bytes16)"));
@@ -12,53 +12,53 @@ contract Foo {
 }
 
 
-// 透明可升级合约的教学代码，不要用于生产。
+// Código de ensino para um contrato transparente e atualizável, não utilizar em produção.
 contract TransparentProxy {
-    address implementation; // logic合约地址
-    address admin; // 管理员
-    string public words; // 字符串，可以通过逻辑合约的函数改变
+    // Endereço do contrato lógico
+    // Administrador
+    // Strings, podem ser alterados por meio de funções de contrato lógico.
 
-    // 构造函数，初始化admin和逻辑合约地址
+    // Construtor, inicializa os endereços do admin e do contrato lógico
     constructor(address _implementation){
         admin = msg.sender;
         implementation = _implementation;
     }
 
-    // fallback函数，将调用委托给逻辑合约
-    // 不能被admin调用，避免选择器冲突引发意外
+    // fallback function, delegates the call to the logic contract
+    // Não pode ser chamado pelo admin para evitar conflitos de seletor inesperados
     fallback() external payable {
         require(msg.sender != admin);
         (bool success, bytes memory data) = implementation.delegatecall(msg.data);
     }
 
-    // 升级函数，改变逻辑合约地址，只能由admin调用
+    // Função de atualização, altera o endereço do contrato lógico, só pode ser chamada pelo admin
     function upgrade(address newImplementation) external {
         if (msg.sender != admin) revert();
         implementation = newImplementation;
     }
 }
 
-// 旧逻辑合约
+// Contrato de lógica antigo
 contract Logic1 {
-    // 状态变量和proxy合约一致，防止插槽冲突
+    // Variáveis de estado e contratos proxy são consistentes para evitar conflitos de slot
     address public implementation; 
     address public admin; 
-    string public words; // 字符串，可以通过逻辑合约的函数改变
+    // Strings, podem ser alterados por meio de funções de contrato lógico.
 
-    // 改变proxy中状态变量，选择器： 0xc2985578
+    // Alterando a variável de estado no proxy, seletor: 0xc2985578
     function foo() public{
         words = "old";
     }
 }
 
-// 新逻辑合约
+// Novo contrato lógico
 contract Logic2 {
-    // 状态变量和proxy合约一致，防止插槽冲突
+    // Variáveis de estado e contratos proxy são consistentes para evitar conflitos de slot
     address public implementation; 
     address public admin; 
-    string public words; // 字符串，可以通过逻辑合约的函数改变
+    // Strings, podem ser alterados por meio de funções de contrato lógico.
 
-    // 改变proxy中状态变量，选择器：0xc2985578
+    // Alterando a variável de estado no proxy, seletor: 0xc2985578
     function foo() public{
         words = "new";
     }

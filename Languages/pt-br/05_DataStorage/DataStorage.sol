@@ -2,19 +2,19 @@
 pragma solidity ^0.8.4;
 
 contract DataStorage {
-    // The data location of x is storage.
-    // This is the only place where the
-    // data location can be omitted.
+    // A localização dos dados de x é armazenamento.
+    // Este é o único lugar onde o
+    // A localização dos dados pode ser omitida.
     uint[] public x = [1,2,3];
 
     function fStorage() public{
-        //声明一个storage的变量xStorage，指向x。修改xStorage也会影响x
+        //Declare a variable xStorage that points to x. Modifying xStorage will also affect x.
         uint[] storage xStorage = x;
         xStorage[0] = 100;
     }
 
     function fMemory() public view{
-        //声明一个Memory的变量xMemory，复制x。修改xMemory不会影响x
+        //Declare a variable xMemory of type Memory, copy x. Modifying xMemory will not affect x.
         uint[] memory xMemory = x;
         xMemory[0] = 100;
         xMemory[1] = 200;
@@ -23,8 +23,8 @@ contract DataStorage {
     }
 
     function fCalldata(uint[] calldata _x) public pure returns(uint[] calldata){
-        //参数为calldata数组，不能被修改
-        // _x[0] = 0 //这样修改会报错
+        // Parâmetro é um array de calldata, não pode ser modificado.
+        // _x[0] = 0 // Essa modificação resultará em um erro
         return(_x);
     }
 }
@@ -35,7 +35,7 @@ contract Variables {
     string public z;
 
     function foo() external{
-        // 可以在函数里更改状态变量的值
+        // Você pode alterar o valor da variável de estado dentro de uma função
         x = 5;
         y = 2;
         z = "0xAA";

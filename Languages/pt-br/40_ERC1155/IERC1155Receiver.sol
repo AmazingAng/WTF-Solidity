@@ -4,12 +4,12 @@ pragma solidity ^0.8.0;
 import "../34_ERC721/IERC165.sol";
 
 /**
- * @dev ERC1155接收合约，要接受ERC1155的安全转账，需要实现这个合约
+ * @dev Contrato receptor de ERC1155. Para receber transferências seguras de ERC1155, é necessário implementar este contrato.
  */
 interface IERC1155Receiver is IERC165 {
     /**
-     * @dev 接受ERC1155安全转账`safeTransferFrom` 
-     * 需要返回 0xf23a6e61 或 `bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"))`
+     * @dev Aceita transferência segura de ERC1155 `safeTransferFrom`
+     * Deve retornar 0xf23a6e61 ou `bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"))`
      */
     function onERC1155Received(
         address operator,
@@ -20,8 +20,8 @@ interface IERC1155Receiver is IERC165 {
     ) external returns (bytes4);
 
     /**
-     * @dev 接受ERC1155批量安全转账`safeBatchTransferFrom` 
-     * 需要返回 0xbc197c81 或 `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))`
+     * @dev Aceita transferências seguras em lote de ERC1155 `safeBatchTransferFrom`
+     * Precisa retornar 0xbc197c81 ou `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))`
      */
     function onERC1155BatchReceived(
         address operator,
