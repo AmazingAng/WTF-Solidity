@@ -1,4 +1,4 @@
-# WTF Tutorial Solidity: 10. Flujo de Control
+# Tutorial WTF Solidity: 10. Flujo de Control
 
 Recientemente, he estado revisando Solidity, consolidando detalles y escribiendo tutoriales "WTF Solidity" para principiantes.
 
@@ -15,7 +15,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-En esta sección, introduciremos el flujo de control en Solidity y escribiremos un ordenamiento por inserción `(InsertionSort)`, un programa que parece simple pero es propenso a errores.
+En esta sección, se introducirá el flujo de control en Solidity y se escribirá un ordenamiento por inserción `(InsertionSort)`, un programa que parece simple pero es propenso a errores.
 
 ## Flujo de Control
 
@@ -75,19 +75,19 @@ function doWhileTest() public pure returns(uint256){
 
 5. Operador condicional (`ternario`)
 
-El operador `ternario` es el único operador en Solidity que acepta tres operandos: una condición seguida por un signo de interrogación (`?`), luego una expresión `x` para ejecutar si la condición es verdadera seguida por dos puntos (`:`), y finalmente la expresión `y` para ejecutar si la condición es falsa: `condición ? x : y`.
+El operador `ternario` es el único operador en Solidity que acepta tres operandos: una condición seguida por un signo de interrogación (`?`), luego una expresión `x` para ejecutarse si la condición es verdadera, seguida por dos puntos (`:`), y finalmente la expresión `y` para ejecutarse si la condición es falsa: `condición ? x : y`.
 
 Este operador se usa frecuentemente como una alternativa a una declaración `if-else`.
 
 ```solidity
 // operador ternario/condicional
 function ternaryTest(uint256 x, uint256 y) public pure returns(uint256){
-    // devuelve el máximo entre x e y, si x es mayor que y, devuelve x, de lo contrario, devuelve y
+    // devuelve el máximo entre 'x' y 'y', si x es mayor que y, devuelve x, de lo contrario, devuelve y
     return x >= y ? x : y; 
 }
 ```
 
-Además, hay palabras clave `continue` (ingresar inmediatamente al siguiente bucle) y `break` (salir del bucle actual) que se pueden usar.
+Además, hay palabras clave `continue` (continuar directamente a la siguiente interacción) y `break` (salir del bucle actual) que se pueden usar.
 
 ## Implementación de Ordenamiento por Inserción en `Solidity`.
 
@@ -95,9 +95,9 @@ Además, hay palabras clave `continue` (ingresar inmediatamente al siguiente buc
 
 ### Ordenamiento por Inserción
 
-El algoritmo de ordenamiento resuelve el problema de ordenar un conjunto desordenado de números de menor a mayor, por ejemplo, ordenar `[2, 5, 3, 1]` a `[1, 2, 3, 5]`. El ordenamiento por Inserción (`InsertionSort`) es el algoritmo de ordenamiento más simple y el primero que la mayoría de los desarrolladores aprenden en su clase de ciencias de la computación. La lógica de `InsertionSort`:
+El algoritmo de ordenamiento resuelve el problema de ordenar un conjunto desordenado de números de menor a mayor, por ejemplo, ordenar `[2, 5, 3, 1]` a `[1, 2, 3, 5]`. El ordenamiento por Inserción (`InsertionSort`) es el algoritmo de ordenamiento más simple y suele ser el primero que aprenden la mayoría de los desarrolladores en su clase de ciencias de la computación. La lógica de `InsertionSort`:
 
-1. Desde el primer elemento del arreglo `x` hasta el último, compara el elemento `x[i]` con el elemento frente a él `x[i-1]`; si `x[i]` es más pequeño, cambia sus posiciones, luego lo compara con `x[i-2]`, y repite el proceso.
+1. Desde el primer elemento del arreglo `x` hasta el último, se compara el elemento `x[i]` con el elemento frente a él `x[i-1]`; si `x[i]` es menor, cambia sus posiciones, luego lo compara con `x[i-2]`, y repite el proceso.
 
 El esquema del ordenamiento por inserción:
 - Sorted = Ordenado
@@ -124,7 +124,7 @@ def insertionSort(arr):
 
 ### Implementación en Solidity (con Error)
 
-La versión en Python del Ordenamiento por Inserción ocupa 9 líneas. Reescribámoslo en Solidity reemplazando `funciones`, `variables` y `bucles` con la sintaxis de Solidity correspondiente. Esta solo ocupa 9 líneas de código:
+La versión en Python del Ordenamiento por Inserción ocupa 9 líneas. Se reescribirá reemplazando `funciones`, `variables` y `bucles` con la sintaxis de Solidity correspondiente. Esta implementación solo ocupa 9 líneas de código:
 
 ``` solidity
     // Ordenamiento por Inserción (Versión incorrecta)
@@ -142,7 +142,7 @@ La versión en Python del Ordenamiento por Inserción ocupa 9 líneas. Reescrib�
     }
 ```
 
-Pero cuando compilamos la versión modificada y tratamos de ordenar `[2, 5, 3, 1]`. *BOOM!* ¡Hay errores! Después de 3 horas de depuración, aún no pude encontrar dónde estaba el error. Busqué "Solidity insertion sort" en Google, y encontré que todos los algoritmos de inserción escritos con Solidity estaban equivocados, como: [Ordenamiento en Solidity sin Comparación](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d) 
+Pero cuando se compila la versión modificada y tratamos de ordenar `[2, 5, 3, 1]`. *BOOM!* ¡Hay errores! Después de 3 horas de depuración, aún no pude encontrar dónde estaba el error. Busqué "Solidity insertion sort" en Google, y encontré que todos los algoritmos de inserción escritos con Solidity estaban equivocados, como: [Ordenamiento en Solidity sin Comparación](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d) 
 
 Aquí los errores en la consola de `Remix`:
 

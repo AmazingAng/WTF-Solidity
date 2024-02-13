@@ -8,7 +8,7 @@ tags:
   - modifier
 ---
 
-# WTF Tutorial Solidity: 11. Constructor & Modificador
+# Tutorial WTF Solidity: 11. Constructor & Modificador
 
 Recientemente, he estado revisando Solidity, consolidando detalles y escribiendo tutoriales "WTF Solidity" para principiantes.
 
@@ -24,7 +24,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-En esta sección, introduciremos `constructor` y `modificador` en Solidity, utilizando como ejemplo un contrato de control de acceso (`Ownable`).
+En esta sección, se introducirá `constructor` y `modificador` en Solidity, utilizando como ejemplo un contrato de control de acceso (`Ownable`).
 
 ## Constructor
 `constructor` es una función especial, que se ejecutará automáticamente una vez durante el despliegue del contrato. Cada contrato puede tener un `constructor`. Se puede usar para inicializar parámetros de un contrato, como una dirección de propietario (`owner`):
@@ -34,7 +34,7 @@ En esta sección, introduciremos `constructor` y `modificador` en Solidity, util
 
    // constructor
    constructor() {
-      owner = msg.sender; // establece al propietario la dirección de quien despliega el contrato
+      owner = msg.sender;  //Asigna la la dirección del usuario que despliega el contrato como owner
    }
 ```
 
@@ -43,22 +43,22 @@ En esta sección, introduciremos `constructor` y `modificador` en Solidity, util
 ```solidity
 pragma solidity = 0.4.21;
 contract Parents {
-    // La función con el mismo nombre que el contrato (Parents) es constructor
+    // La función que tiene el mismo nombre que el contrato (Parents) es el constructor
     function Parents () public {
     }
 }
 ```
 
 ## Modificador
-`modifier` es similar a `decorador` en la programación orientada a objetos, que se utiliza para declarar propiedades dedicadas de funciones y reducir la redundancia de código. El `modificador` es la Armadura de Iron Man para funciones: la función con `modificador` tendrá algunas propiedades mágicas. El caso de uso popular de `modificador` es restringir el acceso de funciones.
+`modifier` es similar a `decorador` en la programación orientada a objetos, que se utiliza para declarar propiedades dedicadas de funciones y reducir la redundancia de código. El `modificador` es la Armadura de Iron Man para funciones: la función con `modificador` tendrá algunas propiedades mágicas. El caso de uso más popular de `modificador` es restringir el acceso a las funciones.
 
 ![Iron Man's modifier](https://images.mirror-media.xyz/publication-images/nVwXsOVmrYu8rqvKKPMpg.jpg?height=630&width=1200)
 
-Definamos un modificador llamado `onlyOwner`. Funciones con él solo pueden ser llamadas por el propietario (`owner`):
+Se define un modificador llamado `onlyOwner`. Las Función que usen `OnlyOwner` solo pueden ser llamadas por el propietario (`owner`):
 ```solidity
    // define el modificador
    modifier onlyOwner {
-      require(msg.sender == owner); // verifica si quien llama la función es la dirección del propietario
+      require(msg.sender == owner); // verifica si la dirección que llama la función es la dirección del propietario
       _; // ejecuta el cuerpo de la función
    }
 ```
@@ -76,8 +76,8 @@ A continuación, definamos una función `changeOwner`, que puede cambiar el prop
 
 ## Demo en Remix
 Aquí, tomamos Owner.sol como ejemplo.
-1. compila y despliega el código en Remix.
-2. haz clic en el botón `owner` para ver el propietario actual.
+1. Compilar y despliega el código en Remix.
+2. Hacer clic en el botón `owner` para ver la dirección del propietario actual.
     ![](img/11-2_es.png)
 3. La transacción tiene éxito cuando la función `changeOwner` es llamada por el usuario de la dirección del propietario.
     ![](img/11-3_es.png)
@@ -86,4 +86,4 @@ Aquí, tomamos Owner.sol como ejemplo.
 
 
 ## Summary
-En esta lección, introducimos `constructor` y `modificador` en Solidity, y escribimos un contrato `Ownable` que controla el acceso del contrato.
+En esta lección, se introdujo `constructor` y `modificador` en Solidity, y escribimos un contrato `Ownable` que controla el acceso del contrato.
