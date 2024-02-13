@@ -84,7 +84,7 @@ Los parámetros `indexed` se pueden entender como la clave "indexada" para los e
 
 Los parámetros no indexados se almacenarán en la sección `data` del registro. Se pueden interpretar como el "valor" del evento y no se pueden recuperar directamente. Pero pueden almacenar datos de mayor tamaño. Por lo tanto, la sección `data` se puede utilizar para almacenar estructuras de datos complejas, como `array` y `string`. Además, `data` consume menos gas en comparación con `topic`.
 
-## Demostración en Remix
+## Demo en Remix
 Tomemos el contrato `Event.sol` como ejemplo.
 
 1. Desplegar el contrato `Event`.
