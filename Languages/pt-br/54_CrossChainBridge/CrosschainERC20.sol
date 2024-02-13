@@ -6,15 +6,15 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract CrossChainToken is ERC20, Ownable {
     
-    // Bridge event
+    // Evento de Ponte
     event Bridge(address indexed user, uint256 amount);
-    // Mint event
+    // Evento Mint
     event Mint(address indexed to, uint256 amount);
 
     /**
-     * @param name Token Name
-     * @param symbol Token Symbol
-     * @param totalSupply Token Supply
+     * @param name Nome do Token
+     * @param symbol Símbolo do Token
+     * @param totalSupply Suprimento do Token
      */
     constructor(
         string memory name,
@@ -25,8 +25,8 @@ contract CrossChainToken is ERC20, Ownable {
     }
 
     /**
-     * Bridge function
-     * @param amount: burn amount of token on the current chain and mint on the other chain
+     * Função de ponte
+     * @param amount: quantidade de tokens a serem queimados na cadeia atual e criados na outra cadeia
      */
     function bridge(uint256 amount) public {
         _burn(msg.sender, amount);
@@ -34,7 +34,7 @@ contract CrossChainToken is ERC20, Ownable {
     }
 
     /**
-     * Mint function
+     * Função de criação
      */
     function mint(address to, uint amount) external onlyOwner {
         _mint(to, amount);

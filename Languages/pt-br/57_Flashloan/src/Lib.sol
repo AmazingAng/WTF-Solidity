@@ -93,9 +93,9 @@ interface IUniswapV3Pool {
     ) external;
 }
 
-// AAVE V3 Pool interface
+// Interface do Pool AAVE V3
 interface ILendingPool {
-    // flashloan of single asset
+    // empréstimo instantâneo de um único ativo
     function flashLoanSimple(
         address receiverAddress,
         address asset,
@@ -104,6 +104,6 @@ interface ILendingPool {
         uint16 referralCode
     ) external;
 
-    // get the fee on flashloan, default at 0.05%
+    // obter a taxa no flashloan, padrão em 0,05%
     function FLASHLOAN_PREMIUM_TOTAL() external view returns (uint128);
 }

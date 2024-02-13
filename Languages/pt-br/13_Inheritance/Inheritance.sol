@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-// 合约继承
+// Contrato de herança
 contract Yeye {
     event Log(string msg);
 
-    // 定义3个function: hip(), pop(), man()，Log值为Yeye。
+    // Definir 3 funções: hip(), pop() e man(), com o valor de Log como Yeye.
     function hip() public virtual{
         emit Log("Yeye");
     }
@@ -20,11 +20,11 @@ contract Yeye {
 }
 
 contract Baba is Yeye{
-    // 继承两个function: hip()和pop()，输出改为Baba。
-    function hip() public virtual override{
-        emit Log("Baba");
+    // class Baba extends hip() {
+    pop() {
+        co console.log("Baba")
     }
-
+ }
     function pop() public virtual override{
         emit Log("Baba");
     }
@@ -35,7 +35,7 @@ contract Baba is Yeye{
 }
 
 contract Erzi is Yeye, Baba{
-    // 继承两个function: hip()和pop()，输出改为Erzi。
+    // Herda duas funções: hip() e pop(), e altera a saída para "Erzi".
     function hip() public virtual override(Yeye, Baba){
         emit Log("Erzi");
     }
@@ -53,7 +53,7 @@ contract Erzi is Yeye, Baba{
     }
 }
 
-// 构造函数的继承
+// Herança de construtores
 abstract contract A {
     uint public a;
 

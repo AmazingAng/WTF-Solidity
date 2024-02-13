@@ -6,13 +6,13 @@ import {IERC4626} from "./IERC4626.sol";
 import {ERC20, IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 /**
- * @dev ERC4626 "代币化金库标准"合约，仅供教学使用，不要用于生产
+ * @dev Contrato ERC4626 "Padrão de Tesouraria Tokenizada", apenas para uso educacional, não utilizar em produção
  */
 contract ERC4626 is ERC20, IERC4626 {
-    /*//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
                     状态变量
     //////////////////////////////////////////////////////////////*/
-    ERC20 private immutable _asset; // 
+    //
     uint8 private immutable _decimals;
 
     constructor(
@@ -25,156 +25,156 @@ contract ERC4626 is ERC20, IERC4626 {
 
     }
 
-    /** @dev See {IERC4626-asset}. */
+    /** @dev Veja {IERC4626-asset}. */
     function asset() public view virtual override returns (address) {
         return address(_asset);
     }
 
     /**
-     * See {IERC20Metadata-decimals}.
+     * Veja {IERC20Metadata-decimals}.
      */
     function decimals() public view virtual override(IERC20Metadata, ERC20) returns (uint8) {
         return _decimals;
     }
 
-    /*//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
                         存款/提款逻辑
     //////////////////////////////////////////////////////////////*/
-    /** @dev See {IERC4626-deposit}. */
+    /** @dev Veja {IERC4626-depositar}. */
     function deposit(uint256 assets, address receiver) public virtual returns (uint256 shares) {
-        // 利用 previewDeposit() 计算将获得的金库份额
+        // Utilizando o previewDeposit() para calcular a participação no cofre que será obtida
         shares = previewDeposit(assets);
 
-        // 先 transfer 后 mint，防止重入
+        // Primeiro transferir e depois criar, para evitar reentrância
         _asset.transferFrom(msg.sender, address(this), assets);
         _mint(receiver, shares);
 
-        // 释放 Deposit 事件
+        // Liberar o evento de Depósito
         emit Deposit(msg.sender, receiver, assets, shares);
     }
 
-    /** @dev See {IERC4626-mint}. */
+    /** @dev Veja {IERC4626-mint}. */
     function mint(uint256 shares, address receiver) public virtual returns (uint256 assets) {
-        // 利用 previewMint() 计算需要存款的基础资产数额
+        // Usando previewMint() para calcular a quantidade de ativos básicos necessários para depósito
         assets = previewMint(shares);
 
-        // 先 transfer 后 mint，防止重入
+        // Primeiro transferir e depois criar, para evitar reentrância
         _asset.transferFrom(msg.sender, address(this), assets);
         _mint(receiver, shares);
 
-        // 释放 Deposit 事件
+        // Liberar o evento de Depósito
         emit Deposit(msg.sender, receiver, assets, shares);
 
     }
 
-    /** @dev See {IERC4626-withdraw}. */
+    /** @dev Veja {IERC4626-withdraw}. */
     function withdraw(
         uint256 assets,
         address receiver,
         address owner
     ) public virtual returns (uint256 shares) {
-        // 利用 previewWithdraw() 计算将销毁的金库份额
+        // Utilizando o previewWithdraw() para calcular a quantidade de ações do cofre a serem destruídas.
         shares = previewWithdraw(assets);
 
-        // 如果调用者不是 owner，则检查并更新授权
+        // Se o chamador não for o proprietário, verifique e atualize a autorização
         if (msg.sender != owner) {
             _spendAllowance(owner, msg.sender, shares);
         }
 
-        // 先销毁后 transfer，防止重入
+        // Primeiro destrua e depois transfira para evitar reentrância
         _burn(owner, shares);
         _asset.transfer(receiver, assets);
 
-        // 释放 Withdraw 函数
+        // Liberar a função Withdraw
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
     }
 
-    /** @dev See {IERC4626-redeem}. */
+    /** @dev Veja {IERC4626-resgatar}. */
     function redeem(
         uint256 shares,
         address receiver,
         address owner
     ) public virtual returns (uint256 assets) {
-        // 利用 previewRedeem() 计算能赎回的基础资产数额
+        // Usando previewRedeem() para calcular a quantidade de ativos básicos que podem ser resgatados
         assets = previewRedeem(shares);
 
-        // 如果调用者不是 owner，则检查并更新授权
+        // Se o chamador não for o proprietário, verifique e atualize a autorização
         if (msg.sender != owner) {
             _spendAllowance(owner, msg.sender, shares);
         }
 
-        // 先销毁后 transfer，防止重入
+        // Primeiro destrua e depois transfira para evitar reentrância
         _burn(owner, shares);
         _asset.transfer(receiver, assets);
 
-        // 释放 Withdraw 函数        
+        // Liberando a função Withdraw
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
     }
 
-    /*//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
                             会计逻辑
     //////////////////////////////////////////////////////////////*/
-    /** @dev See {IERC4626-totalAssets}. */
+    /** @dev Veja {IERC4626-totalAssets}. */
     function totalAssets() public view virtual returns (uint256){
-        // 返回合约中基础资产持仓
+        // Retorna a posição do ativo subjacente no contrato
         return _asset.balanceOf(address(this));
     }
 
-    /** @dev See {IERC4626-convertToShares}. */
+    /** @dev Veja {IERC4626-convertToShares}. */
     function convertToShares(uint256 assets) public view virtual returns (uint256) {
         uint256 supply = totalSupply();
-        // 如果 supply 为 0，那么 1:1 铸造金库份额
-        // 如果 supply 不为0，那么按比例铸造
+        // Se o fornecimento for 0, então a cota do cofre será de 1:1.
+        // Se o fornecimento não for zero, então cunhe proporcionalmente.
         return supply == 0 ? assets : assets * supply / totalAssets();
     }
 
-    /** @dev See {IERC4626-convertToAssets}. */
+    /** @dev Veja {IERC4626-convertToAssets}. */
     function convertToAssets(uint256 shares) public view virtual returns (uint256) {
         uint256 supply = totalSupply();
-        // 如果 supply 为 0，那么 1:1 赎回基础资产
-        // 如果 supply 不为0，那么按比例赎回
+        // Se o fornecimento for 0, então resgate os ativos subjacentes na proporção de 1:1.
+        // Se o fornecimento não for zero, resgate proporcionalmente.
         return supply == 0 ? shares : shares * totalAssets() / supply;
     }
 
-    /** @dev See {IERC4626-previewDeposit}. */
+    /** @dev Veja {IERC4626-previewDeposit}. */
     function previewDeposit(uint256 assets) public view virtual returns (uint256) {
         return convertToShares(assets);
     }
 
-    /** @dev See {IERC4626-previewMint}. */
+    /** @dev Veja {IERC4626-previewMint}. */
     function previewMint(uint256 shares) public view virtual returns (uint256) {
         return convertToAssets(shares);
     }
 
-    /** @dev See {IERC4626-previewWithdraw}. */
+    /** @dev Veja {IERC4626-previewWithdraw}. */
     function previewWithdraw(uint256 assets) public view virtual returns (uint256) {
         return convertToShares(assets);
     }
 
-    /** @dev See {IERC4626-previewRedeem}. */
+    /** @dev Veja {IERC4626-previewRedeem}. */
     function previewRedeem(uint256 shares) public view virtual returns (uint256) {
         return convertToAssets(shares);
     }
 
-    /*//////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
                      DEPOSIT/WITHDRAWAL LIMIT LOGIC
     //////////////////////////////////////////////////////////////*/
-    /** @dev See {IERC4626-maxDeposit}. */
+    /** @dev Veja {IERC4626-maxDeposit}. */
     function maxDeposit(address) public view virtual returns (uint256) {
         return type(uint256).max;
     }
 
-    /** @dev See {IERC4626-maxMint}. */
+    /** @dev Veja {IERC4626-maxMint}. */
     function maxMint(address) public view virtual returns (uint256) {
         return type(uint256).max;
     }
     
-    /** @dev See {IERC4626-maxWithdraw}. */
+    /** @dev Veja {IERC4626-maxWithdraw}. */
     function maxWithdraw(address owner) public view virtual returns (uint256) {
         return convertToAssets(balanceOf(owner));
     }
     
-    /** @dev See {IERC4626-maxRedeem}. */
+    /** @dev Veja {IERC4626-maxRedeem}. */
     function maxRedeem(address owner) public view virtual returns (uint256) {
         return balanceOf(owner);
     }

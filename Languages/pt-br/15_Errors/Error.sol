@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-// Gas cost在Remix中测试得到 使用0.8.17版本编译
-// 参数使用 tokenId = 123, address = {any address}
+// O custo de gás foi testado no Remix usando a versão 0.8.17 de compilação.
+// Parâmetros utilizados tokenId = 123, address = {qualquer endereço}
 
-// 自定义error
+// Erro personalizado
 error TransferNotOwner();
 
-// error TransferNotOwner(address sender);
+// erro TransferNotOwner(endereço remetente);
 
 contract Errors {
-    // 一组映射，记录每个TokenId的Owner
+    // Um mapa que registra o proprietário de cada TokenId
     mapping(uint256 => address) private _owners;
 
-    // Error方法: gas cost 24457
-    // Error with parameter: gas cost 24660
+    // Error method: custo de gás 24457
+    // Erro com o parâmetro: custo de gás 24660
     function transferOwner1(uint256 tokenId, address newOwner) public {
         if (_owners[tokenId] != msg.sender) {
             revert TransferNotOwner();
@@ -23,13 +23,13 @@ contract Errors {
         _owners[tokenId] = newOwner;
     }
 
-    // require方法: gas cost 24755
+    // require方法: custo de gas 24755
     function transferOwner2(uint256 tokenId, address newOwner) public {
         require(_owners[tokenId] == msg.sender, "Transfer Not Owner");
         _owners[tokenId] = newOwner;
     }
 
-    // assert方法: gas cost 24473
+    // assert método: custo de gas 24473
     function transferOwner3(uint256 tokenId, address newOwner) public {
         assert(_owners[tokenId] == msg.sender);
         _owners[tokenId] = newOwner;

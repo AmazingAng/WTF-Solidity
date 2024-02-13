@@ -1,5 +1,5 @@
-// 我们可以通过 npx hardhat run <script> 来运行想要的脚本
-// 这里你可以使用 npx hardhat run deploy.js 来运行
+// Podemos executar o script desejado usando npx hardhat run <script>
+// Aqui você pode usar npx hardhat run deploy.js para executar
 const hre = require("hardhat");
 
 async function main() {
@@ -8,10 +8,10 @@ async function main() {
 
   await token.deployed();
 
-  console.log("成功部署合约:", token.address);
+  console.log("Contrato implantado com sucesso:", token.address)
 }
 
-// 运行脚本
+// Executar script
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

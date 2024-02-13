@@ -4,19 +4,19 @@ pragma solidity ^0.8.0;
 import "../34_ERC721/IERC165.sol";
 
 /**
- * @dev ERC1155标准的接口合约，实现了EIP1155的功能
- * 详见：https://eips.ethereum.org/EIPS/eip-1155[EIP].
+ * @dev Contrato de interface padrão ERC1155, que implementa as funcionalidades do EIP1155
+ * Veja mais em: https://eips.ethereum.org/EIPS/eip-1155[EIP].
  */
 interface IERC1155 is IERC165 {
     /**
-     * @dev 单类代币转账事件
-     * 当`value`个`id`种类的代币被`operator`从`from`转账到`to`时释放.
+     * @dev Evento de transferência de token de uma única classe
+     * É acionado quando `operator` transfere `value` tokens da classe `id` de `from` para `to`.
      */
     event TransferSingle(address indexed operator, address indexed from, address indexed to, uint256 id, uint256 value);
 
     /**
-     * @dev 多类代币转账事件
-     * ids和values为转账的代币种类和数量数组
+     * @dev Evento de transferência de tokens de várias classes
+     * ids e values são arrays de tipos e quantidades de tokens transferidos
      */
     event TransferBatch(
         address indexed operator,
@@ -27,23 +27,23 @@ interface IERC1155 is IERC165 {
     );
 
     /**
-     * @dev 批量授权事件
-     * 当`account`将所有代币授权给`operator`时释放
+     * @dev Evento de autorização em lote
+     * Disparado quando `account` concede autorização de todos os tokens para `operator`
      */
     event ApprovalForAll(address indexed account, address indexed operator, bool approved);
 
     /**
-     * @dev 当`id`种类的代币的URI发生变化时释放，`value`为新的URI
+     * @dev Quando o URI do token da categoria `id` é alterado, libera, `value` é o novo URI
      */
     event URI(string value, uint256 indexed id);
 
     /**
-     * @dev 持仓查询，返回`account`拥有的`id`种类的代币的持仓量
+     * @dev Consulta de posição, retorna a quantidade de tokens detidos por `account` do tipo `id`
      */
     function balanceOf(address account, uint256 id) external view returns (uint256);
 
     /**
-     * @dev 批量持仓查询，`accounts`和`ids`数组的长度要想等。
+     * @dev Consulta de posição em lote, o comprimento dos arrays `accounts` e `ids` deve ser igual.
      */
     function balanceOfBatch(address[] calldata accounts, uint256[] calldata ids)
         external
@@ -51,24 +51,24 @@ interface IERC1155 is IERC165 {
         returns (uint256[] memory);
 
     /**
-     * @dev 批量授权，将调用者的代币授权给`operator`地址。
-     * 释放{ApprovalForAll}事件.
+     * @dev Autorização em lote, concede ao chamador a permissão de transferir tokens para o endereço do `operador`.
+     * Emite o evento {ApprovalForAll}.
      */
     function setApprovalForAll(address operator, bool approved) external;
 
     /**
-     * @dev 批量授权查询，如果授权地址`operator`被`account`授权，则返回`true`
-     * 见 {setApprovalForAll}函数.
+     * @dev Consulta de autorização em lote, retorna `true` se o endereço de autorização `operator` estiver autorizado por `account`
+     * Veja a função {setApprovalForAll}.
      */
     function isApprovedForAll(address account, address operator) external view returns (bool);
 
     /**
-     * @dev 安全转账，将`amount`单位`id`种类的代币从`from`转账给`to`.
-     * 释放{TransferSingle}事件.
-     * 要求:
-     * - 如果调用者不是`from`地址而是授权地址，则需要得到`from`的授权
-     * - `from`地址必须有足够的持仓
-     * - 如果接收方是合约，需要实现`IERC1155Receiver`的`onERC1155Received`方法，并返回相应的值
+     * @dev Transferência segura, transfere `amount` unidades do token de tipo `id` de `from` para `to`.
+     * Emite o evento {TransferSingle}.
+     * Requisitos:
+     * - Se o chamador não for o endereço `from`, mas sim um endereço autorizado, é necessário obter autorização de `from`.
+     * - O endereço `from` deve ter saldo suficiente.
+     * - Se o destinatário for um contrato, ele deve implementar o método `onERC1155Received` do `IERC1155Receiver` e retornar o valor correspondente.
      */
     function safeTransferFrom(
         address from,
@@ -79,11 +79,11 @@ interface IERC1155 is IERC165 {
     ) external;
 
     /**
-     * @dev 批量安全转账
-     * 释放{TransferBatch}事件
-     * 要求：
-     * - `ids`和`amounts`长度相等
-     * - 如果接收方是合约，需要实现`IERC1155Receiver`的`onERC1155BatchReceived`方法，并返回相应的值
+     * @dev Transferência segura em lote
+     * Dispara o evento {TransferBatch}
+     * Requisitos:
+     * - Os arrays `ids` e `amounts` devem ter o mesmo tamanho
+     * - Se o destinatário for um contrato, ele deve implementar o método `onERC1155BatchReceived` da interface `IERC1155Receiver` e retornar o valor correspondente
      */
     function safeBatchTransferFrom(
         address from,

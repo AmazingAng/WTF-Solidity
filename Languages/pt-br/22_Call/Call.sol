@@ -2,43 +2,43 @@
 pragma solidity ^0.8.4;
 
 contract OtherContract {
-    uint256 private _x = 0; // 状态变量x
-    // 收到eth事件，记录amount和gas
+    // Variável de estado x
+    // Recebendo evento eth, registrando amount e gas
     event Log(uint amount, uint gas);
 
     fallback() external payable{}
 
-    // 返回合约ETH余额
+    // Retorna o saldo de ETH do contrato
     function getBalance() view public returns(uint) {
         return address(this).balance;
     }
 
-    // 可以调整状态变量_x的函数，并且可以往合约转ETH (payable)
+    // Você pode ajustar a função da variável de estado _x e também pode enviar ETH para o contrato (payable)
     function setX(uint256 x) external payable{
         _x = x;
-        // 如果转入ETH，则释放Log事件
+        // Se ETH for transferido, dispara o evento Log
         if(msg.value > 0){
             emit Log(msg.value, gasleft());
         }
     }
 
-    // 读取x
+    // Ler x
     function getX() external view returns(uint x){
         x = _x;
     }
 }
 
 contract Call{
-    // 定义Response事件，输出call返回的结果success和data
+    // Definir o evento de resposta, exibindo o resultado de retorno da chamada 'success' e 'data'
     event Response(bool success, bytes data);
 
     function callSetX(address payable _addr, uint256 x) public payable {
-        // call setX()，同时可以发送ETH
+        // chamar setX(), enquanto também é possível enviar ETH
         (bool success, bytes memory data) = _addr.call{value: msg.value}(
             abi.encodeWithSignature("setX(uint256)", x)
         );
 
-        emit Response(success, data); //释放事件
+        //Liberar evento
     }
 
     function callGetX(address _addr) external returns(uint256){
@@ -47,16 +47,16 @@ contract Call{
             abi.encodeWithSignature("getX()")
         );
 
-        emit Response(success, data); //释放事件
+        //Liberar evento
         return abi.decode(data, (uint256));
     }
 
     function callNonExist(address _addr) external{
-        // call 不存在的函数
+        // call função inexistente
         (bool success, bytes memory data) = _addr.call(
             abi.encodeWithSignature("foo(uint256)")
         );
 
-        emit Response(success, data); //释放事件
+        //Liberar evento
     }
 }

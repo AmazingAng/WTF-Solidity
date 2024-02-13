@@ -6,27 +6,27 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 
 contract RandomNumberConsumer is VRFConsumerBaseV2{
 
-    //请求随机数需要调用VRFCoordinatorV2Interface接口
+    //A solicitação de um número aleatório requer a chamada da interface VRFCoordinatorV2Interface.
     VRFCoordinatorV2Interface COORDINATOR;
     
-    // 申请后的subId
+    // ID de submissão após a aplicação
     uint64 subId;
 
-    //存放得到的 requestId 和 随机数
+    // Armazenar o requestId e o número aleatório obtidos
     uint256 public requestId;
     uint256[] public randomWords;
     
     /**
-     * 使用chainlink VRF，构造函数需要继承 VRFConsumerBaseV2
-     * 不同链参数填的不一样
-     * 具体可以看：https://docs.chain.link/vrf/v2/subscription/supported-networks
-     * 网络: Sepolia测试网
-     * Chainlink VRF Coordinator 地址: 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
-     * LINK 代币地址: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
-     * 30 gwei Key Hash: 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c
-     * Minimum Confirmations 最小确认块数 : 3 （数字大安全性高，一般填12）
-     * callbackGasLimit gas限制 : 最大 2,500,000
-     * Maximum Random Values 一次可以得到的随机数个数 : 最大 500          
+     * Usando o Chainlink VRF, o construtor precisa herdar de VRFConsumerBaseV2
+     * Os parâmetros da cadeia são diferentes
+     * Você pode ver mais detalhes em: https://docs.chain.link/vrf/v2/subscription/supported-networks
+     * Rede: Testnet Sepolia
+     * Endereço do Chainlink VRF Coordinator: 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
+     * Endereço do token LINK: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
+     * Key Hash de 30 gwei: 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c
+     * Confirmações mínimas: 3 (quanto maior o número, maior a segurança, geralmente preencha com 12)
+     * Limite de gas callbackGasLimit: máximo de 2.500.000
+     * Valores aleatórios máximos: 500 por vez
      */
     address vrfCoordinator = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
     bytes32 keyHash = 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
@@ -40,7 +40,7 @@ contract RandomNumberConsumer is VRFConsumerBaseV2{
     }
 
     /** 
-     * 向VRF合约申请随机数 
+     * Solicitar um número aleatório ao contrato VRF 
      */
     function requestRandomWords() external {
         requestId = COORDINATOR.requestRandomWords(
@@ -53,8 +53,8 @@ contract RandomNumberConsumer is VRFConsumerBaseV2{
     }
 
     /**
-     * VRF合约的回调函数，验证随机数有效之后会自动被调用
-     * 消耗随机数的逻辑写在这里
+     * Função de retorno do contrato VRF, será chamada automaticamente após a validação do número aleatório
+     * A lógica de consumo do número aleatório deve ser escrita aqui
      */
     function fulfillRandomWords(uint256 requestId, uint256[] memory s_randomWords) internal override {
         randomWords = s_randomWords;

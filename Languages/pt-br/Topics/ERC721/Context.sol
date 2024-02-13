@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: MIT
-// OpenZeppelin Contracts v4.4.1 (utils/Context.sol)
+// OpenZeppelin Contratos v4.4.1 (utils/Context.sol)
 
 pragma solidity ^0.8.0;
 
 /**
- * @dev Provides information about the current execution context, including the
- * sender of the transaction and its data. While these are generally available
- * via msg.sender and msg.data, they should not be accessed in such a direct
- * manner, since when dealing with meta-transactions the account sending and
- * paying for execution may not be the actual sender (as far as an application
- * is concerned).
+ * @dev Fornece informações sobre o contexto de execução atual, incluindo o
+ * remetente da transação e seus dados. Embora essas informações estejam geralmente disponíveis
+ * através de msg.sender e msg.data, elas não devem ser acessadas de forma direta
+ * pois, ao lidar com meta-transações, a conta que envia e
+ * paga pela execução pode não ser o remetente real (do ponto de vista de um aplicativo).
  *
- * This contract is only required for intermediate, library-like contracts.
+ * Este contrato é necessário apenas para contratos intermediários semelhantes a bibliotecas.
+ */
  */
 abstract contract Context {
     function _msgSender() internal view virtual returns (address) {

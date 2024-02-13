@@ -1,37 +1,37 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-// 3种方法发送ETH
-// transfer: 2300 gas, revert
-// send: 2300 gas, return bool
-// call: all gas, return (bool, data)
+// 3 formas de enviar ETH
+// transferir: 2300 gás, reverter
+// enviar: 2300 gás, retornar bool
+// chamar: todo gás, retornar (bool, dados)
 
-error SendFailed(); // 用send发送ETH失败error
-error CallFailed(); // 用call发送ETH失败error
+// Falha ao enviar ETH usando o comando send
+// Falha ao enviar ETH usando a função call
 
 contract SendETH {
-    // 构造函数，payable使得部署的时候可以转eth进去
+    // Construtor, payable permite transferir ETH durante a implantação
     constructor() payable{}
-    // receive方法，接收eth时被触发
+    // Método receive, acionado ao receber eth
     receive() external payable{}
 
-    // 用transfer()发送ETH
+    // Enviar ETH usando transfer()
     function transferETH(address payable _to, uint256 amount) external payable{
         _to.transfer(amount);
     }
 
-    // send()发送ETH
+    // enviar() enviar ETH
     function sendETH(address payable _to, uint256 amount) external payable{
-        // 处理下send的返回值，如果失败，revert交易并发送error
+        // Tratando o valor de retorno do 'send', se falhar, reverta a transação e envie um erro.
         bool success = _to.send(amount);
         if(!success){
             revert SendFailed();
         }
     }
 
-    // call()发送ETH
+    // call() enviar ETH
     function callETH(address payable _to, uint256 amount) external payable{
-        // 处理下call的返回值，如果失败，revert交易并发送error
+        // Tratando o valor de retorno da chamada, se falhar, reverta a transação e envie um erro
         (bool success,) = _to.call{value: amount}("");
         if(!success){
             revert CallFailed();
@@ -40,15 +40,15 @@ contract SendETH {
 }
 
 contract ReceiveETH {
-    // 收到eth事件，记录amount和gas
+    // Recebendo evento eth, registrando amount e gas
     event Log(uint amount, uint gas);
 
-    // receive方法，接收eth时被触发
+    // Método receive, acionado ao receber eth
     receive() external payable{
         emit Log(msg.value, gasleft());
     }
     
-    // 返回合约ETH余额
+    // Retorna o saldo de ETH do contrato
     function getBalance() view public returns(uint) {
         return address(this).balance;
     }

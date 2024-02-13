@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-// By 0xAA
+// Por 0xAA
 pragma solidity ^0.8.4;
 
-import "./IERC20.sol"; //import IERC20
+//importar IERC20
 
 contract ERC20 is IERC20 {
 
@@ -10,19 +10,19 @@ contract ERC20 is IERC20 {
 
     mapping(address => mapping(address => uint256)) public override allowance;
 
-    uint256 public override totalSupply;   // 代币总供给
+    // Fornecimento total de tokens
 
-    string public name;   // 名称
-    string public symbol;  // 符号
+    // Nome
+    // Símbolos
     
-    uint8 public decimals = 18; // 小数位数
+    // Número de casas decimais
 
     constructor(string memory name_, string memory symbol_){
         name = name_;
         symbol = symbol_;
     }
 
-    // @dev 实现`transfer`函数，代币转账逻辑
+    // @dev Implement the `transfer` function, logic for token transfer
     function transfer(address recipient, uint amount) external override returns (bool) {
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;
@@ -30,14 +30,14 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    // @dev 实现 `approve` 函数, 代币授权逻辑
+    // @dev Implement the `approve` function, token authorization logic
     function approve(address spender, uint amount) external override returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
     }
 
-    // @dev 实现`transferFrom`函数，代币授权转账逻辑
+    // @dev Implement the `transferFrom` function, which handles token transfer with authorization
     function transferFrom(
         address sender,
         address recipient,
@@ -50,14 +50,14 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    // @dev 铸造代币，从 `0` 地址转账给 调用者地址
+    // @dev Cunhar tokens e transferir do endereço `0` para o endereço do chamador
     function mint(uint amount) external {
         balanceOf[msg.sender] += amount;
         totalSupply += amount;
         emit Transfer(address(0), msg.sender, amount);
     }
 
-    // @dev 销毁代币，从 调用者地址 转账给  `0` 地址
+    // @dev Destruir tokens, transferindo-os do endereço do chamador para o endereço `0`
     function burn(uint amount) external {
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;
@@ -66,30 +66,30 @@ contract ERC20 is IERC20 {
 
 }
 
-// ERC20代币的水龙头合约
+// Contrato de torneira para tokens ERC20
 contract Faucet {
 
-    uint256 public amountAllowed = 100; // 每次领 100单位代币
-    address public tokenContract;   // token合约地址
-    mapping(address => bool) public requestedAddress;   // 记录领取过代币的地址
+    // Cada vez que você resgata 100 unidades de tokens.
+    // Endereço do contrato de token
+    // Registre os endereços que receberam tokens
 
-    // SendToken事件    
+    // Evento SendToken
     event SendToken(address indexed Receiver, uint256 indexed Amount); 
 
-    // 部署时设定ERC2代币合约
+    // Ao implantar, defina o contrato de token ERC2.
     constructor(address _tokenContract) {
-        tokenContract = _tokenContract; // set token contract
+        // definir contrato de token
     }
 
-    // 用户领取代币函数
+    // Função para o usuário receber tokens
     function requestTokens() external {
-        require(!requestedAddress[msg.sender], "Can't Request Multiple Times!"); // 每个地址只能领一次
-        IERC20 token = IERC20(tokenContract); // 创建IERC20合约对象
-        require(token.balanceOf(address(this)) >= amountAllowed, "Faucet Empty!"); // 水龙头空了
+        // Cada endereço só pode ser resgatado uma vez.
+        // Criar objeto de contrato IERC20
+        // A torneira está vazia.
 
-        token.transfer(msg.sender, amountAllowed); // 发送token
-        requestedAddress[msg.sender] = true; // 记录领取地址 
+        // Enviar token
+        // Registre o endereço de recebimento
         
-        emit SendToken(msg.sender, amountAllowed); // 释放SendToken事件
+        // Liberar o evento SendToken
     }
 }

@@ -3,16 +3,16 @@
 pragma solidity ^0.8.0;
 
 /**
- * @dev ERC165标准接口, 详见
+ * @dev Interface padrão ERC165, consulte
  * https://eips.ethereum.org/EIPS/eip-165[EIP].
  *
- * 合约可以声明支持的接口，供其他合约检查
+ * Contratos podem declarar interfaces suportadas para que outros contratos possam verificar.
  *
  */
 interface IERC165 {
     /**
-     * @dev 如果合约实现了查询的`interfaceId`，则返回true
-     * 规则详见：https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]
+     * @dev Se o contrato implementar o `interfaceId` de consulta, retorna verdadeiro
+     * Regras detalhadas em: https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[Seção EIP]
      *
      */
     function supportsInterface(bytes4 interfaceId) external view returns (bool);

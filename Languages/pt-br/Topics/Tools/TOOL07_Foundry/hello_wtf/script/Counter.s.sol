@@ -18,7 +18,7 @@ contract CounterScript is Script {
     }
 
     // function someFunction(uint256 x) public {
-    //     console2.log("some other func");
+    //     console2.log("alguma outra func");
     //     console2.log(x);
     // }
 }

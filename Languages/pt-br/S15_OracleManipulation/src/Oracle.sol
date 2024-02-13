@@ -5,7 +5,7 @@ import "openzeppelin-contracts/token/ERC20/IERC20.sol";
 import "openzeppelin-contracts/token/ERC20/ERC20.sol";
 
 contract oUSD is ERC20{
-    // 主网合约
+    // Contrato da Mainnet
     address public constant FACTORY_V2 =
         0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f;
     address public constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
@@ -18,20 +18,20 @@ contract oUSD is ERC20{
 
     constructor() ERC20("Oracle USD","oUSD"){}
 
-    // 获取ETH price
+    // Obter preço do ETH
     function getPrice() public view returns (uint256 price) {
-        // pair 交易对中储备
+        // par de negociação de reservas em moeda
         (uint112 reserve0, uint112 reserve1, ) = pair.getReserves();
-        // ETH 瞬时价格
+        // Preço instantâneo do ETH
         price = reserve0/reserve1;
     }
 
     function swap() external payable returns (uint256 amount){
-        // 获取价格
+        // Obter preço
         uint price = getPrice();
-        // 计算兑换数量
+        // Calcular a quantidade de troca
         amount = price * msg.value;
-        // 铸造代币
+        // Cunhando tokens
         _mint(msg.sender, amount);
     }
 }
@@ -74,7 +74,7 @@ interface IUniswapV2Pair {
 }
 
 interface IUniswapV2Router {
-    //  swap相关
+    // swap相关
     function swapExactTokensForTokens(
         uint amountIn,
         uint amountOutMin,
@@ -91,7 +91,7 @@ interface IUniswapV2Router {
         uint deadline
     ) external returns (uint[] memory amounts);
 
-    //  流动性相关
+    // Liquidez relacionada
     function addLiquidity(
         address tokenA,
         address tokenB,

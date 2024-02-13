@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
+// Este programa é software livre: você pode redistribuí-lo e/ou modificá-lo
+// sob os termos da Licença Pública Geral GNU, conforme publicada por
+// a Fundação Software Livre, seja a versão 3 da Licença, ou
+// (a seu critério) qualquer versão posterior.
 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// Este programa é distribuído na esperança de que seja útil,
+// mas SEM NENHUMA GARANTIA; sem mesmo a garantia implícita de
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
+// Licença Pública Geral GNU para mais detalhes.
 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// Você deve ter recebido uma cópia da Licença Pública Geral GNU
+// junto com este programa. Se não, veja <http://www.gnu.org/licenses/>.
 
 pragma solidity >=0.5.0;
 
@@ -70,7 +70,7 @@ contract DSTest {
                     abi.encode(HEVM_ADDRESS, bytes32("failed"), bytes32(uint256(0x01)))
                 )
             );
-            status; // Silence compiler warnings
+            // Silenciar avisos do compilador
         }
         _failed = true;
     }

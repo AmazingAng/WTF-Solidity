@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.5.0) (token/ERC721/ERC721.sol)
+// OpenZeppelin Contratos (última atualização v4.5.0) (token/ERC721/ERC721.sol)
 
 pragma solidity ^0.8.0;
 
@@ -12,51 +12,51 @@ import "./Strings.sol";
 import "./ERC165.sol";
 
 /**
- * @dev Implementation of https://eips.ethereum.org/EIPS/eip-721[ERC721] Non-Fungible Token Standard, including
- * the Metadata extension, but not including the Enumerable extension, which is available separately as
+ * @dev Implementação do https://eips.ethereum.org/EIPS/eip-721[Padrão de Token Não-Fungível ERC721], incluindo
+ * a extensão de Metadados, mas não incluindo a extensão Enumerável, que está disponível separadamente como
  * {ERC721Enumerable}.
  */
 contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     using Address for address;
     using Strings for uint256;
 
-    // Token name 
-    // 代币名称
+    // Nome do token
+    // Nome do token
     string private _name;
 
-    // Token symbol 
-    // 代币代号
+    // Símbolo do token
+    // Código do token
     string private _symbol;
 
-    // Mapping from token ID to owner address 
-    // tokenId到owner地址Mapping
+    // Mapeamento do ID do token para o endereço do proprietário
+    // Mapeamento do tokenId para o endereço do proprietário
     mapping(uint256 => address) private _owners;
 
-    // Mapping owner address to token count 
-    // owner地址到持币数量Mapping
+    // Mapeando o endereço do proprietário para a contagem de tokens
+    // Mapeamento do endereço do proprietário para a quantidade de moedas detidas
     mapping(address => uint256) private _balances;
 
-    // Mapping from token ID to approved address
-    // tokenId到授权地址Mapping
+    // Mapeamento do ID do token para o endereço aprovado
+    // Mapeamento do tokenId para o endereço de autorização
     mapping(uint256 => address) private _tokenApprovals;
 
-    // Mapping from owner to operator approvals
-    // owner地址到批量批准Mapping
+    // Mapeamento do proprietário para aprovações do operador
+    // Endereço do proprietário para mapeamento de aprovação em lote
     mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     /**
-     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
+     * @dev Inicializa o contrato definindo um `nome` e um `símbolo` para a coleção de tokens.
      */
-     // 构造器，需要设定ERC721代币的名字和代号
+     // Construtor, precisa definir o nome e o código do token ERC721
     constructor(string memory name_, string memory symbol_) {
         _name = name_;
         _symbol = symbol_;
     }
 
     /**
-     * @dev See {IERC165-supportsInterface}.
+     * @dev Veja {IERC165-supportsInterface}.
      */
-    // 实现IERC165接口supportsInterface
+    // Implementação do método supportsInterface da interface IERC165
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, IERC165) returns (bool) {
         return
             interfaceId == type(IERC721).interfaceId ||
@@ -65,18 +65,18 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721-balanceOf}.
+     * @dev Veja {IERC721-balanceOf}.
      */
-     // 实现IERC721的balanceOf, 用于查询owner地址的持仓量
+     // Implementação do balanceOf do IERC721, usado para consultar a quantidade de tokens que um endereço possui.
     function balanceOf(address owner) public view virtual override returns (uint256) {
         require(owner != address(0), "ERC721: balance query for the zero address");
         return _balances[owner];
     }
 
     /**
-     * @dev See {IERC721-ownerOf}.
+     * @dev Veja {IERC721-ownerOf}.
      */
-     // 实现IERC721的ownerOf, 用于查询tokenId的owner
+     // Implementação do ownerOf do IERC721, usado para consultar o proprietário do tokenId
     function ownerOf(uint256 tokenId) public view virtual override returns (address) {
         address owner = _owners[tokenId];
         require(owner != address(0), "ERC721: owner query for nonexistent token");
@@ -84,25 +84,25 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721Metadata-name}.
+     * @dev Veja {IERC721Metadata-name}.
      */
-     // 实现IERC721Metadata的name, 查询代币名字
+     // Implementação do método 'name' da interface IERC721Metadata para consultar o nome do token.
     function name() public view virtual override returns (string memory) {
         return _name;
     }
 
     /**
-     * @dev See {IERC721Metadata-symbol}.
+     * @dev Veja {IERC721Metadata-symbol}.
      */
-    // 实现IERC721Metadata的symbol 查询代币代号
+    // Implementação da função symbol da interface IERC721Metadata para consultar o código do token.
     function symbol() public view virtual override returns (string memory) {
         return _symbol;
     }
 
     /**
-     * @dev See {IERC721Metadata-tokenURI}.
+     * @dev Veja {IERC721Metadata-tokenURI}.
      */
-    // 实现IERC721Metadata的tokenURI
+    // Implementação do tokenURI da IERC721Metadata
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
 
@@ -111,19 +111,19 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Base URI for computing {tokenURI}. If set, the resulting URI for each
-     * token will be the concatenation of the `baseURI` and the `tokenId`. Empty
-     * by default, can be overridden in child contracts.
+     * @dev URI base para calcular {tokenURI}. Se definido, o URI resultante para cada
+     * token será a concatenação do `baseURI` e do `tokenId`. Vazio
+     * por padrão, pode ser substituído em contratos filhos.
      */
-    // 基URI，会被tokenURI()调用，跟tokenId拼成tokenURI，默认为空，需要子合约重写。
+    // URI base, called by tokenURI(), concatenated with tokenId to form tokenURI, default is empty, needs to be overridden by child contract.
     function _baseURI() internal view virtual returns (string memory) {
         return "";
     }
 
     /**
-     * @dev See {IERC721-approve}.
+     * @dev Veja {IERC721-approve}.
      */
-    // 实现IERC721的approve, 将tokenId授权给to
+    // Implemente o método approve da interface IERC721 para conceder autorização do tokenId para o endereço 'to'.
     function approve(address to, uint256 tokenId) public virtual override {
         address owner = ERC721.ownerOf(tokenId);
         require(to != owner, "ERC721: approval to current owner");
@@ -137,9 +137,9 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721-getApproved}.
+     * @dev Veja {IERC721-getApproved}.
      */
-    // 实现IERC721的getApproved, 查询tokenId的授权地址
+    // Implementação do getApproved do IERC721, que consulta o endereço autorizado para o tokenId.
     function getApproved(uint256 tokenId) public view virtual override returns (address) {
         require(_exists(tokenId), "ERC721: approved query for nonexistent token");
 
@@ -147,40 +147,40 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721-setApprovalForAll}.
+     * @dev Veja {IERC721-setApprovalForAll}.
      */
-    // 实现IERC721的setApprovalForAll
+    // Implementação do setApprovalForAll do IERC721
     function setApprovalForAll(address operator, bool approved) public virtual override {
         _setApprovalForAll(_msgSender(), operator, approved);
     }
 
     /**
-     * @dev See {IERC721-isApprovedForAll}.
+     * @dev Veja {IERC721-isApprovedForAll}.
      */
-    // 实现IERC721的isApprovedForAll
+    // Implementação do isApprovedForAll do IERC721
     function isApprovedForAll(address owner, address operator) public view virtual override returns (bool) {
         return _operatorApprovals[owner][operator];
     }
 
     /**
-     * @dev See {IERC721-transferFrom}.
+     * @dev Veja {IERC721-transferFrom}.
      */
-    // 实现IERC721的transferFrom
+    // Implementar transferFrom de IERC721
     function transferFrom(
         address from,
         address to,
         uint256 tokenId
     ) public virtual override {
         //solhint-disable-next-line max-line-length
-        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        Se o texto contiver alguma parte em 'zh', traduza todo o texto para 'pt-br', caso contrário, mantenha o texto original.
 
         _transfer(from, to, tokenId);
     }
 
     /**
-     * @dev See {IERC721-safeTransferFrom}.
+     * @dev Veja {IERC721-safeTransferFrom}.
      */
-    // 实现IERC721的safeTransferFrom
+    // Implementação do safeTransferFrom do IERC721
     function safeTransferFrom(
         address from,
         address to,
@@ -190,9 +190,9 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev See {IERC721-safeTransferFrom}.
+     * @dev Veja {IERC721-safeTransferFrom}.
      */
-    // 实现IERC721的safeTransferFrom
+    // Implementação do safeTransferFrom do IERC721
     function safeTransferFrom(
         address from,
         address to,
@@ -204,39 +204,39 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients
-     * are aware of the ERC721 protocol to prevent tokens from being forever locked.
+     * @dev Transfere com segurança o token `tokenId` de `from` para `to`, verificando primeiro se os destinatários do contrato
+     * estão cientes do protocolo ERC721 para evitar que os tokens fiquem bloqueados para sempre.
      *
-     * `_data` is additional data, it has no specified format and it is sent in call to `to`.
+     * `_data` é um dado adicional, não possui um formato especificado e é enviado na chamada para `to`.
      *
-     * This internal function is equivalent to {safeTransferFrom}, and can be used to e.g.
-     * implement alternative mechanisms to perform token transfer, such as signature-based.
+     * Esta função interna é equivalente a {safeTransferFrom} e pode ser usada, por exemplo,
+     * para implementar mecanismos alternativos para realizar a transferência de tokens, como baseados em assinatura.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `from` cannot be the zero address.
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must exist and be owned by `from`.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * - `from` não pode ser o endereço zero.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve existir e ser de propriedade de `from`.
+     * - Se `to` se refere a um contrato inteligente, ele deve implementar {IERC721Receiver-onERC721Received}, que é chamado durante uma transferência segura.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
 
     /**
-    * @dev 安全地将 `tokenId` 代币从 `from` 转移到 `to`，首先检查合约接收者是否了解 ERC721 协议，以防止代币被永久锁定。
+    * @dev Transfere o token `tokenId` de forma segura de `from` para `to`, verificando primeiro se o receptor do contrato entende o protocolo ERC721 para evitar que o token seja bloqueado permanentemente.
     *
-    * `_data` 是附加数据，它没有指定的格式，它会调用 `to` 合约。
+    * `_data` é um dado adicional, sem formato específico, que será chamado pelo contrato `to`.
     *
-    * 此内部函数等价于 {safeTransferFrom}。
+    * Esta função interna é equivalente a {safeTransferFrom}.
     *
-    * 要求:
+    * Requisitos:
     *
-    * - `from` 不能是0地址.
-    * - `to` 不能是0地址.
-    * - `tokenId` 代币必须存在，并且被 `from`拥有.
-    * - 如果 `to` 是智能合约, 他必须支持 {IERC721Receiver-onERC721Received}.
+    * - `from` não pode ser o endereço 0.
+    * - `to` não pode ser o endereço 0.
+    * - O token `tokenId` deve existir e ser possuído por `from`.
+    * - Se `to` for um contrato inteligente, ele deve suportar {IERC721Receiver-onERC721Received}.
     *
-    * 该函数运行时会释放 {Transfer} event.
+    * Esta função emite o evento {Transfer} durante a execução.
     */
     function _safeTransfer(
         address from,
@@ -249,26 +249,26 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Returns whether `tokenId` exists.
+     * @dev Retorna se o `tokenId` existe.
      *
-     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     * Tokens podem ser gerenciados pelo seu proprietário ou contas aprovadas através de {approve} ou {setApprovalForAll}.
      *
-     * Tokens start existing when they are minted (`_mint`),
-     * and stop existing when they are burned (`_burn`).
+     * Tokens começam a existir quando são criados (`_mint`),
+     * e param de existir quando são queimados (`_burn`).
      */
-    // 返回 `tokenId`是否存在（owner是非0地址）
+    // Retorna se o `tokenId` existe (o proprietário não é um endereço 0)
     function _exists(uint256 tokenId) internal view virtual returns (bool) {
         return _owners[tokenId] != address(0);
     }
 
     /**
-     * @dev Returns whether `spender` is allowed to manage `tokenId`.
+     * @dev Retorna se `spender` está autorizado a gerenciar `tokenId`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must exist.
+     * - `tokenId` deve existir.
      */
-    // 返回 `spender`是否被可以使用`tokenId`（owner或被授权）
+    // Retorna se `spender` tem permissão para usar `tokenId` (sendo o proprietário ou autorizado)
     function _isApprovedOrOwner(address spender, uint256 tokenId) internal view virtual returns (bool) {
         require(_exists(tokenId), "ERC721: operator query for nonexistent token");
         address owner = ERC721.ownerOf(tokenId);
@@ -276,25 +276,25 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Safely mints `tokenId` and transfers it to `to`.
+     * @dev Minta com segurança `tokenId` e transfere para `to`.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must not exist.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * - `tokenId` não deve existir.
+     * - Se `to` se refere a um contrato inteligente, ele deve implementar {IERC721Receiver-onERC721Received}, que é chamado durante uma transferência segura.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
-    // 安全mint `tokenId`并转账给 `to`. 条件: 1. `tokenId`尚不存在, 2. 若`to`为智能合约，他要支持{IERC721Receiver-onERC721Received}接口.
+    // Segurança mint `tokenId` e transferir para `to`. Condições: 1. `tokenId` ainda não existe, 2. Se `to` for um contrato inteligente, ele deve suportar a interface {IERC721Receiver-onERC721Received}.
     function _safeMint(address to, uint256 tokenId) internal virtual {
         _safeMint(to, tokenId, "");
     }
 
     /**
-     * @dev Same as {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], with an additional `data` parameter which is
-     * forwarded in {IERC721Receiver-onERC721Received} to contract recipients.
+     * @dev Mesmo que {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], com um parâmetro adicional `data` que é
+     * encaminhado em {IERC721Receiver-onERC721Received} para os destinatários do contrato.
      */
-    // 安全mint的实现
+    // Implementação segura de mint
     function _safeMint(
         address to,
         uint256 tokenId,
@@ -308,18 +308,18 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Mints `tokenId` and transfers it to `to`.
+     * @dev Emite um novo token `tokenId` e transfere-o para `to`.
      *
-     * WARNING: Usage of this method is discouraged, use {_safeMint} whenever possible
+     * AVISO: O uso deste método é desencorajado, use {_safeMint} sempre que possível.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `tokenId` must not exist.
-     * - `to` cannot be the zero address.
+     * - `tokenId` não deve existir.
+     * - `to` não pode ser o endereço zero.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
-    // internal函数，mint`tokenId`并转账给 `to`, 条件: 1. `tokenId`尚不存在, 2. `to`不是0地址. 将释放{Transfer} event.
+    // Função interna, cria um novo token com o ID `tokenId` e transfere para `to`, com as seguintes condições: 1. O token com o ID `tokenId` ainda não existe, 2. `to` não é um endereço 0. Será emitido o evento {Transfer}.
     function _mint(address to, uint256 tokenId) internal virtual {
         require(to != address(0), "ERC721: mint to the zero address");
         require(!_exists(tokenId), "ERC721: token already minted");
@@ -344,16 +344,16 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      *
      * Emits a {Transfer} event.
      */
-    // internal函数，销毁`tokenId`. 条件:`tokenId`存在. 将释放{Transfer} event.
-    function _burn(uint256 tokenId) internal virtual {
-        address owner = ERC721.ownerOf(tokenId);
-
-        _beforeTokenTransfer(owner, address(0), tokenId);
-
-        // 清空授权
-        _approve(address(0), tokenId);
-
-        _balances[owner] -= 1;
+    /**
+    * @dev Destroys `tokenId`.
+        * A aprovação é limpa quando o token é queimado.
+ *
+        * Requisitos:
+ *
+        * - `tokenId` deve existir.
+        *
+ * Emite um evento {Transfer}.
+        */
         delete _owners[tokenId];
 
         emit Transfer(owner, address(0), tokenId);
@@ -362,17 +362,17 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Transfers `tokenId` from `from` to `to`.
-     *  As opposed to {transferFrom}, this imposes no restrictions on msg.sender.
+     * @dev Transfere `tokenId` de `from` para `to`.
+     *  Ao contrário de {transferFrom}, isso não impõe restrições ao msg.sender.
      *
-     * Requirements:
+     * Requisitos:
      *
-     * - `to` cannot be the zero address.
-     * - `tokenId` token must be owned by `from`.
+     * - `to` não pode ser o endereço zero.
+     * - O token `tokenId` deve ser de propriedade de `from`.
      *
-     * Emits a {Transfer} event.
+     * Emite um evento {Transfer}.
      */
-    // internal函数，将 `tokenId` 从 `from` 转账给 `to`. 条件: 1. `tokenId` 被 `from` 拥有, 2. `to` 不是0地址. 将释放{Transfer} event.
+    // Função interna que transfere o `tokenId` de `from` para `to`. Condições: 1. `tokenId` é possuído por `from`, 2. `to` não é um endereço 0. Irá emitir o evento {Transfer}.
     function _transfer(
         address from,
         address to,
@@ -383,7 +383,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
 
         _beforeTokenTransfer(from, to, tokenId);
 
-        // 清空授权
+        // Limpar autorização
         _approve(address(0), tokenId);
 
         _balances[from] -= 1;
@@ -396,22 +396,22 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Approve `to` to operate on `tokenId`
+     * @dev Aprova `to` para operar em `tokenId`
      *
-     * Emits a {Approval} event.
+     * Emite um evento {Approval}.
      */
-    // internal函数，授权 `to` 来操作 `tokenId`. 释放{Approval} event
+    // Função interna, autoriza 'to' a operar 'tokenId'. Dispara o evento {Approval}
     function _approve(address to, uint256 tokenId) internal virtual {
         _tokenApprovals[tokenId] = to;
         emit Approval(ERC721.ownerOf(tokenId), to, tokenId);
     }
 
     /**
-     * @dev Approve `operator` to operate on all of `owner` tokens
+     * @dev Aprova o `operador` para operar em todos os tokens do `proprietário`
      *
-     * Emits a {ApprovalForAll} event.
+     * Emite um evento {ApprovalForAll}.
      */
-    // internal函数，批量授权 `to` 来操作 `owner`全部代币. 释放{ApprovalForAll} event
+    // Função interna para conceder permissão em lote para 'to' operar com todos os tokens do 'owner'. Dispara o evento {ApprovalForAll}.
     function _setApprovalForAll(
         address owner,
         address operator,
@@ -423,16 +423,16 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Internal function to invoke {IERC721Receiver-onERC721Received} on a target address.
-     * The call is not executed if the target address is not a contract.
+     * @dev Função interna para invocar {IERC721Receiver-onERC721Received} em um endereço de destino.
+     * A chamada não é executada se o endereço de destino não for um contrato.
      *
-     * @param from address representing the previous owner of the given token ID
-     * @param to target address that will receive the tokens
-     * @param tokenId uint256 ID of the token to be transferred
-     * @param _data bytes optional data to send along with the call
-     * @return bool whether the call correctly returned the expected magic value
+     * @param from endereço que representa o proprietário anterior do token ID fornecido
+     * @param to endereço de destino que receberá os tokens
+     * @param tokenId uint256 ID do token a ser transferido
+     * @param _data bytes dados opcionais a serem enviados junto com a chamada
+     * @return bool se a chamada retornou corretamente o valor mágico esperado
      */
-    // internal函数，用于在 `to` 为合约的时候调用{IERC721Receiver-onERC721Received}, 以防 `tokenId` 被不小心转入黑洞
+    // Função interna para chamar {IERC721Receiver-onERC721Received} quando `to` é um contrato, evitando que `tokenId` seja acidentalmente enviado para o vácuo negro.
     function _checkOnERC721Received(
         address from,
         address to,
@@ -457,20 +457,20 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     }
 
     /**
-     * @dev Hook that is called before any token transfer. This includes minting
-     * and burning.
+     * @dev Gancho que é chamado antes de qualquer transferência de token. Isso inclui a criação
+     * e queima.
      *
-     * Calling conditions:
+     * Condições de chamada:
      *
-     * - When `from` and `to` are both non-zero, ``from``'s `tokenId` will be
-     * transferred to `to`.
-     * - When `from` is zero, `tokenId` will be minted for `to`.
-     * - When `to` is zero, ``from``'s `tokenId` will be burned.
-     * - `from` and `to` are never both zero.
+     * - Quando `from` e `to` são ambos diferentes de zero, o `tokenId` de ``from`` será
+     * transferido para `to`.
+     * - Quando `from` é zero, `tokenId` será criado para `to`.
+     * - Quando `to` é zero, o `tokenId` de ``from`` será queimado.
+     * - `from` e `to` nunca são ambos zero.
      *
-     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     * Para saber mais sobre ganchos, acesse xref:ROOT:extending-contracts.adoc#using-hooks[Usando Ganchos].
      */
-    // 这个函数在token被转账之前会被表用，包括mint和burn
+    // Esta função será usada antes da transferência do token, incluindo a criação e destruição.
     function _beforeTokenTransfer(
         address from,
         address to,
@@ -478,17 +478,17 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     ) internal virtual {}
 
     /**
-     * @dev Hook that is called after any transfer of tokens. This includes
-     * minting and burning.
+     * @dev Gancho que é chamado após qualquer transferência de tokens. Isso inclui
+     * criação e queima.
      *
-     * Calling conditions:
+     * Condições de chamada:
      *
-     * - when `from` and `to` are both non-zero.
-     * - `from` and `to` are never both zero.
+     * - quando `from` e `to` são ambos diferentes de zero.
+     * - `from` e `to` nunca são ambos zero.
      *
-     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     * Para saber mais sobre ganchos, consulte xref:ROOT:extending-contracts.adoc#using-hooks[Usando Ganchos].
      */
-    // 这个函数在token被转账之后会被调用，包括mint和burn
+    // Esta função será chamada após a transferência do token, incluindo a criação e destruição.
     function _afterTokenTransfer(
         address from,
         address to,

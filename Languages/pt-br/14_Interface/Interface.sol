@@ -32,15 +32,15 @@ interface IERC721 is IERC165 {
 }
 
 contract interactBAYC {
-    // 利用BAYC地址创建接口合约变量（ETH主网）
+    // Usando o endereço BAYC para criar uma variável de contrato de interface (rede principal ETH)
     IERC721 BAYC = IERC721(0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D);
 
-    // 通过接口调用BAYC的balanceOf()查询持仓量
+    // Usando a interface para chamar o balanceOf() do BAYC para consultar a quantidade de posições detidas.
     function balanceOfBAYC(address owner) external view returns (uint256 balance){
         return BAYC.balanceOf(owner);
     }
 
-    // 通过接口调用BAYC的safeTransferFrom()安全转账
+    // Ao chamar a função safeTransferFrom() da interface BAYC, é possível realizar uma transferência segura.
     function safeTransferFromBAYC(address from, address to, uint256 tokenId) external{
         BAYC.safeTransferFrom(from, to, tokenId);
     }

@@ -8,33 +8,33 @@ interface Vm {
         bytes data;
     }
 
-    // Sets block.timestamp (newTimestamp)
+    // Define block.timestamp (newTimestamp)
     function warp(uint256) external;
-    // Sets block.height (newHeight)
+    // Define block.height (newHeight)
     function roll(uint256) external;
-    // Sets block.basefee (newBasefee)
+    // Define block.basefee (newBasefee)
     function fee(uint256) external;
-    // Sets block.difficulty (newDifficulty)
+    // Define block.difficulty (newDifficulty)
     function difficulty(uint256) external;
-    // Sets block.chainid
+    // Define block.chainid
     function chainId(uint256) external;
-    // Loads a storage slot from an address (who, slot)
+    // Carrega um slot de armazenamento de um endereço (quem, slot)
     function load(address,bytes32) external returns (bytes32);
-    // Stores a value to an address' storage slot, (who, slot, value)
+    // Armazena um valor em um slot de armazenamento de um endereço (quem, slot, valor)
     function store(address,bytes32,bytes32) external;
-    // Signs data, (privateKey, digest) => (v, r, s)
+    // Assina os dados, (chavePrivada, digest) => (v, r, s)
     function sign(uint256,bytes32) external returns (uint8,bytes32,bytes32);
-    // Gets the address for a given private key, (privateKey) => (address)
+    // Obtém o endereço para uma chave privada fornecida, (privateKey) => (address)
     function addr(uint256) external returns (address);
-    // Gets the nonce of an account
+    // Obtém o nonce de uma conta
     function getNonce(address) external returns (uint64);
-    // Sets the nonce of an account; must be higher than the current nonce of the account
+    // Define o nonce de uma conta; deve ser maior que o nonce atual da conta
     function setNonce(address, uint64) external;
-    // Performs a foreign function call via the terminal, (stringInputs) => (result)
+    // Executa uma chamada de função estrangeira via terminal, (stringInputs) => (resultado)
     function ffi(string[] calldata) external returns (bytes memory);
-    // Sets environment variables, (name, value)
+    // Define variáveis de ambiente, (nome, valor)
     function setEnv(string calldata, string calldata) external;
-    // Reads environment variables, (name) => (value)
+    // Lê as variáveis de ambiente, (nome) => (valor)
     function envBool(string calldata) external returns (bool);
     function envUint(string calldata) external returns (uint256);
     function envInt(string calldata) external returns (int256);
@@ -42,7 +42,7 @@ interface Vm {
     function envBytes32(string calldata) external returns (bytes32);
     function envString(string calldata) external returns (string memory);
     function envBytes(string calldata) external returns (bytes memory);
-    // Reads environment variables as arrays, (name, delim) => (value[])
+    // Lê as variáveis de ambiente como arrays, (nome, delimitador) => (valor[])
     function envBool(string calldata, string calldata) external returns (bool[] memory);
     function envUint(string calldata, string calldata) external returns (uint256[] memory);
     function envInt(string calldata, string calldata) external returns (int256[] memory);
@@ -50,101 +50,101 @@ interface Vm {
     function envBytes32(string calldata, string calldata) external returns (bytes32[] memory);
     function envString(string calldata, string calldata) external returns (string[] memory);
     function envBytes(string calldata, string calldata) external returns (bytes[] memory);
-    // Sets the *next* call's msg.sender to be the input address
+    // Define o msg.sender da próxima chamada como o endereço de entrada
     function prank(address) external;
-    // Sets all subsequent calls' msg.sender to be the input address until `stopPrank` is called
+    // Define todas as chamadas subsequentes do msg.sender para ser o endereço de entrada até que `stopPrank` seja chamado
     function startPrank(address) external;
-    // Sets the *next* call's msg.sender to be the input address, and the tx.origin to be the second input
+    // Define o msg.sender da próxima chamada como o endereço de entrada e o tx.origin como o segundo parâmetro.
     function prank(address,address) external;
-    // Sets all subsequent calls' msg.sender to be the input address until `stopPrank` is called, and the tx.origin to be the second input
+    // Define todas as chamadas subsequentes do msg.sender para ser o endereço de entrada até que `stopPrank` seja chamado, e o tx.origin para ser o segundo input
     function startPrank(address,address) external;
-    // Resets subsequent calls' msg.sender to be `address(this)`
+    // Reseta o valor de msg.sender para `address(this)` nas chamadas subsequentes.
     function stopPrank() external;
-    // Sets an address' balance, (who, newBalance)
+    // Define o saldo de um endereço, (quem, novoSaldo)
     function deal(address, uint256) external;
-    // Sets an address' code, (who, newCode)
+    // Define o código de um endereço, (quem, novoCódigo)
     function etch(address, bytes calldata) external;
-    // Expects an error on next call
+    // Espera um erro na próxima chamada
     function expectRevert(bytes calldata) external;
     function expectRevert(bytes4) external;
     function expectRevert() external;
-    // Records all storage reads and writes
+    // Registra todas as leituras e escritas de armazenamento
     function record() external;
-    // Gets all accessed reads and write slot from a recording session, for a given address
+    // Obtém todos os slots de leitura e escrita acessados de uma sessão de gravação, para um determinado endereço
     function accesses(address) external returns (bytes32[] memory reads, bytes32[] memory writes);
-    // Prepare an expected log with (bool checkTopic1, bool checkTopic2, bool checkTopic3, bool checkData).
-    // Call this function, then emit an event, then call a function. Internally after the call, we check if
-    // logs were emitted in the expected order with the expected topics and data (as specified by the booleans)
+    // Preparar um log esperado com (bool checkTopic1, bool checkTopic2, bool checkTopic3, bool checkData).
+    // Chame esta função, emita um evento e, em seguida, chame uma função. Internamente, após a chamada, verificamos se
+    // os logs foram emitidos na ordem esperada com os tópicos e dados esperados (conforme especificado pelos booleanos)
     function expectEmit(bool,bool,bool,bool) external;
     function expectEmit(bool,bool,bool,bool,address) external;
-    // Mocks a call to an address, returning specified data.
-    // Calldata can either be strict or a partial match, e.g. if you only
-    // pass a Solidity selector to the expected calldata, then the entire Solidity
-    // function will be mocked.
+    // Simula uma chamada a um endereço, retornando os dados especificados.
+    // Calldata pode ser estrito ou uma correspondência parcial, por exemplo, se você apenas
+    // passar um seletor Solidity para o calldata esperado, em seguida, todo o Solidity
+    // A função será simulada.
     function mockCall(address,bytes calldata,bytes calldata) external;
-    // Mocks a call to an address with a specific msg.value, returning specified data.
+    // Simula uma chamada a um endereço com um determinado msg.value, retornando os dados especificados.
     // Calldata match takes precedence over msg.value in case of ambiguity.
     function mockCall(address,uint256,bytes calldata,bytes calldata) external;
-    // Clears all mocked calls
+    // Limpa todas as chamadas simuladas
     function clearMockedCalls() external;
-    // Expects a call to an address with the specified calldata.
-    // Calldata can either be a strict or a partial match
+    // Espera uma chamada para um endereço com os dados de chamada especificados.
+    // Calldata pode ser uma correspondência estrita ou parcial
     function expectCall(address,bytes calldata) external;
-    // Expects a call to an address with the specified msg.value and calldata
+    // Espera uma chamada para um endereço com o msg.value e calldata especificados
     function expectCall(address,uint256,bytes calldata) external;
-    // Gets the _creation_ bytecode from an artifact file. Takes in the relative path to the json file
+    // Obtém o bytecode de criação de um arquivo de artefato. Recebe o caminho relativo para o arquivo json
     function getCode(string calldata) external returns (bytes memory);
-    // Gets the _deployed_ bytecode from an artifact file. Takes in the relative path to the json file
+    // Obtém o bytecode _deployed_ de um arquivo de artefato. Recebe o caminho relativo para o arquivo json
     function getDeployedCode(string calldata) external returns (bytes memory);
-    // Labels an address in call traces
+    // Rotula um endereço em rastreamentos de chamadas
     function label(address, string calldata) external;
-    // If the condition is false, discard this run's fuzz inputs and generate new ones
+    // Se a condição for falsa, descarte as entradas de fuzz deste ciclo e gere novas entradas
     function assume(bool) external;
-    // Sets block.coinbase (who)
+    // Define block.coinbase (quem)
     function coinbase(address) external;
-    // Using the address that calls the test contract, has the next call (at this call depth only) create a transaction that can later be signed and sent onchain
+    // Usando o endereço que chama o contrato de teste, a próxima chamada (somente nessa profundidade de chamada) cria uma transação que pode ser assinada e enviada posteriormente na cadeia.
     function broadcast() external;
-    // Has the next call (at this call depth only) create a transaction with the address provided as the sender that can later be signed and sent onchain
+    // A próxima chamada (somente nesta profundidade de chamada) cria uma transação com o endereço fornecido como remetente, que pode ser posteriormente assinada e enviada para a cadeia.
     function broadcast(address) external;
-    // Has the next call (at this call depth only) create a transaction with the private key provided as the sender that can later be signed and sent onchain
+    // A próxima chamada (somente nesta profundidade de chamada) cria uma transação com a chave privada fornecida como remetente, que pode ser assinada posteriormente e enviada para a cadeia de blocos.
     function broadcast(uint256) external;
-    // Using the address that calls the test contract, has all subsequent calls (at this call depth only) create transactions that can later be signed and sent onchain
+    // Usando o endereço que chama o contrato de teste, todas as chamadas subsequentes (somente nessa profundidade de chamada) criam transações que podem ser assinadas e enviadas posteriormente na cadeia.
     function startBroadcast() external;
-    // Has all subsequent calls (at this call depth only) create transactions with the address provided that can later be signed and sent onchain
+    // Todas as chamadas subsequentes (somente nesta profundidade de chamada) criarão transações com o endereço fornecido que podem ser posteriormente assinadas e enviadas na cadeia
     function startBroadcast(address) external;
-    // Has all subsequent calls (at this call depth only) create transactions with the private key provided that can later be signed and sent onchain
+    // Todas as chamadas subsequentes (somente nesta profundidade de chamada) criarão transações com a chave privada fornecida, que posteriormente podem ser assinadas e enviadas na cadeia
     function startBroadcast(uint256) external;
-    // Stops collecting onchain transactions
+    // Para de coletar transações onchain
     function stopBroadcast() external;
 
-    // Reads the entire content of file to string, (path) => (data)
+    // Lê todo o conteúdo do arquivo para uma string, (caminho) => (dados)
     function readFile(string calldata) external returns (string memory);
-    // Reads the entire content of file as binary. Path is relative to the project root. (path) => (data)
+    // Lê todo o conteúdo do arquivo como binário. O caminho é relativo à raiz do projeto. (caminho) => (dados)
     function readFileBinary(string calldata) external returns (bytes memory);
-    // Get the path of the current project root
+    // Obtenha o caminho da raiz do projeto atual
     function projectRoot() external returns (string memory);
-    // Reads next line of file to string, (path) => (line)
+    // Lê a próxima linha do arquivo para uma string, (caminho) => (linha)
     function readLine(string calldata) external returns (string memory);
-    // Writes data to file, creating a file if it does not exist, and entirely replacing its contents if it does.
-    // (path, data) => ()
+    // Escreve dados em um arquivo, criando um arquivo se ele não existir e substituindo completamente seu conteúdo se ele existir.
+    // (caminho, dados) => ()
     function writeFile(string calldata, string calldata) external;
-    // Writes binary data to a file, creating a file if it does not exist, and entirely replacing its contents if it does.
-    // Path is relative to the project root. (path, data) => ()
+    // Escreve dados binários em um arquivo, criando um arquivo se ele não existir e substituindo completamente seu conteúdo se ele existir.
+    // O caminho é relativo à raiz do projeto. (caminho, dados) => ()
     function writeFileBinary(string calldata, bytes calldata) external;
-    // Writes line to file, creating a file if it does not exist.
-    // (path, data) => ()
+    // Escreve uma linha no arquivo, criando o arquivo se ele não existir.
+    // (caminho, dados) => ()
     function writeLine(string calldata, string calldata) external;
-    // Closes file for reading, resetting the offset and allowing to read it from beginning with readLine.
+    // Fecha o arquivo para leitura, redefinindo o deslocamento e permitindo a leitura a partir do início com readLine.
     // (path) => ()
     function closeFile(string calldata) external;
-    // Removes file. This cheatcode will revert in the following situations, but is not limited to just these cases:
-    // - Path points to a directory.
-    // - The file doesn't exist.
-    // - The user lacks permissions to remove the file.
+    // Remove arquivo. Este cheatcode será revertido nas seguintes situações, mas não se limita apenas a esses casos:
+    // - O caminho aponta para um diretório.
+    // - O arquivo não existe.
+    // - O usuário não possui permissões para remover o arquivo.
     // (path) => ()
     function removeFile(string calldata) external;
 
-    // Convert values to a string, (value) => (stringified value)
+    // Converter valores para uma string, (valor) => (valor convertido para string)
     function toString(address) external returns(string memory);
     function toString(bytes calldata) external returns(string memory);
     function toString(bytes32) external returns(string memory);
@@ -152,7 +152,7 @@ interface Vm {
     function toString(uint256) external returns(string memory);
     function toString(int256) external returns(string memory);
 
-    // Convert values from a string, (string) => (parsed value)
+    // Converter valores de uma string, (string) => (valor convertido)
     function parseBytes(string calldata) external returns (bytes memory);
     function parseAddress(string calldata) external returns (address);
     function parseUint(string calldata) external returns (uint256);
@@ -160,103 +160,103 @@ interface Vm {
     function parseBytes32(string calldata) external returns (bytes32);
     function parseBool(string calldata) external returns (bool);
 
-    // Record all the transaction logs
+    // Registrar todos os registros de transações
     function recordLogs() external;
-    // Gets all the recorded logs, () => (logs)
+    // Obtém todos os registros de logs gravados, () => (logs)
     function getRecordedLogs() external returns (Log[] memory);
-    // Snapshot the current state of the evm.
-    // Returns the id of the snapshot that was created.
-    // To revert a snapshot use `revertTo`
+    // Capturar o estado atual da EVM.
+    // Retorna o ID do snapshot que foi criado.
+    // Para reverter um snapshot, use `revertTo`
     function snapshot() external returns(uint256);
-    // Revert the state of the evm to a previous snapshot
-    // Takes the snapshot id to revert to.
-    // This deletes the snapshot and all snapshots taken after the given snapshot id.
+    // Reverter o estado do evm para um snapshot anterior
+    // Toma o ID do snapshot para reverter.
+    // Isso exclui o instantâneo e todos os instantâneos tirados após o ID do instantâneo fornecido.
     function revertTo(uint256) external returns(bool);
 
-    // Creates a new fork with the given endpoint and block and returns the identifier of the fork
+    // Cria um novo fork com o endpoint e bloco fornecidos e retorna o identificador do fork
     function createFork(string calldata,uint256) external returns(uint256);
-    // Creates a new fork with the given endpoint and the _latest_ block and returns the identifier of the fork
+    // Cria um novo fork com o endpoint fornecido e o bloco _mais recente_ e retorna o identificador do fork
     function createFork(string calldata) external returns(uint256);
-    // Creates a new fork with the given endpoint and at the block the given transaction was mined in, and replays all transaction mined in the block before the transaction
+    // Cria um novo fork com o endpoint fornecido e no bloco em que a transação fornecida foi minerada, e reproduz todas as transações mineradas no bloco antes da transação
     function createFork(string calldata, bytes32) external returns (uint256);
-    // Creates _and_ also selects a new fork with the given endpoint and block and returns the identifier of the fork
+    // Cria _e_ também seleciona um novo fork com o endpoint e bloco fornecidos e retorna o identificador do fork
     function createSelectFork(string calldata,uint256) external returns(uint256);
-    // Creates _and_ also selects new fork with the given endpoint and at the block the given transaction was mined in, and replays all transaction mined in the block before the transaction
+    // Cria _e_ também seleciona um novo fork com o endpoint fornecido e no bloco em que a transação fornecida foi minerada, e reproduz todas as transações mineradas no bloco antes da transação
     function createSelectFork(string calldata, bytes32) external returns (uint256);
-    // Creates _and_ also selects a new fork with the given endpoint and the latest block and returns the identifier of the fork
+    // Cria _e_ também seleciona um novo fork com o endpoint fornecido e o último bloco e retorna o identificador do fork
     function createSelectFork(string calldata) external returns(uint256);
-    // Takes a fork identifier created by `createFork` and sets the corresponding forked state as active.
+    // Recebe um identificador de fork criado por `createFork` e define o estado bifurcado correspondente como ativo.
     function selectFork(uint256) external;
-    /// Returns the currently active fork
-    /// Reverts if no fork is currently active
+    /// Retorna o fork atualmente ativo
+    /// Reverte se nenhum fork estiver atualmente ativo
     function activeFork() external returns(uint256);
-    // Updates the currently active fork to given block number
-    // This is similar to `roll` but for the currently active fork
+    // Atualiza o fork atualmente ativo para o número de bloco fornecido
+    // Isso é semelhante ao `roll`, mas para o fork ativo no momento
     function rollFork(uint256) external;
-    // Updates the currently active fork to given transaction
-    // this will `rollFork` with the number of the block the transaction was mined in and replays all transaction mined before it in the block
+    // Atualiza o fork atualmente ativo para a transação fornecida
+    // isso irá `rollFork` com o número do bloco em que a transação foi minerada e reproduz todas as transações mineradas antes dela no bloco
     function rollFork(bytes32) external;
-    // Updates the given fork to given block number
+    // Atualiza o fork fornecido para o número de bloco fornecido
     function rollFork(uint256 forkId, uint256 blockNumber) external;
-    // Updates the given fork to block number of the given transaction and replays all transaction mined before it in the block
+    // Atualiza o fork fornecido para o número de bloco da transação fornecida e reproduz todas as transações mineradas antes dela no bloco
     function rollFork(uint256 forkId, bytes32 transaction) external;
 
     // Marks that the account(s) should use persistent storage across fork swaps in a multifork setup
-    // Meaning, changes made to the state of this account will be kept when switching forks
+    // Significado, as alterações feitas no estado desta conta serão mantidas ao trocar de forks.
     function makePersistent(address) external;
     function makePersistent(address, address) external;
     function makePersistent(address, address, address) external;
     function makePersistent(address[] calldata) external;
-    // Revokes persistent status from the address, previously added via `makePersistent`
+    // Revoga o status persistente do endereço, previamente adicionado via `makePersistent`
     function revokePersistent(address) external;
     function revokePersistent(address[] calldata) external;
-    // Returns true if the account is marked as persistent
+    // Retorna verdadeiro se a conta estiver marcada como persistente
     function isPersistent(address) external returns (bool);
 
-    // In forking mode, explicitly grant the given address cheatcode access
+    // No modo de bifurcação, conceda explicitamente acesso ao código de trapaça fornecido ao endereço especificado.
     function allowCheatcodes(address) external;
 
-    // Fetches the given transaction from the active fork and executes it on the current state
+    // Busca a transação fornecida do fork ativo e a executa no estado atual
     function transact(bytes32 txHash) external;
-    // Fetches the given transaction from the given fork and executes it on the current state
+    // Busca a transação fornecida do fork fornecido e a executa no estado atual
     function transact(uint256 forkId, bytes32 txHash) external;
 
-    // Returns the RPC url for the given alias
+    // Retorna a URL RPC para o alias fornecido
     function rpcUrl(string calldata) external returns(string memory);
-    // Returns all rpc urls and their aliases `[alias, url][]`
+    // Retorna todos os URLs e seus aliases `[alias, url][]`
     function rpcUrls() external returns(string[2][] memory);
 
-    // Derive a private key from a provided mnenomic string (or mnenomic file path) at the derivation path m/44'/60'/0'/0/{index}
+    // Derive uma chave privada a partir de uma string mnemônica fornecida (ou caminho do arquivo mnemônico) no caminho de derivação m/44'/60'/0'/0/{índice}
     function deriveKey(string calldata, uint32) external returns (uint256);
-    // Derive a private key from a provided mnenomic string (or mnenomic file path) at the derivation path {path}{index}
+    // Derive uma chave privada a partir de uma string mnemônica fornecida (ou caminho do arquivo mnemônico) no caminho de derivação {path}{index}
     function deriveKey(string calldata, string calldata, uint32) external returns (uint256);
-    // Adds a private key to the local forge wallet and returns the address
+    // Adiciona uma chave privada à carteira local do Forge e retorna o endereço
     function rememberKey(uint256) external returns (address);
 
     // parseJson
 
-    // Given a string of JSON, return the ABI-encoded value of provided key
-    // (stringified json, key) => (ABI-encoded data)
-    // Read the note below!
+    // Dado uma string de JSON, retorne o valor codificado em ABI da chave fornecida
+    // (json em formato de string, chave) => (dados codificados em ABI)
+    // Leia a nota abaixo!
     function parseJson(string calldata, string calldata) external returns(bytes memory);
 
-    // Given a string of JSON, return it as ABI-encoded, (stringified json, key) => (ABI-encoded data)
-    // Read the note below!
+    // Dado uma string de JSON, retorne-a como codificada em ABI, (json stringificado, chave) => (dados codificados em ABI)
+    // Leia a nota abaixo!
     function parseJson(string calldata) external returns(bytes memory);
 
-    // Note:
+    // Nota:
     // ----
-    // In case the returned value is a JSON object, it's encoded as a ABI-encoded tuple. As JSON objects
-    // don't have the notion of ordered, but tuples do, they JSON object is encoded with it's fields ordered in
-    // ALPHABETICAL ordser. That means that in order to successfully decode the tuple, we need to define a tuple that
-    // encodes the fields in the same order, which is alphabetical. In the case of Solidity structs, they are encoded
-    // as tuples, with the attributes in the order in which they are defined.
-    // For example: json = { 'a': 1, 'b': 0xa4tb......3xs}
+    // Caso o valor retornado seja um objeto JSON, ele é codificado como uma tupla codificada em ABI. Como objetos JSON
+    // não tem a noção de ordenado, mas as tuplas têm, o objeto JSON é codificado com seus campos ordenados
+    // ORDEM alfabética. Isso significa que, para decodificar com sucesso a tupla, precisamos definir uma tupla que
+    // codifica os campos na mesma ordem, que é alfabética. No caso das structs do Solidity, elas são codificadas
+    // como tuplas, com os atributos na ordem em que são definidos.
+    // Por exemplo: json = { 'a': 1, 'b': 0xa4tb......3xs}
     // a: uint256
-    // b: address
-    // To decode that json, we need to define a struct or a tuple as follows:
+    // b: endereço
+    // Para decodificar esse json, precisamos definir uma struct ou uma tupla da seguinte forma:
     // struct json = { uint256 a; address b; }
-    // If we defined a json struct with the opposite order, meaning placing the address b first, it would try to
-    // decode the tuple in that order, and thus fail.
+    // Se definirmos uma estrutura json com a ordem oposta, ou seja, colocando o endereço b primeiro, ele tentaria
+    // decodificar a tupla nessa ordem e, portanto, falhar.
 
 }

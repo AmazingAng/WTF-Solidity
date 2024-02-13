@@ -6,28 +6,28 @@ import "../31_ERC20/IERC20.sol";
 import "../31_ERC20/ERC20.sol";
 
 /**
- * @dev ERC20代币时间锁合约。受益人在锁仓一段时间后才能取出代币。
+ * @dev Contrato de bloqueio de tempo para tokens ERC20. O beneficiário só pode retirar os tokens após um período de bloqueio.
  */
 contract TokenLocker {
 
-    // 事件
+    // Eventos
     event TokenLockStart(address indexed beneficiary, address indexed token, uint256 startTime, uint256 lockTime);
     event Release(address indexed beneficiary, address indexed token, uint256 releaseTime, uint256 amount);
 
-    // 被锁仓的ERC20代币合约
+    // Contrato de token ERC20 bloqueado
     IERC20 public immutable token;
-    // 受益人地址
+    // Endereço do beneficiário
     address public immutable beneficiary;
-    // 锁仓时间(秒)
+    // Tempo de bloqueio (segundos)
     uint256 public immutable lockTime;
-    // 锁仓起始时间戳(秒)
+    // Tempo de início de bloqueio (em segundos)
     uint256 public immutable startTime;
 
     /**
-     * @dev 部署时间锁合约，初始化代币合约地址，受益人地址和锁仓时间。
-     * @param token_: 被锁仓的ERC20代币合约
-     * @param beneficiary_: 受益人地址
-     * @param lockTime_: 锁仓时间(秒)
+     * @dev Deploy the time lock contract, initialize the token contract address, beneficiary address, and lock time.
+     * @param token_: ERC20 token contract to be locked
+     * @param beneficiary_: Beneficiary address
+     * @param lockTime_: Lock time (in seconds)
      */
     constructor(
         IERC20 token_,
@@ -44,7 +44,7 @@ contract TokenLocker {
     }
 
     /**
-     * @dev 在锁仓时间过后，将代币释放给受益人。
+     * @dev Após o período de bloqueio, os tokens serão liberados para o beneficiário.
      */
     function release() public {
         require(block.timestamp >= startTime+lockTime, "TokenLock: current time is before release time");

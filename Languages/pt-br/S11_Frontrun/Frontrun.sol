@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: MIT
-// By 0xAA
+// Por 0xAA
 pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-// 我们尝试frontrun一笔Free mint交易
+// Nós estamos tentando frontrun uma transação de mint grátis.
 contract FreeMint is ERC721 {
     uint256 totalSupply;
 
-    // 构造函数，初始化NFT合集的名称、代号
+    // Construtor, inicializa o nome e o código da coleção NFT
     constructor() ERC721("Free Mint NFT", "FreeMint"){}
 
-    // 铸造函数
+    // Função de construção
     function mint() external {
-        _mint(msg.sender, totalSupply); // mint
+        // mint
         totalSupply++;
     }
 }

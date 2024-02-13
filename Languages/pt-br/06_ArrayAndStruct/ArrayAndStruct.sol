@@ -2,21 +2,21 @@
 pragma solidity ^0.8.4;
 contract ArrayTypes {
 
-    // 固定长度 Array
+    // Array de comprimento fixo
     uint[8] array1;
     bytes1[5] array2;
     address[100] array3;
 
-    // 可变长度 Array
+    // Array de comprimento variável
     uint[] array4;
     bytes1[] array5;
     address[] array6;
     bytes array7;
 
-    // 初始化可变长度 Array
+    // Inicializando um Array de comprimento variável
     uint[] array8 = new uint[](5);
     bytes array9 = new bytes(9);
-    //  给可变长度数组赋值
+    // Atribuindo valores a um array de comprimento variável
     function initArray() external pure returns(uint[] memory){
         uint[] memory x = new uint[](3);
         x[0] = 1;
@@ -34,32 +34,32 @@ contract ArrayTypes {
 
 pragma solidity ^0.8.4;
 contract StructTypes {
-    // 结构体 Struct
+    // Estrutura Struct
     struct Student{
         uint256 id;
         uint256 score; 
     }
-    Student student; // 初始一个student结构体
-    //  给结构体赋值
-    // 方法1:在函数中创建一个storage的struct引用
+    // Inicialize uma estrutura de dados chamada "student"
+    // Atribuindo valores a uma estrutura
+    // Método 1: Criar uma referência struct para storage dentro da função
     function initStudent1() external{
-        Student storage _student = student; // assign a copy of student
+        // atribuir uma cópia do estudante
         _student.id = 11;
         _student.score = 100;
     }
 
-    // 方法2:直接引用状态变量的struct
+    // Método 2: Referenciando diretamente a struct da variável de estado
     function initStudent2() external{
         student.id = 1;
         student.score = 80;
     }
     
-    // 方法3:构造函数式
+    // Método 3: Construtor funcional
     function initStudent3() external {
         student = Student(3, 90);
     }
 
-    // 方法4:key value
+    // Método 4: chave valor
     function initStudent4() external {
         student = Student({id: 4, score: 60});
     }
@@ -67,12 +67,12 @@ contract StructTypes {
 
 pragma solidity ^0.8.4;
 contract EnumTypes {
-    // 将uint 0， 1， 2表示为Buy, Hold, Sell
+    // Comprar, Manter, Vender
     enum ActionSet { Buy, Hold, Sell }
-    // 创建enum变量 action
+    // Criar uma variável enum chamada "action"
     ActionSet action = ActionSet.Buy;
 
-    // enum可以和uint显式的转换
+    // enum pode ser convertido explicitamente para uint
     function enumToUint() external view returns(uint){
         return uint(action);
     }

@@ -4,7 +4,7 @@ pragma experimental ABIEncoderV2;
 
 import "./Vm.sol";
 
-// Helpers for parsing keys into types.
+// Auxiliares para analisar chaves em tipos.
 library stdJson {
 
     Vm private constant vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));

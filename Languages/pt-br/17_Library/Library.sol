@@ -5,10 +5,10 @@ library Strings {
     bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
 
     /**
-     * @dev Converts a `uint256` to its ASCII `string` decimal representation.
+     * @dev Converte um `uint256` para sua representação decimal em `string` ASCII.
      */
     function toString(uint256 value) public pure returns (string memory) {
-        // Inspired by OraclizeAPI's implementation - MIT licence
+        // Inspirado na implementação da OraclizeAPI - licença MIT
         // https://github.com/oraclize/ethereum-api/blob/b42146b063c7d6ee1358846c198246239e9360e8/oraclizeAPI_0.4.25.sol
 
         if (value == 0) {
@@ -30,7 +30,7 @@ library Strings {
     }
 
     /**
-     * @dev Converts a `uint256` to its ASCII `string` hexadecimal representation.
+     * @dev Converte um `uint256` para sua representação hexadecimal em `string` ASCII.
      */
     function toHexString(uint256 value) public pure returns (string memory) {
         if (value == 0) {
@@ -46,7 +46,7 @@ library Strings {
     }
 
     /**
-     * @dev Converts a `uint256` to its ASCII `string` hexadecimal representation with fixed length.
+     * @dev Converte um `uint256` para sua representação hexadecimal `string` ASCII com comprimento fixo.
      */
     function toHexString(uint256 value, uint256 length) public pure returns (string memory) {
         bytes memory buffer = new bytes(2 * length + 2);
@@ -62,16 +62,16 @@ library Strings {
 }
 
 
-// 用函数调用另一个库合约
+// Usando uma função para chamar um contrato de biblioteca externa
 contract UseLibrary{    
-    // 利用using for操作使用库
+    // Usando a instrução 'using' para utilizar uma biblioteca
     using Strings for uint256;
     function getString1(uint256 _number) public pure returns(string memory){
-        // 库函数会自动添加为uint256型变量的成员
+        // A biblioteca de funções adicionará automaticamente membros para variáveis do tipo uint256.
         return _number.toHexString();
     }
 
-    // 直接通过库合约名调用
+    // Chamada direta pelo nome do contrato da biblioteca
     function getString2(uint256 _number) public pure returns(string memory){
         return Strings.toHexString(_number);
     }

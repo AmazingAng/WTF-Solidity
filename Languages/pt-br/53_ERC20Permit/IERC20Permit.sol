@@ -2,25 +2,25 @@
 pragma solidity ^0.8.0;
 
 /**
- * @dev ERC20 Permit 扩展的接口，允许通过签名进行批准，如 https://eips.ethereum.org/EIPS/eip-2612[EIP-2612]中定义。
+ * @dev Interface extension for ERC20 Permit, allowing approvals to be made via signatures, as defined in https://eips.ethereum.org/EIPS/eip-2612[EIP-2612].
  *
- * 添加了 {permit} 方法，可以通过帐户签名的消息更改帐户的 ERC20 余额（参见 {IERC20-allowance}）。通过不依赖 {IERC20-approve}，代币持有者的帐户无需发送交易，因此完全不需要持有 Ether。
+ * Adds the {permit} method, which can be used to change the allowance of an account's ERC20 balance by a signed message. This allows token holders to approve without the need to send a transaction, and therefore without the need to hold Ether.
  */
 interface IERC20Permit {
     /**
-     * @dev 根据owner的签名, 将 `owenr` 的ERC20余额授权给 `spender`，数量为 `value`
+     * @dev Autoriza o saldo de ERC20 do `owner` para o `spender`, com quantidade `value`, com base na assinatura do `owner`.
      *
-     * 释放 {Approval} 事件。
+     * Emite o evento {Approval}.
      *
-     * 要求：
+     * Requisitos:
      *
-     * - `spender` 不能是零地址。
-     * - `deadline` 必须是未来的时间戳。
-     * - `v`，`r` 和 `s` 必须是 `owner` 对 EIP712 格式的函数参数的有效 `secp256k1` 签名。
-     * - 签名必须使用 `owner` 当前的 nonce（参见 {nonces}）。
+     * - O `spender` não pode ser um endereço zero.
+     * - O `deadline` deve ser um timestamp futuro.
+     * - O `v`, `r` e `s` devem ser uma assinatura `secp256k1` válida do `owner` nos parâmetros da função no formato EIP712.
+     * - A assinatura deve usar o nonce atual do `owner` (consulte {nonces}).
      *
-     * 有关签名格式的更多信息，请参阅
-     * https://eips.ethereum.org/EIPS/eip-2612#specification。
+     * Para mais informações sobre o formato de assinatura, consulte
+     * https://eips.ethereum.org/EIPS/eip-2612#specification.
      */
     function permit(
         address owner,
@@ -33,14 +33,14 @@ interface IERC20Permit {
     ) external;
 
     /**
-     * @dev 返回 `owner` 的当前 nonce。每次为 {permit} 生成签名时，都必须包括此值。
+     * @dev Retorna o nonce atual do `owner`. Este valor deve ser incluído sempre que gerar uma assinatura para {permit}.
      *
-     * 每次成功调用 {permit} 都会将 `owner` 的 nonce 增加 1。这防止多次使用签名。
+     * Cada chamada bem-sucedida para {permit} aumentará o nonce do `owner` em 1. Isso evita o uso de assinaturas múltiplas.
      */
     function nonces(address owner) external view returns (uint256);
 
     /**
-     * @dev 返回用于编码 {permit} 的签名的域分隔符（domain separator），如 {EIP712} 所定义。
+     * @dev Retorna o separador de domínio (domain separator) usado para codificar a assinatura do {permit}, conforme definido pelo {EIP712}.
      */
     // solhint-disable-next-line func-name-mixedcase
     function DOMAIN_SEPARATOR() external view returns (bytes32);

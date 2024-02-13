@@ -1,22 +1,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-// 通过文件相对位置import
+// Importar por localização relativa do arquivo
 import './Yeye.sol';
-// 通过`全局符号`导入特定的合约
+// Importar um contrato específico através do `símbolo global`
 import {Yeye} from './Yeye.sol';
-// 通过网址引用
-import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
-// 引用oppenzepplin合约
+// Por meio de um URL de referência
+//github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
+// Importar contrato oppenzepplin
 import '@openzeppelin/contracts/access/Ownable.sol';
 
 contract Import {
-    // 成功导入Address库
+    // Sucesso ao importar a biblioteca Address
     using Address for address;
-    // 声明yeye变量
+    // Declarando a variável yeye
     Yeye yeye = new Yeye();
 
-    // 测试是否能调用yeye的函数
+    // Testar se é possível chamar a função do yeye
     function test() external{
         yeye.hip();
     }

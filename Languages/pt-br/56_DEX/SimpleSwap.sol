@@ -4,15 +4,15 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract SimpleSwap is ERC20 {
-    // 代币合约
+    // Contrato de token
     IERC20 public token0;
     IERC20 public token1;
 
-    // 代币储备量
+    // Reserva de tokens
     uint public reserve0;
     uint public reserve1;
     
-    // 事件 
+    // Evento
     event Mint(address indexed sender, uint amount0, uint amount1);
     event Burn(address indexed sender, uint amount0, uint amount1);
     event Swap(
@@ -23,18 +23,18 @@ contract SimpleSwap is ERC20 {
         address tokenOut
         );
 
-    // 构造器，初始化代币地址
+    // Construtor, inicializa o endereço do token
     constructor(IERC20 _token0, IERC20 _token1) ERC20("SimpleSwap", "SS") {
         token0 = _token0;
         token1 = _token1;
     }
 
-    // 取两个数的最小值
+    // Pegue o valor mínimo entre dois números
     function min(uint x, uint y) internal pure returns (uint z) {
         z = x < y ? x : y;
     }
 
-    // 计算平方根 babylonian method (https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method)
+    // Calcular a raiz quadrada pelo método babilônico (https://pt.wikipedia.org/wiki/M%C3%A9todos_de_c%C3%A1lculo_de_raiz_quadrada#M%C3%A9todo_babil%C3%B4nico)
     function sqrt(uint y) internal pure returns (uint z) {
         if (y > 3) {
             z = y;
@@ -48,79 +48,79 @@ contract SimpleSwap is ERC20 {
         }
     }
 
-    // 添加流动性，转进代币，铸造LP
-    // 如果首次添加，铸造的LP数量 = sqrt(amount0 * amount1)
-    // 如果非首次，铸造的LP数量 = min(amount0/reserve0, amount1/reserve1)* totalSupply_LP
-    // @param amount0Desired 添加的token0数量
-    // @param amount1Desired 添加的token1数量
+    // Adicionar liquidez, trocar tokens, criar LP.
+    // Se for a primeira vez que está sendo adicionado, a quantidade de LP criada será igual a sqrt(amount0 * amount1)
+    // Se não for a primeira vez, a quantidade de LPs criados = min(amount0/reserve0, amount1/reserve1) * totalSupply_LP
+    // @param amount0Desired Quantidade de token0 a ser adicionada
+    // @param amount1Desired Quantidade de token1 a ser adicionada
     function addLiquidity(uint amount0Desired, uint amount1Desired) public returns(uint liquidity){
-        // 将添加的流动性转入Swap合约，需事先给Swap合约授权
+        // Transfer the added liquidity to the Swap contract, authorization to the Swap contract must be given in advance.
         token0.transferFrom(msg.sender, address(this), amount0Desired);
         token1.transferFrom(msg.sender, address(this), amount1Desired);
-        // 计算添加的流动性
+        // Calcular a liquidez adicionada
         uint _totalSupply = totalSupply();
         if (_totalSupply == 0) {
-            // 如果是第一次添加流动性，铸造 L = sqrt(x * y) 单位的LP（流动性提供者）代币
+            // Se for a primeira vez que a liquidez é adicionada, crie tokens LP (provedores de liquidez) com uma quantidade de L = sqrt(x * y) unidades.
             liquidity = sqrt(amount0Desired * amount1Desired);
         } else {
-            // 如果不是第一次添加流动性，按添加代币的数量比例铸造LP，取两个代币更小的那个比例
+            // Se não for a primeira vez que a liquidez é adicionada, cunhe LP com base na proporção da quantidade de tokens adicionados, usando a proporção do menor dos dois tokens.
             liquidity = min(amount0Desired * _totalSupply / reserve0, amount1Desired * _totalSupply /reserve1);
         }
 
-        // 检查铸造的LP数量
+        // Verificando a quantidade de LP fundidos
         require(liquidity > 0, 'INSUFFICIENT_LIQUIDITY_MINTED');
 
-        // 更新储备量
+        // Atualizar estoque
         reserve0 = token0.balanceOf(address(this));
         reserve1 = token1.balanceOf(address(this));
 
-        // 给流动性提供者铸造LP代币，代表他们提供的流动性
+        // Dar aos provedores de liquidez a capacidade de criar tokens LP que representam a liquidez fornecida.
         _mint(msg.sender, liquidity);
         
         emit Mint(msg.sender, amount0Desired, amount1Desired);
     }
 
-    // 移除流动性，销毁LP，转出代币
-    // 转出数量 = (liquidity / totalSupply_LP) * reserve
-    // @param liquidity 移除的流动性数量
+    // Remover a liquidez, destruir LP, transferir tokens.
+    // A quantidade transferida = (liquidez / totalSupply_LP) * reserva
+    // @param liquidity Quantidade de liquidez a ser removida
     function removeLiquidity(uint liquidity) external returns (uint amount0, uint amount1) {
-        // 获取余额
+        // Obter saldo
         uint balance0 = token0.balanceOf(address(this));
         uint balance1 = token1.balanceOf(address(this));
-        // 按LP的比例计算要转出的代币数量
+        // Calcular a quantidade de tokens a serem transferidos com base na proporção de LP
         uint _totalSupply = totalSupply();
         amount0 = liquidity * balance0 / _totalSupply;
         amount1 = liquidity * balance1 / _totalSupply;
-        // 检查代币数量
+        // Verificando a quantidade de tokens
         require(amount0 > 0 && amount1 > 0, 'INSUFFICIENT_LIQUIDITY_BURNED');
-        // 销毁LP
+        // Destruir LP
         _burn(msg.sender, liquidity);
-        // 转出代币
+        // Transferir tokens
         token0.transfer(msg.sender, amount0);
         token1.transfer(msg.sender, amount1);
-        // 更新储备量
+        // Atualizar estoque
         reserve0 = token0.balanceOf(address(this));
         reserve1 = token1.balanceOf(address(this));
 
         emit Burn(msg.sender, amount0, amount1);
     }
 
-    // 给定一个资产的数量和代币对的储备，计算交换另一个代币的数量
-    // 由于乘积恒定
-    // 交换前: k = x * y
-    // 交换后: k = (x + delta_x) * (y + delta_y)
-    // 可得 delta_y = - delta_x * y / (x + delta_x)
-    // 正/负号代表转入/转出
+    // Dado a quantidade de um ativo e as reservas de um par de tokens, calcula a quantidade de troca para outro token
+    // Devido ao produto ser constante
+    // Antes da troca: k = x * y
+    // Troca: k = (x + delta_x) * (y + delta_y)
+    // Pode-se obter delta_y = - delta_x * y / (x + delta_x)
+    // O sinal de mais/menos representa entrada/saída
     function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) public pure returns (uint amountOut) {
         require(amountIn > 0, 'INSUFFICIENT_AMOUNT');
         require(reserveIn > 0 && reserveOut > 0, 'INSUFFICIENT_LIQUIDITY');
         amountOut = amountIn * reserveOut / (reserveIn + amountIn);
     }
 
-    // swap代币
-    // @param amountIn 用于交换的代币数量
-    // @param tokenIn 用于交换的代币合约地址
-    // @param amountOutMin 交换出另一种代币的最低数量
+    // swap tokens
+    // @param amountIn Quantidade de tokens para troca
+    // @param tokenIn Endereço do contrato de token a ser trocado
+    // @param amountOutMin Quantidade mínima de troca para a outra moeda
     function swap(uint amountIn, IERC20 tokenIn, uint amountOutMin) external returns (uint amountOut, IERC20 tokenOut){
         require(amountIn > 0, 'INSUFFICIENT_OUTPUT_AMOUNT');
         require(tokenIn == token0 || tokenIn == token1, 'INVALID_TOKEN');
@@ -129,26 +129,26 @@ contract SimpleSwap is ERC20 {
         uint balance1 = token1.balanceOf(address(this));
 
         if(tokenIn == token0){
-            // 如果是token0交换token1
+            // Se for uma troca de token0 por token1
             tokenOut = token1;
-            // 计算能交换出的token1数量
+            // Calcular a quantidade de token1 que pode ser trocada
             amountOut = getAmountOut(amountIn, balance0, balance1);
             require(amountOut > amountOutMin, 'INSUFFICIENT_OUTPUT_AMOUNT');
-            // 进行交换
+            // Realizar troca
             tokenIn.transferFrom(msg.sender, address(this), amountIn);
             tokenOut.transfer(msg.sender, amountOut);
         }else{
-            // 如果是token1交换token0
+            // Se for token1, troque por token0
             tokenOut = token0;
-            // 计算能交换出的token1数量
+            // Calcular a quantidade de token1 que pode ser trocada
             amountOut = getAmountOut(amountIn, balance1, balance0);
             require(amountOut > amountOutMin, 'INSUFFICIENT_OUTPUT_AMOUNT');
-            // 进行交换
+            // Realizar troca
             tokenIn.transferFrom(msg.sender, address(this), amountIn);
             tokenOut.transfer(msg.sender, amountOut);
         }
 
-        // 更新储备量
+        // Atualizar estoque
         reserve0 = token0.balanceOf(address(this));
         reserve1 = token1.balanceOf(address(this));
 
