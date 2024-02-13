@@ -177,4 +177,4 @@ Resultado:
 
 ## Resumen
 
-En esta lección, introducimos el flujo de control en Solidity y escribimos un algoritmo de ordenamiento simple pero propenso a errores. Solidity parece simple pero tiene muchas trampas. Cada mes, proyectos son hackeados y pierden millones de dólares debido a pequeños errores en el contrato inteligente. Para escribir un contrato seguro, necesitamos dominar los fundamentos de Solidity y seguir practicando.
+En esta lección, se introdujo el flujo de control en Solidity y escribimos un algoritmo de ordenamiento simple pero propenso a errores. Solidity parece simple pero tiene muchas trampas. Cada mes, proyectos son hackeados y pierden millones de dólares debido a pequeños errores en los contratos inteligentes. Para escribir un contrato seguro, necesitamos dominar los fundamentos de Solidity y seguir practicando.
