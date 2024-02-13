@@ -1,4 +1,4 @@
-# WTF Tutorial Solidity: 8. Valor inicial de las variables
+# Tutorial WTF Solidity: 8. Valor inicial de las variables
 
 Recientemente, he estado revisando Solidity, consolidando detalles y escribiendo tutoriales "WTF Solidity" para principiantes.
 
@@ -19,7 +19,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 En Solidity, las variables que son declaradas pero no asignadas tienen valores definidos por defecto. En este tutorial, introduciremos los valores iniciales de los tipos más comunes de variables.
 
-### Valores de variables por defecto
+### Valores predeterminados de las variables
 
 - `boolean`: `false`
 - `string`: `""`
@@ -56,7 +56,7 @@ Se puede usar la función `getter` de una variable `pública` para confirmar los
     - arreglo dinámico: `[]` vacío por defecto.
     - arreglo estático（de longitud fija): un arreglo estático donde todos los elementos se establecen en sus valores por defecto.
 
-Puedes usar la función `getter` de una variable `pública` para confirmar los valores iniciales anteriores:
+Se puede usar la función `getter` de una variable `pública` para confirmar los valores iniciales anteriores:
 
 ```solidity
     // tipos de referencia
@@ -85,7 +85,7 @@ Puedes usar la función `getter` de una variable `pública` para confirmar los v
 
 ## Verificar en Remix
 
-- Desplegar `InitialValue.sol` y verificar los valores iniciales de los diferentes tipos.
+- Desplegar el contrato `InitialValue.sol` y verificar los valores iniciales de los diferentes tipos.
 
     ![](./img/8-1_es.png)
 
@@ -95,4 +95,4 @@ Puedes usar la función `getter` de una variable `pública` para confirmar los v
 
 ## Resumen
 
-En esta sección, introducimos los valores iniciales de las variables en Solidity. Cuando una variable es declarada pero no asignada, su valor por defecto es el valor inicial, que es equivalente a `0` representado en su tipo. El operador `delete` puede restablecer el valor de la variable a su valor inicial.
+En esta sección, introdujimos los valores iniciales de las variables en Solidity. Cuando una variable es declarada pero no asignada, su valor por defecto es el valor inicial, que es equivalente a `0` representado en su tipo. El operador `delete` puede restablecer el valor de la variable a su valor inicial.
