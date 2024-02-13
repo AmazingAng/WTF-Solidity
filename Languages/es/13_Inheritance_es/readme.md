@@ -264,7 +264,7 @@ En este ejemplo, llamar la función `super.bar()` en el contrato `people` llamar
 Aunque `Eve` y `Adam` son ambos contratos hijos del contrato padre `God` el contrato `God` solo se llamará una vez en todo el proceso. Esto se debe a que Solidity toma prestado el paradigma de Python, forzando un DAG (grafo dirigido acíclico) compuesto por clases base para garantizar un orden especifico basado en la linearización C3. Para obtener más información sobre la herencia y la linearización, se puede leer la documentación oficial de Solidity [Aca](https://docs.soliditylang.org/en/v0.8.17/contracts.html#multiple-inheritance-and-linearization).
 
 
-## Verificación en Remix
+## Demo en Remix
 1. Después de desplegar el contrato de ejemplo en la sección de Herencia Simple, se puede ver que el contrato `Father` tiene las funciones de `Grandfather`
 
   ![13-1](./img/13-1.png)
