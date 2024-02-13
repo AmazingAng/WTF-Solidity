@@ -150,7 +150,7 @@ Aquí los errores en la consola de `Remix`:
 
 ### Implementación en Solidity (Correcta)
 
-Con la ayuda de un amigo de la comunidad `Dapp-Learning`, finalmente encontramos el problema. El tipo de variable más utilizado en Solidity es `uint`, que representa un entero no negativo. Si intenta tomar un valor negativo, se producirá un error de  `underflow`. En el código anterior, la variable `j` tomará `-1`, causando el error.
+Con la ayuda de un amigo de la comunidad `Dapp-Learning`, finalmente encontramos el problema. El tipo de variable más utilizado en Solidity es `uint`, que representa un entero no negativo. Si se intenta tomar un valor negativo, se producirá un error de  `underflow`. En el código anterior, la variable `j` tomaba `-1`, causando el error.
 
 Por lo tanto, necesitamos agregar `1` a `j` para que nunca tome un valor negativo. El código correcto de ordenamiento por inserción en Solidity:
 
@@ -177,4 +177,4 @@ Resultado:
 
 ## Resumen
 
-En esta lección, introducimos el flujo de control en Solidity y escribimos un algoritmo de ordenamiento simple pero propenso a errores. Solidity parece simple pero tiene muchas trampas. Cada mes, proyectos son hackeados y pierden millones de dólares debido a pequeños errores en el contrato inteligente. Para escribir un contrato seguro, necesitamos dominar los fundamentos de Solidity y seguir practicando.
+En esta lección, se introdujo el flujo de control en Solidity y escribimos un algoritmo de ordenamiento simple pero propenso a errores. Solidity parece simple pero tiene muchas trampas. Cada mes, proyectos son hackeados y pierden millones de dólares debido a pequeños errores en los contratos inteligentes. Para escribir un contrato seguro, necesitamos dominar los fundamentos de Solidity y seguir practicando.
