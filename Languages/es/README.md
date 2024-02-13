@@ -19,11 +19,19 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 ## Intro
 
-**Chapter 1: HelloWeb3 (Solidity en 3 lineas)**：[Code](./01_HolaWeb3_es/HolaWeb3.sol) | [Tutorial](./01_HolaWeb3_es/readme.md)
+**Chapter 1: HolaWeb3 (Solidity en 3 lineas)**：[Code](./01_HolaWeb3_es/HolaWeb3.sol) | [Tutorial](./01_HolaWeb3_es/readme.md)
 
 **Chapter 2: Tipos de valor (Value Types)**：[Code](./02_ValueTypes_es/ValueTypes.sol) | [Tutorial](./02_ValueTypes_es/readme.md)
 
 **Chapter 3. Función**：[Code](./03_Funcion_es/Function.sol) | [Tutorial](./03_Funcion_es/readme.md)
+
+**Chapter 12. Eventos**：[Code](./12_Event_es/Event.sol) | [Tutorial](./12_Event_es/readme.md)
+
+**Chapter 13. Herencia**：[Code](./13_Inheritance_es/Inheritance.sol) | [Tutorial](./13_Inheritance_es/readme.md)
+
+**Chapter 14. Interfaz**：[Code](./14_Interface_es/Interface.sol) | [Tutorial](./14_Interface_es/readme.md)
+
+**Chapter 15. Errores**：[Code](./15_Errors_es/Error.sol) | [Tutorial](./15_Errors_es/readme.md)
 
 ## WTF Contributors
 
