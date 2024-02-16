@@ -6,7 +6,6 @@ contract Mapping {
 
 
 
-      //Rule 1. _KeyType cannot be custom types. The following example will throw an error
       // Regla 1. _KeyType no puede usar tipos de variables personalizadas como struct. El siguiente ejemplo lanzará un error
       //Definir un struct
       //struct Student{
