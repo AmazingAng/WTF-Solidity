@@ -1,5 +1,6 @@
 ---
-title: 11. Constructor y modificador
+Título: 11. Constructor y modificador
+
 tags:
   - solidity
   - basic
