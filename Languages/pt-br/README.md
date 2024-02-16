@@ -1,4 +1,4 @@
-:globe_with_meridians: **[Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/README.md) / [Espanhol](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/README.md) / [Português Brasileiro](./Languages/pt-br/README.md)** :globe_with_meridians:
+:globe_with_meridians: **[Inglês](./Languages/en/README.md) / [Espanhol](./Languages/es/README.md) / [Português Brasileiro](./Languages/pt-br/README.md)** :globe_with_meridians:
 
 # WTF Solidity
 Eu recentemente comecei a reestudar Solidity para reforçar os detalhes e também escrever um "WTF Solidity Guia Básico" para iniciantes (programadores experientes podem procurar outros tutoriais), com atualizações semanais de 1-3 aulas.
@@ -266,19 +266,19 @@ O roteiro será definido com base no número de estrelas deste repositório:
 
 ### Análise de Ameaças On-chain
 
-**Aula 1: Ferramentas**: [Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug//01_tools/) | [Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/01_tools/en/)
+**Aula 1: Ferramentas**: [Artigo](./Topics/Onchain_debug//01_tools/) | [Inglês](./Topics/Onchain_debug/01_tools/en/)
 
-**Aula 2: Aquecimento**: [Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/02_warmup/) | [Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/02_warmup/en/)
+**Aula 2: Aquecimento**: [Artigo](./Topics/Onchain_debug/02_warmup/) | [Inglês](./Topics/Onchain_debug/02_warmup/en/)
 
-**Aula 3: Prova de Conceito de Vulnerabilidades - Parte 1**: [Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/03_write_your_own_poc/) | [Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/03_write_your_own_poc/en/)
+**Aula 3: Prova de Conceito de Vulnerabilidades - Parte 1**: [Artigo](./Topics/Onchain_debug/03_write_your_own_poc/) | [Inglês](./Topics/Onchain_debug/03_write_your_own_poc/en/)
 
-**Aula 4: Prova de Conceito de Vulnerabilidades - Parte 2**: [Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/04_write_your_own_poc/) | [Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/04_write_your_own_poc/en/)
+**Aula 4: Prova de Conceito de Vulnerabilidades - Parte 2**: [Artigo](./Topics/Onchain_debug/04_write_your_own_poc/) | [Inglês](./Topics/Onchain_debug/04_write_your_own_poc/en/)
 
-**Aula 5: Prova de Conceito de Vulnerabilidades - Parte 3**: [Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/05_write_your_own_poc/) | [Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/05_write_your_own_poc/en/)
+**Aula 5: Prova de Conceito de Vulnerabilidades - Parte 3**: [Artigo](./Topics/Onchain_debug/05_write_your_own_poc/) | [Inglês](./Topics/Onchain_debug/05_write_your_own_poc/en/)
 
-**Aula 6: Análise de Rugpull**: [Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/) | [Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/en/)
+**Aula 6: Análise de Rugpull**: [Artigo](./Topics/Onchain_debug/06_Rugpull/) | [Inglês](./Topics/Onchain_debug/06_Rugpull/en/)
 
-**Aula 7: Análise do Evento da Ponte Nomad**: [Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/07_analysis_bridge/) | [Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/07_analysis_bridge/en/)
+**Aula 7: Análise do Evento da Ponte Nomad**: [Artigo](./Topics/Onchain_debug/07_analysis_bridge/) | [Inglês](./Topics/Onchain_debug/07_analysis_bridge/en/)
 
 ### NFT
 

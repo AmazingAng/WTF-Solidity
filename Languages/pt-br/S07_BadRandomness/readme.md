@@ -16,7 +16,7 @@ Nesta aula, vamos falar sobre a vulnerabilidade de "Má Sorteio" em contratos in
 
 Muitas aplicações na Ethereum requerem o uso de números aleatórios, como para sortear `tokenId` de NFTs, abrir lootboxes, determinar resultados aleatórios em batalhas de GameFi, entre outros. No entanto, devido à transparência e determinismo dos dados na Ethereum, não existe um método para gerar números aleatórios como na maioria das outras linguagens de programação, como `random()`. Portanto, muitos projetos acabam utilizando métodos de geração de números pseudorandômicos na blockchain, como `blockhash()` e `keccak256()`.
 
-Vulnerabilidade de Má Sorteio: Hackers podem calcular previamente os resultados desses números pseudorandômicos e manipulá-los conforme desejarem, como criar NFTs raros específicos em vez de sortear aleatoriamente. Para saber mais, consulte [WTF Solidity guia introdutório aula 39: Números Pseudorandômicos](https://github.com/AmazingAng/WTF-Solidity/tree/main/39_Random).
+Vulnerabilidade de Má Sorteio: Hackers podem calcular previamente os resultados desses números pseudorandômicos e manipulá-los conforme desejarem, como criar NFTs raros específicos em vez de sortear aleatoriamente. Para saber mais, consulte [WTF Solidity guia introdutório aula 39: Números Pseudorandômicos](./39_Random).
 
 ## Exemplo de Má Sorteio
 
@@ -73,7 +73,7 @@ Como o Remix com Remix VM não suporta a função `blockhash()`, é necessário 
 
 ## Métodos de Prevenção
 
-Normalmente, utilizamos números aleatórios gerados fora da blockchain por meio de projetos de oráculos, como o Chainlink VRF, para prevenir esse tipo de vulnerabilidade. Esses números aleatórios são gerados fora da blockchain e depois enviados para a mesma, garantindo que sejam imprevisíveis. Para saber mais, consulte [WTF Solidity guia introdutório aula 39: Números Pseudorandômicos](https://github.com/AmazingAng/WTF-Solidity/tree/main/39_Random).
+Normalmente, utilizamos números aleatórios gerados fora da blockchain por meio de projetos de oráculos, como o Chainlink VRF, para prevenir esse tipo de vulnerabilidade. Esses números aleatórios são gerados fora da blockchain e depois enviados para a mesma, garantindo que sejam imprevisíveis. Para saber mais, consulte [WTF Solidity guia introdutório aula 39: Números Pseudorandômicos](./39_Random).
 
 ## Conclusão
 

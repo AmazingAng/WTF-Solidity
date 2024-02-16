@@ -20,16 +20,16 @@
 
 ## Tradução
 
-**[Mergulhando na Máquina Virtual Ethereum Parte 1 - Montagem e Bytecode](../Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md)**
+**[Mergulhando na Máquina Virtual Ethereum Parte 1 - Montagem e Bytecode](../DiveEVM2017/DiveEVM2017-Part1.md)**
 
-**[Mergulhando na Máquina Virtual Ethereum Parte 2 - Representação de Tipos de Dados de Comprimento Fixo](../Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md)**
+**[Mergulhando na Máquina Virtual Ethereum Parte 2 - Representação de Tipos de Dados de Comprimento Fixo](../DiveEVM2017/DiveEVM2017-Part2.md)**
 
-**[Mergulhando na Máquina Virtual Ethereum Parte 3 - Representação de Tipos de Dados Dinâmicos](../Topics/Translation/DiveEVM2017/DiveEVM2017-Part3.md)**
+**[Mergulhando na Máquina Virtual Ethereum Parte 3 - Representação de Tipos de Dados Dinâmicos](../DiveEVM2017/DiveEVM2017-Part3.md)**
 
-**[Mergulhando na Máquina Virtual Ethereum Parte 4 - Chamada de Método de Contrato Inteligente Externo](../Topics/Translation/DiveEVM2017/DiveEVM2017-Part4.md)**
+**[Mergulhando na Máquina Virtual Ethereum Parte 4 - Chamada de Método de Contrato Inteligente Externo](../DiveEVM2017/DiveEVM2017-Part4.md)**
 
-**[Mergulhando na Máquina Virtual Ethereum Parte 5 - Processo de Criação de Contrato Inteligente](../Topics/Translation/DiveEVM2017/DiveEVM2017-Part5.md)**
+**[Mergulhando na Máquina Virtual Ethereum Parte 5 - Processo de Criação de Contrato Inteligente](../DiveEVM2017/DiveEVM2017-Part5.md)**
 
-**[Mergulhando na Máquina Virtual Ethereum Parte 6 - Implementação de Eventos em Solidity](../Topics/Translation/DiveEVM2017/DiveEVM2017-Part6.md)**.
+**[Mergulhando na Máquina Virtual Ethereum Parte 6 - Implementação de Eventos em Solidity](../DiveEVM2017/DiveEVM2017-Part6.md)**.
 
 <!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->
