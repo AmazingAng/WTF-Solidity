@@ -15,8 +15,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 -----
 
 ## Tipos de referencia en Solidity
-**Tipo de Referencia**: Reference types differ from value types in that they do not store values directly on their own. Instead, reference types store the address/pointer of the data’s location and do not directly share the data. You can modify the underlying data with different variable names. Reference types `array`, `struct` and `mapping`, which take up a lot of storage space. We need to deal with the location of the data storage when using them. 
-Los tipos de referencia difieren de los tipos de valor en que no almacenan valores directamente por sí mismos. En su lugar, los tipos de referencia almacenan la dirección/puntero de la ubicación de los datos y no comparten directamente los datos. Puedes modificar los datos subyacentes con diferentes nombres de variables. Los tipos de referencia `array`, `struct` y `mapping`, que ocupan mucho espacio de almacenamiento. Se deben usar por medio de la ubicación del almacenamiento de datos.
+- **Tipos de referencia**: Los tipos de referencia difieren de los tipos de valor en que no almacenan valores directamente por sí mismos. En su lugar, los tipos de referencia almacenan la dirección/puntero de la ubicación de los datos y no comparten directamente los datos. Se pueden modificar los datos subyacentes con diferentes nombres de variables. Los tipos de referencia `array`, `struct` y `mapping`, que ocupan mucho espacio de almacenamiento se deben usar por medio de la ubicación del almacenamiento de datos.
 
 ## Ubicación de datos
 Hay tres tipos de ubicaciones de almacenamiento de datos en solidity: `storage`, `memory` y `calldata`. Los costos de gas son diferentes para cada tipo de almacenamiento.
@@ -25,16 +24,16 @@ Los datos de una variable tipo `storage` se almacenan en la `blockchain`, simila
 
 Uso general:
 
-1. `storage`: The state variables are `storage` by default, which are stored on-chain. Las variables de estado son `storage` por defecto, es decir, se almacenan `on-chain`.
+1. `storage`: Las variables de estado son `storage` por defecto, es decir, se almacenan `on-chain`.
 
-2. `memory`: The parameters and temporary variables in the function generally use `memory` label, which is stored in memory and not on-chain.  Los parámetros y variables temporales en la función generalmente usan la etiqueta `memory`, que se almacena en memoria (`off-chain`) y no `on-chain`.
+2. `memory`: Los parámetros y variables temporales en la función generalmente usan la etiqueta `memory`, que se almacena en memoria (`off-chain`) y no `on-chain`. 
 
 3. `calldata`: Similar a `memory`, es almacenado en memoria, no `on-chain`. La diferencia de `memory` es que las variables `calldata` no pueden ser modificadas, y generalmente se usan para parámetros de función. Ejemplo:
 
 ```solidity
     function fCalldata(uint[] calldata _x) public pure returns(uint[] calldata){
         //El parámetro es el arreglo calldata, que no puede ser modificado.
-        // _x[0] = 0 //Esta modificación reportará un error.
+        // _x[0] = 0 //Esta modificación lanzará un error.
         return(_x);
     }
 ```
@@ -51,7 +50,7 @@ Las ubicaciones de datos no solo son relevantes para la persistencia de datos, s
     uint[] x = [1,2,3]; // variable de estado: arreglo x
 
     function fStorage() public{
-        //Declara una variable de almacenamiento xStorage, apuntando a x. Modificar xStorage también afectará a x
+        //Declarar una variable de almacenamiento xStorage, apuntando a x. Modificar xStorage también afectará a x
         uint[] storage xStorage = x;
         xStorage[0] = 100;
     }
@@ -90,11 +89,11 @@ contract Variables {
     string public z;
 ```
 
-Podemos cambiar el valor de la variable de estado en una función:
+Se puede cambiar el valor de las variables de estado en una función:
 
 ```solidity
     function foo() external{
-        // Puedes cambiar el valor de la variable de estado en la función
+        // Se puede cambiar el valor de la variable de estado en la función
         x = 5;
         y = 2;
         z = "0xAA";
@@ -127,7 +126,7 @@ Las variables globales son variables que funcionan en el ámbito global y son pa
 ```
 En el ejemplo anterior, usamos tres variables globales: `msg.sender`, `block.number` y `msg.data`, que representan al remitente del mensaje (llamada actual), altura del bloque actual y datos completos de calldata, respectivamente. 
 
-Below are some commonly used global variables:
+A continuación, se presentan algunas variables globales comúnmente utilizadas:
 
 - `blockhash(uint blockNumber)`: (`bytes32`)          El hash del bloque dado - solo aplica para los 256 bloques más recientes.
 - `block.coinbase`             : (`address payable`) La dirección del minero del bloque actual
@@ -144,5 +143,5 @@ Below are some commonly used global variables:
 ![5-4.png](./img/5-4.png)
 
 ## Resumen
-En este capítulo, introducimos los tipos de referencia, ubicaciones de almacenamiento de datos y ámbitos de variables en `Solidity`. Hay tres tipos de ubicaciones de almacenamiento de datos: `storage`, `memory` y `calldata`. Los costos de gas son diferentes para diferentes ubicaciones de almacenamiento. El ámbito de la variable incluye variables de estado, variables locales y variables globales.
+En este capítulo, se introdujo los tipos de referencia, ubicaciones de almacenamiento de datos y ámbitos de variables en `Solidity`. Hay tres tipos de ubicaciones de almacenamiento de datos: `storage`, `memory` y `calldata`. Los costos de gas son diferentes para diferentes ubicaciones de almacenamiento. El ámbito de la variable incluye variables de estado, variables locales y variables globales.
 

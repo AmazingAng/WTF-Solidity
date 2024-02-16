@@ -15,7 +15,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-En este capítulo, introduciremos la salida de función en `Solidity`, incluyendo la devolución de múltiples valores, retornos con nombre y la lectura completa o parcial de valores de retorno usando asignaciones de desestructuración.
+En este capítulo, se introducirá la salida de función en `Solidity`, incluyendo el retorno de múltiples valores, retornos con nombre y la lectura completa o parcial de valores de retorno usando asignaciones de desestructuración.
 
 ## Valores de retorno (return y returns)
 Hay dos palabras clave relacionadas con la salida de función: `return` y `returns`:
@@ -28,10 +28,10 @@ Hay dos palabras clave relacionadas con la salida de función: `return` y `retur
             return(1, true, [uint256(1),2,5]);
         }
 ```
-En el código anterior, la función `returnMultiple()` tiene múltiples retornos: `returns (uint256, bool, uint256[3] memory)`, y luego especificamos las variables/valores de retorno en el cuerpo de la función con `return (1, true, [uint256 (1), 2,5])`.
+En el código anterior, la función `returnMultiple()` tiene múltiples retornos: `returns (uint256, bool, uint256[3] memory)`, y luego se especifican las variables/valores de retorno en el cuerpo de la función con `return (1, true, [uint256 (1), 2,5])`.
 
 ## Retornos con nombre
-Podemos indicar el nombre de las variables de retorno en `returns`, para que `Solidity` inicialice automáticamente estas variables, y devuelva automáticamente los valores de estas funciones sin añadir la palabra clave `return`.
+Se puede indicar el nombre de las variables de retorno en `returns`, para que `Solidity` inicialice automáticamente estas variables, y devuelva automáticamente los valores de estas funciones sin añadir la palabra clave `return`.
 
 ```solidity
     // retornos con nombre
@@ -41,9 +41,9 @@ Podemos indicar el nombre de las variables de retorno en `returns`, para que `So
         _array = [uint256(3),2,1];
     }
 ```
-En el código anterior, declaramos el tipo de variable de retorno y el nombre de la variable con `returns (uint256 _number, bool _bool, uint256[3] memory _array)`. Así, solo necesitamos asignar valores a la variable `_number`, `_bool` y `_array` en el cuerpo de la función, y se devolverán automáticamente.
+En el código anterior, se declara el tipo de variable de retorno y el nombre de la variable con `returns (uint256 _number, bool _bool, uint256[3] memory _array)`. Así, solo se necesita asignar los valores a la variable `_number`, `_bool` y `_array` en el cuerpo de la función, y se devolverán automáticamente.
 
-Por supuesto, también puedes devolver variables con la palabra clave `return` en retornos nombrados:
+Por supuesto, también se pueden devolver variables con la palabra clave `return` en retornos nombrados:
 ```solidity
     //Parámetros de retorno con nombre, también soportan return
     function returnNamed2() public pure returns(uint256 _number, bool _bool, uint256[3] memory _array){
@@ -60,16 +60,16 @@ Por supuesto, también puedes devolver variables con la palabra clave `return` e
         uint256[3] memory _array;
         (_number, _bool, _array) = returnNamed();
 ```
-- Al asignar parte de los valores de retorno: Los componentes pueden omitirse. En el siguiente código, solo asignamos el valor de retorno `_bool2`, pero no `_number` y `_array`:
+- Al asignar parte de los valores de retorno: Los componentes pueden omitirse. En el siguiente código, solo se asigna el valor de retorno `_bool2`, pero no `_number` y `_array`:
 ```solidity
         (, _bool2, ) = returnNamed();
 ```
 
 ## Verificar en Remix
-- Despliega el contrato y comprueba los valores de retorno de las funciones.
+- Desplegar el contrato y comprobar los valores de retorno de las funciones.
 
 ![](./img/4-1.png)
 
 
 ## Resumen
-En esta sección, introducimos los valores de retorno de función `return` y `returns`, incluyendo la devolución de múltiples variables, retornos nombrados y la lectura completa o parcial de valores de retorno usando asignaciones de desestructuración.
+En esta sección, se introdujeron los valores de retorno para una función `return` y `returns`, incluyendo la devolución de múltiples variables, retornos nombrados y la lectura completa o parcial de valores de retorno usando asignaciones de desestructuración.
