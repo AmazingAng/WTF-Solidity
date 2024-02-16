@@ -1,3 +1,5 @@
+![](./img/logo2.jpeg)
+
 :globe_with_meridians: **[Inglês](./Languages/en/README.md) / [Espanhol](./Languages/es/README.md) / [Português Brasileiro](./Languages/pt-br/README.md)** :globe_with_meridians:
 
 # WTF Solidity
