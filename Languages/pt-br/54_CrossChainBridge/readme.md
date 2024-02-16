@@ -1,42 +1,58 @@
-# 54. Ponte Interchain
+---
+title: 54. Ponte de Cadeia Cruzada
+tags:
+  - solidity
+  - erc20
+  - eip712
+  - openzepplin
+---
 
-Recentemente, tenho revisitado o estudo do Solidity para reforçar alguns detalhes e escrever um "Guia Simplificado do Solidity" para iniciantes (os programadores mais avançados podem buscar outras fontes de ensino). Atualizo o guia com 1 a 3 lições por semana.
+# WTF Solidity Introdução Simples: 54. Ponte de Cadeia Cruzada
+
+Recentemente, tenho estudado solidity novamente para revisar os detalhes e escrever um "WTF Solidity Introdução Simples" para iniciantes (programadores experientes podem procurar outros tutoriais). Serão lançadas de 1 a 3 aulas por semana.
 
 Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
-Comunidade: [Discord](https://discord.gg/5akcruXrsk) | [Grupo no WhatsApp](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link) | [Site oficial da wtf.academy](https://wtf.academy)
+Comunidade: [Discord](https://discord.gg/5akcruXrsk)｜[Grupo WeChat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Site wtf.academy](https://wtf.academy)
 
-Todo o código e tutoriais estão disponíveis no Github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTF-Solidity)
+Todo o código e tutoriais estão disponíveis no GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
----
+-----
 
-Nesta lição, introduziremos o conceito de Ponte Interchain, uma infraestrutura que permite a transferência de ativos digitais e informações entre duas ou mais blockchains, e construiremos uma ponte interchain simples.
+Nesta aula, vamos falar sobre pontes de cadeia cruzada, que são infraestruturas que permitem a transferência de ativos de uma blockchain para outra, e implementar uma ponte de cadeia cruzada simples.
 
-## 1. O que é uma Ponte Interchain
 
-Uma Ponte Interchain é um protocolo blockchain que permite mover ativos digitais e informações entre duas ou mais blockchains. Por exemplo, um token ERC20 funcionando na rede principal do Ethereum pode ser transferido para uma sidechain ou blockchain independente compatível com o Ethereum usando uma Ponte Interchain.
+## 1. O que é uma Ponte de Cadeia Cruzada
 
-É importante ressaltar que as operações de cross-chain não são nativamente suportadas pelas blockchains, exigindo a intervenção de uma terceira parte confiável para executar as transações, o que também traz riscos. Nos últimos dois anos, ataques às Pontes Interchain resultaram em perdas de mais de **20 bilhões de dólares** em ativos dos usuários.
+Uma ponte de cadeia cruzada é um protocolo de blockchain que permite a movimentação de ativos digitais e informações entre duas ou mais blockchains. Por exemplo, um token ERC20 que está sendo executado na mainnet do Ethereum pode ser transferido para uma sidechain ou uma blockchain independente compatível com Ethereum usando uma ponte de cadeia cruzada.
 
-## 2. Tipos de Pontes Interchain
+No entanto, as pontes de cadeia cruzada não são nativamente suportadas pelas blockchains e exigem a intervenção de terceiros confiáveis para executar as operações de cadeia cruzada, o que também traz riscos. Nos últimos dois anos, ataques a pontes de cadeia cruzada resultaram em perdas de ativos de usuários no valor de mais de **2 bilhões de dólares**.
 
-As Pontes Interchain geralmente se enquadram em três categorias principais:
+## 2. Tipos de Pontes de Cadeia Cruzada
 
-- **Burn/Mint**: Neste método, os tokens na blockchain de origem são queimados e, em seguida, um número equivalente de tokens é criado na blockchain de destino. Esta abordagem mantém o suprimento total de tokens inalterado, mas requer que a Ponte Interchain tenha permissão para criar novos tokens. É adequado para projetos construírem suas próprias Pontes Interchain.
+Existem principalmente três tipos de pontes de cadeia cruzada:
 
-- **Stake/Mint**: Neste método, os tokens na blockchain de origem são bloqueados (stake) e, em seguida, uma quantidade equivalente de tokens (tokens-fichas) é criada na blockchain de destino. Os tokens na blockchain de origem permanecem bloqueados até que os tokens-fichas sejam transferidos de volta. Essa é a abordagem mais comum para Pontes Interchain e não exige nenhuma permissão especial, mas apresenta riscos. Se os ativos na blockchain de origem forem alvos de ataques hackers, os tokens-fichas na blockchain de destino se tornarão inúteis.
+- **Burn/Mint** (Queimar/Cunhar): Nesse método, os tokens são queimados (burn) na cadeia de origem e, em seguida, uma quantidade equivalente de tokens é cunhada (mint) na cadeia de destino. A vantagem desse método é que o suprimento total de tokens permanece o mesmo, mas a ponte de cadeia cruzada precisa ter permissão para cunhar os tokens, o que é adequado para projetos que desejam construir sua própria ponte de cadeia cruzada.
 
-- **Stake/Unstake**: Neste método, os tokens na blockchain de origem são bloqueados (stake) e, em seguida, são liberados (unstake) uma quantidade equivalente de tokens na blockchain de destino. Os tokens na blockchain de destino podem ser trocados de volta pelos tokens na blockchain de origem a qualquer momento. Este método exige que a Ponte Interchain tenha tokens bloqueados em ambas as blockchains, tornando-o mais complexo e com uma barreira de entrada mais alta. Geralmente, os usuários são incentivados a bloquear tokens na Ponte Interchain.
+    ![](./img/54-1.png)
 
-## 3. Construindo uma Ponte Interchain Simples
+- **Stake/Mint** (Bloquear/Cunhar): Nesse método, os tokens são bloqueados (stake) na cadeia de origem e, em seguida, uma quantidade equivalente de tokens (certificados) é cunhada (mint) na cadeia de destino. Os tokens na cadeia de origem são desbloqueados quando os tokens são movidos de volta para a cadeia de origem. Esse é o método mais comum usado pelas pontes de cadeia cruzada, pois não requer nenhuma permissão, mas também apresenta riscos. Se os ativos na cadeia de origem forem atacados por hackers, os certificados na cadeia de destino se tornarão inúteis.
 
-Para entender melhor o conceito de Ponte Interchain, construiremos uma ponte interchain simples que permite a transferência de tokens ERC20 entre a rede de testes Goerli e a rede de testes Sepolia. Utilizaremos o método de queima/emissão (burn/mint), onde os tokens na blockchain de origem (Goerli) serão queimados e tokens equivalentes na blockchain de destino (Sepolia) serão criados. Esta ponte interchain será composta por um contrato inteligente (implantado em ambas as blockchains) e um script em Ethers.js.
+    ![](./img/54-2.png)
 
-Por favor, note que esta é uma implementação muito básica de uma Ponte Interchain, utilizada apenas para fins educacionais. Ela não trata de problemas como transações falhas, reorganização de blockchains, entre outros. Em ambiente de produção, recomenda-se o uso de soluções de Pontes Interchain profissionais ou frameworks auditados.
+- **Stake/Unstake** (Bloquear/Desbloquear): Nesse método, os tokens são bloqueados (stake) na cadeia de origem e, em seguida, uma quantidade equivalente de tokens é desbloqueada (unstake) na cadeia de destino. Os tokens na cadeia de destino podem ser trocados de volta para os tokens na cadeia de origem a qualquer momento. Esse método requer que a ponte de cadeia cruzada tenha tokens bloqueados em ambas as cadeias, o que é mais complexo e geralmente requer incentivos para os usuários bloquearem seus tokens na ponte de cadeia cruzada.
 
-### 3.1 Contrato de token cross-chain
+    ![](./img/54-3.png)
 
-Primeiro, precisamos implantar um contrato de token ERC20, `CrossChainToken`, nas redes de teste Goerli e Sepolia. Este contrato define o nome, símbolo e fornecimento total do token, bem como uma função `bridge()` para transferências cross-chain.
+## 3. Construindo uma Ponte de Cadeia Cruzada Simples
+
+Para entender melhor como uma ponte de cadeia cruzada funciona, vamos construir uma ponte de cadeia cruzada simples e implementar a transferência de tokens ERC20 entre a rede de teste Goerli e a rede de teste Sepolia. Usaremos o método burn/mint, em que os tokens na cadeia de origem são queimados e cunhados na cadeia de destino. Essa ponte de cadeia cruzada consiste em um contrato inteligente (implantado em ambas as cadeias) e um script Ethers.js.
+
+> **Observe** que esta é uma implementação muito simples de uma ponte de cadeia cruzada e é apenas para fins educacionais. Ela não lida com problemas como falhas de transação, reorganização de cadeias, etc. Em um ambiente de produção, é recomendável usar soluções de ponte de cadeia cruzada profissionais ou frameworks que tenham sido amplamente testados e auditados.
+
+### 3.1 Contrato de Token de Cadeia Cruzada
+
+Primeiro, precisamos implantar um contrato ERC20 chamado `CrossChainToken` nas redes de teste Goerli e Sepolia. Esse contrato define o nome, símbolo e fornecimento total do token, além de uma função `bridge()` para a transferência de cadeia cruzada.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -55,7 +71,7 @@ contract CrossChainToken is ERC20, Ownable {
     /**
      * @param name Nome do Token
      * @param symbol Símbolo do Token
-     * @param totalSupply Fornecimento total do Token
+     * @param totalSupply Fornecimento Total do Token
      */
     constructor(
         string memory name,
@@ -66,8 +82,8 @@ contract CrossChainToken is ERC20, Ownable {
     }
 
     /**
-     * Função bridge
-     * @param amount: quantidade de tokens a serem queimados na cadeia atual e criados na outra cadeia
+     * Função Bridge
+     * @param amount: quantidade de tokens a serem queimados na cadeia atual e cunhados na outra cadeia
      */
     function bridge(uint256 amount) public {
         _burn(msg.sender, amount);
@@ -75,7 +91,7 @@ contract CrossChainToken is ERC20, Ownable {
     }
 
     /**
-     * Função mint
+     * Função Mint
      */
     function mint(address to, uint amount) external onlyOwner {
         _mint(to, amount);
@@ -86,30 +102,30 @@ contract CrossChainToken is ERC20, Ownable {
 
 Este contrato possui três funções principais:
 
-- `constructor()`: O construtor, que será chamado uma vez ao implantar o contrato, é usado para inicializar o nome, símbolo e fornecimento total do token.
+- `constructor()`: O construtor é chamado uma vez ao implantar o contrato e é usado para inicializar o nome, símbolo e fornecimento total do token.
 
-- `bridge()`: O usuário chama esta função para realizar uma transferência cross-chain. Ela irá destruir a quantidade de tokens especificada pelo usuário e emitir o evento `Bridge`.
+- `bridge()`: Os usuários chamam essa função para realizar a transferência de cadeia cruzada. Ela queima a quantidade especificada de tokens do usuário e emite o evento `Bridge`.
 
-- `mint()`: Apenas o proprietário do contrato pode chamar esta função para lidar com eventos cross-chain e emitir o evento `Mint`. Quando o usuário chama a função `bridge()` em outra cadeia para destruir o token, o script irá ouvir o evento `Bridge` e criar o token para o usuário na cadeia de destino.
+- `mint()`: Somente o proprietário do contrato pode chamar essa função, que lida com o evento de cadeia cruzada e emite o evento `Mint`. Quando um usuário chama a função `bridge()` na outra cadeia para queimar tokens, o script ouve o evento `Bridge` e cunha os tokens para o usuário na cadeia de destino.
 
-### 3.2 Script cross-chain
+### 3.2 Script de Cadeia Cruzada
 
-Com o contrato de token no lugar, precisamos de um servidor para lidar com eventos cross-chain. Podemos escrever um script ethers.js (versão v6) para ouvir o evento `Bridge` e, quando o evento for acionado, criar a mesma quantidade de tokens na cadeia de destino. Se você não conhece o Ethers.js, pode ler o [WTF Ethers Minimalist Tutorial](https://github.com/WTFAcademy/WTF-Ethers).
+Agora que temos o contrato de token, precisamos de um servidor para lidar com os eventos de cadeia cruzada. Podemos escrever um script Ethers.js (versão 6) para ouvir o evento `Bridge` e, quando esse evento for acionado, cunhar a mesma quantidade de tokens na cadeia de destino. Se você não está familiarizado com o Ethers.js, pode ler o [WTF Ethers Tutorial](https://github.com/WTFAcademy/WTF-Ethers).
 
 ```javascript
 import { ethers } from "ethers";
 
-// Inicialize os provedores das duas cadeias
+// Inicializando os provedores das duas cadeias
 const providerGoerli = new ethers.JsonRpcProvider("Goerli_Provider_URL");
 const providerSepolia = new ethers.JsonRpcProvider("Sepolia_Provider_URL://eth-sepolia.g.alchemy.com/v2/RgxsjQdKTawszh80TpJ-14Y8tY7cx5W2");
 
-// Inicialize os signatários das duas cadeias
-// privateKey preenche a chave privada da carteira do administrador
+// Inicializando os signatários das duas cadeias
+// Preencha privateKey com a chave privada da carteira do administrador
 const privateKey = "Your_Key";
 const walletGoerli = new ethers.Wallet(privateKey, providerGoerli);
 const walletSepolia = new ethers.Wallet(privateKey, providerSepolia);
 
-// Endereço do contrato e ABI
+// Endereços e ABI do contrato
 const contractAddressGoerli = "0xa2950F56e2Ca63bCdbA422c8d8EF9fC19bcF20DD";
 const contractAddressSepolia = "0xad20993E1709ed13790b321bbeb0752E50b8Ce69";
 
@@ -119,34 +135,34 @@ const abi = [
     "function mint(address to, uint amount) external",
 ];
 
-// Inicialize a instância do contrato
+// Inicializando as instâncias do contrato
 const contractGoerli = new ethers.Contract(contractAddressGoerli, abi, walletGoerli);
 const contractSepolia = new ethers.Contract(contractAddressSepolia, abi, walletSepolia);
 
 const main = async () => {
-     try{
-         console.log(`Iniciando a escuta de eventos cross-chain`)
+    try{
+        console.log(`Iniciando a escuta de eventos de cadeia cruzada`)
 
-         // Escute o evento Bridge da cadeia Sepolia e, em seguida, execute a operação de mint em Goerli para completar a transferência cross-chain
-         contractSepolia.on("Bridge", async (user, amount) => {
-             console.log(`Evento Bridge na cadeia Sepolia: Usuário ${user} queimou ${amount} tokens`);
+        // Ouvindo o evento Bridge na cadeia Sepolia e cunhando tokens na cadeia Goerli
+        contractSepolia.on("Bridge", async (user, amount) => {
+            console.log(`Evento Bridge na cadeia Sepolia: Usuário ${user} queimou ${amount} tokens`);
 
-             // Executando a operação de burn
-             let tx = await contractGoerli.mint(user, amount);
-             await tx.wait();
+            // Executando a queima
+            let tx = await contractGoerli.mint(user, amount);
+            await tx.wait();
 
-             console.log(`Criados ${amount} tokens para ${user} na cadeia Goerli`);
-         });
+            console.log(`Cunhados ${amount} tokens para ${user} na cadeia Goerli`);
+        });
 
-       // Escute o evento Bridge da cadeia Goerli e, em seguida, execute a operação de mint em Sepolia para completar a transferência cross-chain
-         contractGoerli.on("Bridge", async (user, amount) => {
-             console.log(`Evento Bridge na cadeia Goerli: Usuário ${user} queimou ${amount} tokens`);
+        // Ouvindo o evento Bridge na cadeia Goerli e cunhando tokens na cadeia Sepolia
+        contractGoerli.on("Bridge", async (user, amount) => {
+            console.log(`Evento Bridge na cadeia Goerli: Usuário ${user} queimou ${amount} tokens`);
 
-             // Executando a operação de burn
+            // Executando a queima
             let tx = await contractSepolia.mint(user, amount);
             await tx.wait();
 
-            console.log(`Criados ${amount} tokens para ${user} na cadeia Sepolia`);
+            console.log(`Cunhados ${amount} tokens para ${user} na cadeia Sepolia`);
         });
 
     }catch(e){
@@ -158,28 +174,28 @@ const main = async () => {
 main();
 ```
 
-## Reaparecimento no Remix
+## Reproduzindo no Remix
 
-1. Implante o contrato `CrossChainToken` nas cadeias de teste Goerli e Sepolia, respectivamente. O contrato irá automaticamente criar 10.000 tokens para nós.
+1. Implante o contrato `CrossChainToken` nas redes de teste Goerli e Sepolia. O contrato irá automaticamente cunhar 10000 tokens para nós.
 
-     ![](./img/54-4.png)
+    ![](./img/54-4.png)
 
-2. Complete a URL do nó RPC e a chave privada do administrador no script cross-chain `crosschain.js`, preencha os endereços dos contratos de token implantados em Goerli e Sepolia nos locais correspondentes e execute o script.
+2. Preencha as URLs dos nós RPC e a chave privada do administrador no script de cadeia cruzada `crosschain.js`. Insira os endereços dos contratos de token implantados no Goerli e Sepolia nos locais apropriados e execute o script.
 
-3. Chame a função `bridge()` do contrato de token na cadeia Goerli para realizar uma transferência cross-chain de 100 tokens.
+3. Chame a função `bridge()` do contrato de token na cadeia Goerli para transferir 100 tokens de cadeia cruzada.
 
-     ![](./img/54-6.png)
+    ![](./img/54-6.png)
 
-4. O script escuta o evento cross-chain e cria 100 tokens na cadeia Sepolia.
+4. O script ouvirá o evento de cadeia cruzada e cunhará 100 tokens na cadeia Sepolia.
 
-     ![](./img/54-7.png)
+    ![](./img/54-7.png)
 
-5. Chame `balance()` na cadeia Sepolia para verificar o saldo e verifique que o saldo do token foi alterado para 10.100. A transferência cross-chain foi bem-sucedida!
+5. Consulte o saldo na cadeia Sepolia usando a função `balance()` e você verá que o saldo de tokens aumentou para 10100. A transferência de cadeia cruzada foi concluída com sucesso!
 
-     ![](./img/54-8.png)
+    ![](./img/54-8.png)
 
-## Resumo
+## Conclusão
 
-Nesta palestra, apresentamos a ponte cross-chain, que permite a transferência de ativos digitais e informações entre duas ou mais blockchains, facilitando a operação de ativos em várias cadeias para os usuários. Ao mesmo tempo, também carrega grandes riscos. Ataques às pontes cross-chain nos últimos dois anos causaram perdas de mais de **2 bilhões de dólares americanos** em ativos dos usuários. Neste tutorial, construímos uma ponte cross-chain simples e implementamos a transferência de tokens ERC20 entre a rede de teste Goerli e a rede de teste Sepolia. Acredito que, através deste tutorial, você terá uma compreensão mais profunda das pontes cross-chain.
+Nesta aula, falamos sobre pontes de cadeia cruzada, que permitem a transferência de ativos digitais e informações entre duas ou mais blockchains, facilitando a operação de ativos em várias cadeias. No entanto, também apresentam riscos significativos, com ataques a pontes de cadeia cruzada resultando em perdas de ativos de usuários no valor de mais de **2 bilhões de dólares** nos últimos dois anos. Neste tutorial, construímos uma ponte de cadeia cruzada simples e implementamos a transferência de tokens ERC20 entre a rede de teste Goerli e a rede de teste Sepolia. Espero que este tutorial tenha ajudado você a entender melhor as pontes de cadeia cruzada.
 
 <!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->
