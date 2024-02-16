@@ -1,197 +1,270 @@
-# WTF Introdução Simples à Solidity: 45. Time Lock
-
-Recentemente, tenho revisitado meus conhecimentos em Solidity para consolidar alguns detalhes e escrever um "WTF Introdução Simples à Solidity" para iniciantes (os mestres da programação podem procurar outros tutoriais). Atualizo de 1 a 3 lições por semana.
-
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
-
-Comunidade: [Discord](https://discord.gg/5akcruXrsk) | [Grupo do WeChat](https://wechat.wtf.academy) | [Site oficial wtf.academy](https://wtf.academy)
-
-Todo o código e tutorial está disponível no GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTF-Solidity)
+---
+title: 45. Time Lock
+tags:
+  - solidity
+  - aplicação
 
 ---
 
-Nesta lição, vamos falar sobre o conceito de time lock (bloqueio de tempo) e contratos de time lock. O código é uma simplificação do contrato Timelock do Compound.
+# WTF Solidity Introdução Simples: 45. Time Lock
+
+Recentemente, tenho estudado solidity novamente para revisar os detalhes e escrever um "WTF Solidity Introdução Simples" para iniciantes (programadores experientes podem procurar outros tutoriais). Serão lançadas de 1 a 3 aulas por semana.
+
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+
+Comunidade: [Discord](https://discord.gg/5akcruXrsk)｜[Grupo WeChat](https://wechat.wtf.academy)｜[Site oficial wtf.academy](https://wtf.academy)
+
+Todo o código e tutoriais estão disponíveis no GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+
+-----
+
+Nesta aula, vamos falar sobre time lock (bloqueio de tempo) e contratos de time lock. O código é uma simplificação do contrato Timelock do Compound [Timelock.sol](https://github.com/compound-finance/compound-protocol/blob/master/contracts/Timelock.sol).
 
 ## Time Lock
 
-O time lock (bloqueio de tempo) é um mecanismo de segurança comum em cofres de banco e outros contêineres de alta segurança. Ele funciona como um cronômetro, projetado para impedir que um cofre ou depósito seja aberto antes de um determinado tempo, mesmo que a pessoa com a senha correta tente abrir.
+![Time Lock](./img/45-1.jpeg)
 
-Na blockchain, o time lock é amplamente utilizado em DeFi e DAOs. Ele é um pedaço de código que pode bloquear algumas funcionalidades de um smart contract por um determinado período de tempo. Isso pode aumentar significativamente a segurança dos contratos inteligentes. Por exemplo, imagine que um hacker comprometa a multisig do Uniswap e esteja prestes a retirar o dinheiro do cofre, mas o contrato do cofre possui um time lock de 2 dias. O hacker terá que esperar 2 dias entre a criação da transação de retirada e a real execução dela. Durante esse período, a equipe do projeto pode encontrar uma solução e os investidores podem se proteger vendendo os tokens.
+Time lock (bloqueio de tempo) é um mecanismo de bloqueio comum em cofres bancários e outros recipientes de alta segurança. É um tipo de temporizador projetado para evitar que um cofre ou depósito seja aberto antes de um determinado tempo, mesmo que a pessoa que está abrindo o cofre conheça a senha correta.
+
+Na blockchain, o time lock é amplamente utilizado em DeFi e DAOs. É um trecho de código que pode bloquear certas funcionalidades de um smart contract por um determinado período de tempo. Isso pode melhorar significativamente a segurança de um smart contract. Por exemplo, se um hacker invadir uma carteira multi-assinatura do Uniswap e tentar retirar os fundos, mas o contrato do cofre tiver um time lock de 2 dias, o hacker terá que esperar 2 dias desde a criação da transação até a retirada dos fundos. Durante esse período, a equipe do projeto pode tomar medidas para lidar com a situação e os investidores podem vender seus tokens antecipadamente para minimizar as perdas.
 
 ## Contrato de Time Lock
 
-A seguir, vamos apresentar o contrato Timelock. Sua lógica não é complexa:
+A seguir, vamos apresentar o contrato Timelock. A lógica do contrato não é complexa:
 
-- Ao criar o contrato Timelock, os desenvolvedores podem definir um período de bloqueio e configurar o administrador como eles mesmos.
-- O Timelock possui três funções principais:
-    - Criar transações e adicioná-las à fila do time lock.
-    - Executar as transações após o término do período de bloqueio.
-    - Se arrepender e cancelar algumas transações na fila do time lock.
-- As equipes de projeto geralmente designam o contrato Timelock como administrador de contratos importantes, como o cofre, e usam o Timelock para operá-los.
-- O administrador do contrato Timelock é geralmente a carteira multisig da equipe, garantindo a descentralização.
+- Ao criar o contrato Timelock, o projeto pode definir o período de bloqueio e definir a si mesmo como o administrador do contrato.
+
+- O time lock tem três principais funcionalidades:
+    - Criar uma transação e adicioná-la à fila do time lock.
+    - Executar uma transação após o período de bloqueio.
+    - Cancelar uma ou mais transações na fila do time lock.
+
+- Geralmente, o contrato de time lock é definido como o administrador de contratos importantes, como o contrato do cofre, e é usado para operá-los.
+- O administrador do contrato de time lock geralmente é uma carteira multi-assinatura do projeto, garantindo a descentralização.
 
 ### Eventos
-
-O contrato Timelock possui quatro eventos:
-
-- `QueueTransaction`: evento de criação e adição de transações à fila do time lock.
-- `ExecuteTransaction`: evento de execução da transação após o período de bloqueio.
-- `CancelTransaction`: evento de cancelamento da transação.
-- `NewAdmin`: evento de alteração do endereço do administrador.
+O contrato Timelock possui quatro eventos.
+- `QueueTransaction`: evento disparado quando uma transação é criada e adicionada à fila do time lock.
+- `ExecuteTransaction`: evento disparado quando uma transação é executada após o período de bloqueio.
+- `CancelTransaction`: evento disparado quando uma transação é cancelada.
+- `NewAdmin`: evento disparado quando o endereço do administrador é alterado.
 
 ```solidity
-// Eventos
-event CancelTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature, bytes data, uint executeTime);
-event ExecuteTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature, bytes data, uint executeTime);
-event QueueTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature, bytes data, uint executeTime);
-event NewAdmin(address indexed newAdmin);
+    // Eventos
+    // Evento disparado quando uma transação é cancelada
+    event CancelTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature,  bytes data, uint executeTime);
+    // Evento disparado quando uma transação é executada
+    event ExecuteTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature,  bytes data, uint executeTime);
+    // Evento disparado quando uma transação é criada e adicionada à fila
+    event QueueTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature, bytes data, uint executeTime);
+    // Evento disparado quando o endereço do administrador é alterado
+    event NewAdmin(address indexed newAdmin);
 ```
 
 ### Variáveis de Estado
-
-O contrato Timelock possui quatro variáveis de estado:
-
+O contrato Timelock possui quatro variáveis de estado.
 - `admin`: endereço do administrador.
 - `delay`: período de bloqueio.
-- `GRACE_PERIOD`: tempo para expirar a transação. Se a transação estiver agendada para execução, mas dentro do `GRACE_PERIOD` não for executada, ela é considerada expirada.
-- `queuedTransactions`: mapeamento do identificador `txHash` de transações na fila do time lock.
+- `GRACE_PERIOD`: tempo de expiração da transação. Se a transação estiver pronta para ser executada, mas não for executada dentro do `GRACE_PERIOD`, ela será considerada expirada.
+- `queuedTransactions`: mapeamento do hash da transação para um booleano, indicando se a transação está na fila do time lock.
 
 ```solidity
-// Variáveis de Estado
-address public admin; // Endereço do administrador
-uint public constant GRACE_PERIOD = 7 dias; // Tempo de expiração da transação
-uint public delay; // Período de bloqueio (segundos)
-mapping (bytes32 => bool) public queuedTransactions; // mapeamento dos txHash de transações na fila do time lock
+    // Variáveis de Estado
+    address public admin; // endereço do administrador
+    uint public constant GRACE_PERIOD = 7 days; // tempo de expiração da transação, transações expiradas são canceladas
+    uint public delay; // período de bloqueio (em segundos)
+    mapping (bytes32 => bool) public queuedTransactions; // mapeamento do hash da transação para um booleano, indicando se a transação está na fila do time lock
 ```
 
 ### Modificadores
-
-O contrato Timelock possui dois modificadores:
-
-- `onlyOwner()`: garante que a função só possa ser executada pelo administrador.
-- `onlyTimelock()`: garante que a função só possa ser executada pelo próprio contrato Timelock.
+O contrato Timelock possui dois modificadores.
+- `onlyOwner()`: o contrato só pode ser executado pelo administrador.
+- `onlyTimelock()`: o contrato só pode ser executado pelo contrato de time lock.
 
 ```solidity
-// Modificador onlyOwner
-modifier onlyOwner() {
-    require(msg.sender == admin, "Timelock: Caller not admin");
-    _;
-}
+    // Modificador onlyOwner
+    modifier onlyOwner() {
+        require(msg.sender == admin, "Timelock: Caller not admin");
+        _;
+    }
 
-// Modificador onlyTimelock
-modifier onlyTimelock() {
-    require(msg.sender == address(this), "Timelock: Caller not Timelock");
-    _;
-}
+    // Modificador onlyTimelock
+    modifier onlyTimelock() {
+        require(msg.sender == address(this), "Timelock: Caller not Timelock");
+        _;
+    }
 ```
 
 ### Funções
-
-O contrato Timelock possui sete funções:
-
-- Construtor: inicializa o período de bloqueio e o endereço do administrador.
-- `queueTransaction()`: cria uma transação e a adiciona à fila do time lock. São necessários os seguintes parâmetros para descrever uma transação completa:
+O contrato Timelock possui sete funções.
+- Construtor: inicializa o período de bloqueio (em segundos) e o endereço do administrador.
+- `queueTransaction()`: cria uma transação e a adiciona à fila do time lock. Os parâmetros são complexos porque descrevem uma transação completa:
     - `target`: endereço do contrato de destino.
-    - `value`: valor em ETH a ser enviado.
+    - `value`: quantidade de ETH a ser enviada.
     - `signature`: assinatura da função a ser chamada.
-    - `data`: dados de chamada da transação.
+    - `data`: dados da chamada da transação.
     - `executeTime`: timestamp da blockchain para a execução da transação.
     
-    Ao chamar essa função, certifique-se de que o tempo de execução da transação `executeTime` seja maior que o timestamp atual da blockchain somado ao período de bloqueio `delay`. A identificação única da transação é o hash de todos os parâmetros, calculado usando a função `getTxHash()`. A transação que entra na fila será atualizada na variável `queuedTransactions` e emitirá o evento `QueueTransaction`.
-- `executeTransaction()`: executa a transação. Os parâmetros são os mesmos do `queueTransaction()`. A transação a ser executada deve estar na fila do time lock, atingir o tempo de execução e não ter expirado. A função de execução da transação utiliza o método de baixo nível `call` do Solidity, explicado na [lição 22](./22_Call/readme.md).
-- `cancelTransaction()`: cancela a transação. Os parâmetros são os mesmos do `queueTransaction()`. A transação a ser cancelada deve estar na fila, e a variável `queuedTransactions` é atualizada, emitindo o evento `CancelTransaction`.
-- `changeAdmin()`: modifica o endereço do administrador, só pode ser chamado pelo contrato Timelock.
+    Ao chamar essa função, é necessário garantir que o tempo de execução da transação `executeTime` seja maior que o timestamp atual da blockchain mais o período de bloqueio `delay`. O hash dos parâmetros é usado como identificador exclusivo da transação, calculado pela função `getTxHash()`. A transação adicionada à fila é atualizada na variável `queuedTransactions` e o evento `QueueTransaction` é emitido.
+- `executeTransaction()`: executa uma transação. Os parâmetros são os mesmos da função `queueTransaction()`. A transação a ser executada deve estar na fila do time lock, ter atingido o tempo de execução e não ter expirado. A função utiliza a função de baixo nível `call` do Solidity, que foi explicada na [aula 22](../22_Call/readme.md).
+- `cancelTransaction()`: cancela uma transação. Os parâmetros são os mesmos da função `queueTransaction()`. A transação a ser cancelada deve estar na fila e é atualizada na variável `queuedTransactions` e o evento `CancelTransaction` é emitido.
+- `changeAdmin()`: altera o endereço do administrador, só pode ser chamada pelo contrato de time lock.
 - `getBlockTimestamp()`: obtém o timestamp atual da blockchain.
-- `getTxHash()`: retorna o identificador da transação, que é o hash de muitos parâmetros da transação.
+- `getTxHash()`: retorna o identificador da transação, que é o hash dos parâmetros da transação.
 
 ```solidity
-// Construtor
-constructor(uint delay_) {
-    delay = delay_;
-    admin = msg.sender;
-}
-
-// Função changeAdmin
-function changeAdmin(address newAdmin) public onlyTimelock {
-    admin = newAdmin;
-
-    emit NewAdmin(newAdmin);
-}
-
-// Função queueTransaction
-function queueTransaction(address target, uint256 value, string memory signature, bytes memory data, uint256 executeTime) public onlyOwner returns (bytes32) {
-    // verificação se o tempo de execução da transação satisfaça o período de bloqueio
-    require(executeTime >= getBlockTimestamp() + delay, "Timelock::queueTransaction: Estimated execution block must satisfy delay.");
-    // cálculo do identificador único da transação
-    bytes32 txHash = getTxHash(target, value, signature, data, executeTime);
-    // adição da transação à fila
-    queuedTransactions[txHash] = true;
-
-    emit QueueTransaction(txHash, target, value, signature, data, executeTime);
-    return txHash;
-}
-
-// Função executeTransaction
-function executeTransaction(address target, uint256 value, string memory signature, bytes memory data, uint256 executeTime) public payable onlyOwner returns (bytes memory) {
-    bytes32 txHash = getTxHash(target, value, signature, data, executeTime);
-    // Verifica se a transação está na fila
-    require(queuedTransactions[txHash], "Timelock::executeTransaction: Transaction hasn't been queued.");
-    // Verifica se passou do tempo de execução
-    require(getBlockTimestamp() >= executeTime, "Timelock::executeTransaction: Transaction hasn't surpassed time lock.");
-    // Verifica se a transação não expirou
-    require(getBlockTimestamp() <= executeTime + GRACE_PERIOD, "Timelock::executeTransaction: Transaction is stale.");
-    // Remove a transação da fila
-    queuedTransactions[txHash] = false;
-
-    // Obtém os dados da chamada
-    bytes memory callData;
-    if (bytes(signature).length == 0) {
-        callData = data;
-    } else {
-        callData = abi.encodePacked(bytes4(keccak256(bytes(signature))), data);
+    /**
+     * @dev Construtor, inicializa o período de bloqueio (em segundos) e o endereço do administrador.
+     */
+    constructor(uint delay_) {
+        delay = delay_;
+        admin = msg.sender;
     }
-    // Executa a transação usando o método call
-    (bool success, bytes memory returnData) = target.call{value: value}(callData);
-    require(success, "Timelock::executeTransaction: Transaction execution reverted.");
 
-    emit ExecuteTransaction(txHash, target, value, signature, data, executeTime);
+    /**
+     * @dev Altera o endereço do administrador, só pode ser chamada pelo contrato de time lock.
+     */
+    function changeAdmin(address newAdmin) public onlyTimelock {
+        admin = newAdmin;
 
-    return returnData;
-}
+        emit NewAdmin(newAdmin);
+    }
 
-// Função para obter o timestamp atual da blockchain
-function getBlockTimestamp() public view returns (uint) {
-    return block.timestamp;
-}
+    /**
+     * @dev Cria uma transação e a adiciona à fila do time lock.
+     * @param target: endereço do contrato de destino.
+     * @param value: quantidade de ETH a ser enviada.
+     * @param signature: assinatura da função a ser chamada.
+     * @param data: dados da chamada da transação.
+     * @param executeTime: timestamp da blockchain para a execução da transação.
+     *
+     * Requer: executeTime seja maior que o timestamp atual da blockchain mais o período de bloqueio.
+     */
+    function queueTransaction(address target, uint256 value, string memory signature, bytes memory data, uint256 executeTime) public onlyOwner returns (bytes32) {
+        // Requer: o tempo de execução da transação seja maior que o período de bloqueio
+        require(executeTime >= getBlockTimestamp() + delay, "Timelock::queueTransaction: Estimated execution block must satisfy delay.");
+        // Calcula o identificador exclusivo da transação: hash dos parâmetros
+        bytes32 txHash = getTxHash(target, value, signature, data, executeTime);
+        // Adiciona a transação à fila
+        queuedTransactions[txHash] = true;
 
-// Função para obter o identificador da transação
-function getTxHash(
-    address target,
-    uint value,
-    string memory signature,
-    bytes memory data,
-    uint executeTime
-) public pure returns (bytes32) {
-    return keccak256(abi.encode(target, value, signature, data, executeTime));
-}
+        emit QueueTransaction(txHash, target, value, signature, data, executeTime);
+        return txHash;
+    }
+
+    /**
+     * @dev Cancela uma transação específica.
+     *
+     * Requer: a transação esteja na fila do time lock.
+     */
+    function cancelTransaction(address target, uint256 value, string memory signature, bytes memory data, uint256 executeTime) public onlyOwner{
+        // Calcula o identificador exclusivo da transação: hash dos parâmetros
+        bytes32 txHash = getTxHash(target, value, signature, data, executeTime);
+        // Requer: a transação esteja na fila do time lock
+        require(queuedTransactions[txHash], "Timelock::cancelTransaction: Transaction hasn't been queued.");
+        // Remove a transação da fila
+        queuedTransactions[txHash] = false;
+
+        emit CancelTransaction(txHash, target, value, signature, data, executeTime);
+    }
+
+    /**
+     * @dev Executa uma transação específica.
+     *
+     * Requer:
+     * 1. A transação esteja na fila do time lock.
+     * 2. Tenha atingido o tempo de execução.
+     * 3. Não tenha expirado.
+     */
+    function executeTransaction(address target, uint256 value, string memory signature, bytes memory data, uint256 executeTime) public payable onlyOwner returns (bytes memory) {
+        bytes32 txHash = getTxHash(target, value, signature, data, executeTime);
+        // Requer: a transação esteja na fila do time lock
+        require(queuedTransactions[txHash], "Timelock::executeTransaction: Transaction hasn't been queued.");
+        // Requer: tenha atingido o tempo de execução
+        require(getBlockTimestamp() >= executeTime, "Timelock::executeTransaction: Transaction hasn't surpassed time lock.");
+        // Requer: não tenha expirado
+       require(getBlockTimestamp() <= executeTime + GRACE_PERIOD, "Timelock::executeTransaction: Transaction is stale.");
+        // Remove a transação da fila
+        queuedTransactions[txHash] = false;
+
+        // Obtém os dados da chamada
+        bytes memory callData;
+        if (bytes(signature).length == 0) {
+            callData = data;
+        } else {
+            callData = abi.encodePacked(bytes4(keccak256(bytes(signature))), data);
+        }
+        // Executa a transação usando call
+        (bool success, bytes memory returnData) = target.call{value: value}(callData);
+        require(success, "Timelock::executeTransaction: Transaction execution reverted.");
+
+        emit ExecuteTransaction(txHash, target, value, signature, data, executeTime);
+
+        return returnData;
+    }
+
+    /**
+     * @dev Obtém o timestamp atual da blockchain.
+     */
+    function getBlockTimestamp() public view returns (uint) {
+        return block.timestamp;
+    }
+
+    /**
+     * @dev Retorna o identificador da transação, que é o hash dos parâmetros da transação.
+     */
+    function getTxHash(
+        address target,
+        uint value,
+        string memory signature,
+        bytes memory data,
+        uint executeTime
+    ) public pure returns (bytes32) {
+        return keccak256(abi.encode(target, value, signature, data, executeTime));
+    }
 ```
 
 ## Demonstração no Remix
+### 1. Implante o contrato Timelock com um período de bloqueio de 120 segundos.
 
-### 1. Deploy do contrato Timelock com um período de bloqueio de `120` segundos.
+![Demonstração no Remix](./img/45-1.jpg)
 
-### 2. Tente chamar diretamente a função `changeAdmin()`, o que resultará em um erro.
+### 2. Chame diretamente a função `changeAdmin()` e você receberá um erro.
 
-### 3. Construa a transação para alterar o administrador.
+![Demonstração no Remix](./img/45-2.jpg)
 
-### 4. Chame a função `queueTransaction` para adicionar a transação à fila do time lock.
+### 3. Construa uma transação para alterar o administrador.
+Para construir a transação, você precisa preencher os seguintes parâmetros:
+address target, uint256 value, string memory signature, bytes memory data, uint256 executeTime
+- `target`: como estamos chamando uma função do próprio contrato Timelock, preencha com o endereço do contrato.
+- `value`: não é necessário enviar ETH, então preencha com `0`.
+- `signature`: a assinatura da função `changeAdmin()` é `"changeAdmin(address)"`.
+- `data`: preencha com os parâmetros da função, que é o endereço do novo administrador. No entanto, você precisa preencher o endereço com 32 bytes de dados para atender ao [padrão de codificação ABI do Ethereum](../27_ABIEncode/readme.md). Você pode usar o site [hashex](https://abi.hashex.org/) para codificar os parâmetros. Exemplo:
+    ```solidity
+    Endereço antes da codificação: 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
+    Endereço após a codificação: 0x000000000000000000000000ab8483f64d9c6d1ecf9b849ae677dd3315835cb2
+    ```
+- `executeTime`: obtenha o timestamp atual da blockchain chamando a função `getBlockTimestamp()` e adicione 150 segundos.
+![Demonstração no Remix](./img/45-3.jpg)
 
-### 5. Tente executar a transação dentro do período de bloqueio para ver que falha.
+### 4. Chame a função `queueTransaction()` para adicionar a transação à fila do time lock.
 
-### 6. Execute a transação após o término do período de bloqueio.
+![Demonstração no Remix](./img/45-4.jpg)
 
-### 7. Verifique o novo endereço do administrador.
+### 5. Chame a função `executeTransaction()` durante o período de bloqueio e a chamada falhará.
 
-O time lock é uma ferramenta poderosa para aumentar a segurança dos contratos inteligentes, reduzindo as chances de ataques de hackers e de "rug pull". Ele é amplamente utilizado em projetos DeFi e DAOs, como Uniswap e Compound. Se você investe em projetos, verifique se eles usam o time lock em suas operações.
+![Demonstração no Remix](./img/45-5.jpg)
+
+### 6. Chame a função `executeTransaction()` após o período de bloqueio e a chamada será bem-sucedida.
+
+![Demonstração no Remix](./img/45-6.jpg)
+
+### 7. Verifique o novo endereço do `admin`.
+
+![Demonstração no Remix](./img/45-7.jpg)
+
+## Conclusão
+
+O time lock pode bloquear certas funcionalidades de um smart contract por um determinado período de tempo, reduzindo significativamente as chances de um projeto fazer um "rug pull" e aumentando a segurança contra ataques de hackers. É amplamente utilizado em DeFi e DAOs, incluindo Uniswap e Compound. Os projetos em que você investe utilizam time lock?
 
 <!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

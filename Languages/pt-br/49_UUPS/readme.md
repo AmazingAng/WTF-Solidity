@@ -1,99 +1,114 @@
-# WTF Solidity Simplified: 49. Procuração Universal e Atualizável
-
-Recentemente, tenho revisado meus conhecimentos sobre solidity para consolidar os detalhes e também escrever um guia simplificado intitulado "WTF Solidity Simplified" para ajudar os iniciantes (os experts podem procurar por outras fontes de aprendizado). Estarei lançando de 1 a 3 lições por semana.
-
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
-
-Comunidade: [Discord](https://discord.gg/5akcruXrsk) | [Grupo no WeChat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link) | [Website wtf.academy](https://wtf.academy)
-
-Todo o código e guias estão disponíveis no GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTF-Solidity)
+---
+title: 49. Proxy Universal Atualizável
+tags:
+  - solidity
+  - proxy
+  - OpenZeppelin
 
 ---
 
-Nesta lição, vamos falar sobre uma outra solução para o conflito de seletores em contratos de proxy: a Procuração Universal e Atualizável (UUPS, do inglês Universal Upgradeable Proxy Standard). O código de ensino foi simplificado a partir do `UUPSUpgradeable` do `OpenZeppelin` e não deve ser usado em produção.
+# WTF Solidity: 49. Proxy Universal Atualizável
+
+Recentemente, estou revisando Solidity para consolidar alguns detalhes e escrever um "WTF Solidity: Guia Básico" para iniciantes (programadores experientes podem procurar outros tutoriais). Serão lançadas de 1 a 3 aulas por semana.
+
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+
+Comunidade: [Discord](https://discord.gg/5akcruXrsk) | [Grupo do WeChat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link) | [Site oficial wtf.academy](https://wtf.academy)
+
+Todo o código e tutoriais estão disponíveis no GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+
+-----
+
+Nesta aula, vamos apresentar outra solução para o problema de conflito de seletores (Selector Clash) em contratos de proxy: o Proxy Universal Atualizável (UUPS, universal upgradeable proxy standard). O código do tutorial é simplificado a partir do contrato UUPSUpgradeable da OpenZeppelin e não deve ser usado em produção.
 
 ## UUPS
 
-Na última lição, vimos sobre o "conflito de seletores" (Selector Clash) em contratos que têm duas funções com seletores iguais, o que pode resultar em problemas graves. Como alternativa aos contratos de proxy transparente, a UUPS também resolve esse problema.
+Na [aula anterior](../48_TransparentProxy/readme.md), aprendemos sobre o "conflito de seletores" (Selector Clash), que ocorre quando um contrato possui duas funções com o mesmo seletor, o que pode causar sérios problemas. Como uma alternativa ao proxy transparente, o UUPS também pode resolver esse problema.
 
-A UUPS (Procuração Universal e Atualizável) coloca a função de atualização no contrato lógico. Dessa forma, se houver outras funções que entrem em conflito com a função de atualização, um erro de compilação será gerado.
+O Proxy Universal Atualizável (UUPS, universal upgradeable proxy standard) coloca a função de atualização no contrato lógico. Dessa forma, se houver outras funções que entrem em conflito com a função de atualização, um erro de compilação será gerado.
 
-A tabela abaixo resume as diferenças entre contratos de atualização padrão, proxies transparentes e UUPS:
+A tabela a seguir resume as diferenças entre contratos atualizáveis comuns, proxies transparentes e UUPS:
 
-![Tipos de contratos de atualização](./img/49-1.png)
+![Tipos de contratos atualizáveis](./img/49-1.png)
 
-## Contrato de Procuração UUPS
+## Contrato UUPS
 
-O contrato de procuração UUPS parece um contrato de proxy não atualizável, porque a função de atualização está no contrato lógico. Ele possui `3` variáveis:
+Primeiro, vamos revisar a [Aula 23 do WTF Solidity: Delegatecall](../23_Delegatecall/readme.md). Se o usuário A fizer um `delegatecall` para o contrato C (contrato lógico) por meio do contrato B (contrato de proxy), o contexto ainda será o do contrato B e o `msg.sender` será o usuário A, não o contrato B. Portanto, o contrato UUPS pode colocar a função de atualização no contrato lógico e verificar se o chamador é o administrador.
+
+![delegatecall](./img/49-2.png)
+
+### Contrato de Proxy UUPS
+
+O contrato de proxy UUPS se parece com um contrato de proxy não atualizável e é muito simples, porque a função de atualização está no contrato lógico. Ele contém três variáveis:
 - `implementation`: endereço do contrato lógico.
 - `admin`: endereço do administrador.
-- `words`: uma string que pode ser alterada através de funções do contrato lógico.
+- `words`: uma string que pode ser alterada por meio de funções do contrato lógico.
 
-Ele possui `2` funções:
+Ele contém duas funções:
 
-- Constructor: inicializa o administrador e o endereço do contrato lógico.
-- `fallback()`: função de fallback, que delega a chamada para o contrato lógico.
+- Construtor: inicializa o endereço do administrador e do contrato lógico.
+- `fallback()`: função de fallback que delega a chamada para o contrato lógico.
 
 ```solidity
 contract UUPSProxy {
     address public implementation; // endereço do contrato lógico
     address public admin; // endereço do administrador
-    string public words; // uma string que pode ser alterada através de funções do contrato lógico
+    string public words; // uma string que pode ser alterada por meio de funções do contrato lógico
 
-    // Constructor: inicializa o administrador e o endereço do contrato lógico
+    // Construtor: inicializa o endereço do administrador e do contrato lógico
     constructor(address _implementation){
         admin = msg.sender;
         implementation = _implementation;
     }
 
-    // fallback function: delega a chamada para o contrato lógico
+    // fallback: delega a chamada para o contrato lógico
     fallback() external payable {
         (bool success, bytes memory data) = implementation.delegatecall(msg.data);
     }
 }
 ```
 
-## Contrato Lógico UUPS
+### Contrato Lógico UUPS
 
-O contrato lógico UUPS, diferentemente do apresentado na [lição 47](../47_Upgrade/readme_pt-br.md), possui uma função adicional de atualização. O contrato contém `3` variáveis de estado, que são mantidas em comum com o contrato de procuração para evitar conflitos nos slots. Ele contém `2` funções:
-- `upgrade()`: função de atualização, que altera o endereço do contrato lógico `implementation` e só pode ser chamada pelo `admin`.
-- `foo()`: a versão antiga do contrato UUPS define `words` como `"old"`, enquanto a nova define como `"new"`.
+O contrato lógico UUPS é diferente do contrato apresentado na [Aula 47](../47_Upgrade/readme.md) porque agora possui uma função de atualização. O contrato lógico UUPS contém três variáveis de estado, que são as mesmas do contrato de proxy para evitar conflitos de slots. Ele contém duas funções:
+- `upgrade()`: função de atualização que altera o endereço do contrato lógico `implementation` e só pode ser chamada pelo `admin`.
+- `foo()`: a versão antiga do contrato UUPS altera o valor de `words` para `"old"`, enquanto a nova versão altera para `"new"`.
 
 ```solidity
 // Contrato lógico UUPS (função de atualização no contrato lógico)
-contract UUPS1 {
-    // Variáveis de estado comuns com o contrato de proxy para evitar conflitos nos slots
-    address public implementation;
-    address public admin;
-    string public words; // uma string que pode ser alterada através de funções do contrato lógico
+contract UUPS1{
+    // Variáveis de estado que são as mesmas do contrato de proxy para evitar conflitos de slots
+    address public implementation; 
+    address public admin; 
+    string public words; // uma string que pode ser alterada por meio de funções do contrato lógico
 
-    // Altera as variáveis de estado do proxy - selector: 0xc2985578
-    function foo() public {
+    // Altera a variável de estado do contrato de proxy, seletor: 0xc2985578
+    function foo() public{
         words = "old";
     }
 
-    // Função de atualização, altera o endereço do contrato lógico
-    // Pode ser chamada apenas pelo admin - selector: 0x0900f010
+    // Função de atualização que altera o endereço do contrato lógico e só pode ser chamada pelo admin, seletor: 0x0900f010
+    // No UUPS, o contrato lógico deve conter a função de atualização, caso contrário, não poderá ser atualizado novamente.
     function upgrade(address newImplementation) external {
         require(msg.sender == admin);
         implementation = newImplementation;
     }
 }
 
-// Novo contrato lógico UUPS
-contract UUPS2 {
-    // Variáveis de estado comuns com o contrato de proxy para evitar conflitos nos slots
-    address public implementation;
-    address public admin;
-    string public words; // uma string que pode ser alterada através de funções do contrato lógico
+// Nova versão do contrato lógico UUPS
+contract UUPS2{
+    // Variáveis de estado que são as mesmas do contrato de proxy para evitar conflitos de slots
+    address public implementation; 
+    address public admin; 
+    string public words; // uma string que pode ser alterada por meio de funções do contrato lógico
 
-    // Altera as variáveis de estado do proxy - selector: 0xc2985578
-    function foo() public {
+    // Altera a variável de estado do contrato de proxy, seletor: 0xc2985578
+    function foo() public{
         words = "new";
     }
 
-    // Função de atualização, altera o endereço do contrato lógico
-    // Pode ser chamada apenas pelo admin - selector: 0x0900f010
+    // Função de atualização que altera o endereço do contrato lógico e só pode ser chamada pelo admin, seletor: 0x0900f010
+    // No UUPS, o contrato lógico deve conter a função de atualização, caso contrário, não poderá ser atualizado novamente.
     function upgrade(address newImplementation) external {
         require(msg.sender == admin);
         implementation = newImplementation;
@@ -103,16 +118,30 @@ contract UUPS2 {
 
 ## Implementação no Remix
 
-1. Implante os contratos lógicos UUPS1 e UUPS2.
+1. Implante as versões antigas e novas do contrato lógico UUPS, `UUPS1` e `UUPS2`.
 
-2. Implante o contrato de procuração UUPS e aponte o endereço de `implementation` para o contrato lógico UUPS1.
+![demo](./img/49-3.jpg)
 
-3. Use o seletor `0xc2985578` para chamar a função `foo()` do contrato lógico UUPS1 e alterar o valor de `words` para `"old"`.
+2. Implante o contrato de proxy UUPS, `UUPSProxy`, e defina o endereço de `implementation` como o do contrato lógico antigo, `UUPS1`.
 
-4. Utilize um codificador ABI online, como o HashEx, para obter a codificação binária e chame a função de atualização `upgrade()`, direcionando o endereço de `implementation` para o contrato lógico UUPS2.
+![demo](./img/49-4.jpg)
 
-5. Utilize o seletor `0xc2985578` para chamar a função `foo()` do contrato lógico UUPS2 e alterar o valor de `words` para `"new"`.
+3. Usando o seletor `0xc2985578`, chame a função `foo()` do contrato lógico antigo, `UUPS1`, no contrato de proxy para alterar o valor de `words` para `"old"`.
 
-Nesta lição, aprendemos sobre a solução UUPS para o conflito de seletores em contratos de proxy. A UUPS coloca a função de atualização no contrato lógico para que conflitos de seletores não possam ser compilados. Comparado ao proxy transparente, o UUPS economiza gás, mas é mais complexo.
+![demo](./img/49-5.jpg)
+
+4. Usando um codificador ABI online, como o [HashEx](https://abi.hashex.org/), obtenha a codificação binária e chame a função de atualização `upgrade()` para definir o endereço de `implementation` como o do contrato lógico novo, `UUPS2`.
+
+![codificação](./img/49-3.png)
+
+![demo](./img/49-6.jpg)
+
+5. Usando o seletor `0xc2985578`, chame a função `foo()` do contrato lógico novo, `UUPS2`, no contrato de proxy para alterar o valor de `words` para `"new"`.
+
+![demo](./img/49-7.jpg)
+
+## Conclusão
+
+Nesta aula, apresentamos outra solução para o problema de "conflito de seletores" em contratos de proxy: o UUPS. Ao contrário do proxy transparente, o UUPS coloca a função de atualização no contrato lógico, o que impede que ocorra um conflito de seletores durante a compilação. Comparado ao proxy transparente, o UUPS consome menos gas, mas também é mais complexo.
 
 <!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->
