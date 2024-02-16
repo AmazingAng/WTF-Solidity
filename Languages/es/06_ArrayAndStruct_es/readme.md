@@ -15,7 +15,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-En esta lección, se introducirá dos importantes tipos de variables en Solidity: `array` y `struct`
+En esta lección, se introducirán dos importantes tipos de variables en Solidity: `array` y `struct`
 
 ## Arreglos
 
@@ -48,7 +48,7 @@ Hay dos tipos de arreglos: Arreglos de tamaño fijo y arreglos de tamaño dinám
 
 En Solidity, hay algunas reglas para crear arreglos:
 
-- Para un arreglo dinámico que es almacenado en `memory`, se puede crear el arreglo usando el operador `new`, pero se debe asignar la longitud del arreglo la cual no puede ser cambiada después. Por ejemplo:
+- Para un arreglo dinámico que es almacenado en `memory`, se puede crear el arreglo usando el operador `new`, pero se debe asignar la longitud del arreglo, y no puede ser cambiada después. Por ejemplo:
 
 ```solidity
     // arreglo dinámico en memoria
@@ -56,7 +56,7 @@ En Solidity, hay algunas reglas para crear arreglos:
     bytes memory array9 = new bytes(9);
 ```
 
-- Los arreglos literales son arreglos en forma de una o más expresiones, y no se asignan inmediatamente a variables; como `[uint(1),2,3]` (el tipo de variable del primer elemento necesita ser declaro, de lo contrario se usa el tipo con el espacio de almacenamiento más pequeño por defecto).
+- Los arreglos literales son arreglos en forma de una o más expresiones, y no se asignan inmediatamente a variables; como `[uint(1),2,3]` (el tipo de variable del primer elemento necesita ser declarado, de lo contrario se usa el tipo con el espacio de almacenamiento más pequeño por defecto).
 
 - Al crear un arreglo dinámico, se necesita asignar cada elemento del arreglo.
 

@@ -15,7 +15,8 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-En esta sección, se introducirá la tabla hash en Solidity: Tipo `mapping`.
+En esta sección, se introducirá la tabla de hashes en Solidity: Tipo `mapping`.
+
 
 ## Mapeo (Mapping)
 
@@ -59,7 +60,8 @@ El formato para declarar las variables de tipo `mapping` es `mapping(_KeyType =>
 
 - **Principio 2**: Mapping usa `keccak256(key)` como desplazamiento para acceder al valor.
 
-- **Principio 3**: Dato que Ethereum define todo espacio no usado como 0, toda `key` que no se le asigne un `value` tendrá un valor inicial de 0.
+- **Principio 3**: Dado que Ethereum define todo espacio no usado como 0, toda `key` que no se le asigne un `value` tendrá un valor inicial de 0.
+
 
 ## Demo en Remix (usa `Mapping.sol` como ejemplo)
 
@@ -79,4 +81,5 @@ El formato para declarar las variables de tipo `mapping` es `mapping(_KeyType =>
 
 ## Resumen
 
-En esta sección, se introdujo el tipo de variable `mapping` en Solidity. Hasta ahora, hemos aprendido los tipos de variables más comunes Solidity.
+En esta sección, se introdujo el tipo de variable `mapping` en Solidity. Hasta ahora, se han aprendido los tipos de variables más comunes Solidity.
+
