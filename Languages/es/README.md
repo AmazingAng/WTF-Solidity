@@ -10,9 +10,9 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](http
 
 Comunidad: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Sitio web wtf.academy](https://wtf.academy)
 
-La traducción al español ha sido realizada por Jonathan Díaz con el objetivo de hacer estos recursos accesibles a la comunidad de habla hispana.
+La traducción al español ha sido realizada por Jonathan Díaz, Angela Ocando y Sebastian Guaqueta con el objetivo de hacer estos recursos accesibles a la comunidad de habla hispana.
 
-Twitter: [@jonthdiaz](https://twitter.com/jonthdiaz)
+Twitter: [@jonthdiaz](https://twitter.com/jonthdiaz) [@ocandocrypto](https://twitter.com/ocandocrypto) [@scguaquetam](https://twitter.com/scguaquetam) 
 
 Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
