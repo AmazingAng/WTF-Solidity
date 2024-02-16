@@ -28,7 +28,7 @@ Em Solidity, os desenvolvedores podem obter o timestamp do bloco atual usando a 
 
 ## Exemplo de Vulnerabilidade
 
-Este exemplo é uma modificação do contrato apresentado em [WTF Solidity Contratos Seguros: S07. Números Aleatórios Ruins](https://github.com/AmazingAng/WTF-Solidity/tree/main/32_Faucet). Alteramos a condição da função de criação `mint()`: agora, a criação só é bem-sucedida se o timestamp do bloco for divisível por 170:
+Este exemplo é uma modificação do contrato apresentado em [WTF Solidity Contratos Seguros: S07. Números Aleatórios Ruins](./32_Faucet). Alteramos a condição da função de criação `mint()`: agora, a criação só é bem-sucedida se o timestamp do bloco for divisível por 170:
 
 ```solidity
 contract TimeManipulation is ERC721 {

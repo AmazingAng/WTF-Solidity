@@ -16,19 +16,19 @@
 
 ### `Análise de Ameaças On-chain`
 
-**Aula 1: Ferramentas** 【[Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug//01_tools/)】 | 【[Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/01_tools/en/)】
+**Aula 1: Ferramentas** 【[Artigo](./Topics/Onchain_debug//01_tools/)】 | 【[Inglês](./Topics/Onchain_debug/01_tools/en/)】
 
-**Aula 2: Introdução** 【[Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/02_warmup/)】 | 【[Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/02_warmup/en/)】
+**Aula 2: Introdução** 【[Artigo](./Topics/Onchain_debug/02_warmup/)】 | 【[Inglês](./Topics/Onchain_debug/02_warmup/en/)】
 
-**Aula 3: Verificação de Conceitos de Vulnerabilidades - Parte 1** 【[Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/03_write_your_own_poc/)】| 【[Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/03_write_your_own_poc/en/)】
+**Aula 3: Verificação de Conceitos de Vulnerabilidades - Parte 1** 【[Artigo](./Topics/Onchain_debug/03_write_your_own_poc/)】| 【[Inglês](./Topics/Onchain_debug/03_write_your_own_poc/en/)】
 
-**Aula 4: Verificação de Conceitos de Vulnerabilidades - Parte 2** 【[Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/04_write_your_own_poc/)】| 【[Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/04_write_your_own_poc/en/)】  
+**Aula 4: Verificação de Conceitos de Vulnerabilidades - Parte 2** 【[Artigo](./Topics/Onchain_debug/04_write_your_own_poc/)】| 【[Inglês](./Topics/Onchain_debug/04_write_your_own_poc/en/)】  
 
-**Aula 5: Verificação de Conceitos de Vulnerabilidades - Parte 3** 【[Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/05_write_your_own_poc/)】| 【[Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/05_write_your_own_poc/en/)】  
+**Aula 5: Verificação de Conceitos de Vulnerabilidades - Parte 3** 【[Artigo](./Topics/Onchain_debug/05_write_your_own_poc/)】| 【[Inglês](./Topics/Onchain_debug/05_write_your_own_poc/en/)】  
 
-**Aula 6: Análise de Rugpull** 【[Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/)】| 【[Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/en/)】
+**Aula 6: Análise de Rugpull** 【[Artigo](./Topics/Onchain_debug/06_Rugpull/)】| 【[Inglês](./Topics/Onchain_debug/06_Rugpull/en/)】
 
-**Aula 7: Análise de Evento de Ponte Nomad** 【[Artigo](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/07_analysis_bridge/)】| 【[Inglês](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/07_analysis_bridge/en/)】
+**Aula 7: Análise de Evento de Ponte Nomad** 【[Artigo](./Topics/Onchain_debug/07_analysis_bridge/)】| 【[Inglês](./Topics/Onchain_debug/07_analysis_bridge/en/)】
 
 ### `NFT`
 **Aula 1: Biblioteca ERC721: Address, Strings, Context** 【[Código](./Topics/ERC721)】 【[Artigo](https://mirror.xyz/wtfacademy.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
