@@ -499,4 +499,3 @@ function supportsInterface(bytes4 interfaceId) public view virtual returns (bool
 ## Conclusão
 Nesta aula, apresentei o padrão `ERC721`, suas interfaces e sua implementação, com comentários em chinês no código do contrato. Também criamos um NFT gratuito chamado "WTF APE" usando o `ERC721`, com os metadados sendo chamados diretamente do `BAYC`. O padrão `ERC721` está em constante evolução, e as versões mais populares atualmente são `ERC721Enumerable` (para melhorar a acessibilidade dos NFTs) e `ERC721A` (para economizar `gas` na criação).
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

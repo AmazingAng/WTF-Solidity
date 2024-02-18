@@ -321,4 +321,3 @@ Gerar um número aleatório em `Solidity` não é tão simples como em outras li
 
 Além desses métodos, existem outras organizações que estão tentando novas formas de RNG (Random Number Generation), como o [randao](https://github.com/randao/randao), que propõe fornecer um serviço de aleatoriedade verdadeiramente onchain em um padrão DAO.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

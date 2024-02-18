@@ -72,4 +72,3 @@ Autor: [Sun](https://twitter.com/1nf0s3cpt)
 
 [Ethers极简入门: 25. Flashbots](https://github.com/WTFAcademy/WTF-Ethers/tree/main/25_Flashbots)
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

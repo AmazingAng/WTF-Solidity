@@ -123,4 +123,3 @@ Neste momento, o saldo de `WETH` é de `0.5 WETH`.
 
 Nesta palestra, apresentamos o `WETH` e implementamos o contrato do `WETH`. Ele funciona como uma camada adicional ao Ether nativo: quando vestido, torna-se `WETH`, de acordo com o padrão ERC20, permitindo interoperabilidade entre blockchains e uso em dApps; ao remover a camada, ele pode ser trocado de volta por `ETH` na proporção de 1:1.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

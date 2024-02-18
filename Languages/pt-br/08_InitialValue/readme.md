@@ -90,4 +90,3 @@ function d() external {
 
 Nesta lição, abordamos os valores iniciais das variáveis no Solidity. Quando uma variável é declarada sem atribuição, seu valor padrão é atribuído. Os valores iniciais variam de acordo com o tipo de variável, e o operador `delete` pode ser usado para redefinir o valor de uma variável para o padrão.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

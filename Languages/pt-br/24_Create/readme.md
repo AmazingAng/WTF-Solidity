@@ -106,4 +106,3 @@ Endereço do PEOPLE na BSC: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 
 Nesta sessão, explicamos como usar o método `create` para criar contratos dentro de um contrato, usando um exemplo simplificado do `Uniswap`. Na próxima sessão, abordaremos o método `create2` para implementar uma versão simplificada do `Uniswap`.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

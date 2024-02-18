@@ -267,4 +267,3 @@ address target, uint256 value, string memory signature, bytes memory data, uint2
 
 O time lock pode bloquear certas funcionalidades de um smart contract por um determinado período de tempo, reduzindo significativamente as chances de um projeto fazer um "rug pull" e aumentando a segurança contra ataques de hackers. É amplamente utilizado em DeFi e DAOs, incluindo Uniswap e Compound. Os projetos em que você investe utilizam time lock?
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

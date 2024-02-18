@@ -171,4 +171,3 @@ Nesta lição, aprendemos como usar o `try-catch` no Solidity para lidar com exc
 - Pode ser usado apenas em chamadas a contratos externos e na criação de contratos.
 - Se a operação em `try` for bem-sucedida, a variável de retorno deve ser declarada e ter um tipo correspondente.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

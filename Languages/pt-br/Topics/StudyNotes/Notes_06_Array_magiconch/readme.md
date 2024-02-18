@@ -101,4 +101,3 @@ contract itemRemoval {
 
 No entanto, essa abordagem tem um alto custo de gas, pois a alteração de um estado tem um custo de gas muito maior do que uma operação. Portanto, a menos que seja absolutamente necessário, não é recomendado usar essa abordagem.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

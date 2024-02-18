@@ -477,4 +477,3 @@ Nesta aula, apresentamos empréstimos relâmpago, que permitem que os usuários 
 
 Através dos empréstimos relâmpago, podemos alavancar grandes quantidades de fundos sem garantia para arbitragem sem risco ou ataques de vulnerabilidade. O que você vai fazer com os empréstimos relâmpago?
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

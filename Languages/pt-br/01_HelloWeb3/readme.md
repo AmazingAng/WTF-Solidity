@@ -88,4 +88,3 @@ Nesta lição, introduzimos brevemente o `Solidity` e a ferramenta `Remix`, e co
 1. [Solidity Documentation](https://docs.soliditylang.org/en/latest/)
 2. [Solidity Tutorial by freeCodeCamp](https://www.youtube.com/watch?v=ipwxYa-F1uY)
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

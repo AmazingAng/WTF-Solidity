@@ -32,4 +32,3 @@
 
 **[Mergulhando na Máquina Virtual Ethereum Parte 6 - Implementação de Eventos em Solidity](../DiveEVM2017/DiveEVM2017-Part6.md)**.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

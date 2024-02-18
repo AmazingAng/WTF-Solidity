@@ -305,4 +305,3 @@ Nesta lição, falamos sobre carteiras multisig e escrevemos um contrato de cart
 
 Tenho uma conexão especial com carteiras multisig. Em 2021, estudei o Gnosis Safe para criar o tesouro da PeopleDAO e escrevi um tutorial em inglês e português sobre como usá-lo [aqui](https://peopledao.mirror.xyz/nFCBXda8B5ZxQVqSbbDOn2frFDpTxNVtdqVBXGIjj0s). Desde então, tive a sorte de ser um dos signatários de três tesouros, garantindo a segurança dos ativos, e agora sou um guardião do Safe, participando ativamente da governança. Espero que todos tenham ativos mais seguros.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -191,4 +191,3 @@ No construtor, insira dois endereços de beneficiários, com participações de 
 
 Nesta lição, apresentamos o contrato de divisão de pagamentos. No mundo blockchain, onde "o Código é a Lei", podemos definir as proporções de cada pessoa em um contrato inteligente antes de recebermos um pagamento e, então, o contrato inteligente faz a divisão dos recursos, evitando assim problemas de "divisão injusta de receitas".
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

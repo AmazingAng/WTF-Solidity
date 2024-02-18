@@ -143,4 +143,3 @@ Nesta lição, explicamos o conflito de seletores em contratos de proxy e como e
 
 Na próxima lição, abordaremos o sistema de proxy universal de atualização (UUPS), que é mais complexo, porém exige menos gás.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -86,4 +86,3 @@ Vamos considerar o arquivo `Owner.sol`.
 
 Nesta palestra, apresentamos os construtores e modificadores do Solidity, usando um exemplo do contrato `Ownable` para ilustrar o controle de permissões em contratos inteligentes.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

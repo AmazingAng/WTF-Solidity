@@ -150,4 +150,3 @@ Neste exemplo, chamamos a função inexistente `foo`. O `call` ainda é bem-suce
 
 Nesta lição, aprendemos como usar o `call`, uma função de baixo nível, para chamar funções de outros contratos. Embora não seja a maneira recomendada de chamar contratos devido aos riscos de segurança, o `call` é útil quando não temos o código fonte ou o `ABI` do contrato alvo.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -159,4 +159,3 @@ Nós fornecemos a codificação binária de `abi.encode` para `decode`, que deco
 
 No Ethereum, os dados devem ser codificados em bytecode para interagir com contratos inteligentes. Nesta lição, introduzimos 4 métodos de `codificação ABI` e 1 método de `decodificação ABI`.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -670,4 +670,3 @@ Duas escolhas de design alternativas para a facilidade de registro poderiam ser:
 * Permitir mais tópicos, embora mais tópicos reduzam a eficência dos filtros de Bloom usados para indexar registros por tópico.
 * Permitir que os tópicos tenham qualquer número de bytes. Por que não?
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

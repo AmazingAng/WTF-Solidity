@@ -111,4 +111,3 @@ A transação final terá a seguinte aparência:
 
 [Polygon Transaction Hash (Txhash) Details | PolygonScan](https://polygonscan.com/tx/0xa57405133607002ef92260f91ee8f56001fcabe0c34cd9c4c77661d9b893c2f0).
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

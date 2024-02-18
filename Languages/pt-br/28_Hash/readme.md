@@ -106,4 +106,3 @@ Novamente, você pode tentar várias vezes para ver se consegue ter sorte e enco
 
 Nesta lição, discutimos o que é uma função de hash e como usar a função de hash mais comum em Solidity, o `keccak256`.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

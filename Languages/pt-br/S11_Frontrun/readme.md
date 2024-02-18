@@ -159,4 +159,3 @@ O front-running é um problema comum em blockchains públicas como Ethereum. Nã
 
 Nesta lição, abordamos o conceito de front-running em Ethereum, uma prática também conhecida como arbitragem de informações. Esse tipo de ataque, originado no mercado financeiro tradicional, é mais fácil de ser realizado em blockchains devido à transparência das informações. Realizamos um exemplo de front-running no tempo: front-runnar uma transação de mint de um NFT. Quando transações semelhantes forem necessárias, é melhor adotar medidas como pools ocultos ou leilões em lote para evitar esse tipo de ataque. O front-running é um problema comum em blockchains públicas como Ethereum, mas podemos reduzir os lucros dos front-runners ao minimizar a importância da ordem e do tempo das transações.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

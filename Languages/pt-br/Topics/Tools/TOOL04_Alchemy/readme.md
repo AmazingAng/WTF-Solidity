@@ -114,4 +114,3 @@ Block Explorer URL: https://etherscan.io
 
 In this lesson, we introduced how to create and use an Alchemy API Key to conveniently access the Ethereum blockchain.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

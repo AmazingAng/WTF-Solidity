@@ -214,4 +214,3 @@ function weeksUnit() external pure returns(uint) {
 
 Nesta aula, apresentamos os tipos de referência, a localização dos dados e o escopo das variáveis no Solidity. O foco principal foi nos termos `storage`, `memory` e `calldata` e suas aplicações. Esses termos foram introduzidos para economizar espaço de armazenamento limitado on-chain e reduzir o consumo de `gas`. Na próxima aula, abordaremos arrays nos tipos de referência.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

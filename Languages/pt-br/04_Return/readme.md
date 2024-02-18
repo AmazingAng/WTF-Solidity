@@ -83,4 +83,3 @@ Solidity suporta a atribuição por destruturação para ler todos ou parte dos 
 
 Nesta aula, abordamos a saída de funções em Solidity, incluindo: retorno de múltiplas variáveis, retorno nomeado e o uso da atribuição por destruturação para ler todos ou parte dos valores de retorno. Esses conceitos nos ajudam a lidar de forma mais flexível com os valores de retorno ao escrever contratos inteligentes.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -127,4 +127,3 @@ Existem 3 funções no contrato de liberação linear.
 
 O desbloqueio em massa de tokens pode gerar uma grande pressão de venda nos preços, enquanto os termos de titularidade de tokens podem reduzir essa pressão e evitar que as equipes e investidores saiam muito cedo. Nesta aula, apresentamos os termos de titularidade de tokens e escrevemos um contrato para liberação linear de tokens ERC20.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -115,4 +115,3 @@ function transfer(address payable _to, uint _amount) public {
 
 Nesta lição, abordamos o ataque de phishing com `tx.origin` em contratos inteligentes e métodos para prevenir esse tipo de ataque: usando `msg.sender` em vez de `tx.origin` ou verificando se `tx.origin == msg.sender`. A primeira abordagem é a mais recomendada, pois a segunda rejeitará chamadas de função feitas por outros contratos.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

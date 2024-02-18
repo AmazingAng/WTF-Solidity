@@ -196,4 +196,3 @@ Os Ataques de Reentrancy podem ser identificados principalmente em três tipos:
 
 Vale mencionar que a técnica deste ataque corresponde exatamente à quarta pergunta no CTF damnvulnerabledefi [Side Entrance. Se os desenvolvedores do projeto tivessem feito isso com cuidado antes, talvez esse ataque não tivesse acontecido 🤣. Em dezembro do mesmo ano, o projeto [Defrost](https://github.com/SunWeb3Sec/DeFiHackLabs#20221223---defrost---reentrancy) também foi atacado devido a um problema semelhante.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

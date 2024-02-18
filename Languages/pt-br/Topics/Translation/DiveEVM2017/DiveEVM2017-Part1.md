@@ -466,4 +466,3 @@ O código de montagem usa quatro valores mágicos:
 // máscara de bits para os 16 bytes mais baixos
 16:32 0x000000
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

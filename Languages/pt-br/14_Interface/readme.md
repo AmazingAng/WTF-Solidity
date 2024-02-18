@@ -124,4 +124,3 @@ contract interactBAYC {
 
 Nesta lição, expliquei os contratos abstratos (`abstract`) e interfaces (`interface`) no Solidity, que são úteis para escrever modelos e reduzir a repetição de código. Também discutimos a interface do contrato `IERC721` e como interagir com o contrato do Bored Ape Yacht Club (`BAYC`) usando essa interface.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

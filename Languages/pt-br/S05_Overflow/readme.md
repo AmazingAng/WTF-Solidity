@@ -77,4 +77,3 @@ contract Token {
 
 Nesta lição, apresentamos a clássica vulnerabilidade de overflow de inteiros. Com a integração do `Safemath` a partir da versão 0.8.0 do Solidity, esse tipo de vulnerabilidade se tornou muito raro.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

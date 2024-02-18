@@ -437,4 +437,3 @@ contract SimpleSwap is ERC20 {
 
 Nesta aula, apresentamos o Market Maker Automatizado com Produto Constante e escrevemos uma exchange descentralizada extremamente simples. No contrato `SimpleSwap`, há muitos aspectos que não foram considerados, como taxas de negociação e governança. Se você estiver interessado em exchanges descentralizadas, recomendamos a leitura de [Programming DeFi: Uniswap V2](https://jeiwan.net/posts/programming-defi-uniswapv2-1/) e [Uniswap v3 book](https://y1cunhui.github.io/uniswapV3-book-zh-cn/) para um estudo mais aprofundado.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -478,4 +478,3 @@ contract ERC4626 is ERC20, IERC4626 {
 
 Nesta aula, apresentamos o padrão ERC4626 para tesourarias tokenizadas e escrevemos um contrato de tesouraria simples que permite a conversão de ativos básicos em tokens de tesouraria na proporção de 1:1. O ERC4626 é importante para melhorar a liquidez e a capacidade de combinação no DeFi, e esperamos que ele se torne mais comum no futuro. Como você usaria o ERC4626 em seus aplicativos?
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

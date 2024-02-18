@@ -171,4 +171,3 @@ Nesta lição, abordamos o conceito de Árvore de Merkle, como gerar uma Árvore
 
 Na prática, Árvores de Merkle mais complexas podem ser geradas e gerenciadas usando a biblioteca `merkletreejs` em JavaScript, e apenas a raiz precisa ser armazenada no blockchain, economizando muito gás. Muitos projetos optam por usar a Árvore de Merkle para distribuir listas brancas.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

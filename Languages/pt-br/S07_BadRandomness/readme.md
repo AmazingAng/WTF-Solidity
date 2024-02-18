@@ -79,4 +79,3 @@ Normalmente, utilizamos números aleatórios gerados fora da blockchain por meio
 
 Nesta aula, abordamos a vulnerabilidade de Má Sorteio em contratos inteligentes e apresentamos um método simples de prevenção: utilizar números aleatórios gerados fora da blockchain por meio de projetos de oráculos. Projetos de NFT e GameFi devem evitar o uso de números pseudorandômicos na blockchain para sorteios, a fim de evitar possíveis ataques de hackers.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

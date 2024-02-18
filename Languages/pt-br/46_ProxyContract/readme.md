@@ -164,4 +164,3 @@ Na próxima lição, veremos contratos de proxy atualizáveis.
 
 Embora os contratos de proxy sejam poderosos, eles também são propensos a bugs, então é recomendável copiar os modelos de contratos do [OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/proxy).
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

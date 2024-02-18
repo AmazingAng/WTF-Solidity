@@ -70,4 +70,3 @@ A alteração de autorização é cancelada em `_transfer()`.
 
 ![Untitled](./img/_safeTransferFrom()使用代理转移NFT_14.png)
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

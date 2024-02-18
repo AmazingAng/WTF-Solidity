@@ -160,4 +160,3 @@ Obrigado por acompanhar! Hora de avançar para a próxima lição.
 [Flashloan vs Flashswap](https://blog.infura.io/post/build-a-flash-loan-arbitrage-bot-on-infura-part-i)
 .
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

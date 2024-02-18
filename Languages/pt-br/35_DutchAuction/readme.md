@@ -155,4 +155,3 @@ Caso contrário, o preço será calculado com base na redução gradual do preç
 ## Conclusão
 Nesta lição, introduzimos o leilão holandês e explicamos como utilizar o contrato simplificado `DutchAuction` para vender NFTs do padrão ERC721 através de um leilão holandês. O item NFT mais caro que já arrematei foi uma música NFT do músico Jonathan Mann. Qual foi o seu?
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -456,4 +456,3 @@ No entanto, ao pensar mais sobre isso, acho que a simplicidade do objeto de tran
 
 Na verdade, no futuro, `data`​ pode até ser interpretado por diferentes máquinas virtuais.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

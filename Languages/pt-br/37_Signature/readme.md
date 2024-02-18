@@ -299,4 +299,3 @@ Nesta aula, apresentamos a assinatura digital `ECDSA` no Ethereum, como criar e 
 
 .
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

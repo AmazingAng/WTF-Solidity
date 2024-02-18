@@ -200,4 +200,3 @@ Também é recomendado seguir o padrão de Pagamentos por Solicitação do OpenZ
 
 Nesta lição, exploramos um dos ataques mais comuns no Ethereum - o ataque de reentrada. Contei a história do "hack 0xAA roubando um banco" para facilitar a compreensão e também introduzi duas maneiras de prevenir o ataque: o padrão checks-effects-interactions e a trava de reentrada. No exemplo, o hacker aproveitou a função fallback para atacar o contrato. Recomendo para iniciantes proteger todas as funções `external` que podem alterar o estado do contrato com a trava de reentrada, mesmo que isso possa consumir mais `gas`, é uma prevenção eficaz contra perdas maiores.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

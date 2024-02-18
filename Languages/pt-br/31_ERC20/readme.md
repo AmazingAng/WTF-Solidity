@@ -229,4 +229,3 @@ As informações da conta estão na metade esquerda da imagem, e os detalhes da 
 
 Nesta aula, aprendemos sobre o padrão ERC20 na Ethereum e como implementá-lo, além de termos emitido nosso próprio token de teste. O padrão ERC20, proposto no final de 2015, reduziu significativamente a barreira de entrada para a emissão de tokens na Ethereum e deu início à grande era dos ICOs. Ao investir em tokens, é fundamental examinar atentamente o contrato do token para evitar problemas e aumentar a chance de sucesso nos investimentos.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

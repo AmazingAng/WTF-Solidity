@@ -78,4 +78,3 @@ URL do explorador de blockchain (Blockchain Explorer URL): https://optimistic.et
 
 Nesta aula, aprendemos como criar e usar uma chave de API do Infura para acessar a blockchain Ethereum de forma conveniente.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

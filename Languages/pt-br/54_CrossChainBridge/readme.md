@@ -198,4 +198,3 @@ main();
 
 Nesta aula, falamos sobre pontes de cadeia cruzada, que permitem a transferência de ativos digitais e informações entre duas ou mais blockchains, facilitando a operação de ativos em várias cadeias. No entanto, também apresentam riscos significativos, com ataques a pontes de cadeia cruzada resultando em perdas de ativos de usuários no valor de mais de **2 bilhões de dólares** nos últimos dois anos. Neste tutorial, construímos uma ponte de cadeia cruzada simples e implementamos a transferência de tokens ERC20 entre a rede de teste Goerli e a rede de teste Sepolia. Espero que este tutorial tenha ajudado você a entender melhor as pontes de cadeia cruzada.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

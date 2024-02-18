@@ -439,4 +439,3 @@ Because the contract address can be precomputed, if it checks for an empty addre
 
 In other cases, `extcodesize` may serve you well. Describing all these cases is beyond the scope here. Understand the basic behavior of the EVM and use your judgment.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->
