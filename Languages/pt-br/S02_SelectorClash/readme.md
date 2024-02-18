@@ -88,4 +88,3 @@ Nesta lição, discutimos a colisão de seletores de função, que foi uma das r
 
 2. É essencial gerenciar adequadamente as permissões das funções do contrato, garantindo que funções de contratos com permissões especiais não possam ser chamadas por usuários.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

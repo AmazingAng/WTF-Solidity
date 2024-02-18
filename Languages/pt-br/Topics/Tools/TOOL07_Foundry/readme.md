@@ -799,4 +799,3 @@ Nesta palestra, introduzimos ferramentas de desenvolvimento centradas em Solidit
 [Comandos cast - Foundry Book](https://book.getfoundry.sh/reference/cast/)
 [https://twitter.com/wp__lai](https://twitter.com/wp__lai)
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

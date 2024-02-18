@@ -148,4 +148,3 @@ Nesta lição, apresentamos os três métodos de envio de ETH em Solidity: `tran
 - `transfer` possui um limite de `2300 gas`, mas reverte a transação automaticamente em caso de falha, sendo uma escolha secundária.
 - `send` possui um limite de `2300 gas` e, se a transferência falhar, não reverte a transação, sendo raramente utilizado.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

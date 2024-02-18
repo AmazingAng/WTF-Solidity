@@ -159,4 +159,3 @@ Depois de executar o código e inserir `[2, 5, 3, 1]`, o resultado foi o esperad
 
 Nesta lição, discutimos o controle de fluxo em Solidity e implementamos o algoritmo de ordenação por inserção. Embora pareça simples, é fácil cometer erros. Este é o mundo de Solidity, cheio de armadilhas, onde projetos perdem milhões ou até bilhões de dólares devido a pequenos bugs como esse. Dominar os fundamentos e praticar constantemente ajudará a escrever um código Solidity de melhor qualidade.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

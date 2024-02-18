@@ -82,4 +82,3 @@ contract Import {
 
 Nesta palestra, exploramos o uso da palavra-chave `import` para importar código externo. Com o `import`, podemos referenciar contratos ou funções de outros arquivos que escrevemos, bem como importar diretamente códigos pré-escritos por terceiros, o que é muito prático.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

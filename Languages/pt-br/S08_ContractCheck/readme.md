@@ -109,4 +109,3 @@ function realContract(address account) public view returns (bool) {
 
 Nesta lição, discutimos como é possível contornar a verificação do comprimento do contrato e apresentamos métodos preventivos. Se o comprimento do `extcodesize` de um endereço for maior que zero, é um contrato; mas se for zero, o endereço pode ser tanto uma EOA quanto um contrato em processo de criação.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

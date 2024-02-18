@@ -326,4 +326,3 @@ O roteiro será definido com base no número de estrelas deste repositório:
 - [DeFi Hack Labs](https://github.com/SunWeb3Sec/DeFiHackLabs)
 - [rekt news](https://rekt.news/)
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -336,4 +336,3 @@ npx hardhat verify --network goerli DEPLOYED_CONTRACT_ADDRESS "Constructor argum
 
 Nesta aula, aprendemos o básico do Hardhat. Com o Hardhat, podemos criar projetos de Solidity de forma mais estruturada e ele fornece muitos recursos úteis. Nos próximos artigos, exploraremos recursos avançados do Hardhat, como plugins e frameworks de teste.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

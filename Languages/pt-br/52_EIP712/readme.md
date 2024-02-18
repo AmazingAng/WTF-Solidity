@@ -188,4 +188,3 @@ contract EIP712Storage {
 
 Espero que você tenha compreendido bem esse método de assinatura mais avançado e seguro que é o EIP712. Ele é amplamente utilizado em diversos projetos, como Metamask, pares de tokens no Uniswap, DAI e muitos outros. Eu espero que você consiga dominar essa técnica com sucesso.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

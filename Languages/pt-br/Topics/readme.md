@@ -51,4 +51,3 @@
 
 **Aula 2: Explorando a EVM**【[Artigo](./Topics/Translation/DiveEVM2017)】
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

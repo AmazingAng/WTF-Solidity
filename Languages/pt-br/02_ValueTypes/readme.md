@@ -157,4 +157,3 @@ O `enum` é um tipo de dados pouco utilizado, raramente usado.
 
 Neste artigo, apresentamos os tipos de valor no Solidity, incluindo booleanos, inteiros, endereços, arrays de bytes de comprimento fixo e enum. Nos próximos capítulos, continuaremos discutindo outros tipos de variáveis no Solidity, como os tipos de referência e mapeamento.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

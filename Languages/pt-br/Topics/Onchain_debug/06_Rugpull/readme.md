@@ -67,4 +67,3 @@ De acordo com o monitoramento OnChain da NUMEN, em 12 de janeiro de 2023 às 14:
 ## Conclusão
 O laboratório NUMEN lembra aos usuários que ao investir, é necessário realizar uma auditoria de segurança nos contratos dos projetos. Contratos não verificados podem conter funcionalidades que dão ao projeto permissões excessivas ou afetam diretamente a segurança dos ativos dos usuários. Os problemas encontrados neste projeto são apenas a ponta do iceberg no ecossistema blockchain como um todo. Ao investir e desenvolver projetos, é essencial realizar uma auditoria de segurança no código. A NUMEN está focada em garantir a segurança do ecossistema web3.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

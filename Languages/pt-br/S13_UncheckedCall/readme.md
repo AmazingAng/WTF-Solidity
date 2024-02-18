@@ -120,4 +120,3 @@ Você pode adotar as seguintes medidas para prevenir a vulnerabilidade de chamad
 
 Exploramos a vulnerabilidade das chamadas de baixo nível não verificadas e as medidas preventiva. Chamadas de baixo nível em Ethereum (call, delegatecall, staticcall, send) retornam `false` em caso de falha, mas não revertam a transação completamente. Se o retorno não for verificado, podem ocorrer problemas inesperados.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -108,4 +108,3 @@ Se não existirem as funções `receive()` e `payable fallback()`, enviar ETH di
 
 Nesta lição, apresentei duas funções especiais do Solidity, `receive()` e `fallback()`, que são usadas principalmente para receber ETH e em contratos proxy ("proxy contract").
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

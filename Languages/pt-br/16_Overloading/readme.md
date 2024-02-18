@@ -52,4 +52,3 @@ Se chamarmos `f(50)`, como `50` pode ser convertido tanto para `uint8` quanto pa
 
 Nesta lição, exploramos o uso básico da sobrecarga de funções no `Solidity`: funções com o mesmo nome, mas com tipos de parâmetros diferentes, podem coexistir e ser tratadas como funções distintas.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

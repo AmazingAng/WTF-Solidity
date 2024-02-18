@@ -155,4 +155,3 @@ function initStudent4() external {
 
 Nesta palestra, apresentamos os conceitos básicos de arrays (arrays) e structs (estruturas) em Solidity. Na próxima palestra, abordaremos mapas (mappings) em Solidity.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

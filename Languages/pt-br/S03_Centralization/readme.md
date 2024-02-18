@@ -67,4 +67,3 @@ contract Centralization is ERC20, Ownable {
 
 A centralização/pseudo descentralização representa o maior risco para projetos blockchain, resultando em perdas de fundos para usuários acima de 2 bilhões de dólares nos últimos dois anos. A centralização de riscos pode ser identificada analisando o código do contrato, enquanto os riscos de pseudo descentralização são mais difíceis de detectar e requerem uma diligência aprofundada do projeto para serem descobertos.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

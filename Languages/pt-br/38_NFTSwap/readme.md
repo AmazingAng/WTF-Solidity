@@ -268,4 +268,3 @@ Após a compra bem-sucedida, chame a função `ownerOf()` do contrato `WTFApe` p
 ## Conclusão
 Nesta palestra, construímos uma exchange descentralizada de NFTs sem taxas. O `Opensea` contribuiu muito para o desenvolvimento dos NFTs, mas suas desvantagens são evidentes: altas taxas, falta de recompensas em token para os usuários e um sistema de negociação suscetível a fraudes que podem resultar na perda de ativos dos usuários. Atualmente, novas plataformas de negociação de NFTs como `Looksrare` e `dydx` estão desafiando a posição do `Opensea`, e até o `Uniswap` está estudando novas exchanges de NFT. Acredito que em breve teremos acesso a exchanges de NFTs ainda melhores.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

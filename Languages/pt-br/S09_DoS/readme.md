@@ -125,4 +125,3 @@ Vários erros lógicos podem levar a um DoS em um contrato inteligente, portanto
 
 Nesta lição, falamos sobre a vulnerabilidade de negação de serviço em contratos inteligentes. O projeto Akutar perdeu mais de 10.000 ETHs devido a essa vulnerabilidade. Vários erros lógicos podem levar a DoS, então os desenvolvedores precisam ter muito cuidado ao escrever contratos inteligentes, como permitir que os usuários cliem os seus próprios reembolsos ao invés de realizar um envio em massa de fundos para eles.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

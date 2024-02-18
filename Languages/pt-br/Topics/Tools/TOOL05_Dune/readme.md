@@ -152,4 +152,3 @@ This will visualize the data I just filtered. The longest bars represent the acc
 
 In this lesson, we introduced the basics of using Dune. With Dune, we can convert on-chain data into visualized data, allowing us to better understand the hotspots on the blockchain.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -122,4 +122,3 @@ function getSum(uint256[] calldata _arr) public pure returns(uint sum) {
 
 Nesta aula, aprendemos como criar um contrato de airdrop de tokens ERC20 usando Solidity, aumentando significativamente a eficiência na distribuição de airdrops. Qual foi o maior airdrop que você já recebeu?
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

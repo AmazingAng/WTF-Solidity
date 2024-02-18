@@ -116,4 +116,3 @@ contract Logic2 {
 
 Este tutorial apresentou um contrato atualizável simples, que adiciona a funcionalidade de atualização a contratos inteligentes que normalmente não são alteráveis. No entanto, este contrato possui um problema de `conflito de seletores`, representando um risco de segurança. Nas próximas aulas, iremos abordar os contratos atualizáveis padrão, como o proxy transparente e o `UUPS`.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

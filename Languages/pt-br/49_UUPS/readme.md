@@ -144,4 +144,3 @@ contract UUPS2{
 
 Nesta aula, apresentamos outra solução para o problema de "conflito de seletores" em contratos de proxy: o UUPS. Ao contrário do proxy transparente, o UUPS coloca a função de atualização no contrato lógico, o que impede que ocorra um conflito de seletores durante a compilação. Comparado ao proxy transparente, o UUPS consome menos gas, mas também é mais complexo.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

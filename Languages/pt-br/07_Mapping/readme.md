@@ -74,4 +74,3 @@ mapping(address => address) public parDePermuta; // mapeamento de pares, endere�
 
 Nesta aula, aprendemos sobre o uso de tabelas hash (mapeamentos) no Solidity. Com isso, já cobrimos todos os tipos comuns de variáveis, e a próxima etapa será aprender sobre fluxo de controle com `if-else`, `while`, entre outros.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

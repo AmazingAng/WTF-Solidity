@@ -95,4 +95,3 @@ Podemos observar que o método `error` é o que consome menos `gas`, seguido pel
 
 Nesta lição, aprendemos sobre os três métodos para lançar exceções no Solidity: `error`, `require` e `assert`, e comparamos o consumo de `gas` entre eles. Concluímos que o `error` é uma opção eficiente, pois fornece explicação da exceção e consome menos `gas`.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

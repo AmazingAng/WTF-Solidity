@@ -143,4 +143,3 @@ Após o envio, você pode observar as alterações no saldo ETH do contrato alvo
 
 Nesta aula, aprendemos como criar uma referência para um contrato externo usando o código (ou interface) e o endereço do contrato, e como chamar as funções desse contrato.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

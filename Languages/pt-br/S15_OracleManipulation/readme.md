@@ -227,4 +227,3 @@ O renomado especialista em segurança de blockchain `samczsun` resumiu métodos 
 
 Nesta lição, discutimos o ataque de manipulação de oráculos e atacamos um contrato de moeda estável com falhas, trocando 1 ETH por 17 trilhões de oUSD. Esses ataques podem causar grandes perdas aos usuários e são uma ameaça significativa à segurança dos contratos inteligentes.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -129,4 +129,3 @@ function delegatecallSetVars(address _addr, uint _num) external payable {
 
 Neste artigo, exploramos a função `delegatecall`, mais um recurso de baixo nível em Solidity. Semelhante ao `call`, o `delegatecall` é usado para chamar outros contratos, com a diferença sendo o contexto de execução: `B chama C`, o contexto é `C`; enquanto `B delegatecall C`, o contexto é `B`. Atualmente, a principal aplicação do `delegatecall` é em contratos de procuração e nos Diamantes EIP-2535.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

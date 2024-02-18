@@ -192,4 +192,3 @@ Função de alto risco (nível de risco: ⚠️⚠️⚠️⚠️)
 
 O próximo artigo apresentará um mecanismo de lista branca de senhas projetado no contrato BanaCatNFT.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

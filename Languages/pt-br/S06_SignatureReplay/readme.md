@@ -165,4 +165,3 @@ Nesta aula, abordamos a vulnerabilidade de replay de assinatura em contratos int
 
 2. Incluir um `nonce` e o `chainid` na mensagem assinada.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

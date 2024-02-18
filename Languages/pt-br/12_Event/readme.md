@@ -90,4 +90,3 @@ Os `tópicos` contêm três elementos, sendo o `[0]` o hash do evento, o `1` e o
 
 Nesta lição, aprendemos como usar e consultar eventos em Solidity. Muitas ferramentas de análise blockchain, como a Nansen e a Dune Analysis, são baseadas em eventos.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

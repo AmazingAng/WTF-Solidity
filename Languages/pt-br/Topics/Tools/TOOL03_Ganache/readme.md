@@ -239,4 +239,3 @@ The balance of Vitalik Buterin on the locally forked network matches the balance
 
 In this way, we have successfully forked a mainnet and set up the necessary local environment for contract development.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -411,4 +411,3 @@ Podemos ter certeza de que o compilador Solidity melhorará no futuro. Mas por e
 
 Literalmente, conhecer suas variáveis de armazenamento vale a pena.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

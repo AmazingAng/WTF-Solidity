@@ -287,4 +287,3 @@ Embora `Eve` e `Adam` sejam contratos filhos de `God`, o contrato `God` só ser�
 
 Nesta aula, apresentamos os conceitos básicos da herança no Solidity, incluindo herança simples, herança múltipla, herança de modificadores e construtores, chamada de funções do contrato pai e o problema da herança de diamante na herança múltipla.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

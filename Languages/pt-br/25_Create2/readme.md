@@ -163,4 +163,3 @@ Endereço do PEOPLE na rede BSC: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 
 Nesta lição, falamos sobre os princípios e utilização do opcode `CREATE2`, e implementamos uma versão simplificada do `Uniswap` utilizando essa funcionalidade, além de calcular antecipadamente os endereços dos pares. O `CREATE2` nos permite determinar o endereço de um contrato antes de implantá-lo, sendo fundamental para alguns projetos de `layer2`.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

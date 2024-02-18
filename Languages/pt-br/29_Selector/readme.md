@@ -90,4 +90,3 @@ Nos logs, podemos ver que a função `mint` foi chamada com sucesso e o evento `
 
 Nesta lição, explicamos o que é um `seletor de função` (`selector`), como ele se relaciona com `msg.data` e a `assinatura da função`, e como utilizá-lo para chamar funções específicas.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

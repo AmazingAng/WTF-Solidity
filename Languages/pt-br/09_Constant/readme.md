@@ -74,4 +74,3 @@ function test() public pure returns(uint256){
 
 Nesta lição, apresentamos duas palavras-chave no Solidity, `constant` (constante) e `immutable` (imutável), para manter variáveis que não devem mudar, inalteradas. Essa prática não apenas economiza `gas`, mas também aumenta a segurança do contrato.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

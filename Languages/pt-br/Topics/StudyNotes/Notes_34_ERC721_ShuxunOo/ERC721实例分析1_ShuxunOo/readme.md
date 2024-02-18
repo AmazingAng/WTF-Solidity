@@ -301,4 +301,3 @@ Cada NFT tem um arquivo JSON correspondente. Todos os arquivos são colocados em
 
 Este artigo apresentou principalmente as funções de "leitura" do contrato do BanaCat. No próximo artigo, apresentaremos as funções de "escrita" do contrato.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

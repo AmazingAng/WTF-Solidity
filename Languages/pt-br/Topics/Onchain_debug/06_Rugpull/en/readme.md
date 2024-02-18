@@ -76,4 +76,3 @@ A Numen Cyber Labs lembra aos usuários que, ao fazer investimentos, é necessá
 
 A Numen Cyber Labs está comprometida em proteger a segurança ecológica do Web3. Fique atento para mais notícias e análises sobre ataques.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

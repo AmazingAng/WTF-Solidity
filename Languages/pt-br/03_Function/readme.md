@@ -141,4 +141,3 @@ Vamos definir a função `minusPayable()`, marcada como `external payable`, que 
 
 Nesta sessão, apresentamos as funções em Solidity. As palavras-chave `pure` e `view` podem ser difíceis de entender, pois não existem equivalentes em outras linguagens de programação: uma função `view` pode ler variáveis de estado, mas não pode modificá-las; uma função `pure` não pode ler nem modificar variáveis de estado.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

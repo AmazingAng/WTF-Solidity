@@ -118,4 +118,3 @@ Os tokens Pixiu são uma das fraudes mais comuns que os investidores enfrentam n
 
 Nesta lição, abordamos contratos Pixiu e métodos para evitar cair em armadilhas Pixiu. Os contratos Pixiu são uma das adversidades mais comuns que investidores enfrentam no mundo cripto, sendo bastante odiados. Recentemente, também surgiram Pixiu NFTs, onde projetos maliciosos alteram as funções de transferência ou autorização do ERC721 para impedir que os investidores vendam. Compreender os princípios dos contratos Pixiu e as medidas de prevenção pode reduzir significativamente a probabilidade de adquirir um contrato Pixiu, tornando seus fundos mais seguros. Mantenha-se sempre aprendendo.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

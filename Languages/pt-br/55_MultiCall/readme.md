@@ -129,4 +129,3 @@ contract Multicall {
 
     Você pode verificar os valores de retorno das chamadas na seção `decoded output`. Os saldos dos dois endereços são `0x000000000000000000000000000000000000000
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -639,4 +639,3 @@ Podemos fazer uma analogia entre a arquitetura de DApps e Web Apps:
 * Transações são como uma solicitação.
 * A ABI é o formato de troca de dados, semelhante a [Protocol Buffers](https://en.wikipedia.org/wiki/Protocol_Buffers).
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

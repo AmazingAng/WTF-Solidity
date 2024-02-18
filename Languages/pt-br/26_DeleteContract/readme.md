@@ -73,4 +73,3 @@ Observando o estado do contrato durante o teste, podemos ver que após a exclus�
 
 `selfdestruct` é o botão de emergência dos contratos inteligentes, permitindo a destruição do contrato e a transferência do `ETH` restante para um endereço específico. Certamente, os fundadores do Ethereum devem ter se arrependido de não ter incluído `selfdestruct` no contrato do `The DAO` para interromper o ataque dos hackers.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

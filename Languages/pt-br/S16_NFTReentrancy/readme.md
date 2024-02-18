@@ -107,4 +107,3 @@ Existem duas maneiras principais de prevenir ataques de reentrada: o modelo de V
 
 Nesta palestra, abordamos a vulnerabilidade de ataques de reentrada em contratos NFT e realizamos um ataque bem-sucedido a um contrato NFT com falhas, criando 10 NFTs. Atualmente, existem duas maneiras principais de prevenir ataques de reentrada: o modelo de Verificação-Impacto-Interação e o uso de bloqueios de reentrada.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

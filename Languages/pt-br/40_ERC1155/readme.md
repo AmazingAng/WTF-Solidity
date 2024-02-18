@@ -626,4 +626,3 @@ Na seção `balanceOf`, insira o endereço da conta para a qual os tokens foram 
 
 Nesta aula, aprendemos sobre o padrão `ERC1155` proposto pelo Ethereum EIP1155, que permite que um contrato contenha vários tipos de tokens fungíveis e não fungíveis. Também criamos uma versão modificada do token chato `BAYC` chamado `BAYC1155`, que contém 10.000 tipos de tokens e tem metadados idênticos ao `BAYC`. Atualmente, o `ERC1155` é amplamente utilizado em aplicativos de GameFi. No entanto, acredito que, com o desenvolvimento contínuo da tecnologia do metaverso, esse padrão se tornará cada vez mais popular.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

@@ -194,4 +194,3 @@ O uso do ERC20Permit para autorizações através de assinaturas traz conveniên
 
 Nesta aula, exploramos o ERC20Permit, uma extensão do padrão ERC20 que permite que as autorizações sejam feitas por meio de assinaturas, melhorando a experiência do usuário e sendo adotada por diversos projetos. No entanto, essa funcionalidade também traz um risco maior, pois uma única assinatura pode permitir o roubo de ativos. Portanto, é essencial ser extremamente cuidadoso ao assinar mensagens.
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->

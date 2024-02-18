@@ -148,4 +148,3 @@ O contrato TokenLocker possui duas funções.
 Nesta aula, falamos sobre o contrato Token Locker. Os projetos geralmente fornecem liquidez em DEXs para que os investidores possam negociar. Se o projeto retirar os tokens LP do pool de liquidez repentinamente, ocorrerá um "rug-pull". No entanto, bloquear os tokens LP em um contrato Token Locker pode evitar essa situação.
 .
 
-<!-- This file was translated using AI by repo_ai_translate. For more information, visit https://github.com/marcelojsilva/repo_ai_translate -->
