@@ -26,7 +26,7 @@ The format of declaring the `mapping` is `mapping(_KeyType => _ValueType)`, wher
 
 ## Rules of `mapping`
 
-- **Rule 1**: The `_KeyType` should be selected among default types in `solidity` such as ` uint `, `address`, etc. No custom `struct` can be used. However, `_ValueType` can be any custom types. The following example will throw an error, because `_KeyType` uses a custom struct:
+- **Rule 1**: The `_KeyType` should be selected among default types in `solidity` such as ` uint `, `address`, etc. No custom `struct` can be used. However, `_ValueType` can be any custom type. The following example will throw an error, because `_KeyType` uses a custom struct:
 
 ```solidity
       // define a struct
@@ -37,7 +37,7 @@ The format of declaring the `mapping` is `mapping(_KeyType => _ValueType)`, wher
       mapping(Student => uint) public testVar;
 ```
 
-- **Rule 2**: The storage location of the mapping must be `storage`: it can serve as the state variable or the `storage` variable inside function. But it can't be used in arguments or return results of `public` function.
+- **Rule 2**: The storage location of the mapping must be `storage`: it can serve as the state variable or the `storage` variable inside the function. But it can't be used in arguments or return results of `public` function.
 
 - **Rule 3**: If the mapping is declared as `public` then Solidity will automatically create a `getter` function for you to query for the `Value` by the `Key`.
 
@@ -57,17 +57,17 @@ The format of declaring the `mapping` is `mapping(_KeyType => _ValueType)`, wher
 
 - **Principle 3**: Since Ethereum defines all unused space as 0, all `key` that are not assigned a `value` will have an initial value of 0.
 
-## Verify on Remix (use `Mapping.sol` as example)
+## Verify on Remix (use `Mapping.sol` as an example)
 
 - Deploy `Mapping.sol`
 
     ![7-1_en](./img/7-1_en.png)
 
-- Check initial value of map `idToAddress`.
+- Check the initial value of map `idToAddress`.
 
     ![7-2_en](./img/7-2_en.png)
 
-- Write new key-value pair
+- Write a new key-value pair
 
     ![7-3_en](./img/7-3_en.png)
 
@@ -75,4 +75,4 @@ The format of declaring the `mapping` is `mapping(_KeyType => _ValueType)`, wher
 
 ## Summary
 
-In this section，we introduced the `mapping` type in Solidity. So far, we've learned all kinds of common variables.
+In this section， we introduced the `mapping` type in Solidity. So far, we've learned all kinds of common variables.
