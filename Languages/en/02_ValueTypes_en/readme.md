@@ -53,13 +53,13 @@ Code：
     bool public _bool5 = _bool != _bool1; // inequality
 ```
 
-From the above source code：the value of the variable `_bool` is `true`; `_bool1` is not`_bool`, which yields `false`; `_bool && _bool1` is `false`；`_bool || _bool1` is `true`；`_bool == _bool1` is `false`；and `_bool != _bool1` is `true`.
+From the above source code: the value of the variable `_bool` is `true`; `_bool1` is not`_bool`, which yields `false`; `_bool && _bool1` is `false`；`_bool || _bool1` is `true`；`_bool == _bool1` is `false`；and `_bool != _bool1` is `true`.
 
 **Important note：** The `&&` and `||` operator follows a short-circuit evaluation rule. This means that for an expression such as `f(x) || g(y)`, if `f(x)` is `true`, `g(y)` will not be evaluated.
 
 ### 2. Integers
 
-Integers types in Solidity includes signed integer `int` and unsigned integer `uint`. It can store up to a 256-bit integers or data units.
+Integers types in Solidity include signed integer `int` and unsigned integer `uint`. It can store up to a 256-bit integers or data units.
 
 ```solidity
     // Integer
