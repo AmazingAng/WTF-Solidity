@@ -1,6 +1,6 @@
 ![](./img/logo2.jpeg)
 
-:globe_with_meridians:	**[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/README.md) / [Español](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/README.md)** :globe_with_meridians:	
+:globe_with_meridians:	**[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/README.md) / [Español](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/README.md) / [Português Brasileiro](./Languages/pt-br/README.md)** :globe_with_meridians:	
 
 # WTF Solidity
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
