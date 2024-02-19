@@ -13,13 +13,13 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 ## Variable Types
 
-1. **Value Type**：This include boolean, integer, etc. These variables directly pass values when assigned.
+1. **Value Type**：This includes boolean, integer, etc. These variables directly pass values when assigned.
 
 2. **Reference Type**：including arrays and structures. These variables take up more space, directly pass addresses (similar to pointers) when assigned, and can be modified with multiple variable names.
 
 3. **Mapping Type**: hash tables in Solidity.
 
-4. **Function Type**：The Solidity documentation classifies functions into value types. But its very different from other types, and I put it in a separate category.
+4. **Function Type**：The Solidity documentation classifies functions into value types. But it's very different from other types, and I put it in a separate category.
 
 Only the commonly used types will be introduced here. In this chapter, we will introduce value types.
 
@@ -86,7 +86,7 @@ You can run the above code and check the values of each variable.
 
 ### 3. Addresses
 
-Addresses have following 2 types: 
+Addresses have the following 2 types: 
 - `address`: Holds a 20 byte value (size of an Ethereum address).
 
 - `address payable`: Same as `address`, but with the additional members `transfer` and `send` to allow ETH transfers.
@@ -117,7 +117,7 @@ Code：
     bytes1 public _byte = _byte32[0]; 
 ```
 
-In the above code, we assigned value `MiniSolidity` to the variable `_byte32`, or in hexadecimal: `0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
+In the above code, we assigned the value `MiniSolidity` to the variable `_byte32`, or in hexadecimal: `0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
 
 And `_byte` takes the value of the first byte of `_byte32`, which is `0x4d`.
 
