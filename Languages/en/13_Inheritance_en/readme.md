@@ -42,7 +42,7 @@ mapping(address => uint256) public override balanceOf;
 
 ### Simple inheritance
 
-Let's start by writing a simple `Grandfather` contract, which contains 1 `Log` event and 3 functions: `hip()`, `pop()`, `grandfather()`, which outputs a string `"Grandfather"`.
+Let's start by writing a simple `Grandfather` contract, which contains 1 `Log` event and 3 functions: `hip()`, `pop()`, `Grandfather()`, which outputs a string `"Grandfather"`.
 
 ```solidity
 contract Grandfather {
@@ -83,7 +83,7 @@ contract Father is Grandfather{
 }
 ```
 
-After deploying the contract, we can see that the `Father` contract contains 4 functions. The outputs of `hip()` and `pop()` are successfully rewritten with the output `"Father"`, while the output of the inherited `grandfather()` function is still `"Grandfather"`.
+After deploying the contract, we can see that the `Father` contract contains 4 functions. The outputs of `hip()` and `pop()` are successfully rewritten with the output `"Father"`, while the output of the inherited `Grandfather()` function is still `"Grandfather"`.
 
 
 ### Multiple inheritance
@@ -109,7 +109,7 @@ contract Son is Grandfather, Father{
     }
 ```
 
-After deploying the contract, we can see that we successfully rewrote the `hip()` and `pop()` functions in the `Son` contract, changing the output to `"Son"`. While the `grandfather()` and `father()` functions inherited from its parent contracts remain unchanged.
+After deploying the contract, we can see that we successfully rewrote the `hip()` and `pop()` functions in the `Son` contract, changing the output to `"Son"`. While the `Grandfather()` and `father()` functions inherited from its parent contracts remain unchanged.
 
 ### Inheritance of modifiers
 
