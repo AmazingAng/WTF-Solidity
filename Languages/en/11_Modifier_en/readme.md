@@ -34,7 +34,7 @@ In this section, we will introduce `constructor` and `modifier` in Solidity, usi
    }
 ```
 
-**Note**: The syntax of constructor in solidity is not consistent for different versions: Before `solidity 0.4.22`, constructors did not use the `constructor` keyword. Instead, the constructor had the same name as the contract name. This old syntax is prone to mistakes: the developer may mistakenly name the contract as `Parents`, while the constructor as `parents`. So in `0.4.22` and later version, the new `constructor` keyword is used. Example of constructor prior to `solidity 0.4.22`:
+**Note**: The syntax of the constructor in solidity is inconsistent for different versions: Before `solidity 0.4.22`, constructors did not use the `constructor` keyword. Instead, the constructor had the same name as the contract name. This old syntax is prone to mistakes: the developer may mistakenly name the contract as `Parents`, while the constructor as `parents`. So in `0.4.22` and later versions, the new `constructor` keyword is used. Example of constructor prior to `solidity 0.4.22`:
 
 ```solidity
 pragma solidity = 0.4.21;
@@ -46,7 +46,7 @@ contract Parents {
 ```
 
 ## Modifier
-`modifier` is similar to `decorator` in object-oriented programming, which is used to declare dedicated properties of functions and reduce code redundancy. `modifier` is Iron Man Armor for functions: the function with `modifier` will have some magic properties. The popular use case of `modifier` is restrict the access of functions.
+`modifier` is similar to `decorator` in object-oriented programming, which is used to declare dedicated properties of functions and reduce code redundancy. `modifier` is Iron Man Armor for functions: the function with `modifier` will have some magic properties. The popular use case of `modifier` is restricting access to functions.
 
 
 ![Iron Man's modifier](https://images.mirror-media.xyz/publication-images/nVwXsOVmrYu8rqvKKPMpg.jpg?height=630&width=1200)
@@ -60,11 +60,11 @@ Let's define a modifier called `onlyOwner`, functions with it can only be called
    }
 ```
 
-Next, let us define a `changeOwner` function, which can change the `owner` of the contract. However, due to the `onlyOwner` modifier, only original `owner` is able to call it. This is the most common way of access control in smart contracts.
+Next, let us define a `changeOwner` function, which can change the `owner` of the contract. However, due to the `onlyOwner` modifier, only the original `owner` is able to call it. This is the most common way of access control in smart contracts.
 
 ```solidity
    function changeOwner(address _newOwner) external onlyOwner{
-      owner = _newOwner; // only owner address can run this function and change owner
+      owner = _newOwner; // only the owner address can run this function and change the owner
    }
 ```
 
@@ -74,11 +74,11 @@ Next, let us define a `changeOwner` function, which can change the `owner` of th
 ## Remix Demo example
 Here, we take `Owner.sol` as an example.
 1. compile and deploy the code in Remix.
-2. click `owner` button to view current owner.
+2. click the `owner` button to view the current owner.
     ![](img/11-2_en.jpg)
-3. The transaction succeeds when `changeOwner` function is called by the owner address user.
+3. The transaction succeeds when the `changeOwner` function is called by the owner address user.
     ![](img/11-3_en.jpg)
-4. The transaction fails when `changeOwner` function is called by other addresses.
+4. The transaction fails when the `changeOwner` function is called by other addresses.
     ![](img/11-4_en.jpg)
 
 
