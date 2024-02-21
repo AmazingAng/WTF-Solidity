@@ -414,3 +414,47 @@ contract TwoStepSwapExecutor {
 ### 跨项目重入攻击
 
 越写越大了。。。所谓跨项目的重入攻击，其核心与上面两例其实也是比较类似。本质就是趁某项目合约的某个状态变量在还未来得及更新时，就利用接手的执行权来发起外部函数调用。如果有第三方合作项目的合约是依赖于前面提到的项目合约里这个状态变量的值来做某些决策的，那么攻击者就可以去攻击这个合作项目的合约，因为在此刻它读到的是一个过期的状态值，会导致它执行一些错误的行为令攻击者获利。 通常，合作项目的合约通过一些`getter`函数或其他只读函数的调用来传递信息，所以这类攻击也通常体现为`只读重入攻击 Read-Only Reentrancy`。
+
+请看如下示例代码：
+
+```
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.17;
+
+contract VulnerableBank {
+  mapping(address => uint256) public balances;
+
+  uint256 private _status; // 重入锁
+
+  // 重入锁
+  modifier nonReentrant() {
+      // 在第一次调用 nonReentrant 时，_status 将是 0
+       require(_status == 0, "ReentrancyGuard: reentrant call");
+      // 在此之后对 nonReentrant 的任何调用都将失败
+      _status = 1;
+      _;
+      // 调用结束，将 _status 恢复为0
+      _status = 0;
+  }
+
+  function deposit() external payable {
+    require(msg.value > 0, "Deposit amount must ba greater than 0");
+    balances[msg.sender] += msg.value;
+  }
+
+  function withdraw(uint256 _amount) external nonReentrant {
+    require(_amount > 0, "Withdrawal amount must be greater than 0");
+    require(isAllowedToWithdraw(msg.sender, _amount), "Insufficient balance");
+
+    (bool success, ) = msg.sender.call{value: _amount}("");
+    require(success, "Withdraw failed");
+
+    balances[msg.sender] -= _amount;
+  }
+
+  function isAllowedToWithdraw(address _user, uint256 _amount) public view returns(bool) {
+    return balances[_user] >= _amount;
+  }
+}
+```
+
