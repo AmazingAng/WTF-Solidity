@@ -464,3 +464,21 @@ contract VulnerableBank {
 
 *我不杀伯仁，伯仁却因我而死。。。 -- 戴锁婆婆*
 
+
+### ERC721 & ERC777 Reentrancy
+
+这两种代币标准都各自规定了一个回调函数：
+
+ERC721: `function onERC721Received(address _operator, address _from, uint256 _tokenId, bytes memory _data) public returns(bytes4);`
+
+ERC777: `function tokensReceived(address _operator, address _from, address _to, uint256 _amount, bytes calldata _userData, bytes calldata _operatorData) external;`
+
+有回调函数的存在就有接手代码执行权的机会，同时也会营造出重入攻击的可能性。对这一情况就不展示代码示例了，因为结合上述几个案例，这一条现在应该很容易理解了。并且，实在是能够玩出无穷花样。
+
+### 彩蛋小结
+
+至此，我们审阅了几个实际发生的，各种花样的重入攻击的逻辑本体和它们的简易代码，相信各位同学应该不难看出，这些合约被攻击，是由于它们都共有一个缺陷。那就是这些合约的设计对于重入攻击的防范，都太过于依赖一个直截了当的工具（重入锁）的保护，而没有贯彻另一条良好的设计习惯 *检查-影响-交互模式* 。 简单的工具永远不会是完美防御，贯彻的方法论才是你永远的后盾 *（报告首长，本节代码课的思政任务已传达，请验收）*
+
+所以，对于使用小工具，还是使用方法论的取舍，我们作为solidity devs，答案我想应该是：既要...又要...！
+
+![Alt text](image.png)
