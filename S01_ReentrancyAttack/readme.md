@@ -313,3 +313,94 @@ contract Attack2Contract {
 那么问题来了：
 
 *如果改进一下， 将合约中的所有跟资产转移沾边的函数都加上重入锁，那是不是就安全了呢？？？*
+
+请看下面的进阶案例...
+
+### 2. 跨合约重入攻击
+
+现在我们的受害者是一个双合约组合系统。第一个合约是`TwoStepSwapManager`, 它是面向用户的合约，里面包含有允许用户直接发起的提交一个swap交易的函数，还有同样是可由用户发起的，用来取消正在等待执行但尚未执行的swap交易的函数；第二个合约是`TwoStepSwapExecutor`, 它是只能由管理的角色来发起的交易，用于执行某个处于等待中的swap交易。这两个合约的 *部分* 示例代码如下：
+
+```
+// Contracts to create and manage swap "requests"
+
+contract TwoStepSwapManager {
+    struct Swap {
+        address user;
+        uint256 amount;
+        address[] swapPath;
+        bool unwrapnativeToken;
+    }
+
+    uint256 swapNonce;
+    mapping(uint256 => Swap) pendingSwaps;
+
+    uint256 private _status; // 重入锁
+
+    // 重入锁
+    modifier nonReentrant() {
+      // 在第一次调用 nonReentrant 时，_status 将是 0
+        require(_status == 0, "ReentrancyGuard: reentrant call");
+      // 在此之后对 nonReentrant 的任何调用都将失败
+        _status = 1;
+        _;
+      // 调用结束，将 _status 恢复为0
+        _status = 0;
+     }
+
+    function createSwap(uint256 _amount, address[] _swapPath, bool _unwrapnativeToken) external nonReentrant {
+        IERC20(swapPath[0]).safeTransferFrom(msg.sender, _amount);
+        pendingSwaps[++swapNounce] = Swap({
+            user: msg.sender,
+            amount: _amount,
+            swapPath: _swapPath,
+            unwrapNativeToken: _unwrapNativeToken
+        });
+    }
+
+    function cancelSwap(uint256 _id) external nonReentrant {
+        Swap memory swap = pendingSwaps[_id];
+        require(swap.user == msg.sender);
+        delete pendingSwaps[_id];
+
+        IERC20(swapPath[0]).safeTransfer(swap.user, swap.amount);
+    }
+}
+```
+
+```
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.17;
+
+// Contract to exeute swaps
+
+contract TwoStepSwapExecutor {
+
+
+    /* 
+        Logic to set prices etc... 
+    */
+
+
+    uint256 private _status; // 重入锁
+
+    // 重入锁
+    modifier nonReentrant() {
+      // 在第一次调用 nonReentrant 时，_status 将是 0
+        require(_status == 0, "ReentrancyGuard: reentrant call");
+      // 在此之后对 nonReentrant 的任何调用都将失败
+        _status = 1;
+        _;
+      // 调用结束，将 _status 恢复为0
+        _status = 0;
+    }
+
+    function executeSwap(uint256 _id) external onlySwapExecutor nonReentrant {
+        Swap memory swap = ISwapManager(swapManager).pendingSwaps(_id);
+
+        // If a swapPath ends in WETH and unwrapNativeToken == true, send ether to the user
+        ISwapManager(swapManager).swap(swap.user, swap.amount, swap.swapPath, swap.unwrapNativeToken);
+
+        delete pendingSwaps[_id];
+    }
+}
+```
