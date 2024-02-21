@@ -218,10 +218,54 @@ function withdraw() external nonReentrant{
 
 这一讲，我们介绍了以太坊最常见的一种攻击——重入攻击，并编了一个`0xAA`抢银行的小故事方便大家理解，最后我们介绍了两种预防重入攻击的办法：检查-影响-交互模式（checks-effect-interaction）和重入锁。在例子中，黑客利用了回退函数在目标合约进行`ETH`转账时进行重入攻击。实际业务中，`ERC721`和`ERC1155`的`safeTransfer()`和`safeTransferFrom()`安全转账函数，还有`ERC777`的回退函数，都可能会引发重入攻击。对于新手，我的建议是用重入锁保护所有可能改变合约状态的`external`函数，虽然可能会消耗更多的`gas`，但是可以预防更大的损失。
 
-## 彩蛋章节
+## 彩蛋环节
 
-当谈到智能合约安全时，重入攻击永远是一个备受关注的话题。在上述章节中，`0xAA`生动展示了教科书级经典的重入攻击思路；而在生产环境中，常常有一些更加安排巧妙，复杂的实例一直在以各种新瓶装旧酒的面目不断地出现，并且成功地对很多项目造成了破坏。这些实例展示了攻击者如何利用智能合约中的漏洞来搭配组合出精心策划的攻击。在这个彩蛋章节中，我们将利用一些生产环境中真实发生的重入攻击案例，简化并提炼其操作，探讨攻击者的思路、利用的漏洞以及对应的防御措施。通过了解这些实例，我们可以更好地理解重入攻击的本质，并且提高我们编写安全智能合约的技能和意识。
+当谈到智能合约安全时，重入攻击永远是一个备受关注的话题。在上述内容中，`0xAA`生动展示了教科书级经典的重入攻击思路；而在生产环境中，常常有一些更加安排巧妙，复杂的实例一直在以各种新瓶装旧酒的面目不断地出现，并且成功地对很多项目造成了破坏。这些实例展示了攻击者如何利用智能合约中的漏洞来搭配组合出精心策划的攻击。在这个彩蛋环节中，我们将利用一些生产环境中真实发生的重入攻击案例，简化并提炼其操作，探讨攻击者的思路、利用的漏洞以及对应的防御措施。通过了解这些实例，我们可以更好地理解重入攻击的本质，并且提高我们编写安全智能合约的技能和意识。
 
-注：此章节中所展示的代码示例均为`pseudo-code`, 主要以阐释思路为目的。
+注：以下所展示的代码示例均为简化过的`pseudo-code`, 主要以阐释攻击思路为目的。内容源自众多`Web3 Security Researchers`所分享的审计案例,感谢他们的贡献！
 
+1. 跨函数重入攻击
+*那一年，我戴了重入锁，不知对手为何物。直到那天，那个男人从天而降，还是卷走了我的银钱... -- 戴锁婆婆*
 
+请看如下代码示例：
+```
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.17;
+
+contract VulnerableBank {
+  mapping(address => uint256) public balances;
+
+  uint256 private _status; // 重入锁
+
+  // 重入锁
+  modifier nonReentrant() {
+      // 在第一次调用 nonReentrant 时，_status 将是 0
+       require(_status == 0, "ReentrancyGuard: reentrant call");
+      // 在此之后对 nonReentrant 的任何调用都将失败
+      _status = 1;
+      _;
+      // 调用结束，将 _status 恢复为0
+      _status = 0;
+  }
+
+  function deposit() external payable {
+    require(msg.value > 0, "Deposit amount must ba greater than 0");
+    balances[msg.sender] += msg.value;
+  }
+
+  function withdraw(uint256 _amount) external nonReentrant {
+    uint256 balance = balances[msg.sender];
+    require(balance >= _amount, "Insufficient balance");
+
+    (bool success, ) = msg.sender.call{value: _amount}("");
+    require(success, "Withdraw failed");
+
+    balances[msg.sender] = balance - _amount;
+  }
+
+  function transfer(address _to, uint256 _amount) external {
+    balances[msg.sender] -= _amount;
+    balances[_to] += _amount;
+  }
+}
+```
