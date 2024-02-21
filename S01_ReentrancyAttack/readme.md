@@ -400,7 +400,13 @@ contract TwoStepSwapExecutor {
         // If a swapPath ends in WETH and unwrapNativeToken == true, send ether to the user
         ISwapManager(swapManager).swap(swap.user, swap.amount, swap.swapPath, swap.unwrapNativeToken);
 
-        delete pendingSwaps[_id];
+        ISwapManager(swapManager).delete(pendingSwaps[_id]);
     }
 }
 ```
+
+从上面两个合约的示例代码可以看出，所有相关的函数均使用了重入锁。然而，那个男人还是成功地对戴锁婆婆施展了重入魔法，再再再一次卷走了原本不属于他的钱财。这一次，他又是如何做到的呢？
+
+俗话说得好， *“灯下黑“* ，答案就在最表面上反而容易被忽视 --- 因为这是 两 个 合 约...锁的状态是不互通的！ 管理员调用了`executeSwap`来执行了那个攻击者提交的swap，此合约的重入锁开始生效变成`1`。当运行到中间那步`swap（）`的时候，发起了`ETH`转账，将执行权交给了攻击者的恶意合约的`fallback`函数，在那里被设置了对`TwoStepSwapManager`合约的`cancelSwap`函数的调用，而此时这个合约的重入锁还是`0`，所以`cancelSwap`开始执行，此合约的重入锁开始生效变成`1`，然而为时已晚。。。 攻击者收到了`executeSwap`发送给他的swap过来的`ETH`，同时还收到了`cancelSwap`退给他的当初送出去用来swap的本金代币。他他他又一次“无中生有”了！
+
+攻击者这么狡猾，你看他来不来气？ 别急，往下看，还有...
