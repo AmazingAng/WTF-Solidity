@@ -409,7 +409,48 @@ contract TwoStepSwapExecutor {
 
 俗话说得好， *“灯下黑“* ，答案就在最表面上反而容易被忽视 --- 因为这是 两 个 合 约...锁的状态是不互通的！ 管理员调用了`executeSwap`来执行了那个攻击者提交的swap，此合约的重入锁开始生效变成`1`。当运行到中间那步`swap（）`的时候，发起了`ETH`转账，将执行权交给了攻击者的恶意合约的`fallback`函数，在那里被设置了对`TwoStepSwapManager`合约的`cancelSwap`函数的调用，而此时这个合约的重入锁还是`0`，所以`cancelSwap`开始执行，此合约的重入锁开始生效变成`1`，然而为时已晚。。。 攻击者收到了`executeSwap`发送给他的swap过来的`ETH`，同时还收到了`cancelSwap`退给他的当初送出去用来swap的本金代币。他他他又一次“无中生有”了！
 
-攻击者这么狡猾，你看他来不来气？ 别急，往下看，还有...
+若想要防范这种跨合约重入攻击，我这里送同学们一个重入锁的升级版 -- 全局重入锁。适合用于同学们以后架构多合约系统。请看以下简易代码思路：
+
+```
+pragma solidity ^0.8.0;
+
+import "../data/Keys.sol";
+import "../data/DataStore.sol";
+
+abstract contract GlobalReentrancyGuard{
+    uint256 private constant NOT_ENTERED = 0;
+    uint256 private constant ENTERED = 1;
+
+    DataStore public immutable dataStore;
+
+    constructor(DataStore _datastore) {
+        dataStore = _dataStore;
+    }
+
+    modifier globalNonReentrant() {
+        _nonReentrantBefore();
+        _;
+        _nonReentrantAfter();
+    }
+
+    function _nonReentrantBefore() private {
+        uint256 status = dataStore.getUint(Keys.REENTRANCY_GUARD_STATUS);
+
+        require(status == NOT_ENTERED, "ReentrancyGuard: reentrant call");
+
+        dataStore.setUint(Keys.REENTRANCY_GUARD_STATUS, ENTERED);
+    }
+
+    function _nonReentrantAfter() private {
+        dataStore.setUint(Keys.REENTRANCY_GUARD_STATUS, NOT_ENTERED);
+    }
+}
+```
+
+一句话概括这个全局重入锁的核心就是，建立一个单独的合约用来储存重入状态，然后，在你的系统里的任何合约里相关的函数在执行的时候，都要来这同一个地方来查看当前的重入状态，这样你的所有合约就都被重入保护起来了。
+
+看似美妙，但还没完... 攻击者还有更新的花招即便是用全局重入锁也无法防范的。接着往下看: ...
+
 
 ### 跨项目重入攻击
 
