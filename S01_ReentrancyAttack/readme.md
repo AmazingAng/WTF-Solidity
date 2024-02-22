@@ -481,4 +481,4 @@ ERC777: `function tokensReceived(address _operator, address _from, address _to, 
 
 所以，对于使用小工具，还是使用方法论的取舍，我们作为solidity devs，答案我想应该是：既要...又要...！从跨函数的攻击，再到跨合约，跨项目的攻击，若是要求devs和auditors记住这越来越庞大的乐高之间的千丝万缕的联系，实在是有些强人所难。于是，在构造过程中的每一步，都标准地布置多道不同防御机制，便能省心地获得更好的结果。
 
-![Alt text](image.png)
+![](./img/S01-2.png)
