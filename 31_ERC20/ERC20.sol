@@ -34,7 +34,7 @@ contract ERC20 is IERC20 {
 
     // @dev 实现 `approve` 函数, 代币授权逻辑
     function approve(address spender, uint amount) external override returns (bool) {
-        allowance[msg.sender][spender] = amount;
+        allowance[msg.sender][spender] += amount;
         emit Approval(msg.sender, spender, amount);
         return true;
     }
