@@ -105,4 +105,4 @@ receive()   fallback()
 
 ## 总结
 
-这一讲，我介绍了`Solidity`中的两种特殊函数，`receive()`和`fallback()`，他们主要在两种情况下被使用，他们主要用于处理接收`ETH`和代理合约`proxy contract`。
+这一讲，我介绍了`Solidity`中的两种特殊函数，`receive()`和`fallback()`，他们主要在两种情况下被使用，处理接收`ETH`和代理合约`proxy contract`。
