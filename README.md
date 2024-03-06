@@ -1,6 +1,6 @@
 ![](./img/logo2.jpeg)
 
-:globe_with_meridians:	**[English Version](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/README.md)** :globe_with_meridians:	
+:globe_with_meridians:	**[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/README.md) / [Español](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/README.md) / [Português Brasileiro](./Languages/pt-br/README.md)** :globe_with_meridians:	
 
 # WTF Solidity
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
@@ -230,36 +230,46 @@
 
 **OP25：优化最小代理合约 EIP-7511**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/25_MinimalProxy) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/25_MinimalProxy/readme.md)
 
+## Solidity 内部规则
+
+**SI01：基础存储布局**：[Code](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/src/01_ValueStorage.sol) | [文章](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/tutorials/01_ValueStorage/readme.md) 
+
+**SI02：映射和动态数组的存储布局**：[Code](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/src/02_MappingStorage.sol) | [文章](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/tutorials/02_MappingStorage/readme.md) 
+
+**SI03：字节数组和字符串的存储布局**：[Code](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/src/03_BytesStorage.sol) | [文章](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/tutorials/03_BytesStorage/readme.md) 
+
+**SI04：内存布局**：[Code](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/src/04_MemoryLayout.sol) | [文章](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/tutorials/04_MemoryLayout/readme.md) 
+
+**SI05：ABI编码基础**：[Code](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/src/05_AbiEncode.sol) | [文章](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/tutorials/05_AbiEncode/readme.md) 
+
+**SI06：动态类型的ABI编码**：[Code](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/src/06_AbiDynamic.sol) | [文章](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/tutorials/06_AbiDynamic/readme.md) 
+
+**SI07：ABI编码公式**：[Code](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/src/07_AbiFormula.sol) | [文章](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/tutorials/07_AbiFormula/readme.md) 
+
+**SI08：calldata/returndata的ABI编码**：[Code](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/src/08_AbiCalldata.sol) | [文章](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/tutorials/08_AbiCalldata/readme.md) 
+
+**SI09：事件的ABI编码**：[Code](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/src/09_AbiEvent.sol) | [文章](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/tutorials/09_AbiEvent/readme.md) 
+
+**SI10：Error的ABI编码**：[Code](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/src/10_AbiError.sol) | [文章](https://github.com/WTFAcademy/WTF-Solidity-Internals/blob/master/tutorials/10_AbiError/readme.md) 
 
 ## 主题
-<details>
-  <summary>
-    <h3>
-    开发工具
-    </h3>
-  </summary>
+### 开发工具
 
-  **第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/wtfacademy.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
+**第1讲：Remix, 最易用的Solidity IDE** 【[代码](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL01_Remix)】 【[文章](https://mirror.xyz/wtfacademy.eth/dSYXG9zF_Vclw58Bgcvsv6HSA0SU6pmBoYLFwLAgVbU)】
 
-  **第2讲：Infura, 连接链下与链上的桥梁** 【[文章](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL02_Infura/readme.md)】
+**第2讲：Infura, 连接链下与链上的桥梁** 【[文章](https://github.com/AmazingAng/WTFSolidity/tree/main/Topics/Tools/TOOL02_Infura/readme.md)】
 
-  **第3讲：Ganache，搭建本地测试网络** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL03_Ganache/readme.md)】
+**第3讲：Ganache，搭建本地测试网络** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL03_Ganache/readme.md)】
 
-  **第4讲：Alchemy, 区块链API和节点基础设施** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】
+**第4讲：Alchemy, 区块链API和节点基础设施** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】
 
-  **第5讲：Dune，使用Dune可视化区块链数据** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL05_Dune/readme.md)】
+**第5讲：Dune，使用Dune可视化区块链数据** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL05_Dune/readme.md)】
 
-  **第6讲：Hardhat，以太坊开发环境** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL06_Hardhat/readme.md)】
+**第6讲：Hardhat，以太坊开发环境** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL06_Hardhat/readme.md)】
 
-  **第7讲：Foundry，以Solidity为中心的开发工具包** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry)】【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md)】
-</details>
+**第7讲：Foundry，以Solidity为中心的开发工具包** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry)】【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md)】
 
-<details>
-  <summary>
-    <h3>
-    链上威胁分析
-    </h3>
-  </summary>
+### 链上威胁分析
 
 **第1讲：工具篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug//01_tools/)】 | 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/01_tools/en/)】
 
@@ -274,14 +284,8 @@
 **第6讲：Rugpull 分析** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/06_Rugpull/en/)】
 
 **第7讲：Nomad 跨链桥事件分析** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/07_analysis_bridge/)】| 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/07_analysis_bridge/en/)】
-</details>
 
-<details>
-  <summary>
-    <h3>
-    NFT
-    </h3>
-  </summary>
+### NFT
 
 **第1讲：ERC721库：Address, Strings, Context** 【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721)】 【[文章](https://mirror.xyz/wtfacademy.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)】
 
@@ -292,19 +296,12 @@
 **第4讲：BAYC主合约和严重漏洞**【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721/BAYC.sol)】 【[文章](https://mirror.xyz/wtfacademy.eth/_buBOQflWtHDpLbg18Fp8zLe8AmLiPka2y-UhppK_u0)】
 
 **第5讲：Loot**【[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/ERC721/5_Loot/Loot.sol)】 【[文章](https://mirror.xyz/wtfacademy.eth/-Bc_vjP9EX-wg6chtUFAz0zm5v-jaIekMlOlqHJ_IhE)】
-</details>
 
-<details>
-  <summary>
-    <h3>
-    翻译
-    </h3>
-  </summary>
+### 翻译
 
 **第1讲：Metamask项目方给Solidity程序员的16个安全建议**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/Consensys2020)】 【[Mirror](https://mirror.xyz/wtfacademy.eth/ygaDE0QQwn3lfI-AVaw0ZMqHQtWCdzo-XV450j2camc)】
 
 **第2讲：深入EVM**【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017)】
-</details>
 
 ## WTF贡献者
 <div align="center">

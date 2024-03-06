@@ -2,7 +2,7 @@
 
 Recently, I have been relearning Solidity, consolidating the finer details, and also writing a "WTF Solidity Tutorial" for newbies to learn. Lectures are updated 1~3 times weekly. 
 
-Everyone is welcomed to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+Everyone is welcome to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 WTF Academy Discord: [Link](https://discord.gg/5akcruXrsk)
 
@@ -16,7 +16,7 @@ All codebase and tutorial notes are open source and available on GitHub (At 1024
 ## Data location
 There are three types of data storage locations in solidity: `storage`, `memory` and `calldata`. Gas costs are different for different storage locations. 
 
-The data of a `storage` variable is stored on-chain, similar to the hard disk of a computer, and consumes a lot of `gas`; while the data of `memory` and `calldata` variables are temporarily stored in memory, consumes less `gas`. 
+The data of a `storage` variable is stored on-chain, similar to the hard disk of a computer, and consumes a lot of `gas`; while the data of `memory` and `calldata` variables are temporarily stored in memory, consuming less `gas`. 
 
 General usage:
 
@@ -24,7 +24,7 @@ General usage:
 
 2. `memory`: The parameters and temporary variables in the function generally use `memory` label, which is stored in memory and not on-chain. 
 
-3. `calldata`: Similar to `memory`, stored in memory, not on-chain. The difference from `memory` is that `calldata` variables cannot be modified, and is generally used for function parameters. Example:
+3. `calldata`: Similar to `memory`, stored in memory, not on-chain. The difference from `memory` is that `calldata` variables cannot be modified, and are generally used for function parameters. Example:
 
 ```solidity
     function fCalldata(uint[] calldata _x) public pure returns(uint[] calldata){
@@ -39,9 +39,9 @@ General usage:
 
 ### Data location and assignment behaviour
 
-Data locations are not only relevant for persistency of data, but also for the semantics of assignments:
+Data locations are not only relevant for the persistence of data but also for the semantics of assignments:
 
-1. When `storage` (a state variable of the contract) is assigned to the local `storage` (in a function), a reference will be created, and changing value of the new variable will affect the original one. Example:
+1. When `storage` (a state variable of the contract) is assigned to the local `storage` (in a function), a reference will be created, and the changing value of the new variable will affect the original one. Example:
 ```solidity
     uint[] x = [1,2,3]; // state variable: array x
 
@@ -139,5 +139,5 @@ Below are some commonly used global variables:
 ![5-4.png](./img/5-4.png)
 
 ## Summary
-In this chapter, we introduced reference types, data storage locations and variable scopes in `solidity`. There are three types of data storage locations: `storage`, `memory` and `calldata`. Gas costs are different for different storage locations. The variable scope include state variables, local variables and global variables.
+In this chapter, we introduced reference types, data storage locations and variable scopes in `solidity`. There are three types of data storage locations: `storage`, `memory` and `calldata`. Gas costs are different for different storage locations. The variable scope includes state variables, local variables and global variables.
 

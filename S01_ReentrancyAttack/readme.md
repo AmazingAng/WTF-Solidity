@@ -9,31 +9,31 @@ tags:
 
 # WTF Solidity 合约安全: S01. 重入攻击
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 solidity，巩固一下细节，也写一个“WTF Solidity 极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 
 这一讲，我们将介绍最常见的一种智能合约攻击-重入攻击，它曾导致以太坊分叉为 ETH 和 ETC（以太经典），并介绍如何避免它。
 
 ## 重入攻击
 
-重入攻击是智能合约中最常见的一种攻击，攻击者通过合约漏洞（例如fallback函数）循环调用合约，将合约中资产转走或铸造大量代币。
+重入攻击是智能合约中最常见的一种攻击，攻击者通过合约漏洞（例如 fallback 函数）循环调用合约，将合约中资产转走或铸造大量代币。
 
 一些著名的重入攻击事件：
 
-- 2016年，The DAO合约被重入攻击，黑客盗走了合约中的 3,600,000 枚 `ETH`，并导致以太坊分叉为 `ETH` 链和 `ETC`（以太经典）链。
-- 2019年，合成资产平台 Synthetix 遭受重入攻击，被盗 3,700,000 枚 `sETH`。
-- 2020年，借贷平台 Lendf.me 遭受重入攻击，被盗 $25,000,000。
-- 2021年，借贷平台 CREAM FINANCE 遭受重入攻击，被盗 $18,800,000。
-- 2022年，算法稳定币项目 Fei 遭受重入攻击，被盗 $80,000,000。
+- 2016 年，The DAO 合约被重入攻击，黑客盗走了合约中的 3,600,000 枚 `ETH`，并导致以太坊分叉为 `ETH` 链和 `ETC`（以太经典）链。
+- 2019 年，合成资产平台 Synthetix 遭受重入攻击，被盗 3,700,000 枚 `sETH`。
+- 2020 年，借贷平台 Lendf.me 遭受重入攻击，被盗 $25,000,000。
+- 2021 年，借贷平台 CREAM FINANCE 遭受重入攻击，被盗 $18,800,000。
+- 2022 年，算法稳定币项目 Fei 遭受重入攻击，被盗 $80,000,000。
 
-距离 The DAO 被重入攻击已经6年了，但每年还是会有几次因重入漏洞而损失千万美元的项目，因此理解这个漏洞非常重要。
+距离 The DAO 被重入攻击已经 6 年了，但每年还是会有几次因重入漏洞而损失千万美元的项目，因此理解这个漏洞非常重要。
 
 ## `0xAA` 抢银行的故事
 
@@ -41,11 +41,12 @@ tags:
 
 以太坊银行的柜员都是机器人（Robot），由智能合约控制。当正常用户（User）来银行取钱时，它的服务流程：
 
-1. 查询用户的 `ETH` 余额，如果大于0，进行下一步。
+1. 查询用户的 `ETH` 余额，如果大于 0，进行下一步。
 2. 将用户的 `ETH` 余额从银行转给用户，并询问用户是否收到。
 3. 将用户名下的余额更新为`0`。
 
 一天黑客 `0xAA` 来到了银行，这是他和机器人柜员的对话：
+
 - 0xAA : 我要取钱，`1 ETH`。
 - Robot: 正在查询您的余额：`1 ETH`。正在转帐`1 ETH`到您的账户。您收到钱了吗？
 - 0xAA : 等等，我要取钱，`1 ETH`。
@@ -64,6 +65,7 @@ tags:
 ### 银行合约
 
 银行合约非常简单，包含`1`个状态变量`balanceOf`记录所有用户的以太坊余额；包含`3`个函数：
+
 - `deposit()`：存款函数，将`ETH`存入银行合约，并更新用户的余额。
 - `withdraw()`：提款函数，将调用者的余额转给它。具体步骤和上面故事中一样：查询余额，转账，更新余额。**注意：这个函数有重入漏洞！**
 - `getBalance()`：获取银行合约里的`ETH`余额。
@@ -97,7 +99,7 @@ contract Bank {
 
 ### 攻击合约
 
-重入攻击的一个攻击点就是合约转账`ETH`的地方：转账`ETH`的目标地址如果是合约，会触发对方合约的`fallback`（回退）函数，从而造成循环调用的可能。如果你不了解回退函数，可以阅读[WTF Solidity极简教程第19讲：接收ETH](https://github.com/AmazingAng/WTFSolidity/blob/main/19_Fallback/readme.md)。`Bank`合约在`withdraw()`函数中存在`ETH`转账：
+重入攻击的一个攻击点就是合约转账`ETH`的地方：转账`ETH`的目标地址如果是合约，会触发对方合约的`fallback`（回退）函数，从而造成循环调用的可能。如果你不了解回退函数，可以阅读[WTF Solidity 极简教程第 19 讲：接收 ETH](https://github.com/AmazingAng/WTFSolidity/blob/main/19_Fallback/readme.md)。`Bank`合约在`withdraw()`函数中存在`ETH`转账：
 
 ```
 (bool success, ) = msg.sender.call{value: balance}("");
@@ -126,7 +128,7 @@ contract Attack {
     constructor(Bank _bank) {
         bank = _bank;
     }
-    
+
     // 回调函数，用于重入攻击Bank合约，反复的调用目标的withdraw函数
     receive() external payable {
         if (bank.getBalance() >= 1 ether) {
@@ -164,7 +166,7 @@ contract Attack {
 
 检查-影响-交互模式强调编写函数时，要先检查状态变量是否符合要求，紧接着更新状态变量（例如余额），最后再和别的合约交互。如果我们将`Bank`合约`withdraw()`函数中的更新余额提前到转账`ETH`之前，就可以修复漏洞：
 
-```solidity 
+```solidity
 function withdraw() external {
     uint256 balance = balanceOf[msg.sender];
     require(balance > 0, "Insufficient balance");
@@ -178,7 +180,7 @@ function withdraw() external {
 
 ### 重入锁
 
-重入锁是一种防止重入函数的修饰器（modifier），它包含一个默认为`0`的状态变量`_status`。被`nonReentrant`重入锁修饰的函数，在第一次调用时会检查`_status`是否为`0`，紧接着将`_status`的值改为`1`，调用结束后才会再改为`0`。这样，当攻击合约在调用结束前第二次的调用就会报错，重入攻击失败。如果你不了解修饰器，可以阅读[WTF Solidity极简教程第11讲：修饰器](https://github.com/AmazingAng/WTFSolidity/blob/main/13_Modifier/readme.md)。
+重入锁是一种防止重入函数的修饰器（modifier），它包含一个默认为`0`的状态变量`_status`。被`nonReentrant`重入锁修饰的函数，在第一次调用时会检查`_status`是否为`0`，紧接着将`_status`的值改为`1`，调用结束后才会再改为`0`。这样，当攻击合约在调用结束前第二次的调用就会报错，重入攻击失败。如果你不了解修饰器，可以阅读[WTF Solidity 极简教程第 11 讲：修饰器](https://github.com/AmazingAng/WTFSolidity/blob/main/11_Modifier/readme.md)。
 
 ```solidity
 uint256 private _status; // 重入锁
@@ -210,7 +212,7 @@ function withdraw() external nonReentrant{
 }
 ```
 
- 此外，OpenZeppelin也提倡遵循PullPayment(拉取支付)模式以避免潜在的重入攻击。其原理是通过引入第三方(escrow)，将原先的“主动转账”分解为“转账者发起转账”加上“接受者主动拉取”。当想要发起一笔转账时，会通过`_asyncTransfer(address dest, uint256 amount)`将待转账金额存储到第三方合约中，从而避免因重入导致的自身资产损失。而当接受者想要接受转账时，需要主动调用`withdrawPayments(address payable payee)`进行资产的主动获取。
+此外，OpenZeppelin 也提倡遵循 PullPayment(拉取支付)模式以避免潜在的重入攻击。其原理是通过引入第三方(escrow)，将原先的“主动转账”分解为“转账者发起转账”加上“接受者主动拉取”。当想要发起一笔转账时，会通过`_asyncTransfer(address dest, uint256 amount)`将待转账金额存储到第三方合约中，从而避免因重入导致的自身资产损失。而当接受者想要接受转账时，需要主动调用`withdrawPayments(address payable payee)`进行资产的主动获取。
 
 ## 总结
 

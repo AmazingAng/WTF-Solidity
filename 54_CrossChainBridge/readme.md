@@ -56,7 +56,7 @@ tags:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -77,7 +77,7 @@ contract CrossChainToken is ERC20, Ownable {
         string memory name,
         string memory symbol,
         uint256 totalSupply
-    ) payable ERC20(name, symbol) {
+    ) payable ERC20(name, symbol) Ownable(msg.sender) {
         _mint(msg.sender, totalSupply);
     }
 
@@ -154,7 +154,7 @@ const main = async () => {
             console.log(`Minted ${amount} tokens to ${user} on Chain Goerli`);
         });
 
-        // 监听chain Sepolia的Bridge事件，然后在Goerli上执行mint操作，完成跨链
+        // 监听chain Goerli的Bridge事件，然后在Sepolia上执行mint操作，完成跨链
         contractGoerli.on("Bridge", async (user, amount) => {
             console.log(`Bridge event on Chain Goerli: User ${user} burned ${amount} tokens`);
 
@@ -164,10 +164,8 @@ const main = async () => {
 
             console.log(`Minted ${amount} tokens to ${user} on Chain Sepolia`);
         });
-
-    }catch(e){
+    } catch(e) {
         console.log(e);
-    
     } 
 }
 
