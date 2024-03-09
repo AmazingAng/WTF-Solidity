@@ -38,7 +38,8 @@ address constant CONSTANT_ADDRESS = 0x0000000000000000000000000000000000000000;
 
 ### immutable
 
-`immutable`变量可以在声明时或构造函数中初始化，因此更加灵活。
+`immutable`变量可以在声明时或构造函数中初始化，因此更加灵活。在`Solidity v8.0.21`以后，`immutable`变量不需要显式初始化。反之，则需要显式初始化。
+若`immutable`变量既在声明时初始化，又在constructor中初始化，会使用constructor初始化的值。
 
 ``` solidity
 // immutable变量可以在constructor里初始化，之后不能改变
@@ -54,7 +55,7 @@ uint256 public immutable IMMUTABLE_TEST;
 // 利用constructor初始化immutable变量，因此可以利用
 constructor(){
     IMMUTABLE_ADDRESS = address(this);
-    IMMUTABLE_BLOCK = block.number;
+    IMMUTABLE_NUM = 1118;
     IMMUTABLE_TEST = test();
 }
 
