@@ -7,6 +7,6 @@
 
 ## Which issue(s) this PR fixes(Optional)
 
-* plz close : #
+* resolve : #
 
 ## What this PR does / why we need it
