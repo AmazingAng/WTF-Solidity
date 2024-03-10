@@ -121,6 +121,22 @@ bytes1 public _byte = _byte32[0];
 
 `_byte` 变量的值为 `_byte32` 的第一个字节，即 `0x4d`。
 
+以下是包含打印逻辑的代码
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
+
+contract array {
+    bytes32 public _byte32 = "MiniSolidity"; 
+    bytes1 public _byte = _byte32[0]; 
+    event Log (bytes1);
+    constructor(){
+        emit Log(_byte);
+    }
+ 
+}
+```
+
 ### 5. 枚举 enum
 
 枚举（`enum`）是 Solidity 中用户定义的数据类型。它主要用于为 `uint` 分配名称，使程序易于阅读和维护。它与 `C 语言` 中的 `enum` 类似，使用名称来代替从 `0` 开始的 `uint`：
@@ -153,6 +169,9 @@ function enumToUint() external view returns(uint){
 
 ![2-2.png](./img/2-2.png)
 ![2-3.png](./img/2-3.png)
+
+- 打印 `_byte`
+![2-4.png](./img/2-4.png)
 
 ## 总结
 

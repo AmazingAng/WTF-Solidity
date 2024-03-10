@@ -32,14 +32,16 @@ contract ValueTypes{
     // 固定长度的字节数组
     bytes32 public _byte32 = "MiniSolidity"; // bytes32: 0x4d696e69536f6c69646974790000000000000000000000000000000000000000
     bytes1 public _byte = _byte32[0]; // bytes1: 0x4d
-    
+    event Log (bytes1);
+    constructor(){
+        emit Log(_byte);
+    }
     
     // Enum
     // 将uint 0， 1， 2表示为Buy, Hold, Sell
     enum ActionSet { Buy, Hold, Sell }
     // 创建enum变量 action
     ActionSet action = ActionSet.Buy;
-
     // enum可以和uint显式的转换
     function enumToUint() external view returns(uint){
         return uint(action);
