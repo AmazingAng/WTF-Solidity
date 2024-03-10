@@ -76,7 +76,7 @@ contract Faucet {
     // SendToken事件    
     event SendToken(address indexed Receiver, uint256 indexed Amount); 
 
-    // 部署时设定ERC2代币合约
+    // 部署时设定ERC20代币合约
     constructor(address _tokenContract) {
         tokenContract = _tokenContract; // set token contract
     }

@@ -10,13 +10,13 @@ tags:
 
 # WTF Solidity极简入门: 32. 代币水龙头
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
-欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
 
-欢迎加入WTF科学家社区，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github（1024个star发课程认证，2048个star发社群NFT）: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
 
@@ -60,28 +60,29 @@ event SendToken(address indexed Receiver, uint256 indexed Amount);
 合约中只有两个函数：
 
 - 构造函数：初始化`tokenContract`状态变量，确定发放的`ERC20`代币地址。
-```solidity
-// 部署时设定ERC2代币合约
-constructor(address _tokenContract) {
-	tokenContract = _tokenContract; // set token contract
-}
-```
+
+    ```solidity
+    // 部署时设定ERC20代币合约
+    constructor(address _tokenContract) {
+	    tokenContract = _tokenContract; // set token contract
+    }
+    ```
 
 - `requestTokens()`函数，用户调用它可以领取`ERC20`代币。
 
-```solidity
-// 用户领取代币函数
-function requestTokens() external {
-    require(requestedAddress[msg.sender] == false, "Can't Request Multiple Times!"); // 每个地址只能领一次
-    IERC20 token = IERC20(tokenContract); // 创建IERC20合约对象
-    require(token.balanceOf(address(this)) >= amountAllowed, "Faucet Empty!"); // 水龙头空了
+    ```solidity
+    // 用户领取代币函数
+    function requestTokens() external {
+        require(!requestedAddress[msg.sender], "Can't Request Multiple Times!"); // 每个地址只能领一次
+        IERC20 token = IERC20(tokenContract); // 创建IERC20合约对象
+        require(token.balanceOf(address(this)) >= amountAllowed, "Faucet Empty!"); // 水龙头空了
 
-    token.transfer(msg.sender, amountAllowed); // 发送token
-    requestedAddress[msg.sender] = true; // 记录领取地址 
-    
-    emit SendToken(msg.sender, amountAllowed); // 释放SendToken事件
-}
-```
+        token.transfer(msg.sender, amountAllowed); // 发送token
+        requestedAddress[msg.sender] = true; // 记录领取地址 
+        
+        emit SendToken(msg.sender, amountAllowed); // 释放SendToken事件
+    }
+    ```
 
 ## Remix演示
 
@@ -93,12 +94,12 @@ function requestTokens() external {
 
 3. 利用`ERC20`代币合约的`transfer()`函数，将 10000 单位代币转账到`Faucet`合约地址。
     ![给`Faucet`水龙头合约转账](./img/32-3.png)
-    
+
 4. 换一个新账户，调用`Faucet`合约`requestTokens()`函数，领取代币。可以在终端看到`SendToken`事件被释放。
     ![切换账户](./img/32-4.png)
-    
+
     ![requestToken](./img/32-5.png)
-    
+
 5. 在`ERC20`代币合约上利用`balanceOf`查询领取水龙头的账户余额，可以看到余额变为`100`，领取成功！
     ![领取成功](./img/32-6.png)
 
