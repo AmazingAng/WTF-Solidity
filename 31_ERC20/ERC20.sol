@@ -25,7 +25,7 @@ contract ERC20 is IERC20 {
     }
 
     // @dev 实现`transfer`函数，代币转账逻辑
-    function transfer(address recipient, uint amount) external override returns (bool) {
+    function transfer(address recipient, uint amount) public override returns (bool) {
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;
         emit Transfer(msg.sender, recipient, amount);
@@ -33,7 +33,7 @@ contract ERC20 is IERC20 {
     }
 
     // @dev 实现 `approve` 函数, 代币授权逻辑
-    function approve(address spender, uint amount) external override returns (bool) {
+    function approve(address spender, uint amount) public override returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
@@ -44,7 +44,7 @@ contract ERC20 is IERC20 {
         address sender,
         address recipient,
         uint amount
-    ) external override returns (bool) {
+    ) public override returns (bool) {
         allowance[sender][msg.sender] -= amount;
         balanceOf[sender] -= amount;
         balanceOf[recipient] += amount;
