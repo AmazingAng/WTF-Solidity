@@ -435,7 +435,7 @@ tag_2:
 80
 // sload
 54
-// push17 push the the next 17 bytes as a 32 bytes number
+// push17 push the next 17 bytes as a 32 bytes number
 70 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
 /* not(sub(exp(0x2, 0x80), 0x1)) */
