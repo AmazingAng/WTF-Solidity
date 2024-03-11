@@ -8,7 +8,7 @@ tags:
   - airdrop
 ---
 
-# WTF Solidity 极简入门: 33. 空投合约
+# WTF Solidity极简入门: 33. 空投合约
 
 我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
