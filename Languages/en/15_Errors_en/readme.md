@@ -69,7 +69,7 @@ function transferOwner2(uint256 tokenId, address newOwner) public {
 The `assert` statement is generally used for debugging purposes, because it does not include error message to inform the user.
 Syntax of `assert`: 
 ```solidity
-`assert(condition);
+assert(condition);
 ```
 If the condition is not met, an error will be thrown.
 
