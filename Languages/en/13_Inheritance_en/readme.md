@@ -83,7 +83,7 @@ contract Father is Grandfather{
 }
 ```
 
-After deploying the contract, we can see that the `Father` contract contains 4 functions. The outputs of `hip()` and `pop()` are successfully rewritten with the output `"Father"`, while the output of the inherited `Grandfather()` function is still `"Grandfather"`.
+After deploying the contract, we can see that the `Father` contract contains 4 functions. The outputs of `hip()` and `pop()` are successfully rewritten with the output `"Father"`, while the output of the inherited `grandfather()` function is still `"Grandfather"`.
 
 
 ### Multiple inheritance
