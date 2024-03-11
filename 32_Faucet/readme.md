@@ -18,7 +18,7 @@ tags:
 
 所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 
 我们在第31讲学习了`ERC20`代币标准。这一讲，我们将学习`ERC20`水龙头的智能合约。在这个合约中，用户可以领到免费的`ERC20`代币。
 
