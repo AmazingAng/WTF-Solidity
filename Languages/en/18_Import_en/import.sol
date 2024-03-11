@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.20;
 
 // Import via relative location of file
 import './Yeye.sol';
 // Import specific contracts via `global symbols`
 import {Yeye} from './Yeye.sol';
 // Import by URL
-import '@openzeppelin/contracts/utils/Address.sol';
+import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
 // Import "oppenzepplin" contract
 import '@openzeppelin/contracts/access/Ownable.sol';
 
