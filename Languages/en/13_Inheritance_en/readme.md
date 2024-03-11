@@ -90,7 +90,7 @@ After deploying the contract, we can see that the `Father` contract contains 4 f
 
 A solidity contract can inherit multiple contracts. The rules are:
 
-1. For multiple inheritance, parent contracts should be ordered by seniority, from the highest to the lowest. For example: `contract Son is Grandfather, Father`. An error will be thrown if the order is not correct.
+1. For multiple inheritance, parent contracts should be ordered by seniority, from the highest to the lowest. For example: `contract Son is Grandfather, Father`. A error will be thrown if the order is not correct.
 
 2. If a function exists in multiple parent contracts, it must be overridden in the child contract, otherwise an error will occur.
 
