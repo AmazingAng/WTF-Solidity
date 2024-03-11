@@ -8,7 +8,7 @@ tags:
   - using for
 ---
 
-# WTF Solidity Tutorial: 17. Library : Standing on the shoulders of giants
+# WTF Solidity Tutorial: 17. Library: Standing on the shoulders of giants
 
 Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies. 
 
@@ -109,7 +109,7 @@ It mainly contains two functions, `toString()` converts `uint256` to `string`,
 `toHexString()` converts `uint256` to `hexadecimal`, and then converts it to `string`.
 
 ### How to use library contracts
-We use the toHexString() function in String library function to demonstrate two ways of using the functions in the library contract.
+We use the toHexString() function in the String library function to demonstrate two ways of using the functions in the library contract.
 
 **1. `using for` command**
 
@@ -142,9 +142,8 @@ proving that we call the library function successfully!
 ## Summary
 
 In this lecture, we use the referenced library function `String` of `ERC721` as an example to introduce the library function (`Library`) in `solidity`. 
-99% of developers have no need to write library contracts themselves, 
-who can use the ones written by masters. 
-The only thing we need to know is that which library contract to use and where the library is suitable.
+99% of developers do not need to write library contracts themselves, they can use the ones written by masters. 
+The only thing we need to know is which library contract to use and where the library is most suitable.
 
 Some commonly used libraries are:
 1. [String](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/4a9cc8b4918ef3736229a5cc5a310bdc17bf759f/contracts/utils/Strings.sol)：Convert `uint256` to `String`
