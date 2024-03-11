@@ -26,14 +26,14 @@ In this chapter, we will introduce three ways to throw exceptions in solidity: `
 Solidity has many functions for error handling. Errors can occur at compile time or runtime. 
 
 ### Error
-`error` statement is a new feature in solidity `0.8`. It saves gas and informs users why the operation failed. It is the recommended way to throw error in solidity.
-Custom errors are defined using the error statement, which can be used inside and outside of contracts. Below, we created a `TransferNotOwner` error, which will throw an error when the caller is not the token `owner` during transfer:
+The `error` statement is a new feature in solidity `0.8`. It saves gas and informs users why the operation failed. It is the recommended way to throw errors in solidity.
+Custom errors are defined using the error statement, which can be used inside and outside of contracts. Below, we created a `TransferNotOwner` error, which will throw an error when the caller is not the token `owner` during the transfer:
 
 ```solidity
 error TransferNotOwner(); // custom error
 ```
 
-In functions, `error` must be used together with `revert` statement.
+In functions, `error` must be used together with the `revert` statement.
 
 ```solidity
 function transferOwner1(uint256 tokenId, address newOwner) public {
@@ -46,7 +46,7 @@ function transferOwner1(uint256 tokenId, address newOwner) public {
 The `transferOwner1()` function will check if the caller is the owner of the token; if not, it will throw a `TransferNotOwner` error and revert the transaction.
 
 ### Require
-`require` statement was the most commonly used method for error handling prior to solidity `0.8`. It is still popular among developers. 
+The `require` statement was the most commonly used method for error handling prior to solidity `0.8`. It is still popular among developers. 
 
 Syntax of `require`: 
 ```
@@ -66,7 +66,7 @@ function transferOwner2(uint256 tokenId, address newOwner) public {
 ```
 
 ### Assert
-The `assert` statement is generally used for debugging purposes, because it does not include error message to inform the user.
+The `assert` statement is generally used for debugging purposes because it does not include an error message to inform the user.
 Syntax of `assert`: 
 ```solidity
 assert(condition);
@@ -97,7 +97,7 @@ After deploying `Error` contract.
     ![15-3.png](./img/15-3.png)
    
 
-## Gas comparison
+## Gas Comparison
 Let's compare the gas consumption of `error`, `require`, and `assert`. 
 You can find the gas consumption for each function call with the Debug button of the remix console:
 
@@ -106,8 +106,8 @@ You can find the gas consumption for each function call with the Debug button of
 3. **gas for `assert`**：24473 `wei`
 
 We can see that the `error` consumes the least gas, followed by the `assert`, while the `require` consumes the most gas!
-Therefore, `error` not only informs the user on the error message, but also saves gas.
+Therefore, `error` not only informs the user of the error message but also saves gas.
 
 ## Summary
-In this chapter, we introduced 3 statements to handle errors in Solidity: `error`, `require`, and `assert`. After comparing their gas consumption, `error` statement is the cheapest, while `require` has the highest gas consumption.
+In this chapter, we introduced 3 statements to handle errors in Solidity: `error`, `require`, and `assert`. After comparing their gas consumption, the `error` statement is the cheapest, while `require` has the highest gas consumption.
 

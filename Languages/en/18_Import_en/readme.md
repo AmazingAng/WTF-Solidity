@@ -19,7 +19,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 -----
 
-`solidity` supports the use of `import` keyword to import global symbols in other contracts 
+`solidity` supports the use of the `import` keyword to import global symbols in other contracts 
 (simply understood as external source code), making development more modular. Generally, 
 if not specified, all global symbols of the imported file will be imported into the current global scope.
 
@@ -42,7 +42,7 @@ import './Yeye.sol';
 import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
 ```
 
-- Import via `npm` directory. For example:
+- Import via the `npm` directory. For example:
 ```solidity
 import '@openzeppelin/contracts/access/Ownable.sol';
 ```
