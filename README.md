@@ -178,6 +178,8 @@
 
 **S16：NFT重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy/readme.md)
 
+**S17：“跨服”重入攻击**：[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S17_CrossReentrancy/readme.md)
+
 ## EVM 操作码
 
 **OP01：Hello Opcodes**：[代码](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/01_HelloOpcodes) | [文章](https://github.com/WTFAcademy/WTF-Opcodes/blob/main/01_HelloOpcodes/readme.md)
