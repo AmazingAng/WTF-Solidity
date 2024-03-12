@@ -49,7 +49,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 ## 总结
 
-仅仅通过点选就可以写出经验老道Solidity程序员写出的同款代码，并且久经安全测试，这就是Openzepplin库的强大功能。然而Openzeppelin Wizard只是整个仓库的很小一部分，更多相关库细节内容可以参见官方doc文件。
+仅仅通过点选就可以写出经验老道Solidity程序员写出的同款代码，并且久经安全测试，这就是Openzeppelin库的强大功能。然而Openzeppelin Wizard只是整个仓库的很小一部分，更多相关库细节内容可以参见官方doc文件。
 
 基本上想写出在商业上可用的Solidity代码的程序员必然需要了解Openzeppelin库，另一个角度参考别人的代码或许能给你更多的灵感，毕竟程序语言的发展就建立在前人造的轮子上面。
 
