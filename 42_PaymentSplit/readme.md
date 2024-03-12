@@ -18,7 +18,7 @@ tags:
 
 ---
 
-这一讲，我们介绍分账合约，该合约允许将`ETH`按权重转给一组账户中，进行分账。代码部分由oppenzepplin库的[PaymentSplitter合约](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/finance/PaymentSplitter.sol)简化而来。
+这一讲，我们介绍分账合约，该合约允许将`ETH`按权重转给一组账户中，进行分账。代码部分由OpenZeppelin库的[PaymentSplitter合约](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/finance/PaymentSplitter.sol)简化而来。
 
 ## 分账
 

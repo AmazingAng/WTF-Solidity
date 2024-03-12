@@ -72,7 +72,7 @@ A continuación, definamos una función `changeOwner`, que puede cambiar el prop
    }
 ```
 
-### Implementación de Ownable de OppenZepplin:
+### Implementación de Ownable de OpenZeppelin:
 `OppenZeppelin` es una organización que mantiene una base de código estandarizada para `Solidity`, Su implementación estándar de `Ownable` está en [este enlace](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol).
 
 ## Demo en Remix
