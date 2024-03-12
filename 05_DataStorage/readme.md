@@ -123,7 +123,7 @@ function global() external view returns(address, uint, bytes memory){
 }
 ```
 
-在上面例子里，我们使用了3个常用的全局变量：`msg.sender`, `block.number`和`msg.data`，他们分别代表请求发起地址，当前区块高度，和请求数据。下面是一些常用的全局变量，更完整的列表请看这个[链接](https://learnblockchain.cn/docs/solidity/units-and-global-variables.html#special-variables-and-functions)：
+在上面例子里，我们使用了3个常用的全局变量：`msg.sender`，`block.number`和`msg.data`，他们分别代表请求发起地址，当前区块高度，和请求数据。下面是一些常用的全局变量，更完整的列表请看这个[链接](https://learnblockchain.cn/docs/solidity/units-and-global-variables.html#special-variables-and-functions)：
 
 - `blockhash(uint blockNumber)`: (`bytes32`) 给定区块的哈希值 – 只适用于256最近区块, 不包含当前区块。
 - `block.coinbase`: (`address payable`) 当前区块矿工的地址
@@ -136,7 +136,7 @@ function global() external view returns(address, uint, bytes memory){
 - `msg.sig`: (`bytes4`) calldata的前四个字节 (function identifier)
 - `msg.value`: (`uint`) 当前交易发送的 `wei` 值
 - `block.blobbasefee`: (`uint`) 当前区块的blob基础费用。这是Cancun升级新增的全局变量。
-- `blobhash(uint index)`: (`bytes32`) 返回跟当前交易关联的第 `index` 个blob的版本化哈希（第一个字节为版本，当前为 `0x01`，后31位为KZG 承诺的 SHA256 哈希的最后 31 个字节）。若当前交易不包含blob，则返回空字节。这是Cancun升级新增的全局变量。
+- `blobhash(uint index)`: (`bytes32`) 返回跟当前交易关联的第 `index` 个blob的版本化哈希（第一个字节为版本号，当前为`0x01`，后面接KZG承诺的SHA256哈希的最后31个字节）。若当前交易不包含blob，则返回空字节。这是Cancun升级新增的全局变量。
 
 
 **Example:**
