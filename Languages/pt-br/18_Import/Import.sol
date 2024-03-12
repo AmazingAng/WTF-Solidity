@@ -7,7 +7,7 @@ import './Yeye.sol';
 import {Yeye} from './Yeye.sol';
 // Por meio de um URL de referência
 //github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
-// Importar contrato oppenzepplin
+// Importar contrato OpenZeppelin
 import '@openzeppelin/contracts/access/Ownable.sol';
 
 contract Import {

@@ -69,7 +69,7 @@ import './Yeye.sol';
 import {Yeye} from './Yeye.sol';
 // 通过网址引用
 import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
-// 引用oppenzepplin合约
+// 引用OpenZeppelin合约
 import '@openzeppelin/contracts/access/Ownable.sol';
 
 contract Import {
