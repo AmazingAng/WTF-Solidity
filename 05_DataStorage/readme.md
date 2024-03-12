@@ -134,7 +134,10 @@ function global() external view returns(address, uint, bytes memory){
 - `msg.data`: (`bytes calldata`) 完整call data
 - `msg.sender`: (`address payable`) 消息发送者 (当前 caller)
 - `msg.sig`: (`bytes4`) calldata的前四个字节 (function identifier)
-- `msg.value`: (`uint`) 当前交易发送的`wei`值
+- `msg.value`: (`uint`) 当前交易发送的 `wei` 值
+- `block.blobbasefee`: (`uint`) 当前区块的blob基础费用。这是Cancun升级新增的全局变量。
+- `blobhash(uint index)`: (`bytes32`) 返回跟当前交易关联的第 `index` 个blob的版本化哈希（第一个字节为版本，当前为 `0x01`，后31位为KZG 承诺的 SHA256 哈希的最后 31 个字节）。若当前交易不包含blob，则返回空字节。这是Cancun升级新增的全局变量。
+
 
 **Example:**
 
