@@ -99,7 +99,7 @@ contract ERC20 is IERC20 {
     function transfer(
         address recipient,
         uint amount
-    ) external override returns (bool) {
+    ) public override returns (bool) {
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;
         emit Transfer(msg.sender, recipient, amount);
@@ -110,7 +110,7 @@ contract ERC20 is IERC20 {
     function approve(
         address spender,
         uint amount
-    ) external override returns (bool) {
+    ) public override returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
@@ -121,7 +121,7 @@ contract ERC20 is IERC20 {
         address sender,
         address recipient,
         uint amount
-    ) external override returns (bool) {
+    ) public override returns (bool) {
         allowance[sender][msg.sender] -= amount;
         balanceOf[sender] -= amount;
         balanceOf[recipient] += amount;
