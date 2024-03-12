@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>WTF Solidity&#x6781;&#x7b80;&#x5165;&#x95e8;-&#x5de5;&#x5177;&#x7bc7;8&#xff1a;Openzeppelin&comma; Solidity&#x7684;&#x5b89;&#x5168;&#x8303;&#x5f0f;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="wtf-solidity极简入门-工具篇8openzeppelin-solidity的安全范式">WTF Solidity极简入门-工具篇8：Openzeppelin, Solidity的安全范式</h1>
+<p>我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用），每周更新1-3讲。</p>
+<p>欢迎关注我的推特：<a href="https://twitter.com/0xAA_Science">@0xAA_Science</a></p>
+<p>WTF技术社群discord，内有加微信群方法：<a href="https://discord.gg/5akcruXrsk">链接</a></p>
+<p>所有代码和教程开源在github: <a href="https://github.com/AmazingAng/WTFSolidity">github.com/AmazingAng/WTFSolidity</a></p>
+<hr>
+<p><code>Openzeppelin</code>是Solidity安全的最佳实践、拥有众多经过社区审查的库和最常用的 ERC 开发标准，最大程度的降低合约风险。这一讲我们将介绍如何使用Openzeppelin Wizard生成易用安全的Solidity合约。</p>
+<p><strong>Openzeppelin官网</strong>：<a href="https://www.openzeppelin.com/">openzeppelin.com</a></p>
+<h2 id="更安全的范式">更安全的范式</h2>
+<p>由于区块链是一个由真实金钱构成的生态系统，对于solidity新手来说，天马行空的代码模式可能会在链上造成项目或者个人的重大财产损失和安全问题。solidity这门语言的难度更在对整个金融系统理念和区块链的理解而不是语言本身。
+因此快速构建安全、易用的代码就变得尤为重要。庆幸的是Openzeppelin为这门语言提供了大量久经测试的语言模板，最大程度的保证了安全性。</p>
+<h2 id="使用openzeppelin-wizard生成solidity合约代码">使用Openzeppelin Wizard生成Solidity合约代码</h2>
+<h3 id="1-打开openzeppelin官网的合约界面">1. 打开Openzeppelin官网的合约界面</h3>
+<p><img src="file:///c:\Users\Glaci\code\new\WTF-Solidity\Topics\Tools\TOOL08_Openzeppelin\img\openzeppelin2.png" alt="打开Openzeppelin官网的合约界面"></p>
+<p>打开官网进入<code>Openzeppelin Wizard</code>，我们可以看到以下几个面板：</p>
+<ol>
+<li>类型选择：可以选择不同 ERC 标准的模板合约。</li>
+<li>内容选择：可以添加不同合约功能的 <code>GUI</code>。</li>
+<li>编辑页面：代码编辑器。</li>
+<li>保存选项：将文本内容保存到任意位置，支持Remix、本地保存、剪切板。</li>
+</ol>
+<h3 id="2-保存生成合约内容">2. 保存生成合约内容</h3>
+<p>按照图片所示在<code>features</code>栏选择复选框<code>Burnable</code>,<code>Pausable</code>,<code>Permit</code>，并在<code>access control</code>栏选择Ownable，观察编辑页面会随着复选框的选择而变化，随之代码生成了。最后用remix打开生成的代码(右上角<code>open in Remix</code>)</p>
+<p><img src="file:///c:\Users\Glaci\code\new\WTF-Solidity\Topics\Tools\TOOL08_Openzeppelin\img\openzeppelin3.png" alt="保存生成合约内容"></p>
+<h3 id="3-在remix成功部署">3. 在Remix成功部署</h3>
+<p>选择复制<code>ACCOUNT</code>地址，复制到<strong>Deploy</strong>按钮旁边，并且点击<strong>Deploy</strong>按钮部署，这一步是为了给合约的constructor构造函数传参。即可在下角看到合约部署成功。</p>
+<p><img src="file:///c:\Users\Glaci\code\new\WTF-Solidity\Topics\Tools\TOOL08_Openzeppelin\img\openzeppelin4.png" alt="在Remix成功部署"></p>
+<h3 id="4-查看部署合约类型">4. 查看部署合约类型</h3>
+<p>在Remix部署合约之后，展开合约的可调用功能，可以看到合约已经具有了我们刚开始在Openzeppelin Wizard复选框选择的功能，如<code>Burnable</code>、<code>Pausable</code>、<code>Permit</code>、<code>Ownable</code>。</p>
+<p><img src="file:///c:\Users\Glaci\code\new\WTF-Solidity\Topics\Tools\TOOL08_Openzeppelin\img\openzeppelin5.png" alt="查看部署合约类型"></p>
+<h2 id="总结">总结</h2>
+<p>仅仅通过点选就可以写出经验老道Solidity程序员写出的同款代码，并且久经安全测试，这就是Openzepplin库的强大功能。然而Openzeppelin Wizard只是整个仓库的很小一部分，更多相关库细节内容可以参见官方doc文件。</p>
+<p>基本上想写出在商业上可用的Solidity代码的程序员必然需要了解Openzeppelin库，另一个角度参考别人的代码或许能给你更多的灵感，毕竟程序语言的发展就建立在前人造的轮子上面。</p>
+<p>同时doc文件可能缺乏一些设计上的用意和思路解释，在此我还推荐Openzeppelin的官方博客，涉及整个仓库设计的更多细节和版本更替思路。</p>
+<p><strong>Openzeppelin doc地址</strong>：<a href="https://docs.openzeppelin.com/">docs.openzeppelin.com</a></p>
+<p><strong>Openzeppelin blog地址</strong>：<a href="https://blog.openzeppelin.com/">blogs.openzeppelin.com</a></p>
+
+            
+            
+        </body>
+        </html>
