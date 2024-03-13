@@ -49,7 +49,7 @@ It contains `3` functions:
 ```solidity
 // SPDX-License-Identifier: MIT
 // wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // simple upgradeable contract, the admin could change the logic contract's address by calling upgrade function, thus change the contract logic
 // FOR TEACHING PURPOSE ONLY, DO NOT USE IN PRODUCTION

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 interface Base {
     function getFirstName() external pure returns(string memory);
     function getLastName() external pure returns(string memory);

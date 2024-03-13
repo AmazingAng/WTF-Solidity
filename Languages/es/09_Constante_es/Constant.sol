@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract Constant {
 	// Una variable de tipo constante debe ser inicializada cuando es declarada, ya que después no se puede modificar
     uint256 public constant CONSTANT_NUM = 10;

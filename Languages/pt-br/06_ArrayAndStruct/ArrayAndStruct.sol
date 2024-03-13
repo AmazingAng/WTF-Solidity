@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract ArrayTypes {
 
     // Array de comprimento fixo
@@ -32,7 +32,7 @@ contract ArrayTypes {
     }
 }
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract StructTypes {
     // Estrutura Struct
     struct Student{
@@ -65,7 +65,7 @@ contract StructTypes {
     }
 }
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract EnumTypes {
     // Comprar, Manter, Vender
     enum ActionSet { Buy, Hold, Sell }

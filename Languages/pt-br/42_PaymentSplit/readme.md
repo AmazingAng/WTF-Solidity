@@ -29,7 +29,7 @@ O contrato de divisão de pagamentos (`PaymentSplit`) tem as seguintes caracter�
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 /**
  * Contrato de Divisão de Pagamentos

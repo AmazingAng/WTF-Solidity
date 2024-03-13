@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contratos (última atualização v4.7.0) (utils/Strings.sol)
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 /**
  * @dev Operações de string.

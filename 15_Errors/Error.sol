@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // Gas cost在Remix中测试得到 使用0.8.17版本编译
 // 参数使用 tokenId = 123, address = {any address}

@@ -35,7 +35,7 @@ Este programa simples consiste em 1 linha de comentário e 3 linhas de código:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract HelloWeb3{
     string public _string = "Olá Web3!";
 }
@@ -49,10 +49,10 @@ Vamos analisar o programa e aprender sobre a estrutura de um arquivo de código 
    // SPDX-License-Identifier: MIT
    ```
 
-2. A segunda linha declara a versão do Solidity que este arquivo está usando, pois a sintaxe varia entre versões. Esta linha indica que o arquivo só pode ser compilado com a versão 0.8.4 do compilador Solidity, até a versão 0.9.0 (a segunda condição é fornecida pelo "^"). As declarações em Solidity terminam com ponto e vírgula (`;`).
+2. A segunda linha declara a versão do Solidity que este arquivo está usando, pois a sintaxe varia entre versões. Esta linha indica que o arquivo só pode ser compilado com a versão 0.8.21 do compilador Solidity, até a versão 0.9.0 (a segunda condição é fornecida pelo "^"). As declarações em Solidity terminam com ponto e vírgula (`;`).
 
    ```solidity
-   pragma solidity ^0.8.4;
+   pragma solidity ^0.8.21;
    ```
 
 3. As linhas 3-4 são a parte do contrato. A linha 3 cria o contrato (`contract`) e declara que o nome do contrato é `HelloWeb3`. A linha 4 é o corpo do contrato, declarando uma variável string `_string` pública, com o valor "Olá Web3!".

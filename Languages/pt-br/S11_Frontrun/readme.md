@@ -46,7 +46,7 @@ Se você dominar o front-running, será considerado um cientista do blockchain d
 ```solidity
 // SPDX-License-Identifier: MIT
 // By 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 // Tentaremos fazer um front-run de uma transação de mint gratuita

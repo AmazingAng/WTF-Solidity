@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // O Proxy da UUPS é semelhante a um proxy comum.
 // A função de atualização está dentro da função lógica, onde o administrador pode alterar o endereço do contrato lógico usando a função de atualização, alterando assim a lógica do contrato.

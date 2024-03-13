@@ -81,7 +81,7 @@ Use o contrato da aula 31 do [WTF Solidity](../31_ERC20/readme.md)
 // SPDX-License-Identifier: MIT
 // WTF Solidity by 0xAA
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "./IERC20.sol";
 

@@ -89,7 +89,7 @@ We define a state variable `number = 5`
 
 ```solidity
     // SPDX-License-Identifier: MIT
-    pragma solidity ^0.8.4;
+    pragma solidity ^0.8.21;
     contract FunctionTypes{
         uint256 public number = 5;
 ```

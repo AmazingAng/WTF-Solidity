@@ -28,7 +28,7 @@ As funções auxiliares `assert` e `require` podem ser usadas para verificar con
 
 A função `assert` deve ser usada apenas para testar erros internos e verificar invariantes.
 
-A função `require` deve ser usada para garantir que condições válidas sejam atendidas, como entradas ou variáveis de estado do contrato, ou para verificar o valor de retorno de chamadas a contratos externos. (0xAA: O Solidity introduziu a funcionalidade de erro personalizado na versão 0.8.4, então use `require` antes dessa versão e `revert-error` depois dessa versão para garantir que as condições válidas sejam atendidas)
+A função `require` deve ser usada para garantir que condições válidas sejam atendidas, como entradas ou variáveis de estado do contrato, ou para verificar o valor de retorno de chamadas a contratos externos. (0xAA: O Solidity introduziu a funcionalidade de erro personalizado na versão 0.8.21, então use `require` antes dessa versão e `revert-error` depois dessa versão para garantir que as condições válidas sejam atendidas)
 
 Seguir esse padrão permite que ferramentas de análise formal verifiquem que nenhuma operação inválida seja executada: isso significa que nenhum invariante é violado no código e é verificado formalmente.
 ```

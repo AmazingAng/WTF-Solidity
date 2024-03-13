@@ -36,7 +36,7 @@ A vulnerabilidade neste exemplo está na função `transfer()`, onde `require(ba
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 contract Token {
   mapping(address => uint) balances;

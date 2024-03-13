@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // autor: @0xAA_Science da wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 /// Carteira multi-assinatura baseada em assinaturas, simplificada a partir do contrato Gnosis Safe, para fins educacionais.
 contract MultisigWallet {

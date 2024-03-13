@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // english translation by 22X
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // Game with DoS vulnerability, players deposit money and call refund to withdraw it after the game ends.
 contract DoSGame {

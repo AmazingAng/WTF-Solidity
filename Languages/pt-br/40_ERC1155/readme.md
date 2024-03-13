@@ -559,7 +559,7 @@ Vamos modificar o token chato `BAYC` do padrão `ERC721` e criar um token gratui
 ```solidity
 // SPDX-License-Identifier: MIT
 // por 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "./ERC1155.sol";
 

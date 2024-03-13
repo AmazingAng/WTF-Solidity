@@ -40,7 +40,7 @@ Ele possui `3` funções:
 ```solidity
 // SPDX-License-Identifier: MIT
 // wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // Contrato atualizável simples, no qual o admin pode alterar o endereço do contrato lógico usando a função de atualização, modificando assim a lógica do contrato.
 // Apenas para fins educacionais, não deve ser utilizado em ambiente de produção. 

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract ArrayTypes {
 
     // Arreglos de longitud fija
@@ -34,7 +34,7 @@ contract ArrayTypes {
     }
 }
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract StructTypes {
     // Struct
     struct Student{
