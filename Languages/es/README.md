@@ -27,7 +27,11 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 **Capítulo 4. Retorno**：[Code](./04_Retorno_es/Return.sol) | [Tutorial](./04_Retorno_es/readme.md)
 
-**Capítulo 5. Almacenamiento**：[Code](./04_AlmacenamientoInformacion_es/DataStorage.sol) | [Tutorial](./04_AlmacenamientoInformacion_es/readme.md)
+**Capítulo 5. Almacenamiento**：[Code](./05_AlmacenamientoInformacion_es/DataStorage.sol) | [Tutorial](./05_AlmacenamientoInformacion_es/readme.md)
+
+**Capítulo 6. Arreglos y Estructuras**：[Code](./06_ArreglosyEstructuras_es/ArrayAndStruct.sol) | [Tutorial](./06_ArreglosyEstructuras_es/readme.md)
+
+**Capítulo 7. Mapeo**：[Code](./07_Mapeo_es/Mapping.sol) | [Tutorial](./07_Mapeo_es/readme.md)
 
 **Capítulo 8. Valor Inicial**：[Code](./08_ValorInicial_es/InitialValue.sol) | [Tutorial](./08_ValorInicial_es/readme.md)
 
