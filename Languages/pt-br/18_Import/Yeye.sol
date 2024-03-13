@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // Aula 10: Contrato Yeye na herança de contratos
 contract Yeye {

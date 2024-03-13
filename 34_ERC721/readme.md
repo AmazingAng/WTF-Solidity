@@ -193,7 +193,7 @@ interface IERC721Metadata is IERC721 {
 ```solidity
 // SPDX-License-Identifier: MIT
 // by 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "./IERC165.sol";
 import "./IERC721.sol";
@@ -463,7 +463,7 @@ contract ERC721 is IERC721, IERC721Metadata{
 ```solidity
 // SPDX-License-Identifier: MIT
 // by 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "./ERC721.sol";
 

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // Jogo com vulnerabilidade de DoS, os jogadores depositam dinheiro primeiro e, após o término do jogo, chamam a função deposit para retirar o dinheiro.
 contract DoSGame {

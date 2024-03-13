@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 /**
  * @dev Todas as chamadas ao contrato Proxy são delegadas para a execução em outro contrato usando o opcode `delegatecall`. Este último é chamado de contrato lógico (Implementation).

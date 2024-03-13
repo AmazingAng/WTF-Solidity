@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // Exemplo de conflito de seletor
 // Após remover os comentários, o contrato não será compilado, pois as duas funções têm o mesmo seletor.

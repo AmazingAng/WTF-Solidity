@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract Events {
     // Definir a variável de mapeamento _balances para registrar a quantidade de tokens detidos por cada endereço
     mapping(address => uint256) public _balances;

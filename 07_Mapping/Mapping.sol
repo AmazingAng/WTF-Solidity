@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract Mapping {
     mapping(uint => address) public idToAddress; // id映射到地址
     mapping(address => address) public swapPair; // 币对的映射，地址到地址

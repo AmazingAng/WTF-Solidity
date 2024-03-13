@@ -192,7 +192,7 @@ O contrato principal do `ERC721` implementa todas as funcionalidades definidas p
 ```solidity
 // SPDX-License-Identifier: MIT
 // por 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "./IERC165.sol";
 import "./IERC721.sol";

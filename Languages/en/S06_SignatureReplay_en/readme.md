@@ -42,7 +42,7 @@ The `SigReplay` contract below is an `ERC20` token contract that has a signature
 ```solidity
 // SPDX-License-Identifier: MIT
 // english translation by 22X
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";

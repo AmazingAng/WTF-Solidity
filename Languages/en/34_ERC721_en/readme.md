@@ -191,7 +191,7 @@ The `ERC721` main contract implements all the functionalities defined by `IERC72
 ```solidity
 // SPDX-License-Identifier: MIT
 // by 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "./IERC165.sol";
 import "./IERC721.sol";
@@ -466,7 +466,7 @@ Let's use `ERC721` to write a free minting `WTF APE`, with a total quantity of `
 ```solidity
 // SPDX-License-Identifier: MIT
 // by 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "./ERC721.sol";
 

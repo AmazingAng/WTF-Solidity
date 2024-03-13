@@ -38,7 +38,7 @@ This one is easy, the program only contains 1 line of comment and 3 lines of cod
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract HelloWeb3{
     string public _string = "Hello Web3!";}
 ```
@@ -51,10 +51,10 @@ Now, we will breakdown and analyze the source code in detail, understanding the 
 // SPDX-License-Identifier: MIT
 ```
 
-2. The second line declares the Solidity version used by the source file because the syntax of different versions is different. This line of code means that the source file will not allow compilation by compiler versions lower than v0.8.4 and not higher than v0.9.0 (the second condition is provided by `^`).
+2. The second line declares the Solidity version used by the source file because the syntax of different versions is different. This line of code means that the source file will not allow compilation by compiler versions lower than v0.8.21 and not higher than v0.9.0 (the second condition is provided by `^`).
 
 ```solidity
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 ```
     
 3. Lines 3 and 4 are the main body of the smart contract. Line 3 creates a contract with the name `HelloWeb3`. Line 4 is the content of the contract. Here, we created a string variable called `_string` and assigned "Hello Web3!" as value to it.

@@ -562,7 +562,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
 ```solidity
 // SPDX-License-Identifier: MIT
 // by 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "./ERC1155.sol";
 

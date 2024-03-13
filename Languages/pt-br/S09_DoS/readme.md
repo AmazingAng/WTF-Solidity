@@ -34,7 +34,7 @@ Abaixo, vamos examinar um contrato chamado `DoSGame` que representa uma versão 
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // Jogo com vulnerabilidade de DoS - os jogadores fazem depósitos e, quando o jogo termina, recebem seus reembolsos
 contract DoSGame {

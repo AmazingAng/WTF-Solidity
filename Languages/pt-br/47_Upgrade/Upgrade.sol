@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // Contrato simples e atualizável, onde o administrador pode alterar o endereço do contrato lógico através da função de atualização, modificando assim a lógica do contrato.
 // Para fins de demonstração educacional, não utilizar em ambiente de produção.

@@ -18,7 +18,7 @@ Ao escrever contratos inteligentes, é comum encontrar bugs. Os comandos de exce
 
 ### Error
 
-`error` é um recurso adicionado na versão 0.8.4 do Solidity, que permite explicar de forma eficiente (e econômica em termos de `gas`) o motivo de uma operação falhar. É possível definir exceções fora dos contratos. Abaixo, definimos a exceção `TransferNotOwner`, que é lançada quando alguém que não é o dono da moeda tenta fazer uma transferência:
+`error` é um recurso adicionado na versão 0.8.21 do Solidity, que permite explicar de forma eficiente (e econômica em termos de `gas`) o motivo de uma operação falhar. É possível definir exceções fora dos contratos. Abaixo, definimos a exceção `TransferNotOwner`, que é lançada quando alguém que não é o dono da moeda tenta fazer uma transferência:
 
 ```solidity
 error TransferNotOwner(); // Erro personalizado

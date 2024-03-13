@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Por 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "../34_ERC721/ERC721.sol";
 

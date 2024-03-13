@@ -52,7 +52,7 @@ Podemos testar se a importação do código externo foi bem-sucedida com o segui
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // Importar por posição relativa do arquivo
 import './Yeye.sol';

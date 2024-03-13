@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract ArrayTypes {
 
     // 固定长度 Array
@@ -32,7 +32,7 @@ contract ArrayTypes {
     }
 }
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract StructTypes {
     // 结构体 Struct
     struct Student{
@@ -65,7 +65,7 @@ contract StructTypes {
     }
 }
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract EnumTypes {
     // 将uint 0， 1， 2表示为Buy, Hold, Sell
     enum ActionSet { Buy, Hold, Sell }

@@ -43,7 +43,7 @@ tags:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract HelloWeb3{
     string public _string = "Hello Web3!";
 }
@@ -57,10 +57,10 @@ contract HelloWeb3{
    // SPDX-License-Identifier: MIT
    ```
 
-2. 第 2 行声明源文件所使用的 Solidity 版本，因为不同版本的语法有差异。这行代码表示源文件将不允许小于 0.8.4 版本或大于等于 0.9.0 的编译器编译（第二个条件由 `^` 提供）。Solidity 语句以分号（;）结尾。
+2. 第 2 行声明源文件所使用的 Solidity 版本，因为不同版本的语法有差异。这行代码表示源文件将不允许小于 0.8.21 版本或大于等于 0.9.0 的编译器编译（第二个条件由 `^` 提供）。Solidity 语句以分号（;）结尾。
 
    ```solidity
-   pragma solidity ^0.8.4;
+   pragma solidity ^0.8.21;
    ```
 
 3. 第 3-4 行是合约部分。第 3 行创建合约（contract），并声明合约名为 `HelloWeb3`。第 4 行是合约内容，声明了一个 string（字符串）变量 `_string`，并赋值为 "Hello Web3!"。

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // selfdestruct: Exclui o contrato e força a transferência de qualquer ETH restante no contrato para uma conta especificada.
 
