@@ -20,7 +20,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 ----
 
-In this lecture, I will introduce the Dutch Auction and explain how to issue a `NFT` using the `ERC721` standard through a simplified version of the `Azuki` Dutch Auction code.
+In this lecture, I will introduce the Dutch Auction and explain how to issue an `NFT` using the `ERC721` standard through a simplified version of the `Azuki` Dutch Auction code.
 
 ## Dutch Auction
 
@@ -55,7 +55,7 @@ contract DutchAuction is Ownable, ERC721 {
 There are a total of `9` state variables in the contract, of which `6` are related to the auction. They are:
 
 - `COLLECTION_SIZE`: Total number of NFTs.
-- `AUCTION_START_PRICE`: Starting price of the Dutch auction, also the highest price.
+- `AUCTION_START_PRICE`: Starting price of the Dutch auction, is also the highest price.
 - `AUCTION_END_PRICE`: Ending price of the Dutch auction, also the lowest price/floor price.
 - `AUCTION_TIME`: Duration of the auction.
 - `AUCTION_DROP_INTERVAL`: Time interval when the price drops.
@@ -115,7 +115,7 @@ If `block.timestamp` is between the start and end times, the current decay price
 
 - User auctions and mints `NFT`: Users participate in a Dutch auction and mint `NFT` by calling the `auctionMint()` function to pay `ETH`.
 
-First, the function checks if the auction has started or if the number of `NFTs` has exceeded the limit. Then, the contract calculates the auction cost based on the number of minted `NFTs` and using the `getAuctionPrice()` function. It also checks if the user has enough `ETH` to participate. If the user has enough `ETH`, the contract mints `NFTs` and refunds any excess `ETH`. Otherwise, the transaction is reverted.
+First, the function checks if the auction has started or if the number of `NFTs` has exceeded the limit. Then, the contract calculates the auction cost based on the number of minted `NFTs` and uses the `getAuctionPrice()` function. It also checks if the user has enough `ETH` to participate. If the user has enough `ETH`, the contract mints `NFTs` and refunds any excess `ETH`. Otherwise, the transaction is reverted.
 
 ```solidity
     // the auction mint function
