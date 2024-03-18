@@ -1,5 +1,5 @@
 ---
-title: 27. ABI编码解码
+title: 27. ABI Encoding and Decoding
 tags:
   - solidity
   - advanced
@@ -36,7 +36,7 @@ We will encode four variables, their types are `uint256` (alias `uint`), `addres
 ```
 
 ### `abi.encode`
-Use [ABI rules](https://learnblockchain.cn/docs/solidity/abi-spec.html) to encode the given parameters. `ABI` is designed to interact with smart contract by filling each parameter with 32 bytes data and splicing them together. If you want to interact with contracts, you should use `abi.encode`.
+Use [ABI rules](https://learnblockchain.cn/docs/solidity/abi-spec.html) to encode the given parameters. `ABI` is designed to interact with smart contracts by filling each parameter with 32-byte data and splicing them together. If you want to interact with contracts, you should use `abi.encode`.
 ```solidity
     function encode() public view returns(bytes memory result) {
         result = abi.encode(x, addr, name, array);
@@ -54,17 +54,17 @@ Encode given parameters according to their minimum required space. It is similar
 The result of encoding is`0x000000000000000000000000000000000000000000000000000000000000000a7a58c0be72be218b41c608b7fe7c5bb630736c713078414100000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000006`. Because `abi.encodePacked` compacts encoding, the length of result is much shorter than `abi.encode`.
 
 ### `abi.encodeWithSignature`
-Similar with `abi.encode` function, but the first parameter is `function signatures`, such as `"foo(uint256, address, string, uint256[2])"`. It can be used when calling other contracts.
+Similar to `abi.encode` function, the first parameter is `function signatures`, such as `"foo(uint256, address, string, uint256[2])"`. It can be used when calling other contracts.
 ```solidity
     function encodeWithSignature() public view returns(bytes memory result) {
         result = abi.encodeWithSignature("foo(uint256,address,string,uint256[2])", x, addr, name, array);
     }
 ```
 The result of encoding is`0xe87082f1000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000007a58c0be72be218b41c608b7fe7c5bb630736c7100000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000043078414100000000000000000000000000000000000000000000000000000000`. This is equivalent to adding 4 bytes `function selector` to the front of result of `abi.encode`[^note].
-[^note]: Function selectors identify functions by signature processing(Keccak–Sha3) using function names and arguments, which can be used for function call between different contracts.
+[^note]: Function selectors identify functions by signature processing(Keccak–Sha3) using function names and arguments, which can be used for function calls between different contracts.
 
 ### `abi.encodeWithSelector`
-Similar to `abi.encodeWithSignature`, except that first argument is a `function selector` which is the first 4 bytes of `function signature` Keccak hash.
+Similar to `abi.encodeWithSignature`, except that the first argument is a `function selector`, the first 4 bytes of `function signature` Keccak hash.
 
 ```solidity
     function encodeWithSelector() public view returns(bytes memory result) {
@@ -88,17 +88,17 @@ We input binary encoding of `abi.encode` into `decode`, which will decode the or
 ![](https://images.mirror-media.xyz/publication-images/jboRaaq0U57qVYjmsOgbv.png?height=408&width=624)
 
 ## 在remix上验证
-- deploy contract to check the encoding result of `abi.encode`
+- deploy the contract to check the encoding result of `abi.encode`
 ![](./img/27-1_en.png)
 
-- compare and verify the similarities and differences of four encoding functions
+- compare and verify the similarities and differences of the four encoding functions
 ![](./img/27-2_en.png)
 
 - check the decoding result of `abi.decode`
 ![](./img/27-3_en.png)
 
 ## ABI的使用场景
-1. In contract development, ABI is often paired with call to implement low-level call to contract.
+1. In contract development, ABI is often paired with a call to implement a low-level call to contract.
 ```solidity  
     bytes4 selector = contract.getValue.selector;
 
@@ -108,7 +108,7 @@ We input binary encoding of `abi.encode` into `decode`, which will decode the or
 
     return abi.decode(returnedData, (uint256));
 ```
-2. ABI is often used in ethers.js to implement contract import and function call.
+2. ABI is often used in ethers.js to implement contract import and function calls.
 ```solidity
     const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
     /*
@@ -116,14 +116,14 @@ We input binary encoding of `abi.encode` into `decode`, which will decode the or
         */
     const waves = await wavePortalContract.getAllWaves();
 ```
-3. After decompiling a non-open source contract, some functions cannot find function signature but can be called through ABI.
-- 0x533ba33a() is a function which show after decompiled, we can only get function encoded results, and can't find function signature.
+3. After decompiling a non-open source contract, some functions cannot find function signatures but can be called through ABI.
+- 0x533ba33a() is a function which shows after decompiling, we can only get function-encoded results, and can't find the function signature.
 ![](./img/27-4_en.png)
 ![](./img/27-5_en.png)
 - in this case we can't call through constructing an interface or contract
 ![](./img/27-6_en.png)
 
-In this case, we can call through ABI function selector.
+In this case, we can call through the ABI function selector.
 ```solidity
     bytes memory data = abi.encodeWithSelector(bytes4(0x533ba33a));
 
