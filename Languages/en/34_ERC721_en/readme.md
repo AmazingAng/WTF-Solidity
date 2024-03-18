@@ -131,7 +131,7 @@ interface IERC721 is IERC165 {
 
 ## IERC721Receiver
 
-If a contract does not implement the relevant functions of `ERC721`, the incoming NFT will be stuck and unable to be transferred out, causing a loss of the token. In order to prevent accidental transfers, `ERC721` implements the `safeTransferFrom()` function, and the target contract must implement the `IERC721Receiver` interface in order to receive `ERC721` tokens, otherwise it will `revert`. The `IERC721Receiver` interface only includes an `onERC721Received()` function.
+If a contract does not implement the relevant functions of `ERC721`, the incoming NFT will be stuck and unable to be transferred out, causing a loss of the token. In order to prevent accidental transfers, `ERC721` implements the `safeTransferFrom()` function, and the target contract must implement the `IERC721Receiver` interface in order to receive `ERC721` tokens, otherwise, it will `revert`. The `IERC721Receiver` interface only includes an `onERC721Received()` function.
 
 ```solidity
 // ERC721 receiver interface: Contracts must implement this interface to receive ERC721 tokens via safe transfers.
@@ -244,13 +244,13 @@ contract ERC721 is IERC721, IERC721Metadata{
         return _balances[owner];
     }
 
-    // Implements the ownerOf function of IERC721, which uses `_owners` variable to check `tokenId`'s owner.
+    // Implements the ownerOf function of IERC721, which uses the `_owners` variable to check `tokenId`'s owner.
     function ownerOf(uint tokenId) public view override returns (address owner) {
         owner = _owners[tokenId];
         require(owner != address(0), "token doesn't exist");
     }
 
-    // Implements the isApprovedForAll function of IERC721, which uses `_operatorApprovals` variable to check whether `owner` address's NFTs are authorized in batch to be held by another `operator` address.    
+    // Implements the isApprovedForAll function of IERC721, which uses the `_operatorApprovals` variable to check whether the `owner` address's NFTs are authorized in batch to be held by another `operator` address.    
     function isApprovedForAll(address owner, address operator)
         external
         view
@@ -260,19 +260,19 @@ contract ERC721 is IERC721, IERC721Metadata{
         return _operatorApprovals[owner][operator];
     }
 
-    // Implements the setApprovalForAll function of IERC721, which approves all holding tokens to `operator` address. Invokes `_setApprovalForAll` function.
+    // Implements the setApprovalForAll function of IERC721, which approves all holding tokens to the `operator` address. Invokes `_setApprovalForAll` function.
     function setApprovalForAll(address operator, bool approved) external override {
         _operatorApprovals[msg.sender][operator] = approved;
         emit ApprovalForAll(msg.sender, operator, approved);
     }
 
-    // Implements the getApproved function of IERC721, which uses `_tokenApprovals` variable to check authorized address of `tokenId`.
+    // Implements the getApproved function of IERC721, which uses the `_tokenApprovals` variable to check the authorized address of `tokenId`.
     function getApproved(uint tokenId) external view override returns (address) {
         require(_owners[tokenId] != address(0), "token doesn't exist");
         return _tokenApprovals[tokenId];
     }
      
-    // The approve function, which updates `_tokenApprovals` variable to approve `to` address to use `tokenId` and emits an Approval event.
+    // The approve function, which updates the `_tokenApprovals` variable to approve `to` address to use `tokenId` and emits an Approval event.
     function _approve(
         address owner,
         address to,
@@ -391,7 +391,7 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     /** 
-     * The mint function, which updates `_balances` and `_owners` variables to mint `tokenId` and transfers it to `to`. It emits an Transfer event.
+     * The mint function, which updates `_balances` and `_owners` variables to mint `tokenId` and transfers it to `to`. It emits a Transfer event.
      * This mint function can be used by anyone, developers need to rewrite this function and add some requirements in practice.
      * Requirements: 
      * 1. `tokenId` must not exist.
@@ -494,12 +494,12 @@ contract WTFApe is ERC721{
 
 With the `ERC721` standard, issuing NFTs on the `ETH` chain has become very easy. Now, let's issue our own NFT.
 
-After compiling the `ERC721` contract and the `WTFApe` contract in `Remix` (in order), click the button in the deployment column, enter parameters of the constructor function , set `name_` and `symbol_` to `WTF`, and then click the `transact` button to deploy.
+After compiling the `ERC721` contract and the `WTFApe` contract in `Remix` (in order), click the button in the deployment column, enter the parameters of the constructor function, set `name_` and `symbol_` to `WTF`, and then click the `transact` button to deploy.
 
 ![How to emphasize NFT information](./img/34-1.png)
 ![Deploy contract](./img/34-2.png)
 
-This way, we have created the `WTF` NFT. We need to run the `mint()` function to mint some tokens for ourselves. In the `mint` function panel, click the right button to input the account address and token id, and then click the `mint` button to mint the `0`-numbered `WTF` NFT for ourselves.
+This way, we have created the `WTF` NFT. We need to run the `mint()` function to mint some tokens for ourselves. In the `mint` function panel, click the right button to input the account address and token ID, and then click the `mint` button to mint the `0`-numbered `WTF` NFT for ourselves.
 
 You can click the Debug button on the right to view the logs below.
 
@@ -528,7 +528,7 @@ interface ERC721TokenReceiver {
 }
 ```
 
-Expanding into the world of programming languages, whether it's Java's interface or Rust's Trait (of course, in solidity, it's more like a library than a trait), whenever it relates to interfaces, it implies that an interface is a collection of certain behaviors (in solidity, interfaces are equivalent to a collection of function selectors). If a certain type implements a certain interface, it means that the type has a certain functionality. Therefore, as long as a certain contract type implements the above `ERC721TokenReceiver` interface (specifically, it implements the `onERC721Received` function), the contract type indicates to the outside world that it has the ability to manage NFTs. Of course, the logic of operating NFTs is implemented in other functions of the contract.
+Expanding into the world of programming languages, whether it's Java's interface or Rust's Trait (of course, in solidity, it's more like a library than a trait), whenever it relates to interfaces, it implies that an interface is a collection of certain behaviours (in solidity, interfaces are equivalent to a collection of function selectors). If a certain type implements a certain interface, it means that the type has a certain functionality. Therefore, as long as a certain contract type implements the above `ERC721TokenReceiver` interface (specifically, it implements the `onERC721Received` function), the contract type indicates to the outside world that it has the ability to manage NFTs. Of course, the logic of operating NFTs is implemented in other functions of the contract.
 
 When executing `safeTransferFrom` in the ERC721 standard, it will check whether the target contract implements the `onERC721Received` function, which is an operation based on the `ERC165` idea.
 
@@ -587,7 +587,7 @@ The calculation of **0x5b5e139f** is:
 IERC721Metadata.name.selector ^ IERC721Metadata.symbol.selector ^ IERC721Metadata.tokenURI.selector
 ```
 
-How does the ERC721.sol implemented by Solamte fulfill these features required by `ERC165`?
+How does the ERC721.sol implemented by Solamte fulfil these features required by `ERC165`?
 
 ```solidity
 function supportsInterface(bytes4 interfaceId) public view virtual returns (bool) {
