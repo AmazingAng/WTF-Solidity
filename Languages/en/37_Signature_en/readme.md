@@ -95,7 +95,7 @@ Ethereum signed message: 0xb42ca4636f721c7a331923e764587e98ec577cea1a185f60dfcc1
 
 **3-1. Sign with wallet:** In daily operations, most users sign messages using this method. After obtaining the message that needs to be signed, we need to use the `Metamask` wallet to sign it. The `personal_sign` method of `Metamask` will automatically convert the `message` into an `Ethereum signed message` and then initiate the signature. So we only need to input the `message` and the `signer wallet account`. It should be noted that the input `signer wallet account` needs to be consistent with the account currently connected by `Metamask`.
 
-Therefore, you need to firstly import the `private key` in the example into the `Foxlet wallet`, and then open the `console` page of the browser: `Chrome menu-more tools-developer tools-Console`. Under the status of connecting to the wallet (such as connecting to OpenSea, otherwise an error will occur), enter the following instructions step by step to sign:
+Therefore, you need to first import the `private key` in the example into the `Foxlet wallet`, and then open the `console` page of the browser: `Chrome menu-more tools-developer tools-Console`. Under the status of connecting to the wallet (such as connecting to OpenSea, otherwise an error will occur), enter the following instructions step by step to sign:
 
 ```
 ethereum.enable()
@@ -166,7 +166,7 @@ _signature：0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d5
 
 ![Public key recovery by signature and message](./img/37-8.png)
 
-**5. Compare public keys and verify signature:** Next, we just need to compare the recovered `public key` with the signer's public key`_signer` to determine if they are equal: if they are, the signature is valid; otherwise, the signature is invalid.
+**5. Compare public keys and verify the signature:** Next, we just need to compare the recovered `public key` with the signer's public key `_signer` to determine if they are equal: if they are, the signature is valid; otherwise, the signature is invalid.
 
 ```solidity
 /**
