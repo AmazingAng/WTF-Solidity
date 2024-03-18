@@ -19,7 +19,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 ## `selector`
 
-When we call a smart contract, we essentially send a `calldata` to the target contract. After sending a transaction in remix, we can see in the details that `input` is the `calldata` of this transaction.
+When we call a smart contract, we essentially send a `calldata` to the target contract. After sending a transaction in the remix, we can see in the details that `input` is the `calldata` of this transaction.
 
 ![tx input in remix](./img/29-1.png)
 
@@ -62,7 +62,7 @@ Actually, this  `calldata` is to tell the smart contract which function I want t
 
 The `method id` is defined as the first 4 bytes after the `Keccak` hash of the `function signature`. The function is called when the `selector` matches the `method id`.
 
-Then what is the `function signature` ? In section 21, we introduced function signature. The function signature is `"function_name(comma-separated parameter types)"`. For example, the function signature of `mint` in the code above is `"mint(address)"`. In the same smart contract, different functions have different function signatures, so we can determine which function to call by the function signature.
+Then what is the `function signature`? In section 21, we introduced function signature. The function signature is `"function_name(comma-separated parameter types)"`. For example, the function signature of `mint` in the code above is `"mint(address)"`. In the same smart contract, different functions have different function signatures, so we can determine which function to call by the function signature.
 
 Please note that `uint` and `int` are written as `uint256` and `int256` in the function signature.
 
@@ -95,4 +95,4 @@ We can see in the log that the `mint` function was successfully called and the `
 
 ## Summary
 
-In this section, we introduce what is `selector` and its relationship with `msg.data`, `function signature`, and how to use it to call the target function.
+In this section, we introduce the `selector` and its relationship with `msg.data`, `function signature`, and how to use it to call the target function.
