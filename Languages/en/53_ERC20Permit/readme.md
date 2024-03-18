@@ -23,7 +23,7 @@ In this lecture, we introduce an extension of ERC20 tokens, ERC20Permit, which s
 
 ## ERC20
 
-We introduced ERC20, the most popular token standard in Ethereum, in [Lecture 31](https://github.com/WTFAcademy/WTF-Solidity/blob/main/Languages/en/31_ERC20_en/readme.md). One of the main reasons for its popularity is that the two functions `approve` and `transferFrom` are used together, so that tokens can not only be transferred between externally owned accounts (EOA), but can also be used by other contracts.
+We introduced ERC20, the most popular token standard in Ethereum, in [Lecture 31](https://github.com/WTFAcademy/WTF-Solidity/blob/main/Languages/en/31_ERC20_en/readme.md). One of the main reasons for its popularity is that the two functions `approve` and `transferFrom` are used together so that tokens can not only be transferred between externally owned accounts (EOA) but can also be used by other contracts.
 
 However, the `approve` function of ERC20 is restricted to be called only by the token owner, which means that all initial operations of `ERC20` tokens must be performed by `EOA`. For example, if user A uses `USDT` to exchange `ETH` on a decentralized exchange, two transactions must be completed: in the first step, user A calls `approve` to authorize `USDT` to the contract, and in the second step, user A calls `approve` to authorize `USDT` to the contract. Contracts are exchanged. Very cumbersome, and users must hold `ETH` to pay for the gas of the transaction.
 
@@ -42,7 +42,7 @@ EIP-2612 proposes ERC20Permit, which extends the ERC20 standard by adding a `per
 
 First, let us study the interface contract of ERC20Permit, which defines 3 functions:
 
-- `permit()`: Authorize the ERC20 token balance of `owenr` to `spender` according to the signature of `owner`, and the amount is `value`. Require:
+- `permit()`: Authorize the ERC20 token balance of `owner` to `spender` according to the signature of `owner`, and the amount is `value`. Require:
  
      - `spender` cannot be a zero address.
      - `deadline` must be a timestamp in the future.
@@ -63,7 +63,7 @@ pragma solidity ^0.8.0;
   */
 interface IERC20Permit {
      /**
-      * @dev Authorizes `owenr`’s ERC20 balance to `spender` based on the owner’s signature, the amount is `value`
+      * @dev Authorizes `owner`’s ERC20 balance to `spender` based on the owner’s signature, the amount is `value`
      */
     function permit(
         address owner,
@@ -98,7 +98,7 @@ Next, let us write a simple ERC20Permit contract, which implements all interface
 The contract contains 5 functions:
 
 - Constructor: Initialize the `name` and `symbol` of the token.
-- **`permit()`**: The core function of ERC20Permit, which implements the `permit()` of IERC20Permit. It first checks whether the signature has expired, then restores the signed message using `_PERMIT_TYPEHASH`, `owner`, `spender`, `value`, `nonce`, `deadline` and verifies whether the signature is valid. If the signature is valid, the `_approve()` function of ERC20 is called to perform the authorization operation.
+- **`permit()`**: The core function of ERC20Permit, which implements the `permit()` of IERC20Permit. It first checks whether the signature has expired, then restores the signed message using `_PERMIT_TYPEHASH`, `owner`, `spender`, `value`, `nonce`, and `deadline` and verifies whether the signature is valid. If the signature is valid, the `_approve()` function of ERC20 is called to perform the authorization operation.
 - `nonces()`: Implements the `nonces()` function of IERC20Permit.
 - `DOMAIN_SEPARATOR()`: Implements the `DOMAIN_SEPARATOR()` function of IERC20Permit.
 - `_useNonce()`: A function that consumes `nonce`, returns the user's current `nonce`, and increases it by 1.
@@ -183,7 +183,7 @@ contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
 
 1. Deploy the `ERC20Permit` contract and set both `name` and `symbol` to `WTFPermit`.
 
-2. Run `signERC20Permit.html` and change the `Contract Address` to the deployed `ERC20Permit` contract address. Other information is given below. Then click the `Connect Metamask` and `Sign Permit` buttons in sequence to sign, and obtain `r`, `s`, `v` for contract verification. To sign, use the wallet that deploys the contract, such as the Remix test wallet:
+2. Run `signERC20Permit.html` and change the `Contract Address` to the deployed `ERC20Permit` contract address. Other information is given below. Then click the `Connect Metamask` and `Sign Permit` buttons in sequence to sign, and obtain `r`, `s`, and `v` for contract verification. To sign, use the wallet that deploys the contract, such as the Remix test wallet:
 
     ```js
     owner: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4    spender: 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
