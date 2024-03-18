@@ -20,7 +20,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 -----
 
 ## `delegatecall`
-`delegatecall` is similar to `call`, and is a low-level function in `Solidity`. `delegate` means entrust/represent, so what does `delegatecall` entrust/represent?
+`delegatecall` is similar to `call`, it's a low-level function in `Solidity`. `delegate` means entrust/represent, so what does `delegatecall` entrust?
 
 When user `A` `call` contract `C` via contract `B`, the executed functions are from contract `C`, and the `execution context` (the environment including state and variable) is in contract `C`: `msg.sender` is contract `B`'s address, and if state variables are changed due to function call, the affected state variables are in contract `C`.
 
