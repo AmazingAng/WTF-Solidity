@@ -1,13 +1,15 @@
 ---
-name: Feature request
-about: Suggest an idea for the WTF-Solidity
+name: Feature request(功能请求)
+about: Suggest an idea for the WTF-Solidity(给WTF-Solidity提一个想法)
 
 ---
 
-**🧐 Motivation**
-<!-- Is your feature request related to a specific problem? Is it just a crazy idea? Tell us about it! -->
+**🧐 Motivation(动机)**
 
-**📝 Details**
-<!-- Please describe your feature request in detail. -->
+<!-- Please describe your motivation in the feature request. (请描述您在功能请求中的动机。)-->
 
+**📝 Details(细节)**
 
+<!-- Please describe your feature request in detail. (请详细描述您的功能请求。)-->
+
+<!-- We will assign it to you if you desire to fix it. You can comment on the issue. (如果你愿意修复它，我们将把任务指派给你。你可以发表评论在问题中。)-->
