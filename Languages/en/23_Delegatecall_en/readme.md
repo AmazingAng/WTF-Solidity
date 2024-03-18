@@ -20,9 +20,9 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 -----
 
 ## `delegatecall`
-`delegatecall` is similar to `call`, is a low level function in `Solidity`. `delegate` meas entrust/represent, so what does `delegatecall`entrust?
+`delegatecall` is similar to `call`, and is a low-level function in `Solidity`. `delegate` means entrust/represent, so what does `delegatecall` entrust/represent?
 
-When user `A` `call` contract `C` via contract `B`, the executed functions are from contract `C`, the `execution context` (the environment including state and variable) is in contract `C`: `msg.sender` is contract `B`'s address, and if state variables are changed due to function call, the affected state variables are in contract `C`.
+When user `A` `call` contract `C` via contract `B`, the executed functions are from contract `C`, and the `execution context` (the environment including state and variable) is in contract `C`: `msg.sender` is contract `B`'s address, and if state variables are changed due to function call, the affected state variables are in contract `C`.
 
 ![execution context of call](./img/23-1.png)
 
@@ -30,9 +30,9 @@ And when user `A` `delegatecall` contract `C` via contract `B`, the executed fun
 
 ![execution context of delegatecall](./img/23-2.png)
 
-You can understand it like this: a `rich businessman` entrusts his asset (`state variables`) to a `VC` (functions of target contract) for management. The executed functions are from the `VC`, but the state variables get changed is from the `businessman`.
+You can understand it like this: a `rich businessman` entrusts his asset (`state variables`) to a `VC` (functions of target contract) for management. The executed functions are from the `VC`, but the state variables get changed from the `businessman`.
 
-The syntax of `delegatecall` is simimar to `call`:
+The syntax of `delegatecall` is similar to `call`:
 
 ```
 targetContractAddress.delegatecall(binary code);
@@ -45,21 +45,21 @@ abi.encodeWithSignature("function signature", parameters separated by comma)
 ```
 `function signature` is `"functionName(parameters separated by comma)"`. For example, `abi.encodeWithSignature("f(uint256,address)", _x, _addr)`。
 
-Unlike `call`, `delegatecall` can specify the value of `gas` when calling smart contract, but the value of `ETH` can't be specified.
+Unlike `call`, `delegatecall` can specify the value of `gas` when calling a smart contract, but the value of `ETH` can't be specified.
 
-> **Attention**: using delegatecall could incur risk, make sure the storage layout of state variables of current contract and target cotnract is same, and target contract is safe, otherwise could cause loss of funds.
+> **Attention**: using delegatecall could incur risk, make sure the storage layout of state variables of the current contract and target contract is the same, and the target contract is safe, otherwise it could cause loss of funds.
 
 ## `delegatecall` use cases?
-Currently there are 2 major use cases for delegatecall:
+Currently, there are 2 major use cases for delegatecall:
 
 1. `Proxy Contract`: separating the storage part and logic part of smart contract: `proxy contract` is used to store all related variables, and also store the address of logic contract; all functions are stored in the `logic contract`, and called via delegatecall. When upgrading, you only need to redirect `proxy contract` to a new `logic contract`.
-2. EIP-2535 Diamonds: Diamond is a standard that supports building modular smart contract systems that can scale in production. Diamond is a proxy contract with multiple implementation contracts. For more information, check: [Introduction to EIP-2535 Diamonds](https://eip2535diamonds.substack.com/p/introduction-to-the-diamond-standard).
+2. EIP-2535 Diamonds: Diamond is a standard that supports building modular smart contract systems that can scale in production. Diamond is a proxy contract with multiple implementation contracts. For more information, check [Introduction to EIP-2535 Diamonds](https://eip2535diamonds.substack.com/p/introduction-to-the-diamond-standard).
 
 ## `delegatecall` example
 Call mechanism: you (`A`) call contract `C` via contract `B`.
 
 ### Target Contract C
-First we create a target contract `C` with 2 `public` variables: `num` and `sender` which are `uint256` and `address` respectively; and a function which sets `num` based on `_num`, and set `sender` as `msg.sender`.
+First, we create a target contract `C` with 2 `public` variables: `num` and `sender` which are `uint256` and `address` respectively; and a function which sets `num` based on `_num`, and set `sender` as `msg.sender`.
 
 ```solidity
 // Target contract C
@@ -73,7 +73,7 @@ contract C {
     }
 }
 ```
-### Call Initizalization Contract B
+### Call Initialization Contract B
 First, contract `B` must have the same state variable layout as target contract `C`, 2 variables and the order is `num` and `sender`.
 
 ```solidity
@@ -84,7 +84,7 @@ contract B {
 
 Next, we use `call` and `delegatecall` respectively to call `setVars` from contract `C`, so we can understand the difference better.
 
-Function `callSetVars` calls `setVars` via `call`. callSetVars has 2 parameters, `_addr` and `_num`, which correspond to contract `C`'s address and the parameter of `setVars`.
+The function `callSetVars` calls `setVars` via `call`. callSetVars has 2 parameters, `_addr` and `_num`, which correspond to contract `C`'s address and the parameter of `setVars`.
 
 ```solidity
     // Calling setVars() of contract C with call, the state variables of contract C will be changed
@@ -110,7 +110,7 @@ While function `delegatecallSetVars` calls `setVars` via `delegatecall`. Similar
 ```
 
 ### Verify on Remix
-1. First we deploy contract B and contract C
+1. First we deploy Contract B and contract C
 
 ![deploy.png](./img/23-3.png)
 
@@ -132,10 +132,10 @@ While function `delegatecallSetVars` calls `setVars` via `delegatecall`. Similar
 
 ![delegatecall.png](./img/23-7.png)
 
-6. Because of `delegatecall`, the execution context is contract `B`. Afte execution, the state variables of contract `B` are changed: `num` is changed to 100, `sender` is changed to your wallet's address. The state variables of contract `C` are unchanged.
+6. Because of `delegatecall`, the execution context is contract `B`. After execution, the state variables of contract `B` are changed: `num` is changed to 100, `sender` is changed to your wallet's address. The state variables of contract `C` are unchanged.
 
 ![resultdelegatecall.png](./img/23-8.png)
 
 ## Summary
-In this lecture we introduce another low level function in `Solidity`, `delegatecall`. Similar to `call`, `delegatecall` can be used to call another contract; the difference of `delegatecall` and `call` is `execution context`, the `execution context` is `C` if `B` `call` `C`; but the `execution context` is `B` if `B` `delegatecall` `C`. The major use cases for delegatecall is `proxy contract` and `EIP-2535 Diamonds`.
+In this lecture, we introduce another low-level function in `Solidity`, `delegatecall`. Similar to `call`, `delegatecall` can be used to call another contract; the difference between `delegatecall` and `call` is `execution context`, the `execution context` is `C` if `B` `call` `C`; but the `execution context` is `B` if `B` `delegatecall` `C`. The major use cases for delegatecall are `proxy contract` and `EIP-2535 Diamonds`.
 
