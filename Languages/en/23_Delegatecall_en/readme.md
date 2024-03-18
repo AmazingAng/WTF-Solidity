@@ -47,7 +47,7 @@ abi.encodeWithSignature("function signature", parameters separated by comma)
 
 Unlike `call`, `delegatecall` can specify the value of `gas` when calling a smart contract, but the value of `ETH` can't be specified.
 
-> **Attention**: using delegatecall could incur risk, make sure the storage layout of state variables of the current contract and target contract is the same, and the target contract is safe, otherwise it could cause loss of funds.
+> **Attention**: using delegatecall could incur risk, make sure the storage layout of state variables of current contract and target contract is same, and target contract is safe, otherwise could cause loss of funds.
 
 ## `delegatecall` use cases?
 Currently, there are 2 major use cases for delegatecall:
