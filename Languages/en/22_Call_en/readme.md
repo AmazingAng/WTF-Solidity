@@ -23,11 +23,11 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 Previously in [20: Sending ETH](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/20_SendETH_en) we talked about sending `ETH` with `call`, in this tutorial we will dive into that. 
 
 ## Call
-`call` is one of the `address` low-level functions which is used to interact with other contract. It returns the success condition and the returned data: `(bool, data)`. 
+`call` is one of the `address` low-level functions which is used to interact with other contracts. It returns the success condition and the returned data: `(bool, data)`. 
 
 - Officially recommended by `solidity`, `call` is used to send `ETH` by triggering `fallback` or `receive` functions.
-- `call` is not recommended for interacting with other contract, because you give away the control when calling a malicious contract. The recommended way is to create a contract reference and call its functions. See [21: Interact with other Contract](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/21_CallContract_en)
-- If the source code or `ABI` is not available, we cannot create contract variable; However we can still interact with other contract using `call` function.  
+- `call` is not recommended for interacting with other contracts, because you give away the control when calling a malicious contract. The recommended way is to create a contract reference and call its functions. See [21: Interact with other Contract](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/21_CallContract_en)
+- If the source code or `ABI` is not available, we cannot create a contract variable; However, we can still interact with other contracts using `call` function.  
 
 ### Rules of using `call`
 Rules of using `call`:
@@ -49,7 +49,7 @@ contractAdress.call{value:ETH value, gas:gas limit}(binary code);
 It looks a bit complicated, lets see how to use `call` in examples.
 
 ### Target contract
-Lets write and deploy a simple target contract `OtherContract`, the code is mostly same as chapter 19, only with an extra `fallback` function。
+Let's write and deploy a simple target contract `OtherContract`, the code is mostly the same as chapter 19, only with an extra `fallback` function。
 
 ```solidity
 contract OtherContract {
@@ -81,14 +81,14 @@ contract OtherContract {
 ```
 
 This contract includes a state variable `x`, a `Log` event for receiving `ETH`, and three functions:
-- `getBalance()`: get the balance of contract
-- `setX()`: `external payable` function, can be used to set the value of `x` and receiving `ETH`. 
+- `getBalance()`: get the balance of the contract
+- `setX()`: `external payable` function, can be used to set the value of `x` and receive `ETH`. 
 - `getX()`: get the value of `x`.
 
 ### Contract interaction using `call`
 **1. Response Event**
 
-Lets write a `Call` contract to interact with the target functions in `OtherContract`. First we declare the `Response` event, which takes `success` and `data` returned from `call` as parameters. So we can check the return values.
+Let's write a `Call` contract to interact with the target functions in `OtherContract`. First, we declare the `Response` event, which takes `success` and `data` returned from `call` as parameters. So we can check the return values.
 
 
 ```solidity
@@ -98,7 +98,7 @@ event Response(bool success, bytes data);
 
 **2. Call setX function**
 
-Now we declare the `callSetX` function to call the target function `setX()` in `OtherContract`. Meanwhile we send `msg.value` of `ETH`, then emit the `Response` event, with `success` and `data` as parameter:
+Now we declare the `callSetX` function to call the target function `setX()` in `OtherContract`. Meanwhile, we send `msg.value` of `ETH`, then emit the `Response` event, with `success` and `data` as parameters:
 
 ```solidity
 function callSetX(address payable _addr, uint256 x) public payable {
@@ -111,14 +111,14 @@ function callSetX(address payable _addr, uint256 x) public payable {
 }
 ```
 
-Now we call `callSetX` to change state variable `_x` to 5, pass the `OtherContract` address and `5` as parameters, since `setX()` does not have return value, so `data` is `0x` (i.e. Null)  in `Response` event.
+Now we call `callSetX` to change state variable `_x` to 5, pass the `OtherContract` address and `5` as parameters, since `setX()` does not have a return value, so `data` is `0x` (i.e. Null)  in `Response` event.
 
 
 ![22-1](./img/22-1.png)
 
 **3. Call getX function**
 
-Next we call `getX()` function, it will return the value of `_x` in `OtherContract`, the type is `uint256`. We can decode the return value from `call` function, and get its value. 
+Next, we call `getX()` function, and it will return the value of `_x` in `OtherContract`, the type is `uint256`. We can decode the return value from `call` function, and get its value. 
 
 
 ```solidity
@@ -157,5 +157,5 @@ In this example, we try to call `foo` which is not declared with `call`, the tra
 
 ## Summary
 
-In this tutorial, we talked about how to interact with other contract using low-level function `call`. For security reasons, `call` is not recommended method, but it's useful when we don't know the source code and `ABI` of the target contract. 
+In this tutorial, we talked about how to interact with other contracts using the low-level function `call`. For security reasons, `call` is not a recommended method, but it's useful when we don't know the source code and `ABI` of the target contract. 
 
