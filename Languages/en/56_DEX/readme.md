@@ -21,7 +21,7 @@ In this lecture, we will introduce the Constant Product Automated Market Maker (
 
 ## Automatic market maker
 
-An Automated Market Maker (AMM) is an algorithm, or a smart contract that runs on the blockchain, which allows decentralized transactions between digital assets. The introduction of AMM has created a new trading method that does not require traditional buyers and sellers to match orders. Instead, a liquidity pool is created through a preset mathematical formula (such as a constant product formula), allowing users to trade at any time. Trading.
+An Automated Market Maker (AMM) is an algorithm or a smart contract that runs on the blockchain, which allows decentralized transactions between digital assets. The introduction of AMM has created a new trading method that does not require traditional buyers and sellers to match orders. Instead, a liquidity pool is created through a preset mathematical formula (such as a constant product formula), allowing users to trade at any time. Trading.
 
 ![](./img/56-1.png)
 
@@ -33,9 +33,9 @@ The Constant Sum Automated Market Maker (CSAMM) is the simplest automated market
 
 $$k=x+y$$
 
-where $k$ is a constant. That is, the sum of the quantities of colas and dollars in the market remains the same before and after the trade. For example, there are 10 bottles of Coke and $10 in the market. At this time, $k=20$, and the price of Coke is $1/bottle. I was thirsty and wanted to exchange my $2 for a Coke. The total number of dollars in the post-trade market becomes 12. According to the constraint $k=20$, there are 8 bottles of Coke in the post-trade market at a price of $1/bottle. I got 2 bottles of coke in the deal for $1/bottle.
+where $k$ is a constant. That is, the sum of the quantities of colas and dollars in the market remains the same before and after the trade. For example, there are 10 bottles of Coke and $10 in the market. At this time, $k=20$, and the price of Coke is $1/bottle. I was thirsty and wanted to exchange my $2 for a Coke. The total number of dollars in the post-trade market becomes 12. According to the constraint $k=20$, there are 8 bottles of Coke in the post-trade market at a price of $1/bottle. I got 2 bottles of Coke in the deal for $1/bottle.
 
-The advantage of CSAMM is that it can ensure that the relative price of tokens remains unchanged. This is very important in stable currency exchange. Everyone hopes that 1 USDT can always be exchanged for 1 USDC. But its shortcomings are also obvious. Its liquidity is easily exhausted: I only need $10 to exhaust the liquidity of Coke in the market, and other users who want to drink Coke will not be able to trade.
+The advantage of CSAMM is that it can ensure that the relative price of tokens remains unchanged. This is very important in a stable currency exchange. Everyone hopes that 1 USDT can always be exchanged for 1 USDC. But its shortcomings are also obvious. Its liquidity is easily exhausted: I only need $10 to exhaust the liquidity of Coke in the market, and other users who want to drink Coke will not be able to trade.
 
 Below we introduce the constant product automatic market maker with "unlimited" liquidity.
 
@@ -55,7 +55,7 @@ Next, let us build a minimalist decentralized exchange based on CPAMM.
 
 Next, we use smart contracts to write a decentralized exchange `SimpleSwap` to support users to trade a pair of tokens.
 
-`SimpleSwap` inherits the ERC20 token standard and facilitates recording of liquidity provided by liquidity providers. In the constructor, we specify a pair of token addresses `token0` and `token1`. The exchange only supports this pair of tokens. `reserve0` and `reserve1` record the reserve amount of tokens in the contract.
+`SimpleSwap` inherits the ERC20 token standard and facilitates the recording of liquidity provided by liquidity providers. In the constructor, we specify a pair of token addresses `token0` and `token1`. The exchange only supports this pair of tokens. `reserve0` and `reserve1` record the reserve amount of tokens in the contract.
 
 ```solidity
 contract SimpleSwap is ERC20 {
