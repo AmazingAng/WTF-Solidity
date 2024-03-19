@@ -24,7 +24,7 @@ In this lecture, we will learn about the `ERC1155` standard, which allows a cont
 ## `EIP1155`
 Both the `ERC20` and `ERC721` standards correspond to a single token contract. For example, if we wanted to create a large game similar to World of Warcraft on Ethereum, we would need to deploy a contract for each piece of equipment. Deploying and managing thousands of contracts is very cumbersome. Therefore, the [Ethereum EIP1155](https://eips.ethereum.org/EIPS/eip-1155) proposes a multi-token standard called `ERC1155`, which allows a contract to contain multiple homogeneous and heterogeneous tokens. `ERC1155` is widely used in GameFi applications, and well-known blockchain games such as Decentraland and Sandbox use it.
 
-In simple terms, `ERC1155` is similar to the previously introduced non-fungible token standard [ERC721](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721): in `ERC721`, each token has a `tokenId` as a unique identifier, and each `tokenId` corresponds to only one token; in `ERC1155`, each type of token has an `id` as a unique identifier, and each `id` corresponds to one type of token. This way, the types of tokens can be managed heterogeneously in the same contract, and each type of token has a URL `uri` to store its metadata, similar to `tokenURI` in `ERC721`. The following is the metadata interface contract `IERC1155MetadataURI` for `ERC1155`:
+In simple terms, `ERC1155` is similar to the previously introduced non-fungible token standard [ERC721](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721): In `ERC721`, each token has a `tokenId` as a unique identifier, and each `tokenId` corresponds to only one token; in `ERC1155`, each type of token has an `id` as a unique identifier, and each `id` corresponds to one type of token. This way, the types of tokens can be managed heterogeneously in the same contract, and each type of token has a URL `uri` to store its metadata, similar to `tokenURI` in `ERC721`. The following is the metadata interface contract `IERC1155MetadataURI` for `ERC1155`:
 
 ```solidity
 /**
@@ -37,7 +37,7 @@ interface IERC1155MetadataURI is IERC1155 {
     function uri(uint256 id) external view returns (string memory);
 ```
 
-How to distinguish whether a type of token in `ERC1155` is a fungible or a non-fungible token? It's actually simple: if the total amount of a token corresponding to a specific `id` is `1`, then it is a non-fungible token, similar to `ERC721`; if the total amount of a token corresponding to a specific `id` is greater than `1`, then it is a fungible token, because these tokens share the same `id`, similar to `ERC20`.
+How to distinguish whether a type of token in `ERC1155` is a fungible or a non-fungible token? It's actually simple: if the total amount of a token corresponding to a specific `id` is `1`, then it is a non-fungible token, similar to `ERC721`; if the total amount of a token corresponding to a specific `id` is greater than `1`, then it is a fungible token because these tokens share the same `id`, similar to `ERC20`.
 
 ## `IERC1155` Interface Contract
 
@@ -403,7 +403,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
      * Require:
      * - to cannot be 0 address.
      * - from has enough balance and the caller has authorization
-     * - If to is a smart contract, it must support IERC1155Receiver-onERC1155BatchReceived.
+     * - If it is a smart contract, it must support IERC1155Receiver-onERC1155BatchReceived.
      * - ids and amounts arrays have equal length
      */
     function safeBatchTransferFrom(
@@ -711,7 +711,7 @@ In the `blanceOf` section, enter the account address and `id` to view the corres
 
 ### 4. Batch `mint` and view position changes
 
-In the "mintBatch" section, input the "ids" array and corresponding quantity to be minted. The length of both arrays must be the same. 
+In the "mintBatch" section, input the "ids" array and the corresponding quantity to be minted. The length of both arrays must be the same. 
 To view the recently minted token "id" array, input it as shown. 
 
 Similarly, in the "transfer" section, we transfer tokens from an address that already owns them to a new address. This address can be a normal address or a contract address; if it is a contract address, it will be verified whether it has implemented the "onERC1155Received()" receiving function. 
@@ -720,4 +720,4 @@ To view the changes in holdings of the address to which tokens were just transfe
 
 ## Summary
 
-In this lesson we learned about the `ERC1155` multi-token standard proposed by Ethereum's `EIP1155`. It allows for a contract to include multiple homogeneous or heterogeneous tokens. Additionally, we created a modified version of the Bored Ape Yacht Club (BAYC) - `BAYC1155`: an `ERC1155` token containing 10,000 tokens with the same metadata as BAYC. Currently, `ERC1155` is primarily used in GameFi. However, I believe that as metaverse technology continues to develop, this standard will become increasingly popular.
+In this lesson, we learned about the `ERC1155` multi-token standard proposed by Ethereum's `EIP1155`. It allows for a contract to include multiple homogeneous or heterogeneous tokens. Additionally, we created a modified version of the Bored Ape Yacht Club (BAYC) - `BAYC1155`: an `ERC1155` token containing 10,000 tokens with the same metadata as BAYC. Currently, `ERC1155` is primarily used in GameFi. However, I believe that as metaverse technology continues to develop, this standard will become increasingly popular.
