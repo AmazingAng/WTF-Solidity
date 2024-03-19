@@ -171,7 +171,7 @@ uint8 public decimals = 18; // 小数位数
 - `transfer()`函数：实现`IERC20`中的`transfer`函数，代币转账逻辑。调用方扣除`amount`数量代币，接收方增加相应代币。土狗币会魔改这个函数，加入税收、分红、抽奖等逻辑。
 
     ```solidity
-    function transfer(address recipient, uint amount) public override returns (bool) {
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;
         emit Transfer(msg.sender, recipient, amount);
@@ -182,7 +182,7 @@ uint8 public decimals = 18; // 小数位数
 - `approve()`函数：实现`IERC20`中的`approve`函数，代币授权逻辑。被授权方`spender`可以支配授权方的`amount`数量的代币。`spender`可以是EOA账户，也可以是合约账户：当你用`uniswap`交易代币时，你需要将代币授权给`uniswap`合约。
 
     ```solidity
-    function approve(address spender, uint amount) public override returns (bool) {
+    function approve(address spender, uint256 amount) public override returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
@@ -195,7 +195,7 @@ uint8 public decimals = 18; // 小数位数
     function transferFrom(
         address sender,
         address recipient,
-        uint amount
+        uint256 amount
     ) public override returns (bool) {
         allowance[sender][msg.sender] -= amount;
         balanceOf[sender] -= amount;
