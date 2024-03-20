@@ -1,0 +1,41 @@
+
+name: Feature request
+description: Suggest an idea for this project（对此项目提出一个意见）
+title: "[Feature][Module Name（模块名称）] Feature title（标题）"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        能用英文用英文，觉得描述不清就用中文
+
+
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: A short description of your feature （简短的描述一下）
+
+  - type: textarea
+    attributes:
+      label: Use case
+      description: What do you want to happen?（你想要干啥）
+      placeholder: >
+        
+
+
+
+  - type: checkboxes
+    attributes:
+      label: Are you willing to submit a PR?(你愿意提交PR吗？)
+      description: >
+        This is absolutely not required, but we are happy to guide you in the contribution process
+                especially if you already have a good understanding of how to implement the fix.
+                （这不是必须的，但是我们很高兴您能够提交PR）
+      options:
+        - label: Yes I am willing to submit a PR!(是的我愿意)
+
+
+
+  - type: markdown
+    attributes:
+      value: "Thanks for completing our form!"

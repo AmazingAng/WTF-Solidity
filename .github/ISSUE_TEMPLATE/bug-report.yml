@@ -1,0 +1,73 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+name: Bug report
+title: "[Bug] [Class (章节)] Bug title （标题）"
+description: Problems and issues with code of WTF
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Please make sure what you are reporting is indeed a bug with reproducible steps, if you want to ask questions
+        or share ideas, you can head to our
+        [Discussions](https://github.com/AmazingAng/WTF-Solidity/discussions) tab, you can also
+        [join our discord](https://discord.gg/5akcruXrsk)
+
+
+  - type: textarea
+    attributes:
+      label: What happened (发生啥)
+      description: Describe what happened.(描述一下发生了啥)
+      placeholder: >
+        Please provide the context in which the problem occurred and explain what happened(请提供问题发生的背景并解释发生的情况)
+    validations:
+      required: true
+
+
+  - type: textarea
+    attributes:
+      label: Anything else (其他需要补充的)
+      description: Anything else we need to know?（有什么其他需要上报的）
+      placeholder: >
+        比如环境信息，Solidity版本等等
+
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: >
+        Which version of WTF are you running? (哪个分支出现的)
+      options:
+        - main
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: Are you willing to submit PR?(你愿意提交PR吗？)
+      description: >
+        This is absolutely not required, but we are happy to guide you in the contribution process
+        especially if you already have a good understanding of how to implement the fix.
+        （这不是必须的，但是我们很高兴您能够提交PR）
+      options:
+        - label: Yes I am willing to submit a PR!(是的我愿意)
+
+
+
+  - type: markdown
+    attributes:
+      value: "Thanks for completing our form!"
