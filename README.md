@@ -14,7 +14,7 @@
 
 - [x] 512 :star: 发布官网: [wtf.academy](https://wtf.academy)
 
-- [x] 1024 :star: 发课程认证`SBT`: [Learning Center](https://wtf.academy/learning-center)
+- [x] 1024 :star: 发课程认证`SBT`: [Learning Center](https://wtf.academy/courses)
 
 - [ ] 2048 :star: 发社群NFT
 
