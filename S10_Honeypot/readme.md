@@ -132,7 +132,9 @@ contract HoneyPot is ERC20, Ownable {
 
 4. 仔细检查项目的官网和社交媒体。
 
-5. 只投资你了解的项目，做好研究（DYOR）。
+5. 只投资你了解的项目，做好研究（DYOR。
+
+6. 使用tenderly、phalcon分叉模拟卖出貔貅，如果失败则确定是貔貅代币。
 
 ## 总结
 
