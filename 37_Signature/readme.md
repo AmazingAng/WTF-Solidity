@@ -120,7 +120,7 @@ rpc = 'https://rpc.ankr.com/eth'
 w3 = Web3(HTTPProvider(rpc))
 
 #打包信息
-msg = Web3.solidityKeccak(['address','uint256'], [address,0])
+msg = Web3.solidity_keccak(['address','uint256'], [address,0])
 print(f"消息：{msg.hex()}")
 #构造可签名信息
 message = encode_defunct(hexstr=msg.hex())
