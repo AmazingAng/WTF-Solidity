@@ -96,7 +96,7 @@ Next is the `EIP712Storage` contract part, which needs to verify the signature a
 
 1. `EIP712DOMAIN_TYPEHASH`: The type hash of `EIP712Domain`, which is a constant.
 2. `STORAGE_TYPEHASH`: The type hash of `Storage`, which is a constant.
-3. `DOMAIN_SEPARATOR`: This is the unique value of each domain (Dapp) mixed in the signature, consisting of `EIP712DOMAIN_TYPEHASH` and `EIP712Domain` (name, version, chainId, verifyingContract), initialized in `constructor()` .
+3. `DOMAIN_SEPARATOR`: This is the unique value of each domain (Dapp) mixed in the signature, consisting of `EIP712DOMAIN_TYPEHASH` and `EIP712Domain` (name, version, chainId, verifyingContract), initialized in `constructor()`.
 4. `number`: The state variable that stores the value in the contract can be modified by the `permitStore()` method.
 5. `owner`: Contract owner, initialized in `constructor()`, and verify the validity of the signature in the `permitStore()` method.
 
@@ -104,7 +104,7 @@ In addition, the `EIP712Storage` contract has `3` functions.
 
 1. Constructor: Initialize `DOMAIN_SEPARATOR` and `owner`.
 2. `retrieve()`: Read the value of `number`.
-3. `permitStore`: Verify the EIP712 signature and modify the value of `number`. First, it breaks the signature into `r`, `s`, `v`. The signed message text `digest` is then spelled out using `DOMAIN_SEPARATOR`, `STORAGE_TYPEHASH`, the caller address, and the `_num` parameter entered. Finally, use the `recover()` method of `ECDSA` to recover the signer's address. If the signature is valid, update the value of `number`.
+3. `permitStore`: Verify the EIP712 signature and modify the value of `number`. First, it breaks the signature into `r`, `s`, and `v`. The signed message text `digest` is then spelt out using `DOMAIN_SEPARATOR`, `STORAGE_TYPEHASH`, the caller address, and the `_num` parameter entered. Finally, use the `recover()` method of `ECDSA` to recover the signer's address. If the signature is valid, update the value of `number`.
 
 ```solidity
 // SPDX-License-Identifier: MIT

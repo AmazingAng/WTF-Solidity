@@ -17,7 +17,7 @@ All codes and tutorials are open-sourced on Github: [github.com/AmazingAng/WTFSo
 
 ---
 
-In this lecture, we'll introduce the payment splitting contract, which allows the transfer of `ETH` to a group of accounts according to their respective weights for payment splitting purposes. The code section is a simplification of the PaymentSplitter contract provided by the OpenZeppelin library, which can be found on [Github](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/finance/PaymentSplitter.sol).
+In this lecture, we'll introduce the payment-splitting contract, which allows the transfer of `ETH` to a group of accounts according to their respective weights for payment-splitting purposes. The code section is a simplification of the PaymentSplitter contract provided by the OpenZeppelin library, which can be found on [Github](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/finance/PaymentSplitter.sol).
 
 ## Payment Split
 
@@ -30,9 +30,9 @@ Payment split is the act of dividing money according to a certain ratio. In real
 The Payment Split contract (`PaymentSplit`) has the following features:
 
 1. When creating the contract, the beneficiaries `payees` and their share `shares` are predetermined.
-2. The shares can be equal or in any other proportions.
-3. From all the ETH that the contract receives, each beneficiary is able to withdraw the amount proportional to their allocated share.
-4. The Payment Split contract follows the `Pull Payment` pattern, where payments are not automatically transferred to the account, but are kept in the contract. Beneficiaries trigger the actual transfer by calling the `release()` function.
+2. The shares can be equal or in any other proportion.
+3. From all the ETH that the contract receives, each beneficiary can withdraw the amount proportional to their allocated share.
+4. The Payment Split contract follows the `Pull Payment` pattern, where payments are not automatically transferred to the account but are kept in the contract. Beneficiaries trigger the actual transfer by calling the `release()` function.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -62,7 +62,7 @@ There are a total of `3` events in the Splitter Contract:
 
 ### State Variables
 
-There are `5` state variables in the revenue splitting contract, used to record beneficiary addresses, shares, and paid out `ETH`:
+There are `5` state variables in the revenue-splitting contract, used to record beneficiary addresses, shares, and paid-out `ETH`:
 
 - `totalShares`: Total shares, which is the sum of `shares`.
 - `totalReleased`: The amount of `ETH` paid out from the revenue splitting contract to beneficiaries, which is the sum of `released`.
@@ -81,7 +81,7 @@ There are `5` state variables in the revenue splitting contract, used to record 
 
 ### Functions
 
-There are `6` functions in the revenue sharing contract:
+There are `6` functions in the revenue-sharing contract:
 
 - Constructor: initializes the beneficiary array `_payees` and the revenue sharing array `_shares`, where the length of both arrays must not be 0 and their lengths must be equal. Elements of the \_shares array must be greater than 0, and the addresses in the \_payees array can't be the zero address and can't have a duplicate address.
 - `receive()`: callback function, releases the `PaymentReceived` event when the revenue sharing contract receives `ETH`.
@@ -203,7 +203,7 @@ In the constructor, enter two beneficiary addresses with shares of `1` and `3`.
 
 ![Viewing the second beneficiary](./img/42-4.png)
 
-### 3. Call `release` function to claim `ETH`
+### 3. Call the `release` function to claim `ETH`
 
 ![Calling the release function](./img/42-5.png)
 
@@ -213,4 +213,4 @@ In the constructor, enter two beneficiary addresses with shares of `1` and `3`.
 
 ## Summary
 
-In this lecture, we introduced the revenue sharing contract. In the world of blockchain, `Code is Law`, we can write the proportion that each person should receive in the smart contract beforehand. After receiving revenue, the smart contract will handle revenue sharing to avoid the issue of "unequal distribution of shares" afterwards.
+In this lecture, we introduced the revenue-sharing contract. In the world of blockchain, `Code is Law`, we can write the proportion that each person should receive in the smart contract beforehand. After receiving revenue, the smart contract will handle revenue sharing to avoid the issue of "unequal distribution of shares" afterwards.

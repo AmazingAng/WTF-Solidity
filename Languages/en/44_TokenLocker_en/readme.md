@@ -13,7 +13,7 @@ Feel free to follow me on Twitter: [@0xAA_Science](https://twitter.com/0xAA_Scie
 
 You are also welcome to join the WTF Scientists community and find information on how to join the WeChat group: [link](https://discord.gg/5akcruXrsk)
 
-All of the code and tutorials are open source and can be found on Github (I will provide a course certification for 1024 stars and a community NFT for 2048 stars): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All of the code and tutorials are open source and can be found on GitHub (I will provide a course certification for 1024 stars and a community NFT for 2048 stars): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 ---
 
@@ -23,7 +23,7 @@ A Token Lock is a simple time-based smart contract that allows one to lock a num
 
 ### What are LP Tokens?
 
-In decentralized exchanges (DEX), users trade tokens, such as in the case of Uniswap. Unlike centralized exchanges (CEX), decentralized exchanges use Automated Market Maker (AMM) mechanisms. Users or projects provide a liquidity pool, so that other users can buy and sell tokens instantly. To compensate the user or project for providing the liquidity pool, the DEX will mint corresponding LP tokens, which represent their contribution and entitle them to transaction fees.
+In decentralized exchanges (DEX), users trade tokens, such as in the case of Uniswap. Unlike centralized exchanges (CEX), decentralized exchanges use Automated Market Maker (AMM) mechanisms. Users or projects provide a liquidity pool so that other users can buy and sell tokens instantly. To compensate the user or project for providing the liquidity pool, the DEX will mint corresponding LP tokens, which represent their contribution and entitle them to transaction fees.
 
 ### Why Lock Liquidity?
 
