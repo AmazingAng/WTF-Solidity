@@ -41,6 +41,6 @@ contract CallContract{
     }
 
     function setXTransferETH(address otherContract, uint256 x) payable external{
-        OtherContract(otherContract).setX{value: msg.value}(x);
+        OtherContract(otherContract).setX{value: x}(x);
     }
 }
