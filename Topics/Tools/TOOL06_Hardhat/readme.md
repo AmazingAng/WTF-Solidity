@@ -41,14 +41,14 @@ npx hardhat
 选择第三项：创建空白项目配置 `Create an empty hardhat.config.js`
 
 ```shell
-👷 Welcome to Hardhat v2.9.9 👷‍
+Welcome to Hardhat v2.22.2
 
-? What do you want to do? …
-  Create a JavaScript project
+? What do you want to do? ...
+> Create a JavaScript project
   Create a TypeScript project
-❯ Create an empty hardhat.config.js
+  Create a TypeScript project (with Viem)
+  Create an empty hardhat.config.js
   Quit
-
 ```
 
 ### 安装插件
@@ -63,7 +63,7 @@ require("@nomicfoundation/hardhat-toolbox");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.9",
+  solidity: "0.8.21",
 };
 ```
 
@@ -182,8 +182,9 @@ describe("ERC20 合约测试", ()=>{
      const Token = await ethers.getContractFactory("ERC20");
      // 部署合约, 传入参数 ERC20.sol 中的构造函数参数分别是 name, symbol 这里我们都叫做WTF
      const hardhatToken = await Token.deploy("WTF", "WTF"); 
+     await hardhatToken.waitForDeployment();
       // 获取合约地址
-     const ContractAddress = await hardhatToken.address;
+     const ContractAddress = await hardhatToken.target;
      expect(ContractAddress).to.properAddress;
   });
 })
@@ -226,9 +227,9 @@ async function main() {
   const Contract = await hre.ethers.getContractFactory("ERC20");
   const token = await Contract.deploy("WTF","WTF");
 
-  await token.deployed();
+  await token.waitForDeployment();
 
-  console.log("成功部署合约:", token.address);
+  console.log("成功部署合约:", token.target);
 }
 
 // 运行脚本
@@ -291,7 +292,7 @@ const GOERLI_PRIVATE_KEY = "YOUR GOERLI PRIVATE KEY";
 const ETHERSCAN_API_KEY = "YOUR_ETHERSCAN_API_KEY";
 
 module.exports = {
-  solidity: "0.8.9", // solidity的编译版本
+  solidity: "0.8.21", // solidity的编译版本
   networks: {
     goerli: {
       url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
