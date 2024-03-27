@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // 简单的可升级合约，管理员可以通过升级函数更改逻辑合约地址，从而改变合约的逻辑。
 // 教学演示用，不要用在生产环境

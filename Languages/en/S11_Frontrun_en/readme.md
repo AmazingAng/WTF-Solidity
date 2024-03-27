@@ -60,7 +60,7 @@ If you learn front-running, you can consider yourself an entry-level crypto scie
 // SPDX-License-Identifier: MIT
 // By 0xAA
 // english translation by 22X
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 // We attempt to frontrun a Free mint transaction

@@ -26,9 +26,9 @@ You must have heard the term “flash loan attack”, but what is a flash loan? 
 
 The first time you heard about "flash loan" must be in Web3, because Web2 does not have this thing. Flashloan is a DeFi innovation that allows users to lend and quickly return funds in one transaction without providing any collateral.
 
-Imagine that you suddenly find an arbitrage opportunity in the market, but you need to prepare 1 million U of funds to complete the arbitrage. In Web2, you go to the bank to apply for a loan, which requires approval, and you may miss the arbitrage opportunity. In addition, if the arbitrage fails, you not only have to pay interest, but also need to return the lost principal.
+Imagine that you suddenly find an arbitrage opportunity in the market, but you need to prepare 1 million U of funds to complete the arbitrage. In Web2, you go to the bank to apply for a loan, which requires approval, and you may miss the arbitrage opportunity. In addition, if the arbitrage fails, you not only have to pay interest but also need to return the lost principal.
 
-In Web3, you can obtain funds through flash loans on the DeFI platform (Uniswap, AAVE, Dodo). You can borrow 1 million u tokens without guarantee, perform on-chain arbitrage, and finally return the loan and interest. .
+In Web3, you can obtain funds through flash loans on the DeFI platform (Uniswap, AAVE, Dodo). You can borrow 1 million U tokens without guarantee, perform on-chain arbitrage, and finally return the loan and interest.
 
 Flash loans take advantage of the atomicity of Ethereum transactions: a transaction (including all operations within it) is either fully executed or not executed at all. If a user attempts to use a flash loan and does not return the funds in the same transaction, the entire transaction will fail and be rolled back as if it never happened. Therefore, the DeFi platform does not need to worry about the borrower not being able to repay the loan, because if it is not repaid, it means that the money has not been loaned out; at the same time, the borrower does not need to worry about the arbitrage being unsuccessful, because if the arbitrage is unsuccessful, the repayment will not be repaid, and It means that the loan was unsuccessful.
 
@@ -46,7 +46,7 @@ Below, we introduce how to implement flash loan contracts in Uniswap V2, Uniswap
 function swap(uint amount0Out, uint amount1Out, address to, bytes calldata data) external lock {
      // Other logic...
 
-     // Optimistically send tokens to the to address
+     // Optimistically send tokens to the address
      if (amount0Out > 0) _safeTransfer(_token0, to, amount0Out);
      if (amount1Out > 0) _safeTransfer(_token1, to, amount1Out);
 
@@ -182,7 +182,7 @@ function testFlashloan() public {
 }
 ```
 
-In the test contract, we tested the cases of sufficient and insufficient handling fees respectively. You can use the following command line to test after installing Foundry (you can change the RPC to other Ethereum RPC):
+In the test contract, we tested the cases of sufficient and insufficient handling fees respectively. You can use the following command line to test after installing Foundry (you can change the RPC to another Ethereum RPC):
 
 ```shell
 FORK_URL=https://singapore.rpc.blxrbdn.com
@@ -202,7 +202,7 @@ function flash(
 ) external override lock noDelegateCall {
     // Other logic...
 
-// Optimistically send tokens to the to address
+// Optimistically send tokens to the address
      if (amount0 > 0) TransferHelper.safeTransfer(token0, recipient, amount0);
      if (amount1 > 0) TransferHelper.safeTransfer(token1, recipient, amount1);
 
@@ -339,7 +339,7 @@ function testFlashloan() public {
 
 // If the handling fee is insufficient, it will be reverted.
      function testFlashloanFail() public {
-         //Exchange weth and transfer it to the flashloan contract to use it as handling fee
+         //Exchange weth and transfer it to the flashloan contract to use it as a handling fee
          weth.deposit{value: 1e18}();
          weth.transfer(address(flashloan), 1e17);
          // Flash loan loan amount
@@ -360,7 +360,7 @@ forge test  --fork-url $FORK_URL --match-path test/UniswapV3Flashloan.t.sol -vv
 
 ### 3. AAVE V3 Flash Loan
 
-AAVE is a decentralized lending platform. Its [Pool contract](https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/Pool.sol#L424) passes `flashLoan The two functions ()` and `flashLoanSimple()` support single-asset and multi-asset flash loans. Here, we only use `flashLoan()` to implement flash loan of a single asset (`WETH`).
+AAVE is a decentralized lending platform. Its [Pool contract](https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/Pool.sol#L424) passes `flashLoan The two functions ()` and `flashLoanSimple()` support single-asset and multi-asset flash loans. Here, we only use `flashLoan()` to implement a flash loan of a single asset (`WETH`).
 
 Next, we complete the flash loan contract `AaveV3Flashloan.sol`. We let it inherit `IFlashLoanSimpleReceiver` and write the core logic of flash loan in the callback function `executeOperation`.
 
@@ -481,7 +481,7 @@ function testFlashloan() public {
 }
 ```
 
-In the test contract, we tested the cases of sufficient and insufficient handling fees respectively. You can use the following command line to test after installing Foundry (you can change the RPC to other Ethereum RPC):
+In the test contract, we tested the cases of sufficient and insufficient handling fees respectively. You can use the following command line to test after installing Foundry (you can change the RPC to another Ethereum RPC):
 
 ```shell
 FORK_URL=https://singapore.rpc.blxrbdn.com

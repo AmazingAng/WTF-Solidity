@@ -1,6 +1,6 @@
 ![](./img/logo2.jpeg)
 
-:globe_with_meridians:	**[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/README.md) / [Español](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/README.md)** :globe_with_meridians:	
+:globe_with_meridians:	**[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/README.md) / [Español](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/README.md) / [Português Brasileiro](./Languages/pt-br/README.md)** :globe_with_meridians:	
 
 # WTF Solidity
 我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
@@ -14,7 +14,7 @@
 
 - [x] 512 :star: 发布官网: [wtf.academy](https://wtf.academy)
 
-- [x] 1024 :star: 发课程认证`SBT`: [Learning Center](https://wtf.academy/learning-center)
+- [x] 1024 :star: 发课程认证`SBT`: [Learning Center](https://wtf.academy/courses)
 
 - [ ] 2048 :star: 发社群NFT
 
@@ -91,7 +91,7 @@
 
 **第32讲：代币水龙头**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/32_Faucet) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/32_Faucet/readme.md) | [Mirror](https://mirror.xyz/wtfacademy.eth/tr1pm32UYMO96gOsgQsU5beAAcD3rkHtaBYg9MBzCz0)
 
-**第33讲：空投**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/33_Airdrop) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/33_Airdrop/readme.md) | [Mirror](https://mirror.xyz/wtfacademy.eth/pRoRGe7V4djkWX-_ZkkrdzKE8RSO5ivoDktCacE-4R8)
+**第33讲：空投合约**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/33_Airdrop) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/33_Airdrop/readme.md) | [Mirror](https://mirror.xyz/wtfacademy.eth/pRoRGe7V4djkWX-_ZkkrdzKE8RSO5ivoDktCacE-4R8)
 
 **第34讲：ERC721**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/readme.md) | [Mirror](https://mirror.xyz/wtfacademy.eth/7BbjaN4Zz1ycAlfvKARlijMusL0RV3SOAltSx0nJed4)
 
@@ -177,6 +177,8 @@
 **S15：操纵预言机**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S15_OracleManipulation) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S15_OracleManipulation/readme.md)
 
 **S16：NFT重入攻击**：[代码](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy) | [文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S16_NFTReentrancy/readme.md)
+
+**S17：“跨服”重入攻击**：[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/S17_CrossReentrancy/readme.md)
 
 ## EVM 操作码
 

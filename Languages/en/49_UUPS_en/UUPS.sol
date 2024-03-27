@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // UUPS proxy looks like a regular proxy
 // upgrade function is inside logic contract, the admin is able to upgrade the logic contract's address by calling upgrade function, thus change the logic of the contract
