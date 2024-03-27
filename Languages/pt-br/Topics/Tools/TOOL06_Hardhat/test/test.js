@@ -11,7 +11,7 @@ describe("ERC20 合约测试", ()=>{
      // Implante o contrato, passando os parâmetros do construtor da ERC20.sol, que são nome e símbolo, ambos chamados de WTF aqui.
      const hardhatToken = await Token.deploy("WTF", "WTF"); 
       // Aguardando a conclusão da implantação do contrato
-      await hardhatToken.deployed();
+      await hardhatToken.waitForDeployment();
       // Obter endereço do contrato
       const ContractAddress = await hardhatToken.address;
       expect(ContractAddress).to.properAddress;

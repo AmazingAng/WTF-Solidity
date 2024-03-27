@@ -6,14 +6,14 @@ describe("create2 test", function () {
     console.log("1.==> deploy pair");
     const PairFactory = await ethers.getContractFactory("Pair");
     const Pair = await PairFactory.deploy();
-    await Pair.deployed();
+    await Pair.waitForDeployment();
     console.log("pair address =>",Pair.address);
 
     console.log();
     console.log("2.==> deploy PairFactory2");   
     const PairFactory2Factory = await ethers.getContractFactory("PairFactory2");
     const PairFactory2 = await PairFactory2Factory.deploy();
-    await PairFactory2.deployed();
+    await PairFactory2.waitForDeployment();
     console.log("PairFactory2 address =>",PairFactory2.address);
     
     console.log("3.==> calculateAddr for wbnb people");  

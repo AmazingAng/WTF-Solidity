@@ -6,7 +6,7 @@ async function main() {
   const Contract = await hre.ethers.getContractFactory("ERC20");
   const token = await Contract.deploy("WTF","WTF");
 
-  await token.deployed();
+  await token.waitForDeployment();
 
   console.log("Contrato implantado com sucesso:", token.address)
 }
