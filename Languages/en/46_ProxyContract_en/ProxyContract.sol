@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 /**
  * @dev all invocations through Proxy contract are delegated to another contract, which is called logic contract(Implementation), by `delegatecall` opcode. 

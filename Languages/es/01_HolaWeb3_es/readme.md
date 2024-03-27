@@ -44,7 +44,7 @@ Este primer programa es sencillo, el programa solo contiene 1 linea con un comen
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract HolaWeb3{
     string public _string = "Hola Web3!";}
 ```
@@ -57,10 +57,10 @@ Ahora, vamos a desplegar y analizar el código fuente, comprendiendo su estructu
 // SPDX-License-Identifier: MIT
 ```
 
-2. La segunda linea declara la versión de Solidity utilizada por el archivo fuente, ya que la sintaxis varia entre diferentes versiones. Esta línea de código significa que el archivo fuente no permitirá la compilación por compiladores con versiones inferiores a v0.8.4 y no superiores a v0.9.0 (la segunda condición se proporciona con `^`)
+2. La segunda linea declara la versión de Solidity utilizada por el archivo fuente, ya que la sintaxis varia entre diferentes versiones. Esta línea de código significa que el archivo fuente no permitirá la compilación por compiladores con versiones inferiores a v0.8.21 y no superiores a v0.9.0 (la segunda condición se proporciona con `^`)
 
 ```solidity
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 ```
     
 3. Las lineas 3 y 4 constituyen el cuerpo principal del contrato inteligente. La linea 3 crea un contrato con el nombre `HolaWeb3`. La linea 4 es el contenido del contrato. Aquí se ha creado una variable de cadena llamada `_string` y le asignamos el valor "Hola Web3!".

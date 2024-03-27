@@ -11,7 +11,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 -----
 
-In this section, we will introduce control flow in Solidity, and write a insertion sort (`InsertionSort`), a program that looks simple but is actually bug-prone.
+In this section, we will introduce control flow in Solidity, and write an insertion sort (`InsertionSort`), a program that looks simple but is actually bug-prone.
 
 ## Control Flow
 
@@ -71,7 +71,7 @@ function doWhileTest() public pure returns(uint256){
 
 5. Conditional (`ternary`) operator
 
-The `ternary` operator is the only operator in Solidity that accepts three operands：a condition followed by a question mark (`?`), then an expression `x` to execute if the condition is true followed by a colon (`:`), and finally the expression `y` to execute if the condition is false: `condition ? x : y`. 
+The `ternary` operator is the only operator in Solidity that accepts three operands： a condition followed by a question mark (`?`), then an expression `x` to execute if the condition is true followed by a colon (`:`), and finally the expression `y` to execute if the condition is false: `condition ? x : y`. 
 
 This operator is frequently used as an alternative to an `if-else` statement.
 
@@ -87,7 +87,7 @@ In addition, there are `continue` (immediately enter the next loop) and `break` 
 
 ## `Solidity` Implementation of Insertion Sort
 
-**Note**: Over 90% of people who write the insertion algorithm with Solidity will get it wrong at the first try.
+**Note**: Over 90% of people who write the insertion algorithm with Solidity will get it wrong on the first try.
 
 ### Insertion Sort
 
@@ -136,7 +136,7 @@ Python version of Insertion Sort takes up 9 lines. Let's rewrite it into Solidit
     }
 ```
 
-But when we compile the modified version and try to sort `[2, 5, 3, 1]`. *BOOM!* There are bugs! After 3-hour debugging, I still could not find where the bug was. I googled "Solidity insertion sort", and found that all the insertion algorithms written with Solidity are all wrong, such as: [Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
+But when we compile the modified version and try to sort `[2, 5, 3, 1]`. *BOOM!* There are bugs! After 3-hour debugging, I still could not find where the bug was. I googled "Solidity insertion sort", and found that all the insertion algorithms written with Solidity are all wrong, such as [Sorting in Solidity without Comparison](https://medium.com/coinmonks/sorting-in-solidity-without-comparison-4eb47e04ff0d)
 
 Errors occurred in `Remix decoded output`:
 
@@ -144,7 +144,7 @@ Errors occurred in `Remix decoded output`:
 
 ### Solidity Implementation (Correct)
 
-With the help of a friend from `Dapp-Learning` community, we finally found the problem. The most commonly used variable type in Solidity is `uint`, which represent a non-negative integer. If it takes a negative value, we will encounter an `underflow` error. In the above code, the variable `j` will get `-1`, causing the bug.
+With the help of a friend from `Dapp-Learning` community, we finally found the problem. The most commonly used variable type in Solidity is `uint`, which represents a non-negative integer. If it takes a negative value, we will encounter an `underflow` error. In the above code, the variable `j` will get `-1`, causing the bug.
 
 So, we need to add `1` to `j` so it can never take a negative value. The correct insertion sort solidity code:
 
@@ -171,4 +171,4 @@ Result:
 
 ## Summary
 
-In this lecture, we introduced control flow in Solidity and wrote a simple but bug-prone sorting algorithm. Solidity looks simple but have many traps. Every month, projects get hacked and lose millions of dollars because of small bugs in the smart contract. To write a safe contract, we need to master the basics of the Solidity and keep practicing.
+In this lecture, we introduced control flow in Solidity and wrote a simple but bug-prone sorting algorithm. Solidity looks simple but has many traps. Every month, projects get hacked and lose millions of dollars because of small bugs in the smart contract. To write a safe contract, we need to master the basics of Solidity and keep practising.

@@ -20,7 +20,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 ## `selfdestruct`
 
-The `selfdestruct` operation is the only way to delete a smart contract and the remaining Ether stored at that address is sent to a designated target. The `selfdestruct` operation is designed to deal with the extreme case of contract errors. Originally the opcode was named `suicide` but the Ethereum community decided to rename it as `selfdestruct` because suicide is a heavy subject and we should make every effort possible to not affect the programmer who suffer from depression.
+The `selfdestruct` operation is the only way to delete a smart contract and the remaining Ether stored at that address is sent to a designated target. The `selfdestruct` operation is designed to deal with the extreme case of contract errors. Originally the opcode was named `suicide` but the Ethereum community decided to rename it as `selfdestruct` because suicide is a heavy subject and we should make every effort possible not to be insensitive to programmers who suffer from depression.
 
 ### How to use `selfdestruct`
 
@@ -54,25 +54,25 @@ contract DeleteContract {
 }
 ```
 
-In `DeleteContract`，we define a public state variable named `value` and two functions：`getBalance()` which is used to get ETH balance of the contract，`deleteContract()` which is used to delete the contract and transfer the remaining ETH to the sender of message.
+In `DeleteContract`， we define a public state variable named `value` and two functions：`getBalance()` which is used to get the ETH balance of the contract，`deleteContract()` which is used to delete the contract and transfer the remaining ETH to the sender of the message.
 
-After the contract is deployed，we send 1 ETH to the contract. The result should be 1 ETH while we call `getBalance()` and the `value` should be 10.
+After the contract is deployed， we send 1 ETH to the contract. The result should be 1 ETH while we call `getBalance()` and the `value` should be 10.
 
 Then we call `deleteContract().` The contract will self-destruct and all variables will be cleared. At this time, `value` is equal to  `0` which is the default value, and `getBalance()` also returns an empty value.
 
 ### Attention
 
 1. When providing the contract destruction function externally, it is best to declare the function to only be called by the contract owner such as using the  function modifier `onlyOwner`.
-2. When the contract is destructed, the interaction with the smart contract can also succeed and return `0` .
-3. Security and trust issues often arise when there is a `selfdestruct` function in a contract. The function of  `selfdestruct`  in the contract opens up attack vectors for attackers. For example, using `selfdestruct` to frequently transfer tokens to a contract to attack, this will greatly save the cost of GAS, although few people do this. In addition, this `selfdestruct`  feature reduces users' confidence in the contract.
+2. When the contract is destroyed, the interaction with the smart contract can also succeed and return `0`.
+3. Security and trust issues often arise when a contract includes a `selfdestruct` function. This feature opens up attack vectors for potential attackers. For instance, attackers might exploit `selfdestruct` to frequently transfer tokens to a contract, significantly reducing the cost of gas for attacking. Although this tactic is not commonly employed, it remains a concern. Furthermore, the presence of the `selfdestruct` feature can diminish users' confidence in the contract.
 
 ### Example from Remix
 
-1. Deploy the contract and send 1 ETH to the contract. Check the status of contract.
+1. Deploy the contract and send 1 ETH to the contract. Check the status of the contract.
 
 ![deployContract.png](./img/26-2.png)
 
-2. Delete the contract and check the status of contract.
+2. Delete the contract and check the status of the contract.
 
 ![deleteContract.png](./img/26-1.png)
 

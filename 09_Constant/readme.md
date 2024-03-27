@@ -9,15 +9,15 @@ tags:
 
 # WTF Solidity极简入门: 9. 常数 constant和immutable
 
-我最近在重新学Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 这一讲，我们介绍Solidity中和常量相关的两个关键字，`constant`（常量）和`immutable`（不变量）。状态变量声明这两个关键字之后，不能在初始化后更改数值。这样做的好处是提升合约的安全性并节省`gas`。
 
 另外，只有数值变量可以声明`constant`和`immutable`；`string`和`bytes`可以声明为`constant`，但不能为`immutable`。
@@ -38,7 +38,8 @@ address constant CONSTANT_ADDRESS = 0x0000000000000000000000000000000000000000;
 
 ### immutable
 
-`immutable`变量可以在声明时或构造函数中初始化，因此更加灵活。
+`immutable`变量可以在声明时或构造函数中初始化，因此更加灵活。在`Solidity v8.0.21`以后，`immutable`变量不需要显式初始化。反之，则需要显式初始化。
+若`immutable`变量既在声明时初始化，又在constructor中初始化，会使用constructor初始化的值。
 
 ``` solidity
 // immutable变量可以在constructor里初始化，之后不能改变
@@ -54,7 +55,7 @@ uint256 public immutable IMMUTABLE_TEST;
 // 利用constructor初始化immutable变量，因此可以利用
 constructor(){
     IMMUTABLE_ADDRESS = address(this);
-    IMMUTABLE_BLOCK = block.number;
+    IMMUTABLE_NUM = 1118;
     IMMUTABLE_TEST = test();
 }
 

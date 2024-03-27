@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // 3 ways to send ETH
 // transfer: 2300 gas, revert
@@ -10,7 +10,7 @@ error SendFailed(); // error when sending with Send
 error CallFailed(); // error when seding with Call
 
 contract SendETH {
-    // Constructor, make it payable so we can transfer ETH at depolyment
+    // Constructor, make it payable so we can transfer ETH at deployment
     constructor() payable{}
     // receive function, called when receiving ETH
     receive() external payable{}

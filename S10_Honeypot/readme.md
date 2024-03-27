@@ -9,13 +9,13 @@ tags:
 
 # WTF Solidity 合约安全: S10. 貔貅
 
-我最近在重新学 solidity，巩固一下细节，也写一个“WTF Solidity 极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity 合约安全”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 ---
 
@@ -132,7 +132,9 @@ contract HoneyPot is ERC20, Ownable {
 
 4. 仔细检查项目的官网和社交媒体。
 
-5. 只投资你了解的项目，做好研究（DYOR）。
+5. 只投资你了解的项目，做好研究（DYOR。
+
+6. 使用tenderly、phalcon分叉模拟卖出貔貅，如果失败则确定是貔貅代币。
 
 ## 总结
 

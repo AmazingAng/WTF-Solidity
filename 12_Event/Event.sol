@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract Events {
     // 定义_balances映射变量，记录每个地址的持币数量
     mapping(address => uint256) public _balances;

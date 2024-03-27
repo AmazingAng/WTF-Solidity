@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // selfdestruct: 删除合约，并强制将合约剩余的ETH转入指定账户
 
