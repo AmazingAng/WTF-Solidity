@@ -16,4 +16,4 @@ jobs:
         with:
           check_filenames: true
           ignore_words_file: .codespellignore
-          skip: ./.git,package-lock.json
+          skip: "./.git,package-lock.json,./Languages/es,./Languages/pt-br"
