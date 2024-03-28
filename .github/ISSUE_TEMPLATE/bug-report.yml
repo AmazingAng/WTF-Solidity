@@ -14,7 +14,7 @@ body:
   - type: textarea
     attributes:
       label: Details (细节)
-      description: Describe what happened.(描述一下发生了啥)
+      description: Describe what happened.(描述一下发生了什么)
       placeholder: >
         Please provide the context in which the problem occurred and explain what happened(请提供问题发生的背景并解释发生的情况)
     validations:
@@ -24,7 +24,7 @@ body:
   - type: textarea
     attributes:
       label: Environment (其他需要补充的)
-      description: Tell us about your environment
+      description: Tell us about your environment(告诉我们你的环境信息)
       placeholder: >
         Tell us what you're using it: Hardhat, Remix, etc. (告诉我们你使用的环境：Hardhat，Remix等等。)
 
