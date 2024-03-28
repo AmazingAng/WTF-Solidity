@@ -5,7 +5,10 @@ body:
   - type: markdown
     attributes:
       value: |
-        能用英文用英文，觉得描述不清就用中文
+        For better global communication, Please write in English.
+
+        If you feel the description in English is not clear, then you can use Chinese, thanks!
+        （为了更好的全球化的交流，能用英文用英文，觉得描述不清就用中文）
 
   - type: textarea
     attributes:
@@ -25,4 +28,4 @@ body:
 
   - type: markdown
     attributes:
-      value: "Thanks for completing our form!"
+      value: "Thanks for completing our form!(感谢填写表单！)"
