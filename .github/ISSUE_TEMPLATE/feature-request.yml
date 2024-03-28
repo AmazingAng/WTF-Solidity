@@ -1,5 +1,5 @@
 
-name: Feature request
+name: Feature request（对此项目提出一个意见）
 description: Suggest an idea for this project（对此项目提出一个意见）
 title: "[Feature][Module Name（模块名称）] Feature title（标题）"
 body:
@@ -12,15 +12,15 @@ body:
 
   - type: textarea
     attributes:
-      label: Description
-      description: A short description of your feature （简短的描述一下）
+      label:  Details(细节)
+      description: Please describe your feature request in detail. (请详细描述您的功能请求。)
 
   - type: textarea
     attributes:
-      label: Use case
-      description: What do you want to happen?（你想要干啥）
+      label: Motivation(动机)
+      description: Please describe your motivation in the feature request. (请描述您在功能请求中的动机。)
       placeholder: >
-        
+        Please describe your motivation in the feature request. (请描述您在功能请求中的动机。)
 
 
 

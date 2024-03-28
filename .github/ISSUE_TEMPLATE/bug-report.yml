@@ -1,19 +1,19 @@
-name: Bug report
+name: Bug report (程序Bug报告)
 title: "[Bug] [Class (章节)] Bug title （标题）"
-description: Problems and issues with code of WTF
+description: Problems and issues with code of WTF (报告WTF-Solidity中的程序Bug)
 body:
   - type: markdown
     attributes:
       value: >
-        Please make sure what you are reporting is indeed a bug with reproducible steps, if you want to ask questions
-        or share ideas, you can head to our
+        Please make sure what you are reporting is indeed a bug with reproducible steps(请确保您所报告的是一个具有可重现步骤的错误), if you want to ask questions
+        or share ideas, you can head to our (如果你是想问一个问题或者分享一个主意，你可以通过以下方式)
         [Discussions](https://github.com/AmazingAng/WTF-Solidity/discussions) tab, you can also
         [join our discord](https://discord.gg/5akcruXrsk)
 
 
   - type: textarea
     attributes:
-      label: What happened (发生啥)
+      label: Details (细节)
       description: Describe what happened.(描述一下发生了啥)
       placeholder: >
         Please provide the context in which the problem occurred and explain what happened(请提供问题发生的背景并解释发生的情况)
@@ -23,21 +23,11 @@ body:
 
   - type: textarea
     attributes:
-      label: Anything else (其他需要补充的)
-      description: Anything else we need to know?（有什么其他需要上报的）
+      label: Environment (其他需要补充的)
+      description: Tell us about your environment
       placeholder: >
-        比如环境信息，Solidity版本等等
+        Tell us what you're using it: Hardhat, Remix, etc. (告诉我们你使用的环境：Hardhat，Remix等等。)
 
-  - type: dropdown
-    id: version
-    attributes:
-      label: Version
-      description: >
-        Which version of WTF are you running? (哪个分支出现的)
-      options:
-        - main
-    validations:
-      required: true
 
   - type: checkboxes
     attributes:

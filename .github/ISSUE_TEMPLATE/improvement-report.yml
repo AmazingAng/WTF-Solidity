@@ -1,5 +1,5 @@
-name: Improvement request
-description: Suggest an improvement for this project
+name: Improvement request (提升请求)
+description: Suggest an improvement for this project (给WTF-Solidity提一个改进提升的请求)
 title: "[Improvement][Module Name（模块）] Improvement title（标题）"
 body:
   - type: markdown
@@ -10,7 +10,8 @@ body:
   - type: textarea
     attributes:
       label: Description
-      description: A short description why your want to do this improvement （简短的描述一下）
+      description: A short description why your find in our document.（简短的描述一下）
+
 
   - type: checkboxes
     attributes:

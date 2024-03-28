@@ -1,5 +1,5 @@
-name: Documentation Related
-description: Suggest an improvement or report a bug for this project's Documentation
+name: Typo report(勘误报告)
+description: Report a typo in the WTF-Solidity(报告WTF-Solidity中的勘误)
 title: "[Doc][Module Name（模块）] Documentation bug or improvement（标题）"
 body:
   - type: markdown
@@ -9,7 +9,7 @@ body:
 
   - type: textarea
     attributes:
-      label: Description
+      label: Details(细节)
       description: A short description why your find in our document.（简短的描述一下）
 
 
