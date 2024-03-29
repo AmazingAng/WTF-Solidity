@@ -20,7 +20,7 @@ English translations by: [@to_22X](https://twitter.com/to_22X)
 
 ---
 
-In this lesson, we will introduce the Signature Replay attack and how to prevent in smart contracts, which indirectly led to the theft of 20 million $OP tokens from the famous market maker Wintermute.
+In this lesson, we will introduce the Signature Replay attack and how to prevent it in smart contracts, which indirectly led to the theft of 20 million $OP tokens from the famous market maker Wintermute.
 
 ## Signature Replay
 
@@ -37,7 +37,7 @@ There are generally two common types of replay attacks on digital signatures:
 
 ## Vulnerable Contract Example
 
-The `SigReplay` contract below is an `ERC20` token contract that has a signature replay vulnerability in its minting function. It uses off-chain signatures to allow whitelisted address `to` to mint a corresponding amount `amount` of tokens. The contract stores the `signer` address to verify the validity of the signature.
+The `SigReplay` contract below is an `ERC20` token contract that has a signature replay vulnerability in its minting function. It uses off-chain signatures to allow whitelisted addresses `to` mint a corresponding amount `amount` of tokens. The contract stores the `signer` address to verify the validity of the signature.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -162,7 +162,7 @@ There are two main methods to prevent signature replay attacks:
 
 ## Summary
 
-In this lesson, we discussed the signature replay vulnerability in smart contracts and introduced two methods to prevent:
+In this lesson, we discussed the signature replay vulnerability in smart contracts and introduced two methods to prevent it:
 
 1. Keep a record of used signatures to prevent their reuse.
 
