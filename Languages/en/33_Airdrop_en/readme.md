@@ -48,7 +48,7 @@ The logic of the airdrop contract is simple: by using a loop, a single transacti
    - `_addresses`: Array of user addresses receiving the airdrop (`address[]` type)
    - `_amounts`: Array of airdrop amounts that correspond to the quantity of each address in `_addresses` (`uint[]` type)
 
-   This function contains `2` checks: The first `require` checks if the length of `_addresses` array is equal to the length of `_amounts` array . The second `require` checks if the authorization limit of the airdrop contract is greater than the total amount of tokens to be airdropped.
+   This function contains `2` checks: The first `require` checks if the length of the `_addresses` array is equal to the length of the `_amounts` array. The second `require` checks if the authorization limit of the airdrop contract is greater than the total amount of tokens to be airdropped.
 
 ```solidity
 /// @notice Transfer ERC20 tokens to multiple addresses, authorization is required before use

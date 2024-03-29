@@ -31,7 +31,7 @@ Is there a way to modify or upgrade the contract after it is deployed? The answe
 
 ![Proxy Pattern](./img/46-1.png)
 
-The proxy pattern separates contract data and logic, and saves them in different contracts. Taking the simple proxy contract in the above figure as an example, the data (state variable) is stored in the proxy contract, and the logic (function) is stored in another logic contract. The proxy contract (Proxy) delegates the function call to the logic contract (Implementation) through `delegatecall`, and then returns the final result to the caller(Caller).
+The proxy pattern separates contract data and logic and saves them in different contracts. Taking the simple proxy contract in the above figure as an example, the data (state variable) is stored in the proxy contract, and the logic (function) is stored in another logic contract. The proxy contract (Proxy) delegates the function call to the logic contract (Implementation) through `delegatecall`, and then returns the final result to the caller(Caller).
 
 The proxy pattern has two main benefits:
 1. Upgradeable: When we need to upgrade the logic of the contract, we only need to point the proxy contract to a new logic contract.
@@ -77,8 +77,8 @@ The fallback function of `Proxy` delegates external calls to the `Logic` contrac
 
 ```solidity
 /**
-* @dev fallback function, delegates invocations of current contract to `implementation` contract
-* with inline assembly, it gives fallback function a return value
+* @dev fallback function, delegates invocations of the current contract to `implementation` contract
+* with inline assembly, it gives the fallback function a return value
 */
 fallback() external payable {
     address _implementation = implementation;
@@ -87,7 +87,7 @@ fallback() external payable {
         // the parameters of opcode calldatacopy: start position of memory, start position of calldata, length of calldata
         calldatacopy(0, 0, calldatasize())
 
-        // use delegatecall to call implementation contract
+        // use delegatecall to call the implementation contract
         // the parameters of opcode delegatecall: gas, target contract address, start position of input memory, length of input memory, start position of output memory, length of output memory
         // set start position of output memory and length of output memory to 0
         // delegatecall returns 1 if success, 0 if fail

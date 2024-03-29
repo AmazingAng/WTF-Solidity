@@ -70,19 +70,19 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
 
 contract RandomNumberConsumer is VRFConsumerBase {
     
-    bytes32 internal keyHash; // VRF唯一标识符
-    uint256 internal fee; // VRF使用手续费
+    bytes32 internal keyHash; // VRF unique identifier
+    uint256 internal fee; // VRF usage fee
     
-    uint256 public randomResult; // 存储随机数
+uint256 public randomResult; // store random numbers
     
-    /**
-     * 使用chainlink VRF，构造函数需要继承 VRFConsumerBase 
-     * 不同链参数填的不一样
-     * 网络: Rinkeby测试网
-     * Chainlink VRF Coordinator 地址: 0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B
-     * LINK 代币地址: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
-     * Key Hash: 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311
-     */
+     /**
+      * When using chainlink VRF, the constructor needs to inherit VRFConsumerBase
+      * Different chain parameters are filled in differently.
+      *Network: Rinkeby testnet
+      * Chainlink VRF Coordinator address: 0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B
+      * LINK token address: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
+      * Key Hash: 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311
+      */
     constructor() 
         VRFConsumerBase(
             0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B, // VRF Coordinator
@@ -90,7 +90,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
         )
     {
         keyHash = 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311;
-        fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF使用费，Rinkeby测试网)
+fee = 0.1 * 10 ** 18; // 0.1 LINK (VRF usage fee, Rinkeby test network)
     }
 ```
 
@@ -110,7 +110,7 @@ Users can call `requestRandomness()` inherited from the `VRFConsumerBase` contra
     }
 ```
 
-3. The `Chainlink` node generates a random number and a digital signature off-chain, and sends them to the `VRF` contract.
+3. The `Chainlink` node generates a random number and a digital signature off-chain and sends them to the `VRF` contract.
  
 4. The `VRF` contract verifies the validity of the signature.
  
@@ -118,12 +118,12 @@ Users can call `requestRandomness()` inherited from the `VRFConsumerBase` contra
  
 After verifying the validity of the signature in the `VRF` contract, the fallback function `fulfillRandomness()` of the user contract will be automatically called, and the off-chain generated random number will be sent over. The logic of consuming the random number should be implemented in this function.
  
-Note: The `requestRandomness()` function called by the user to request a random number and the fallback function `fulfillRandomness()` called when the `VRF` contract returns the random number are two separate transactions, with the user contract and the `VRF` contract being the callers, respectively. The latter will be a few minutes later than the former (with different chain delays).
+Note: The `requestRandomness()` function is called by the user to request a random number and the fallback function `fulfillRandomness()` is called when the `VRF` contract returns the random number are two separate transactions, with the user contract and the `VRF` contract being the callers, respectively. The latter will be a few minutes later than the former (with different chain delays).
 
 ```solidity
     /**
-     * VRF合约的回调函数，验证随机数有效之后会自动被调用
-     * 消耗随机数的逻辑写在这里
+* The callback function of the VRF contract will be automatically called after verifying that the random number is valid.
+      * The logic of consuming random numbers is written here
      */
     function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
         randomResult = randomness;
@@ -295,17 +295,17 @@ In addition to the constructor function, the contract defines 5 other functions:
 After the contract is deployed, copy the contract address, and transfer `LINK` to the contract address just as you would for a normal transfer.
 ![Transfer LINK tokens](./img/39-4.png)
 
-### 4. Mint NFTs using onchain random numbers
+### 4. Mint NFTs using on-chain random numbers
 
-In the `remix` interface, click on the orange function `mintRandomOnchain` on the left side ![mintOnchain](./img/39-5-1.png), then click confirm in the pop-up `Metamask` to start minting the transaction using onchain random numbers.
+In the `remix` interface, click on the orange function `mintRandomOnchain` on the left side![mintOnchain](./img/39-5-1.png), then click confirm in the pop-up `Metamask` to start minting the transaction using on-chain random numbers.
 
 ![Mint NFTs using onchain random numbers](./img/39-5.png)
 
-### 5. Mint NFTs using `Chainlink VRF` offchain random numbers
+### 5. Mint NFTs using `Chainlink VRF` off-chain random numbers
 
 Similarly, in the `remix` interface, click on the orange function `mintRandomVRF` on the left and click confirm in the pop-up little fox wallet. The transaction of minting an `NFT` using `Chainlink VRF` off-chain random number has started.
 
-Note: when using `VRF` to mint `NFT`, initiating the transaction and the success of minting are not in the same block.
+Note: when using `VRF` to mint `NFT`, initiating the transaction and the success of minting is not in the same block.
 
 ![Transaction start for VRF minting](./img/39-6.png)
 ![Transaction success for VRF minting](./img/39-7.png)
@@ -316,6 +316,6 @@ From the above screenshots, it can be seen that in this example, the `NFT` with 
 
 ## Conclusion
 
-Generating a random number in `Solidity` is not as straightforward as in other programming languages. In this tutorial, we introduced two methods of generating random numbers on-chain (using hash functions) and off-chain (`Chainlink` oracle), and used them to create an `NFT` with a randomly assigned `tokenId`. Both methods have their own advantages and disadvantages: using on-chain random numbers is efficient but insecure, while generating off-chain random numbers relies on third-party oracle services, which is relatively safe but not as easy and economical. Project teams should choose the appropriate method according to their specific business needs.
+Generating a random number in `Solidity` is not as straightforward as in other programming languages. In this tutorial, we introduced two methods of generating random numbers on-chain (using hash functions) and off-chain (`Chainlink` oracle), and used them to create an `NFT` with a randomly assigned `tokenId`. Both methods have their advantages and disadvantages: using on-chain random numbers is efficient but insecure while generating off-chain random numbers relies on third-party Oracle services, which is relatively safe but not as easy and economical. Project teams should choose the appropriate method according to their specific business needs.
 
 Apart from these methods, there are other organizations that are trying new ways of RNG (Random Number Generation), such as [randao](https://github.com/randao/randao), which proposes to provide an on-chain and true randomness service in a DAO pattern.

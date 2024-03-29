@@ -36,7 +36,7 @@ Here, we will implement a simplified version of an `ERC20` faucet. The logic is 
 
 We define `3` state variables in the faucet contract:
 
-- `amountAllowed` sets the amount of tokens that can be claimed per request (default value is `100`, not 100 tokens as tokens may have decimal places).
+- `amountAllowed` sets the number of tokens that can be claimed per request (default value is `100`, not 100 tokens as tokens may have decimal places).
 - `tokenContract` stores the address of the `ERC20` token contract.
 - `requestedAddress` keeps track of the addresses that have already claimed tokens.
 

@@ -33,21 +33,21 @@ The following table summarizes the differences between regular upgradeable contr
 
 ## UUPS contract
 
-First, let's review [WTF Solidity Minimalist Tutorial Lesson 23: Delegatecall](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/23_Delegatecall_en/readme.md). If user A `delegatecall`s contract C (logic contract) through contract B (proxy contract), the context is still the context of contract B, and `msg.sender` is still user A rather than contract B. Therefore, the UUPS contract can place the upgrade function in the logical contract and check whether the caller is admin.
+First, let's review [WTF Solidity Minimalist Tutorial Lesson 23: Delegatecall](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/23_Delegatecall_en/readme.md). If user A `delegatecall`s contract C (logic contract) through contract B (proxy contract), the context is still the context of contract B, and `msg.sender` is still user A rather than contract B. Therefore, the UUPS contract can place the upgrade function in the logical contract and check whether the caller is an admin.
 
 ![delegatecall](./img/49-2.png)
 
 ### UUPS proxy contract
 
-The UUPS proxy contract looks like an unupgradable proxy contract and is very simple because the upgrade function is placed in the logic contract. It contains three variables:
+The UUPS proxy contract looks like an un-upgradable proxy contract and is very simple because the upgrade function is placed in the logic contract. It contains three variables:
 
 - `implementation`: address of the logic contract.
 - `admin`: address of the admin.
-- `words`: string that can be changed by functions in the logic contract.
+- `words`: a string that can be changed by functions in the logic contract.
 
 It contains `2` functions:
 - Constructor: initializes the admin and logic contract address.
-- `fallback()`: callback function that delegates the call to the logic contract.
+- `fallback()`: a callback function that delegates the call to the logic contract.
 
 ```solidity
 contract UUPSProxy {

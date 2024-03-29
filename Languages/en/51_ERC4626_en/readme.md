@@ -21,7 +21,7 @@ All code and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSoli
 
 -----
 
-We often say that DeFi is like LEGO blocks, where you can create new protocols by combining multiple protocols. However, due to the lack of standards in DeFi, its composability is severely affected. ERC4626 extends the ERC20 token standard and aims to standardize yield vaults. In this talk, we will introduce the new generation DeFi standard - ERC4626 and write a simple vault contract. The teaching code reference comes from the ERC4626 contract in openzeppelin and solmate and is for teaching purposes only.
+We often say that DeFi is like LEGO blocks, where you can create new protocols by combining multiple protocols. However, due to the lack of standards in DeFi, its composability is severely affected. ERC4626 extends the ERC20 token standard and aims to standardize yield vaults. In this talk, we will introduce the new generation DeFi standard - ERC4626 and write a simple vault contract. The teaching code reference comes from the ERC4626 contract in Openzeppelin and Solmate and is for teaching purposes only.
 
 ## Vault
 
@@ -47,12 +47,12 @@ In summary, the importance of ERC4626 for DeFi is no less than that of ERC721 fo
 
 ### Key Points of ERC4626
 
-The ERC4626 standard mainly implements the following logics:
+The ERC4626 standard mainly implements the following logic:
 
 1. ERC20: ERC4626 inherits ERC20, and the vault shares are represented by ERC20 tokens: users deposit specific ERC20 underlying assets (such as WETH) into the vault, and the contract mints a specific number of vault share tokens for them; When users withdraw underlying assets from the vault, the corresponding number of vault share tokens will be destroyed. The `asset()` function returns the token address of the vault's underlying asset.
-2. Deposit logic: allows users to deposit underlying assets and mint corresponding number of vault shares. Related functions are `deposit()` and `mint()`. The `deposit(uint assets, address receiver)` function allows users to deposit `assets` units of assets and mint corresponding number of vault shares to `receiver` address. `mint(uint shares, address receiver)` is similar, except that it takes the minted vault shares as a parameter.
-3. Withdrawal logic: allows users to destroy vault share tokens and withdraw corresponding number of underlying assets from the vault. Related functions are `withdraw()` and `redeem()`, the former taking the amount of underlying assets to be withdrawn as a parameter, and the latter taking the number of destroyed vault share tokens as a parameter.
-4. Accounting and limit logic: other functions in the ERC4626 standard are for asset accounting in the vault, deposit and withdrawal limits, and the number of underlying assets and vault shares for deposit and withdrawal.
+2. Deposit logic: allows users to deposit underlying assets and mint the corresponding number of vault shares. Related functions are `deposit()` and `mint()`. The `deposit(uint assets, address receiver)` function allows users to deposit `assets` units of assets and mint the corresponding number of vault shares to the `receiver` address. `mint(uint shares, address receiver)` is similar, except that it takes the minted vault shares as a parameter.
+3. Withdrawal logic: allows users to destroy vault share tokens and withdraw the corresponding number of underlying assets from the vault. Related functions are `withdraw()` and `redeem()`, the former taking the amount of underlying assets to be withdrawn as a parameter, and the latter taking the number of destroyed vault share tokens as a parameter.
+4. Accounting and limit logic: other functions in the ERC4626 standard are for asset accounting in the vault, deposit and withdrawal limits and the number of underlying assets and vault shares for deposit and withdrawal.
 
 ### IERC4626 Interface Contract
 

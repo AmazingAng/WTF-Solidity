@@ -31,7 +31,7 @@ At the same time, cross-chain bridges are not natively supported by the blockcha
 
 There are three main types of cross-chain bridges:
 
-- **Burn/Mint**: Destroy (burn) tokens on the source chain, and then create (mint) the same number of tokens on the target chain. The advantage of this method is that the total supply of tokens remains unchanged, but the cross-chain bridge needs to have the permission to mint the tokens, which is suitable for project parties to build their own cross-chain bridges.
+- **Burn/Mint**: Destroy (burn) tokens on the source chain, and then create (mint) the same number of tokens on the target chain. The advantage of this method is that the total supply of tokens remains unchanged, but the cross-chain bridge needs to have permission to mint the tokens, which is suitable for project parties to build their own cross-chain bridges.
 
 ![](./img/54-1.png)
 
@@ -195,4 +195,4 @@ main();
 
 ## Summary
 
-In this lecture, we introduced the cross-chain bridge, which allows digital assets and information to be moved between two or more blockchains, making it convenient for users to operate assets on multiple chains. At the same time, it also carries great risks. Attacks on cross-chain bridges in the past two years have caused more than **2 billion US dollars** in user asset losses. In this tutorial, we build a simple cross-chain bridge and implement ERC20 token transfer between Goerli testnet and Sepolia testnet. I believe that through this tutorial, you will have a deeper understanding of cross-chain bridges.
+In this lecture, we introduced the cross-chain bridge, which allows digital assets and information to be moved between two or more blockchains, making it convenient for users to operate assets on multiple chains. At the same time, it also carries great risks. Attacks on cross-chain bridges in the past two years have caused more than **2 billion US dollars** in user asset losses. In this tutorial, we build a simple cross-chain bridge and implement ERC20 token transfer between the Goerli testnet and the Sepolia testnet. I believe that through this tutorial, you will have a deeper understanding of cross-chain bridges.
