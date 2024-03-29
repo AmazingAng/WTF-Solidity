@@ -9,15 +9,15 @@ tags:
 
 # WTF Solidity极简入门: 54. 跨链桥
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 
 这一讲，我们介绍跨链桥，能将资产从一条区块链转移到另一条区块链的基础设施，并实现一个简单的跨链桥。
 
@@ -56,7 +56,7 @@ tags:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -77,7 +77,7 @@ contract CrossChainToken is ERC20, Ownable {
         string memory name,
         string memory symbol,
         uint256 totalSupply
-    ) payable ERC20(name, symbol) {
+    ) payable ERC20(name, symbol) Ownable(msg.sender) {
         _mint(msg.sender, totalSupply);
     }
 
@@ -154,7 +154,7 @@ const main = async () => {
             console.log(`Minted ${amount} tokens to ${user} on Chain Goerli`);
         });
 
-        // 监听chain Sepolia的Bridge事件，然后在Goerli上执行mint操作，完成跨链
+        // 监听chain Goerli的Bridge事件，然后在Sepolia上执行mint操作，完成跨链
         contractGoerli.on("Bridge", async (user, amount) => {
             console.log(`Bridge event on Chain Goerli: User ${user} burned ${amount} tokens`);
 
@@ -164,10 +164,8 @@ const main = async () => {
 
             console.log(`Minted ${amount} tokens to ${user} on Chain Sepolia`);
         });
-
-    }catch(e){
+    } catch(e) {
         console.log(e);
-    
     } 
 }
 

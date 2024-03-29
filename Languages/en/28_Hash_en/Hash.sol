@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 contract Hash {
     bytes32 _msg = keccak256(abi.encodePacked("0xAA"));

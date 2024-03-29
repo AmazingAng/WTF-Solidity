@@ -23,7 +23,7 @@
 ## Loot代码
 `Loot`代码在etherscan上开源，地址：[链接](https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7#code)
 
-主合约`Loot`从`1291行`开始，继承了`ERC721Enumerable`，`ReentrancyGuard`和`Ownable`，这些合约都是`oppenzepplin`标准库中的。
+主合约`Loot`从`1291行`开始，继承了`ERC721Enumerable`，`ReentrancyGuard`和`Ownable`，这些合约都是`OpenZeppelin`标准库中的。
 
 ```solidity
 contract Loot is ERC721Enumerable, ReentrancyGuard, Ownable {

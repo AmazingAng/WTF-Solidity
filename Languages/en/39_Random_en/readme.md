@@ -64,7 +64,7 @@ In the tutorial, we use the `Rinkeby` testnet. After deploying the contract, use
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
 
@@ -136,7 +136,7 @@ In this section, we will use on-chain and off-chain random numbers to create a `
 
 ```Solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";

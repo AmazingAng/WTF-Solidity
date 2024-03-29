@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 abstract contract Base{
     string public name = "Base";
     function getAlias() public pure virtual returns(string memory);

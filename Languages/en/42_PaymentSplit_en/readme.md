@@ -36,7 +36,7 @@ The Payment Split contract (`PaymentSplit`) has the following features:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 /**
  * PaymentSplit

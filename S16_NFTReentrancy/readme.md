@@ -11,17 +11,17 @@ tags:
 
 # WTF Solidity 合约安全: S16. NFT重入攻击
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity 合约安全”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 
-这一讲，我们将介绍NFT合约的重入攻击漏洞，并攻击一个有漏洞的NFT合约，铸造100个NFT。
+这一讲，我们将介绍NFT合约的重入攻击漏洞，并攻击一个有漏洞的NFT合约，铸造10个NFT。
 
 ## NFT重入风险
 
@@ -88,7 +88,7 @@ contract Attack is IERC721Receiver{
         nft.mint();
     }
 
-    // ERC721的回调函数，会重复调用mint函数，铸造100个
+    // ERC721的回调函数，会重复调用mint函数，铸造10个
     function onERC721Received(address, address, uint256, bytes memory) public virtual override returns (bytes4) {
         if(nft.balanceOf(address(this)) < 10){
             nft.mint();
@@ -126,8 +126,8 @@ contract Attack is IERC721Receiver{
       }
   ```
 
-2. 重入锁：它是一种防止重入函数的修饰器（modifier）。建议直接使用OpenZeppelin提供的[ReentrancyGuard](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/security/ReentrancyGuard.sol)
+2. 重入锁：它是一种防止重入函数的修饰器（modifier）。建议直接使用OpenZeppelin提供的[ReentrancyGuard](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/ReentrancyGuard.sol)
 
 ## 总结
 
-这一讲，我们介绍了NFT的重入攻击漏洞，并攻击了一个有漏洞的NFT合约，铸造了100个NFT。目前主要有两种预防重入攻击的办法：检查-影响-交互模式（checks-effect-interaction）和重入锁。
+这一讲，我们介绍了NFT的重入攻击漏洞，并攻击了一个有漏洞的NFT合约，铸造了10个NFT。目前主要有两种预防重入攻击的办法：检查-影响-交互模式（checks-effect-interaction）和重入锁。

@@ -68,8 +68,8 @@ Next, let us define a `changeOwner` function, which can change the `owner` of th
    }
 ```
 
-### OppenZepplin's implementation of Ownable：
-`OppenZepplin` is an organization that maintains a standardized code base for `Solidity`, Their standard implementation of `Ownable` is in [this link](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol).
+### OpenZeppelin's implementation of Ownable：
+`OpenZeppelin` is an organization that maintains a standardized code base for `Solidity`, Their standard implementation of `Ownable` is in [this link](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol).
 
 ## Remix Demo example
 Here, we take `Owner.sol` as an example.
