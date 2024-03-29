@@ -119,7 +119,6 @@ which can be called directly. Note: When calling, this variable will be passed t
 
 ```solidity
     // Using the library with the "using for" 
-    {
     using Strings for uint256;
     function getString1(uint256 _number) public pure returns(string memory){
         // Library functions are automatically added as members of uint256 variables

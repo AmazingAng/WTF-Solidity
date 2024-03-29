@@ -91,7 +91,7 @@ Let's take `Event.sol` contract as an example.
 
 3. Check transaction details to check the emitted event.
 
-![](./img/12-1_en.jpg)
+![](./img/12-2_en.jpg)
 
 ### Query event on etherscan
 
