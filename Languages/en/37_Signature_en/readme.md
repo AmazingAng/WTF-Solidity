@@ -53,7 +53,7 @@ Signature: 0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d559
 
 ### Creating a signature
 
-**1. Packing the message:** In the Ethereum `ECDSA` standard, the `message` being signed is the `keccak256` hash of a set of data, which is of type `bytes32`. We can pack any content we want to sign using the `abi.encodePacked()` function, and then use `keccak256()` to calculate the hash as the `message`. In our example, the `message` is obtained from a`uint256` type variable and an `address` type variable.
+**1. Packing the message:** In the Ethereum `ECDSA` standard, the `message` being signed is the `keccak256` hash of a set of data, which is of type `bytes32`. We can pack any content we want to sign using the `abi.encodePacked()` function, and then use `keccak256()` to calculate the hash as the `message`. In our example, the `message` is obtained from a 'uint256` type variable and an `address` type variable.
 
 ```solidity
 /*
@@ -73,7 +73,7 @@ function getMessageHash(address _account, uint256 _tokenId) public pure returns(
 
 ```solidity
     /**
-     * @dev Returns an Ethereum signed message hash.
+     * @dev Returns an Ethereum-signed message hash.
      * `hash`: The message to be hashed
      * Follows Ethereum signing standard: https://eth.wiki/json-rpc/API#eth_sign[`eth_sign`]
      * and `EIP191`:https://eips.ethereum.org/EIPS/eip-191`
@@ -95,7 +95,7 @@ Ethereum signed message: 0xb42ca4636f721c7a331923e764587e98ec577cea1a185f60dfcc1
 
 **3-1. Sign with wallet:** In daily operations, most users sign messages using this method. After obtaining the message that needs to be signed, we need to use the `Metamask` wallet to sign it. The `personal_sign` method of `Metamask` will automatically convert the `message` into an `Ethereum signed message` and then initiate the signature. So we only need to input the `message` and the `signer wallet account`. It should be noted that the input `signer wallet account` needs to be consistent with the account currently connected by `Metamask`.
 
-Therefore, first import the `private key` in the example into the `Foxlet wallet`, and then open the `console` page of the browser: `Chrome menu-more tools-developer tools-Console`. Under the status of connecting to the wallet (such as connecting to OpenSea, otherwise an error will occur), enter the following instructions step by step to sign:
+Therefore, you need to first import the `private key` in the example into the `Foxlet wallet`, and then open the `console` page of the browser: `Chrome menu-more tools-developer tools-Console`. Under the status of connecting to the wallet (such as connecting to OpenSea, otherwise an error will occur), enter the following instructions step by step to sign:
 
 ```
 ethereum.enable()
@@ -104,7 +104,7 @@ hash = "0x1bf2c0ce4546651a1a2feb457b39d891a6b83931cc2454434f39961345ac378c"
 ethereum.request({method: "personal_sign", params: [account, hash]})
 ```
 
-The created signature can be seen in the returned result (`PromiseResult`) . Different accounts have different private keys, and the created signature values are also different. The signature created using the tutorial's private key is shown below:
+The created signature can be seen in the returned result (`PromiseResult`). Different accounts have different private keys, and the created signature values are also different. The signature created using the tutorial's private key is shown below:
 
 ```
 0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d559b12d220f99f41d17651b0c1c6a669d346a397f8541760d6b32a5725378b241c
@@ -166,7 +166,7 @@ _signature：0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d5
 
 ![Public key recovery by signature and message](./img/37-8.png)
 
-**5. Compare public keys and verify signature:** Next, we just need to compare the recovered `public key` with the signer's public key`_signer` to determine if they are equal: if they are, the signature is valid; otherwise, the signature is invalid.
+**5. Compare public keys and verify the signature:** Next, we just need to compare the recovered `public key` with the signer's public key `_signer` to determine if they are equal: if they are, the signature is valid; otherwise, the signature is invalid.
 
 ```solidity
 /**
@@ -287,4 +287,4 @@ _signature: 0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d55
 In this section, we introduced the digital signature `ECDSA` in Ethereum, how to create and verify signatures using `ECDSA`, and `ECDSA` contracts, and how to distribute `NFT` whitelists using them. The `ECDSA` library in the code is simplified from the same library of `OpenZeppelin`. 
 - Since the signature is off-chain and does not require `gas`, this whitelist distribution model is more cost-effective than the `Merkle Tree` model;
 - However, since users need to request a centralized interface to obtain the signature, a certain degree of decentralization is inevitably sacrificed;
-- Another advantage is that the whitelist can be dynamically changed, rather than being hardcoded in the contract in advance, because the central backend interface of the project can accept requests from any new address and provide whitelist signatures.
+- Another advantage is that the whitelist can be dynamically changed, rather than being hardcoded in the contract in advance because the central backend interface of the project can accept requests from any new address and provide whitelist signatures.
