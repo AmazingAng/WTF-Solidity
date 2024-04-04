@@ -28,10 +28,10 @@ tags:
 
 ## 漏洞例子
 
-此例子由[WTF Solidity合约安全: S07. 坏随机数](https://github.com/AmazingAng/WTF-Solidity/tree/main/32_Faucet)中的合约改写而成。我们改变了 `mint()` 铸造函数的条件：当区块时间能被 170 整除时才能成功铸造：
+此例子由[WTF Solidity合约安全: S07. 坏随机数](https://github.com/AmazingAng/WTF-Solidity/tree/main/S07_BadRandomness)中的合约改写而成。我们改变了 `mint()` 铸造函数的条件：当区块时间能被 170 整除时才能成功铸造：
 
 ```solidity
-contract TimeMnipulation is ERC721 {
+contract TimeManipulation is ERC721 {
     uint256 totalSupply;
 
     // 构造函数，初始化NFT合集的名称、代号
@@ -110,8 +110,8 @@ contract TimeManipulationTest is Test {
 在安装好 Foundry 之后，在命令行输入下列命令启动新项目，并安装 openzeppelin 库：
 
 ```shell
-forge init TimeMnipulation
-cd TimeMnipulation
+forge init TimeManipulation
+cd TimeManipulation
 forge install Openzeppelin/openzeppelin-contracts
 ```
 
@@ -139,7 +139,7 @@ Logs:
 Test result: ok. 1 passed; 0 failed; finished in 7.64ms
 ```
 
-我们可以看到，当我们将` block.timestamp` 修改为 17000时，铸造成功。
+我们可以看到，当我们将`block.timestamp` 修改为 17000时，铸造成功。
 
 ## 总结
 
