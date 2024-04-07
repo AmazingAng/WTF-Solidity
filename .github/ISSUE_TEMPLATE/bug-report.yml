@@ -23,7 +23,7 @@ body:
 
   - type: textarea
     attributes:
-      label: Environment (其他需要补充的)
+      label: Environment (环境)
       description: Tell us about your environment(告诉我们你的环境信息)
       placeholder: >
         Tell us what you're using it: Hardhat, Remix, etc. (告诉我们你使用的环境：Hardhat，Remix等等。)
