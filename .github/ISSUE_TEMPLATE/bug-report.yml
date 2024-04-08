@@ -1,5 +1,5 @@
 name: Bug report (程序Bug报告)
-title: "[Bug] [Class (章节)] title（标题）"
+title: "[Bug] [Class (章节)] Title（标题）"
 description: Problems and issues with code of WTF-Solidity (报告WTF-Solidity中的程序Bug)
 body:
   - type: markdown

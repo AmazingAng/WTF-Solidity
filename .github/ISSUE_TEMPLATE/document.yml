@@ -1,6 +1,6 @@
 name: Typo report(勘误报告)
 description: Report a typo in the WTF-Solidity(报告WTF-Solidity中的勘误)
-title: "[Doc][Module Name（模块）] title（标题）"
+title: "[Doc][Module Name（模块）] Title（标题）"
 body:
   - type: markdown
     attributes:
