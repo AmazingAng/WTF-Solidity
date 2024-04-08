@@ -1,7 +1,7 @@
 
 name: Feature request（对此项目提出一个意见）
 description: Suggest an idea for this project（对此项目提出一个意见）
-title: "[Feature][Module Name（模块名称）] Feature title（标题）"
+title: "[Feature][Module Name（模块名称）] title（标题）"
 body:
   - type: markdown
     attributes:
