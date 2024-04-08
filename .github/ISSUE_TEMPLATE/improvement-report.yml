@@ -1,6 +1,6 @@
 name: Improvement request (提升请求)
 description: Suggest an improvement for this project (给WTF-Solidity提一个改进提升的请求)
-title: "[Improvement][Module Name（模块）] Improvement title（标题）"
+title: "[Improvement][Module Name（模块名称）] title（标题）"
 body:
   - type: markdown
     attributes:
