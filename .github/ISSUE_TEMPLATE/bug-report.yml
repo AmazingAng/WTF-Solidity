@@ -1,6 +1,6 @@
 name: Bug report (程序Bug报告)
 title: "[Bug] [Class (章节)] Bug title （标题）"
-description: Problems and issues with code of WTF (报告WTF-Solidity中的程序Bug)
+description: Problems and issues with code of WTF (报告WTF中的程序Bug)
 body:
   - type: markdown
     attributes:
@@ -43,4 +43,4 @@ body:
 
   - type: markdown
     attributes:
-      value: "Thanks for completing our form!"
+      value: "Thanks for completing our form!(感谢填写表单！)"
