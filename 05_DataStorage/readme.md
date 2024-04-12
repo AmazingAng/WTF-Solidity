@@ -66,7 +66,8 @@ function fCalldata(uint[] calldata _x) public pure returns(uint[] calldata){
     **Example:**
 
     ![5-2.png](./img/5-2.png)
-  - `memory`赋值给`memory`，会创建引用，改变新变量会影响原变量。
+  - `memory`赋值给`memory`，会创建引用，改变新变量会影响原变量（string 和 bytes 类型会创建副本）。
+
 
 - 其他情况下，赋值创建的是本体的副本，即对二者之一的修改，并不会同步到另一方
 
