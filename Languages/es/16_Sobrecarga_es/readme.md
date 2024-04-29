@@ -28,7 +28,7 @@ y se consideran funciones diferentes.
 Note que `solidity` no permite la sobrecarga de modificadores (`modifier`).
 
 ### Sobrecarga de Funciones
-Por ejemplo, podríamos definir dos funciones llamadas `saySomething()`:
+Por ejemplo, se podría definir dos funciones llamadas `saySomething()`:
 una sin argumentos y que devuelva `"Nothing"`, la otra que tome un argumento de tipo `string` y devuelva un `string`.
 
 ```solidity
@@ -46,7 +46,8 @@ Para ver el contenido específico del selector de una función, consulte [WTF So
 
 Tomando el contrato `Overloading.sol` como ejemplo, después de compilar y desplegar en Remix.
 Después de llamar a las funciones de sobrecarga `saySomething()` y `saySomething(string memory something)` respectivamente,
-podemos ver diferentes resultados, ya que las funciones se consideran diferentes.
+se pueden ver diferentes resultados, ya que las funciones se consideran diferentes.
+
 ![](./img/16-1.jpeg)
 
 ### Coincidencia de Argumentos
@@ -67,6 +68,6 @@ El siguiente ejemplo tiene dos funciones llamadas `f()`, una tiene el parámetro
 El número `50` se puede convertir tanto a `uint8` como a `uint256`, por lo que se generará un error si llamamos a `f(50)`.
 
 ## Resumen
-En esta lección, presentamos el uso básico de la función de sobrecarga en `solidity`:
+En esta lección, se presento el uso básico de la función de sobrecarga en `solidity`:
 las funciones con el mismo nombre pero diferentes tipos de parámetros de entrada pueden existir al mismo tiempo,
 y se consideran funciones diferentes.

@@ -25,7 +25,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 Hay tres formas de enviar `ETH` en `Solidity`: `transfer()`, `send()` y `call()`, de las cuales `call()` es la recomendada.
 
 ## Contrato para recibir ETH
-Primero, despleguemos un contrato `ReceiveETH` para recibir `ETH`. `ReceiveETH` tiene un evento `Log`, que registra la cantidad de `ETH` recibida y el `gas` restante. 
+Primero, se despliega un contrato `ReceiveETH` para recibir `ETH`. `ReceiveETH` tiene un evento `Log`, que registra la cantidad de `ETH` recibida y el `gas` restante. 
 Junto con otras dos funciones, una es la función `receive()`, que se ejecuta al recibir `ETH`, y emite el evento `Log`; la otra es la función `getBalance()` que se utiliza para obtener el balance del contrato.
 
 ```solidity
