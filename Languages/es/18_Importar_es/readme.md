@@ -79,6 +79,6 @@ contract Import {
 ![result](./img/18-1.png)
 
 ## Resumen
-En esta lección, presentamos el método de importación de código fuente externo usando la palabra clave `import`. A través de `import`,
+En esta lección, se presento el método de importación de código fuente externo usando la palabra clave `import`. A través de `import`,
 puede hacer referencia a contratos o funciones en otros archivos escritos por nosotros,
 o importar directamente código escrito por otros, lo cual es muy conveniente.

@@ -24,13 +24,13 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-En este capítulo, se usará el contrato de biblioteca `String` referenciado por `ERC721` como ejemplo para introducir el contrato de biblioteca en `solidity`,
+En este capítulo se usará el contrato de biblioteca `String` referenciado por `ERC721` como ejemplo para introducir el contrato de biblioteca en `solidity`,
 y luego resumir las funciones de biblioteca comúnmente utilizadas.
 
 
 ## Funciones de biblioteca
 
-Una librería es un contrato especial que existe para mejorar la reutilización de `solidity` y reducir el consumo de `gas`.
+Una librería es un contrato especial que existe para mejorar la reutilización en `solidity` y reducir el consumo de `gas`.
 Los contratos de biblioteca son generalmente una colección de funciones útiles (`funciones de biblioteca`),
 que son creadas por los maestros o la parte del proyecto.
 Solo necesitamos pararnos sobre los hombros de los gigantes y usar esas funciones.
@@ -147,11 +147,11 @@ ambos métodos pueden devolver la cadena `hexadecimal` correcta "0xaa",
 
 ## Resumen
 
-En este capítulo, hemos introducido el contrato de biblioteca en `solidity` y resumido las funciones de biblioteca comúnmente utilizadas.
+En este capítulo, se ha introducido el contrato de biblioteca en `solidity` y resumido las funciones de biblioteca comúnmente utilizadas.
 99% de los desarrolladores no necesitan escribir contratos de biblioteca ellos mismos, pueden usar los escritos por los maestros.
 Lo único que necesitamos saber es qué contrato de biblioteca usar y dónde es más adecuada la biblioteca.
 
-Some commonly used libraries are:
+Algunas bibliotecas comúnmente utilizadas son:
 1. [String](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/4a9cc8b4918ef3736229a5cc5a310bdc17bf759f/contracts/utils/Strings.sol)：Convertir `uint256` a `String`
 2. [Address](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/4a9cc8b4918ef3736229a5cc5a310bdc17bf759f/contracts/utils/Address.sol)：Determinar si auna dirección es una dirección de contrato.
 3. [Create2](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/4a9cc8b4918ef3736229a5cc5a310bdc17bf759f/contracts/utils/Create2.sol)：Uso más seguro de  `Create2 EVM opcode`

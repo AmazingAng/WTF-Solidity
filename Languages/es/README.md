@@ -53,7 +53,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 **Capítulo 17. Librería**：[Code](./17_Libreria_es/Library.sol) | [Tutorial](./17_Libreria_es/readme.md)
 
-**Capítulo 18. Importart**：[Code](./18_Importar_es/import.sol) | [Tutorial](./18_Importar_es/readme.md)
+**Capítulo 18. Importar**：[Code](./18_Importar_es/import.sol) | [Tutorial](./18_Importar_es/readme.md)
 
 **Capítulo 19. Alternativa**：[Code](./19_Alternativa_es/Fallback.sol) | [Tutorial](./19_Alternativa_es/readme.md)
 

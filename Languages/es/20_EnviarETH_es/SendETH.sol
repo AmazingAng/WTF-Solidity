@@ -1,37 +1,37 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-// 3 ways to send ETH
-// transfer: 2300 gas, revert
-// send: 2300 gas, return bool
-// call: all gas, return (bool, data)
+// 3 Formas de enviar ETH
+// transfer: 2300 gas, revertir
+// send: 2300 gas, retorna bool
+// call: all gas, returnar (bool, data)
 
-error SendFailed(); // error when sending with Send
-error CallFailed(); // error when seding with Call
+error SendFailed(); // error cuando se envía con Send 
+error CallFailed(); // error cuando se envía con Call
 
 contract SendETH {
-    // Constructor, make it payable so we can transfer ETH at deployment
+    // Constructor, hacerlo pagable para poder transferir ETH al despliegue
     constructor() payable{}
-    // receive function, called when receiving ETH
+    // receive function, llamada al recibir ETH
     receive() external payable{}
 
-    // sending ETH with transfer()
+    // enviar ETH con transfer()
     function transferETH(address payable _to, uint256 amount) external payable{
         _to.transfer(amount);
     }
 
-    // sending ETH with send()
+    // enviar ETH con send()
     function sendETH(address payable _to, uint256 amount) external payable{
-        // check result of send()，revert with error when failed
+        // verificar el resultado de send(), revertir con error cuando falla
         bool success = _to.send(amount);
         if(!success){
             revert SendFailed();
         }
     }
 
-    // sending ETH with call()
+    // enviar ETH con call()
     function callETH(address payable _to, uint256 amount) external payable{
-        // check result of call()，revert with error when failed
+        // verificar el resultado de call(), revertir con error cuando falla
         (bool success,) = _to.call{value: amount}("");
         if(!success){
             revert CallFailed();
@@ -40,15 +40,15 @@ contract SendETH {
 }
 
 contract ReceiveETH {
-    // Receiving ETH event, log the amount and gas
+    // Recibir evento ETH, registrar la cantidad y el gas
     event Log(uint amount, uint gas);
 
-    // receive is executed when receiving ETH
+    // receive se ejecuta al recibir ETH
     receive() external payable{
         emit Log(msg.value, gasleft());
     }
     
-    // return the balance of the contract
+    // retorna el balance del contrato
     function getBalance() view public returns(uint) {
         return address(this).balance;
     }
