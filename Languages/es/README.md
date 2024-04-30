@@ -49,6 +49,16 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 **Capítulo 15. Errores**：[Code](./15_Errores_es/Error.sol) | [Tutorial](./15_Errores_es/readme.md)
 
+**Capítulo 26. Eliminar contrato**：[Code](./26_EliminarContrato_es/DeleteContract.sol) | [Tutorial](./26_EliminarContrato_es/readme.md)
+
+**Capítulo 27. Codificacion y decodificación ABI**：[Code](./27_CodificacionDecodificacionABI_es/ABIEncode.sol) | [Tutorial](./27_CodificacionDecodificacionABI_es/readme.md)
+
+**Capítulo 28. Función hash**：[Code](./28_FuncionHash_es/Hash.sol) | [Tutorial](./28_FuncionHash_es/readme.md)
+
+**Capítulo 29. Selector**：[Code](./29_Selector_es/Hash.sol) | [Tutorial](./29_Selector_es/readme.md)
+
+**Capítulo 30. Intentar capturar**：[Code](./30_IntentarCapturar_es/TryCatch.sol) | [Tutorial](./30_IntentarCapturar_es/readme.md)
+
 ## WTF Contributors
 
 <div align="center">
