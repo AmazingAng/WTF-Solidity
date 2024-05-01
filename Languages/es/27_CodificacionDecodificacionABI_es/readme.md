@@ -91,13 +91,13 @@ Ingresamos la codificación binaria de `abi.encode` en `decode`, que decodificar
 
 ## Verificación en Remix
 - Desplegar el contrato para verificar el resultado de la codificación de `abi.encode` 
-![](./img/27-1_en.png)
+![](./img/27-1.png)
 
 - comparar y verificar las similitudes y diferencias de las cuatro funciones de codificación
-![](./img/27-2_en.png)
+![](./img/27-2.png)
 
 - verificar el resultado de decodificación de `abi.decode`
-![](./img/27-3_en.png)
+![](./img/27-3.png)
 
 ## Escenario de uso de ABI 
 1. En el desarrollo de contratos, `ABI` a menudo se combina con una llamada para implementar una llamada de bajo nivel al contrato.
@@ -120,10 +120,10 @@ Ingresamos la codificación binaria de `abi.encode` en `decode`, que decodificar
 ```
 3. Después de descompilar un contrato que no es de código abierto, algunas funciones no pueden encontrar firmas de función, pero se pueden llamar a través de `ABI`.
 - 0x533ba33a() es una función que se muestra después de descompilar, solo se pueden obtener resultados codificados de funciones, y no se puede encontrar la firma de la función.
-![](./img/27-4_en.png)
-![](./img/27-5_en.png)
+![](./img/27-4.png)
+![](./img/27-5.png)
 - En este caso no podemos llamar a través de la construcción de una interfaz o contrato
-![](./img/27-6_en.png)
+![](./img/27-6.png)
 
 En este caso, podemos llamar a través del selector de función ABI.
 ```solidity

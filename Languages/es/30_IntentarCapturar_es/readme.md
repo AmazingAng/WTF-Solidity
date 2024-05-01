@@ -123,11 +123,11 @@ por último, se crea una función `execute` para llamar a la función `onlyEven`
 
 Cuando se ejecuta `execute(0)`, como `0` es par, satisface `require(b % 2 == 0, "Ups! Reverting");`, por lo que no se lanza ninguna excepción. La llamada tiene éxito y se lanza `SuccessEvent`.
 
-![](./img/30-1_en.jpg)
+![](./img/30-1.png)
 
 Cuando se ejecuta `execute(1)`, como `1` es impar, no satisface `require(b % 2 == 0, "Ups! Reverting");`, por lo que se lanza la excepción. La llamada falla y se lanza `CatchEvent`.
 
-![](./img/30-2_en.jpg)
+![](./img/30-2.png)
 
 ### Manejar excepciones de creación de contratos
 
@@ -155,15 +155,15 @@ Aquí se usa `try-catch` para manejar excepciones cuando se crea un contrato. So
 ### Verificar en remix
 Cuando se ejecuta `executeNew(0)`, como `0` no satisface `require(a != 0, "invalid number");`, la llamada fallará y se lanzará `CatchEvent`.
 
-![](./img/30-3_en.jpg)
+![](./img/30-3.png)
 
 Cuando se ejecuta `executeNew(1)`, como `1` no satisface `assert(a != 1);`, la llamada fallará y se lanzará `CatchByte`.
 
-![](./img/30-4_en.jpg)
+![](./img/30-4.png)
 
 Cuando se ejecuta `executeNew(2)`, como `2` satisface `require(a != 0, "invalid number");` y `assert(a != 1);`, la llamada tiene éxito y se lanza `SuccessEvent`.
 
-![](./img/30-5_en.jpg)
+![](./img/30-5.png)
 
 ## Resumen
 En este capítulo, se presenta cómo usar `try-catch` en `solidity` para manejar excepciones en la operación de contratos inteligentes.
