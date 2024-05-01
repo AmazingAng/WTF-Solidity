@@ -55,7 +55,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 **Capítulo 28. Función hash**：[Code](./28_FuncionHash_es/Hash.sol) | [Tutorial](./28_FuncionHash_es/readme.md)
 
-**Capítulo 29. Selector**：[Code](./29_Selector_es/Hash.sol) | [Tutorial](./29_Selector_es/readme.md)
+**Capítulo 29. Selector**：[Code](./29_Selector_es/Selector.sol) | [Tutorial](./29_Selector_es/readme.md)
 
 **Capítulo 30. Intentar capturar**：[Code](./30_IntentarCapturar_es/TryCatch.sol) | [Tutorial](./30_IntentarCapturar_es/readme.md)
 
