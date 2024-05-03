@@ -49,6 +49,16 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 **Capítulo 15. Errores**：[Code](./15_Errores_es/Error.sol) | [Tutorial](./15_Errores_es/readme.md)
 
+**Capítulo 16. Sobrecarga**：[Code](./16_Sobrecarga_es/Overloading.sol) | [Tutorial](./16_Sobrecarga_es/readme.md)
+
+**Capítulo 17. Librería**：[Code](./17_Libreria_es/Library.sol) | [Tutorial](./17_Libreria_es/readme.md)
+
+**Capítulo 18. Importar**：[Code](./18_Importar_es/import.sol) | [Tutorial](./18_Importar_es/readme.md)
+
+**Capítulo 19. Alternativa**：[Code](./19_Alternativa_es/Fallback.sol) | [Tutorial](./19_Alternativa_es/readme.md)
+
+**Capítulo 20. Enviar ETH**：[Code](./20_EnviarETH_es/SendETH.sol) | [Tutorial](./20_EnviarETH_es/readme.md)
+
 ## WTF Contributors
 
 <div align="center">
