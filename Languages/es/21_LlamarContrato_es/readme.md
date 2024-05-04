@@ -1,5 +1,5 @@
 ---
-title: 21. Interactuar con Contrato
+title: 21. Interactuar con un Contrato externo
 tags:
   - solidity
   - avanzado
@@ -23,12 +23,12 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-## Interactuar con contrato desplegado
+## Interactuar con un contrato desplegado
 
 Las interacciones entre contratos no solo hacen que los programas sean reutilizables en la cadena de bloques, sino que también enriquecen el ecosistema de Ethereum. Muchas Dapps de `web3` dependen de otro contrato para funcionar, por ejemplo, `yield farming`. En este tutorial, hablaremos sobre cómo interactuar con contratos cuyo código fuente (o ABI) y dirección están disponibles.
 
 ## Contrato Objetivo
-Escribamos un contrato simple `OtherContract` para trabajar con él.
+Se escribe un contrato simple `OtherContract` para trabajar con él.
 
 ```solidity
 contract OtherContract {
