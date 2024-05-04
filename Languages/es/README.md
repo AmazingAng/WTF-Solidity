@@ -59,6 +59,16 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 **Capítulo 20. Enviar ETH**：[Code](./20_EnviarETH_es/SendETH.sol) | [Tutorial](./20_EnviarETH_es/readme.md)
 
+**Capítulo 21. Llamar contrato**：[Code](./21_LlamarContrato_es/CallContract.sol) | [Tutorial](./21_LlamarContrato_es/readme.md)
+
+**Capítulo 22. Metodo llamar**：[Code](./22_Metodo_llamar_es/Call.sol) | [Tutorial](./22_Metodo_llamar_es/readme.md)
+
+**Capítulo 23. Delegar llamada**：[Code](./23_DelegarLlamada_es/Delegatecall.sol) | [Tutorial](./23_DelegarLlamada_es/readme.md)
+
+**Capítulo 24. Crear**：[Code](./24_Crear_es/Create.sol) | [Tutorial](./24_Crear_es/readme.md)
+
+**Capítulo 25. Crear**：[Code](./25_Crear2_es/create2.sol) | [Tutorial](./25_Crear2_es/readme.md)
+
 **Capítulo 26. Eliminar contrato**：[Code](./26_EliminarContrato_es/DeleteContract.sol) | [Tutorial](./26_EliminarContrato_es/readme.md)
 
 **Capítulo 27. Codificacion y decodificación ABI**：[Code](./27_CodificacionDecodificacionABI_es/ABIEncode.sol) | [Tutorial](./27_CodificacionDecodificacionABI_es/readme.md)
