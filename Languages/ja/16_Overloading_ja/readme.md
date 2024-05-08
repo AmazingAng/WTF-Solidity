@@ -11,21 +11,21 @@ tags:
 
 最近、Solidity の学習を再開し、詳細を確認しながら「Solidity 超シンプル入門」を作っています。これは初心者向けのガイドで、プログラミングの達人向けの教材ではありません。毎週 1〜3 レッスンのペースで更新していきます。
 
-僕のツィッターをフォローしてね：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy\_](https://twitter.com/WTFAcademy_)
+僕のツイッター：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
 コミュニティ：[Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[公式サイト wtf.academy](https://wtf.academy)
 
-すべてのソースコードやレッスンは github にて全公開: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+すべてのソースコードやレッスンは github にて公開: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 ---
 
 ## オーバーロード
 
-`Solidity`ではオーバーロードは許容されている（`overloading`）、すなわち同名の関数は、異なる関数として認識されます。特筆したいのは`Solidity`はモディファイヤー（`modifier`）のオーバーロードを許容していない点。
+`Solidity`ではオーバーロードは許可されています（`overloading`）、すなわち同名の関数は異なる関数として認識されます。特に注目すべきは、`Solidity`は修飾子（`modifier`）のオーバーロードを許容していない点です。
 
 ### 関数のオーバーロード
 
-例えば，我々は２つの`saySomething()`の関数を定義できます。片方は引数がなく、return 値は`nothing`、もう片方は`string`の引数を持っていて return 値はこの`string`の引数とします。
+例えば，私たちは２つの`saySomething()`の関数を定義できます。一方は引数がなく、`return`値は`nothing`、もう一方は`string`方の引数を取り、その引数を`return`値としています。
 
 ```solidity
 function saySomething() public pure returns(string memory){
