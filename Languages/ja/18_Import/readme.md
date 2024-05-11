@@ -7,7 +7,7 @@ tags:
   - import
 ---
 
-# WTF Solidity 超シンプル入門: 16. 関数のオーバーロード
+# WTF Solidity 超シンプル入門: 18. import
 
 最近、Solidity の学習を再開し、詳細を確認しながら「Solidity 超シンプル入門」を作っています。これは初心者向けのガイドで、プログラミングの達人向けの教材ではありません。毎週 1〜3 レッスンのペースで更新していきます。
 
@@ -19,7 +19,6 @@ tags:
 
 ---
 
-在 Solidity 中，`import`语句可以帮助我们在一个文件中引用另一个文件的内容，提高代码的可重用性和组织性。本教程将向你介绍如何在 Solidity 中使用`import`语句。
 Solidity において、`import`文を使うことで、別のファイルの内容を参照することができ、コードの再利用性と構造化を向上させることができます。このチュートリアルでは、Solidity で`import`文の使い方について説明します。
 
 ## `import`の使い方
@@ -66,7 +65,6 @@ pragma solidity ^0.8.21;
 
 // 相対パスを使ってimport
 import './Yeye.sol';
-// 通过`全局符号`导入特定的合约
 // グローバルシンボルを使って特定のコントラクトをimport
 import {Yeye} from './Yeye.sol';
 // URL を使ってimport
@@ -80,7 +78,7 @@ contract Import {
     // yeye変数を宣言
     Yeye yeye = new Yeye();
 
-    // yeyeの関数が呼び出せるかテスト
+    // yeyeの関数を呼び出せるかテスト
     function test() external{
         yeye.hip();
     }
