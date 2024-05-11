@@ -136,7 +136,6 @@ library Strings {
 
 ## まとめ
 
-这一讲，我们用`ERC721`的引用的库合约`String`为例介绍`Solidity`中的库合约（`Library`）。99%的开发者都不需要自己去写库合约，会用大神写的就可以了。我们只需要知道什么情况该用什么库合约。常用的有：
 今回、私たちは`ERC721`の参照として使用される`String`ライブラリコントラクトを例に、`Solidity`のライブラリコントラクト（`Library`）について説明し、一般的なライブラリの使い方を説明しました。99%の開発者はライブラリコントラクトを自分で書く必要はありません。巨人たちが書いたものを使えば十分です。私たちが知っておくべきことは、どのような状況でどのライブラリコントラクトを使用するかです。一般的に使用されるライブラリコントラクトは以下の通り：
 
 1. [String](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/4a9cc8b4918ef3736229a5cc5a310bdc17bf759f/contracts/utils/Strings.sol)：`uint256`を`string`に変換するためのライブラリ
