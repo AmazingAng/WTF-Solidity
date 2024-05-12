@@ -166,6 +166,7 @@ main()
 
 - 使用预提交方案(commit-reveal scheme)。
 - 使用暗池，用户发出的交易将不进入公开的`mempool`，而是直接到矿工手里。例如 flashbots 和 TaiChi。
+- 在调用参数中加上保护性参数，如[滑点保护](https://uniswapv3book.com/milestone_3/slippage-protection.html)，从而减少抢跑者的潜在收益。
 
 ## 总结
 
