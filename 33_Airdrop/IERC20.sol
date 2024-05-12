@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // WTF Solidity by 0xAA
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 /**
  * @dev ERC20 接口合约.

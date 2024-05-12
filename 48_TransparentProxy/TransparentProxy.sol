@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // wtf.academy
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // 选择器冲突的例子
 // 去掉注释后，合约不会通过编译，因为两个函数有着相同的选择器

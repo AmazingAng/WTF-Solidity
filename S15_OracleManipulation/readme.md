@@ -9,15 +9,15 @@ tags:
 
 # WTF Solidity 合约安全: S15. 操纵预言机
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity 合约安全”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 
 这一讲，我们将介绍智能合约的操纵预言机攻击，并复现了一个攻击示例：用`1 ETH`兑换17万亿枚稳定币。仅2022年一年，操纵预言机攻击造成用户资产损失超过 2 亿美元。
 
@@ -44,7 +44,7 @@ tags:
 
 ## 漏洞例子
 
-下面我们学习一个预言机漏洞的例子，`oUSD` 合约。该合约是一个稳定币合约，符合ERC20标准。类似合成资产平台Synthetix，用户可以在这个合约中零滑点的将 `ETH` 兑换为 `oUSD`（Oracle USD）。兑换价格由自定义的价格预言机（`getPrice()`函数）决定，这里采取的是Uniswap V2的 `WETH-BUSD` 的瞬时价格。在之后的攻击示例例子中，我们会看到这个预言机非常容易被操纵。
+下面我们学习一个预言机漏洞的例子，`oUSD` 合约。该合约是一个稳定币合约，符合ERC20标准。类似合成资产平台Synthetix，用户可以在这个合约中零滑点的将 `ETH` 兑换为 `oUSD`（Oracle USD）。兑换价格由自定义的价格预言机（`getPrice()`函数）决定，这里采取的是Uniswap V2的 `WETH-BUSD` 的瞬时价格。在之后的攻击示例中，我们会看到这个预言机在使用闪电贷和大额资金的情况下非常容易被操纵。
 
 ### 漏洞合约
 
@@ -105,8 +105,8 @@ contract oUSD is ERC20{
 我们针对有漏洞的价格预言机 `getPrice()` 函数进行攻击，步骤：
 
 1. 准备一些 `BUSD`，可以是自有资金，也可以是闪电贷借款。在实现中，我们利用 Foundry 的 `deal` cheatcode 在本地网络上给自己铸造了 `1_000_000 BUSD`
-2. 在 UniswapV2 的 `WETH-BUSD` 池中大量买入 `WETH`。具体实现见攻击代码的 `swapBUSDtoWETH()` 函数。
-3. `WETH` 瞬时价格暴涨，这时我们调用 `swap()` 函数将 `ETH` 转换为 `oUSD`。
+2. 在 UniswapV2 的 `WETH-BUSD` 池中使用`BUSD`大量买入 `WETH`。具体实现见攻击代码的 `swapBUSDtoWETH()` 函数。
+3. 在此情况下，`WETH-BUSD`池中代币对比例失去了平衡，`WETH` 瞬时价格暴涨，这时我们调用 `swap()` 函数将 `ETH` 转换为 `oUSD`。
 4. **可选:** 在 UniswapV2 的 `WETH-BUSD` 池中卖出第2步买入的 `WETH`，收回本金。
 
 这4步可以在一个交易中完成。
@@ -152,7 +152,7 @@ contract oUSD is ERC20{
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 import "forge-std/Test.sol";
 import "forge-std/console.sol";
 import "../src/Oracle.sol";
@@ -232,7 +232,8 @@ contract OracleTest is Test {
 2. 不要使用现货/瞬时价格做价格预言机，要加入价格延迟，例如时间加权平均价格（TWAP）。
 3. 使用去中心化的预言机。
 4. 使用多个数据源，每次选取最接近价格中位数的几个作为预言机，避免极端情况。
-5. 仔细阅读第三方价格预言机的使用文档及参数设置。
+5. 在使用Oracle预言机的询价方法如`latestRoundData()`，需要对返回结果进行校验，防止使用过时失效数据。
+6. 仔细阅读第三方价格预言机的使用文档及参数设置。
 
 ## 总结
 

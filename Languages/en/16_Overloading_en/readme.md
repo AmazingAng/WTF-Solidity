@@ -19,9 +19,9 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 -----
 
 ## Overloading
-`solidity` allows functions to be overloaded（`overloading`）.That is, functions with the same name but different input parameter types 
+`solidity` allows functions to be overloaded（`overloading`）. That is, functions with the same name but different input parameter types 
 can exist at the same time, and they are regarded as different functions.
-Note that `solidity` does not allow modifier (`modifier`) to be overloaded.
+Note that `solidity` does not allow the modifier (`modifier`) to be overloaded.
 
 ### Function Overloading
 For example, we could define two functions both called `saySomething()`:
@@ -40,14 +40,14 @@ function saySomething(string memory something) public pure returns(string memory
 After compiling, all overloading functions become different function selectors due to different parameter types. 
 For the specific content of the function selector, please refer to [WTF Solidity Tutorial: 29. Function Selector](https://github.com/AmazingAng/WTFSolidity/tree/main/29_Selector).
 
-Taking the `Overloading.sol` contract as an example, after compiling and deploying on Remix.
+Take the `Overloading.sol` contract as an example, after compiling and deploying on Remix.
 After calling the overloading functions `saySomething()` and `saySomething(string memory something)` respectively, 
 we can see different results, for the functions are regarded as different ones.
 ![](./img/16-1.jpeg)
 
 ### Argument Matching
 
-When the overloading function is called, the variable type will be matched between input parameter and function parameters.
+When the overloading function is called, the variable type will be matched between the input parameter and function parameters.
 An error will be reported if there are multiple matching overloading functions,
 The following example has two functions called `f()`, one have `uint8` parameter and the other get `uint256`:
 
@@ -64,7 +64,7 @@ For `50` can be converted to `uint8` as well as `uint256`, so it will report an 
 
 ## Summary
 
-In this lecture, we introduce the basic usage of overloading function in `solidity`: 
+In this lecture, we introduce the basic usage of the overloading function in `solidity`: 
 functions with the same name but different input parameter types can exist at the same time, 
 which are treated as different functions.
 

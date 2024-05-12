@@ -204,7 +204,7 @@ The `approve(address to, uint tokenId)` method has 2 parameters:
 
 ![](./img/38-5.png)
 
-Following the method above, authorizes the NFT with `tokenId` of `1` to the `NFTSwap` contract address.
+Following the method above authorizes the NFT with `tokenId` of `1` to the `NFTSwap` contract address.
 
 ### 4. List the NFT for Sale
 Call the `list()` function of the `NFTSwap` contract to list the NFT with `tokenId` of `0` that is held by the caller on the `NFTSwap`. Set the price to 1 `wei`.

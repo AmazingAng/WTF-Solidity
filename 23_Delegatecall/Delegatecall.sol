@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 // delegatecall和call类似，都是低级函数
 // call: B call C, 上下文为 C (msg.sender = B, C中的状态变量受影响)

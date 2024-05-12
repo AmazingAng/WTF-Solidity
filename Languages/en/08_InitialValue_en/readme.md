@@ -27,7 +27,7 @@ In Solidity, variables declared but not assigned have their initial/default valu
     - `internal`: blank function
     - `external`: blank function
 
-You can use `getter` function of `public` variables to confirm the above initial values:
+You can use the `getter` function of `public` variables to confirm the above initial values:
 
 ```solidity
     bool public _bool; // false
@@ -50,16 +50,16 @@ You can use `getter` function of `public` variables to confirm the above initial
 
 - `array`
     - dynamic array: `[]`
-    - static array（fixed-length): a static array where all members set to their default values.
+    - static array（fixed-length): a static array where all members are set to their default values.
 
-You can use `getter` function of `public` variables to confirm initial values:
+You can use the `getter` function of `public` variables to confirm initial values:
 
 ```solidity
     // reference types
     uint[8] public _staticArray; // a static array which all members set to their default values[0,0,0,0,0,0,0,0]
     uint[] public _dynamicArray; // `[]`
     mapping(uint => address) public _mapping; // a mapping which all members set to their default values
-    // a struct which all members set to their default values 0, 0
+    // a struct in which all members are set to their default values of 0, 0
     struct Student{
         uint256 id;
         uint256 score; 
@@ -85,10 +85,10 @@ You can use `getter` function of `public` variables to confirm initial values:
 
     ![](./img/8-1_en.jpg)
 
-- After using the `delete` operator, the value of the variables are reset to their initial values.
+- After using the `delete` operator, the values of the variables are reset to their initial values.
 
     ![](./img/8-2_en.jpg)
 
 ## Summary
 
-In this section, we introduced the initial values of variables in Solidity. When a variable is declared but not assigned, its value defaults to the initial value, which is equivalent as `0` represented in its type. The `delete` operator can reset the value of the variable to the initial value.
+In this section, we introduced the initial values of variables in Solidity. When a variable is declared but not assigned, its value defaults to the initial value, which is equivalent to `0` represented in its type. The `delete` operator can reset the value of the variable to the initial value.

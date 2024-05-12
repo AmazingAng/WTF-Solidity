@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // by 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 contract SelectorClash {
     bool public solved; // 攻击是否成功

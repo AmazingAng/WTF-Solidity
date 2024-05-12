@@ -26,7 +26,7 @@ Vitalik once said that a multisig wallet is safer than a hardware wallet ([tweet
 
 ## Multisig Wallet
 
-A multisig wallet is an electronic wallet where transactions require authorization from multiple private key holders (multisig owners) before they can be executed. For example, if a wallet is managed by three multisig owners, each transaction requires authorization from at least two of them. Multisig wallets can prevent single point failure (loss of private keys, individual misbehavior), have greater decentralized characteristics, and provide increased security. It is used by many DAOs.
+A multisig wallet is an electronic wallet where transactions require authorization from multiple private key holders (multisig owners) before they can be executed. For example, if a wallet is managed by three multisig owners, each transaction requires authorization from at least two of them. Multisig wallets can prevent single-point failure (loss of private keys, individual misbehavior), have greater decentralized characteristics, and provide increased security. It is used by many DAOs.
 
 Gnosis Safe is the most popular multisig wallet on Ethereum, managing nearly $40 billion in assets. The contract has undergone auditing and practical testing, supports multiple chains (Ethereum, BSC, Polygon, etc.), and provides comprehensive DAPP support. For more information, you can read the [Gnosis Safe tutorial](https://peopledao.mirror.xyz/nFCBXda8B5ZxQVqSbbDOn2frFDpTxNVtdqVBXGIjj0s) I wrote in December 2021.
 
@@ -101,7 +101,7 @@ The `MultisigWallet` contract has `6` functions:
     }
     ```
 
-2. `_setupOwners()`: Called by the constructor during contract deployment to initialize the `owners`, `isOwner`, `ownerCount`, `threshold` state variables. The passed-in parameters must have a threshold greater than or equal to `1` and less than or equal to the number of multisignature owners. The multisignature addresses cannot be the zero address and cannot be duplicated.
+2. `_setupOwners()`: Called by the constructor during contract deployment to initialize the `owners`, `isOwner`, `ownerCount`, and `threshold` state variables. The passed-in parameters must have a threshold greater than or equal to `1` and less than or equal to the number of multisignature owners. The multisignature addresses cannot be the zero addresses and cannot be duplicated.
 
 ```solidity
 /// @dev Initialize owners, isOwner, ownerCount, threshold
@@ -130,7 +130,7 @@ function _setupOwners(address[] memory _owners, uint256 _threshold) internal {
 3. `execTransaction()`: After collecting enough multisig signatures, it verifies the signatures and executes the transaction. The parameters passed in include the target address `to`, the amount of Ethereum sent `value`, the data `data`, and the packaged signatures `signatures`. The packaged signature is the signature of the transaction hash collected by the multisig parties, packaged into a [bytes] data in the order of the multisig owners' addresses from small to large. This step calls `encodeTransactionData()` to encode the transaction and calls `checkSignatures()` to verify the validity of the signatures and whether the number of signatures reaches the execution threshold.
 
 ```solidity
-/// @dev After collecting enough signatures from the multisig, execute transaction
+/// @dev After collecting enough signatures from the multisig, execute the transaction
 /// @param to Target contract address
 /// @param value msg.value, ether paid
 /// @param data calldata
