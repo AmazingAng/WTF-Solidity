@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 contract FunctionTypes{
     uint256 public number = 5;
     
@@ -22,7 +22,7 @@ contract FunctionTypes{
         new_number = number + 1;
     }
 
-    // internal: 内部
+    // internal: 内部函数
     function minus() internal {
         number = number - 1;
     }

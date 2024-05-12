@@ -107,7 +107,7 @@ Deploy the `WETH` contract as shown in the image.
 
 ### 2. Execute `deposit` to deposit `1 ETH`, and check the `WETH` balance
 
-Execute `deposit` function to deposit `1 ETH`, and check the `WETH` balance.
+Execute the `deposit` function to deposit `1 ETH`, and check the `WETH` balance.
 
 ![WETH](./img/41-3.jpg)
 

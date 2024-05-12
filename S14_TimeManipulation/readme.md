@@ -8,15 +8,15 @@ tags:
 
 # WTF Solidity 合约安全: S14. 操纵区块时间
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity 合约安全”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
 
 这一讲，我们将介绍智能合约的操纵区块时间攻击，并使用 Foundry 复现。在合并（The Merge）之前，以太坊矿工可以操纵区块时间，如果抽奖合约的伪随机数依赖于区块时间，则可能被攻击。
 
@@ -28,10 +28,10 @@ tags:
 
 ## 漏洞例子
 
-此例子由[WTF Solidity合约安全: S07. 坏随机数](https://github.com/AmazingAng/WTF-Solidity/tree/main/32_Faucet)中的合约改写而成。我们改变了 `mint()` 铸造函数的条件：当区块时间能被 170 整除时才能成功铸造：
+此例子由[WTF Solidity合约安全: S07. 坏随机数](https://github.com/AmazingAng/WTF-Solidity/tree/main/S07_BadRandomness)中的合约改写而成。我们改变了 `mint()` 铸造函数的条件：当区块时间能被 170 整除时才能成功铸造：
 
 ```solidity
-contract TimeMnipulation is ERC721 {
+contract TimeManipulation is ERC721 {
     uint256 totalSupply;
 
     // 构造函数，初始化NFT合集的名称、代号
@@ -65,7 +65,7 @@ contract TimeMnipulation is ERC721 {
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "forge-std/Test.sol";
 import "forge-std/console.sol";
@@ -110,8 +110,8 @@ contract TimeManipulationTest is Test {
 在安装好 Foundry 之后，在命令行输入下列命令启动新项目，并安装 openzeppelin 库：
 
 ```shell
-forge init TimeMnipulation
-cd TimeMnipulation
+forge init TimeManipulation
+cd TimeManipulation
 forge install Openzeppelin/openzeppelin-contracts
 ```
 
@@ -139,7 +139,7 @@ Logs:
 Test result: ok. 1 passed; 0 failed; finished in 7.64ms
 ```
 
-我们可以看到，当我们将` block.timestamp` 修改为 17000时，铸造成功。
+我们可以看到，当我们将`block.timestamp` 修改为 17000时，铸造成功。
 
 ## 总结
 

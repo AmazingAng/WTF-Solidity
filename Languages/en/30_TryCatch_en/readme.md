@@ -21,7 +21,7 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidit
 
 `try-catch` is a standard way of handling exceptions that is almost ubiquitous in modern programming languages. Besides, it's added to `solidity`0.6.
 
-In this chapter, we will introduce you how to use `try-catch` to handle exceptions in smart contracts. 
+In this chapter, we will introduce how to use `try-catch` to handle exceptions in smart contracts. 
 
 ## `try-catch`
 In `solidity`, `try-catch` can only be used for `external` function or call `constructor` (considered `external` function) when creating contracts. The basic syntax is as follows:
@@ -32,11 +32,11 @@ In `solidity`, `try-catch` can only be used for `external` function or call `con
             // if call fails, run some codes
         }
 ```
-`externalContract.f()` is function call of an external contract, `try` module runs if call succeeds, while `catch` module runs if call fails.
+`externalContract.f()` is a function call of an external contract, `try` module runs if the call succeeds, while `catch` module runs if the call fails.
 
-You can also use `this.f()` instead of `externalContract.f()`. `this.f()` is also considered as an external call, but can't be used in constructor because the contract has not been created at that time.
+You can also use `this.f()` instead of `externalContract.f()`. `this.f()` is also considered as an external call, but can't be used in the constructor because the contract has not been created at that time.
 
-If the called function has a return value, then `returns(returnType val)` must be declared after `try`, and the returned variable can be used in `try` module. In the case of contract creation, the returned value is newly created contract variable.
+If the called function has a return value, then `returns(returnType val)` must be declared after `try`, and the returned variable can be used in `try` module. In the case of contract creation, the returned value is a newly created contract variable.
 ```solidity
         try externalContract.f() returns(returnType val){
             // if call succeeds, run some codes
@@ -100,9 +100,9 @@ First, define some events and state variables in `TryCatch` contract:
         even = new OnlyEven(2);
     }
 ```
-`SuccessEvent` is the event that will be released when call succeeds, while `CatchEvent` and `CatchByte` are the events that will be released when an exception is thrown, corresponding to `require/revert` and `assert` exceptions respectively. `even` is a state variable of `OnlyEven` contract type.
+`SuccessEvent` is the event that will be released when the call succeeds, while `CatchEvent` and `CatchByte` are the events that will be released when an exception is thrown, corresponding to `require/revert` and `assert` exceptions respectively. `even` is a state variable of `OnlyEven` contract type.
 
-Then we use `try-catch` in `execute` function to handle exception in the call to external function `onlyEven`:
+Then we use `try-catch` in `execute` function to handle exceptions in the call to the external function `onlyEven`:
 
 ```solidity
     // use try-catch in external call
@@ -123,7 +123,7 @@ When running `execute(0)`, because `0` is even, satisfy `require(b % 2 == 0, "Up
 
 ![](./img/30-1_en.jpg)
 
-When running `execute(1)`, because `1` is odd, doesn't satisfy `require(b % 2 == 0, "Ups! Reverting");`, so exception is thrown. The call fails and `CatchEvent` is released.
+When running `execute(1)`, because `1` is odd, doesn't satisfy `require(b % 2 == 0, "Ups! Reverting");`, so the exception is thrown. The call fails and `CatchEvent` is released.
 
 ![](./img/30-2_en.jpg)
 
@@ -161,7 +161,7 @@ When running `executeNew(1)`, because `1` doesn't satisfy `assert(a != 1);`, the
 
 ![](./img/30-4_en.jpg)
 
-When running `executeNew(2)`, because `2` satisfy `require(a != 0, "invalid number");` and `assert(a != 1);`, the call succeeds and `SuccessEvent` is released.
+When running `executeNew(2)`, because `2` satisfies `require(a != 0, "invalid number");` and `assert(a != 1);`, the call succeeds and `SuccessEvent` is released.
 
 ![](./img/30-5_en.jpg)
 

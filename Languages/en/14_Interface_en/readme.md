@@ -24,7 +24,7 @@ In this section, we will introduce the `abstract` and `interface` contracts in S
 
 ## Abstract contract
 
-If a contract contains at least one unimplemented function (no contents in the function body `{}`), it must be labeled as `abstract`; Otherwise it will not compile. Moreover, the unimplemented function needs to be labeled as `virtual`. 
+If a contract contains at least one unimplemented function (no contents in the function body `{}`), it must be labelled as `abstract`; Otherwise it will not compile. Moreover, the unimplemented function needs to be labelled as `virtual`. 
 Take our previous [Insertion Sort Contract](https://github.com/AmazingAng/WTFSolidity/tree/main/07_InsertionSort) as an example, 
 if we haven't figured out how to implement the insertion sort function, we can mark the contract as `abstract`, and let others overwrite it in the future.
 
@@ -36,7 +36,7 @@ abstract contract InsertionSort{
 
 ## Interface
 
-The `interface` contract is similar to the `abstract` contract, but it requires no functions are implemented. Rules of the interface:
+The `interface` contract is similar to the `abstract` contract, but it requires no functions to be implemented. Rules of the interface:
 
 1. Cannot contain state variables.
 2. Cannot contain constructors.
@@ -44,8 +44,8 @@ The `interface` contract is similar to the `abstract` contract, but it requires 
 4. All functions must be external and cannot have contents in the function body.
 5. The contract that inherits the interface contract must implement all the functions defined in it.
 
-Although the interface does not implement any functionality, it is the skeleton of smart contracts. Interface 
-defines what the contract does and how to interact with them: if a smart contract implements an interface (like `ERC20` or `ERC721`), 
+Although the interface does not implement any functionality, it is the skeleton of smart contracts. The interface 
+defines what the contract does and how to interact with it: if a smart contract implements an interface (like `ERC20` or `ERC721`), 
 other Dapps and smart contracts will know how to interact with it. Because it provides two important pieces of information:
 
 1. The `bytes4` selector for each function in the contract, and the function signatures `function name (parameter type)`.
@@ -55,8 +55,8 @@ In addition, the interface is equivalent to the contract `ABI` (Application Bina
 and they can be converted to each other: compiling the interface contract will give you the contract `ABI`, 
 and [abi-to-sol tool](https://gnidan.github.io/ abi-to-sol/) will convert the `ABI` back to the interface contract.
 
-We take `IERC721` contract, the interface for the `ERC721` token standard, as an example. It consists of 3 events and 9 functions, 
-which all `ERC721` contracts need to implement. In interface, each function ends with `;` instead of the function body `{ }`. Moreover, every function in interface contract is by default `virtual`, so you do not need to label function as `virtual` explicitly.
+We take the `IERC721` contract, the interface for the `ERC721` token standard, as an example. It consists of 3 events and 9 functions, 
+which all `ERC721` contracts need to implement. In the interface, each function ends with `;` instead of the function body `{ }`. Moreover, every function in the interface contract is by default `virtual`, so you do not need to label the function as `virtual` explicitly.
 
 ```solidity
 interface IERC721 is IERC165 {
@@ -88,7 +88,7 @@ interface IERC721 is IERC165 {
 `IERC721` contains 3 events.
 - `Transfer` event: emitted during transfer, records the sending address `from`, the receiving address `to`, and `tokenid`.
 - `Approval` event: emitted during approval, records the token owner address `owner`, the approved address `approved`, and `tokenid`.
-- `ApprovalForAll` event: emitted during batch approval, records the owner address `owner` of batch approval, the approved address `operator`, and whether the approve is enabled or disabled `approved` .
+- `ApprovalForAll` event: emitted during batch approval, records the owner address `owner` of batch approval, the approved address `operator`, and whether the approve is enabled or disabled `approved`.
 
 ### IERC721 Function
 `IERC721` contains 3 events.
@@ -107,7 +107,7 @@ interface IERC721 is IERC165 {
 If we know that a contract implements the `IERC721` interface, we can interact with it without knowing its detailed implementation.
 
 The Bored Ape Yacht Club `BAYC` is an `ERC721` NFT, which implements all functions in the `IERC721` interface. We can interact with the `BAYC` contract with the `IERC721` interface and its contract address, without knowing its source code.
-For example, we can use `balanceOf()` to query the `BAYC` balance of an address, or use `safeTransferFrom()` to transfer a `BAYC` NFT.
+For example, we can use `balanceOf()` to query the `BAYC` balance of an address or use `safeTransferFrom()` to transfer a `BAYC` NFT.
 
 
 ```solidity
@@ -135,4 +135,4 @@ contract interactBAYC {
 
 ## Summary
 In this chapter, we introduced the `abstract` and `interface` contracts in Solidity, which are used to write contract templates and reduce code redundancy.
-We also learned the interface of `ERC721` token standard and how to interact with the `BAYC` contract using interface.
+We also learned the interface of the `ERC721` token standard and how to interact with the `BAYC` contract using the interface.
