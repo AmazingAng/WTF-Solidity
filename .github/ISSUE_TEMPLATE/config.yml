@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question or get support（提个问题或者获得支持）
+    url: https://github.com/AmazingAng/WTF-Solidity/discussions
+    about: Ask a question or request support for using WTF-Solidity （在使用WTF-Solidity时，遇到的问题或者需要获得帮助）

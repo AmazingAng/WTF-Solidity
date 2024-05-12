@@ -54,7 +54,7 @@ contract TimeManipulation is ERC721 {
 
 ## Reproduce on Foundry
 
-Attackers only need to manipulate the block timestamp and set it to a number that can be divided by 170, and they can successfully mint NFTs. We choose Foundry to reproduce this attack because it provides cheatcode to modify the block timestamp. If you are not familiar with Foundry/cheatcode, you can read the [Foundry tutorial](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md) and [Foundry Book](https://book.getfoundry.sh/forge/cheatcodes).
+Attackers only need to manipulate the block timestamp and set it to a number that can be divided by 170, and they can successfully mint NFTs. We chose Foundry to reproduce this attack because it provides a cheat code to modify the block timestamp. If you are not familiar with Foundry/cheatcode, you can read the [Foundry tutorial](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md) and [Foundry Book](https://book.getfoundry.sh/forge/cheatcodes).
 
 1. Create a `TimeManipulation` contract variable `nft`.
 2. Create a wallet address `alice`.
