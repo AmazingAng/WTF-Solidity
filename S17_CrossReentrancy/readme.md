@@ -311,6 +311,7 @@ contract VulnerableBank {
 
 *“我不杀伯仁，伯仁却因我而死...” -- 戴锁婆婆*
 
+针对`Read-Only Reentrancy`, [Euler Finance](https://github.com/euler-xyz/euler-contracts/commit/91adeee39daf8ece00584b6f7ec3e60a1d226bc9#diff-05f47d885ccf959493d5c53203672966544d73232f5410184d5484a7aedf0c5eR260)采用`read-only reentrancy guard`，仅当未加锁时才能进行读取。同时，锁的可见性可以设置为`public`以供其他项目使用。
 
 ## 4. ERC721 & ERC777 Reentrancy
 
