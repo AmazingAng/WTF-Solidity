@@ -85,16 +85,16 @@ function changeOwner(address _newOwner) external onlyOwner{
 
 1. 在 Remix 上编译并部署代码,在合约部署时传入 initialOwner 变量。
 
-    ![11-1](img/11-1.jpg)
+    ![11-1](./img/11-1.jpg)
 2. 点击 `owner` 按钮查看当前 owner 变量。
 
-    ![11-2](img/11-2.jpg)
+    ![11-2](./img/11-2.jpg)
 3. 以 owner 地址的用户身份，调用 `changeOwner` 函数，交易成功。
 
-    ![11-3](img/11-3.jpg)
+    ![11-3](./img/11-3.jpg)
 4. 以非 owner 地址的用户身份，调用 `changeOwner` 函数，交易失败，因为modifier onlyOwner 的检查语句不满足。
 
-    ![11-4](img/11-4.jpg)
+    ![11-4](./img/11-4.jpg)
 
 ## 总结
 
