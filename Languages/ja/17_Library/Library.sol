@@ -61,17 +61,17 @@ library Strings {
     }
 }
 
-// 用函数调用另一个库合约
+// 関数を使ってライブラリを使う
 contract UseLibrary {
-    // 利用using for操作使用库
+    // using for方式でライブラリを使う
     using Strings for uint256;
 
     function getString1(uint256 _number) public pure returns (string memory) {
-        // 库函数会自动添加为uint256型变量的成员
+        // ライブラリ関数はuint256のメンバ関数として呼び出すケース
         return _number.toHexString();
     }
 
-    // 直接通过库合约名调用
+    // ライブラリ関数を直接呼び出すケース
     function getString2(uint256 _number) public pure returns (string memory) {
         return Strings.toHexString(_number);
     }
