@@ -2,31 +2,32 @@
 pragma solidity ^0.8.21;
 
 contract Fallback {
-    /* 触发fallback() 还是 receive()?
-           接收ETH
+    /* fallback() or receive()?
+           ETHを受け取る
               |
-         msg.data是空？
+         msg.dataがemptyか？
             /  \
-          是    否
+         はい   いいえ
           /      \
-receive()存在?   fallback()
+    receive()あるか?   fallback()
         / \
-       是  否
+      はい いいえ
       /     \
-receive()  fallback   
+     /       \
+    receive()   fallback()
     */
 
-    // 定义事件
-    event receivedCalled(address Sender, uint Value);
-    event fallbackCalled(address Sender, uint Value, bytes Data);
+    // eventを定義
+    event receivedCalled(address Sender, uint256 Value);
+    event fallbackCalled(address Sender, uint256 Value, bytes Data);
 
-    // 接收ETH时释放Received事件
+    // ETHを受け取るときにイベントを発生
     receive() external payable {
         emit receivedCalled(msg.sender, msg.value);
     }
 
     // fallback
-    fallback() external payable{
+    fallback() external payable {
         emit fallbackCalled(msg.sender, msg.value, msg.data);
     }
 }
