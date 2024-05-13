@@ -166,7 +166,7 @@ main();
 
 **5. Call the `mint()` function:** Call the `mint()` function of the Freemint contract on the deployment page of Remix to mint an NFT.
 
-**6. Script detects and frontruns the transaction:** We can see in the terminal that the `frontrun.js` script successfully detects the transaction and frontruns it. If you call the `ownerOf()` function of the NFT contract to check the owner of `tokenId` 0, and it matches the wallet address in the frontrun script, it proves that the frontrun was successful!.
+**6. The script detects and frontruns the transaction:** We can see in the terminal that the `frontrun.js` script successfully detects the transaction and frontruns it. If you call the `ownerOf()` function of the NFT contract to check the owner of `tokenId` 0, and it matches the wallet address in the frontrun script, it proves that the frontrun was successful!
 ![](./img/S11-4.png)
 
 ## How to Prevent
@@ -174,7 +174,7 @@ main();
 Frontrunning is a common issue on Ethereum and other public blockchains. While we cannot eliminate it entirely, we can reduce the profitability of frontrunning by minimizing the importance of transaction order or time:
 
 - Use a commit-reveal scheme.
-- Use dark pools, where user transactions bypass the public mempool and go directly to miners. Examples include flashbots and TaiChi.
+- Use dark pools, where user transactions bypass the public mempool and go directly to miners. Examples include Flashbots and TaiChi.
 
 ## Summary
 

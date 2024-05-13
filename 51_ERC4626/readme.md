@@ -29,7 +29,7 @@ tags:
 
 - 收益农场: 在 Yearn Finance 中，你可以质押 `USDT` 获取利息。
 - 借贷: 在 AAVE 中，你可以出借 `ETH` 获取存款利息和贷款。
-- 质押: 在 Lido 中，你可以质押 `ETH` 参与 ETH 2.0 质押，得到可以升息的 `stETH`。
+- 质押: 在 Lido 中，你可以质押 `ETH` 参与 ETH 2.0 质押，得到可以生息的 `stETH`。
 
 ## ERC4626
 
