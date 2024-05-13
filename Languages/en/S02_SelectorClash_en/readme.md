@@ -21,7 +21,7 @@ English translations by: [@to_22X](https://twitter.com/to_22X)
 
 ---
 
-In this lesson, we will introduce the selector clash attack, which is one of the reasons behind the hack of the cross-chain bridge Poly Network. In August 2021, the cross-chain bridge contracts of Poly Network on ETH, BSC, and Polygon were hacked, resulting in a loss of up to $611 million ([summary](https://rekt.news/zh/polynetwork-rekt/)). This is the largest blockchain hack of 2021 and the second-largest in history, second only to the Ronin bridge hack.
+In this lesson, we will introduce the selector clash attack, which is one of the reasons behind the hack of the cross-chain bridge Poly Network. In August 2021, the cross-chain bridge contracts of Poly Network on ETH, BSC, and Polygon were hacked, resulting in a loss of up to $611 million ([summary](https://rekt.news/zh/polynetwork-rekt/)). This is the largest blockchain hack of 2021 and the second-largest in history, second only to the Ronin Bridge hack.
 
 ## Selector Clash
 
@@ -46,9 +46,9 @@ In contrast, the public key of a wallet is `64` bytes long and the probability o
 
 The people of Ethereum have angered the gods, and the gods are furious. In order to punish the people of Ethereum, the goddess Hera sends down a Sphinx, a creature with the head of a human and the body of a lion, to the cliffs of Ethereum. The Sphinx presents a riddle to every Ethereum user who passes by the cliff: "What walks on four legs in the morning, two legs at noon, and three legs in the evening? It is the only creature that walks on different numbers of legs throughout its life. When it has the most legs, it is at its slowest and weakest." Those who solve this enigmatic riddle will be spared, while those who fail to solve it will be devoured. The Sphinx uses the selector `0x10cd2dc7` to verify the correct answer.
 
-One morning, Oedipus passes by and encounters the Sphinx. He solves the mysterious riddle and says, "It is `function man()`. In the morning of life, he is a child who crawls on two legs and two hands. At noon, he becomes an adult who walks on two legs. In the evening, he grows old and weak, and needs a cane to walk, hence he is called three-legged." After guessing the riddle correctly, Oedipus is allowed to live.
+One morning, Oedipus passes by and encounters the Sphinx. He solves the mysterious riddle and says, "It is `function man()`. In the morning of life, he is a child who crawls on two legs and two hands. At noon, he becomes an adult who walks on two legs. In the evening, he grows old and weak and needs a cane to walk, hence he is called three-legged." After guessing the riddle correctly, Oedipus is allowed to live.
 
-Later that afternoon, `0xAA` passes by and encounters the Sphinx. He also solves the mysterious riddle and says, "It is `function peopleLduohW(uint256)`. In the morning of life, he is a child who crawls on two legs and two hands. At noon, he becomes an adult who walks on two legs. In the evening, he grows old and weak, and needs a cane to walk, hence he is called three-legged." Once again, the riddle is guessed correctly, and the Sphinx becomes furious. In a fit of anger, the Sphinx slips and falls from the towering cliff to its death.
+Later that afternoon, `0xAA` passes by and encounters the Sphinx. He also solves the mysterious riddle and says, "It is `function peopleLduohW(uint256)`. In the morning of life, he is a child who crawls on two legs and two hands. At noon, he becomes an adult who walks on two legs. In the evening, he grows old and weak and needs a cane to walk, hence he is called three-legged." Once again, the riddle is guessed correctly, and the Sphinx becomes furious. In a fit of anger, the Sphinx slips and falls from the towering cliff to its death.
 
 ![](./img/S02-2.png)
 
@@ -88,7 +88,7 @@ In the Poly Network hack, the hacker collided the `_method` as `f1121318093`, wh
 ## Reproduce on `Remix`
 
 1. Deploy the `SelectorClash` contract.
-2. Call `executeCrossChainTx()` with the parameters `0x6631313231333138303933`, `0x`, `0x`, `0`, to initiate the attack.
+2. Call `executeCrossChainTx()` with the parameters `0x6631313231333138303933`, `0x`, `0x`, and `0`, to initiate the attack.
 3. Check the value of the `solved` variable, which should be modified to `true`, indicating a successful attack.
 
 ## Summary
