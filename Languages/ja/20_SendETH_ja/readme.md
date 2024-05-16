@@ -1,5 +1,5 @@
 ---
-title: 20. 发送ETH
+title: 20. ETH 送金
 tags:
   - solidity
   - advanced
@@ -7,99 +7,110 @@ tags:
   - transfer/send/call
 ---
 
-# WTF Solidity极简入门: 20. 发送ETH
+# WTF Solidity 超シンプル入門: 19. ETH の 送金
 
-我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
+最近、Solidity の学習を再開し、詳細を確認しながら「Solidity 超シンプル入門」を作っています。これは初心者向けのガイドで、プログラミングの達人向けの教材ではありません。毎週 1〜3 レッスンのペースで更新していきます。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
+僕のツイッター：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
-社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+コミュニティ：[Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[公式サイト wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+すべてのソースコードやレッスンは github にて公開: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 ---
+
 `Solidity`有三种方法向其他合约发送`ETH`，他们是：`transfer()`，`send()`和`call()`，其中`call()`是被鼓励的用法。
 
-## 接收ETH合约
+## ETH を受け取るコントラクト
 
 我们先部署一个接收`ETH`合约`ReceiveETH`。`ReceiveETH`合约里有一个事件`Log`，记录收到的`ETH`数量和`gas`剩余。还有两个函数，一个是`receive()`函数，收到`ETH`被触发，并发送`Log`事件；另一个是查询合约`ETH`余额的`getBalance()`函数。
+まず、私たちは ETH を受け取る用のコントラクトをデプロイします。
+このコントラクトは以下となっています。
+
+1. `ReceiveETH`コントラクトには、受け取った ETH の量と残りの gas を記録する`Log`イベントがあります。
+2. また、２つの関数があります。
+   - `receive()`は、ETH を受け取ると呼び出され、`Log`イベントを放出します。
+   - もう一つの関数は、コントラクトの ETH 残高を取得する`getBalance()`です。
 
 ```solidity
 contract ReceiveETH {
-    // 收到eth事件，记录amount和gas
+    // ETHを受け取るイベントで、amountやgasを記録します
     event Log(uint amount, uint gas);
-    
-    // receive方法，接收eth时被触发
+
+    // この関数はETHを受け取ると呼び出されます
     receive() external payable{
         emit Log(msg.value, gasleft());
     }
-    
-    // 返回合约ETH余额
+
+    // この関数はコントラクトのETH残高を返します
     function getBalance() view public returns(uint) {
         return address(this).balance;
     }
 }
 ```
 
-部署`ReceiveETH`合约后，运行`getBalance()`函数，可以看到当前合约的`ETH`余额为`0`。
+`ReceiveETH`コントラクトをデプロイした後、`getBalance()`関数を実行すると、現在のコントラクトの ETH 残高が`0`であることがわかります。
 
 ![20-1](./img/20-1.png)
 
-## 发送ETH合约
+## ETH を送金するコントラクト
 
-我们将实现三种方法向`ReceiveETH`合约发送`ETH`。首先，先在发送ETH合约`SendETH`中实现`payable`的`构造函数`和`receive()`，让我们能够在部署时和部署后向合约转账。
+我们将实现三种方法向`ReceiveETH`合约发送`ETH`。首先，先在发送 ETH 合约`SendETH`中实现`payable`的`构造函数`和`receive()`，让我们能够在部署时和部署后向合约转账。
+私たちは３つの方法を使って`ReceiveETH`コントラクトに ETH を送ります。まず、`SendETH`コントラクトをデプロイします。
 
 ```solidity
 contract SendETH {
-    // 构造函数，payable使得部署的时候可以转eth进去
+    // コンストラクターです。
+    // payableを使ってデプロイ時にETHを送金できるようにします
     constructor() payable{}
-    // receive方法，接收eth时被触发
+    // receive関数、ETHを受け取ると呼び出されます
     receive() external payable{}
 }
 ```
 
 ### transfer
 
-- 用法是`接收方地址.transfer(发送ETH数额)`。
-- `transfer()`的`gas`限制是`2300`，足够用于转账，但对方合约的`fallback()`或`receive()`函数不能实现太复杂的逻辑。
-- `transfer()`如果转账失败，会自动`revert`（回滚交易）。
+- 使い方は`受取アドレス.transfer(送るETHの量)`。
+- `transfer()`の`gas`の制限は`2300`で、送金には十分ですが、相手のコントラクトの`fallback()`や`receive()`関数には複雑なロジックを実装できません。
+- もし`transfer()`が失敗すると、自動的に`revert`（ロールバック）します。
 
-代码样例，注意里面的`_to`填`ReceiveETH`合约的地址，`amount`是`ETH`转账金额：
+サンプルコードです。`_to`には`ReceiveETH`コントラクトのアドレスを入力し、`amount`には送金する`ETH`の量を入力します。
 
 ```solidity
-// 用transfer()发送ETH
+// transfer関数を使ってETHを送る
 function transferETH(address payable _to, uint256 amount) external payable{
     _to.transfer(amount);
 }
 ```
 
-部署`SendETH`合约后，对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，发生`revert`。
+`SendEth`コントラクトをデプロイした後、`ReceiveETH`コントラクトに ETH を送ります。この時、`amount`は 10、`value`は 0、`amount`>`value`なので、送金は失敗して`revert`されます。
 
 ![20-2](./img/20-2.png)
 
-此时`amount`为10，`value`为10，`amount`<=`value`，转账成功。
+ここでは、`amount`は 10，`value`は 10，`amount`<=`value`なので，送金が成功するでしょう。
 
 ![20-3](./img/20-3.png)
 
-在`ReceiveETH`合约中，运行`getBalance()`函数，可以看到当前合约的`ETH`余额为`10`。
+`ReceiveETH`コントラクトでは、`getBalance()`関数を実行すると、現在のコントラクトの ETH 残高が`10`であることがわかります。
 
 ![20-4](./img/20-4.png)
 
 ### send
 
-- 用法是`接收方地址.send(发送ETH数额)`。
-- `send()`的`gas`限制是`2300`，足够用于转账，但对方合约的`fallback()`或`receive()`函数不能实现太复杂的逻辑。
-- `send()`如果转账失败，不会`revert`。
+- 使い方は`受取アドレス.send(送るETHの量)`。
+- `send()`の`gas`の制限は`2300`で、送金には十分ですが、相手のコントラクトの`fallback()`や`receive()`関数には複雑なロジックを実装できません。
+- `send()`がもし失敗したら、`revert`されることはない。
 - `send()`的返回值是`bool`，代表着转账成功或失败，需要额外代码处理一下。
+- `send()`の返り値は`bool`で、送金が成功したあるいは失敗したを表します。送金が失敗した場合、処理するコードの追加が必要です。
 
-代码样例：
+サンプルコード：
 
 ```solidity
-error SendFailed(); // 用send发送ETH失败error
+error SendFailed(); // sendでETHを送る際に失敗した場合のエラー
 
-// send()发送ETH
+// send()関数を使ってETHを送ります
 function sendETH(address payable _to, uint256 amount) external payable{
-    // 处理下send的返回值，如果失败，revert交易并发送error
+    // send()でETHを送る時に、失敗した場合、revertしてerrorを放出します
     bool success = _to.send(amount);
     if(!success){
         revert SendFailed();
@@ -107,29 +118,30 @@ function sendETH(address payable _to, uint256 amount) external payable{
 }
 ```
 
-对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，因为经过处理，所以发生`revert`。
+`ReceiveETH`コントラクトに対して ETH を送ります。この時、`amount`は 10、`value`は 0、`amount`>`value`なので、送金は失敗して`revert`されます。
 
 ![20-5](./img/20-5.png)
 
-此时`amount`为10，`value`为11，`amount`<=`value`，转账成功。
+ここでは、`amount`は 10，`value`は 10，`amount`<=`value`なので、送金は成功します。
 
 ![20-6](./img/20-6.png)
 
 ### call
 
-- 用法是`接收方地址.call{value: 发送ETH数额}("")`。
-- `call()`没有`gas`限制，可以支持对方合约`fallback()`或`receive()`函数实现复杂逻辑。
+- 使い方は`受取アドレス.call{value: 送るETHの量}("")`。
+- ｀ call()`は`gas`の制限がなく、相手のコントラクトの`fallback()`や`receive()`関数に複雑なロジックを実装できます。
 - `call()`如果转账失败，不会`revert`。
-- `call()`的返回值是`(bool, bytes)`，其中`bool`代表着转账成功或失败，需要额外代码处理一下。
+- `call()`がもし失敗したら、`revert`されることはない。
+- `call()`の返り値は`(bool, bytes)`で、送金が成功したあるいは失敗したを表します。送金が失敗した場合、処理するコードの追加が必要です。
 
-代码样例：
+サンプルコード：
 
 ```solidity
 error CallFailed(); // 用call发送ETH失败error
 
-// call()发送ETH
+// call()関数を使ってETHを送ります
 function callETH(address payable _to, uint256 amount) external payable{
-    // 处理下call的返回值，如果失败，revert交易并发送error
+    // call()の返り値を処理し、失敗した場合、revertしてerrorを放出します
     (bool success,) = _to.call{value: amount}("");
     if(!success){
         revert CallFailed();
@@ -137,20 +149,24 @@ function callETH(address payable _to, uint256 amount) external payable{
 }
 ```
 
-对`ReceiveETH`合约发送ETH，此时`amount`为10，`value`为0，`amount`>`value`，转账失败，因为经过处理，所以发生`revert`。
+`ReceiveETH`コントラクトに対して ETH を送ります。この時、`amount`は 10、`value`は 0、`amount`>`value`なので、送金は失敗して`revert`されます。
 
 ![20-7](./img/20-7.png)
 
-此时`amount`为10，`value`为11，`amount`<=`value`，转账成功。
+ここでは、`amount`は 10，`value`は 10，`amount`<=`value`なので、送金は成功します。
 
 ![20-8](./img/20-8.png)
 
 运行三种方法，可以看到，他们都可以成功地向`ReceiveETH`合约发送`ETH`。
+３つの方法を使って`ReceiveETH`コントラクトに ETH を送ります。
 
-## 总结
+すべての方法で送金ができることがわかりましたね。
 
-这一讲，我们介绍`Solidity`三种发送`ETH`的方法：`transfer`，`send`和`call`。
+## まとめ
 
-- `call`没有`gas`限制，最为灵活，是最提倡的方法；
-- `transfer`有`2300 gas`限制，但是发送失败会自动`revert`交易，是次优选择；
-- `send`有`2300 gas`限制，而且发送失败不会自动`revert`交易，几乎没有人用它。
+今回は、`Solidity`の３つの方法で`ETH`を送る方法を紹介しました：`transfer`、`send`、`call`。
+
+- `call`は`gas`の制限がなく、最も柔軟であり、一番推奨される方法です。
+- `transfer`有`2300 gas`限制，但是发送失败会自动`revert`交易，是次优选择。
+- `transfer`は`2300 gas`の制限があり、送金が失敗した場合、自動的に`revert`されるため、`call`に次ぐ選択肢です。
+- `send`は`2300 gas`の制限があり、送金が失敗した場合、自動的に`revert`されないため、ほとんど使用されません。
