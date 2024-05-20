@@ -99,7 +99,7 @@ contract PaymentSplit{
     constructor(address[] memory _payees, uint256[] memory _shares) payable {
         // 检查_payees和_shares数组长度相同，且不为0
         require(_payees.length == _shares.length, "PaymentSplitter: payees and shares length mismatch");
-        require(_payees.length > 0, "PaymentSplitter: no payees");
+        require(_shares.length > 0, "PaymentSplitter: no payees");
         // 调用_addPayee，更新受益人地址payees、受益人份额shares和总份额totalShares
         for (uint256 i = 0; i < _payees.length; i++) {
             _addPayee(_payees[i], _shares[i]);
