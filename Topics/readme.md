@@ -14,6 +14,8 @@
 
 **第7讲：Foundry，以Solidity为中心的开发工具包** 【[代码](./Tools/TOOL07_Foundry/readme.md)】
 
+**第8讲：ZAN，节点服务和合约审计等Web3技术服务** 【[文章](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL08_ZAN/readme.md)】
+
 ### `链上威胁分析`
 
 **第1讲：工具篇** 【[文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug//01_tools/)】 | 【[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/Onchain_debug/01_tools/en/)】
