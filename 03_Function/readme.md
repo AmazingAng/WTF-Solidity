@@ -46,7 +46,7 @@ function <function name>(<parameter types>) {internal|external|public|private} [
 
     **注意 1**：合约中定义的函数需要明确指定可见性，它们没有默认值。
 
-    **注意 2**：`public|private|internal` 也可用于修饰状态变量(定义可参考[变量的存储和作用域](../05_DataStorage/readme.md))。`public`变量会自动生成同名的`getter`函数，用于查询数值。未标明可见性类型的状态变量，默认为`internal`。
+    **注意 2**：`public|private|internal` 也可用于修饰状态变量(定义可参考[变量的存储和作用域](../05_DataStorage/readme.md#1-状态变量))。`public`变量会自动生成同名的`getter`函数，用于查询数值。未标明可见性类型的状态变量，默认为`internal`。
 
 5. `[pure|view|payable]`：决定函数权限/功能的关键字。`payable`（可支付的）很好理解，带着它的函数，运行的时候可以给合约转入 ETH。`pure` 和 `view` 的介绍见下一节。
 
