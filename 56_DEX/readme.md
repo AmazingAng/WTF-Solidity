@@ -436,7 +436,7 @@ contract SimpleSwap is ERC20 {
 
 3. 调用两个ERC20代币的`approve()`函数，分别给 `SimpleSwap` 合约授权 1000 单位代币。
    
-   <img title="" src="img/56-5.jpg" alt="token0授权" width="311"><img title="" src="img/56-6.jpg" alt="token1授权" width="297">
+   <img title="" src="img/56-5.jpg" alt="token0授权" width="311"><img title="" src="img/56-6.jpg" alt="token1授权" width="296">
 
 4. 调用 `SimpleSwap` 合约的 `addLiquidity()` 函数给交易所添加流动性，token0 和 token1 分别添加 100 单位。
    
