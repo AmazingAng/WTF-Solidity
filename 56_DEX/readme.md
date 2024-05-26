@@ -67,7 +67,7 @@ contract SimpleSwap is ERC20 {
     // 代币储备量
     uint public reserve0;
     uint public reserve1;
-    
+
     // 构造器，初始化代币地址
     constructor(IERC20 _token0, IERC20 _token1) ERC20("SimpleSwap", "SS") {
         token0 = _token0;
@@ -85,11 +85,11 @@ contract SimpleSwap is ERC20 {
 首先，我们需要实现添加流动性的功能。当用户向代币池添加流动性时，合约要记录添加的LP份额。根据 Uniswap V2，LP份额如下计算：
 
 1. 代币池被首次添加流动性时，LP份额 $\Delta{L}$ 由添加代币数量乘积的平方根决定:
-
+   
     $$\Delta{L}=\sqrt{\Delta{x} *\Delta{y}}$$
 
-1. 非首次添加流动性时，LP份额由添加代币数量占池子代币储备量的比例决定（两个代币的比例取更小的那个）:
-
+2. 非首次添加流动性时，LP份额由添加代币数量占池子代币储备量的比例决定（两个代币的比例取更小的那个）:
+   
     $$\Delta{L}=L*\min{(\frac{\Delta{x}}{x}, \frac{\Delta{y}}{y})}$$
 
 因为 `SimpleSwap` 合约继承了 ERC20 代币标准，在计算好LP份额后，可以将份额以代币形式铸造给用户。
@@ -131,7 +131,7 @@ function addLiquidity(uint amount0Desired, uint amount1Desired) public returns(u
 
     // 给流动性提供者铸造LP代币，代表他们提供的流动性
     _mint(msg.sender, liquidity);
-    
+
     emit Mint(msg.sender, amount0Desired, amount1Desired);
 }
 ```
@@ -149,7 +149,7 @@ $$\Delta{y}={\frac{\Delta{L}}{L} * y}$$
 4. 销毁LP份额。
 5. 将相应的代币转账给用户。
 6. 更新储备量。
-5. 释放 `Burn` 事件。
+7. 释放 `Burn` 事件。
 
 ```solidity
 // 移除流动性，销毁LP，转出代币
@@ -228,7 +228,7 @@ function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) public pur
 function swap(uint amountIn, IERC20 tokenIn, uint amountOutMin) external returns (uint amountOut, IERC20 tokenOut){
     require(amountIn > 0, 'INSUFFICIENT_OUTPUT_AMOUNT');
     require(tokenIn == token0 || tokenIn == token1, 'INVALID_TOKEN');
-    
+
     uint balance0 = token0.balanceOf(address(this));
     uint balance1 = token1.balanceOf(address(this));
 
@@ -278,7 +278,7 @@ contract SimpleSwap is ERC20 {
     // 代币储备量
     uint public reserve0;
     uint public reserve1;
-    
+
     // 事件 
     event Mint(address indexed sender, uint amount0, uint amount1);
     event Burn(address indexed sender, uint amount0, uint amount1);
@@ -343,7 +343,7 @@ contract SimpleSwap is ERC20 {
 
         // 给流动性提供者铸造LP代币，代表他们提供的流动性
         _mint(msg.sender, liquidity);
-        
+
         emit Mint(msg.sender, amount0Desired, amount1Desired);
     }
 
@@ -391,7 +391,7 @@ contract SimpleSwap is ERC20 {
     function swap(uint amountIn, IERC20 tokenIn, uint amountOutMin) external returns (uint amountOut, IERC20 tokenOut){
         require(amountIn > 0, 'INSUFFICIENT_OUTPUT_AMOUNT');
         require(tokenIn == token0 || tokenIn == token1, 'INVALID_TOKEN');
-        
+
         uint balance0 = token0.balanceOf(address(this));
         uint balance1 = token1.balanceOf(address(this));
 
@@ -427,18 +427,32 @@ contract SimpleSwap is ERC20 {
 ## Remix 复现
 
 1. 部署两个ERC20代币合约（token0 和 token1），并记录它们的合约地址。
+   
+   ![创建ERC20token](img/56-2.jpg)
 
 2. 部署 `SimpleSwap` 合约，并将上面的代币地址填入。
+   
+   <img title="" src="img/56-3.jpg" alt="TOKEN地址" width="287"><img title="" src="img/56-4.jpg" alt="传入token地址" width="318">
 
 3. 调用两个ERC20代币的`approve()`函数，分别给 `SimpleSwap` 合约授权 1000 单位代币。
+   
+   <img title="" src="img/56-5.jpg" alt="token0授权" width="311"><img title="" src="img/56-6.jpg" alt="token1授权" width="297">
 
 4. 调用 `SimpleSwap` 合约的 `addLiquidity()` 函数给交易所添加流动性，token0 和 token1 分别添加 100 单位。
+   
+   <img title="" src="img/56-7.jpg" alt="调用addLiquidity" width="273"><img title="" src="img/56-8.jpg" alt="reserve" width="337">
 
 5. 调用 `SimpleSwap` 合约的 `balanceOf()` 函数查看用户的LP份额，这里应该为 100。（$\sqrt{100*100}=100$）
+   
+   ![balanceOf](img/56-9.jpg)
 
 6. 调用 `SimpleSwap` 合约的 `swap()` 函数进行代币交易，用 100 单位的 token0。
+   
+   ![swap](img/56-10.jpg)
 
 7. 调用 `SimpleSwap` 合约的 `reserve0` 和 `reserve1` 函数查看合约中的代币储备粮，应为 200 和 50。上一步我们利用 100 单位的 token0 交换了 50 单位的 token 1（$\frac{100*100}{100+100}=50$）。
+   
+   ![reserveAfter](img/56-11.jpg)
 
 ## 总结
 
