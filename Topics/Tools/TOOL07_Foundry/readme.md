@@ -336,8 +336,7 @@ cast block-number --rpc-url=$RPC_MAIN
 ```
 15769241
 ```
-
-> 将环境变量的`ETH_RPC_URL`设置为 `--rpc-url` 你就不需要在每个命令行后面增加  `--rpc-url=$RPC_MAIN`  我这里直接设置为主网
+> 将环境变量的ETH_RPC_URL设置为 --rpc-url 你就不需要在每个命令行后面增加 --rpc-url=$RPC_MAIN 我这里直接设置为主网
 
 ### 查询区块信息
 
@@ -596,8 +595,9 @@ cast etherscan-source 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 --etherscan-api
 cast etherscan-source $WETH -d ~/Downloads
 ```
 
-### 调用合约
+### 调用合约(读数据)
 
+`cast call` 用于从区块链上读取数据（调用只读函数），该操作不会改变区块链状态，也不需要支付 Gas 费用。
 调用 WETH合约的`balanceOf`方法,查看`0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`账号的余额
 
 ```shell
@@ -616,6 +616,18 @@ cast call $WETH "balanceOf(address)(uint256)" 0xC02aaA39b223FE8D0A0e5C4F27eAD908
 # 646577988758891995548
 
 ```
+
+### 调用合约(写数据)
+
+`cast send` 用于发送交易并修改区块链状态（调用改变状态的函数），该操作会消耗 Gas 费用，需要签名并发送交易。
+
+```shell
+#cast send [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND] --rpc-url=$RPC
+
+cast send 0x... "deposit(address,uint256)" 0x... 1 --rpc-url=$RPC
+
+```
+
 
 ### 解析ABI
 
@@ -645,7 +657,13 @@ cast --from-rlp
 ## Tips
 
 ### 设置ETH_RPC_URL
-将环境变量的`ETH_RPC_URL`设置为 `--rpc-url` 你就不需要在每个命令行后面增加  `--rpc-url=$RPC_MAIN`  我这里直接设置为主网
+将环境变量的`ETH_RPC_URL`设置为 `--rpc-url`的值，这样你就不需要在每个命令行后面增加 `--rpc-url=$RPC_MAIN`，我这里直接设置为主网，如下：
+``` shell
+export ETH_RPC_URL=your_rpc_url
+source ~/.bashrc  # 如果你使用的是 Bash
+source ~/.zshrc   # 如果你使用的是 Zsh
+cast block-number # 不用再配置 --rpc-url 参数
+```
 
 ### 设置ETHERSCAN_API_KEY
 设置`ETHERSCAN_API_KEY`环境变量可以直接代替 `--etherscan-api-key`
@@ -1114,7 +1132,7 @@ forge script script/Counter.s.sol -vvvv --rpc-url=http://127.0.0.1:8545
 正式部署：
 
 ```
-forge script script/Counter.s.sol -vvvv --rpc-url=http://127.0.0.1:8545 --broadcast --private-key=privete_key
+forge script script/Counter.s.sol -vvvv --rpc-url=$RPC_MAIN --broadcast --private-key=privete_key
 ```
 
 部署完成之后会多一个broadcast文件夹，查看该文件夹有`run-latest.json`可以看到部署的相应信息。
@@ -1126,6 +1144,18 @@ forge script script/Counter.s.sol -vvvv --rpc-url=http://127.0.0.1:8545 --broadc
 
 ```js
 uint256 mainnet = vm.createFork(rpc);
+```
+
+## 命令行部署合约
+
+部署并开源合约，其中 `--etherscan-api-key` 为以太坊浏览器（或其他 EVM 浏览器）中申请的 API key，`--verify` 为部署后开源合约。
+```solidity
+# forge create --rpc-url <your_rpc_url> --private-key <your_private_key> --etherscan-api-key <KEY> --verify src/YourContract.sol:YourContract --constructor-args <constructor_args>
+  forge create --rpc-url $RPC_MAIN \ 
+   --private-key privete_key  \ 
+   --etherscan-api-key xxxx  \ 
+   --verify \
+   src/Counter.sol:Counter
 ```
 
 ## Tips： 
