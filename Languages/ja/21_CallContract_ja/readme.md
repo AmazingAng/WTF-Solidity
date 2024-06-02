@@ -74,7 +74,7 @@ contract OtherContract {
 
 ![deploy contract2 in remix](./img/21-3.png)
 
-### 1. コントラクトのアドレスを導入
+### 1. コントラクトのアドレスを渡す
 
 私たちは、関数内でターゲットコントラクトのアドレスを渡すことができ、ターゲットコントラクトの参照を生成し、その関数を呼び出すことができます。例として、`OtherContract`コントラクトの`setX`関数を呼び出すために、新しいコントラクトに`callSetX`関数を記述します。すでにデプロイ済みの`OtherContract`コントラクトのアドレス`_Address`と`setX`のパラメータ`x`を渡します。
 
@@ -104,7 +104,6 @@ function callGetX(OtherContract _Address) external view returns(uint x){
 }
 ```
 
-复制`OtherContract`合约的地址，填入`callGetX`函数的参数中，调用后成功获取`x`的值
 `otherContract`コントラクトのアドレスをコピーし、`callGetX`関数のパラメータとして入力し、成功した後、`OtherContract`の`getX`を呼び出して`x`が 123 になっていることを確認できるでしょう。
 
 ![call contract3 in remix](./img/21-6.png)
@@ -120,7 +119,7 @@ function callGetX2(address _Address) external view returns(uint x){
 }
 ```
 
-｀ OtherContract`のコントラクトアドレスをコピーし、`callGetX2`関数のパラメータとして入力し、`x`の値の取得に成功します。
+`OtherContract`のコントラクトアドレスをコピーし、`callGetX2`関数のパラメータとして入力し、`x`の値の取得に成功します。
 
 ![call contract4 in remix](./img/21-7.png)
 
