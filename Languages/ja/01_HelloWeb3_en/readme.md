@@ -31,7 +31,7 @@ Website: [remix.ethereum.org](https://remix.ethereum.org)
 Remixに入ると、左端の垂直メニューに、FILE EXPLORER (コードを書く場所)、SEARCH IN FILES (ファイルを検索したり置換したりする場所)、SOLIDITY COMPILER (コードを実行する場所)、そしてDEPLOY & RUN TRANSACTIONS (オンチェーンに対してのデプロイを行う場所)があることがわかります。 "Create New File"ボタンをクリックすることで、空の`solidity`コントラクトを作成することが出来ます。
 
 ![Remix Menu](./img/1-1.png)
-
+<img src="./img/1-1.png" width="***サイズ***">
 ## はじめてのSolidityプログラム
 
 これは1行のコメントと3行のコードのみを含む簡単なプログラムです。
@@ -73,11 +73,11 @@ contract HelloWeb3{
 コンパイルした後で、左側のメニューにある`Deploy`ボタンをクリックしてデプロイのページに入ってください。
 
    ![](./img/1-2.png)
-
+<img src="./img/1-2.png" width="***サイズ***">
 デフォルトでは、Remixはブラウザ上でテストネットを実行するのと同様に、JavaScript仮想マシンをしようしてEthereumチェーンをシミュレートしてスマートコントラクトを実行します。Remixはそれぞれに100ETH（テスト用のトークン）を持つ、幾つかのテスト用アカウントをあなたに割り当てます。`Deploy`（黄色のボタン）をクリックしてコントラクトをデプロイすることができます。
 
    ![](./img/1-3.png)
-
+<img src="./img/1-3.png" width="***サイズ***">
 デプロイが成功すれば、`HelloWeb3`という名前のコントラクトが下の方に出てくることが分かります。`_string`という変数をクリックすることで、その値を表示させます：`Hello Web3!"。
 
 ## 要約
