@@ -29,7 +29,7 @@ tags:
 - `call`は`fallback`関数または`receive`関数をトリガーして`ETH`を送信するための`Solidity`の推奨方法です。
 
 - `call`を使って他のコントラクトを呼び出すのをおすすめしません。なぜなら、セキュアでないコントラクトを呼び出すとき、コントロール権を渡すことになるからです。他のコントラクトを呼び出す場合は、コントラクト変数を宣言して関数を呼び出すことがおすすめです。[第 21 回：コントラクトの呼び出し](https://github.com/AmazingAng/WTFSolidity/tree/main/21_CallContract)を参照してほしいです。
-- 他のコントラクトのソースコードや`ABI`がわからない場合、コントラクト変数を作成するには難があるおんで、`call`を使って他のコントラクトの関数を呼び出すことができます。
+- 他のコントラクトのソースコードや`ABI`がわからない場合、コントラクト変数を作成するには難があるので、`call`を使って他のコントラクトの関数を呼び出すことができます。
 
 ### `call`を使うときのルール
 
@@ -39,12 +39,10 @@ tags:
 ターゲットコントラクトのアドレス.call(バイトコード);
 ```
 
-其中`字节码`利用结构化编码函数`abi.encodeWithSignature`获得：
 その中で`バイトコード`は`abi.encodeWithSignature("関数名(パラメータの型)", パラメータ)`を使って取得可能です。
 
 ```text
-abi.encodeWithSignature("函数签名", 逗号分隔的具体参数)
-abi.encodeWithSignature("関数シグネチャ", カンマ区切りの具体的なパラメータ)
+abi.encodeWithSignature("関数シグネチャ", 半角カンマ区切りの具体的な引数)
 ```
 
 `関数シグネチャ`は`"関数名（コンマで繋いだ引数）"`です。例えば`abi.encodeWithSignature("f(uint256,address)", _x, _addr)`。
@@ -55,7 +53,7 @@ abi.encodeWithSignature("関数シグネチャ", カンマ区切りの具体的�
 ターゲットのコントラクトアドレス.call{value:送金額, gas:ガス量}(バイトコード);
 ```
 
-複雑そうですよね。次に、`call`を使ったコードサンプルを見ましょう。
+複雑そうかもしれません。次に、理解を深めるため、`call`を使ったコードサンプルを見ましょう。
 
 ### ターゲットコントラクト
 
@@ -74,8 +72,7 @@ contract OtherContract {
         return address(this).balance;
     }
 
-    // 可以调整状态变量_x的函数，并且可以往合约转ETH (payable)
-    // _xの値を設定できる関数。同時にコントラクトへETHを送信することもできます。
+    // _xの値を設定できる関数。同時にコントラクトへETHを送信することもできる(payable)
     function setX(uint256 x) external payable{
         _x = x;
         // もしETHの送信がある場合のみLogイベントを放出
@@ -91,7 +88,6 @@ contract OtherContract {
 }
 ```
 
-这个合约包含一个状态变量`x`，一个在收到`ETH`时触发的事件`Log`，三个函数：
 このコントラクトは一つの状態変数`x`、`Log`イベント、3 つの関数を含んでいます。
 
 - `getBalance()`: コントラクトの`ETH`残高を返す
