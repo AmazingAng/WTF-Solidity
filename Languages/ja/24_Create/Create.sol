@@ -10,7 +10,6 @@ contract Pair {
         factory = msg.sender;
     }
 
-    // called once by the factory at time of deployment
     // デプロイ時に一度呼ばれる初期化関数
     function initialize(address _token0, address _token1) external {
         require(msg.sender == factory, "UniswapV2: FORBIDDEN"); // sufficient check
