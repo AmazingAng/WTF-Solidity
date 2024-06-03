@@ -157,7 +157,6 @@ function callETH(address payable _to, uint256 amount) external payable{
 
 ![20-8](./img/20-8.png)
 
-运行三种方法，可以看到，他们都可以成功地向`ReceiveETH`合约发送`ETH`。
 ３つの方法を使って`ReceiveETH`コントラクトに ETH を送ります。
 
 すべての方法で送金ができることがわかりましたね。

@@ -36,9 +36,8 @@ tags:
 
 ![delegatecallのコンテキスト](https://images.mirror-media.xyz/publication-images/JucQiWVixdlmJl6zHjCSI.png?height=702&width=1862)
 
-皆さんはこのように理解するとよいです。投資家（ユーザー`A`）は彼の資産（`B`コントラクトの`状態変数`）をリスク投資代理（`C`コントラクト）に管理させます。実行されるのはリスク投資代理の関数ですが、変更されるのは資産の状態です。
+皆さんはこのように理解するとよいです。投資家（ユーザー`A`）は彼自身の資産（`B`コントラクトの`状態変数`）をリスク投資代理（`C`コントラクト）に管理させます。実行されるのはリスク投資代理の関数ですが、変更されるのは資産の状態です。
 
-`delegatecall`语法和`call`类似，也是：
 `delegatecall`の文法は`call`と似ています。
 
 このようになります：
@@ -76,7 +75,6 @@ abi.encodeWithSignature("関数シグネチャ", カンマ区切りの引数);
 
 ### 呼び出されるコントラクト`C`
 
-我们先写一个简单的目标合约`C`：有两个`public`变量：`num`和`sender`，分别是`uint256`和`address`类型；有一个函数，可以将`num`设定为传入的`_num`，并且将`sender`设为`msg.sender`。
 私たちはまず簡単なターゲットコントラクト`C`を作成します。`num`と`sender`の2つの`public`変数があります。それぞれ`uint256`と`address`の型です。`setVars`関数があり、`num`を渡された`_num`に設定し、`sender`を`msg.sender`に設定します。
 
 ```solidity
@@ -92,9 +90,9 @@ contract C {
 }
 ````
 
-### 发起调用的合约 B
+### 呼び出しをする側のコントラクト B
 
-首先，合约`B`必须和目标合约`C`的变量存储布局必须相同，两个变量，并且顺序为`num`和`sender`
+まず、コントラクト`B`は必ずターゲットコントラクト`C`と同じストレージストラクチャでなければならず、２つの状態変数は`num`、`sender`です。
 
 ```solidity
 contract B {
@@ -103,12 +101,13 @@ contract B {
 }
 ```
 
-接下来，我们分别用`call`和`delegatecall`来调用合约`C`的`setVars`函数，更好的理解它们的区别。
+次に、それらの違いを理解するために、私たちはそれぞれ`call`や`delegatecall`を使ってコントラクト`C`の`setVars`関数を呼び出します。
 
 `callSetVars`函数通过`call`来调用`setVars`。它有两个参数`_addr`和`_num`，分别对应合约`C`的地址和`setVars`的参数。
+`callSetVars`関数は`call`を使って`setVars`を呼び出します。２つの引数があり、`_addr`、`_num`があります。それぞれはコントラクト`C`のアドレスと`setVars`の引数二対応しています。
 
 ```solidity
-// 通过call来调用C的setVars()函数，将改变合约C里的状态变量
+// callを使ってCのsetVars()関数を呼び出す。これはCコントラクトの状態変数を変更する
 function callSetVars(address _addr, uint _num) external payable{
     // call setVars()
     (bool success, bytes memory data) = _addr.call(
@@ -131,30 +130,38 @@ function delegatecallSetVars(address _addr, uint _num) external payable{
 
 ### 在 remix 上验证
 
-1. 首先，我们把合约`B`和`C`都部署好
+1. まず、私たちはコントラクト`B`、`C`コントラクトをデプロイする。
 
    ![deploy.png](./img/23-1.png)
 
-2. 部署之后，查看`C`合约状态变量的初始值，`B`合约的状态变量也是一样。
+2. デプロイ後、`C`コントラクトの状態変数の初期値を確認し、`B`コントラクトの状態変数と同じとなってることがわかる。
 
    ![initialstate.png](./img/23-2.png)
 
-3. 此时，调用合约`B`中的`callSetVars`，传入参数为合约`C`地址和`10`
+3. この時点で、コントラクト`B`にある`callSetVars`を呼び出し、いれる引数は`C`のアドレスと数字`10`。
 
    ![call.png](./img/23-3.png)
 
-4. 运行后，合约`C`中的状态变量将被修改：`num`被改为`10`，`sender`变为合约`B`的地址
+4. 関数を呼んだ後、コントラクト`C`にある状態変数が変更される：`num`は`10`になり、`sender`はコントラクト`B`のアドレスとなる。
 
    ![resultcall.png](./img/23-4.png)
 
-5. 接下来，我们调用合约`B`中的`delegatecallSetVars`，传入参数为合约`C`地址和`100`
+5. 続いてコントラクト`B`にある`delegatecallSetVars`関数を呼び出し、いれる引数はコントラクト`C`と数字の`100`。
 
    ![delegatecall.png](./img/23-5.png)
 
-6. 由于是`delegatecall`，上下文为合约`B`。在运行后，合约`B`中的状态变量将被修改：`num`被改为`100`，`sender`变为你的钱包地址。合约`C`中的状态变量不会被修改。
+6. `delegatecall`なので、コンテキストはコントラクト`B`である。呼んだ後、コントラクト`B`の状態変数はこのように変更された。
+
+   1. `num`は`100`
+   2. sender はあなたのウォレットアドレス
+   3. コントラクト`C`の状態変数は不変
 
    ![resultdelegatecall.png](./img/23-6.png)
 
-## 总结
+## まとめ
 
-这一讲我们介绍了`Solidity`中的另一个低级函数`delegatecall`。与`call`类似，它可以用来调用其他合约；不同点在于运行的上下文，`B call C`，上下文为`C`；而`B delegatecall C`，上下文为`B`。目前`delegatecall`最大的应用是代理合约和`EIP-2535 Diamonds`（钻石）。
+今回、私たちは`Solidity`のもう一個の低レベル関数`delegatecall`を紹介しました。
+
+`call`と同様、他のコントラクトを呼び出すことができますが、実行されるコンテキスト(context)が異なります。`B call C`の場合、コンテキストは`C`です。`B delegatecall C`の場合、コンテキストは`B`です。
+
+現在、`delegatecall`の最大の応用はプロキシコントラクトと`EIP-2535 Diamonds`（ダイヤモンド）です。
