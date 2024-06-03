@@ -56,16 +56,15 @@ abi.encodeWithSignature("関数シグネチャ", カンマ区切りの引数);
 
 `call`との違いとしては、`delegatecall`は`gas`を指定できますが、`ETH`の量を指定できません。
 
-> ***注意***: `delegatecall`を使うにはセキュリティリスクがあります。ときにはターゲットコントラクトがコントラクトとのストレージストラクチャが同じであることが求められます。そうでない場合、資産がなくされる可能性があります。
+> **_注意_**: `delegatecall`を使うにはセキュリティリスクがあります。ときにはターゲットコントラクトがコントラクトとのストレージストラクチャが同じであることが求められます。そうでない場合、資産がなくされる可能性があります。
 
 ## どのような場合に`delegatecall`を使用するのか？
 
-現在、主に2つの`delegatecall`を使用する場面があります。
+現在、主に 2 つの`delegatecall`を使用する場面があります。
 
 1. プロキシコントラクトのケース：スマートコントラクトのストレージコントラクトとロジックコントラクトを分離する。プロキシコントラクトはすべての関連する変数を保存し、ロジックコントラクトのアドレスを保存する。すべての関数はロジックコントラクト（`Logic Contract`）に存在し、`delegatecall`を使用して実行します。アップグレード時には、プロキシコントラクトを新しいロジックコントラクトに向けるだけです。
 
 2. EIP-2535 Diamonds（ダイヤモンド）：ダイヤモンドは、生産環境で拡張可能なモジュラーなスマートコントラクトシステムを構築するための標準です。ダイヤモンドは複数の実装コントラクトを持つプロキシコントラクトです。詳細はこちら：[ダイヤモンドスタンダードの紹介](https://eip2535diamonds.substack.com/p/introduction-to-the-diamond-standard)。
-
 
 ## `delegatecall`のサンプルコード
 
@@ -73,7 +72,7 @@ abi.encodeWithSignature("関数シグネチャ", カンマ区切りの引数);
 
 ### 呼び出されるコントラクト`C`
 
-私たちはまず簡単なターゲットコントラクト`C`を作成します。`num`と`sender`の2つの`public`変数があります。それぞれ`uint256`と`address`の型です。`setVars`関数があり、`num`を渡された`_num`に設定し、`sender`を`msg.sender`に設定します。
+私たちはまず簡単なターゲットコントラクト`C`を作成します。`num`と`sender`の 2 つの`public`変数があります。それぞれ`uint256`と`address`の型です。`setVars`関数があり、`num`を渡された`_num`に設定し、`sender`を`msg.sender`に設定します。
 
 ```solidity
 // 呼び出されるコントラクトC
@@ -86,7 +85,7 @@ contract C {
         sender = msg.sender;
     }
 }
-````
+```
 
 ### 呼び出しをする側のコントラクト B
 
@@ -103,8 +102,7 @@ contract B {
 
 `callSetVars`関数は`call`を通じて`setVars`を呼び出します。２つの引数`_addr`、`_num`があり、コントラクト`C`のアドレスや`setVars`の引数を意味しています。
 
-
-以下はコントラクトBの一部です。
+以下はコントラクト B の一部です。
 
 ```solidity
 // callを使ってCのsetVars()関数を呼び出す。これはCコントラクトの状態変数を変更する
@@ -116,11 +114,10 @@ function callSetVars(address _addr, uint _num) external payable{
 }
 ```
 
-而`delegatecallSetVars`函数通过`delegatecall`来调用`setVars`。与上面的`callSetVars`函数相同，有两个参数`_addr`和`_num`，分别对应合约`C`的地址和`setVars`的参数。
-一方で、`delegatecallSetVars`関数は
+一方で、`delegatecallSetVars`関数は`delegatecall`を通じて`setVars`関数を呼び出します。上の`callSetVars`関数と同じように、。２つの引数`_addr`、`_num`があり、コントラクト`C`のアドレスや`setVars`の引数を意味しています。
 
 ```solidity
-// 通过delegatecall来调用C的setVars()函数，将改变合约B里的状态变量
+    // delegatecallを通じてCのsetVars()関数を呼び出し、コントラクトBの状態変数が変更される
 function delegatecallSetVars(address _addr, uint _num) external payable{
     // delegatecall setVars()
     (bool success, bytes memory data) = _addr.delegatecall(
@@ -129,7 +126,7 @@ function delegatecallSetVars(address _addr, uint _num) external payable{
 }
 ```
 
-### 在 remix 上验证
+### remix にて検証をする
 
 1. まず、私たちはコントラクト`B`、`C`コントラクトをデプロイする。
 
