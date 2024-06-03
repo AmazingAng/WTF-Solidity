@@ -20,7 +20,7 @@ contract Pair {
 }
 
 contract PairFactory {
-    mapping(address => mapping(address => address)) public getPair; // トークン1, 2によってpairのアドレスを調べれるようにするマッピング変数
+    mapping(address => mapping(address => address)) public getPair; // トークン1, 2によってpairのアドレスを調べれるようにするマップ変数
     address[] public allPairs; // すべてのpairのアドレスを格納する配列
 
     function createPair(address tokenA, address tokenB) external returns (address pairAddr) {
@@ -28,7 +28,7 @@ contract PairFactory {
         Pair pair = new Pair();
         // Pairコントラクトの初期化関数を呼び出す
         pair.initialize(tokenA, tokenB);
-        // 更新地址map
+        // マップ変数を更新する
         pairAddr = address(pair);
         allPairs.push(pairAddr);
         getPair[tokenA][tokenB] = pairAddr;
