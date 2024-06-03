@@ -1,5 +1,5 @@
 ---
-title: 24. 在合约中创建新合约
+title: 24. スマートコントラクトを使ってスマートコントラクトを作成する方法
 tags:
   - solidity
   - advanced
@@ -7,83 +7,87 @@ tags:
   - create contract
 ---
 
-# WTF Solidity极简入门: 24. 在合约中创建新合约
+# WTF Solidity 超シンプル入門: 24. スマートコントラクトを使ってスマートコントラクトを作成する方法
 
-我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
+最近、Solidity の学習を再開し、詳細を確認しながら「Solidity 超シンプル入門」を作っています。これは初心者向けのガイドで、プログラミングの達人向けの教材ではありません。毎週 1〜3 レッスンのペースで更新していきます。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
+僕のツイッター：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
-社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+コミュニティ：[Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[公式サイト wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+すべてのソースコードやレッスンは github にて公開: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 ---
 
-在以太坊链上，用户（外部账户，`EOA`）可以创建智能合约，智能合约同样也可以创建新的智能合约。去中心化交易所`uniswap`就是利用工厂合约（`PairFactory`）创建了无数个币对合约（`Pair`）。这一讲，我会用简化版的`uniswap`讲如何通过合约创建合约。
+イーサリアムのブロックチェーン上では、ユーザー（外部アカウント、`EOA`）がスマートコントラクトを作成できます。
+
+実は、スマートコントラクトを使っても新しいスマートコントラクトを作成できます。
+
+分散型取引所`uniswap`は、ファクトリコントラクト（`PairFactory`）を使用して無数のペアコントラクト（`Pair`）を作成しています。今回のレッスンでは、簡易版の`uniswap`を使って、スマートコントラクトを使ってスマートコントラクトを作成する方法を説明します。
 
 ## `create`
 
-有两种方法可以在合约中创建新合约，`create`和`create2`，这里我们讲`create`，下一讲会介绍`create2`。
+スマートコントラクトを使ってスマートコントラクトを作成する方法は 2 種類あり、`create`と`create2`があります。今回は`create`を説明し、次回は`create2`を説明します。
 
-`create`的用法很简单，就是`new`一个合约，并传入新合约构造函数所需的参数：
+`create`の使い方は非常に簡単です。それは新しいコントラクトを`new`するとともに、新しいコントラクトのコンストラクタに必要な引数を渡します。
 
 ```solidity
 Contract x = new Contract{value: _value}(params)
 ```
 
-其中`Contract`是要创建的合约名，`x`是合约对象（地址），如果构造函数是`payable`，可以创建时转入`_value`数量的`ETH`，`params`是新合约构造函数的参数。
+今のコードの中で、`Contract`は作りたいコントラクト名です。`x`はコントラクトのアドレスです。もしコントラクトのコンストラクタが`payable`なら、作成時に`_value`量の`ETH`を送ることができます。`params`は新しいコントラクトのコンストラクタの引数です。
 
-## 极简Uniswap
+## 簡易版 Uniswap
 
-`Uniswap V2`[核心合约](https://github.com/Uniswap/v2-core/tree/master/contracts)中包含两个合约：
+`Uniswap V2`[コアコントラクト](https://github.com/Uniswap/v2-core/tree/master/contracts)に 2 つのコントラクトが含まれています。
 
-1. UniswapV2Pair: 币对合约，用于管理币对地址、流动性、买卖。
-2. UniswapV2Factory: 工厂合约，用于创建新的币对，并管理币对地址。
+1. UniswapV2Pair: トークンペアのコントラクト → 流動性、トークンペアコントラクト、売買を管理しています。
+2. UniswapV2Factory: ファクトリコントラクト → 新しいトークンペアコントラクトの作成、トークンペアのアドレスを管理しています。
 
-下面我们用`create`方法实现一个极简版的`Uniswap`：`Pair`币对合约负责管理币对地址，`PairFactory`工厂合约用于创建新的币对，并管理币对地址。
+以下では`create`メソッドを使って、簡易版の`Uniswap`を実装します。`Pair`はペアアドレスを管理し、`PairFactory`は新しいペアを作成し、ペアアドレスを管理します。
 
-### `Pair`合约
+### `Pair`コントラクト
 
 ```solidity
-contract Pair{
-    address public factory; // 工厂合约地址
-    address public token0; // 代币1
-    address public token1; // 代币2
+contract Pair {
+    address public factory; // ファクトリコントラクト
+    address public token0; // トークン1
+    address public token1; // トークン2
 
     constructor() payable {
         factory = msg.sender;
     }
 
-    // called once by the factory at time of deployment
+    // デプロイ時に一度呼ばれる初期化関数
     function initialize(address _token0, address _token1) external {
-        require(msg.sender == factory, 'UniswapV2: FORBIDDEN'); // sufficient check
+        require(msg.sender == factory, "UniswapV2: FORBIDDEN"); // sufficient check
         token0 = _token0;
         token1 = _token1;
     }
 }
 ```
 
-`Pair`合约很简单，包含3个状态变量：`factory`，`token0`和`token1`。
+`Pari`コントラクトは非常にシンプルです。3 つの状態変数があります：`factory`、`token0`、`token1`。
 
-构造函数`constructor`在部署时将`factory`赋值为工厂合约地址。`initialize`函数会由工厂合约在部署完成后手动调用以初始化代币地址，将`token0`和`token1`更新为币对中两种代币的地址。
+コンストラクト関数`constructor`はデプロイ時に`factory`をファクトリコントラクトのアドレスに設定します。`initialize`関数はファクトリコントラクトがデプロイ直後に呼び出され、トークンアドレスを初期化し、`token0`と`token1`を更新します。
 
-> **提问**：为什么`uniswap`不在`constructor`中将`token0`和`token1`地址更新好？
->
-> **答**：因为`uniswap`使用的是`create2`创建合约，生成的合约地址可以实现预测，更多详情请阅读[第25讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/25_Create2/readme.md)。
+> **質問**：なぜ`uniswap`はコンストラクタの中で、`token0`と`token1`のアドレスを更新しないのですか？
+
+> **答え**：それは`uniswap`が`create2`を使ってコントラクトを作成するため、生成されたコントラクトアドレスを予測できるためです。詳細は[第 25 回](https://github.com/AmazingAng/WTF-Solidity/blob/main/25_Create2/readme.md)を参照してください。
 
 ### `PairFactory`
 
 ```solidity
-contract PairFactory{
-    mapping(address => mapping(address => address)) public getPair; // 通过两个代币地址查Pair地址
-    address[] public allPairs; // 保存所有Pair地址
+contract PairFactory {
+    mapping(address => mapping(address => address)) public getPair; // トークン1, 2によってpairのアドレスを調べれるようにするマップ変数
+    address[] public allPairs; // すべてのpairのアドレスを格納する配列
 
     function createPair(address tokenA, address tokenB) external returns (address pairAddr) {
-        // 创建新合约
-        Pair pair = new Pair(); 
-        // 调用新合约的initialize方法
+        // 新しいPairコントラクトをデプロイする
+        Pair pair = new Pair();
+        // Pairコントラクトの初期化関数を呼び出す
         pair.initialize(tokenA, tokenB);
-        // 更新地址map
+        // マップ変数を更新する
         pairAddr = address(pair);
         allPairs.push(pairAddr);
         getPair[tokenA][tokenB] = pairAddr;
@@ -92,33 +96,37 @@ contract PairFactory{
 }
 ```
 
-工厂合约（`PairFactory`）有两个状态变量`getPair`是两个代币地址到币对地址的`map`，方便根据代币找到币对地址；`allPairs`是币对地址的数组，存储了所有代币地址。
+ファクトリコントラクト(`PairFactory`)は２つの状態変数があります。`getPair`は２つのトークンアドレスからペアアドレスを取得するためのマップ変数です。`allPairs`はすべてのペアアドレスを格納する配列です。
 
 `PairFactory`合约只有一个`createPair`函数，根据输入的两个代币地址`tokenA`和`tokenB`来创建新的`Pair`合约。其中
+`PairFactory`コントラクトは一つの`createPair`関数しかありません。入力された２つのトークンアドレス`tokenA`と`tokenB`に基づいて新しい`Pair`コントラクトを作成します。
+（実際のコントラクトはトークンペアの作成がすでにあるかチェックするコードがあるが、ここでは省いていると思われます）
 
 ```solidity
-Pair pair = new Pair(); 
+Pair pair = new Pair();
 ```
 
-就是创建合约的代码，非常简单。大家可以部署好`PairFactory`合约，然后用下面两个地址作为参数调用`createPair`，看看创建的币对地址是什么：
+これはコントラクトを作成するコードです。非常に簡単です。`PairFactory`コントラクトをデプロイし、以下の２つのアドレスを引数として`createPair`を呼び出し、作成されたペアのアドレスを確認してみてください。
 
 ```text
-WBNB地址: 0x2c44b726ADF1963cA47Af88B284C06f30380fC78
-BSC链上的PEOPLE地址: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
+WBNBアドレス: 0x2c44b726ADF1963cA47Af88B284C06f30380fC78
+BSCにあるPEOPLEアドレス: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 ```
 
-### 在remix上验证
+### 在 remix 上验证
 
-1. 使用`WBNB`和`PEOPLE`的地址作为参数调用`createPair`,得到`Pair`合约地址：0xD3e2008b4Da2cD6DEAF73471590fF30C86778A48
+1. `WBNB`、`PEOPLE`のアドレスを引数として`createPair`を呼び出し、`Pair`コントラクトのアドレスを取得すると、`0xD3e2008b4Da2cD6DEAF73471590fF30C86778A48`となります。
 
-    ![24-1](./img/24-1.png)
-2. 查看`Pair`合约变量
+   ![24-1](./img/24-1.png)
 
-    ![24-2](./img/24-2.png)
-3. Debug查看`create`操作码
+2. `Pair`コントラクトのアドレスを確認する
 
-    ![24-3](./img/24-3.png)
+   ![24-2](./img/24-2.png)
 
-## 总结
+3. Debug して、`create`オペコードを見る
 
-这一讲，我们用极简`Uniswap`的例子介绍了如何使用`create`方法再合约里创建合约，下一讲我们将介绍如何使用`create2`方法来实现极简`Uniswap`。
+   ![24-3](./img/24-3.png)
+
+## まとめ
+
+今回、私たちは簡易版の`Uniswap`の例を使って、`create`メソッドを使ってコントラクトを作成する方法を説明しました。次回は別の方法の`create2`メソッドを使って簡易版の`Uniswap`を実装します。
