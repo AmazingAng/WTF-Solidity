@@ -28,15 +28,15 @@ tags:
 
 ユーザー`A`がコントラクト`B`を通してコントラクト`C`を`call`すると、コントラクト`C`の関数が実行され、`Context`(コンテキスト：状態変数のストレージ、msg.sender など)もコントラクト`C`になります。この場合、`msg.sender`は`B`のアドレスであり、関数がいくつかの状態変数を変更する場合、その効果はコントラクト`C`の変数に影響を与えます。
 
-![call的上下文](https://images.mirror-media.xyz/publication-images/VgMR533pA8WYtE5Lr65mQ.png?height=698&width=1860)
+![call的上下文](./img/23-1.png)
 
 ### `delegatecall`の場合
 
 ユーザー`A`がコントラクト`B`を通してコントラクト`C`を`delegatecall`すると、コントラクト`C`の関数が実行されますが、`Context`(コンテキスト：状態変数のストレージ、msg.sender など)はコントラクト`B`になります。この場合、`msg.sender`は`A`のアドレスであり、関数がいくつかの状態変数を変更する場合、その効果はコントラクト`B`の変数に影響を与えます。
 
-![delegatecallのコンテキスト](https://images.mirror-media.xyz/publication-images/JucQiWVixdlmJl6zHjCSI.png?height=702&width=1862)
+![delegatecallのコンテキスト](./img/23-2.png)
 
-皆さんはこのように理解するとよいです。投資家（ユーザー`A`）は彼自身の資産（`B`コントラクトの`状態変数`）をリスク投資代理（`C`コントラクト）に管理させます。実行されるのはリスク投資代理の関数ですが、変更されるのは資産の状態です。
+皆さんはこのように理解するとよいです。投資家（ユーザー`A`）は彼自身の資産（`B`コントラクトの`状態変数`）を資産管理会社（`C`コントラクト）に管理させてます。実行されるのは資産管理会社の関数（`C`）ですが、変更されるのは資産（`B`）の状態です。
 
 `delegatecall`の文法は`call`と似ています。
 
@@ -55,8 +55,6 @@ abi.encodeWithSignature("関数シグネチャ", カンマ区切りの引数);
 `関数シグネチャ`は`"関数名（カンマ区切りの引数型）"`です。例えば`abi.encodeWithSignature("f(uint256,address)", _x, _addr)`。
 
 `call`との違いとしては、`delegatecall`は`gas`を指定できますが、`ETH`の量を指定できません。
-
-````solidity
 
 > ***注意***: `delegatecall`を使うにはセキュリティリスクがあります。ときにはターゲットコントラクトがコントラクトとのストレージストラクチャが同じであることが求められます。そうでない場合、資産がなくされる可能性があります。
 
@@ -103,8 +101,10 @@ contract B {
 
 次に、それらの違いを理解するために、私たちはそれぞれ`call`や`delegatecall`を使ってコントラクト`C`の`setVars`関数を呼び出します。
 
-`callSetVars`函数通过`call`来调用`setVars`。它有两个参数`_addr`和`_num`，分别对应合约`C`的地址和`setVars`的参数。
-`callSetVars`関数は`call`を使って`setVars`を呼び出します。２つの引数があり、`_addr`、`_num`があります。それぞれはコントラクト`C`のアドレスと`setVars`の引数二対応しています。
+`callSetVars`関数は`call`を通じて`setVars`を呼び出します。２つの引数`_addr`、`_num`があり、コントラクト`C`のアドレスや`setVars`の引数を意味しています。
+
+
+以下はコントラクトBの一部です。
 
 ```solidity
 // callを使ってCのsetVars()関数を呼び出す。これはCコントラクトの状態変数を変更する
@@ -117,6 +117,7 @@ function callSetVars(address _addr, uint _num) external payable{
 ```
 
 而`delegatecallSetVars`函数通过`delegatecall`来调用`setVars`。与上面的`callSetVars`函数相同，有两个参数`_addr`和`_num`，分别对应合约`C`的地址和`setVars`的参数。
+一方で、`delegatecallSetVars`関数は
 
 ```solidity
 // 通过delegatecall来调用C的setVars()函数，将改变合约B里的状态变量
