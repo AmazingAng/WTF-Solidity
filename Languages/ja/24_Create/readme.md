@@ -113,7 +113,7 @@ WBNBアドレス: 0x2c44b726ADF1963cA47Af88B284C06f30380fC78
 BSCにあるPEOPLEアドレス: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 ```
 
-### 在 remix 上验证
+### remix で検証する
 
 1. `WBNB`、`PEOPLE`のアドレスを引数として`createPair`を呼び出し、`Pair`コントラクトのアドレスを取得すると、`0xD3e2008b4Da2cD6DEAF73471590fF30C86778A48`となります。
 
