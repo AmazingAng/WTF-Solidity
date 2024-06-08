@@ -32,14 +32,14 @@ y luego resumir las funciones de biblioteca comúnmente utilizadas.
 
 Una librería es un contrato especial que existe para mejorar la reutilización en `solidity` y reducir el consumo de `gas`.
 Los contratos de biblioteca son generalmente una colección de funciones útiles (`funciones de biblioteca`),
-que son creadas por los maestros o la parte del proyecto.
-Solo necesitamos pararnos sobre los hombros de los gigantes y usar esas funciones.
+que son creadas por los grandes proyectos o personas que trabajan en ellos.
+Solo se necesita pararse sobre los hombros de los gigantes y usar esas funciones.
 
 ![Biblioteca de contratos: Pararse sobre los hombros de los gigantes](https://images.mirror-media.xyz/publication-images/HJC0UjkALdrL8a2BmAE2J.jpeg?height=300&width=388)
 
 Es diferente de los contratos ordinarios en los siguientes puntos:
 
-1. Variables de estado no están permitidas
+1. Las variables de estado no están permitidas
 2. No puede recibir ether
 3. No puede heredar ni ser heredado
 4. No puede ser destruido
@@ -114,11 +114,11 @@ Principalmente contiene dos funciones, `toString()` convierte `uint256` a `strin
 `toHexString()` convierte `uint256` a `hexadecimal`, y luego lo convierte a `string`.
 
 ### Cómo usar contratos de biblioteca
-Nosotros usamos la función toHexString() en la función de biblioteca String para demostrar dos formas de usar las funciones en el contrato de biblioteca.
+Se usa la función toHexString() en la función de biblioteca String para demostrar dos formas de usar las funciones en el contrato de biblioteca.
 
-**1. `usar for` comando**
+**1. Usar comando `for` **
 
-Comando `using A for B` se puede usar para adjuntar funciones de biblioteca (de la biblioteca A) a cualquier tipo (B). Después de la instrucción,
+El comando `using A for B` se puede usar para adjuntar funciones de biblioteca (de la biblioteca A) a cualquier tipo (B). Después de la instrucción,
 la función en la biblioteca `A` se agregará automáticamente como miembro de la variable de tipo `B`, 
 que se puede llamar directamente. Nota: Al llamar, esta variable se pasará a la función como el primer parámetro:
 
@@ -148,8 +148,8 @@ ambos métodos pueden devolver la cadena `hexadecimal` correcta "0xaa",
 ## Resumen
 
 En este capítulo, se ha introducido el contrato de biblioteca en `solidity` y resumido las funciones de biblioteca comúnmente utilizadas.
-99% de los desarrolladores no necesitan escribir contratos de biblioteca ellos mismos, pueden usar los escritos por los maestros.
-Lo único que necesitamos saber es qué contrato de biblioteca usar y dónde es más adecuada la biblioteca.
+99% de los desarrolladores no necesitan escribir contratos de biblioteca ellos mismos, pueden usar los escritos por personas con más experiencia.
+Lo único que se necesita saber es qué contrato de biblioteca usar y dónde es más adecuada usarlo.
 
 Algunas bibliotecas comúnmente utilizadas son:
 1. [String](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/4a9cc8b4918ef3736229a5cc5a310bdc17bf759f/contracts/utils/Strings.sol)：Convertir `uint256` a `String`

@@ -24,14 +24,14 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 -----
 
-`ABI`(Application Binary Interface) es el estándar para interactuar con contratos inteligentes de Ethereum. Los datos se codifican en función de su tipo, y debido a que el resultado codificado no contiene información de tipo, es necesario indicar sus tipos al decodificarlos.
+El `ABI` (Application Binary Interface) es el estándar utilizado para la interacción entre aplicaciones externas y contratos inteligentes en Ethereum. Define cómo se deben codificar y decodificar los datos según su tipo para asegurar una comunicación efectiva. Dado que los datos codificados no incluyen información sobre su tipo, es imprescindible especificar estos tipos al momento de decodificar los datos para interpretarlos correctamente.
 
 En Solidity, `ABI encode` tiene cuatro funciones: `abi.encode`, `abi.encodePacked`, `abi.encodeWithSignature`, `abi.encodeWithSelector`. Mientras que `ABI decode` tiene una función: `abi.decode`, que se utiliza para decodificar los datos de `abi.encode`.
 
 En este capítulo, aprenderemos cómo usar estas funciones.
 
 ## Codificación ABI
-Codificaremos cuatro variables, sus tipos son `uint256` (alias `uint`), `address`, `string`, `uint256[2]`:
+Se codificaran cuatro variables, sus tipos son `uint256` (alias `uint`), `address`, `string`, `uint256[2]`:
 ```solidity
     uint x = 10;
     address addr = 0x7A58c0Be72BE218B41C608b7Fe7C5bB630736C71;
@@ -39,7 +39,7 @@ Codificaremos cuatro variables, sus tipos son `uint256` (alias `uint`), `address
     uint[2] array = [5, 6]; 
 ```
 ### `abi.encode`
-Utilizamos las [reglas ABI](https://learnblockchain.cn/docs/solidity/abi-spec.html) para codificar los parámetros dados. `ABI` está diseñado para interactuar con contratos inteligentes llenando cada parámetro con datos de 32 bytes y concatenándolos. Si deseas interactuar con contratos, debes usar `abi.encode`.
+Se utiliza las [reglas ABI](https://learnblockchain.cn/docs/solidity/abi-spec.html) para codificar los parámetros dados. `ABI` está diseñado para interactuar con contratos inteligentes llenando cada parámetro con datos de 32 bytes y concatenándolos. Si se desea interactuar con contratos, se debe usar `abi.encode`.
 ```solidity
     function encode() public view returns(bytes memory result) {
         result = abi.encode(x, addr, name, array);
@@ -85,7 +85,7 @@ El resultado de la codificación es `0xe87082f1000000000000000000000000000000000
         (dx, daddr, dname, darray) = abi.decode(data, (uint, address, string, uint[2]));
     }
 ```
-Ingresamos la codificación binaria de `abi.encode` en `decode`, que decodificará los parámetros originales:
+Se ingresa la codificación binaria de `abi.encode` en `decode`, que decodificará los parámetros originales:
 
 ![](https://images.mirror-media.xyz/publication-images/jboRaaq0U57qVYjmsOgbv.png?height=408&width=624)
 
@@ -122,10 +122,10 @@ Ingresamos la codificación binaria de `abi.encode` en `decode`, que decodificar
 - 0x533ba33a() es una función que se muestra después de descompilar, solo se pueden obtener resultados codificados de funciones, y no se puede encontrar la firma de la función.
 ![](./img/27-4.png)
 ![](./img/27-5.png)
-- En este caso no podemos llamar a través de la construcción de una interfaz o contrato
+- En este caso no se puede llamar a través de la construcción de una interfaz o contrato
 ![](./img/27-6.png)
 
-En este caso, podemos llamar a través del selector de función ABI.
+En este caso, se puede llamar a través del selector de función ABI.
 ```solidity
     bytes memory data = abi.encodeWithSelector(bytes4(0x533ba33a));
 

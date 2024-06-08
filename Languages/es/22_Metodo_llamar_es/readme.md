@@ -23,6 +23,7 @@ Twitter: [@jonthdiaz](https://twitter.com/jonthdiaz)
 Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
+
 Anteriormente en [20: Enviar ETH](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/20_EnviarETH_es) se habló sobre cómo enviar `ETH` con `call`, en este tutorial se profundizará sobre ello.
 
 ## Metodo Call
@@ -133,7 +134,8 @@ function callGetX(address _addr) external returns(uint256){
 	return abi.decode(data, (uint256));
 }
 ```
-Desde el registro del evento `Response`, se ve que `data` es `0x0000000000000000000000000000000000000000000000000000000000000005`. Después de decodificar con `abi.decode`, el valor de retorno final es `5`.
+
+Desde el registro del evento `Response`, se puede ver que `data` es `0x0000000000000000000000000000000000000000000000000000000000000005`. Después de decodificar con `abi.decode`, el valor de retorno final es `5`.
 
 ![22-2](./img/22-2.png)
 
@@ -152,7 +154,7 @@ function callNonExist(address _addr) external{
 }
 ```
 
-En este ejemplo, intentamos llamar a `foo` que no está declaro con `call`, la transacción seguirá teniendo éxito y devolverá `success`, pero la función ejecutada fue la función `fallback`.
+En este ejemplo, se intento llamar a `foo` que no está declaro con `call`, la transacción seguirá teniendo éxito y devolverá `success`, pero la función ejecutada fue la función `fallback`.
 
 ![22-3](./img/22-3.png)
 
