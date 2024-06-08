@@ -31,7 +31,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 Nota⚠️: Antes de la versión 0.6.x de Solidity, solo estaba disponible `fallback()` para recibir Ether y como función de respaldo.
 Después de la versión 0.6, `fallback()` se separó en `receive()` y `fallback()`.
 
-Este tutorial, estará en focado en recibir Ether.
+Este tutorial estará enfocado en recibir Ether.
 
 ## Recibir función ETH: receive()
 La función `receive()` se utiliza únicamente para recibir `ETH`. Un contrato puede tener a lo sumo una función `receive()`, 
