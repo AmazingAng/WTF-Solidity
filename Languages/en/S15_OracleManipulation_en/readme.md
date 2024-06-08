@@ -40,9 +40,9 @@ One of the most commonly used oracles is a price oracle, which refers to any dat
 
 If an oracle is not used correctly by developers, it can pose significant security risks.
 
-- In October 2021, Cream Finance, a DeFi platform on the Binance Smart Chain, suffered a [theft of $130 million in user funds](https://rekt.news/cream-rekt-2/) due to an oracle vulnerability.
-- In May 2022, Mirror Protocol, a synthetic asset platform on the Terra blockchain, suffered a [theft of $115 million in user funds](https://rekt.news/mirror-rekt/) due to an oracle vulnerability.
-- In October 2022, Mango Market, a decentralized lending platform on the Solana blockchain, suffered a [theft of $115 million in user funds](https://rekt.news/mango-markets-rekt/) due to an oracle vulnerability.
+- In October 2021, Cream Finance, a DeFi platform on the Binance Smart Chain, suffered a [theft of $130 million in user funds](https://rekt.news/cream-rekt-2/) due to an Oracle vulnerability.
+- In May 2022, Mirror Protocol, a synthetic asset platform on the Terra blockchain, suffered a [theft of $115 million in user funds](https://rekt.news/mirror-rekt/) due to an Oracle vulnerability.
+- In October 2022, Mango Market, a decentralized lending platform on the Solana blockchain, suffered a [theft of $115 million in user funds](https://rekt.news/mango-markets-rekt/) due to an Oracle vulnerability.
 
 ## Vulnerability Example
 
@@ -116,7 +116,7 @@ These 4 steps can be completed in a single transaction.
 
 ### Reproduce on Foundry
 
-We will use Foundry to reproduce the manipulation attack on the oracle because it is fast and allows us to create a local fork of the mainnet for testing. If you are not familiar with Foundry, you can read [WTF Solidity Tools T07: Foundry](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md).
+We will use Foundry to reproduce the manipulation attack on the Oracle because it is fast and allows us to create a local fork of the mainnet for testing. If you are not familiar with Foundry, you can read [WTF Solidity Tools T07: Foundry](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md).
 
 1. After installing Foundry, start a new project and install the OpenZeppelin library by running the following command in the command line:
 

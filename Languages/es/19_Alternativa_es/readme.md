@@ -28,10 +28,10 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 1. Recibir Ether
 2. Manejar llamadas al contrato si ninguna de las otras funciones coincide con la firma de función dada (por ejemplo, contrato proxy)
 
-Nota⚠️: Antes de la versión 0.6.x de Solidity, solo estaba disponible `fallback()`, para recibir Ether y como función de respaldo.
+Nota⚠️: Antes de la versión 0.6.x de Solidity, solo estaba disponible `fallback()` para recibir Ether y como función de respaldo.
 Después de la versión 0.6, `fallback()` se separó en `receive()` y `fallback()`.
 
-Este tutorial, estará en focado en recibir Ether.
+Este tutorial estará enfocado en recibir Ether.
 
 ## Recibir función ETH: receive()
 La función `receive()` se utiliza únicamente para recibir `ETH`. Un contrato puede tener a lo sumo una función `receive()`, 
@@ -53,7 +53,7 @@ Se puede enviar un `evento` en la función `receive()`, por ejemplo:
 ```
 
 Algunos contratos maliciosos agregan códigos en `receive()` (`fallback()` antes de Solidity 0.6.x), que consumen una gran cantidad de `gas` o hacen que la transacción se revierta.
-Así que harán que algunas funciones de reembolso o transferencia fallen, preste atención a tales riesgos al escribir tales operaciones.
+Así lograrán que algunas funciones de reembolso o transferencia fallen, preste atención a tales riesgos al escribir tales operaciones.
 
 ## Función de respaldo: fallback()
 La función `fallback()` se ejecuta en una llamada al contrato si ninguna de las otras funciones coincide con la firma de función dada, o si no se suministró ningún dato y no hay una función `receive Ether`. 

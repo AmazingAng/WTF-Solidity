@@ -50,7 +50,7 @@ Después de desplegar `ReceiveETH`, se llama a la función `getBalance()`, se pu
 
 ## Contrato para enviar ETH
 Se implementaran tres formas de enviar `ETH` al contrato `ReceiveETH`. Primero, se crea el `constructor` del contrato `SendETH` `payable`, y se agrega la función `receive()`,
-para poder transferir `ETH` a nuestro contrato al desplegarlo.
+para poder transferir `ETH` al contrato luego de desplegarlo.
 
 ```solidity
 contract SendETH {
@@ -60,7 +60,7 @@ contract SendETH {
     receive() external payable{}
 }
 ```
-### Transferir
+### Transferir (transfer)
 - Uso: `receiverAddress.transfer(value in Wei)`.
 - El límite de `gas` de `transfer()` es `2300`, que es suficiente para hacer la transferencia, pero no si el contrato receptor tiene un `fallback()` o `receive()` que consume `gas`.
 - Si `transfer()` falla, la transacción se `revertirá`.
@@ -85,10 +85,10 @@ En el contrato `ReceiveETH`, cuando se llama a `getBalance()`, se puede ver que 
 
 ![20-4](./img/20-4.png)
 
-### Enviar
+### Enviar (send)
 
 - Uso: `receiverAddress.send(value in Wei)`.
-- El límite de `gas` de `send()` es `2300`, que es suficiente para hacer la transferencia, pero no si el contrato receptor tiene un `fallback()` o `receive()` que consume `gas`.
+- El límite de `gas` de `send()` es `2300`, es suficiente para hacer la transferencia, pero no si el contrato receptor tiene un `fallback()` o `receive()` que consume `gas`.
 - Si `send()` falla, la transacción no se `revertirá`.
 - El valor de retorno de `send()` es `bool`, que es el estado de la transacción, se puede elegir actuar en consecuencia.
 
@@ -112,7 +112,7 @@ Si `amount` es 10, y `value` es 11, `amount`<=`value`, la transacción se realiz
 
 ![20-6](./img/20-6.png)
 
-### Funcion call
+### Función `call`
 
 - Uso: `receiverAddress.call{value: value in Wei}("")`.
 - No hay límite de `gas` para `call()`, por lo que admite más operaciones en `fallback()` o `receive()` del contrato receptor.
@@ -141,8 +141,9 @@ Si `amount` es 10, y `value` es 11, `amount`<=`value`, la transacción se realiz
 
 Con cualquiera de estos tres métodos, se puede enviar `ETH` al contrato `ReceiveETH` con éxito.
 
+
 ## Resumen
 En este tutorial, se habla sobre tres formas de enviar `ETH` en `solidity`: `transfer`, `send` y `call`.
 - No hay límite de `gas` para `call`, que es la forma más flexible y recomendada;
-- El límite de `gas` de `transfer` es `2300 gas`, la transacción se `revertirá` si falla, lo que lo convierte en la segunda opción;
+- El límite de `gas` de `transfer` es `2300`, la transacción se `revertirá` si falla, lo que lo convierte en la segunda opción;
 - El límite de `gas` de `send` es `2300`, la transacción no se `revertirá` si falla, lo que lo convierte en la peor opción.

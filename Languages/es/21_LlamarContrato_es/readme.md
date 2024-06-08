@@ -103,7 +103,7 @@ Copiar la dirección de `OtherContract`, y pasarla como parámetro de `callGetX`
 ![usar contract3 in remix](./img/21-6.png)
 
 ### 3. Crear variable de contrato
-Se puede crear una variable de contrato y llamar a sus funciones. El siguiente ejemplo muestra cómo crear una referencia de `OtherContract` y guardarla en `oc`:
+Se puede crear una variable de contrato y llamar a sus funciones. El siguiente ejemplo muestra cómo crear una referencia de `OtherContract` y guardarla en la variable `oc`:
 
 ```solidity
     function callGetX2(address _Address) external view returns(uint x){

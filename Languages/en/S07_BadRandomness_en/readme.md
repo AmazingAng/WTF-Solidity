@@ -85,9 +85,9 @@ Since the Remix VM does not support the `blockhash` function, you need to deploy
 
 ## How to Prevent
 
-To prevent such vulnerabilities, we often use off-chain random numbers provided by oracle projects, such as Chainlink VRF. These random numbers are generated off-chain and then uploaded to the blockchain, ensuring that the numbers are unpredictable. For more information, you can read [WTF Solidity 39: Pseudo-random Numbers](https://github.com/AmazingAng/WTF-Solidity/tree/main/39_Random).
+To prevent such vulnerabilities, we often use off-chain random numbers provided by Oracle projects, such as Chainlink VRF. These random numbers are generated off-chain and then uploaded to the blockchain, ensuring that the numbers are unpredictable. For more information, you can read [WTF Solidity 39: Pseudo-random Numbers](https://github.com/AmazingAng/WTF-Solidity/tree/main/39_Random).
 
 ## Summary
 
-In this lesson, we introduced the Bad Randomness vulnerability and discussed a simple method to prevent it: using off-chain random numbers provided by oracle projects. NFT and GameFi projects should avoid using on-chain pseudorandom numbers for lotteries to prevent exploitation by hackers.
+In this lesson, we introduced the Bad Randomness vulnerability and discussed a simple method to prevent it: using off-chain random numbers provided by Oracle projects. NFT and GameFi projects should avoid using on-chain pseudorandom numbers for lotteries to prevent exploitation by hackers.
 
