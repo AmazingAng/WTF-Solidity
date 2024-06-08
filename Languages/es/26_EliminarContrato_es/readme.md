@@ -24,7 +24,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 ## `selfdestruct`
 
-La operación `selfdestruct` es la única forma de eliminar un contrato inteligente y el `ETH` restante almacenado en esa dirección se envía a un destino designado. La operación `selfdestruct` está diseñada para tratar con casos extremos de errores de contrato. Originalmente, el opcode se llamaba `suicide`, pero la comunidad de Ethereum decidió cambiarlo a `selfdestruct` porque el suicidio es un tema pesado y debemos hacer todo lo posible para no ser insensibles a los programadores que sufren de depresión.
+La operación `selfdestruct` es la única forma de eliminar un contrato inteligente y el `ETH` restante almacenado en esa dirección se envía a un destino designado. La operación `selfdestruct` está diseñada para tratar con casos extremos de errores de contrato. Originalmente, el opcode se llamaba `suicide`, pero la comunidad de Ethereum decidió cambiarlo a `selfdestruct` porque el suicidio es un tema pesado y se debe hacer todo lo posible para no ser insensibles a los programadores que sufren de depresión.
 
 ### Cómo usar `selfdestruct`
 
@@ -33,7 +33,7 @@ Es simple usar `selfdestruct`：
 selfdestruct(_addr);
 ```
 
-`_addr` es la dirección para almacenar el `ETH` restante en el contrato.
+`_addr` es la dirección para enviar el `ETH` restante en el contrato.
 
 ### Ejemplo:
 
@@ -59,9 +59,9 @@ contract DeleteContract {
 
 En `DeleteContract`, definimos una variable de estado pública llamada `value` y dos funciones: `getBalance()` que se utiliza para obtener el saldo de `ETH` del contrato, `deleteContract()` que se utiliza para eliminar el contrato y transferir el `ETH` restante al remitente del mensaje.
 
-Después de desplegar el contrato, enviamos 1 ETH al contrato. El resultado debería ser 1 ETH cuando llamamos a `getBalance()` y el `value` debería ser 10.
+Después de desplegar el contrato, se envía 1 ETH al contrato. El resultado debería ser 1 ETH cuando se llama a `getBalance()` y el `value` debería ser 10.
 
-Luego llamamos a `deleteContract().` El contrato se autodestruirá y todas las variables se borrarán. En este momento, `value` es igual a `0` que es el valor predeterminado, y `getBalance()` también devuelve un valor vacío.
+Luego se llama a `deleteContract().` El contrato se auto-destruirá y todas las variables se borrarán. En este momento, `value` es igual a `0` que es el valor predeterminado, y `getBalance()` también devuelve un valor vacío.
 
 ### Atención
 
@@ -71,7 +71,7 @@ Luego llamamos a `deleteContract().` El contrato se autodestruirá y todas las v
 
 ### Ejemplo de Remix
 
-1. Desplegar el contrato y envía 1 ETH al contrato. Comprobar el estado del contrato. 
+1. Desplegar el contrato y enviar 1 ETH al contrato. Comprobar el estado del contrato. 
 
 ![deployContract.png](./img/26-2.png)
 
