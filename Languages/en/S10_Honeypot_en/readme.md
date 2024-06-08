@@ -31,8 +31,8 @@ In this lesson, we will introduce the Pixiu contract and stay away from Pixiu to
 
 Typically, a Pixiu scam follows the following lifecycle:
 
-1. Malicious project owner deploys the Pixiu token contract.
-2. Promote the Pixiu token to retail investors, and due to the inability to sell, the token price keeps rising.
+1. A malicious project owner deploys the Pixiu token contract.
+2. They promote the Pixiu token to retail investors, and due to the inability to sell, the token price keeps rising.
 3. The project owner performs a "rug pull" and runs away with the funds.
 
 ![](./img/S10-1.png)

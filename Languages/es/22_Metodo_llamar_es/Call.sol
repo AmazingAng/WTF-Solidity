@@ -16,7 +16,7 @@ contract OtherContract {
     // Asignar el valor de x, así como recibir ETH (pagable)
     function setX(uint256 x) external payable{
         _x = x;
-        // Emiter evento Log al recibir ETH
+        // Emitir evento Log al recibir ETH
         if(msg.value > 0){
             emit Log(msg.value, gasleft());
         }
@@ -38,7 +38,7 @@ contract Call{
             abi.encodeWithSignature("setX(uint256)", x)
         );
 
-        emit Response(success, data); //emiter evento
+        emit Response(success, data); //emitir evento
     }
 
     function callGetX(address _addr) external returns(uint256){
@@ -57,6 +57,6 @@ contract Call{
             abi.encodeWithSignature("foo(uint256)")
         );
 
-        emit Response(success, data); //emiter evento
+        emit Response(success, data); //emitir evento
     }
 }

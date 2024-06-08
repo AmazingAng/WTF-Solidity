@@ -22,7 +22,7 @@ Twitter: [@jonthdiaz](https://twitter.com/jonthdiaz)
 Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 -----
 
-En Ethereum, el usuario (cuenta externa, `EOA`) puede crear contratos inteligentes, y un contrato inteligente también puede crear nuevos contratos inteligentes. El intercambio descentralizado `Uniswap` crea un número infinito de contratos `Pair` con su contrato `Factory`. En esta lección, explicaré cómo crear nuevos contratos inteligentes en un contrato inteligente existente utilizando una versión simplificada de `Uniswap`.
+En Ethereum, el usuario (cuenta externa, `EOA`) puede crear contratos inteligentes, y un contrato inteligente también puede crear nuevos contratos inteligentes. El intercambio descentralizado `Uniswap` crea un número infinito de contratos `Pair` con su contrato `Factory`. En esta lección se explica cómo crear nuevos contratos inteligentes en un contrato inteligente existente utilizando una versión simplificada de `Uniswap`.
 
 ## `create` y `create2`
 Hay dos formas de crear un nuevo contrato en un contrato existente, `create` y `create2`, esta lección presentará `create`, la siguiente lección presentará `create2`.
@@ -41,7 +41,7 @@ El contrato inteligente principal de `Uniswap V2` incluye 2 contratos inteligent
 1. UniswapV2Pair: Contrato Pair, utilizado para gestionar las direcciones de los tokens, la liquidez y el intercambio.
 2. UniswapV2Factory: Contrato Factory, utilizado para crear nuevos contratos Pair, y gestionar las direcciones de Pair.
 
-A continuación, se implementara un `Uniswap` simplificado con `create`: el contrato `Pair` se utiliza para gestionar las direcciones de los tokens, el contrato `PairFactory` se utiliza para crear nuevos contratos Pair y gestionar las direcciones de Pair.
+A continuación, se implementará un `Uniswap` simplificado con `create`, el contrato `Pair` se utiliza para gestionar las direcciones de los tokens, el contrato `PairFactory` se utiliza para crear nuevos contratos Pair y gestionar las direcciones de Pair.
 
 ### Contrato `Pair`
 

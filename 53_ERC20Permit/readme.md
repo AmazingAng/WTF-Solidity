@@ -198,13 +198,15 @@ contract ERC20Permit is ERC20, IERC20Permit, EIP712 {
 
 3. 调用合约的 `permit()` 方法，输入相应参数，进行授权。
 
-4. 调用合约的 `allance()` 方法，输入相应的 `owner` 和 `spender`，可以看到授权成功。
+4. 调用合约的 `allowance()` 方法，输入相应的 `owner` 和 `spender`，可以看到授权成功。
 
 ## 安全注意
 
 ERC20Permit 利用链下签名进行授权给用户带来了便利，同时带来了风险。一些黑客会利用这一特性进行钓鱼攻击，骗取用户签名并盗取资产。2023年4月的一起针对 USDC 的签名[钓鱼攻击](https://twitter.com/0xAA_Science/status/1652880488095440897?s=20)让一位用户损失了 228w u 的资产。
 
 **签名时，一定要谨慎的阅读签名内容！**
+
+同时，一些合约在集成`permit`时，也会带来DoS（拒绝服务）的风险。因为`permit`在执行时会用掉当前的`nonce`值，如果合约的函数中包含`permit`操作，则攻击者可以通过抢跑执行`permit`从而使得目标交易因为`nonce`被占用而回滚。
 
 ## 总结
 

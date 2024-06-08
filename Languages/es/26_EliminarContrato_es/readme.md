@@ -33,7 +33,7 @@ Es simple usar `selfdestruct`：
 selfdestruct(_addr);
 ```
 
-`_addr` es la dirección para almacenar el `ETH` restante en el contrato.
+`_addr` es la dirección para enviar el `ETH` restante en el contrato.
 
 ### Ejemplo:
 
@@ -59,9 +59,10 @@ contract DeleteContract {
 
 En `DeleteContract`, se define una variable de estado pública llamada `value` y dos funciones: `getBalance()` que se utilizan para obtener el saldo de `ETH` del contrato, `deleteContract()` que se utiliza para eliminar el contrato y transferir el `ETH` restante al remitente del mensaje.
 
-Después de desplegar el contrato, se envía 1 ETH al contrato. El resultado debería ser 1 ETH cuando se llama a `getBalance()`  el `value` debería ser 10.
 
-Luego se llame a `deleteContract().` El contrato se autodestruirá y todas las variables se borrarán. En este momento, `value` es igual a `0` que es el valor predeterminado, y `getBalance()` también devuelve un valor vacío.
+Después de desplegar el contrato, se envía 1 ETH al contrato. El resultado debería ser 1 ETH cuando se llama a `getBalance()` y el `value` debería ser 10.
+
+Luego se llama a `deleteContract().` El contrato se auto-destruirá y todas las variables se borrarán. En este momento, `value` es igual a `0` que es el valor predeterminado, y `getBalance()` también devuelve un valor vacío.
 
 ### Atención
 
@@ -71,7 +72,7 @@ Luego se llame a `deleteContract().` El contrato se autodestruirá y todas las v
 
 ### Ejemplo de Remix
 
-1. Desplegar el contrato y envía 1 ETH al contrato. Comprobar el estado del contrato. 
+1. Desplegar el contrato y enviar 1 ETH al contrato. Comprobar el estado del contrato. 
 
 ![deployContract.png](./img/26-2.png)
 
