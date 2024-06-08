@@ -47,7 +47,7 @@ El `código binario` se genera con `abi.encodeWithSignature`:
 ```solidity
 abi.encodeWithSignature("función firma", parámetros separados por coma)
 ```
-```
+
 `firma de función` es `"nombre de la función (parámetros separados por coma)"`. Por ejemplo, `abi.encodeWithSignature("f(uint256,address)", _x, _addr)`.
 
 Al igual que `call`, `delegatecall` puede especificar el valor de `gas` al llamar a un contrato inteligente, pero no se puede especificar el valor de `ETH`.
@@ -87,7 +87,7 @@ contract B {
     address public sender;
 ```
 
-El siguiente paso es usar `call` y `delegatecall` respectivamente para llamar a `setVars` desde el contrato `C`, para que podamos entender mejor la diferencia.
+El siguiente paso es usar `call` y `delegatecall` respectivamente para llamar a `setVars` desde el contrato `C`, para que se pueda entender mejor la diferencia.
 
 La función `callSetVars` llama a `setVars` a través de `call`, la función `delegatecallSetVars` llama a `setVars` a través de `delegatecall`.
 
@@ -115,7 +115,7 @@ Mientras que la función `delegatecallSetVars` llama a `setVars` a través de `d
 ```
 
 ### Verificar en Remix
-1. Primero desplegamos el contrato B y el contrato C
+1. Primero se despliega el contrato B y el contrato C
 
 ![deploy.png](./img/23-3.png)
 
@@ -123,7 +123,7 @@ Mientras que la función `delegatecallSetVars` llama a `setVars` a través de `d
 
 ![initialstate.png](./img/23-4.png)
 
-3. A continuación, llamamos a `callSetVars` en el contrato `B` con los argumentos de la dirección del contrato `C` y `10`
+3. A continuación, se llama a `callSetVars` en el contrato `B` con los argumentos de la dirección del contrato `C` y `10`
 
 ![call.png](./img/23-5.png)
 
@@ -131,7 +131,7 @@ Mientras que la función `delegatecallSetVars` llama a `setVars` a través de `d
 
 ![resultcall.png](./img/23-6.png)
 
-5. A continuación, llamamos a `delegatecallSetVars` en el contrato `B` con los argumentos de la dirección del contrato `C` y `100`
+5. A continuación, se llama a `delegatecallSetVars` en el contrato `B` con los argumentos de la dirección del contrato `C` y `100`
 
 ![delegatecall.png](./img/23-7.png)
 

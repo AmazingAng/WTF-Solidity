@@ -42,7 +42,7 @@ function saySomething(string memory something) public pure returns(string memory
 ```
 
 Después de compilar, todas las funciones de sobrecarga se convierten en selectores de funciones diferentes debido a los diferentes tipos de parámetros.
-Para ver el contenido específico del selector de una función, consulte [WTF Solidity Tutorial: 29. Function Selector](https://github.com/AmazingAng/WTFSolidity/tree/main/29_Selector)
+Para ver el contenido específico del selector de una función, consultar [WTF Solidity Tutorial: 29. Function Selector](https://github.com/AmazingAng/WTFSolidity/tree/main/29_Selector)
 
 Tomando el contrato `Overloading.sol` como ejemplo, después de compilar y desplegar en Remix.
 Después de llamar a las funciones de sobrecarga `saySomething()` y `saySomething(string memory something)` respectivamente,
@@ -65,7 +65,7 @@ El siguiente ejemplo tiene dos funciones llamadas `f()`, una tiene el parámetro
         out = _in;
     }
 ```
-El número `50` se puede convertir tanto a `uint8` como a `uint256`, por lo que se generará un error si llamamos a `f(50)`.
+El número `50` se puede convertir tanto a `uint8` como a `uint256`, por lo que se generará un error si se llama a `f(50)`.
 
 ## Resumen
 En esta lección, se presento el uso básico de la función de sobrecarga en `solidity`:

@@ -31,7 +31,7 @@ Solidity tiene muchas funciones para el manejo de errores. Los errores pueden oc
 
 ### Error
 La declaración `error` es una característica nueva en solidity `0.8`. Ahorra gas e informa a los usuarios por qué la operación falló. Es la manera recomendada de lanzar un error en Solidity.
-Los errores personalizados se definen utilizando la declaración de error, que se puede usar dentro y fuera de los contratos. A continuación, creamos un error `TransferNotOwner`, que lanzará un error cuando el usuario que realice la transacción no sea el `propietario` del token.
+Los errores personalizados se definen utilizando la declaración de error, que se puede usar dentro y fuera de los contratos. A continuación, se crea un error `TransferNotOwner`, que lanzará un error cuando el usuario que realice la transacción no sea el `propietario` del token.
 
 ```solidity
 error TransferNotOwner(); // error personalizado
@@ -93,7 +93,7 @@ Después de desplegar el contrato `Error`.
 
     ![15-1.png](./img/15-1.png)
    
-2. `require`: Ingrese un número `uint256` y una dirección no cero, y llame la función `transferOwner2()`. La consola lanzará un error y mostrará el mensaje de error `"El usuario no es el propietario del token"`.
+2. `require`: Ingrese un número `uint256` y una dirección no cero, y llame la función `transferOwner2()`. La consola lanzará un error y  se mostrará el mensaje de error `"El usuario no es el propietario del token"`.
 
     ![15-2.png](./img/15-2.png)
    
@@ -114,4 +114,4 @@ Se puede ver que `error` consume menos gas, seguido por `assert`, mientras que `
 Por lo tanto, `error` no solo informa al usuario sobre el mensaje del error, sino que también ahorra gas.
 
 ## Resumen
-En este capítulo, introdujimos 3 declaraciones para manejar errores en Solidity: `error`, `require` y `assert`. Después de comparar su consumo de gas, la declaración `error` es la más barata, mientras que `require` tiene el consumo de gas más alto. 
+En este capítulo, Se introdujo 3 declaraciones para manejar errores en Solidity: `error`, `require` y `assert`. Después de comparar su consumo de gas, la declaración `error` es la más barata, mientras que `require` tiene el consumo de gas más alto. 

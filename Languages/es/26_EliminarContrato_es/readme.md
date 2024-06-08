@@ -24,7 +24,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 ## `selfdestruct`
 
-La operación `selfdestruct` es la única forma de eliminar un contrato inteligente y el `ETH` restante almacenado en esa dirección se envía a un destino designado. La operación `selfdestruct` está diseñada para tratar con casos extremos de errores de contrato. Originalmente, el opcode se llamaba `suicide`, pero la comunidad de Ethereum decidió cambiarlo a `selfdestruct` porque el suicidio es un tema pesado y debemos hacer todo lo posible para no ser insensibles a los programadores que sufren de depresión.
+La operación `selfdestruct` es la única forma de eliminar un contrato inteligente y el `ETH` restante almacenado en esa dirección se envía a un destino designado. La operación `selfdestruct` está diseñada para tratar con casos extremos de errores de contrato. Originalmente, el opcode se llamaba `suicide`, pero la comunidad de Ethereum decidió cambiarlo a `selfdestruct` porque el suicidio es un tema pesado y se debe hacer todo lo posible para no ser insensibles a los programadores que sufren de depresión.
 
 ### Cómo usar `selfdestruct`
 
@@ -57,11 +57,11 @@ contract DeleteContract {
 }
 ```
 
-En `DeleteContract`, definimos una variable de estado pública llamada `value` y dos funciones: `getBalance()` que se utiliza para obtener el saldo de `ETH` del contrato, `deleteContract()` que se utiliza para eliminar el contrato y transferir el `ETH` restante al remitente del mensaje.
+En `DeleteContract`, se define una variable de estado pública llamada `value` y dos funciones: `getBalance()` que se utilizan para obtener el saldo de `ETH` del contrato, `deleteContract()` que se utiliza para eliminar el contrato y transferir el `ETH` restante al remitente del mensaje.
 
-Después de desplegar el contrato, enviamos 1 ETH al contrato. El resultado debería ser 1 ETH cuando llamamos a `getBalance()` y el `value` debería ser 10.
+Después de desplegar el contrato, se envía 1 ETH al contrato. El resultado debería ser 1 ETH cuando se llama a `getBalance()`  el `value` debería ser 10.
 
-Luego llamamos a `deleteContract().` El contrato se autodestruirá y todas las variables se borrarán. En este momento, `value` es igual a `0` que es el valor predeterminado, y `getBalance()` también devuelve un valor vacío.
+Luego se llame a `deleteContract().` El contrato se autodestruirá y todas las variables se borrarán. En este momento, `value` es igual a `0` que es el valor predeterminado, y `getBalance()` también devuelve un valor vacío.
 
 ### Atención
 
@@ -79,7 +79,7 @@ Luego llamamos a `deleteContract().` El contrato se autodestruirá y todas las v
 
 ![deleteContract.png](./img/26-1.png)
 
-Resisando el estado del contrado, se sabe que el ETH se envía a la dirección especificada después de que el contrato se destruye. Después de que el contrato se elimina, todavía podemos interactuar con el contrato. Por lo tanto, no podemos confirmar si el contrato ha sido destruido basándonos en esta condición.
+Al examinar el estado del contrato, se observa que el ETH se transfiere a la dirección especificada solo después de que el contrato se ha destruido. Sin embargo, incluso después de la eliminación del contrato, aún es posible interactuar con él. Por lo tanto, la simple capacidad de interacción no confirma si el contrato ha sido efectivamente destruido.
 
 
 ## Resumen

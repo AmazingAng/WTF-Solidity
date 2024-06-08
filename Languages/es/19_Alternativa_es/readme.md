@@ -40,9 +40,9 @@ Esta función no puede tener argumentos, no puede devolver nada y debe tener vis
 
 `receive()` es ejecutado en transferencias de Ether a un contrato. No se deben realizar demasiadas operaciones en `receive()` al enviar Ether con `send` o `transfer`, 
 solo hay 2300 `gas` disponible, y las operaciones complicadas desencadenarán un error `Out of Gas`; en su lugar, se debe usar la función `call` que puede especificar el límite de `gas`.
-(Se cubrira las tres formas de enviar Ether más adelante). 
+(Se cubrirán las tres formas de enviar Ether más adelante). 
 
-Podemos enviar un `evento` en la función `receive()`, por ejemplo: 
+Se puede enviar un `evento` en la función `receive()`, por ejemplo: 
 ```solidity
     // Declarar evento
     event Received(address Sender,  uint Value); 
@@ -60,7 +60,7 @@ La función `fallback()` se ejecuta en una llamada al contrato si ninguna de las
 Puede usarse para recibir Ether o en `contrato proxy`. `fallback()` se declara sin la palabra clave `function`, y debe tener visibilidad `external`, a menudo tiene mutabilidad de estado `payable`,
 que se usa para recibir Ether: `fallback() external payable { ... }`.
 
-Declaramos una función `fallback()`, que enviará un evento `fallbackCalled`, con `msg.sender`, `msg.value` y `msg.data` como parámetros:
+Se declara una función `fallback()`, que enviará un evento `fallbackCalled`, con `msg.sender`, `msg.value` y `msg.data` como parámetros:
 ```solidity
     event fallbackCalled(address Sender,  uint Value,  bytes Data); 
     // fallback
