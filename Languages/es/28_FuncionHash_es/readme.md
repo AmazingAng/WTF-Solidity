@@ -55,8 +55,8 @@ hash = keccak256(data);
 Aquí hay algo interesante:
 
 1. sha3 está estandarizado por keccak. Keccak y SHA3 son sinónimos en muchas ocasiones. Pero cuando SHA3 finalmente se estandarizó en agosto de 2015, NIST ajustó el algoritmo de relleno.
-   Por lo tanto, SHA3 es diferente del resultado calculado por keccak. Debemos prestar atención a este punto en el desarrollo real.
-2. sha3 todavía se estaba estandarizando cuando Ethereum se estaba desarrollando, por lo que Ethereum usó keccak. En otras palabras, SHA3 en Ethereum y el código de contrato inteligente de Solidity se refiere a Keccak256, no a SHA3 estándar de NIST. Para evitar confusiones, es claro que escribimos Keccak256 directamente en el código del contrato.
+   Por lo tanto, SHA3 es diferente del resultado calculado por keccak. Se debe prestar atención a este punto en el desarrollo real.
+2. sha3 todavía se estaba estandarizando cuando Ethereum se estaba desarrollando, por lo que Ethereum usó keccak. En otras palabras, SHA3 en Ethereum y el código de contrato inteligente de Solidity se refiere a Keccak256, no a SHA3 estándar de NIST. Para evitar confusiones, es claro que se usará Keccak256 directamente en el código del contrato.
 
 ### Generar un identificador único de los datos
 
@@ -64,9 +64,9 @@ Se puede usar `keccak256` para generar un identificador único para los datos. P
 
 ### Colisión débil de resistencia
 
-Usamos `keccak256` para mostrar la resistencia débil a colisiones, que dado un mensaje `x`, es difícil encontrar otro mensaje `x' tal que `hash(x) = hash(x')`.
+Se usa `keccak256` para mostrar la resistencia débil a colisiones, que dado un mensaje `x`, es difícil encontrar otro mensaje `x' tal que `hash(x) = hash(x')`.
 
-Definimos un mensaje llamado `0xAA` y tratamos de encontrar otro mensaje cuyo valor hash sea igual al mensaje `0xAA`.
+Se define un mensaje llamado `0xAA` y se tratará de encontrar otro mensaje cuyo valor hash sea igual al mensaje `0xAA`.
 
 ```solidity
     // Resistencia débil a colisiones
@@ -81,9 +81,9 @@ Puedes intentarlo 10 veces y ver si tienes suerte.
 
 ### Resistencia fuerte a colisiones
 
-Por otro lado, usamos `keccak256` para mostrar la resistencia fuerte a colisiones, que es difícil encontrar arbitrariamente `x` y `x'` tal que `hash(x) = hash(x')`.
+Por otro lado, se usará `keccak256` para mostrar la resistencia fuerte a colisiones, que es difícil encontrar arbitrariamente `x` y `x'` tal que `hash(x) = hash(x')`.
 
-Definimos una función llamada `strong` que recibe dos parámetros de tipo string llamados `string1` y `string2`. Luego, comprobamos si sus hash son iguales.
+Se define una función llamada `strong` que recibe dos parámetros de tipo string llamados `string1` y `string2`. Luego, se comprueba si sus hash son iguales.
 
 ```solidity
     // Resistencia fuerte a colisiones

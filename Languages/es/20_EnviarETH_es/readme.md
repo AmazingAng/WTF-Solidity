@@ -73,7 +73,7 @@ function transferETH(address payable _to,  uint256 amount) external payable{
 }
 ```
 
-Después de desplegar el contrato `SendETH`, podemos enviar `ETH` al contrato `ReceiveETH`. Si `amount` es 10, y `value` es 0, `amount`>`value`, la transacción falla y se `revertirá`.
+Después de desplegar el contrato `SendETH`, se puede enviar `ETH` al contrato `ReceiveETH`. Si `amount` es 10, y `value` es 0, `amount`>`value`, la transacción falla y se `revertirá`.
 
 ![20-2](./img/20-2.png)
 
@@ -131,7 +131,7 @@ function callETH(address payable _to,  uint256 amount) external payable{
 }
 ```
 
-Ahora se envia  `ETH` al contrato `ReceiveETH`, si `amount` es 10, y `value` es 0, `amount`>`value`, la transacción falla, ya que manejamos el valor, la transacción se `revertirá`.
+Ahora se envia  `ETH` al contrato `ReceiveETH`, si `amount` es 10, y `value` es 0, `amount`>`value`, la transacción falla, ya que se maneja el valor, la transacción se `revertirá`.
 
 ![20-7](./img/20-7.png)
 
@@ -139,7 +139,7 @@ Si `amount` es 10, y `value` es 11, `amount`<=`value`, la transacción se realiz
 
 ![20-8](./img/20-8.png)
 
-Con cualquiera de estos tres métodos, enviamos `ETH` al contrato `ReceiveETH` con éxito.
+Con cualquiera de estos tres métodos, se puede enviar `ETH` al contrato `ReceiveETH` con éxito.
 
 ## Resumen
 En este tutorial, se habla sobre tres formas de enviar `ETH` en `solidity`: `transfer`, `send` y `call`.

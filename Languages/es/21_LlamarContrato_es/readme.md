@@ -25,7 +25,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 ## Interactuar con un contrato desplegado
 
-Las interacciones entre contratos no solo hacen que los programas sean reutilizables en la cadena de bloques, sino que también enriquecen el ecosistema de Ethereum. Muchas Dapps de `web3` dependen de otro contrato para funcionar, por ejemplo, `yield farming`. En este tutorial, hablaremos sobre cómo interactuar con contratos cuyo código fuente (o ABI) y dirección están disponibles.
+Las interacciones entre contratos no solo hacen que los programas sean reutilizables en la cadena de bloques, sino que también enriquecen el ecosistema de Ethereum. Muchas Dapps de `web3` dependen de otro contrato para funcionar, por ejemplo, `yield farming`. En este tutorial, se hablará sobre cómo interactuar con contratos cuyo código fuente (o ABI) y dirección están disponibles.
 
 ## Contrato Objetivo
 Se escribe un contrato simple `OtherContract` para trabajar con él.
@@ -74,7 +74,7 @@ Se muestran cuatro ejemplos de interacción con contratos, se compilan y desplie
 ![desplegar contract2 en remix](./img/21-3.png)
 
 ### 1. Pasar la dirección del contrato
-Se puede pasar la dirección del contrato como parámetro y crear una referencia de `OtherContract`, luego llamar a la función de `OtherContract`. Por ejemplo, aquí creamos una función `callSetX` que llamará a `setX` de `OtherContract`, pasamos la dirección del contrato desplegado `_Address` y el valor `x` como parámetro:
+Se puede pasar la dirección del contrato como parámetro y crear una referencia de `OtherContract`, luego llamar a la función de `OtherContract`. Por ejemplo, aquí se crea una función `callSetX` que llamará a `setX` de `OtherContract`, se pasa la dirección del contrato desplegado `_Address` y el valor `x` como parámetro:
 
 ```solidity
     function callSetX(address _Address, uint256 x) external{

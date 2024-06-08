@@ -23,14 +23,14 @@ Twitter: [@jonthdiaz](https://twitter.com/jonthdiaz)
 Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 -----
-Anteriormente en [20: Enviar ETH](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/20_EnviarETH_es) hablamos sobre cómo enviar `ETH` con `call`, en este tutorial se profundizara sobre eso.
+Anteriormente en [20: Enviar ETH](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/20_EnviarETH_es) se habló sobre cómo enviar `ETH` con `call`, en este tutorial se profundizara sobre eso.
 
 ## Metodo Call
 `call` es una de las funciones de bajo nivel de `address` que se utiliza para interactuar con otros contratos. Devuelve la condición de éxito y los datos devueltos: `(bool, data)`.
 
 - Oficialmente recomendado por `solidity`, `call` se utiliza para enviar `ETH` al activar funciones `fallback` o `receive`.
 - `call` no es recomendado para interactuar con otros contratos, porque cedes el control al llamar a un contrato malicioso. La forma recomendada es crear una referencia de contrato y llamar a sus funciones. Ver [21: Interactuar con otro Contrato](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/21_LamarContrato_es)
-- Si el código fuente o `ABI` no está disponible, no podemos crear una variable de contrato; sin embargo, aún podemos interactuar con otros contratos utilizando la función `call`.
+- Si el código fuente o `ABI` no está disponible, no se puede crear una variable de contrato; sin embargo, aún se puede interactuar con otros contratos utilizando la función `call`.
 
 ### Reglas de uso de `call`
 Reglas de uso de `call`:
@@ -43,7 +43,7 @@ abi.encodeWithSignature("function signature", parameters separated by comma)
 ```
 `function signature` es `"functionName(parameters separated by comma)"`. Por ejemplo, `abi.encodeWithSignature("f(uint256,address)", _x, _addr)`.
 
-Además, podemos especificar el valor de `ETH` y `gas` para la transacción al usar `call`:
+Además, se puede especificar el valor de `ETH` y `gas` para la transacción al usar `call`:
 
 ```
 contractAdress.call{value:ETH value, gas:gas limit}(binary code);
@@ -133,7 +133,7 @@ function callGetX(address _addr) external returns(uint256){
 	return abi.decode(data, (uint256));
 }
 ```
-Desde el registro del evento `Response`, vemos que `data` es `0x0000000000000000000000000000000000000000000000000000000000000005`. Después de decodificar con `abi.decode`, el valor de retorno final es `5`.
+Desde el registro del evento `Response`, se puede ver que `data` es `0x0000000000000000000000000000000000000000000000000000000000000005`. Después de decodificar con `abi.decode`, el valor de retorno final es `5`.
 
 ![22-2](./img/22-2.png)
 
@@ -152,11 +152,11 @@ function callNonExist(address _addr) external{
 }
 ```
 
-En este ejemplo, intentamos llamar a `foo` que no está declaro con `call`, la transacción seguirá teniendo éxito y devolverá `success`, pero la función ejecutada fue la función `fallback`.
+En este ejemplo, se intento llamar a `foo` que no está declaro con `call`, la transacción seguirá teniendo éxito y devolverá `success`, pero la función ejecutada fue la función `fallback`.
 
 ![22-3](./img/22-3.png)
 
 ## Resumen
 
-En este tutorial, se habló sobre cómo interactuar con otros contratos utilizando la función de bajo nivel `call`. Por razones de seguridad, `call` no es un método recomendado, pero es útil cuando no conocemos el código fuente y el `ABI` del contrato objetivo.
+En este tutorial, se habló sobre cómo interactuar con otros contratos utilizando la función de bajo nivel `call`. Por razones de seguridad, `call` no es un método recomendado, pero es útil cuando no se conoce el código fuente y el `ABI` del contrato objetivo.
 
