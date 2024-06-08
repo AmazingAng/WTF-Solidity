@@ -62,7 +62,7 @@ library Strings {
 }
 
 
-// Call another library contract with a function
+// Llamando a otro contrato de biblioteca con una función
 contract UseLibrary{    
     // Usando la biblioteca con el comando "using for" 
     using Strings for uint256;

@@ -106,7 +106,7 @@ PEOPLE address on BSC: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 
 ### Verificar en Remix
 
-1. Llamar a `createPair` con los argumentos de las direcciones de `WBNB` y `PEOPLE`, obtendremos la dirección del contrato `Pair`: 0x5C9eb5D6a6C2c1B3EFc52255C0b356f116f6f66D
+1. Llamar a `createPair` con los argumentos de las direcciones de `WBNB` y `PEOPLE`, se obtendra la dirección del contrato `Pair`: 0x5C9eb5D6a6C2c1B3EFc52255C0b356f116f6f66D
 
 ![](./img/24-1.png)
 

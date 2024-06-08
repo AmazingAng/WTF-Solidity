@@ -141,7 +141,7 @@ contract Identifier is Base1 {
 }
 ```
 
-El contrato `Identifier` puede usar directamente el modificador `exactDividedBy2And3`, por que hereda del contrato `Base1`. También podemos reescribir el modificador del contrato.
+El contrato `Identifier` puede usar directamente el modificador `exactDividedBy2And3`, por que hereda del contrato `Base1`. También se puede reescribir el modificador del contrato.
 
 ```solidity
     modifier exactDividedBy2And3(uint _a) override {

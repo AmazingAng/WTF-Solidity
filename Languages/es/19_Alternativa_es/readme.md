@@ -42,7 +42,7 @@ Esta función no puede tener argumentos, no puede devolver nada y debe tener vis
 solo hay 2300 `gas` disponible, y las operaciones complicadas desencadenarán un error `Out of Gas`; en su lugar, se debe usar la función `call` que puede especificar el límite de `gas`.
 (Se cubrirán las tres formas de enviar Ether más adelante). 
 
-Podemos enviar un `evento` en la función `receive()`, por ejemplo: 
+Se puede enviar un `evento` en la función `receive()`, por ejemplo: 
 ```solidity
     // Declarar evento
     event Received(address Sender,  uint Value); 

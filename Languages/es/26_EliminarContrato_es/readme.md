@@ -57,7 +57,8 @@ contract DeleteContract {
 }
 ```
 
-En `DeleteContract`, definimos una variable de estado pública llamada `value` y dos funciones: `getBalance()` que se utiliza para obtener el saldo de `ETH` del contrato, `deleteContract()` que se utiliza para eliminar el contrato y transferir el `ETH` restante al remitente del mensaje.
+En `DeleteContract`, se define una variable de estado pública llamada `value` y dos funciones: `getBalance()` que se utilizan para obtener el saldo de `ETH` del contrato, `deleteContract()` que se utiliza para eliminar el contrato y transferir el `ETH` restante al remitente del mensaje.
+
 
 Después de desplegar el contrato, se envía 1 ETH al contrato. El resultado debería ser 1 ETH cuando se llama a `getBalance()` y el `value` debería ser 10.
 
@@ -79,7 +80,7 @@ Luego se llama a `deleteContract().` El contrato se auto-destruirá y todas las 
 
 ![deleteContract.png](./img/26-1.png)
 
-Resisando el estado del contrado, se sabe que el ETH se envía a la dirección especificada después de que el contrato se destruye. Después de que el contrato se elimina, todavía podemos interactuar con el contrato. Por lo tanto, no podemos confirmar si el contrato ha sido destruido basándonos en esta condición.
+Al examinar el estado del contrato, se observa que el ETH se transfiere a la dirección especificada solo después de que el contrato se ha destruido. Sin embargo, incluso después de la eliminación del contrato, aún es posible interactuar con él. Por lo tanto, la simple capacidad de interacción no confirma si el contrato ha sido efectivamente destruido.
 
 
 ## Resumen

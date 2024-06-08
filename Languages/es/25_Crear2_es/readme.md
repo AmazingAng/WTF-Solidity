@@ -60,7 +60,7 @@ Contract x = new Contract{salt: _salt, value: _value}(params)
 
 ## Uniswap2 Minimalista
 
-Similar al [capítulo anterior](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/24_Crear_es), usamos `CREATE2` para implementar un `Uniswap` minimalista.
+Similar al [capítulo anterior](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/24_Crear_es), se usa `CREATE2` para implementar un `Uniswap` minimalista.
 
 ### `Pair`
 ```solidity
@@ -135,7 +135,7 @@ Es el código anterior el que utiliza `CREATE2` para crear un contrato, que es m
             )))));
         }
 ```
-`calculateAddr` es una función que precalcula la dirección del contrato `Pair` que `tokenA` y `tokenB` generarán. Con ella, se puede verificar si la dirección que calculamos de antemano es la misma que la dirección real.
+`calculateAddr` es una función que precalcula la dirección del contrato `Pair` que `tokenA` y `tokenB` generarán. Con ella, se puede verificar si la dirección que se cálculo anteriormente es la misma que la dirección real.
 
 Para verificar si la dirección del par de tokens creada coincide con la dirección precalculada, se puede desplegar el contrato `PairFactory2` y llamar a `createPair2` con las siguientes dos direcciones como parámetros. Luego, observar la dirección resultante del contrato de par de tokens creado.
 ```solidity
