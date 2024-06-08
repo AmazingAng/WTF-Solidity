@@ -28,7 +28,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 1. Recibir Ether
 2. Manejar llamadas al contrato si ninguna de las otras funciones coincide con la firma de función dada (por ejemplo, contrato proxy)
 
-Nota⚠️: Antes de la versión 0.6.x de Solidity, solo estaba disponible `fallback()`, para recibir Ether y como función de respaldo.
+Nota⚠️: Antes de la versión 0.6.x de Solidity, solo estaba disponible `fallback()` para recibir Ether y como función de respaldo.
 Después de la versión 0.6, `fallback()` se separó en `receive()` y `fallback()`.
 
 Este tutorial, estará en focado en recibir Ether.
