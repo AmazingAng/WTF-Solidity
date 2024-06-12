@@ -24,7 +24,7 @@ sstore(0x0, 0x1)
 * EVM 将值 `0x1` 存储在存储(storage)位置 `0x0`​
 * 每个存储位置可以存储 32 个字节（或 256 位）
 
-> 如果看起来不熟悉，建议阅读：[深入以太坊虚拟机 Part1 — 汇编与字节码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md)。
+> 如果看起来不熟悉，建议阅读：[深入以太坊虚拟机 Part1 — 汇编与字节码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md)。
 
 在本文中，我们将开始研究 Solidity 如何使用 32 字节的块(chunks)来表示更复杂的数据类型，比如结构体和数组。我们还将了解如何优化存储，以及优化是如何失败的。
 

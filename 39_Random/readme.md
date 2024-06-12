@@ -17,7 +17,7 @@ tags:
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -133,7 +133,7 @@ contract RandomNumberConsumer is VRFConsumerBaseV2{
     }
 ```
 
-**3. `Chainlink`节点链下生成随机数和[数字签名](https://github.com/AmazingAng/WTFSolidity/blob/main/37_Signature/readme.md)，并发送给`VRF`合约**
+**3. `Chainlink`节点链下生成随机数和[数字签名](https://github.com/AmazingAng/WTF-Solidity/blob/main/37_Signature/readme.md)，并发送给`VRF`合约**
 
 **4. `VRF`合约验证签名有效性**
 
@@ -161,7 +161,7 @@ contract RandomNumberConsumer is VRFConsumerBaseV2{
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/ERC721.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 

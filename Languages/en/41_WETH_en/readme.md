@@ -15,7 +15,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Discord: [WTF Academy](https://discord.gg/5akcruXrsk)
 
-All code and tutorials are open-sourced on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All code and tutorials are open-sourced on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -27,7 +27,7 @@ In this lecture, we will learn about `WETH` - the wrapped version of `ETH`.
 
 `WETH` (Wrapped ETH) is a wrapped version of `ETH`. The commonly seen `WETH`, `WBTC`, and `WBNB` are all wrapped native tokens. Why do we need to wrap them?
 
-In 2015, the [ERC20](https://github.com/AmazingAng/WTFSolidity/blob/main/20_SendETH/readme.md) standard was introduced, which aimed to establish a set of standard rules for tokens on Ethereum, simplifying the release of new tokens and making all tokens on the blockchain comparable to each other. Unfortunately, Ether itself does not adhere to the `ERC20` standard. The development of `WETH` is to improve interoperability between blockchains and allow the use of `ETH` in decentralized applications (dApps). It is like putting a smart contract's clothing on the native token: when the clothing is put on, it becomes `WETH`, complying with the `ERC20` standard for fungible tokens, and can be used for dApps and cross-chain transfer. When the clothing is taken off, it can be exchanged 1:1 for `ETH`.
+In 2015, the [ERC20](https://github.com/AmazingAng/WTF-Solidity/blob/main/20_SendETH/readme.md) standard was introduced, which aimed to establish a set of standard rules for tokens on Ethereum, simplifying the release of new tokens and making all tokens on the blockchain comparable to each other. Unfortunately, Ether itself does not adhere to the `ERC20` standard. The development of `WETH` is to improve interoperability between blockchains and allow the use of `ETH` in decentralized applications (dApps). It is like putting a smart contract's clothing on the native token: when the clothing is put on, it becomes `WETH`, complying with the `ERC20` standard for fungible tokens, and can be used for dApps and cross-chain transfer. When the clothing is taken off, it can be exchanged 1:1 for `ETH`.
 
 ## The `WETH` Contract
 
