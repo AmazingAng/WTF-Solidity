@@ -6,10 +6,10 @@
 
 本系列的前几篇文章（按顺序）。
 
-* [深入以太坊虚拟机 Part1 — 汇编与字节码](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md)
-* [深入以太坊虚拟机 Part2 — 固定长度数据类型的表示 ](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md)
-* [深入以太坊虚拟机 Part3 — 动态数据类型的表示](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part3.md)
-* [深入以太坊虚拟机 Part4 — 智能合约外部方法调用](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part4.md)
+* [深入以太坊虚拟机 Part1 — 汇编与字节码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md)
+* [深入以太坊虚拟机 Part2 — 固定长度数据类型的表示 ](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md)
+* [深入以太坊虚拟机 Part3 — 动态数据类型的表示](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part3.md)
+* [深入以太坊虚拟机 Part4 — 智能合约外部方法调用](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part4.md)
 
 到目前为止，我们看到的 EVM 字节码很简单，只是 EVM 从上到下执行的指令，没有魔法。合约创建过程更有趣，因为它模糊了代码和数据之间的界限。
 

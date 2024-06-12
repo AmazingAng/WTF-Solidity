@@ -15,7 +15,7 @@ tags:
 
 コミュニティ：[Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[公式サイト wtf.academy](https://wtf.academy)
 
-すべてのソースコードやレッスンは github にて公開: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+すべてのソースコードやレッスンは github にて公開: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -37,7 +37,7 @@ function saySomething(string memory something) public pure returns(string memory
 }
 ```
 
-最終的に、オーバーロード関数はコンパイラによって異なる関数セレクタ（selector）に変換されます。関数セレクタについての詳細は[WTF Solidity 超シンプル入門: 29. 関数セレクタ Selector](https://github.com/AmazingAng/WTFSolidity/tree/main/29_Selector)を参照してほしいです。
+最終的に、オーバーロード関数はコンパイラによって異なる関数セレクタ（selector）に変換されます。関数セレクタについての詳細は[WTF Solidity 超シンプル入門: 29. 関数セレクタ Selector](https://github.com/AmazingAng/WTF-Solidity/tree/main/29_Selector)を参照してほしいです。
 
 `Overloading.sol`コントラクトを例に取り、Remix でコンパイルしてデプロイした後、オーバーロード関数 `saySomething()` と `saySomething(string memory something)` をそれぞれ呼び出すと、異なる結果が返され、異なる関数として区別されることがわかります。
 
