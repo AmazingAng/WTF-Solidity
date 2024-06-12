@@ -15,7 +15,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Community: [Discord](https://discord.gg/5akcruXrsk) | [WeChat group](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link) | [Official website wtf.academy](https://wtf.academy)
 
-All code and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All code and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -23,7 +23,7 @@ In this lesson, we will introduce the selector clash issue in proxy contracts, a
 
 ## Selector Clash
 
-In smart contracts, a function selector is the hash of a function signature's first 4 bytes. For example, the selector of function `mint(address account)` is `bytes4(keccak256("mint(address)"))`, which is `0x6a627842`. For more about function selectors see [WTF Solidity Tutorial #29: Function Selectors](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/29_Selector_en/readme.md).
+In smart contracts, a function selector is the hash of a function signature's first 4 bytes. For example, the selector of function `mint(address account)` is `bytes4(keccak256("mint(address)"))`, which is `0x6a627842`. For more about function selectors see [WTF Solidity Tutorial #29: Function Selectors](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/29_Selector_en/readme.md).
 
 Because a function selector has only 4 bytes, its range is very small. Therefore, two different functions may have the same selector, such as the following two functions:
 
@@ -50,7 +50,7 @@ The logic of the transparent proxy is very simple: admin may mistakenly call the
 
 ### Proxy Contract
 
-The proxy contract here is very similar to the one in [Lecture 47](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/47_Upgrade_en/readme.md), except that the `fallback()` function restricts the call by the admin address.
+The proxy contract here is very similar to the one in [Lecture 47](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/47_Upgrade_en/readme.md), except that the `fallback()` function restricts the call by the admin address.
 
 It contains three variables:
 
@@ -97,7 +97,7 @@ contract TransparentProxy {
 
 ### Logic Contract
 
-The new and old logic contracts here are the same as in [Lecture 47](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/47_Upgrade_en/readme.md). The logic contracts contain `3` state variables, consistent with the proxy contract to prevent slot conflicts. It also contains a function `foo()`, where the old logic contract will change the value of `words` to `"old"`, and the new one will change it to `"new"`.
+The new and old logic contracts here are the same as in [Lecture 47](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/47_Upgrade_en/readme.md). The logic contracts contain `3` state variables, consistent with the proxy contract to prevent slot conflicts. It also contains a function `foo()`, where the old logic contract will change the value of `words` to `"old"`, and the new one will change it to `"new"`.
 
 ```solidity
 // old logic contract

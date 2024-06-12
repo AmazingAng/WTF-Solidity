@@ -6,7 +6,7 @@ Siga-me no Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Junte-se à comunidade de Cientistas do WTF, com métodos para ingressar no grupo do WhatsApp: [Link](https://discord.gg/5akcruXrsk)
 
-Todo o código e tutorial estão disponíveis no Github (Certificação do curso com 1024 estrelas, Comunidade NFT com 2048 estrelas): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTF-Solidity)
+Todo o código e tutorial estão disponíveis no Github (Certificação do curso com 1024 estrelas, Comunidade NFT com 2048 estrelas): [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 

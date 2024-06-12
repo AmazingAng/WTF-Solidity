@@ -14,7 +14,7 @@ tags:
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -37,7 +37,7 @@ tags:
 1. 可升级：当我们需要升级合约的逻辑时，只需要将代理合约指向新的逻辑合约。
 2. 省gas：如果多个合约复用一套逻辑，我们只需部署一个逻辑合约，然后再部署多个只保存数据的代理合约，指向逻辑合约。
 
-**提示**：对`delegatecall`不熟悉的朋友可以看下本教程[第23讲Delegatecall](https://github.com/AmazingAng/WTFSolidity/tree/main/23_Delegatecall)。
+**提示**：对`delegatecall`不熟悉的朋友可以看下本教程[第23讲Delegatecall](https://github.com/AmazingAng/WTF-Solidity/tree/main/23_Delegatecall)。
 
 ## 代理合约
 
@@ -137,7 +137,7 @@ contract Logic {
 
 ### 调用者合约`Caller`
 
-`Caller`合约会演示如何调用一个代理合约，它也非常简单。但是要理解它，你需要先学习本教程的[第22讲 Call](https://github.com/AmazingAng/WTFSolidity/tree/main/22_Call/readme.md)和[第27讲 ABI编码](https://github.com/AmazingAng/WTFSolidity/tree/main/27_ABIEncode/readme.md)。
+`Caller`合约会演示如何调用一个代理合约，它也非常简单。但是要理解它，你需要先学习本教程的[第22讲 Call](https://github.com/AmazingAng/WTF-Solidity/tree/main/22_Call/readme.md)和[第27讲 ABI编码](https://github.com/AmazingAng/WTF-Solidity/tree/main/27_ABIEncode/readme.md)。
 
 它有`1`个变量，`2`个函数：
 - `proxy`：状态变量，记录代理合约地址。

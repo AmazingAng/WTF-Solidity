@@ -306,7 +306,7 @@ O roteiro será definido com base no número de estrelas deste repositório:
   <h4 align="center">
     Os contribuidores são a base da Academia WTF
   </h4>
-  <a href="https://github.com/AmazingAng/WTFSolidity/graphs/contributors">
+  <a href="https://github.com/AmazingAng/WTF-Solidity/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=AmazingAng/WTFSolidity" />
   </a>
 </div>
