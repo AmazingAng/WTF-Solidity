@@ -14,7 +14,7 @@ tags:
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -52,7 +52,7 @@ contract TimeManipulation is ERC721 {
 
 ## Foundry复现攻击
 
-攻击者只需操纵区块时间，将它设为能被 170 整除的数字，就可以成功铸造 NFT。我们选择 Foundry 来复现这个攻击，因为它提供了修改区块时间的作弊码（cheatcodes）。如果你不了解 Foundry/作弊码，可以阅读 [Foundry教程](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md) 和 [Foundry Book](https://book.getfoundry.sh/forge/cheatcodes)。
+攻击者只需操纵区块时间，将它设为能被 170 整除的数字，就可以成功铸造 NFT。我们选择 Foundry 来复现这个攻击，因为它提供了修改区块时间的作弊码（cheatcodes）。如果你不了解 Foundry/作弊码，可以阅读 [Foundry教程](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md) 和 [Foundry Book](https://book.getfoundry.sh/forge/cheatcodes)。
 
 代码大致逻辑
 

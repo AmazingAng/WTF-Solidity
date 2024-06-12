@@ -20,7 +20,7 @@ sstore(0x0, 0x1)
 - A EVM armazena o valor `0x1` na posição de armazenamento `0x0`
 - Cada posição de armazenamento pode armazenar 32 bytes (ou 256 bits)
 
-> Se isso parece estranho, recomendo ler: [Diving Into The Ethereum VM Part1 — Assembly and Bytecode](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md).
+> Se isso parece estranho, recomendo ler: [Diving Into The Ethereum VM Part1 — Assembly and Bytecode](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md).
 
 Neste artigo, começaremos a explorar como o Solidity representa tipos de dados de comprimento fixo em blocos de 32 bytes, como estruturas e arrays. Também entenderemos como otimizar o armazenamento e como a otimização pode falhar.
 

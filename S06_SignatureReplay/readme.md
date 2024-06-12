@@ -14,7 +14,7 @@ tags:
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -24,7 +24,7 @@ tags:
 
 上学的时候，老师经常会让家长签字，有时候家长很忙，我就会很“贴心”照着以前的签字抄一遍。某种意义上来说，这就是签名重放。
 
-在区块链中，数字签名可以用于识别数据签名者和验证数据完整性。发送交易时，用户使用私钥签名交易，使得其他人可以验证交易是由相应账户发出的。智能合约也能利用 `ECDSA` 算法验证用户将在链下创建的签名，然后执行铸造或转账等逻辑。更多关于数字签名的介绍请见[WTF Solidity第37讲：数字签名](https://github.com/AmazingAng/WTFSolidity/blob/main/37_Signature/readme.md)。
+在区块链中，数字签名可以用于识别数据签名者和验证数据完整性。发送交易时，用户使用私钥签名交易，使得其他人可以验证交易是由相应账户发出的。智能合约也能利用 `ECDSA` 算法验证用户将在链下创建的签名，然后执行铸造或转账等逻辑。更多关于数字签名的介绍请见[WTF Solidity第37讲：数字签名](https://github.com/AmazingAng/WTF-Solidity/blob/main/37_Signature/readme.md)。
 
 数字签名一般有两种常见的重放攻击：
 

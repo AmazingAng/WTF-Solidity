@@ -6,7 +6,7 @@ Siga-me no Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Comunidade técnica do WTF no Discord, com informações sobre como entrar no grupo do WeChat: [link](https://discord.gg/5akcruXrsk)
 
-Todo o código e tutoriais estão disponíveis no GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Todo o código e tutoriais estão disponíveis no GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 

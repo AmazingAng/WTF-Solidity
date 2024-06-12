@@ -16,7 +16,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](http
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -25,7 +25,7 @@ In this section, we will introduce the `abstract` and `interface` contracts in S
 ## Abstract contract
 
 If a contract contains at least one unimplemented function (no contents in the function body `{}`), it must be labelled as `abstract`; Otherwise it will not compile. Moreover, the unimplemented function needs to be labelled as `virtual`. 
-Take our previous [Insertion Sort Contract](https://github.com/AmazingAng/WTFSolidity/tree/main/07_InsertionSort) as an example, 
+Take our previous [Insertion Sort Contract](https://github.com/AmazingAng/WTF-Solidity/tree/main/07_InsertionSort) as an example, 
 if we haven't figured out how to implement the insertion sort function, we can mark the contract as `abstract`, and let others overwrite it in the future.
 
 ```solidity
