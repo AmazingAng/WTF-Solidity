@@ -6,7 +6,7 @@ Everyone is welcome to follow my Twitter: [@0xAA_Science](https://twitter.com/0x
 
 WTF Academy Discord: [Link](https://discord.gg/5akcruXrsk)
 
-All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)\
+All codebase and tutorial notes are open source and available on GitHub (At 1024 repo stars, course certification is unlocked. At 2048 repo stars, community NFT is unlocked.): [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)\
 
 -----
 

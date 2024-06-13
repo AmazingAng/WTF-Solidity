@@ -14,7 +14,7 @@ La traducción al español ha sido realizada por Jonathan Díaz, Angela Ocando y
 
 Twitter: [@jonthdiaz](https://twitter.com/jonthdiaz) [@ocandocrypto](https://twitter.com/ocandocrypto) [@scguaquetam](https://twitter.com/scguaquetam) 
 
-Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 
 ## Intro
@@ -86,7 +86,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
   <h4 align="center">
     Contributors are the basis of WTF Academy
   </h4>
-  <a href="https://github.com/AmazingAng/WTFSolidity/graphs/contributors">
+  <a href="https://github.com/AmazingAng/WTF-Solidity/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=AmazingAng/WTFSolidity" />
   </a>
 </div>

@@ -15,7 +15,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Discord: [WTF Academy](https://discord.gg/5akcruXrsk)
 
-Todo o código e tutoriais estão disponíveis no GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Todo o código e tutoriais estão disponíveis no GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -47,7 +47,7 @@ A interface `IERC1155` abstrai as funcionalidades que o `EIP1155` requer que sej
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.sol";
 
 /**
  * @dev Interface padrão do ERC1155 que implementa as funcionalidades do EIP1155
@@ -169,7 +169,7 @@ Assim como o padrão `ERC721`, para evitar que os tokens sejam transferidos para
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.sol";
 
 /**
  * @dev Contrato de recebimento do ERC1155, deve ser implementado para receber transferências seguras do ERC1155
@@ -242,9 +242,9 @@ pragma solidity ^0.8.0;
 import "./IERC1155.sol";
 import "./IERC1155Receiver.sol";
 import "./IERC1155MetadataURI.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/Address.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/String.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/Address.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/String.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.sol";
 
 /**
  * @dev Padrão ERC1155 para múltiplos tipos de tokens

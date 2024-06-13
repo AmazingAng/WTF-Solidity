@@ -10,7 +10,7 @@ La traducción al español ha sido realizada por Angela Ocando con el objetivo d
 
 Twitter: [@ocandocrypto](https://twitter.com/ocandocrypto)
 
-Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 
 -----

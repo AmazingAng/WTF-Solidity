@@ -21,7 +21,7 @@ La traducción al español ha sido realizada por Sebas G con el objetivo de hace
 
 Twitter: [@scguaquetam](https://twitter.com/scguaquetam)
 
-Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 

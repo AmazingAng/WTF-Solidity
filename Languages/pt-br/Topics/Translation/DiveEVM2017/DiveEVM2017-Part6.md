@@ -16,11 +16,11 @@ Ao entender como os eventos são implementados usando instruções de nível mai
 
 Se você não está familiarizado com o conteúdo anterior, por favor, leia os artigos anteriores:
 
-* [Aprofundando na Máquina Virtual Ethereum Parte 1 - Assembly e Bytecode](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md)
-* [Aprofundando na Máquina Virtual Ethereum Parte 2 - Representação de Tipos de Dados de Comprimento Fixo](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md)
-* [Aprofundando na Máquina Virtual Ethereum Parte 3 - Representação de Tipos de Dados Dinâmicos](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part3.md)
-* [Aprofundando na Máquina Virtual Ethereum Parte 4 - Chamadas Externas de Métodos de Contratos Inteligentes](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part4.md)
-* [Aprofundando na Máquina Virtual Ethereum Parte 5 - Processo de Criação de Contratos Inteligentes](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part5.md)
+* [Aprofundando na Máquina Virtual Ethereum Parte 1 - Assembly e Bytecode](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md)
+* [Aprofundando na Máquina Virtual Ethereum Parte 2 - Representação de Tipos de Dados de Comprimento Fixo](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md)
+* [Aprofundando na Máquina Virtual Ethereum Parte 3 - Representação de Tipos de Dados Dinâmicos](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part3.md)
+* [Aprofundando na Máquina Virtual Ethereum Parte 4 - Chamadas Externas de Métodos de Contratos Inteligentes](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part4.md)
+* [Aprofundando na Máquina Virtual Ethereum Parte 5 - Processo de Criação de Contratos Inteligentes](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part5.md)
 
 ## Eventos Solidity
 
