@@ -16,7 +16,7 @@ tags:
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -43,7 +43,7 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
     - `nonce`：初始为`0`，随着多签合约每笔成功执行的交易递增的值，可以防止签名重放攻击。
     - `chainid`：链id，防止不同链的签名重放攻击。
 
-3. 收集多签签名（链下）：将上一步的交易ABI编码并计算哈希，得到交易哈希，然后让多签人签名，并拼接到一起的到打包签名。对ABI编码和哈希不了解的，可以看WTF Solidity极简教程[第27讲](https://github.com/AmazingAng/WTFSolidity/blob/main/27_ABIEncode/readme.md)和[第28讲](https://github.com/AmazingAng/WTFSolidity/blob/main/28_Hash/readme.md)。
+3. 收集多签签名（链下）：将上一步的交易ABI编码并计算哈希，得到交易哈希，然后让多签人签名，并拼接到一起的到打包签名。对ABI编码和哈希不了解的，可以看WTF Solidity极简教程[第27讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/27_ABIEncode/readme.md)和[第28讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/28_Hash/readme.md)。
 
     ```solidity
     交易哈希: 0xc1b055cf8e78338db21407b425114a2e258b0318879327945b661bfdea570e66
@@ -56,7 +56,7 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
     0x014db45aa753fefeca3f99c2cb38435977ebb954f779c2b6af6f6365ba4188df542031ace9bdc53c655ad2d4794667ec2495196da94204c56b1293d0fbfacbb11cbe2e0e6de5574b7f65cad1b7062be95e7d73fe37dd8e888cef5eb12e964ddc597395fa48df1219e7f74f48d86957f545d0fbce4eee1adfbaff6c267046ade0d81c
     ```
 
-4. 调用多签合约的执行函数，验证签名并执行交易（链上）。对验证签名和执行交易不了解的，可以看WTF Solidity极简教程[第22讲](https://github.com/AmazingAng/WTFSolidity/blob/main/22_Call/readme.md)和[第37讲](https://github.com/AmazingAng/WTFSolidity/blob/main/37_Signature/readme.md)。
+4. 调用多签合约的执行函数，验证签名并执行交易（链上）。对验证签名和执行交易不了解的，可以看WTF Solidity极简教程[第22讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/22_Call/readme.md)和[第37讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/37_Signature/readme.md)。
 
 ### 事件
 

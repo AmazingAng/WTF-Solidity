@@ -16,7 +16,7 @@ Welcome to follow my Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Welcome to join the WTF Scientist community, where you can find instructions to join our WeChat group: [link](https://discord.gg/5akcruXrsk)
 
-All code and tutorials are open-sourced on GitHub (course certification with 1024 stars, community NFT with 2048 stars): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All code and tutorials are open-sourced on GitHub (course certification with 1024 stars, community NFT with 2048 stars): [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
  
 -----
 

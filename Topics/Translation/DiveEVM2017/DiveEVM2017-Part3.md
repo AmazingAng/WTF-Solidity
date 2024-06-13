@@ -16,7 +16,7 @@ Solidity 提供了其他编程语言中常见的数据结构。除了像数字�
 
 具有固定大小的存储变量在存储中一个接一个地放置，尽可能紧密地打包成 32 字节的块。
 
-（如果这部分看起来不熟悉，请阅读 [深入以太坊虚拟机 Part2 — 固定长度数据类型的表示](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md)）
+（如果这部分看起来不熟悉，请阅读 [深入以太坊虚拟机 Part2 — 固定长度数据类型的表示](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md)）
 
 在本文中，我们将研究 Solidity 如何支持更复杂的数据结构。 Solidity 中的数组和映射可能表面上看起来很熟悉，但它们的实现方式赋予了它们完全不同的性能特征。
 

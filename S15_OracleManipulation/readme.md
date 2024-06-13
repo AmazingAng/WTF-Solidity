@@ -15,7 +15,7 @@ tags:
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -113,7 +113,7 @@ contract oUSD is ERC20{
 
 ### Foundry 复现
 
-我们选用 Foundry 进行操纵预言机攻击的复现，因为它很快，并且可以创建主网的本地分叉，方便测试。如果你不了解 Foundry，可以阅读 [WTF Solidity工具篇 T07: Foundry](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md)。
+我们选用 Foundry 进行操纵预言机攻击的复现，因为它很快，并且可以创建主网的本地分叉，方便测试。如果你不了解 Foundry，可以阅读 [WTF Solidity工具篇 T07: Foundry](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md)。
 
 1. 在安装好 Foundry 之后，在命令行输入下列命令启动新项目，并安装 openzeppelin 库。
   ```shell

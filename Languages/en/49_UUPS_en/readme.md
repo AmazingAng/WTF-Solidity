@@ -15,7 +15,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[WeChat Group](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Official website wtf.academy](https://wtf.academy)
 
-All code and tutorials are open source on Github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All code and tutorials are open source on Github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -33,7 +33,7 @@ The following table summarizes the differences between regular upgradeable contr
 
 ## UUPS contract
 
-First, let's review [WTF Solidity Minimalist Tutorial Lesson 23: Delegatecall](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/23_Delegatecall_en/readme.md). If user A `delegatecall`s contract C (logic contract) through contract B (proxy contract), the context is still the context of contract B, and `msg.sender` is still user A rather than contract B. Therefore, the UUPS contract can place the upgrade function in the logical contract and check whether the caller is an admin.
+First, let's review [WTF Solidity Minimalist Tutorial Lesson 23: Delegatecall](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/23_Delegatecall_en/readme.md). If user A `delegatecall`s contract C (logic contract) through contract B (proxy contract), the context is still the context of contract B, and `msg.sender` is still user A rather than contract B. Therefore, the UUPS contract can place the upgrade function in the logical contract and check whether the caller is an admin.
 
 ![delegatecall](./img/49-2.png)
 
@@ -73,7 +73,7 @@ contract UUPSProxy {
 
 ### UUPS Logic Contract
 
-The UUPS logic contract is different from the one in [Lesson 47](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/47_Upgrade_en/readme.md) in that it includes an upgrade function. The UUPS logic contract contains `3` state variables to be consistent with the proxy contract and prevent slot conflicts. It includes `2` functions: 
+The UUPS logic contract is different from the one in [Lesson 47](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/47_Upgrade_en/readme.md) in that it includes an upgrade function. The UUPS logic contract contains `3` state variables to be consistent with the proxy contract and prevent slot conflicts. It includes `2` functions: 
 - `upgrade()`: an upgrade function that changes the logic contract address `implementation`, which can only be called by the `admin`.
 - `foo()`: The old UUPS logic contract will change the value of `words` to `"old"`, and the new one will change it to `"new"`.
 

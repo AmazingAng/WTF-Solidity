@@ -13,7 +13,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Discord: [WTF Academy](https://discord.gg/5akcruXrsk)
 
-All codes and tutorials are open-sourced on Github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All codes and tutorials are open-sourced on Github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
