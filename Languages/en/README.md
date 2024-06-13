@@ -10,7 +10,7 @@ Twitter: [@WTFAcademy\_](https://twitter.com/WTFAcademy_) | [@0xAA_Science](http
 
 Community: [Discord](https://discord.gg/5akcruXrsk) | [Website: wtf.academy](https://wtf.academy)
 
-Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 **NOTE: the English Version of WTF Solidity is preliminary and requires further community review.**
 
@@ -164,7 +164,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTFSolidi
   <h4 align="center">
     Contributors are the basis of WTF Academy
   </h4>
-  <a href="https://github.com/AmazingAng/WTFSolidity/graphs/contributors">
+  <a href="https://github.com/AmazingAng/WTF-Solidity/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=AmazingAng/WTFSolidity" />
   </a>
 </div>

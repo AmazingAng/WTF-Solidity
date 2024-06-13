@@ -16,7 +16,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Comunidade: [Discord](https://discord.gg/5akcruXrsk) | [WeChat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link) | [Website WTF.academy](https://wtf.academy)
 
-Todo o código e tutorial estão disponíveis no GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTF-Solidity)
+Todo o código e tutorial estão disponíveis no GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 

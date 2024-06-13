@@ -16,7 +16,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[WeChat Group](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Official website wtf.academy](https://wtf.academy)
 
-All code and tutorials are open source on Github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All code and tutorials are open source on Github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -43,7 +43,7 @@ A multisig wallet on Ethereum is actually a smart contract, and it is a contract
     - `nonce`: Initially set to `0`, the value of the nonce increases with each successfully executed transaction of the multisig contract, which can prevent replay attacks.
     - `chainid`: The chain id helps prevent replay attacks across different chains.
 
-3. Collect multisig signatures (off-chain): The previous transaction is encoded using ABI and hashed to obtain the transaction hash. Then, the multisig individuals sign it and concatenate the signatures together to obtain the final signed transaction. For those who are not familiar with ABI encoding and hashing, you can refer to the WTF Solidity Tutorial [Lesson 27](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/27_ABIEncode_en/readme.md) and [Lesson 28](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/28_Hash_en/readme.md).
+3. Collect multisig signatures (off-chain): The previous transaction is encoded using ABI and hashed to obtain the transaction hash. Then, the multisig individuals sign it and concatenate the signatures together to obtain the final signed transaction. For those who are not familiar with ABI encoding and hashing, you can refer to the WTF Solidity Tutorial [Lesson 27](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/27_ABIEncode_en/readme.md) and [Lesson 28](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/28_Hash_en/readme.md).
 
 ```solidity
 Transaction hash: 0xc1b055cf8e78338db21407b425114a2e258b0318879327945b661bfdea570e66

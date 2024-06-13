@@ -16,18 +16,18 @@ tags:
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
-我们曾在[第20讲：发送ETH](https://github.com/AmazingAng/WTFSolidity/tree/main/20_SendETH)那一讲介绍过利用`call`来发送`ETH`，这一讲我们将介绍如何利用它调用合约。
+我们曾在[第20讲：发送ETH](https://github.com/AmazingAng/WTF-Solidity/tree/main/20_SendETH)那一讲介绍过利用`call`来发送`ETH`，这一讲我们将介绍如何利用它调用合约。
 
 ## Call
 
 `call` 是`address`类型的低级成员函数，它用来与其他合约交互。它的返回值为`(bool, bytes memory)`，分别对应`call`是否成功以及目标函数的返回值。
 
 - `call`是`Solidity`官方推荐的通过触发`fallback`或`receive`函数发送`ETH`的方法。
-- 不推荐用`call`来调用另一个合约，因为当你调用不安全合约的函数时，你就把主动权交给了它。推荐的方法仍是声明合约变量后调用函数，见[第21讲：调用其他合约](https://github.com/AmazingAng/WTFSolidity/tree/main/21_CallContract)
+- 不推荐用`call`来调用另一个合约，因为当你调用不安全合约的函数时，你就把主动权交给了它。推荐的方法仍是声明合约变量后调用函数，见[第21讲：调用其他合约](https://github.com/AmazingAng/WTF-Solidity/tree/main/21_CallContract)
 - 当我们不知道对方合约的源代码或`ABI`，就没法生成合约变量；这时，我们仍可以通过`call`调用对方合约的函数。
 
 ### `call`的使用规则

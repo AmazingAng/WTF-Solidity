@@ -20,7 +20,7 @@ La traducción al español ha sido realizada por Jonathan Díaz con el objetivo 
 
 Twitter: [@jonthdiaz](https://twitter.com/jonthdiaz)
 
-Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Los códigos y tutoriales están como código abierto en GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -29,7 +29,7 @@ En esta sección, se introducirá los contratos `abstract` y `interface` en Soli
 ## Contrato Abstracto
 
 Si un contrato contiene al menos una función no implementada (sin contenido en el cuerpo de la función, `{}`) debe ser marcado con la palabra clave `abstract`; de lo contrario, no se compilará. Además, la función no implementada necesita usar la palabra clave `virtual`.
-Se toma el contrato [Contrato de Ordenación por Inserción](https://github.com/AmazingAng/WTFSolidity/tree/main/07_InsertionSort) anterior como ejemplo, 
+Se toma el contrato [Contrato de Ordenación por Inserción](https://github.com/AmazingAng/WTF-Solidity/tree/main/07_InsertionSort) anterior como ejemplo, 
 si no se ha averiguado cómo implementar la función de ordenación por inserción, se puede marcar el contrato como `abstract` y permitir que otros lo sobrescriban en el futuro.
 
 

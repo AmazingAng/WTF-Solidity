@@ -14,9 +14,9 @@ Uma transação para um contrato inteligente é como uma solicitação HTTP para
 
 Se você não está familiarizado com a montagem EVM e a representação de dados da Solidity, consulte os artigos anteriores desta série para mais informações:
 
-* [Aprofundando na Máquina Virtual Ethereum Parte 1 — Montagem e Bytecode](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md)
-* [Aprofundando na Máquina Virtual Ethereum Parte 2 — Representação de Tipos de Dados de Comprimento Fixo](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md)
-* [Aprofundando na Máquina Virtual Ethereum Parte 3 — Representação de Tipos de Dados Dinâmicos](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part3.md)
+* [Aprofundando na Máquina Virtual Ethereum Parte 1 — Montagem e Bytecode](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part1.md)
+* [Aprofundando na Máquina Virtual Ethereum Parte 2 — Representação de Tipos de Dados de Comprimento Fixo](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md)
+* [Aprofundando na Máquina Virtual Ethereum Parte 3 — Representação de Tipos de Dados Dinâmicos](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part3.md)
 
 ## Transação de Contrato
 
