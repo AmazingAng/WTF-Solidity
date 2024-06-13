@@ -6,7 +6,7 @@
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 ## Alchemy是什么
@@ -19,7 +19,7 @@
 
 `Alchemy` 和 `Infura`在链下、链上之间搭了一座桥，让两者的交互变的简单。它为用户提供对以太坊和IPFS网络的即时、可扩展的`API`访问。开发者在`Alchemy` 和 `Infura`官网注册后，就可以免费申请的以太坊`API KEY`，就可以利用它们的节点与区块链交互。另外，小狐狸`metamask`钱包内置了`Infura`服务，方便用户访问以太坊网络。
 
-关于`Infura`的介绍，可以参考 [WTF Solidity极简入门-工具篇2：Infura, 连接链下与链上的桥梁](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL02_Infura/readme.md)
+关于`Infura`的介绍，可以参考 [WTF Solidity极简入门-工具篇2：Infura, 连接链下与链上的桥梁](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL02_Infura/readme.md)
 
 ## Alchemy 和 Infura 的区别
 

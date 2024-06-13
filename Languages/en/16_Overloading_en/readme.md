@@ -14,7 +14,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](http
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -38,7 +38,7 @@ function saySomething(string memory something) public pure returns(string memory
 ```
 
 After compiling, all overloading functions become different function selectors due to different parameter types. 
-For the specific content of the function selector, please refer to [WTF Solidity Tutorial: 29. Function Selector](https://github.com/AmazingAng/WTFSolidity/tree/main/29_Selector).
+For the specific content of the function selector, please refer to [WTF Solidity Tutorial: 29. Function Selector](https://github.com/AmazingAng/WTF-Solidity/tree/main/29_Selector).
 
 Take the `Overloading.sol` contract as an example, after compiling and deploying on Remix.
 After calling the overloading functions `saySomething()` and `saySomething(string memory something)` respectively, 

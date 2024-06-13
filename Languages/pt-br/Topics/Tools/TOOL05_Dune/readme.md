@@ -6,7 +6,7 @@ Feel free to follow me on Twitter: [@0xAA_Science](https://twitter.com/0xAA_Scie
 
 Join the WTF Tech Community Discord, where you can find instructions to join the WeChat group: [Link](https://discord.gg/5akcruXrsk)
 
-All the code and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All the code and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 ## What is Dune?

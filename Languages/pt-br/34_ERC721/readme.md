@@ -17,7 +17,7 @@ Siga-me no Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Junte-se à comunidade WTF Scientists, há um método para entrar no grupo do WeChat: [link](https://discord.gg/5akcruXrsk)
 
-Todo o código e tutoriais estão disponíveis no GitHub (1024 estrelas para obter certificação do curso, 2048 estrelas para obter um NFT da comunidade): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+Todo o código e tutoriais estão disponíveis no GitHub (1024 estrelas para obter certificação do curso, 2048 estrelas para obter um NFT da comunidade): [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 

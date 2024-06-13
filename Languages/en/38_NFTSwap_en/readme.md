@@ -16,7 +16,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Discord: [WTF Academy](https://discord.gg/5akcruXrsk)
 
-All code and tutorials are open source on Github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All code and tutorials are open source on Github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -164,7 +164,7 @@ function revoke(address _nftAddr, uint256 _tokenId) public {
 ## Implementation in `Remix`
 
 ### 1. Deploy the NFT contract
-Refer to the [ERC721](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721) tutorial to learn about NFTs and deploy the `WTFApe` NFT contract.
+Refer to the [ERC721](https://github.com/AmazingAng/WTF-Solidity/tree/main/34_ERC721) tutorial to learn about NFTs and deploy the `WTFApe` NFT contract.
 
 ![Deploy the NFT contract](./img/38-1.png)
 
