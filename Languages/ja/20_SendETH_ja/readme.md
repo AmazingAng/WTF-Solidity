@@ -98,7 +98,6 @@ function transferETH(address payable _to, uint256 amount) external payable{
 - 使い方は`受取アドレス.send(送るETHの量)`。
 - `send()`の`gas`の制限は`2300`で、送金には十分ですが、相手のコントラクトの`fallback()`や`receive()`関数には複雑なロジックを実装できません。
 - `send()`がもし失敗したら、`revert`されることはない。
-- `send()`的返回值是`bool`，代表着转账成功或失败，需要额外代码处理一下。
 - `send()`の返り値は`bool`で、送金が成功したあるいは失敗したを表します。送金が失敗した場合、処理するコードの追加が必要です。
 
 サンプルコード：
