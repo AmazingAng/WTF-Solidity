@@ -8,74 +8,77 @@ tags:
   - create2
 ---
 
-# WTF Solidity极简入门: 25. CREATE2
+# WTF Solidity 超シンプル入門: 25. Create2
 
-我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
+最近、Solidity の学習を再開し、詳細を確認しながら「Solidity 超シンプル入門」を作っています。これは初心者向けのガイドで、プログラミングの達人向けの教材ではありません。毎週 1〜3 レッスンのペースで更新していきます。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
+僕のツイッター：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
-社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+コミュニティ：[Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[公式サイト wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+すべてのソースコードやレッスンは github にて公開: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
 ---
 
 ## CREATE2
 
-`CREATE2` 操作码使我们在智能合约部署在以太坊网络之前就能预测合约的地址。`Uniswap`创建`Pair`合约用的就是`CREATE2`而不是`CREATE`。这一讲，我将介绍`CREATE2`的用法
+CREATE2 オペコードを使用すると、スマートコントラクトがイーサリアムネットワークにデプロイされる前に、そのアドレスを予測できます。`Uniswap`は`Pair`コントラクトを作成する際に`CREATE2`を使用しています。このレッスンでは、`CREATE2`の使い方について説明します。
 
-### CREATE如何计算地址
+### CREATE はどのようにアドレスを決めているのか
 
-智能合约可以由其他合约和普通账户利用`CREATE`操作码创建。 在这两种情况下，新合约的地址都以相同的方式计算：创建者的地址(通常为部署的钱包地址或者合约地址)和`nonce`(该地址发送交易的总数,对于合约账户是创建的合约总数,每创建一个合约nonce+1)的哈希。
+スマートコントラクトは、他のスマートコントラクトや一般アカウントによって`CREATE`オペコードを使用して作成されることがある。 これらの 2 つの場合、新しいスマートコントラクトのアドレスは同じ方法で計算されます。
 
-```text
-新地址 = hash(创建者地址, nonce)
-```
-
-创建者地址不会变，但`nonce`可能会随时间而改变，因此用`CREATE`创建的合约地址不好预测。
-
-### CREATE2如何计算地址
-
-`CREATE2`的目的是为了让合约地址独立于未来的事件。不管未来区块链上发生了什么，你都可以把合约部署在事先计算好的地址上。用`CREATE2`创建的合约地址由4个部分决定：
-
-- `0xFF`：一个常数，避免和`CREATE`冲突
-- `CreatorAddress`: 调用 CREATE2 的当前合约（创建合约）地址。
-- `salt`（盐）：一个创建者指定的`bytes32`类型的值，它的主要目的是用来影响新创建的合约的地址。
-- `initcode`: 新合约的初始字节码（合约的Creation Code和构造函数的参数）。
+- 作成者のアドレス（通常はデプロイされたウォレットアドレスまたはコントラクトアドレス）と`nonce`（そのアドレスが送信したトランザクションの合計数、コントラクトアカウントの場合は作成されたコントラクトの合計数、コントラクトを作成するたびに nonce+1）のハッシュ値。
 
 ```text
-新地址 = hash("0xFF",创建者地址, salt, initcode)
+新しいアドレス = hash(作成者アドレス, nonce)
 ```
 
-`CREATE2` 确保，如果创建者使用 `CREATE2` 和提供的 `salt` 部署给定的合约`initcode`，它将存储在 `新地址` 中。
+作成者のアドレスは不変なのに対し、`nonce`は時間とともに変化する可能性があるため、`CREATE`で作成されたコントラクトのアドレスは予測しにくいという特徴を持っています。
 
-## 如何使用`CREATE2`
+### CREATE2 はどのようにアドレスを決めているのか
 
-`CREATE2`的用法和之前讲的`CREATE`类似，同样是`new`一个合约，并传入新合约构造函数所需的参数，只不过要多传一个`salt`参数：
+`CREATE2`の目的は将来のイベントと分離するためにある。将来何が起ころうとも、事前に計算されたアドレスにコントラクトをデプロイできます。`CREATE2`で作成されたコントラクトのアドレスは 4 つの要素で決定されます：
+
+- `0xFF`：定数。`CREATE`との衝突を避けるためにある
+- `CreatorAddress`: `CREATE2`を呼び出す当該コントラクトのアドレス
+- `salt`(塩)：作成者が指定する`bytes32`型の値で、新しいコントラクトのアドレスに一味別の影響を与えるためのもの（塩のような存在）
+- `initcode`:新しいコントラクトの初期バイトコード（コントラクトの creation code とコンストラクタの引数）。
+
+```text
+新しいアドレス = hash("0xFF",作成者アドレス, salt, initcode)
+```
+
+`CREATE2`は、作成者が指定した`salt`を使用して、`initcode`をデプロイすると、そのコントラクトが`新しいアドレス`に格納されることを保証することができました。
+
+## `CREATE2`はどう使うか
+
+`CREATE2`の使い方は`CREATE`と似ており、新しいコントラクトを`new`するとともに、新しいコントラクトのコンストラクタに必要な引数を渡します。ただし、余計に`salt`を指定する必要があります。
 
 ```solidity
 Contract x = new Contract{salt: _salt, value: _value}(params)
 ```
 
-其中`Contract`是要创建的合约名，`x`是合约对象（地址），`_salt`是指定的盐；如果构造函数是`payable`，可以创建时转入`_value`数量的`ETH`，`params`是新合约构造函数的参数。
+その中で`Contract`は作りたいコントラクトの名前です。`x`はコントラクトのアドレスで、`_salt`は指定した任意の値。もしコントラクトのコンストラクタが`payable`なら、作成時に`_value`量の`ETH`を送ることができます。`params`は新しいコントラクトのコンストラクタの引数です。
 
-## 极简Uniswap2
+## 簡易版 Uniswap2
 
 跟[上一讲](https://mirror.xyz/wtfacademy.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)类似，我们用`CREATE2`来实现极简`Uniswap`。
+[前回](https://mirror.xyz/wtfacademy.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)と同じように、今回私たちは`CREATE2`を使って簡易版の`Uniswap`を実装します。
 
 ### `Pair`
 
 ```solidity
 contract Pair{
-    address public factory; // 工厂合约地址
-    address public token0; // 代币1
-    address public token1; // 代币2
+    address public factory; // ファクトリコントラクト
+    address public token0; // トークン1
+    address public token1; // トークン2
 
     constructor() payable {
         factory = msg.sender;
     }
 
-    // called once by the factory at time of deployment
+    // デプロイ時に一度呼び出される
     function initialize(address _token0, address _token1) external {
         require(msg.sender == factory, 'UniswapV2: FORBIDDEN'); // sufficient check
         token0 = _token0;
@@ -84,27 +87,29 @@ contract Pair{
 }
 ```
 
-`Pair`合约很简单，包含3个状态变量：`factory`，`token0`和`token1`。
+`Pair`コントラクトは非常にシンプルです。3 つの状態変数があります：`factory`、`token0`、`token1`。
 
-构造函数`constructor`在部署时将`factory`赋值为工厂合约地址。`initialize`函数会在`Pair`合约创建的时候被工厂合约调用一次，将`token0`和`token1`更新为币对中两种代币的地址。
+`constructor`関数はデプロイ時に、`factory`をファクトリーのコントラクトアドレスにします。`initialize`関数は`Pair`コントラクトの作成時に一度だけ呼び出され、`token0`と`token1`を更新します。
 
 ### `PairFactory2`
 
 ```solidity
 contract PairFactory2{
-    mapping(address => mapping(address => address)) public getPair; // 通过两个代币地址查Pair地址
-    address[] public allPairs; // 保存所有Pair地址
+    mapping(address => mapping(address => address)) public getPair; // トークンのアドレスからペアのアドレスを参照する用
+    address[] public allPairs; // すべてのペアアドレスを保存する
 
     function createPair2(address tokenA, address tokenB) external returns (address pairAddr) {
-        require(tokenA != tokenB, 'IDENTICAL_ADDRESSES'); //避免tokenA和tokenB相同产生的冲突
-        // 用tokenA和tokenB地址计算salt
-        (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA); //将tokenA和tokenB按大小排序
+        require(tokenA != tokenB, "IDENTICAL_ADDRESSES"); // token Aとtoken Bが同じアドレスでないことを確認
+
+        // token Aとtoken Bをソートして小さい方をtoken0に、大きい方をtoken1にする
+        (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
+        // token0、token1を使ってkeccak256でsaltを計算
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));
-        // 用create2部署新合约
-        Pair pair = new Pair{salt: salt}(); 
-        // 调用新合约的initialize方法
+        // create2をつかってコントラクトをデプロイする
+        Pair pair = new Pair{salt: salt}();
+        // 新しいコントラクトのinitialize関数を呼び出す
         pair.initialize(tokenA, tokenB);
-        // 更新地址map
+        // アドレスのマップallPairsを更新
         pairAddr = address(pair);
         allPairs.push(pairAddr);
         getPair[tokenA][tokenB] = pairAddr;
@@ -113,56 +118,66 @@ contract PairFactory2{
 }
 ```
 
-工厂合约（`PairFactory2`）有两个状态变量`getPair`是两个代币地址到币对地址的`map`，方便根据代币找到币对地址；`allPairs`是币对地址的数组，存储了所有币对地址。
+ファクトリーコントラクトの`PairFactory2`は２つの状態変数を持っており、`getPair`は２つのトークンアドレスからペアアドレスを取得するためのマップ変数です。`allPairs`はすべてのペアアドレスを格納する配列です。
 
-`PairFactory2`合约只有一个`createPair2`函数，使用`CREATE2`根据输入的两个代币地址`tokenA`和`tokenB`来创建新的`Pair`合约。其中
+`PairFactory2`コントラクトは一つの`createPair2`関数しかありません。入力された２つのトークンアドレス`tokenA`と`tokenB`に基づいて新しい`Pair`コントラクトを作成します。
+
+その中で、
 
 ```solidity
-Pair pair = new Pair{salt: salt}(); 
+Pair pair = new Pair{salt: salt}();
 ```
 
-就是利用`CREATE2`创建合约的代码，非常简单，而`salt`为`token1`和`token2`的`hash`：
+は`CREATE2`を使ってコントラクトを作成しています。非常にシンプルですね。`salt`は`token1`と`token2`の`hash`値を利用しています。
 
 ```solidity
 bytes32 salt = keccak256(abi.encodePacked(token0, token1));
 ```
 
-### 事先计算`Pair`地址
+### 事前に`Pair`のアドレスを計算
 
 ```solidity
-// 提前计算pair合约地址
-function calculateAddr(address tokenA, address tokenB) public view returns(address predictedAddress){
-    require(tokenA != tokenB, 'IDENTICAL_ADDRESSES'); //避免tokenA和tokenB相同产生的冲突
-    // 计算用tokenA和tokenB地址计算salt
-    (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA); //将tokenA和tokenB按大小排序
+// ペアのアドレスをあらかじめ計算する関数
+function calculateAddr(address tokenA, address tokenB) public view returns (address predictedAddress) {
+    require(tokenA != tokenB, "IDENTICAL_ADDRESSES"); // token Aとtoken Bが同じアドレスでないことを確認
+
+    // token Aとtoken Bをソートして小さい方をtoken0に、大きい方をtoken1にする
+    (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
+    // token0、token1を使ってkeccak256でsaltを計算
     bytes32 salt = keccak256(abi.encodePacked(token0, token1));
-    // 计算合约地址方法 hash()
-    predictedAddress = address(uint160(uint(keccak256(abi.encodePacked(
-        bytes1(0xff),
-        address(this),
-        salt,
-        keccak256(type(Pair).creationCode)
-        )))));
+    // hash()を使ってコントラクトアドレスを計算する
+    predictedAddress = address(
+        uint160(
+            uint256(
+                keccak256(abi.encodePacked(bytes1(0xff), address(this), salt, keccak256(type(Pair).creationCode)))
+            )
+        )
+    );
 }
 ```
 
-我们写了一个`calculateAddr`函数来事先计算`tokenA`和`tokenB`将会生成的`Pair`地址。通过它，我们可以验证我们事先计算的地址和实际地址是否相同。
+私たちは`calculateAddr`関数を作り、事前に`tokenA`と`tokenB`によって生成される`Pair`のアドレスを計算しました。これを使って、計算したアドレスと実際のアドレスが一致するかどうかを確認できます。
 
-大家可以部署好`PairFactory2`合约，然后用下面两个地址作为参数调用`createPair2`，看看创建的币对地址是什么，是否与事先计算的地址一样：
+皆さんはデプロイ済みの`PairFactory2`コントラクトを使って、以下のアドレスをパラメーターとして`createPair2`を呼び出し、作成されたペアのアドレスがどうなるか、事前に計算したアドレスと一致するかどうかを確認できます。
 
 ```text
-WBNB地址: 0x2c44b726ADF1963cA47Af88B284C06f30380fC78
-BSC链上的PEOPLE地址: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
+WBNBアドレス: 0x2c44b726ADF1963cA47Af88B284C06f30380fC78
+BSCオンチェーンのPEOPLEアドレス: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 ```
 
-#### 如果部署合约构造函数中存在参数
+#### もし`constructor`関数に引数がある場合
 
-例如当create2合约时：
+例えば、`create2`を使ってコントラクトを作成する場合：
+
 > Pair pair = new Pair{salt: salt}(address(this));
 
-计算时，需要将参数和initcode一起进行打包：
+計算時に、引数と`initcode`を一緒にパッケージにする必要があります。
+
 > ~~keccak256(type(Pair).creationCode)~~
-> => keccak256(abi.encodePacked(type(Pair).creationCode, abi.encode(address(this))))
+
+↓
+
+> keccak256(abi.encodePacked(type(Pair).creationCode, abi.encode(address(this))))
 
 ```solidity
 predictedAddress = address(uint160(uint(keccak256(abi.encodePacked(
@@ -173,20 +188,23 @@ predictedAddress = address(uint160(uint(keccak256(abi.encodePacked(
             )))));
 ```
 
-### 在remix上验证
+### remix にて検証する
 
-1. 首先用`WBNB`和`PEOPLE`的地址哈希作为`salt`来计算出`Pair`合约的地址
-2. 调用`PairFactory2.createPair2`传入参数为`WBNB`和`PEOPLE`的地址，获取出创建的`pair`合约地址
-3. 对比合约地址
+1. まず、`WBNB`と`PEOPLE`のアドレスハッシュを`salt`として使って`Pair`コントラクトのアドレスを計算
+2. `PairFactory2.createPair2`を呼び出し、`WBNB`と`PEOPLE`のアドレスを引数として渡します。`pair`コントラクトのアドレスを取得
+3. コントラクトアドレスを比較
 
-    ![create2_remix_test.png](./img/25-1.png)
+   ![create2_remix_test.png](./img/25-1_en.png)
 
-## create2的实际应用场景
+## create2 実際の活用シーン
 
-1. 交易所为新用户预留创建钱包合约地址。
+3. 取引所が新規ユーザーのためのウォレットコントラクトアドレスを予約する。
+4. `CREATE2`を使って`factory`コントラクトを作成し、`Uniswap V2`の中でペアを作成するのは`Factory`で行います。これをするメリットとしては、確定した`pair`アドレスを得ることができ、`Router`で`(tokenA, tokenB)`を使って`pair`アドレスを計算できるようになります。もう一度`Factory.getPair(tokenA, tokenB)`というコントラクトをまたぐ呼び出しを実行する必要がなくなります。
 
-2. 由 `CREATE2` 驱动的 `factory` 合约，在`Uniswap V2`中交易对的创建是在 `Factory`中调用`CREATE2`完成。这样做的好处是: 它可以得到一个确定的`pair`地址, 使得 `Router`中就可以通过 `(tokenA, tokenB)` 计算出`pair`地址, 不再需要执行一次 `Factory.getPair(tokenA, tokenB)` 的跨合约调用。
+## まとめ
 
-## 总结
+今回、私たちは`CREATE2`のオペコードの原理と使い方を紹介し、簡易版の`Uniswap`を作成しました。
 
-这一讲，我们介绍了`CREATE2`操作码的原理，使用方法，并用它完成了极简版的`Uniswap`并提前计算币对合约地址。`CREATE2`让我们可以在部署合约前确定它的合约地址，这也是一些`layer2`项目的基础。
+事前にペアのコントラクトアドレスを計算しました。`CREATE2`を使うことで、コントラクトをデプロイする前にそのアドレスを予測できるようになります。
+
+これはいくつかの`layer2`プロジェクトのベースの知識にもなります。
