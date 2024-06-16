@@ -97,9 +97,9 @@ receive()あるか?   fallback()
 receive()   fallback()
 ```
 
-简单来说，合约接收`ETH`时，`msg.data`为空且存在`receive()`时，会触发`receive()`；`msg.data`不为空或不存在`receive()`时，会触发`fallback()`，此时`fallback()`必须为`payable`。
+簡単にいうと、コントラクトが`ETH`を受け取るとき、`msg.data`が空で`receive()`が存在する場合は`receive()`がトリガーされます。`msg.data`が空で`receive()`が存在しない場合は、`fallback()`がトリガーされます。この場合、`fallback()`は`payable`である必要があります。
 
-`receive()`和`payable fallback()`均不存在的时候，向合约**直接**发送`ETH`将会报错（你仍可以通过带有`payable`的函数向合约发送`ETH`）。
+`receive()`と`payable fallback()`が存在しない場合、コントラクトに直接`ETH`を送信するとエラーが発生します（`payable`関数を使ってコントラクトに`ETH`を送信することはできます）。
 
 ## Remix 演示
 
