@@ -19,11 +19,10 @@ tags:
 
 ---
 
-`Solidity`有三种方法向其他合约发送`ETH`，他们是：`transfer()`，`send()`和`call()`，其中`call()`是被鼓励的用法。
+`Solidity`には他のコントラクトに ETH を送る３つの方法がある。それらは`transfer()`, `send()`, `call()`。現在、おすすめされている方法は`call()`。
 
 ## ETH を受け取るコントラクト
 
-我们先部署一个接收`ETH`合约`ReceiveETH`。`ReceiveETH`合约里有一个事件`Log`，记录收到的`ETH`数量和`gas`剩余。还有两个函数，一个是`receive()`函数，收到`ETH`被触发，并发送`Log`事件；另一个是查询合约`ETH`余额的`getBalance()`函数。
 まず、私たちは ETH を受け取る用のコントラクトをデプロイします。
 このコントラクトは以下となっています。
 
@@ -55,8 +54,7 @@ contract ReceiveETH {
 
 ## ETH を送金するコントラクト
 
-我们将实现三种方法向`ReceiveETH`合约发送`ETH`。首先，先在发送 ETH 合约`SendETH`中实现`payable`的`构造函数`和`receive()`，让我们能够在部署时和部署后向合约转账。
-私たちは３つの方法を使って`ReceiveETH`コントラクトに ETH を送ります。まず、`SendETH`コントラクトをデプロイします。
+私たちは３つの方法を使って`ReceiveETH`コントラクトに ETH を送ります。まず、`SendETH`コントラクトの中で`payable`の`constructor`関数と`receive()`関数を実装し、デプロイ時とデプロイ後に コントラクトに対して ETH を送金できるようにします。
 
 ```solidity
 contract SendETH {
@@ -74,7 +72,7 @@ contract SendETH {
 - `transfer()`の`gas`の制限は`2300`で、送金には十分ですが、相手のコントラクトの`fallback()`や`receive()`関数には複雑なロジックを実装できません。
 - もし`transfer()`が失敗すると、自動的に`revert`（ロールバック）します。
 
-サンプルコードです。`_to`には`ReceiveETH`コントラクトのアドレスを入力し、`amount`には送金する`ETH`の量を入力します。
+以下はサンプルコードです。`_to`には`ReceiveETH`コントラクトのアドレスを入力し、`amount`には送金する`ETH`の量を入力します。
 
 ```solidity
 // transfer関数を使ってETHを送る
@@ -130,7 +128,6 @@ function sendETH(address payable _to, uint256 amount) external payable{
 
 - 使い方は`受取アドレス.call{value: 送るETHの量}("")`。
 - ｀ call()`は`gas`の制限がなく、相手のコントラクトの`fallback()`や`receive()`関数に複雑なロジックを実装できます。
-- `call()`如果转账失败，不会`revert`。
 - `call()`がもし失敗したら、`revert`されることはない。
 - `call()`の返り値は`(bool, bytes)`で、送金が成功したあるいは失敗したを表します。送金が失敗した場合、処理するコードの追加が必要です。
 
