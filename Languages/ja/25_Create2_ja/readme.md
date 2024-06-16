@@ -63,7 +63,6 @@ Contract x = new Contract{salt: _salt, value: _value}(params)
 
 ## 簡易版 Uniswap2
 
-跟[上一讲](https://mirror.xyz/wtfacademy.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)类似，我们用`CREATE2`来实现极简`Uniswap`。
 [前回](https://mirror.xyz/wtfacademy.eth/kojopp2CgDK3ehHxXc_2fkZe87uM0O5OmsEU6y83eJs)と同じように、今回私たちは`CREATE2`を使って簡易版の`Uniswap`を実装します。
 
 ### `Pair`
