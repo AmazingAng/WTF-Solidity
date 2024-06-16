@@ -193,7 +193,7 @@ predictedAddress = address(uint160(uint(keccak256(abi.encodePacked(
 2. `PairFactory2.createPair2`を呼び出し、`WBNB`と`PEOPLE`のアドレスを引数として渡します。`pair`コントラクトのアドレスを取得
 3. コントラクトアドレスを比較
 
-   ![create2_remix_test.png](./img/25-1_en.png)
+   ![create2_remix_test.png](./img/25-1.jpg)
 
 ## create2 実際の活用シーン
 
