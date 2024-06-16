@@ -67,7 +67,7 @@ contract Pair {
 }
 ```
 
-`Pari`コントラクトは非常にシンプルです。3 つの状態変数があります：`factory`、`token0`、`token1`。
+`Pair`コントラクトは非常にシンプルです。3 つの状態変数があります：`factory`、`token0`、`token1`。
 
 コンストラクト関数`constructor`はデプロイ時に`factory`をファクトリコントラクトのアドレスに設定します。`initialize`関数はファクトリコントラクトがデプロイ直後に呼び出され、トークンアドレスを初期化し、`token0`と`token1`を更新します。
 

@@ -162,6 +162,5 @@ function callETH(address payable _to, uint256 amount) external payable{
 今回は、`Solidity`の３つの方法で`ETH`を送る方法を紹介しました：`transfer`、`send`、`call`。
 
 - `call`は`gas`の制限がなく、最も柔軟であり、一番推奨される方法です。
-- `transfer`有`2300 gas`限制，但是发送失败会自动`revert`交易，是次优选择。
 - `transfer`は`2300 gas`の制限があり、送金が失敗した場合、自動的に`revert`されるため、`call`に次ぐ選択肢です。
 - `send`は`2300 gas`の制限があり、送金が失敗した場合、自動的に`revert`されないため、ほとんど使用されません。
