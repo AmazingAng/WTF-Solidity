@@ -34,16 +34,16 @@ tags:
 contract TimeManipulation is ERC721 {
     uint256 totalSupply;
 
-    // 构造函数，初始化NFT合集的名称、代号
+    // 构造函数，初始化 NFT 合集的名称、代号
     constructor() ERC721("", ""){}
 
-    // 铸造函数：当区块时间能被7整除时才能mint成功
+    // 铸造函数：当区块时间能被 170 整除时才能 mint 成功
     function luckyMint() external returns(bool success){
         if(block.timestamp % 170 == 0){
             _mint(msg.sender, totalSupply); // mint
             totalSupply++;
             success = true;
-        }else{
+        } else {
             success = false;
         }
     }
@@ -52,7 +52,7 @@ contract TimeManipulation is ERC721 {
 
 ## Foundry复现攻击
 
-攻击者只需操纵区块时间，将它设为能被 170 整除的数字，就可以成功铸造 NFT。我们选择 Foundry 来复现这个攻击，因为它提供了修改区块时间的作弊码（cheatcodes）。如果你不了解 Foundry/作弊码，可以阅读 [Foundry教程](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md) 和 [Foundry Book](https://book.getfoundry.sh/forge/cheatcodes)。
+攻击者只需操纵区块时间，将它设为能被 170 整除的数字，就可以成功铸造 NFT。我们选择 Foundry 来复现这个攻击，因为它提供了修改区块时间的作弊码（cheatcodes）。如果你不了解 Foundry 作弊码，可以阅读 [Foundry教程](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL07_Foundry/readme.md) 和 [Foundry Book](https://book.getfoundry.sh/forge/cheatcodes)。
 
 代码大致逻辑
 
@@ -87,7 +87,7 @@ contract TimeManipulationTest is Test {
         // Set block.timestamp to 169
         vm.warp(169);
         console.log("block.timestamp: %s", block.timestamp);
-        // Sets all subsequent calls' msg.sender to be the input address
+        // Set all subsequent calls's msg.sender to be the input address
         // until `stopPrank` is called
         vm.startPrank(alice);
         console.log("alice balance before mint: %s", nft.balanceOf(alice));
@@ -139,7 +139,7 @@ Logs:
 Test result: ok. 1 passed; 0 failed; finished in 7.64ms
 ```
 
-我们可以看到，当我们将`block.timestamp` 修改为 17000时，铸造成功。
+我们可以看到，当我们将`block.timestamp` 修改为 17000 时，铸造成功。
 
 ## 总结
 
