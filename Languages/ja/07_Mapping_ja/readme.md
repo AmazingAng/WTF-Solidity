@@ -60,15 +60,15 @@
 
 - `Mapping.sol`をデプロイする
 
-    ![7-1_en](./img/7-1_en.png)
+    ![7-1_ja](./img/7-1_ja.png)
 
 - マッピングである`idToAddress`の初期値をチェックする
 
-    ![7-2_en](./img/7-2_en.png)
+    ![7-2_ja](./img/7-2_ja.png)
 
 - 新たらしいキーと値の組み合わせを書き込む
 
-    ![7-3_en](./img/7-3_en.png)
+    ![7-3_ja](./img/7-3_ja.png)
 
 
 
