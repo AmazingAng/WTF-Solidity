@@ -61,7 +61,7 @@
         (, _bool2, ) = returnNamed();
 ```
 
-## Verify on Remix
+## Verify on Remix（Remixによる検証）
 - コントラクトをデプロイして関数の返り値をチェックしてみましょう:
 
 ![](./img/4-1.png)

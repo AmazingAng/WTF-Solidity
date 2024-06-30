@@ -22,7 +22,7 @@ contract InitialValue {
         delete _bool2; // delete will make _bool2 change to default(false)
                        //（deleteは_bool2をデフォルト値(false)に変更します）
     }
-
+    
     function d_address() external {
         delete _address; // delete will make _address change to default(address(0))
                          //（deleteは_addressをデフォルト値(address(0))に変更します）
