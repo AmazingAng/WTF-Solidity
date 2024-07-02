@@ -587,7 +587,7 @@ The calculation of **0x5b5e139f** is:
 IERC721Metadata.name.selector ^ IERC721Metadata.symbol.selector ^ IERC721Metadata.tokenURI.selector
 ```
 
-How does the ERC721.sol implemented by Solamte fulfil these features required by `ERC165`?
+How does the ERC721.sol implemented by Solmate fulfil these features required by `ERC165`?
 
 ```solidity
 function supportsInterface(bytes4 interfaceId) public view virtual returns (bool) {

@@ -75,7 +75,7 @@ module.exports = {
 新建`contracts`合约目录，并添加第31章节的ERC20合约。
 
 ### 编写合约
-这里的合约直接使用[WTF Solidity第31讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/31_ERC20/readme.md]的ERC20合约
+这里的合约直接使用[WTF Solidity第31讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/31_ERC20/readme.md)的ERC20合约
 
 ```js
 // SPDX-License-Identifier: MIT
