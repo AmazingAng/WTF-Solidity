@@ -14,7 +14,7 @@ tags:
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -65,11 +65,11 @@ contract Centralization is ERC20, Ownable {
 
 ## 如何减少中心化/伪去中心化风险？
 
-1. 使用多签钱包管理国库和控制合约参数。为了兼顾效率和去中心化，可以选择 4/7 或 6/9 多签。如果你不了解多签钱包，可以阅读[WTF Solidity 第 50 讲：多签钱包](https://github.com/AmazingAng/WTFSolidity/blob/main/50_MultisigWallet/readme.md)。
+1. 使用多签钱包管理国库和控制合约参数。为了兼顾效率和去中心化，可以选择 4/7 或 6/9 多签。如果你不了解多签钱包，可以阅读[WTF Solidity 第 50 讲：多签钱包](https://github.com/AmazingAng/WTF-Solidity/blob/main/50_MultisigWallet/readme.md)。
 
 2. 多签的持有人要多样化，分散在创始团队、投资人、社区领袖之间，并且不要相互授权签名。
 
-3. 使用时间锁控制合约，在黑客或项目内鬼修改合约参数/盗取资产时，项目方和社区有一些时间来应对，将损失最小化。如果你不了解时间锁合约，可以阅读[WTF Solidity 第 45 讲：时间锁](https://github.com/AmazingAng/WTFSolidity/blob/main/45_Timelock/readme.md)。
+3. 使用时间锁控制合约，在黑客或项目内鬼修改合约参数/盗取资产时，项目方和社区有一些时间来应对，将损失最小化。如果你不了解时间锁合约，可以阅读[WTF Solidity 第 45 讲：时间锁](https://github.com/AmazingAng/WTF-Solidity/blob/main/45_Timelock/readme.md)。
 
 ## 总结
 

@@ -6,7 +6,7 @@
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -75,7 +75,7 @@ module.exports = {
 新建`contracts`合约目录，并添加第31章节的ERC20合约。
 
 ### 编写合约
-这里的合约直接使用[WTF Solidity第31讲](https://github.com/AmazingAng/WTFSolidity/blob/main/31_ERC20/readme.md]的ERC20合约
+这里的合约直接使用[WTF Solidity第31讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/31_ERC20/readme.md]的ERC20合约
 
 ```js
 // SPDX-License-Identifier: MIT
@@ -261,7 +261,7 @@ npx hardhat run --network hardhat  scripts/deploy.js
 ### 前期准备
 
 1. 申请alchemy的api key
-参考【[第4讲：Alchemy, 区块链API和节点基础设施](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】 
+参考【[第4讲：Alchemy, 区块链API和节点基础设施](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】 
 2. 申请Goerli测试代币
 [点击申请](https://goerlifaucet.com/) 登录alchemy账号每天可以领取0.2个代币
 3. 导出私钥

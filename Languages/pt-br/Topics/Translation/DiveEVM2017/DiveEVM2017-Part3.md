@@ -16,7 +16,7 @@ Na parte anterior desta série, vimos como tipos simples de tamanho fixo são re
 
 Variáveis de armazenamento de tamanho fixo são colocadas uma após a outra no armazenamento, empacotadas o mais próximo possível em blocos de 32 bytes.
 
-(Se esta parte parece não familiar, por favor, leia [Aprofundando na Máquina Virtual Ethereum Parte 2 — A Representação de Tipos de Dados de Comprimento Fixo](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md))
+(Se esta parte parece não familiar, por favor, leia [Aprofundando na Máquina Virtual Ethereum Parte 2 — A Representação de Tipos de Dados de Comprimento Fixo](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017/DiveEVM2017-Part2.md))
 
 Neste artigo, vamos explorar como o Solidity suporta estruturas de dados mais complexas. Arrays e mapeamentos no Solidity podem parecer familiares na superfície, mas a maneira como são implementados lhes confere características de desempenho completamente diferentes.
 

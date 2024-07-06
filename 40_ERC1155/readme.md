@@ -15,7 +15,7 @@ tags:
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -24,7 +24,7 @@ tags:
 ## `EIP1155`
 不论是`ERC20`还是`ERC721`标准，每个合约都对应一个独立的代币。假设我们要在以太坊上打造一个类似《魔兽世界》的大型游戏，这需要我们对每个装备都部署一个合约。上千种装备就要部署和管理上千个合约，这非常麻烦。因此，[以太坊EIP1155](https://eips.ethereum.org/EIPS/eip-1155)提出了一个多代币标准`ERC1155`，允许一个合约包含多个同质化和非同质化代币。`ERC1155`在GameFi应用最多，Decentraland、Sandbox等知名链游都使用它。
 
-简单来说，`ERC1155`与之前介绍的非同质化代币标准[ERC721](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721)类似：在`ERC721`中，每个代币都有一个`tokenId`作为唯一标识，每个`tokenId`只对应一个代币；而在`ERC1155`中，每一种代币都有一个`id`作为唯一标识，每个`id`对应一种代币。这样，代币种类就可以非同质的在同一个合约里管理了，并且每种代币都有一个网址`uri`来存储它的元数据，类似`ERC721`的`tokenURI`。下面是`ERC1155`的元数据接口合约`IERC1155MetadataURI`：
+简单来说，`ERC1155`与之前介绍的非同质化代币标准[ERC721](https://github.com/AmazingAng/WTF-Solidity/tree/main/34_ERC721)类似：在`ERC721`中，每个代币都有一个`tokenId`作为唯一标识，每个`tokenId`只对应一个代币；而在`ERC1155`中，每一种代币都有一个`id`作为唯一标识，每个`id`对应一种代币。这样，代币种类就可以非同质的在同一个合约里管理了，并且每种代币都有一个网址`uri`来存储它的元数据，类似`ERC721`的`tokenURI`。下面是`ERC1155`的元数据接口合约`IERC1155MetadataURI`：
 
 ```solidity
 /**
@@ -47,7 +47,7 @@ interface IERC1155MetadataURI is IERC1155 {
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.sol";
 
 /**
  * @dev ERC1155标准的接口合约，实现了EIP1155的功能
@@ -167,7 +167,7 @@ interface IERC1155 is IERC165 {
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.sol";
 
 /**
  * @dev ERC1155接收合约，要接受ERC1155的安全转账，需要实现这个合约
@@ -240,9 +240,9 @@ pragma solidity ^0.8.0;
 import "./IERC1155.sol";
 import "./IERC1155Receiver.sol";
 import "./IERC1155MetadataURI.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/Address.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/String.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/Address.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/String.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.sol";
 
 /**
  * @dev ERC1155多代币标准

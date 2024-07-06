@@ -17,7 +17,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Discord: [WTF Academy](https://discord.gg/5akcruXrsk)
 
-All code and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All code and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 Many Ethereum applications require the use of random numbers, such as NFT random tokenId selection, blind box drawing, and randomly determining the winner in gamefi battles. However, since all data on Ethereum is public and deterministic, it cannot provide developers with a method of generating random numbers like other programming languages. In this tutorial, we will introduce two methods of on-chain (hash function) and off-chain (Chainlink oracle) random number generation, and use them to create a tokenId random minting NFT.
 
@@ -138,7 +138,7 @@ In this section, we will use on-chain and off-chain random numbers to create a `
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/ERC721.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
 
 contract Random is ERC721, VRFConsumerBase{

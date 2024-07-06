@@ -16,7 +16,7 @@ tags:
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -164,7 +164,7 @@ contract NFTSwap is IERC721Receiver{
 ## `Remix`实现
 
 ### 1. 部署NFT合约
-参考 [ERC721](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721) 教程了解NFT，并部署`WTFApe` NFT合约。
+参考 [ERC721](https://github.com/AmazingAng/WTF-Solidity/tree/main/34_ERC721) 教程了解NFT，并部署`WTFApe` NFT合约。
 
 ![部署NFT合约](./img/38-1.png)
 
