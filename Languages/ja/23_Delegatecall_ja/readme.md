@@ -22,7 +22,7 @@ tags:
 
 ## `Delegatecall`
 
-`delegatecall`は`call`と似ており、`Solidity`におけるアドレス型の低いレベルのメンバー関数です。`delegate`は「委任・プロキシ」を意味していますが、一体`delegatecall`は何を委任しているのでしょうか？
+`delegatecall`は`call`と似ており、`Solidity`におけるアドレス型の低いレベルのメンバー関数です。`delegate`は「委任・プロキシ」を意味していますが、一体`delegatecall`は何を委任しているのでしょうか。
 
 ### `call`の場合
 
