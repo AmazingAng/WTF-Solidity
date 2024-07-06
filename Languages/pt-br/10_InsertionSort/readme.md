@@ -6,7 +6,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Comunidade: [Discord](https://discord.gg/5akcruXrsk) | [Grupo do WeChat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link) | [Website wtf.academy](https://wtf.academy)
 
-Todo o código e tutoriais estão disponíveis no GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTF-Solidity)
+Todo o código e tutoriais estão disponíveis no GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 Nesta lição, vamos discutir o fluxo de controle em Solidity e depois explicar como implementar a ordenação por inserção (Insertion Sort) em Solidity, um algoritmo que parece simples, mas é fácil introduzir erros.

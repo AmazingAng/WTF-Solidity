@@ -16,7 +16,7 @@ Welcome to follow me on Twitter: [@0xAA_Science](https://twitter.com/0xAA_Scienc
 
 Welcome to the WTF Scientist community, which includes methods for adding WeChat groups: [link](https://discord.gg/5akcruXrsk)
 
-All code and tutorials are open source on GitHub (1024 stars will issue course certification, 2048 stars will issue community NFTs): [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All code and tutorials are open source on GitHub (1024 stars will issue course certification, 2048 stars will issue community NFTs): [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 

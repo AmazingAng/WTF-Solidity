@@ -13,7 +13,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[WeChat Group](https://wechat.wtf.academy)｜[wtf.academy](https://wtf.academy)
 
-All code and tutorials are open-sourced on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All code and tutorials are open-sourced on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
@@ -135,7 +135,7 @@ There are a total of 7 functions in the `Timelock` contract.
   - `data`: the call data of the transaction
   - `executeTime`: the blockchain timestamp when the transaction will be executed.
     When calling this function, it is necessary to ensure that the expected execution time `executeTime` is greater than the current blockchain timestamp + the lock time `delay`. The unique identifier for the transaction is the hash value of all the parameters, calculated using the `getTxHash()` function. Transactions that enter the queue will update the `queuedTransactions` variable and release a `QueueTransaction` event.
-- `executeTransaction()`: Executes a transaction. Its parameters are the same as `queueTransaction()`. The transaction to be executed must be in the time lock queue, reach its execution time, and not be expired. The `call` member function of `solidity` is used to execute the transaction, which was introduced in [Lesson 22](https://github.com/AmazingAng/WTFSolidity/blob/main/22_Call/readme.md).
+- `executeTransaction()`: Executes a transaction. Its parameters are the same as `queueTransaction()`. The transaction to be executed must be in the time lock queue, reach its execution time, and not be expired. The `call` member function of `solidity` is used to execute the transaction, which was introduced in [Lesson 22](https://github.com/AmazingAng/WTF-Solidity/blob/main/22_Call/readme.md).
 - `cancelTransaction()`: Cancels a transaction. Its parameters are the same as `queueTransaction()`. The transaction to be cancelled must be in the queue. The `queuedTransactions` will be updated and a `CancelTransaction` event will be released.
 - `changeAdmin()`: Changes the administrator address and can only be called by the `Timelock` contract.
 - `getBlockTimestamp()`: Gets the current blockchain timestamp.
@@ -334,7 +334,7 @@ address target, uint256 value, string memory signature, bytes memory data, uint2
 - `target`: Since we are calling a function of `Timelock`, we fill in the contract address.
 - `value`: No need to transfer ETH, fill in `0` here.
 - `signature`: The function signature of `changeAdmin()` is: `"changeAdmin(address)"`.
-- `data`: Fill in the parameter to be passed, which is the address of the new administrator. But the address needs to be padded to 32 bytes of data to meet the [Ethereum ABI Encoding Standard](https://github.com/AmazingAng/WTFSolidity/blob/main/27_ABIEncode/readme.md). You can use the [hashex](https://abi.hashex.org/) website to encode the parameters to ABI. Example:
+- `data`: Fill in the parameter to be passed, which is the address of the new administrator. But the address needs to be padded to 32 bytes of data to meet the [Ethereum ABI Encoding Standard](https://github.com/AmazingAng/WTF-Solidity/blob/main/27_ABIEncode/readme.md). You can use the [hashex](https://abi.hashex.org/) website to encode the parameters to ABI. Example:
 
   ```solidity
   Address before encoding：0xd9145CCE52D386f254917e481eB44e9943F39138

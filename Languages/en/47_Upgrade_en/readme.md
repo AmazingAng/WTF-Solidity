@@ -15,7 +15,7 @@ Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
 
 Community: [Discord](https://discord.gg/5akcruXrsk)｜[WeChat group](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Official website wtf.academy](https://wtf.academy)
 
-All code and tutorials are open source on GitHub: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+All code and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -33,7 +33,7 @@ Below we implement a simple upgradeable contract that includes 3 contracts: the 
 
 ### Proxy Contract
 
-This proxy contract is simpler than that in [Lecture 46](https://github.com/AmazingAng/WTFSolidity/blob/main/Languages/en/46_ProxyContract_en/readme.md). We didn't use inline assembly in its `fallback()` function, but only used `implementation.delegatecall(msg.data);`. Therefore, the callback function does not return a value, but it is sufficient for teaching purposes.
+This proxy contract is simpler than that in [Lecture 46](https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/46_ProxyContract_en/readme.md). We didn't use inline assembly in its `fallback()` function, but only used `implementation.delegatecall(msg.data);`. Therefore, the callback function does not return a value, but it is sufficient for teaching purposes.
 
 It contains 3 variables:
 - `implementation`: The logic contract address.
