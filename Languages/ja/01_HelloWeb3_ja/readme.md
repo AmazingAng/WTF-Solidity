@@ -80,7 +80,7 @@ contract HelloWeb3{
    
 デプロイが成功すれば、`HelloWeb3`という名前のコントラクトが下の方に出てくることが分かります。`_string`という変数をクリックすることで、その値を表示させます：`Hello Web3!"。
 
-## 要約
+## まとめ
 
 このチュートリアルでは、簡単に`Solidity`、`Remix` IDEを紹介し、最初のSolidityのプログラム`HelloWeb3`を完成させました。今後も、Solidityの旅を続けていきます。
 

@@ -141,6 +141,6 @@ Below are some commonly used global variables:
 
 ![5-4.png](./img/5-4.png)
 
-## 要約
+## まとめ
 この章では、`solidity`における参照型、データ保存場所と変数スコープを紹介しました。データ保存場所には３種類あります: `storage`、`memory`、そして`calldata`です。ガスコストは保存場所毎に異なっています。変数スコープには状態変数、ローカル変数、そしてグローバル変数があります。
 
