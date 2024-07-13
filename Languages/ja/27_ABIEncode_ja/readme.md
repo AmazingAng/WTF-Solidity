@@ -69,8 +69,6 @@ function encodePacked() public view returns(bytes memory result) {
 
 これは他のコントラクトを呼び出す場合に使用します。
 
-与`abi.encode`功能类似，只不过第一个参数为`函数签名`，比如`"foo(uint256,address,string,uint256[2])"`。当调用其他合约的时候可以使用。
-
 ```solidity
 function encodeWithSignature() public view returns(bytes memory result) {
     result = abi.encodeWithSignature("foo(uint256,address,string,uint256[2])", x, addr, name, array);
@@ -117,13 +115,13 @@ function decode(bytes memory data) public pure returns(uint dx, address daddr, s
 
   ![27-1](./img/27-1.png)
 
-- 对比验证四种编码方法的异同点
+- 4 種類のエンコード方法の違いを比較
 
   ![27-2](./img/27-2.png)
 
-- 查看 abi.decode 方法的解码结果
+- abi.decode メソッドの結果を確認
 
-  ![27-3](./img/27-3.png)
+![27-3](./img/27-3.png)
 
 ## ABI のユースケース
 
