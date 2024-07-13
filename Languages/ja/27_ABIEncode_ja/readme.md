@@ -79,7 +79,7 @@ function encodeWithSignature() public view returns(bytes memory result) {
 
 `abi.encode`を下に 4 バイトの`関数セレクタ`[^说明]を追加したものとなります。
 
-[^说明]：関数セレクタは関数名とパラメータを署名処理(Keccak–Sha3)して関数を識別するため、異なるコントラクト間での関数呼び出しに使用できます。
+[^説明]：関数セレクタは関数名とパラメータを署名処理(Keccak–Sha3)して関数を識別するため、異なるコントラクト間での関数呼び出しに使用できます。
 
 ### `abi.encodeWithSelector`
 
