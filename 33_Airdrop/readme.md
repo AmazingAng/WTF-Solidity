@@ -93,11 +93,11 @@ tags:
       for (uint256 i = 0; i < _addresses.length; i++) {
           // 注释代码有Dos攻击风险, 并且transfer 也是不推荐写法
           // Dos攻击 具体参考 https://github.com/AmazingAng/WTF-Solidity/blob/main/S09_DoS/readme.md
-          // _addresses[i].transfer(_amounts[i]);
-          (bool success, ) = _addresses[i].call{value: _amounts[i]}("");
-          if (!success) {
-              failTransferList[_addresses[i]] = _amounts[i];
-          }
+          _addresses[i].transfer(_amounts[i]);
+          //(bool success, ) = _addresses[i].call{value: _amounts[i]}("");
+          //if (!success) {
+          //    failTransferList[_addresses[i]] = _amounts[i];
+          //}
       }
   }
   ```
