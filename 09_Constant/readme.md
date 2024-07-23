@@ -38,13 +38,14 @@ address constant CONSTANT_ADDRESS = 0x0000000000000000000000000000000000000000;
 
 ### immutable
 
-`immutable`变量可以在声明时或构造函数中初始化，因此更加灵活。在`Solidity v8.0.21`以后，`immutable`变量不需要显式初始化。反之，则需要显式初始化。
+`immutable`变量可以在声明时或构造函数中初始化，因此更加灵活。在`Solidity v8.0.21`以后，`immutable`变量不需要显式初始化，未显式初始化的`immutable`变量将使用数值类型的初始值（见 [8. 变量初始值](https://github.com/AmazingAng/WTF-Solidity/blob/main/08_InitialValue/readme.md#%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%80%BC)）。反之，则需要显式初始化。
 若`immutable`变量既在声明时初始化，又在constructor中初始化，会使用constructor初始化的值。
 
 ``` solidity
 // immutable变量可以在constructor里初始化，之后不能改变
 uint256 public immutable IMMUTABLE_NUM = 9999999999;
-address public immutable IMMUTABLE_ADDRESS;
+// 在`Solidity v8.0.21`以后,下列变量数值暂为初始值
+address public immutable IMMUTABLE_ADDRESS; 
 uint256 public immutable IMMUTABLE_BLOCK;
 uint256 public immutable IMMUTABLE_TEST;
 ```
