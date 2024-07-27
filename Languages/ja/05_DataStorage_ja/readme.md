@@ -22,7 +22,7 @@ Solidityにおけるデータ保存場所については、３つの種類があ
 
 1. `storage`: 状態変数はデフォルトで`storage`です。そしてオンチェーンに保存されます。 
 
-2. `memory`: 関数における引数や一時変数というのは`memory`ラベルが使用され、メモリーに保存されますが、オンチェーンに保存されるわけではありません。
+2. `memory`: 関数における引数や一時変数というのは`memory`ラベルが使用され、メモリーに保存されますが、オンチェーンに保存されません。特に、文字列、バイト、配列、カスタム構造体など、戻り値のデータ型が可変長の場合は、メモリを追加する必要があります。
 
 3. `calldata`: `memory`に似ており、メモリーに保存され、オンチェーンには保存されません。`memory`との違いは`calldata`変数は編集出来ません。そして一般的に関数の引数に使用されます。使用例を見てみましょう:
 
@@ -140,6 +140,85 @@ Below are some commonly used global variables:
 **Example:**
 
 ![5-4.png](./img/5-4.png)
+
+### 4. グローバル変数 - イーサリアムの単位と時間の単位
+
+**イーサリアムの単位**
+
+小数点は`Solidity`には存在せず、トランザクションの正確さを保証し、精度の損失を防ぐために`0`に置き換えられます。イーサリアムの単位の使用により、計算ミスの問題が回避され、プログラマーはコントラクトで通貨トランザクションを簡単に処理できます。
+
+- `wei`: 1
+- `gwei`: 1e9 = 1000000000
+- `ether`: 1e18 = 1000000000000000000
+
+```solidity
+    function weiUnit() external pure returns(uint) {
+        assert(1 wei == 1e0);
+        assert(1 wei == 1);
+        return 1 wei;
+    }
+
+    function gweiUnit() external pure returns(uint) {
+        assert(1 gwei == 1e9);
+        assert(1 gwei == 1000000000);
+        return 1 gwei;
+    }
+
+    function etherUnit() external pure returns(uint) {
+        assert(1 ether == 1e18);
+        assert(1 ether == 1000000000000000000);
+        return 1 ether;
+    }
+```
+
+**Example:**
+
+![5-5.png](./img/5-5.png)
+
+**時間の単位**
+
+コントラクトの中で、あるオペレーションを1週間以内に完了させるとか、あるイベントが1ヶ月後に発生するといった指定が可能です。 これにより、コントラクトの実行をより正確に行うことができ、技術的なエラーによってコントラクトの結果に影響を与えることはありません。 したがって、時間単位は Solidity の重要な概念であり、契約の可読性と保守性の向上に役立ちます。
+
+- `seconds`: 1
+- `minutes`: 60 seconds = 60
+- `hours`: 60 minutes = 3600
+- `days`: 24 hours = 86400
+- `weeks`: 7 days = 604800
+
+```solidity
+    function secondsUnit() external pure returns(uint) {
+        assert(1 seconds == 1);
+        return 1 seconds;
+    }
+
+    function minutesUnit() external pure returns(uint) {
+        assert(1 minutes == 60);
+        assert(1 minutes == 60 seconds);
+        return 1 minutes;
+    }
+
+    function hoursUnit() external pure returns(uint) {
+        assert(1 hours == 3600);
+        assert(1 hours == 60 minutes);
+        return 1 hours;
+    }
+
+    function daysUnit() external pure returns(uint) {
+        assert(1 days == 86400);
+        assert(1 days == 24 hours);
+        return 1 days;
+    }
+
+    function weeksUnit() external pure returns(uint) {
+        assert(1 weeks == 604800);
+        assert(1 weeks == 7 days);
+        return 1 weeks;
+    }
+```
+
+**Example:**
+
+![5-6.png](./img/5-6.png)
 
 ## まとめ
 この章では、`solidity`における参照型、データ保存場所と変数スコープを紹介しました。データ保存場所には３種類あります: `storage`、`memory`、そして`calldata`です。ガスコストは保存場所毎に異なっています。変数スコープには状態変数、ローカル変数、そしてグローバル変数があります。
