@@ -41,16 +41,16 @@ contract InsertionSort {
         return(sum);
     }
 
-    // Ternary/Conditional operator
+    // Ternary/Conditional operator（三項演算子/条件演算子）
     function ternaryTest(uint256 x, uint256 y) public pure returns(uint256){
-        // return the max of x and y
+        // return the max of x and y（xとyの最大値を返す）
         return x >= y ? x: y; 
     }
 
 
-    // Insertion Sort(Wrong version）
+    // Insertion Sort(Wrong version）（挿入ソート(間違いバージョン)）
     function insertionSortWrong(uint[] memory a) public pure returns(uint[] memory) {
-        // note that uint can not take negative value
+        // note that uint can not take negative value（uint型は負の数を取れないことに注意すること）
         for (uint i = 1;i < a.length;i++){
             uint temp = a[i];
             uint j=i-1;
@@ -63,9 +63,9 @@ contract InsertionSort {
         return(a);
     }
 
-    // Insertion Sort（Correct Version）
+    // Insertion Sort（Correct Version）（挿入ソート(正確なバージョン)）
     function insertionSort(uint[] memory a) public pure returns(uint[] memory) {
-        // note that uint can not take negative value
+        // note that uint can not take negative value（uint型は負の数を取れないことに注意すること）
         for (uint i = 1;i < a.length;i++){
             uint temp = a[i];
             uint j=i;
