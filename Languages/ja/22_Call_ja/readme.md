@@ -98,7 +98,6 @@ contract OtherContract {
 
 #### 1. Response イベント
 
-我们写一个`Call`合约来调用目标合约函数。首先定义一个`Response`事件，输出`call`返回的`success`和`data`，方便我们观察返回值。
 私たちは`Call`のコントラクトを作成し、ターゲットコントラクトの関数を呼び出します。まずは Response ベントを定義しました。このイベントは呼び出しに際しての結果 success と data を出力して、便利に debug できるように準備しました。
 
 ```solidity

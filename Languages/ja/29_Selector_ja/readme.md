@@ -84,8 +84,6 @@ function mintSelector() external pure returns(bytes4 mSelector){
 
 ##### 基本型
 
-`solidity`中，基础类型的参数有：`uint256`(`uint8`, ... , `uint256`)、`bool`, `address`等。在计算`method id`时，只需要计算`bytes4(keccak256("函数名(参数类型1,参数类型2,...)"))`。例如，如下函数，函数名为`elementaryParamSelector`，参数类型分别为`uint256`和`bool`。所以，只需要计算`bytes4(keccak256("elementaryParamSelector(uint256,bool)"))`便可得到此函数的`method id`。
-
 `solidity`では、基本型のパラメーターは`uint256`(`uint8`, ..., `uint256`)、`bool`、`address`などです。`method id`を計算する際は、`bytes4(keccak256("関数名(パラメータ型1,パラメータ型2,...)"))`を使用します。例えば、以下の関数`elementaryParamSelector`のパラメータは`uint256`と`bool`です。したがって、この関数の`method id`を計算するには、`bytes4(keccak256("elementaryParamSelector(uint256,bool)"))`を使用します。
 
 ```solidity
@@ -133,8 +131,6 @@ function mintSelector() external pure returns(bytes4 mSelector){
 ##### マッピング型のパラメータ
 
 マッピング型のパラメーターは通常`contract`、`enum`、`struct`などです。`method id`を計算する際には、その型を`ABI`型に変換する必要があります。
-
-例如，如下函数`mappingParamSelector`中`DemoContract`需要转化为`address`，结构体`User`需要转化为`tuple`类型`(uint256,bytes)`，枚举类型`School`需要转化为`uint8`。因此，计算该函数的`method id`的代码为`bytes4(keccak256("mappingParamSelector(address,(uint256,bytes),uint256[],uint8)"))`。
 
 例えば、以下の関数`mappingParamSelector`のパラメータは`DemoContract`、`User`、`uint256[]`、`School`です。したがって、この関数の`method id`を計算するには、`bytes4(keccak256("mappingParamSelector(address,(uint256,bytes),uint256[],uint8)"))`を使用します。
 
