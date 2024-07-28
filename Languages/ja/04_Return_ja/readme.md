@@ -18,7 +18,7 @@
 - `return`は関数本体で使用され、予期された変数を返します。
 
 ```solidity
-    // returning multiple variables
+    // returning multiple variables（複数の変数を返す）
     function returnMultiple() public pure returns(uint256, bool, uint256[3] memory){
             return(1, true, [uint256(1),2,5]);
         }
@@ -29,7 +29,7 @@
 `returns`では返り値となる変数の名前を表明することができます。そうすることで、`solidity`は自動的にこれらの変数を初期化し、そして`return`キーワードを付与することなくこれらの関数の値を自動的に返すことができるようになります。
 
 ```solidity
-    // named returns
+    // named returns（名前付き返り値）
     function returnNamed() public pure returns(uint256 _number, bool _bool, uint256[3] memory _array){
         _number = 2;
         _bool = false; 
@@ -41,7 +41,7 @@
 
 勿論、名前付き返り値に`return`キーワードを用いることによって変数を返すことも出来ます:
 ```solidity
-    // Named return, still support return
+    // Named return, still support return（名前付き返り値、通常のreturnステートメントも引き続きサポート）
     function returnNamed2() public pure returns(uint256 _number, bool _bool, uint256[3] memory _array){
         return(1, true, [uint256(1),2,5]);
     }
