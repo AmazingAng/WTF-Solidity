@@ -107,7 +107,7 @@ contract DeleteContract {
 
 2.  コントラクトを削除し、コントラクトのステートを確認
 
-        ![deleteContract2.png](./img/26-4.png)
+    ![deleteContract2.png](./img/26-4.png)
 
     テスト中、コントラクトのステートを観察すると、コントラクトが保持していた ETH がゼロになり（指定のアドレスに返却された）、コントラクトの関数を呼び出すことができることがわかります。
 
