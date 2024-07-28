@@ -98,7 +98,6 @@ contract PairFactory {
 
 ファクトリコントラクト(`PairFactory`)は２つの状態変数があります。`getPair`は２つのトークンアドレスからペアアドレスを取得するためのマップ変数です。`allPairs`はすべてのペアアドレスを格納する配列です。
 
-`PairFactory`合约只有一个`createPair`函数，根据输入的两个代币地址`tokenA`和`tokenB`来创建新的`Pair`合约。其中
 `PairFactory`コントラクトは一つの`createPair`関数しかありません。入力された２つのトークンアドレス`tokenA`と`tokenB`に基づいて新しい`Pair`コントラクトを作成します。
 （実際のコントラクトはトークンペアの作成がすでにあるかチェックするコードがあるが、ここでは省いていると思われます）
 
