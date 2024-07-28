@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 contract ValueTypes{
-    // Boolean（論理型）
+    // Boolean（真偽値型）
     bool public _bool = true;
     // Boolean operators（論理演算子）
-    bool public _bool1 = !_bool; // logical NOT
-    bool public _bool2 = _bool && _bool1; // logical AND
-    bool public _bool3 = _bool || _bool1; // logical OR
-    bool public _bool4 = _bool == _bool1; // equality
-    bool public _bool5 = _bool != _bool1; // inequality
+    bool public _bool1 = !_bool; // logical NOT　　　　　（否定）
+    bool public _bool2 = _bool && _bool1; // logical AND（論理積）
+    bool public _bool3 = _bool || _bool1; // logical OR （論理和）
+    bool public _bool4 = _bool == _bool1; // equality  （等価）
+    bool public _bool5 = _bool != _bool1; // inequality（不等価）
 
 
     // Integer（整数型）
@@ -17,9 +17,9 @@ contract ValueTypes{
     uint256 public _number = 20220330;
     // Integer operators（整数型の演算子）
     uint256 public _number1 = _number + 1; // +，-，*，/
-    uint256 public _number2 = 2**2; // exponent
-    uint256 public _number3 = 7 % 2; // modulo (modulus)
-    bool public _numberbool = _number2 > _number3; // greater than
+    uint256 public _number2 = 2**2; // exponent　　　　　（べき乗）
+    uint256 public _number3 = 7 % 2; // modulo (modulus)（剰余(モジュロ)）
+    bool public _numberbool = _number2 > _number3; // greater than（大なり）
 
 
     // Address data type（アドレス型）
