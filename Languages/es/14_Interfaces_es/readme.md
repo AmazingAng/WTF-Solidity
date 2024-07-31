@@ -111,9 +111,9 @@ interface IERC721 is IERC165 {
 
 
 ### ¿Cuándo usar una interfaz?
-Si sabemos que un contrato implementa la interfaz `IERC721`, podemos interactuar con él sin conocer su implementación detallada.
+Si sabe que un contrato implementa la interfaz `IERC721`, se puede interactuar con él sin conocer su implementación detallada.
 
-El Bored Ape Yacht Club `BAYC` es un NFT `ERC721` que implementa todas las funciones de la interfaz `IERC721`. Podemos interactuar con el contrato `BAYC` con la interfaz `IERC721` y su dirección de contrato, sin conocer su código fuente.
+El Bored Ape Yacht Club `BAYC` es un NFT `ERC721` que implementa todas las funciones de la interfaz `IERC721`. Se puede interactuar con el contrato `BAYC` con la interfaz `IERC721` y su dirección de contrato, sin conocer su código fuente.
 Por ejemplo, se puede usar `balanceOf()` para consultar el saldo de `BAYC` de una dirección, o usar `safeTransferFrom()` para transferir un NFT `BAYC`.
 
 
