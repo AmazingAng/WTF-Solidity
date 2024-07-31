@@ -160,7 +160,7 @@ Aquí definimos una función `internal minus()`, `number` disminuirá en 1 cada 
     }
 ```
 
-Definimos una función `external payable minusPayable()`, la cual llama a `minus()` y devuelve el `balance de ETH` del contrato actual (la palabra clave`this` nos permite consultar la dirección del contrato actual). Dado que la función es `payable`, podemos enviar 1 `ETH` al contrato al llamar a `minusPayable()`.
+Se define una función `external payable minusPayable()`, la cual llama a `minus()` y devuelve el `balance de ETH` del contrato actual (la palabra clave `this` permite consultar la dirección del contrato actual). Dado que la función es `payable`, se puede enviar 1 `ETH` al contrato al llamar a `minusPayable()`.
 
 ![](./img/3-5.png)
 
