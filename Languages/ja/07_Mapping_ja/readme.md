@@ -19,8 +19,9 @@
 `mapping`の宣言フォーマットは`mapping(_KeyType => _ValueType)`となります。そしてそこで`_KeyType`と`_ValueType`というのは、それぞれ`Key`と`Value`の変数型のことです。使用例を見てみましょう:
 
 ```solidity
-    mapping(uint => address) public idToAddress; // id maps to address
+    mapping(uint => address) public idToAddress; // id maps to address（idがアドレスにマッピングされている）
     mapping(address => address) public swapPair; // mapping of token pairs, from address to address
+                                                 //（トークンの組み合わせのマッピング、アドレスからアドレスへ）
 ```
 
 ## Rules of `mapping`　（`mapping`の決まり）
@@ -28,7 +29,7 @@
 - **Rule 1**: `_KeyType`は、例えば` uint `や`address`などのような`solidity`のデフォルトの型の間で選択されます。個人仕様で作成された`struct`は使用できません。しかしながら、`_ValueType`はどんな個人仕様で作成された型でも良いです。次のような例はエラーを吐きます。`_KeyType`が個人仕様で作成されたstruct（構造体）を使用しているからです:
 
 ```solidity
-      // define a struct
+      // define a struct（構造体を定義）
       struct Student{
           uint256 id;
           uint256 score;
