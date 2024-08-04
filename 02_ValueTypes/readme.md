@@ -68,14 +68,14 @@ bool public _bool5 = _bool != _bool1; // 不相等
 ```solidity
 // 整型
 int public _int = -1; // 整数，包括负数
-uint public _uint = 1; // 正整数
-uint256 public _number = 20220330; // 256位正整数
+uint public _uint = 1; // 无符号整数
+uint256 public _number = 20220330; // 256位无符号整数
 ```
 
 常用的整型运算符包括：
 
 - 比较运算符（返回布尔值）： `<=`， `<`，`==`， `!=`， `>=`， `>`
-- 算数运算符： `+`， `-`， `*`， `/`， `%`（取余），`**`（幂）
+- 算术运算符： `+`， `-`， `*`， `/`， `%`（取余），`**`（幂）
 
 ```solidity
 // 整数运算
@@ -117,7 +117,7 @@ bytes32 public _byte32 = "MiniSolidity";
 bytes1 public _byte = _byte32[0]; 
 ```
 
-在上述代码中，`MiniSolidity` 变量以字节的方式存储进变量 `_byte32`。如果把它转换成 `16 进制`，就是：`0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
+在上述代码中，字符串 `MiniSolidity` 以字节的方式存储进变量 `_byte32`。如果把它转换成 `16 进制`，就是：`0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
 
 `_byte` 变量的值为 `_byte32` 的第一个字节，即 `0x4d`。
 
@@ -132,7 +132,7 @@ enum ActionSet { Buy, Hold, Sell }
 ActionSet action = ActionSet.Buy;
 ```
 
-枚举可以显式地和 `uint` 相互转换，并会检查转换的正整数是否在枚举的长度内，否则会报错：
+枚举可以显式地和 `uint` 相互转换，并会检查转换的无符号整数是否在枚举的长度内，否则会报错：
 
 ```solidity
 // enum可以和uint显式的转换
@@ -141,7 +141,7 @@ function enumToUint() external view returns(uint){
 }
 ```
 
-`enum` 是一个比较冷门的变量，几乎没什么人用。
+`enum` 是一个比较冷门的数据类型，几乎没什么人用。
 
 ## 在 Remix 上运行
 
