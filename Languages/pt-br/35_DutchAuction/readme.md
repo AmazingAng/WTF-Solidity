@@ -43,7 +43,7 @@ contract DutchAuction is Ownable, ERC721 {
 
 Há um total de 9 variáveis de estado no contrato, sendo 6 relacionadas ao leilão. Elas são:
 
-- `COLLECTOIN_SIZE`: total de NFTs.
+- `COLLECTION_SIZE`: total de NFTs.
 - `AUCTION_START_PRICE`: preço inicial e mais alto do leilão holandês.
 - `AUCTION_END_PRICE`: preço final e mais baixo do leilão holandês.
 - `AUCTION_TIME`: duração do leilão.
@@ -51,7 +51,7 @@ Há um total de 9 variáveis de estado no contrato, sendo 6 relacionadas ao leil
 - `auctionStartTime`: timestamp de início do leilão (utilizando `block.timestamp`).
 
 ```solidity
-    uint256 public constant COLLECTOIN_SIZE = 10000; // Total de NFTs
+    uint256 public constant COLLECTION_SIZE = 10000; // Total de NFTs
     uint256 public constant AUCTION_START_PRICE = 1 ether; // Preço inicial (mais alto)
     uint256 public constant AUCTION_END_PRICE = 0.1 ether; // Preço final (mais baixo)
     uint256 public constant AUCTION_TIME = 10 minutes; // Duração do leilão, apenas para fins de teste

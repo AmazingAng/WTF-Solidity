@@ -70,7 +70,7 @@ contract UUPSProxy {
 
 ### UUPS的逻辑合约
 
-UUPS的逻辑合约与[第47讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/47_Upgrade/readme.md)中的不同是多了个升级函数。UUPS逻辑合约包含`3`个状态变量，与保持代理合约一致，防止插槽冲突。它包含`2`个
+UUPS的逻辑合约与[第47讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/47_Upgrade/readme.md)中的不同是多了个升级函数。UUPS逻辑合约包含`3`个状态变量，与代理合约保持一致，防止插槽冲突。它包含`2`个
 - `upgrade()`：升级函数，将改变逻辑合约地址`implementation`，只能由`admin`调用。
 - `foo()`：旧UUPS逻辑合约会将`words`的值改为`"old"`，新的会改为`"new"`。
 
