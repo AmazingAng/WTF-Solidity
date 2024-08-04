@@ -26,11 +26,12 @@ tags:
 `constructor`はスマートコントラクト開発の最中に一度だけ自動的に実行する特別な関数のことです。スマートコントラクト一つに対し、一つだけ`constructor`を伴わせることが出来ます。例えば`owner`アドレスのように、スマートコントラクトのパラメーターを初期化する為に使うことが出来ます:
 
 ```solidity
-   address owner; // define owner variable
+   address owner; // define owner variable（所有者の変数を定義する）
 
-   // constructor
+   // constructor（コンストラクター）
    constructor() {
       owner = msg.sender; //  set owner to the deployer address
+                          //（スマートコントラクトがデプロイされている際に、開発者のアドレス（「所有者アドレス」）を変数ownerに設定する）
    }
 ```
 
@@ -40,6 +41,7 @@ tags:
 pragma solidity = 0.4.21;
 contract Parents {
     // The function with the same name as the contract name(Parents) is constructor
+    //（コントラクト名(Parents)と同じ名前の関数がコンストラクター
     function Parents () public {
     }
 }
@@ -54,8 +56,8 @@ contract Parents {
 ```solidity
    // define modifier
    modifier onlyOwner {
-      require(msg.sender == owner); // check whether caller is address of owner
-      _; // execute the function body
+      require(msg.sender == owner); // check whether caller is address of owner（実行する者がownerのアドレスかどうかチェックする）
+      _; // execute the function body（関数本体を実行）
    }
 ```
 
@@ -64,6 +66,7 @@ contract Parents {
 ```solidity
    function changeOwner(address _newOwner) external onlyOwner{
       owner = _newOwner; // only the owner address can run this function and change the owner
+                         //（所有者アドレスだけがこの関数を実行でき、所有者を変更できる）
    }
 ```
 

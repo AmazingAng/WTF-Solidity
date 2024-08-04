@@ -21,7 +21,7 @@
     - 固定長配列: 宣言時に配列の長さが指定されます。`array`は`T[k]`というフォーマットで宣言され、そこで`T`というのは要素の型であり、`k`は長さです。
 
 ```solidity
-    // fixed-length array
+    // fixed-length array（固定長配列）
     uint[8] array1;
     byte[5] array2;
     address[100] array3;
@@ -30,7 +30,7 @@
 - 可変長配列（動的配列）: 配列の長さは宣言時に指定されません。`T[]`というフォーマットを使用し、そこで`T`というのは要素の型です。
 
 ```solidity
-    // variable-length array
+    // variable-length array（可変長配列）
     uint[] array4;
     byte[] array5;
     address[] array6;
@@ -46,7 +46,7 @@ Solidityでは、配列を作成する為にいくつかの決まりがありま
 - `memory`の動的配列は`new`演算子によって作成することが出来ますが、長さは宣言される必要があり、宣言した後でその長さを変更することは出来ません。使用例を見てみましょう:
 
 ```solidity
-    // memory dynamic array
+    // memory dynamic array（memoryによる動的配列）
     uint[] memory array8 = new uint[](5);
     bytes memory array9 = new bytes(9);
 ```
@@ -78,20 +78,21 @@ Solidityでは、配列を作成する為にいくつかの決まりがありま
 Solidityにおいて、`struct`というフォーマットによって新しい型を定義できます。`struct`の要素はプリミティブ型か参照型でも構いません。そして`struct`は`array`か`mapping`の要素となり得ます。
 
 ```solidity
-    // struct
+    // struct（構造体）
     struct Student{
         uint256 id;
         uint256 score; 
     }
 
-    Student student; // Initially a student structure
+    Student student; // Initially a student structure（構造体studentの初期化）
 ```
 
 `struct`に値を代入する４つの方法があります:
 
 ```solidity
-    //  assign value to structure
+    // assign value to structure（構造体に値を代入）
     // Method 1: Create a storage struct reference in the function
+    //（方法1: 関数にてstorage型構造体の参照を作成する）
     function initStudent1() external{
         Student storage _student = student; // assign a copy of student
         _student.id = 11;
@@ -105,6 +106,7 @@ Solidityにおいて、`struct`というフォーマットによって新しい�
 
 ```solidity
      // Method 2: Directly refer to the struct of the state variable
+     //（方法2: 状態変数の構造体を直接参照する）
     function initStudent2() external{
         student.id = 1;
         student.score = 80;
@@ -117,11 +119,13 @@ Solidityにおいて、`struct`というフォーマットによって新しい�
 
 ```solidity
     // Method 3: struct constructor
+    //（方法3: 構造体のコンストラクターによる）
     function initStudent3() external {
         student = Student(3, 90);
     }
     
     // Method 4: key value
+    //（方法4: キーと値による）
     function initStudent4() external {
         student = Student({id: 4, score: 60});
     }

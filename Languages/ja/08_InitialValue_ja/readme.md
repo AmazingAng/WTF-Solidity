@@ -38,8 +38,8 @@ Solidityにおいて、宣言されているが代入されていない変数に
     enum ActionSet {Buy, Hold, Sell}
     ActionSet public _enum; // first element 0
 
-    function fi() internal{} // internal blank function
-    function fe() external{} // external blank function
+    function fi() internal{} // internal blank function（internalな空の関数）
+    function fe() external{} // external blank function（externalな空の関数）
 ```
 
 ### Initial values of reference types （参照型の初期値）
@@ -56,9 +56,11 @@ Solidityにおいて、宣言されているが代入されていない変数に
 ```solidity
     // reference types
     uint[8] public _staticArray; // a static array which all members set to their default values[0,0,0,0,0,0,0,0]
+                                 // 全てのメンバーがデフォルトの初期値[0,0,0,0,0,0,0,0]に設定された静的配列
     uint[] public _dynamicArray; // `[]`
     mapping(uint => address) public _mapping; // a mapping which all members set to their default values
-    // a struct in which all members are set to their default values of 0, 0
+                                              // 全てのメンバーがデフォルト値に設定されたマッピング
+    // a struct in which all members are set to their default values of 0, 0（全てのメンバーがデフォルト値0, 0に設定された構造体）
     struct Student{
         uint256 id;
         uint256 score; 
@@ -71,10 +73,10 @@ Solidityにおいて、宣言されているが代入されていない変数に
 `delete a`は変数`a`の値をその初期値に変更することができます。
 
 ```solidity
-    // delete operator
+    // delete operator（delete演算子）
     bool public _bool2 = true; 
     function d() external {
-        delete _bool2; // delete will make _bool2 change to default(false)
+        delete _bool2; // delete will make _bool2 change to default(false)（deleteは_bool2をデフォルト値(false)に変更します）
     }
 ```
 

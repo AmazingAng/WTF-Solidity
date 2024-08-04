@@ -59,7 +59,7 @@ Solidityにおける関数の書式を示します:
 
 3. 他のコントラクトを作成する。
 
-4. 自己破壊を使用する。
+4. selfdestructを使用する。
 
 5. callメソッドを通してイーサリアムを送金する。
 
@@ -149,6 +149,7 @@ Solidityにおける関数の書式を示します:
 
 ```solidity
     // payable: money (ETH) can be sent to the contract via this function
+    //（payable: 関数を経由してお金（イーサリアム）をコントラクトに送金することが出来る）
     function minusPayable() external payable returns(uint256 balance) {
         minus();
         balance = address(this).balance;
