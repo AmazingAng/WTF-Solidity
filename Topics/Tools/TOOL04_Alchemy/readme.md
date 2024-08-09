@@ -109,7 +109,7 @@ const provider = new ethers.providers.JsonRpcProvider(`https://eth-mainnet.g.alc
 ```
 网络名称（Network Name）: Alchemy-eth
 RPC URL：填在alchemy申请的optimism rpc链接
-链ID (Chain ID): 1
+链ID (Chain ID): 10
 符号 (Chain Symbol): ETH
 区块链浏览器URL (Blockchain Explorer URL): https://etherscan.io
 ```
