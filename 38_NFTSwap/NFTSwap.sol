@@ -39,6 +39,7 @@ contract NFTSwap is IERC721Receiver {
     mapping(address => mapping(uint256 => Order)) public nftList;
 
     fallback() external payable {}
+    receive() external payable {}
 
     // 挂单: 卖家上架NFT，合约地址为_nftAddr，tokenId为_tokenId，价格_price为以太坊（单位是wei）
     function list(address _nftAddr, uint256 _tokenId, uint256 _price) public {
