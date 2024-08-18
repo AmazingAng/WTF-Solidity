@@ -1,4 +1,5 @@
-# WTF Solidity 超シンプル入門: 9. Constant and Immutable （定数と不変）
+# WTF Solidity 超シンプル入門: 9. Constant and Immutable
+#                              （定数と不変）
 
 最近、Solidity の学習を再開し、詳細を確認しながら「Solidity 超シンプル入門」を作っています。これは初心者向けのガイドで、プログラミングの達人向けの教材ではありません。毎週 1〜3 レッスンのペースで更新していきます。
 
