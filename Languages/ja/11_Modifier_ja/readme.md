@@ -84,5 +84,5 @@ contract Parents {
     ![](img/11-4_ja.png)
 
 
-## Summary
+## まとめ
 このレクチャーでは、Solidityの`constructor`と`modifier`を紹介し、スマートコントラクトへのアクセスを制御する`Ownable`スマートコントラクトを書きました。
