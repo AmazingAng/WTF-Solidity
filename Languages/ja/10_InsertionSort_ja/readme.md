@@ -170,6 +170,6 @@ Result:
 
    !["Input [2,5,3,1] Output[1,2,3,5]"](https://images.mirror-media.xyz/publication-images/S-i6rwCMeXoi8eNJ0fRdB.png?height=300&width=554)
 
-## Summary
+## まとめ
 
 このレクチャーでは、Solidityにおける制御フローを紹介し、シンプルでありながらバグが発生しやすいソートアルゴリズムを書きました。Solidityはシンプルに見えますが、沢山の罠を抱えています。毎月、スマートコントラクトにある小さなバグが故に、プロジェクトはハッキングされて、何百万ドルもの損失を生んでしまいます。安全なコントラクトを書く為には、Solidityの基礎をマスターし、訓練し続ける必要があるのです。
