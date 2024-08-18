@@ -96,7 +96,7 @@ keccak256("Transfer(addrses,address,uint256)")
 
 イーサスキャン（Etherscan）はイーサリアムのブロックチェーン上にあるトランザクションやスマートコントラクト、それ以上のことを見ることが出来るブロックエクスプローラーです。先ず、私はRinkebyやGoerliなどのイーサリアムテストネットにコントラクトをデプロイしました。次に、私は100トークン送金する為に`_transfer`関数を呼び出しました。その後で、トランザクションの詳細情報を`etherscan`で確認することが出来ます：[URL](https://rinkeby.etherscan.io/tx/0x8cf87215b23055896d93004112bbd8ab754f081b4491cb48c37592ca8f8a36c7)
 
-イベントの詳細情報を確認する為に`Logs`ボタンをクリックします：
+イベントの詳細情報を確認する為に`Logs`ボタンをクリックします：  
 
 ![details of event](./img/12-3_ja.png)
 
