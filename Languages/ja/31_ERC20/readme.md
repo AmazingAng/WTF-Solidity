@@ -130,7 +130,7 @@ event Approval(address indexed owner, address indexed spender, uint256 value);
     function transferFrom(address from, address to, uint256 amount) external returns (bool);
   ```
 
-## 实现 ERC20
+## ERC20 の実装
 
 今から、シンプルな`ERC20`を書いて、`IERC20`の関数を実装します。
 
