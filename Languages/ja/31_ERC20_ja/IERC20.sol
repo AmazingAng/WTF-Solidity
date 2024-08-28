@@ -4,7 +4,7 @@
 pragma solidity ^0.8.21;
 
 /**
- * @dev ERC20 接口合约.
+ * @dev ERC20 のインターフェースコントラクト
  */
 interface IERC20 {
     /**
