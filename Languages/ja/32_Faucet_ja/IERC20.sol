@@ -4,64 +4,60 @@
 pragma solidity ^0.8.21;
 
 /**
- * @dev ERC20 接口合约.
+ * @dev ERC20 のインターフェースコントラクト
  */
 interface IERC20 {
     /**
-     * @dev 释放条件：当 `value` 单位的货币从账户 (`from`) 转账到另一账户 (`to`)时.
+     * @dev 放出条件： `value` 数量のトークンが (`from`)アカウントから (`to`)アカウントへ移動した時
      */
     event Transfer(address indexed from, address indexed to, uint256 value);
 
     /**
-     * @dev 释放条件：当 `value` 单位的货币从账户 (`owner`) 授权给另一账户 (`spender`)时.
+     * @dev 放出条件： `value` 数量のトークンが  (`owner`) アカウントからもう一個のアカウント(`spender`)へ権限委任された時
      */
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     /**
-     * @dev 返回代币总供给.
+     * @dev トークンの総供給量を返却
      */
     function totalSupply() external view returns (uint256);
 
     /**
-     * @dev 返回账户`account`所持有的代币数.
+     * @dev `account`所持のトークン数量を返却
      */
     function balanceOf(address account) external view returns (uint256);
 
     /**
-     * @dev 转账 `amount` 单位代币，从调用者账户到另一账户 `to`.
+     * @dev  `amount` の数量のトークンをトランザクションのcallerから`to`アカウントへ転送
      *
-     * 如果成功，返回 `true`.
+     * もし成功した場合、`true`を返却
      *
-     * 释放 {Transfer} 事件.
+     * ｛Transfer｝イベントを放出
      */
     function transfer(address to, uint256 amount) external returns (bool);
 
     /**
-     * @dev 返回`owner`账户授权给`spender`账户的额度，默认为0。
+     * @dev `owner`アカウントが`spender`アカウントに委任した権限数量を返却
      *
-     * 当{approve} 或 {transferFrom} 被调用时，`allowance`会改变.
+     * {approve} または {transferFrom} が呼ばれると，`allowance`が変化する
      */
     function allowance(address owner, address spender) external view returns (uint256);
 
     /**
-     * @dev 调用者账户给`spender`账户授权 `amount`数量代币。
+     * @dev callerが`spender`に`amount`数量のトークンを委任する
      *
-     * 如果成功，返回 `true`.
+     * もし成功した場合、`true`を返却
      *
-     * 释放 {Approval} 事件.
+     * {Approval} イベントを放出
      */
     function approve(address spender, uint256 amount) external returns (bool);
 
     /**
-     * @dev 通过授权机制，从`from`账户向`to`账户转账`amount`数量代币。转账的部分会从调用者的`allowance`中扣除。
+     * @dev アプルーブのメカニズムを通じて、`from`アカウントから`to`アカウントへ`amount`数量のトークンを転送する。転送された部分は呼び出し者の`allowance`から差し引かれる。
      *
-     * 如果成功，返回 `true`.
+     * もし成功した場合、`true`を返却
      *
-     * 释放 {Transfer} 事件.
+     * {Transfer} イベントを放出
      */
-    function transferFrom(
-        address from,
-        address to,
-        uint256 amount
-    ) external returns (bool);
+    function transferFrom(address from, address to, uint256 amount) external returns (bool);
 }
