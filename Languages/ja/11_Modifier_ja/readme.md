@@ -8,7 +8,8 @@ tags:
   - modifier
 ---
 
-# WTF Solidity 超シンプル入門: 11. Constructor & Modifier（コンストラクターと修飾子）
+# WTF Solidity 超シンプル入門: 11. Constructor & Modifier
+# <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>（コンストラクターと修飾子）
 
 最近、Solidity の学習を再開し、詳細を確認しながら「Solidity 超シンプル入門」を作っています。これは初心者向けのガイドで、プログラミングの達人向けの教材ではありません。毎週 1〜3 レッスンのペースで更新していきます。
 
@@ -84,5 +85,5 @@ contract Parents {
     ![](img/11-4_ja.png)
 
 
-## Summary
+## まとめ
 このレクチャーでは、Solidityの`constructor`と`modifier`を紹介し、スマートコントラクトへのアクセスを制御する`Ownable`スマートコントラクトを書きました。
