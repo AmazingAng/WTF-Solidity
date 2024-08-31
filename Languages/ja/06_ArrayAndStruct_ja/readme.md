@@ -132,7 +132,7 @@ Solidityにおいて、`struct`というフォーマットによって新しい�
 ```
 
 
-## Summary
+## まとめ
 
 このレクチャーでは、Solidityにおける`array`と`struct`のベーシックな使用方法を紹介しました。次のレクチャーでは、Solidityのハッシュテーブルを紹介します。- `mapping`
 
