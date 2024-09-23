@@ -2,8 +2,8 @@
 pragma solidity ^0.8.21;
 
 import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/ERC721.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
-import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+import "@chainlink/contracts/src/v0.8/vrf/interfaces/VRFCoordinatorV2Interface.sol";
+import "@chainlink/contracts/src/v0.8/vrf/VRFConsumerBaseV2.sol";
 
 contract Random is ERC721, VRFConsumerBaseV2{
     // NFT相关
