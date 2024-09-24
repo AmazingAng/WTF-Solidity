@@ -25,7 +25,7 @@ Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教
 我们先看一下 Solidity 中函数的形式:
 
 ```solidity
-function <function name>(<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
+function <function name>([parameter types[, ...]]) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
 ```
 
 看着有一些复杂，让我们从前往后逐个解释(方括号中的是可写可不
@@ -35,7 +35,7 @@ function <function name>(<parameter types>) {internal|external|public|private} [
 
 2. `<function name>`：函数名。
 
-3. `(<parameter types>)`：圆括号内写入函数的参数，即输入到函数的变量类型和名称。
+3. `([parameter types[, ...]])`：圆括号内写入函数的参数，即输入到函数的变量类型和名称。
 
 4. `{internal|external|public|private}`：函数可见性说明符，共有4种。
 
