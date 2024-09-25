@@ -125,7 +125,7 @@ function global() external view returns(address, uint, bytes memory){
 
 在上面例子里，我们使用了3个常用的全局变量：`msg.sender`，`block.number`和`msg.data`，他们分别代表请求发起地址，当前区块高度，和请求数据。下面是一些常用的全局变量，更完整的列表请看这个[链接](https://learnblockchain.cn/docs/solidity/units-and-global-variables.html#special-variables-and-functions)：
 
-- `blockhash(uint blockNumber)`: (`bytes32`) 给定区块的哈希值 – 只适用于256最近区块, 不包含当前区块。
+- `blockhash(uint blockNumber)`: (`bytes32`) 给定区块的哈希值 – 只适用于最近的256个区块, 不包含当前区块。
 - `block.coinbase`: (`address payable`) 当前区块矿工的地址
 - `block.gaslimit`: (`uint`) 当前区块的gaslimit
 - `block.number`: (`uint`) 当前区块的number
