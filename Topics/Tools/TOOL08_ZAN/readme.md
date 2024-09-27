@@ -1,25 +1,26 @@
-# WTF Solidity极简入门-工具篇8：ZAN，节点服务和合约审计等Web3技术服务 
+# WTF Solidity 极简入门-工具篇 8：ZAN，节点服务和合约审计等 Web3 技术服务
 
-我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity 极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
 社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
 所有代码和教程开源在 github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
 
------
+---
+
 ## ZAN 是什么
 
-[ZAN](https://zan.top) 是一家 Web3 技术服务提供商，是蚂蚁集团下的一个技术品牌。它提供多种技术服务，有类似 Infura 和 Alchemy 提供的节点服务，包括各种链的 JSON-RPC 支持，以及其他高级的链 API。还有安全相关的合约审计、链上数据分析、KYC 等服务。另外还提供 toB 的解决方案，包括 RWA 资产的链上发行、零知识证明加速以及提供安全和可定制的区块链等。
+[ZAN](https://zan.top?chInfo=wtf) 是一家 Web3 技术服务提供商，是蚂蚁集团下的一个技术品牌。它提供多种技术服务，有类似 Infura 和 Alchemy 提供的节点服务，包括各种链的 JSON-RPC 支持，以及其他高级的链 API。还有安全相关的合约审计、链上数据分析、KYC 等服务。另外还提供 toB 的解决方案，包括 RWA 资产的链上发行、零知识证明加速以及提供安全和可定制的区块链等。
 
-接下来会针对开发者常用的节点服务、合约审计和链上数据分析（KNOW YOUR TRANSACTION）功能做介绍。在学习之前你可以先访问 [https://zan.top](https://zan.top) 并完成注册和登录。
+接下来会针对开发者常用的节点服务、合约审计和链上数据分析（KNOW YOUR TRANSACTION）功能做介绍。在学习之前你可以先访问 [https://zan.top](https://zan.top?chInfo=wtf) 并完成注册和登录。
 
 ## 节点服务
 
 ### 创建 API Key
 
-之后进入到节点服务的控制台 [https://zan.top/service/apikeys](https://zan.top/service/apikeys) 创建一个 Key，每个 Key 都有默认的免费额度，对于小项目来说够用了。
+之后进入到节点服务的控制台 [https://zan.top/service/apikeys](https://zan.top/service/apikeys?chInfo=wtf) 创建一个 Key，每个 Key 都有默认的免费额度，对于小项目来说够用了。
 
 创建成功后你会看到如下的页面：
 
@@ -42,10 +43,12 @@ ZAN 提供的接口自然也遵循这样的规范，比如你可以通过访问 
 ```javascript
 import { ethers } from "ethers";
 
-const provider = new ethers.providers.JsonRpcProvider('https://api.zan.top/node/v1/eth/mainnet/{YourZANApiKey}');
+const provider = new ethers.providers.JsonRpcProvider(
+  "https://api.zan.top/node/v1/eth/mainnet/{YourZANApiKey}"
+);
 
 provider.getBlockNumber().then((blockNumber) => {
-  console.log('Current block number: ' + blockNumber);
+  console.log("Current block number: " + blockNumber);
 });
 ```
 
@@ -56,11 +59,13 @@ provider.getBlockNumber().then((blockNumber) => {
 在 web3.js 中，我们可以利用 ZAN 提供的 API Key 来创建 Web3Provider，与链上交互。
 
 ```javascript
-import Web3 from 'web3';
+import Web3 from "web3";
 
-const web3 = new Web3('https://api.zan.top/node/v1/eth/mainnet/{YourZANApiKey}');
+const web3 = new Web3(
+  "https://api.zan.top/node/v1/eth/mainnet/{YourZANApiKey}"
+);
 web3.eth.getBlockNumber().then((blockNumber) => {
-  console.log('Current block number: ' + blockNumber);
+  console.log("Current block number: " + blockNumber);
 });
 ```
 
@@ -71,22 +76,20 @@ web3.eth.getBlockNumber().then((blockNumber) => {
 在 ZAN 的控制台中选择以太坊主网的节点服务地址复制，复制后的地址添加到 wagmi 的 `http()` 方法中，如下：
 
 ```jsx
-import { createConfig, http, WagmiProvider } from 'wagmi';
+import { createConfig, http, WagmiProvider } from "wagmi";
 import { mainnet } from "wagmi/chains";
 
 const config = createConfig({
   chains: [mainnet],
   transports: {
-    [mainnet.id]: http('https://api.zan.top/node/v1/eth/mainnet/{YourZANApiKey}'),
+    [mainnet.id]: http(
+      "https://api.zan.top/node/v1/eth/mainnet/{YourZANApiKey}"
+    ),
   },
 });
 
 export default function App() {
-  return (
-    <WagmiProvider config={config}>
-      {/** ... */}
-    </WagmiProvider>
-  )
+  return <WagmiProvider config={config}>{/** ... */}</WagmiProvider>;
 }
 ```
 
@@ -100,14 +103,17 @@ export default function App() {
 
 还有其他设置你也可以在 ZAN 的控制台中找到，比如你可以设置每个 Key 的访问频率限制，这样可以避免你的 Key 被滥用。也可以查看每个 Key 的使用情况，设置团队共同管理 Key 等。
 
+### 测试网代币水龙头
+
+在开发中，我们经常需要获取测试网的代币，你可以通过水龙头获取测试代币，ZAN 也提供了测试网代币的水龙头服务，你可以在 [https://zan.top/faucet](https://zan.top/faucet?chInfo=wtf) 中获取测试代币。
+
 ## 合约安全审计
 
 合约安全审计是一个非常重要的环节，尤其是在 DeFi 项目中，合约的安全性直接关系到用户的资金安全。ZAN 提供了合约安全审计服务，你可以在 [https://zan.top/home/contract-review](https://zan.top/home/contract-review) 中提交你的合约进行审计。ZAN 提供了免费版和专家版，专家版是有人工介入，需要收费。我们以免费版为例，说明如何在 ZAN 中提交合约审计任务。你有两种方法，一种是在网站上提交，另外一种是通过 VSCode 插件提交。
 
-
 ### 通过 ZAN 网站提交
 
-你可以在 [https://zan.top/review/reports/apply](https://zan.top/review/reports/apply) 提交一个合约审计任务：
+你可以在 [https://zan.top/review/reports/apply](https://zan.top/review/reports/apply?chInfo=wtf) 提交一个合约审计任务：
 
 ![create](./img/scr-new.png)
 
@@ -139,7 +145,7 @@ ZAN 提供了一个 [VSCode 插件](https://marketplace.visualstudio.com/items?i
 
 ![src-report](./img/scr-report.png)
 
-比如上图是对一个简单的 ERC721 的[合约](https://github.com/ourmetaverse/our-metaverse-contract)的分析结果，你可以通过[https://zan.top/review/reports/public/b82c9992-bfce-4986-baff-5bb4e76e1eb9](https://zan.top/review/reports/public/b82c9992-bfce-4986-baff-5bb4e76e1eb9)查看报告。
+比如上图是对一个简单的 ERC721 的[合约](https://github.com/ourmetaverse/our-metaverse-contract)的分析结果，你可以通过[https://zan.top/review/reports/public/b82c9992-bfce-4986-baff-5bb4e76e1eb9](https://zan.top/review/reports/public/b82c9992-bfce-4986-baff-5bb4e76e1eb9?chInfo=wtf)查看报告。
 
 对于专家服务，会有多轮 AI + 专家人工审计后得到一个 PDF 报告，你可以访问[该链接](https://mdn.alipayobjects.com/huamei_hsbbrh/afts/file/A*tl-PR5pIIt4AAAAAAAAAAAAADiOMAQ/hebao_v3_20240313.pdf) 查看一个示例。
 
@@ -147,7 +153,7 @@ ZAN 提供了一个 [VSCode 插件](https://marketplace.visualstudio.com/items?i
 
 ## 链上数据分析（KNOW YOUR TRANSACTION）
 
-区块链上的数据都是公开透明的，然而要在浩瀚的链上数据中分析问题，查找线索也不是那么容易的事情。ZAN 提供了链上数据分析服务，你可以在 [https://zan.top/kyt/controller](https://zan.top/kyt/controller) 中提交你的地址，查看交易的详细信息。
+区块链上的数据都是公开透明的，然而要在浩瀚的链上数据中分析问题，查找线索也不是那么容易的事情。ZAN 提供了链上数据分析服务，你可以在 [https://zan.top/kyt/controller](https://zan.top/kyt/controller?chInfo=wtf) 中提交你的地址，查看交易的详细信息。
 
 ![kyt](./img/kyt-submit.png)
 
