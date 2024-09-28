@@ -27,7 +27,7 @@ tags:
 
 ![Merkle Tree](./img/36-1.png)
 
-`Merkle Tree`允许对大型数据结构的内容进行有效和安全的验证（`Merkle Proof`）。对于有`N`个叶子结点的`Merkle Tree`，在已知`root`根值的情况下，验证某个数据是否有效（属于`Merkle Tree`叶子结点）只需要`ceil(log₂N)`个数据（也叫`proof`），非常高效。如果数据有误，或者给的`proof`错误，则无法还原出`root`根植。
+`Merkle Tree`允许对大型数据结构的内容进行有效和安全的验证（`Merkle Proof`）。对于有`N`个叶子节点的`Merkle Tree`，在已知`root`根值的情况下，验证某个数据是否有效（属于`Merkle Tree`叶子节点）只需要`ceil(log₂N)`个数据（也叫`proof`），非常高效。如果数据有误，或者给的`proof`错误，则无法还原出`root`根值。
 下面的例子中，叶子`L1`的`Merkle proof`为`Hash 0-1`和`Hash 1`：知道这两个值，就能验证`L1`的值是不是在`Merkle Tree`的叶子中。为什么呢？
 因为通过叶子`L1`我们就可以算出`Hash 0-0`，我们又知道了`Hash 0-1`，那么`Hash 0-0`和`Hash 0-1`就可以联合算出`Hash 0`，然后我们又知道`Hash 1`，`Hash 0`和`Hash 1`就可以联合算出`Top Hash`，也就是root节点的hash。
 
@@ -38,7 +38,7 @@ tags:
 
 我们可以利用[网页](https://lab.miguelmota.com/merkletreejs/example/)或者Javascript库[merkletreejs](https://github.com/miguelmota/merkletreejs)来生成`Merkle Tree`。
 
-这里我们用网页来生成`4`个地址作为叶子结点的`Merkle Tree`。叶子结点输入：
+这里我们用网页来生成`4`个地址作为叶子节点的`Merkle Tree`。叶子节点输入：
 
 ```solidity
     [
@@ -63,7 +63,7 @@ tags:
 ![生成Merkle Tree](./img/36-3.png)
 
 ## `Merkle Proof`验证
-通过网站，我们可以得到`地址0`的`proof`如下，即图2中蓝色结点的哈希值：
+通过网站，我们可以得到`地址0`的`proof`如下，即图2中蓝色节点的哈希值：
 ```solidity
 [
   "0x999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb",
@@ -140,8 +140,9 @@ contract MerkleTree is ERC721 {
     {
         require(_verify(_leaf(account), proof), "Invalid merkle proof"); // Merkle检验通过
         require(!mintedAddress[account], "Already minted!"); // 地址没有mint过
-        _mint(account, tokenId); // mint
+
         mintedAddress[account] = true; // 记录mint过的地址
+        _mint(account, tokenId); // mint
     }
 
     // 计算Merkle树叶子的哈希值
@@ -170,7 +171,7 @@ contract MerkleTree is ERC721 {
 ### 函数
 合约中共有4个函数：
 - 构造函数：初始化`NFT`的名称和代号，还有`Merkle Tree`的`root`。
-- `mint()`函数：利用白名单铸造`NFT`。参数为白名单地址`account`，铸造的`tokenId`，和`proof`。首先验证`address`是否在白名单中，验证通过则把序号为`tokenId`的`NFT`铸造给该地址，并将它记录到`mintedAddress`。此过程中调用了`_leaf()`和`_verify()`函数。
+- `mint()`函数：利用白名单铸造`NFT`。参数为白名单地址`account`，铸造的`tokenId`，和`proof`。首先验证`address`是否在白名单中，然后验证该地址是否还未铸造，验证通过则先把该地址记录到`mintedAddress`中防止[重入攻击](https://github.com/AmazingAng/WTF-Solidity/blob/main/S01_ReentrancyAttack/readme.md)，然后把序号为`tokenId`的`NFT`铸造给该地址。此过程中调用了`_leaf()`和`_verify()`函数。
 - `_leaf()`函数：计算了`Merkle Tree`的叶子地址的哈希。
 - `_verify()`函数：调用了`MerkleProof`库的`verify()`函数，进行`Merkle Tree`验证。
 
@@ -185,7 +186,7 @@ merkleroot = 0xeeefd63003e0e702cb41cd0043015a6e26ddb38073cc6ffeb0ba3e808ba8c097
 
 ![部署MerkleTree合约](./img/36-5.png)
 
-接下来运行`mint`函数给地址0铸造`NFT`，`3`个参数分别为：
+接下来运行`mint`函数给`地址0`铸造`NFT`，`3`个参数分别为：
 
 ```solidity
 account = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
@@ -195,7 +196,7 @@ proof = [   "0x999bf57501565dbd2fdcea36efa2b9aef8340a8901e3459f4a4c926275d36cdb"
 
 ![白名单mint](./img/36-6.png)
 
-我们可以用`ownerOf`函数验证`tokenId`为0的`NFT`已经铸造给了地址0，合约运行成功！
+我们可以用`ownerOf`函数验证`tokenId`为0的`NFT` 已经铸造给了`地址0`，合约运行成功！
 
 ![tokenId为0的持有者改变，合约运行成功！](./img/36-7.png)
 
