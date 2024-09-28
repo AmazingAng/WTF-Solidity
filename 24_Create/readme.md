@@ -92,7 +92,7 @@ contract PairFactory{
 }
 ```
 
-工厂合约（`PairFactory`）有两个状态变量`getPair`是两个代币地址到币对地址的`map`，方便根据代币找到币对地址；`allPairs`是币对地址的数组，存储了所有代币地址。
+工厂合约（`PairFactory`）有两个状态变量`getPair`是两个代币地址到币对地址的`map`，方便根据代币找到币对地址；`allPairs`是币对地址的数组，存储了所有币对地址。
 
 `PairFactory`合约只有一个`createPair`函数，根据输入的两个代币地址`tokenA`和`tokenB`来创建新的`Pair`合约。其中
 
@@ -121,4 +121,4 @@ BSC链上的PEOPLE地址: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 
 ## 总结
 
-这一讲，我们用极简`Uniswap`的例子介绍了如何使用`create`方法再合约里创建合约，下一讲我们将介绍如何使用`create2`方法来实现极简`Uniswap`。
+这一讲，我们用极简`Uniswap`的例子介绍了如何使用`create`方法在合约里创建合约，下一讲我们将介绍如何使用`create2`方法来实现极简`Uniswap`。

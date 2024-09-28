@@ -89,7 +89,7 @@ contract NFTSwap is IERC721Receiver{
         require(_nft.getApproved(_tokenId) == address(this), "Need Approval"); // 合约得到授权
         require(_price > 0); // 价格大于0
 
-        Order storage _order = nftList[_nftAddr][_tokenId]; //设置NF持有人和价格
+        Order storage _order = nftList[_nftAddr][_tokenId]; //设置NFT持有人和价格
         _order.owner = msg.sender;
         _order.price = _price;
         // 将NFT转账到合约
