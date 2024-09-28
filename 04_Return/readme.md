@@ -41,7 +41,7 @@ function returnMultiple() public pure returns(uint256, bool, uint256[3] memory){
 
 ## 命名式返回
 
-我们可以在 `returns` 中标明返回变量的名称。Solidity 会初始化这些变量，并且自动返回这些函数的值，无需使用 `return`。
+我们可以在 `returns` 中标明返回变量的名称。Solidity 会初始化这些变量，并且自动返回这些变量的值，无需使用 `return`。
 
 ```solidity
 // 命名式返回
