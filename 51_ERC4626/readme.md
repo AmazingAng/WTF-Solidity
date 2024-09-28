@@ -448,6 +448,8 @@ contract ERC4626 is ERC20, IERC4626 {
 }
 ```
 
+当然，本文中的`ERC4626`合约仅是为了教学演示使用，在实际使用时，还需要考虑如`Inflation Attack`, `Rounding Direction`等问题。在生产中，建议使用`openzeppelin`的具体实现。
+
 ## `Remix`演示
 
 **注意:** 以下运行示例使用了remix中第二个账户,即`0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2`, 来部署合约, 调用合约方法.
