@@ -590,7 +590,7 @@ interface ERC721Metadata /* is ERC721 */ {
 IERC721Metadata.name.selector ^ IERC721Metadata.symbol.selector ^ IERC721Metadata.tokenURI.selector
 ```
 
-solamte实现的ERC721.sol是怎么完成这些ERC165要求的特性的呢？
+solmate实现的ERC721.sol是怎么完成这些ERC165要求的特性的呢？
 
 ```solidity
 function supportsInterface(bytes4 interfaceId) public view virtual returns (bool) {
