@@ -34,7 +34,7 @@ tags:
 `selfdestruct`使用起来非常简单：
 
 ```solidity
-selfdestruct(_addr)；
+selfdestruct(_addr);
 ```
 
 其中`_addr`是接收合约中剩余`ETH`的地址。`_addr` 地址不需要有`receive()`或`fallback()`也能接收`ETH`。
