@@ -75,7 +75,7 @@ contract Token {
 
 ## 预防办法
 
-1. Solidity `0.8.0` 之前的版本，在合约中引用 [Safemath 库](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol)，在整型溢出时报错。
+1. Solidity `0.8.0` 之前的版本，在合约中引用 [Safemath 库](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v4.9/contracts/utils/math/SafeMath.sol)，在整型溢出时报错。
 
 2. Solidity `0.8.0` 之后的版本内置了 `Safemath`，因此几乎不存在这类问题。开发者有时会为了节省gas使用 `unchecked` 关键字在代码块中临时关闭整型溢出检测，这时要确保不存在整型溢出漏洞。
 
