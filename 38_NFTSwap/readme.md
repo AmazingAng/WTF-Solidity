@@ -74,6 +74,7 @@ contract NFTSwap is IERC721Receiver{
     ) external override returns (bytes4){
         return IERC721Receiver.onERC721Received.selector;
     }
+}
 ```
 
 ### 交易
