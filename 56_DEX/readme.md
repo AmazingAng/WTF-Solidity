@@ -139,6 +139,7 @@ function addLiquidity(uint amount0Desired, uint amount1Desired) public returns(u
 接下来，我们需要实现移除流动性的功能。当用户从池子中移除流动性 $\Delta{L}$ 时，合约要销毁LP份额代币，并按比例将代币返还给用户。返还代币的计算公式如下:
 
 $$\Delta{x}={\frac{\Delta{L}}{L} * x}$$ 
+
 $$\Delta{y}={\frac{\Delta{L}}{L} * y}$$ 
 
 下面的 `removeLiquidity()` 函数实现移除流动性的功能，主要步骤如下：
