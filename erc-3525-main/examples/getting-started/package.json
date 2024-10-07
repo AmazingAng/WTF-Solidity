@@ -1,0 +1,23 @@
+{
+  "name": "erc3525-getting-started",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test"
+  },
+  "keywords": [],
+  "author": "Ethan Y. Tsai <yee.tsai@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@nomiclabs/hardhat-ethers": "^2.2.1",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.12.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.8.0",
+    "@solvprotocol/erc-3525": "^1.1.0"
+  }
+}
