@@ -43,7 +43,7 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
     - `nonce`：初始为`0`，随着多签合约每笔成功执行的交易递增的值，可以防止签名重放攻击。
     - `chainid`：链id，防止不同链的签名重放攻击。
 
-3. 收集多签签名（链下）：将上一步的交易ABI编码并计算哈希，得到交易哈希，然后让多签人签名，并拼接到一起的到打包签名。对ABI编码和哈希不了解的，可以看WTF Solidity极简教程[第27讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/27_ABIEncode/readme.md)和[第28讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/28_Hash/readme.md)。
+3. 收集多签签名（链下）：将上一步的交易ABI编码并计算哈希，得到交易哈希，然后让多签人签名，并拼接到一起得到打包签名。对ABI编码和哈希不了解的，可以看WTF Solidity极简教程[第27讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/27_ABIEncode/readme.md)和[第28讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/28_Hash/readme.md)。
 
     ```solidity
     交易哈希: 0xc1b055cf8e78338db21407b425114a2e258b0318879327945b661bfdea570e66
