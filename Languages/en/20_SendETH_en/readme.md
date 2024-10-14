@@ -82,7 +82,7 @@ In the `ReceiveETH` contract, when we call `getBalance()`, we can see the balanc
 
 - Usage: `receiverAddress.send(value in Wei)`. 
 - The `gas` limit of `send()` is `2300`, which is enough to make the transfer, but not if the receiving contract has a gas-consuming `fallback()` or `receive()`. 
-- If `send()` fails, the transaction will be `reverted`. 
+- If `send()` fails, the transaction will not be `reverted`. 
 - The return value of `send()` is `bool`, which is the status of the transaction, you can choose to act on that. 
 
 Sample Code:
