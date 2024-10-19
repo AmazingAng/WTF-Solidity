@@ -61,12 +61,7 @@ mapping(address => address) public swapPair; // 币对的映射，地址到地�
 
 - **原理1**: 映射不储存任何键（`Key`）的资讯，也没有length的资讯。
 
-- **原理2**: 对于映射使用`keccak256(h(key) . slot)`计算存取value的位置。
-    - `slot`是映射变量定义所在的插槽位置。
-    - `.` 是连接符
-    - h 是一个函数，根据key的类型应用于键。
-        - 如果key为值类型，h函数将与在内存中存储值的相同方式来将值填充为32字节。则计算方式为：keccak256(abi.encode(key, slot))。
-        - 如果为字符串或者字符数组，则只是未填充的数据本身。则计算方式为：keccak256(abi.encodePacked(key, slot))。
+- **原理2**: 对于映射使用`keccak256(h(key) . slot)`计算存取value的位置。感兴趣的可以去阅读 [WTF Solidity 内部规则: 映射存储布局](https://github.com/WTFAcademy/WTF-Solidity-Internals/tree/master/tutorials/02_MappingStorage)
 
 - **原理3**: 因为Ethereum会定义所有未使用的空间为0，所以未赋值（`Value`）的键（`Key`）初始值都是各个type的默认值，如uint的默认值是0。
 
