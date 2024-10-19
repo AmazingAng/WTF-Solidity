@@ -81,7 +81,7 @@ contract TransparentProxy {
     }
 
     // fallback function, delegates function call to logic contract
-    // can not be called by admin, to avoid causing unexpected beahvior due to selector clash
+    // can not be called by admin, to avoid causing unexpected behavior due to selector clash
     fallback() external payable {
         require(msg.sender != admin);
         (bool success, bytes memory data) = implementation.delegatecall(msg.data);

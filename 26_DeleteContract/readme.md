@@ -75,18 +75,22 @@ contract DeleteContract {
 1. 部署合约并且转入1ETH，查看合约状态
 
     ![deployContract.png](./img/26-1.png)
-2. 销毁合约，查看合约状态
+   
+3. 销毁合约，查看合约状态
 
     ![deleteContract.png](./img/26-2.png)
+   
 从测试中观察合约状态可以发现合约销毁后的ETH返回给了指定的地址，在合约销毁后再次调用合约函数进行交互则会失败。
 
 ##### 坎昆升级之后
 1. 部署合约并且转入1ETH，查看合约状态
 
     ![deployContract2.png](./img/26-3.png)
-2. 销毁合约，查看合约状态
+   
+3. 销毁合约，查看合约状态
 
     ![deleteContract2.png](./img/26-4.png)
+   
 从测试中观察合约状态可以发现合约包含的ETH已经清零（返回给了指定的地址），再次调用合约函数进行交互依然可以成功。
 
 
@@ -127,7 +131,8 @@ contract DeployContract {
 1. 部署`DeployContract`合约并且转入1ETH调用`demo`方法，查看合约状态，显示`DeleteContract`已被正确部署，且在`selfdestruct`后ETH已转移到`DeployContract`。
 
     ![deployContract3.png](./img/26-5.png)
-2. 选择导入返回值中的地址为`DeleteContract`。显示该地址不存有ETH，且调用合约函数进行交互均失败。
+   
+3. 选择导入返回值中的地址为`DeleteContract`。显示该地址不存有ETH，且调用合约函数进行交互均失败。
 
     ![deleteContract3.png](./img/26-6.png)
 

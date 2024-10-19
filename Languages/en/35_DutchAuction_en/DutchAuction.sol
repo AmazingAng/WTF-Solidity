@@ -20,7 +20,7 @@ contract DutchAuction is Ownable, ERC721 {
 
     // Set auction start time: We declare the current block time as the start time in the constructor. 
     // The project owner can also adjust the start time through the `setAuctionStartTime(uint32)` function.
-    constructor() ERC721("WTF Dutch Auction", "WTF Dutch Auction") {
+    constructor() Ownable(msg.sender) ERC721("WTF Dutch Auction", "WTF Dutch Auction") {
         auctionStartTime = block.timestamp;
     }
 

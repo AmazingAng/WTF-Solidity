@@ -112,10 +112,16 @@ BSC链上的PEOPLE地址: 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
 1. 使用`WBNB`和`PEOPLE`的地址作为参数调用`createPair`,得到`Pair`合约地址：0xD3e2008b4Da2cD6DEAF73471590fF30C86778A48
 
     ![24-1](./img/24-1.png)
-2. 查看`Pair`合约变量
+   
+2. 将 Contract 改为 `Pair`，然后在 At Address 输入框输入 `Pair` 合约地址，创建一个前端接口用于调用已部署的合约。
+
+    ![24-4](./img/24-4.png)
+   
+3. 查看`Pair`合约变量
 
     ![24-2](./img/24-2.png)
-3. Debug查看`create`操作码
+   
+4. Debug查看`create`操作码
 
     ![24-3](./img/24-3.png)
 

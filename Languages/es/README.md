@@ -49,6 +49,37 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
 
 **Capítulo 15. Errores**：[Code](./15_Errores_es/Error.sol) | [Tutorial](./15_Errores_es/readme.md)
 
+**Capítulo 16. Sobrecarga**：[Code](./16_Sobrecarga_es/Overloading.sol) | [Tutorial](./16_Sobrecarga_es/readme.md)
+
+**Capítulo 17. Librería**：[Code](./17_Libreria_es/Library.sol) | [Tutorial](./17_Libreria_es/readme.md)
+
+**Capítulo 18. Importar**：[Code](./18_Importar_es/import.sol) | [Tutorial](./18_Importar_es/readme.md)
+
+**Capítulo 19. Alternativa**：[Code](./19_Alternativa_es/Fallback.sol) | [Tutorial](./19_Alternativa_es/readme.md)
+
+**Capítulo 20. Enviar ETH**：[Code](./20_EnviarETH_es/SendETH.sol) | [Tutorial](./20_EnviarETH_es/readme.md)
+
+**Capítulo 21. Llamar contrato**：[Code](./21_LlamarContrato_es/CallContract.sol) | [Tutorial](./21_LlamarContrato_es/readme.md)
+
+**Capítulo 22. Metodo llamar**：[Code](./22_Metodo_llamar_es/Call.sol) | [Tutorial](./22_Metodo_llamar_es/readme.md)
+
+**Capítulo 23. Delegar llamada**：[Code](./23_DelegarLlamada_es/Delegatecall.sol) | [Tutorial](./23_DelegarLlamada_es/readme.md)
+
+**Capítulo 24. Crear**：[Code](./24_Crear_es/Create.sol) | [Tutorial](./24_Crear_es/readme.md)
+
+**Capítulo 25. Crear**：[Code](./25_Crear2_es/create2.sol) | [Tutorial](./25_Crear2_es/readme.md)
+
+**Capítulo 26. Eliminar contrato**：[Code](./26_EliminarContrato_es/DeleteContract.sol) | [Tutorial](./26_EliminarContrato_es/readme.md)
+
+**Capítulo 27. Codificacion y decodificación ABI**：[Code](./27_CodificacionDecodificacionABI_es/ABIEncode.sol) | [Tutorial](./27_CodificacionDecodificacionABI_es/readme.md)
+
+**Capítulo 28. Función hash**：[Code](./28_FuncionHash_es/Hash.sol) | [Tutorial](./28_FuncionHash_es/readme.md)
+
+**Capítulo 29. Selector**：[Code](./29_Selector_es/Selector.sol) | [Tutorial](./29_Selector_es/readme.md)
+
+**Capítulo 30. Intentar capturar**：[Code](./30_IntentarCapturar_es/TryCatch.sol) | [Tutorial](./30_IntentarCapturar_es/readme.md)
+
+
 ## WTF Contributors
 
 <div align="center">
