@@ -597,8 +597,7 @@ cast etherscan-source $WETH -d ~/Downloads
 
 ### 调用合约(读数据)
 
-`cast call` 用于从区块链上读取数据（调用只读函数），该操作不会改变区块链状态，也不需要支付 Gas 费用。
-调用 WETH合约的`balanceOf`方法,查看`0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`账号的余额
+`cast call` 用于从区块链上读取数据（调用只读函数），该操作不会改变区块链状态，也不需要支付 Gas 费用。下面我们调用 `WETH` 合约的`balanceOf`方法,查看 `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2` 账号的余额
 
 ```shell
 #cast call [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND] --rpc-url=$RPC
