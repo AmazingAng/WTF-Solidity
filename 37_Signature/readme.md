@@ -137,7 +137,7 @@ print(f"签名：{signed_message['signature'].hex()}")
 
 为了验证签名，验证者需要拥有`消息`，`签名`，和签名使用的`公钥`。我们能验证签名的原因是只有`私钥`的持有者才能够针对交易生成这样的签名，而别人不能。
 
-**4. 通过签名和消息恢复公钥：**`签名`是由数学算法生成的。这里我们使用的是`rsv签名`，`签名`中包含`r, s, v`三个值的信息。而后，我们可以通过`r, s, v`及`以太坊签名消息`来求得`公钥`。下面的`recoverSigner()`函数实现了上述步骤，它利用`以太坊签名消息 _msgHash`和`签名 _signature`恢复`公钥`（使用了简单的内联汇编）：
+**4. 通过签名和消息恢复公钥：**`签名`是由数学算法生成的。这里我们使用的是`rsv签名`，`签名`中包含`r, s, v`三个值的信息，长度分别为32 bytes，32 bytes，1 byte。而后，我们可以通过`r, s, v`及`以太坊签名消息`来求得`公钥`。下面的`recoverSigner()`函数实现了上述步骤，它利用`以太坊签名消息 _msgHash`和`签名 _signature`恢复`公钥`（使用了简单的内联汇编）：
 
 ```solidity
     // @dev 从_msgHash和签名_signature中恢复signer地址
@@ -171,6 +171,9 @@ print(f"签名：{signed_message['signature'].hex()}")
 _msgHash：0xb42ca4636f721c7a331923e764587e98ec577cea1a185f60dfcc14dbb9bd900b
 _signature：0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d559b12d220f99f41d17651b0c1c6a669d346a397f8541760d6b32a5725378b241c
 ```
+
+需要注意的是，这里需要对输入参数`_signature`的长度进行检查，确保其长度为65bytes，否则会产生签名重放问题。具体问题可以参考[BlazCTF中的Cyber Cartel](https://github.com/DeFiHackLabs/blazctf-2024-writeup/blob/main/writeup/cyber-cartel.md).
+
 ![通过签名和消息恢复公钥](./img/37-8.png)
 
 **5. 对比公钥并验证签名：** 接下来，我们只需要比对恢复的`公钥`与签名者公钥`_signer`是否相等：若相等，则签名有效；否则，签名无效：
