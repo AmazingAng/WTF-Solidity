@@ -103,7 +103,7 @@ library Strings {
 }
 ```
 
-他主要包含两个函数，`toString()`将`uint256`转为`string`，`toHexString()`将`uint256`转换为`16进制`，在转换为`string`。
+它主要包含两个函数，`toString()`将`uint256`转换为10进制的`string`，`toHexString()`将`uint256`转换为16进制的`string`。
 
 ### 如何使用库合约
 

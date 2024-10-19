@@ -63,9 +63,9 @@ Integers types in Solidity include signed integer `int` and unsigned integer `ui
 
 ```solidity
     // Integer
-    int public _int = -1; // integers including negative numbers
-    uint public _uint = 1; // non-negative numbers
-    uint256 public _number = 20220330; // 256-bit positive integers
+    int public _int = -1; // integers including negative integers
+    uint public _uint = 1; // unsigned integers
+    uint256 public _number = 20220330; // 256-bit unsigned integers
 ```
 Commonly used integer operators include:
 
@@ -79,7 +79,7 @@ Code：
     uint256 public _number1 = _number + 1; // +, -, *, /
     uint256 public _number2 = 2**2; // Exponent
     uint256 public _number3 = 7 % 2; // Modulo (Modulus)
-    bool public _numberbool = _number2 > _number3; // Great than
+    bool public _numberbool = _number2 > _number3; // Greater than
 ```
 
 You can run the above code and check the values of each variable.
