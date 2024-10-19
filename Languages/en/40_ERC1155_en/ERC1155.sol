@@ -14,7 +14,7 @@ import "../34_ERC721_en/IERC165.sol";
  */
 contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     using Address for address; // use the Address library, isContract to determine whether the address is a contract
-    using Strings for uint256; // use the String library
+    using Strings for uint256; // use the Strings library
     // Token name
     string public name;
     // Token code name
