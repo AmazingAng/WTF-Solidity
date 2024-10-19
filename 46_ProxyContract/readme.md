@@ -115,7 +115,7 @@ fallback() external payable {
 - `implementation`：占位变量，与`Proxy`合约保持一致，防止插槽冲突。
 - `x`：`uint`变量，被设置为`99`。
 - `CallSuccess`事件：在调用成功时释放。
-- `increment()`函数：会被`Proxy`合约调用，释放`CallSuccess`事件，并返回一个`uint`，它的`selector`为`0xd09de08a`。如果直接调用`increment()`回返回`100`，但是通过`Proxy`调用它会返回`1`，大家可以想想为什么？
+- `increment()`函数：会被`Proxy`合约调用，释放`CallSuccess`事件，并返回一个`uint`，它的`selector`为`0xd09de08a`。如果直接调用`increment()`会返回`100`，但是通过`Proxy`调用它会返回`1`，大家可以想想为什么？
 
 ```solidity
 /**

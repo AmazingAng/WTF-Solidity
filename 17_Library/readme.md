@@ -34,7 +34,7 @@ tags:
 3. 不能接收以太币
 4. 不可以被销毁
 
-需要注意的是，库合约重的函数可见性如果被设置为`public`或者`external`，则在调用函数时会触发一次`delegatecall`。而如果被设置为`internal`，则不会引起。对于设置为`private`可见性的函数来说，其仅能在库合约中可见，在其他合约中不可用。
+需要注意的是，库合约中的函数可见性如果被设置为`public`或者`external`，则在调用函数时会触发一次`delegatecall`。而如果被设置为`internal`，则不会引起。对于设置为`private`可见性的函数来说，其仅能在库合约中可见，在其他合约中不可用。
 
 
 ## Strings库合约
@@ -103,7 +103,7 @@ library Strings {
 }
 ```
 
-他主要包含两个函数，`toString()`将`uint256`转为`string`，`toHexString()`将`uint256`转换为`16进制`，在转换为`string`。
+它主要包含两个函数，`toString()`将`uint256`转换为10进制的`string`，`toHexString()`将`uint256`转换为16进制的`string`。
 
 ### 如何使用库合约
 

@@ -25,7 +25,7 @@ Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教
 我们先看一下 Solidity 中函数的形式:
 
 ```solidity
-function <function name>(<parameter types>) {internal|external|public|private} [pure|view|payable] [virtual|override] [<modifiers>]
+function <function name>([parameter types[, ...]]) {internal|external|public|private} [pure|view|payable] [virtual|override] [<modifiers>]
 [returns (<return types>)]{ <function body> }
 ```
 
@@ -36,7 +36,7 @@ function <function name>(<parameter types>) {internal|external|public|private} [
 
 2. `<function name>`：函数名。
 
-3. `(<parameter types>)`：圆括号内写入函数的参数，即输入到函数的变量类型和名称。
+3. `([parameter types[, ...]])`：圆括号内写入函数的参数，即输入到函数的变量类型和名称。
 
 4. `{internal|external|public|private}`：函数可见性说明符，共有4种。
 
@@ -47,7 +47,7 @@ function <function name>(<parameter types>) {internal|external|public|private} [
 
     **注意 1**：合约中定义的函数需要明确指定可见性，它们没有默认值。
 
-    **注意 2**：`public|private|internal` 也可用于修饰状态变量。`public`变量会自动生成同名的`getter`函数，用于查询数值。未标明可见性类型的状态变量，默认为`internal`。
+    **注意 2**：`public|private|internal` 也可用于修饰状态变量(定义可参考[WTF Solidity 第5讲的相关内容]([../05_DataStorage/readme.md#1-状态变量](https://github.com/AmazingAng/WTF-Solidity/tree/main/05_DataStorage#1-%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F)))。`public`变量会自动生成同名的`getter`函数，用于查询数值。未标明可见性类型的状态变量，默认为`internal`。
 
 5. `[pure|view|payable]`：决定函数权限/功能的关键字。`payable`（可支付的）很好理解，带着它的函数，运行的时候可以给合约转入 ETH。`pure` 和 `view` 的介绍见下一节。
 

@@ -28,7 +28,7 @@ contract MultisigWallet {
     function _setupOwners(address[] memory _owners, uint256 _threshold) internal {
         // threshold没被初始化过
         require(threshold == 0, "WTF5000");
-        // 多签执行门槛 小于 多签人数
+        // 多签执行门槛 小于或等于 多签人数
         require(_threshold <= _owners.length, "WTF5001");
         // 多签执行门槛至少为1
         require(_threshold >= 1, "WTF5002");

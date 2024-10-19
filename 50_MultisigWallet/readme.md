@@ -107,7 +107,7 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
     function _setupOwners(address[] memory _owners, uint256 _threshold) internal {
         // threshold没被初始化过
         require(threshold == 0, "WTF5000");
-        // 多签执行门槛 小于 多签人数
+        // 多签执行门槛 小于或等于 多签人数
         require(_threshold <= _owners.length, "WTF5001");
         // 多签执行门槛至少为1
         require(_threshold >= 1, "WTF5002");
@@ -150,7 +150,7 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
     }
     ```
 
-4. `checkSignatures()`：检查签名和交易数据的哈希是否对应，数量是否达到门槛，若否，交易会revert。单个签名长度为65字节，因此打包签名的长度要长于`threshold * 65`。调用了`signatureSplit()`分离出单个签名。这个函数的大致思路：
+4. `checkSignatures()`：检查签名和交易数据的哈希是否对应，数量是否达到门槛，若否，交易会revert。单个签名长度为65字节，因此打包签名的长度要长于或等于`threshold * 65`。调用了`signatureSplit()`分离出单个签名。这个函数的大致思路：
     - 用ecdsa获取签名地址.
     - 利用 `currentOwner > lastOwner` 确定签名来自不同多签（多签地址递增）。
     - 利用`isOwner[currentOwner]`确定签名者为多签持有人。
@@ -286,7 +286,7 @@ Gnosis Safe多签钱包是以太坊最流行的多签钱包，管理近400亿美
 
     多签地址2的签名: 0x6b228b6033c097e220575f826560226a5855112af667e984aceca50b776f4c885e983f1f2155c294c86a905977853c6b1bb630c488502abcc838f9a225c813811c
 
-    讲两个签名拼接到一起，得到打包签名:  0xa3f3e4375f54ad0a8070f5abd64e974b9b84306ac0dd5f59834efc60aede7c84454813efd16923f1a8c320c05f185bd90145fd7a7b741a8d13d4e65a4722687e1b6b228b6033c097e220575f826560226a5855112af667e984aceca50b776f4c885e983f1f2155c294c86a905977853c6b1bb630c488502abcc838f9a225c813811c
+    将两个签名拼接到一起，得到打包签名:  0xa3f3e4375f54ad0a8070f5abd64e974b9b84306ac0dd5f59834efc60aede7c84454813efd16923f1a8c320c05f185bd90145fd7a7b741a8d13d4e65a4722687e1b6b228b6033c097e220575f826560226a5855112af667e984aceca50b776f4c885e983f1f2155c294c86a905977853c6b1bb630c488502abcc838f9a225c813811c
     ```
 
     ![签名](./img/50-5.png)

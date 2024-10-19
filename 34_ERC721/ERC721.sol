@@ -9,7 +9,7 @@ import "./IERC721Metadata.sol";
 import "./String.sol";
 
 contract ERC721 is IERC721, IERC721Metadata{
-    using Strings for uint256; // 使用String库，
+    using Strings for uint256; // 使用Strings库，
 
     // Token名称
     string public override name;
@@ -21,7 +21,7 @@ contract ERC721 is IERC721, IERC721Metadata{
     mapping(address => uint) private _balances;
     // tokenID 到 授权地址 的授权映射
     mapping(uint => address) private _tokenApprovals;
-    //  owner地址。到operator地址 的批量授权映射
+    // owner地址 到 operator地址 的批量授权映射
     mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     // 错误 无效的接收者
