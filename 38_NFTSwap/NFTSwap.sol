@@ -68,13 +68,15 @@ contract NFTSwap is IERC721Receiver {
         // 将NFT转给买家
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
         // 将ETH转给卖家，多余ETH给买家退款
-        payable(_order.owner).transfer(_order.price);
-        payable(msg.sender).transfer(msg.value - _order.price);
-
-        delete nftList[_nftAddr][_tokenId]; // 删除order
+        if (msg.value > _order.price) {
+            payable(_order.owner).transfer(_order.price);
+            payable(msg.sender).transfer(msg.value - _order.price);
+        }
 
         // 释放Purchase事件
         emit Purchase(msg.sender, _nftAddr, _tokenId, _order.price);
+
+        delete nftList[_nftAddr][_tokenId]; // 删除order
     }
 
     // 撤单： 卖家取消挂单
