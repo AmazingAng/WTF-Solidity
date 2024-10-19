@@ -1,0 +1,64 @@
+{
+  "name": "@solvprotocol/erc-3525",
+  "version": "1.4.0",
+  "description": "ERC-3525 Reference Implementation for Solidity",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solv-finance/erc-3525.git"
+  },
+  "engines": {
+    "node": ">=12.10"
+  },
+  "contributors": [
+    "Ethan Y. Tsai <yee.tsai@gmail.com>",
+    "Alvis Du <alvis@solv.finance>"
+  ],
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "coverage": "env COVERAGE=true hardhat coverage",
+    "clean": "hardhat clean && rimraf build contracts/build",
+    "gas-report": "env ENABLE_GAS_REPORT=true npm run test",
+    "event-trace": "env EVENT_TRACE=true hardhat test --trace",
+    "transpile": "scripts/transpile.sh",
+    "release": "scripts/release.sh"
+  },
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart",
+    "contracts",
+    "erc-3525",
+    "erc3525",
+    "solv"
+  ],
+  "author": "Solv Protocol",
+  "bugs": {
+    "url": "https://github.com/solv-finance/erc-3525/issues"
+  },
+  "homepage": "https://solv.finance/",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.4",
+    "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+    "@openzeppelin/test-helpers": "^0.5.16",
+    "dotenv": "^16.0.1",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.1",
+    "hardhat": "^2.12.3",
+    "hardhat-contract-sizer": "^2.6.1",
+    "hardhat-tracer": "^1.1.0-rc.8",
+    "solc": "^0.8.13",
+    "solhint": "^3.3.7"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
+    "@openzeppelin/contracts-upgradeable": "^4.7.3"
+  }
+}
