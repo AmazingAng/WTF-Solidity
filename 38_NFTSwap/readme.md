@@ -87,23 +87,24 @@ contract NFTSwap is IERC721Receiver {
 
 - 挂单`list()`：卖家创建`NFT`并创建订单，并释放`List`事件。参数为`NFT`合约地址`_nftAddr`，`NFT`对应的`_tokenId`，挂单价格`_price`（**注意：单位是`wei`**）。成功后，`NFT`会从卖家转到`NFTSwap`合约中。
 
-  ```solidity
-  // 挂单: 卖家上架NFT，合约地址为_nftAddr，tokenId为_tokenId，价格_price为以太坊（单位是wei）
-  function list(address _nftAddr, uint256 _tokenId, uint256 _price) public{
-      IERC721 _nft = IERC721(_nftAddr); // 声明IERC721接口合约变量
-      require(_nft.getApproved(_tokenId) == address(this), "Need Approval"); // 合约得到授权
-      require(_price > 0); // 价格大于0
+    ```solidity
+    // 挂单: 卖家上架NFT，合约地址为_nftAddr，tokenId为_tokenId，价格_price为以太坊（单位是wei）
+    function list(address _nftAddr, uint256 _tokenId, uint256 _price) public{
+        IERC721 _nft = IERC721(_nftAddr); // 声明IERC721接口合约变量
+        require(_nft.getApproved(_tokenId) == address(this), "Need Approval"); // 合约得到授权
+        require(_price > 0); // 价格大于0
 
-      Order storage _order = nftList[_nftAddr][_tokenId]; //设置NF持有人和价格
-      _order.owner = msg.sender;
-      _order.price = _price;
-      // 将NFT转账到合约
-      _nft.safeTransferFrom(msg.sender, address(this), _tokenId);
+        Order storage _order = nftList[_nftAddr][_tokenId]; //设置NFT持有人和价格
+        _order.owner = msg.sender;
+        _order.price = _price;
+        // 将NFT转账到合约
+        _nft.safeTransferFrom(msg.sender, address(this), _tokenId);
 
-      // 释放List事件
-      emit List(msg.sender, _nftAddr, _tokenId, _price);
-  }
-  ```
+        // 释放List事件
+        emit List(msg.sender, _nftAddr, _tokenId, _price);
+    }
+    ```
+
 
 - 撤单`revoke()`：卖家撤回挂单，并释放`Revoke`事件。参数为`NFT`合约地址`_nftAddr`，`NFT`对应的`_tokenId`。成功后，`NFT`会从`NFTSwap`合约转回卖家。
 

@@ -904,7 +904,7 @@ contract Helper {
 
 运行测试：
 
-因为本地没有dai的部署合约，所以我们直接fork主网， -vvv可以现实console2.log，-w表示watch模式。
+因为本地没有dai的部署合约，所以我们直接fork主网， -vvv可以显示console2.log，-w表示watch模式。
 
 ```shell
 forge test -vvv --fork-url=$ETH_RPC_URL -w

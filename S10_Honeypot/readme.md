@@ -100,7 +100,7 @@ contract HoneyPot is ERC20, Ownable {
 2. 调用 `mint()` 函数，给自己铸造 `100000` 枚貔貅币。
 ![](./img/S10-3.png)
 
-3. 进入 [uniswap](https://app.uniswap.org/#/add/v2/ETH) 交易所，为貔貅币创造流动性（v2），提供 `10000`貔貅币。和 `0.1` ETH。
+3. 进入 [uniswap](https://app.uniswap.org/#/add/v2/ETH) 交易所，为貔貅币创造流动性（v2），提供 `10000`貔貅币和 `0.1` ETH。
 ![](./img/S10-4.png)
 
 4. 出售 `100` 貔貅币，能够操作成功。
@@ -132,7 +132,7 @@ contract HoneyPot is ERC20, Ownable {
 
 4. 仔细检查项目的官网和社交媒体。
 
-5. 只投资你了解的项目，做好研究（DYOR。
+5. 只投资你了解的项目，做好研究(DYOR)。
 
 6. 使用tenderly、phalcon分叉模拟卖出貔貅，如果失败则确定是貔貅代币。
 

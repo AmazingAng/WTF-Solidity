@@ -62,7 +62,7 @@ There are a total of `9` state variables in the contract, of which `6` are relat
 - `auctionStartTime`: Starting time of the auction (blockchain timestamp, `block.timestamp`).
 
 ```solidity
-    uint256 public constant COLLECTOIN_SIZE = 10000; // Total number of NFTs 
+    uint256 public constant COLLECTION_SIZE = 10000; // Total number of NFTs 
     uint256 public constant AUCTION_START_PRICE = 1 ether; // Starting price (highest price)
     uint256 public constant AUCTION_END_PRICE = 0.1 ether; // End price (lowest price/floor price)
     uint256 public constant AUCTION_TIME = 10 minutes; // Auction duration. Set to 10 minutes for testing convenience
@@ -126,7 +126,7 @@ First, the function checks if the auction has started or if the number of `NFTs`
         "sale has not started yet"
         ); // checks if the start time of auction has been set and auction has started
         require(
-        totalSupply() + quantity <= COLLECTOIN_SIZE,
+        totalSupply() + quantity <= COLLECTION_SIZE,
         "not enough remaining reserved for auction to support desired mint amount"
         ); // checks if the number of NFTs has exceeded the limit
 

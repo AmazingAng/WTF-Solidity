@@ -250,7 +250,7 @@ import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.s
  */
 contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
     using Address for address; // 使用Address库，用isContract来判断地址是否为合约
-    using Strings for uint256; // 使用String库
+    using Strings for uint256; // 使用Strings库
     // Token名称
     string public name;
     // Token代号
