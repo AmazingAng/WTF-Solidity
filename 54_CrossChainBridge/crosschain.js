@@ -32,18 +32,18 @@ const main = async () => {
         contractSepolia.on("Bridge", async (user, amount) => {
             console.log(`Bridge event on Chain Sepolia: User ${user} burned ${amount} tokens`);
 
-            // 在执行burn操作
+            // 在Goerli上执行mint操作
             let tx = await contractGoerli.mint(user, amount);
             await tx.wait();
 
             console.log(`Minted ${amount} tokens to ${user} on Chain Goerli`);
         });
 
-        // 监听chain Sepolia的Bridge事件，然后在Goerli上执行mint操作，完成跨链
+        // 监听chain Goerli的Bridge事件，然后在Sepolia上执行mint操作，完成跨链
         contractGoerli.on("Bridge", async (user, amount) => {
             console.log(`Bridge event on Chain Goerli: User ${user} burned ${amount} tokens`);
 
-            // 在执行burn操作
+            // 在Sepolia上执行mint操作
             let tx = await contractSepolia.mint(user, amount);
             await tx.wait();
 

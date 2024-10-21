@@ -147,7 +147,7 @@ const main = async () => {
         contractSepolia.on("Bridge", async (user, amount) => {
             console.log(`Bridge event on Chain Sepolia: User ${user} burned ${amount} tokens`);
 
-            // 在执行burn操作
+            // 在Goerli上执行mint操作
             let tx = await contractGoerli.mint(user, amount);
             await tx.wait();
 
@@ -158,7 +158,7 @@ const main = async () => {
         contractGoerli.on("Bridge", async (user, amount) => {
             console.log(`Bridge event on Chain Goerli: User ${user} burned ${amount} tokens`);
 
-            // 在执行burn操作
+            // 在Sepolia上执行mint操作
             let tx = await contractSepolia.mint(user, amount);
             await tx.wait();
 
