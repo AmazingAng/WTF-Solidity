@@ -46,7 +46,7 @@ contract NFTSwap is IERC721Receiver {
         require(_nft.getApproved(_tokenId) == address(this), "Need Approval"); // 合约得到授权
         require(_price > 0); // 价格大于0
 
-        Order storage _order = nftList[_nftAddr][_tokenId]; //设置NF持有人和价格
+        Order storage _order = nftList[_nftAddr][_tokenId]; //设置NFT持有人和价格
         _order.owner = msg.sender;
         _order.price = _price;
         // 将NFT转账到合约
@@ -68,13 +68,15 @@ contract NFTSwap is IERC721Receiver {
         // 将NFT转给买家
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
         // 将ETH转给卖家，多余ETH给买家退款
-        payable(_order.owner).transfer(_order.price);
-        payable(msg.sender).transfer(msg.value - _order.price);
-
-        delete nftList[_nftAddr][_tokenId]; // 删除order
+        if (msg.value > _order.price) {
+            payable(_order.owner).transfer(_order.price);
+            payable(msg.sender).transfer(msg.value - _order.price);
+        }
 
         // 释放Purchase事件
         emit Purchase(msg.sender, _nftAddr, _tokenId, _order.price);
+
+        delete nftList[_nftAddr][_tokenId]; // 删除order
     }
 
     // 撤单： 卖家取消挂单

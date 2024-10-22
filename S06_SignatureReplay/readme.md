@@ -157,10 +157,21 @@ contract SigReplay is ERC20 {
     }
     ```
 
+3. 对于由用户输入`signature`的场景，需要检验`signature`的长度，确保其长度为`65bytes`，否则也会产生签名重放问题。
+
+    ```solidity
+    function mint(address to, uint amount, bytes memory signature) public {
+        require(signature.length == 65, "Invalid signature length");
+        ...
+    }
+    ```
+
 ## 总结
 
-这一讲，我们介绍了智能合约中的签名重放漏洞，并介绍了两个预防方法：
+这一讲，我们介绍了智能合约中的签名重放漏洞，并介绍了三个预防方法：
 
 1. 将使用过的签名记录下来，防止二次使用。
 
 2. 将 `nonce` 和 `chainid` 包含到签名消息中。
+
+3. 对于由用户输入`signature`的场景，需要检验`signature`的长度，确保其长度为`65bytes`，否则也会产生签名重放问题。

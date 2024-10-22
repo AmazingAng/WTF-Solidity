@@ -46,7 +46,7 @@ EIP-2612 提出了 ERC20Permit，扩展了 ERC20 标准，添加了一个 `permi
  
     - `spender` 不能是零地址。
     - `deadline` 必须是未来的时间戳。
-    - `v`，`r` 和 `s` 必须是 `owner` 对 EIP712 格式的函数参数的有效 `secp256k1` 签名。
+    - `v`，`r` 和 `s` 必须是 `owner` 对 EIP712 格式的函数参数的有效 `keccak256` 签名。
     - 签名必须使用 `owner` 当前的 nonce。
 
 

@@ -158,6 +158,8 @@ contract Attack {
 4. 调用`Bank`合约的`getBalance()`函数，发现余额已被提空。
 5. 调用`Attack`合约的`getBalance()`函数，可以看到余额变为`21 ETH`，重入攻击成功。
 
+当然，不仅仅`ETH`转账会触发重入攻击，`ERC721`和`ERC1155`的`safeTransfer()`和`safeTransferFrom()`安全转账函数，还有`ERC777`的`callback`函数，都可能会引发重入攻击。所以这更多的是一个宏观上的设计问题，而不仅仅局限于ETH转账本身。
+
 ## 预防办法
 
 目前主要有两种办法来预防可能的重入攻击漏洞： 检查-影响-交互模式（checks-effect-interaction）和重入锁。

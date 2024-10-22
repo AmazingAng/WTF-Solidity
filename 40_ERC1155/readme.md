@@ -248,7 +248,6 @@ import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.s
  * 见 https://eips.ethereum.org/EIPS/eip-1155
  */
 contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
-    using Strings for uint256; // 使用String库
     // Token名称
     string public name;
     // Token代号
