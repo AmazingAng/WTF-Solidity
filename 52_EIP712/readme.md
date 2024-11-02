@@ -182,16 +182,23 @@ contract EIP712Storage {
 }
 ```
 
-## Remix 复现
+## 部署复现
 
-1. 部署 `EIP712Storage` 合约。
+1. 在 `Remix` 部署 `EIP712Storage` 合约。
 
-2. 运行 `eip712storage.html`，将 `Contract Address` 改为部署的 `EIP712Storage` 合约地址，然后依次点击 `Connect Metamask` 和 `Sign Permit` 按钮签名。签名要使用部署合约的钱包，比如 Remix 测试钱包：
+2. 运行 `eip712storage.html`，根据 MetaMask 的内容安全策略（[Content Security Policy](https://github.com/MetaMask/faq/blob/9257d7d52784afa957c12166aff20682cf692ae5/DEVELOPERS.md#requirements-nut_and_bolt)）的要求，MetaMask 不能通过打开的本地文件（file:// 协议）与 DApp 通信。 可以使用 Node 静态文件服务器 `http-server` 启动本地服务，在包含 `eip712storage.html` 文件的目录下执行以下命令：
 
-    ```js
-    public_key: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-    private_key: 503f38a9c967ed597e47fe25643985f032b072db8075426a92110f82df48dfcb
-    ```
+```sh
+npm install -g http-server
+http-server
+```
+
+在浏览器中打开 `http://127.0.0.1:8080` 就可以访问了。 然后将 `Contract Address` 改为部署的 `EIP712Storage` 合约地址，然后依次点击 `Connect Metamask` 和 `Sign Permit` 按钮签名。签名要使用部署合约的钱包，比如 Remix 测试钱包：
+
+```js
+public_key: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+private_key: 503f38a9c967ed597e47fe25643985f032b072db8075426a92110f82df48dfcb
+```
 
 3. 调用合约的 `permitStore()` 方法，输入相应的 `_num` 和签名，修改 `number` 的值。
 
