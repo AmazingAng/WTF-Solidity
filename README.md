@@ -308,6 +308,7 @@
 **第2讲：深入EVM**【[文章](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Translation/DiveEVM2017)】
 
 ## WTF贡献者
+
 <div align="center">
   <h4 align="center">
     贡献者是WTF学院的基石
@@ -319,13 +320,14 @@
 
 ## 捐赠
 
-- [Gitcoin](https://gitcoin.co/grants/6090/wtf-solidity)
+- 学院国库地址 Ethereum/Optimism/zkSync/Scroll/evm兼容链地址: 0x25df6da2f4e5c178ddff45038378c0b08e0bce54
 - [Mirror](https://mirror.xyz/wtfacademy.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)
 
 ## 参考
+
 - [Solidity 官方文档](https://docs.soliditylang.org/en/v0.8.17/)
 - [Solidity By Example](https://solidity-by-example.org/)
-  - [中文版](https://github.com/Web3-Club/solidity-by-example_Chinese)   
+- [中文版](https://github.com/Web3-Club/solidity-by-example_Chinese)   
 - [OpenZeppelin Contract](https://github.com/OpenZeppelin/openzeppelin-contracts)
 - [solmate](https://github.com/transmissions11/solmate)
 - [Chainlink Docs](https://docs.chain.link/)
