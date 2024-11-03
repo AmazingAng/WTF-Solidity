@@ -139,25 +139,27 @@ function revoke(address _nftAddr, uint256 _tokenId) public {
 - Purchase: The buyer pays with `ETH` to purchase the `NFT` on the order, and triggers the `Purchase` event. The parameters are the `NFT` contract address `_nftAddr` and the corresponding `_tokenId` of the `NFT`. Upon success, the `ETH` will be transferred to the seller and the `NFT` will be transferred from the `NFTSwap` contract to the buyer.
 
 ```solidity
-    // Purchase: A buyer purchases an NFT with ETH attached, the contract address is _nftAddr, tokenId is _tokenId
-    function purchase(address _nftAddr, uint256 _tokenId) payable public {
-        Order storage _order = nftList[_nftAddr][_tokenId]; // Get Order
-        require(_order.price > 0, "Invalid Price"); // The NFT price is greater than 0
-        require(msg.value >= _order.price, "Increase price"); // The purchase price is greater than the asking price
-        // Declare IERC721 interface contract variable
+    // Purchase: The buyer purchases NFT, the contract is _nftAddr, the tokenId is _tokenId, and ETH is required when calling the function
+    function purchase(address _nftAddr, uint256 _tokenId) public payable {
+        Order storage _order = nftList[_nftAddr][_tokenId]; // get Order
+        require(_order.price > 0, "Invalid Price"); // NFT price is greater than 0
+        require(msg.value >= _order.price, "Increase price"); // The purchase price is greater than the list price
+        // Declare IERC721 interface contract variables
         IERC721 _nft = IERC721(_nftAddr);
-        require(_nft.ownerOf(_tokenId) == address(this), "Invalid Order"); // The NFT is in the contract
+        require(_nft.ownerOf(_tokenId) == address(this), "Invalid Order"); // NFT is in the contract
 
-        // Transfer the NFT to the buyer
+        // Transfer NFT to buyer
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
-        // Transfer ETH to the seller, refund any excess ETH to the buyer
+        // Transfer ETH to the seller, and refund the excess ETH to the buyer
         payable(_order.owner).transfer(_order.price);
-        payable(msg.sender).transfer(msg.value-_order.price);
+        if (msg.value > _order.price) {
+            payable(msg.sender).transfer(msg.value - _order.price);
+        }
+        
+        // Release the Purchase event
+        emit Purchase(msg.sender, _nftAddr, _tokenId, _order.price);
 
-        delete nftList[_nftAddr][_tokenId]; // Delete order
-
-        // Release Purchase event
-        emit Purchase(msg.sender, _nftAddr, _tokenId, msg.value);
+        delete nftList[_nftAddr][_tokenId]; // delete order
     }
 ```
 
