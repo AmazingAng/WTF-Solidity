@@ -69,12 +69,14 @@ contract NFTSwap is IERC721Receiver {
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
         // Transfer ETH to the seller, and refund the excess ETH to the buyer
         payable(_order.owner).transfer(_order.price);
-        payable(msg.sender).transfer(msg.value - _order.price);
+        if (msg.value > _order.price) {
+            payable(msg.sender).transfer(msg.value - _order.price);
+        }
+        
+        // Release the Purchase event
+        emit Purchase(msg.sender, _nftAddr, _tokenId, _order.price);
 
         delete nftList[_nftAddr][_tokenId]; // delete order
-
-        // Release the Purchase event
-        emit Purchase(msg.sender, _nftAddr, _tokenId, msg.value);
     }
 
     // Cancellation: The seller cancels the pending order
