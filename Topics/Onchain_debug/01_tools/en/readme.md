@@ -9,20 +9,18 @@ From my studies, we will launch a series of Web3 security articles to entice mor
 In the first series, we will introduce how to conduct an on-chain analysis, and then we will reproduce on-chain attack(s). This skill will aid us in understanding the attack process, the root cause of the vulnerability, and even how the arbitrage robot arbitrages!
 
 ## Tools can greatly improve efficiency
+
 Before getting into the analysis, allow me to introduce some common tools. The right tools can help you do research more efficiently.
 
 ### Transaction debugging tools
-[Phalcon](https://phalcon.blocksec.com/) | [Tx.viewer](https://tx.eth.samczsun.com/) | [Cruise](https://cruise.supremacy.team/) | [Ethtx](https://ethtx.info/) | [Tenderly](https://dashboard.tenderly.co/explorer)
 
-Transaction Viewer is the most commonly used tool, it is able to list the stack trace of function calls and the input data in each function during the transaction. Transaction viewer tools are all similar; the major difference is the chain support and auxiliary functions support. I personally use Phalcon and Sam’s Transaction Viewer. If I encounter unsupported chains, I will use Tenderly. Tenderly supports most chains, But the readability is limited, and analysis can be slow using its Debug feature. It is however one of the first tools I learned along with Ethtx.
+[Phalcon](https://phalcon.blocksec.com/) | [Ethtx](https://ethtx.info/) | [Tenderly](https://dashboard.tenderly.co/explorer)
+
+Transaction Viewer is the most commonly used tool, it is able to list the stack trace of function calls and the input data in each function during the transaction. Transaction viewer tools are all similar; the major difference is the chain support and auxiliary functions support. I personally use Phalcon's Transaction Viewer. If I encounter unsupported chains, I will use Tenderly. Tenderly supports most chains, But the readability is limited, and analysis can be slow using its Debug feature. It is however one of the first tools I learned along with Ethtx.
 
 #### Chain support comparison
 
 Phalcon： `Ethereum、BSC、Cronos、Avalanche C-Chain、Polygon`
-
-Sam's Transaction viewer： `Ethereum、Polygon、BSC、Avalanche C-Chain、Fantom、Arbitrum、Optimism`
-
-Cruise： `Ethereum、BSC 、Polygon、Arbitrum、Fantom、Optimism、Avalanche、Celo、Gnosis`
 
 Ethtx： `Ethereum、Goerli testnet`
 
@@ -30,6 +28,7 @@ Tendery： `Ethereum、Polygon、BSC、Sepolia、Goerli、Gnosis、POA、RSK、A
 、Fantom、Moonbeam、Moonriver`
 
 #### Lab
+
 We will look at JayPeggers - Insufficient validation + Reentrancy [Incident](https://github.com/SunWeb3Sec/DeFiHackLabs/#20221229---jay---insufficient-validation--reentrancy) as an example transaction [TXID](https://phalcon.blocksec.com/tx/eth/0xd4fafa1261f6e4f9c8543228a67caf9d02811e4ad3058a2714323964a8db61f6) to dissect.
 
 First I use the Phalcon tool developed by Blocksec to illustrate. The basic information and balance changes of the transaction can be seen in the figure below. From the balance changes, we can quickly see how much profit the attacker has made. In this example, the attacker made a profit of 15.32 ETH.
@@ -62,7 +61,7 @@ This can help us clarify all the things this transaction did. Before writing the
 
 ### Ethereum Signature Database
 
-[4byte](https://www.4byte.directory/) | [sig.eth](https://sig.eth.samczsun.com/) | [etherface](https://www.etherface.io/hash)
+[4byte](https://www.4byte.directory/) | [etherface](https://www.etherface.io/hash)
 
 In the Raw Input data, the first 4 bytes are Function Signatures. Sometimes if Etherscan or analysis tools cannot identify the function, we may check the possible Functions through the Signature Database.
 
@@ -92,6 +91,7 @@ Obtain ABI for unverified contracts: If you encounter a contract that is not ver
 ![圖片](https://user-images.githubusercontent.com/52526645/210588945-701b0e22-7390-4539-9d2f-e13479b52824.png)
 
 ### Decompile tools
+
 [Etherscan-decompile bytecode](https://etherscan.io/address/0xaE9C73fd0Fd237c1c6f66FE009d24ce969e98704#code) | [Dedaub](https://library.dedaub.com/decompile) | [heimdall-rs](https://github.com/Jon-Becker/heimdall-rs)
 
 Etherscan has a built-in decompilation feature, but the readability of the result is often poor. Personally, I often use Dedaub, which produces better decompiled code. It is my recommended decompiler. Let's use a MEV Bot being attacked as an example You can try to decompile it for yourself using this [contract](https://twitter.com/1nf0s3cpt/status/1577594615104172033).
@@ -105,6 +105,7 @@ First, copy the Bytecodes of the unverified contract and paste it on Dedaub, and
 If you want to learn more, you can refer to the following videos.
 
 ## Resources
+
 [samczsun's eth txn explorer and vscode extension](https://www.youtube.com/watch?v=HXgu239mPBc)
 
 [Vulnerabilities in DeFi by Daniel V.F.](https://www.youtube.com/watch?v=9fcOffCg2ig)
@@ -114,4 +115,3 @@ If you want to learn more, you can refer to the following videos.
 [Reversing The EVM: Raw Calldata](https://degatchi.com/articles/reading-raw-evm-calldata)
 
 https://web3sec.xrex.io/
-

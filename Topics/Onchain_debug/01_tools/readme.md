@@ -7,27 +7,26 @@ Author: [SunSec](https://twitter.com/1nf0s3cpt)
 第一个系列我们将介绍如何进行链上分析到撰写攻击重现。此技能将能帮助你分析攻击过程和漏洞原因甚至套利机器人如何套利！
 
 ## 工欲善其事，必先利其器
+
 在进入分析之前，我先介绍一些常用工具，正确的工具可以帮助你做研究时更有效率。
+
 ### Transaction debugging tools
-[Phalcon](https://phalcon.blocksec.com/) | [Tx.viewer](https://tx.eth.samczsun.com/) | [Cruise](https://cruise.supremacy.team/) | [Ethtx](https://ethtx.info/) | [Tenderly](https://dashboard.tenderly.co/explorer)
+
+[Phalcon](https://phalcon.blocksec.com/) | [Ethtx](https://ethtx.info/) | [Tenderly](https://dashboard.tenderly.co/explorer)
 
 Transaction Viewer 这类工具是最常用的，可以帮助我们针对想要分析的交易 Transaction，以可视化列出函数呼叫的流程以及每个函数带入了什么的参数等。
-每个工具大同小异，只差异在链的支援度不同和辅助功能，我个人是比较常用 Phalcon 和 Sam 的 Transaction Viewer，如果遇到不支援的链则会使用 Tenderly，Tenderly 支援最多链，但是可读性就不是这么方便，需要 Debug 慢慢分析。不过我最初在研究链上分析是先学习 Ethtx 和 Tenderly。
+每个工具大同小异，只差异在链的支援度不同和辅助功能，我个人是比较常用 Phalcon 的 Transaction Viewer，如果遇到不支援的链则会使用 Tenderly，Tenderly 支援最多链，但是可读性就不是这么方便，需要 Debug 慢慢分析。不过我最初在研究链上分析是先学习 Ethtx 和 Tenderly。
 
 #### 链支援度比较
 
 Phalcon： `Ethereum、BSC、Cronos、Avalanche C-Chain、Polygon`
 
-Sam's Transaction viewer： `Ethereum、Polygon、BSC、Avalanche C-Chain、Fantom、Arbitrum、Optimism`
-
-Cruise： `Ethereum、BSC 、Polygon、Arbitrum、Fantom、Optimism、Avalanche、Celo、Gnosis`
-
 Ethtx： `Ethereum、Goerli testnet`
 
-Tendery： `Ethereum、Polygon、BSC、Sepolia、Goerli、Gnosis、POA、RSK、Avalanche C-Chain、Arbitrum、Optimism
-、Fantom、Moonbeam、Moonriver`
+Tendery： `Ethereum、Polygon、BSC、Sepolia、Goerli、Gnosis、POA、RSK、Avalanche C-Chain、Arbitrum、Optimism、Fantom、Moonbeam、Moonriver`
 
 #### 实务操作
+
 以 JayPeggers - Insufficient validation + Reentrancy [事件](https://github.com/SunWeb3Sec/DeFiHackLabs/#20221229---jay---insufficient-validation--reentrancy)来当例子 [TXID](https://phalcon.blocksec.com/tx/eth/0xd4fafa1261f6e4f9c8543228a67caf9d02811e4ad3058a2714323964a8db61f6)
 使用 Blocksec 开发的 Phalcon 工具来说明，下图可以看到该交易的基本资讯和余额变化，从余额变化可以快速看出攻击者大概获利多少，以这个例子攻击者获利 15.32 ETH。
 
@@ -62,7 +61,7 @@ Phalcon 2.0 新增了资金流向和 Debug + 源代码分析可以在 Trace 的�
 
 ### Ethereum Signature Database
 
-[4byte](https://www.4byte.directory/) | [sig.eth](https://sig.eth.samczsun.com/) | [etherface](https://www.etherface.io/hash)
+[4byte](https://www.4byte.directory/) | [etherface](https://www.etherface.io/hash)
 
 在原始 Input data，前面 4bytes 为 Function Signature. 有时遇到 Etherscan 或分析工具无法解出来时，可以透过 Signature Database 来查看看可能是什么 Function。
 
@@ -93,6 +92,7 @@ Get ABI for unverified contracts: 如果遇到未开源的合约，可以透过�
 ![图片](https://user-images.githubusercontent.com/52526645/210588945-701b0e22-7390-4539-9d2f-e13479b52824.png)
 
 ### Decompile tools
+
 [Etherscan-decompile bytecode](https://etherscan.io/address/0xaE9C73fd0Fd237c1c6f66FE009d24ce969e98704#code) | [Dedaub](https://library.dedaub.com/decompile) | [heimdall-rs](https://github.com/Jon-Becker/heimdall-rs)
 
 Etherscan 内建有一个反编译功能但可读性偏差，个人比较常使用 Dedaub，可读性好一点，也是常常最多人DM 问我都使用哪个工具反编译。
@@ -105,8 +105,11 @@ Etherscan 内建有一个反编译功能但可读性偏差，个人比较常使�
 ![图片](https://user-images.githubusercontent.com/52526645/210591478-6fa928f3-455d-42b5-a1ac-6694f97386c2.png)
 
 第一课分享就先到这边，想学更多可以参考以下学习资源。
+
 ---
+
 ## 学习资源
+
 [samczsun's eth txn explorer and vscode extension](https://www.youtube.com/watch?v=HXgu239mPBc)
 
 [Vulnerabilities in DeFi by Daniel V.F.](https://www.youtube.com/watch?v=9fcOffCg2ig)
