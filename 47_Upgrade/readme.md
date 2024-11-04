@@ -36,11 +36,12 @@ tags:
 这个代理合约比[第46讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/46_ProxyContract/readme.md)中的简单。我们没有在它的`fallback()`函数中使用`内联汇编`，而仅仅用了`implementation.delegatecall(msg.data);`。因此，回调函数没有返回值，但足够教学使用了。
 
 它包含`3`个变量：
+
 - `implementation`：逻辑合约地址。
 - `admin`：admin地址。
 - `words`：字符串，可以通过逻辑合约的函数改变。
 
-它包含`3`个函数
+它包含`3`个函数：
 
 - 构造函数：初始化admin和逻辑合约地址。
 - `fallback()`：回调函数，将调用委托给逻辑合约。
