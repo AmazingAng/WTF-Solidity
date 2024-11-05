@@ -23,7 +23,7 @@ tags:
 
 ## `try-catch`
 
-在`Solidity`中，`try-catch`只能被用于`external`函数或创建合约时`constructor`（被视为`external`函数）的调用。基本语法如下：
+在`Solidity`中，`try-catch`只能被用于`external`函数或`public`函数或创建合约时`constructor`（被视为`external`函数）的调用。基本语法如下：
 
 ```solidity
 try externalContract.f() {
