@@ -45,3 +45,43 @@ contract NotContract {
         ContractCheck(contractCheck).mint();
     }
 }
+
+
+//拒绝绕过合约检查的攻击
+contract GoodContractCheck is ERC20 {
+    // 构造函数：初始化代币名称和代号
+    constructor() ERC20("", "") {}
+
+    // 利用 extcodesize 检查是否为合约
+    function isNotContract(address account) public view returns (bool) {
+        // tx.origin 是原始交易的发送者地址，不受任何中间合约调用的影响
+        return account == tx.origin && msg.sender == account;
+    }
+
+    // mint函数，只有非合约地址能调用（）
+    function mint() public {
+        require(isNotContract(msg.sender), "Only EOA allowed!");
+        _mint(msg.sender, 100);
+    }
+}
+
+// 利用构造函数的特点攻击，无法攻击成功
+contract NotContractV2 {
+    bool public isContract;
+    address public contractCheck;
+
+    // 当合约正在被创建时，extcodesize (代码长度) 为 0，因此不会被 isContract() 检测出。
+    constructor(address addr) {
+        contractCheck = addr;
+        isContract = GoodContractCheck(addr).isNotContract(address(this));
+        // This will work
+        for(uint i; i < 10; i++){
+            GoodContractCheck(addr).mint();
+        }
+    }
+
+    // 合约创建好以后，extcodesize > 0，isContract() 可以检测
+    function mint() external {
+        GoodContractCheck(contractCheck).mint();
+    }
+}
