@@ -189,7 +189,7 @@ contract EIP712Storage {
 
 1. 在 `Remix` 部署 `EIP712Storage` 合约。
 
-2. 运行 `eip712storage.html`，根据 MetaMask 的内容安全策略（[Content Security Policy](https://github.com/MetaMask/faq/blob/9257d7d52784afa957c12166aff20682cf692ae5/DEVELOPERS.md#requirements-nut_and_bolt)）的要求，MetaMask 不能通过打开的本地文件（file:// 协议）与 DApp 通信。 可以使用 Node 静态文件服务器 `http-server` 启动本地服务，在包含 `eip712storage.html` 文件的目录下执行以下命令：
+2. 运行 `eip712storage.html`，根据浏览器的内容安全策略（[Content Security Policy](https://github.com/MetaMask/faq/blob/9257d7d52784afa957c12166aff20682cf692ae5/DEVELOPERS.md#requirements-nut_and_bolt)）的要求，MetaMask 不能通过打开的本地文件（file:// 协议）与 DApp 通信。 可以使用 Node 静态文件服务器 `http-server` 启动本地服务，在包含 `eip712storage.html` 文件的目录下执行以下命令：
 
     ```sh
     npm install -g http-server
