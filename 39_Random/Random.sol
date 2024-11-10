@@ -18,7 +18,7 @@ contract Random is ERC721, VRFConsumerBaseV2Plus{
      * 使用chainlink VRF，构造函数需要继承 VRFConsumerBaseV2Plus
      * 不同链参数填的不一样
      * 网络: Sepolia测试网
-     * Chainlink VRF Coordinator 地址: 0x9ddfaca8183c41ad55329bdeed9f6a8d53168b1b
+     * Chainlink VRF Coordinator 地址: 0x9DdfaCa8183c41ad55329BdeeD9F6A8d53168B1B
      * LINK 代币地址: 0x779877a7b0d9e8603169ddbd7836e478b4624789
      * 30 gwei Key Hash: 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae
      * Minimum Confirmations 最小确认块数 : 3 （数字大安全性高，一般填12）

@@ -319,7 +319,7 @@ contract Random is ERC721, VRFConsumerBaseV2Plus{
         _mint(sender, tokenId);
     }
 ```
-## `remix`验证
+## `公共测试网`验证
 
 ### 1. 在`Chainlink VRF`上申请`Subscription`
 ![申请Subscription](./img/39-2.png)
@@ -361,6 +361,78 @@ contract Random is ERC721, VRFConsumerBaseV2Plus{
 
 当合约不使用后可以在`Chainlink VRF`上取消订阅，取出剩余的`LINK`代币
 ![取消订阅](./img/39-10.png)
+
+## `remix`本地测试网验证
+
+ChainLink也提供了在remix本地进行测试的方案。
+
+### 1. remix部署`VRFCoordinatorV2_5Mock`合约
+
+该合约用于模拟 `VRFCoordinatorV2_5` 
+
+```solidity
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.21;
+    import "@chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
+```
+
+部署`VRFCoordinatorV2_5Mock.sol`, 在`DEPLOY`下，填写`_BASEFEE`、`_GASPRICELINK`和`_WEIPERUNITLINK`。
+
+这些变量在`VRFCoordinatorV2_5Mock`合约中用于表示`VRF`请求的基本费用和`gas`价格（以`LINK`代币为单位）以及当前的`LINK/ETH`价格。
+你可以设置：`_BASEFEE=1000000000000000000000000`,`_GASPRICELINK=10000000000`,`_WEIPERUNITLINK=4520468802992735`。
+
+![部署VRFCoordinatorV2_5Mock合约](./img/39-10.png)
+
+### 2. 创建订阅
+
+点击左侧`createSubscription`以创建新订阅
+
+在`remix`控制台中，读取交易解码输出，获取订阅ID。在当前示例中，订阅ID为`47914843579104322711844175658084001921319535008700164149259867293999186422780`。
+
+![获取订阅 ID](./img/39-11.png)
+
+之后点击`fundSubscription`为您的订阅提供资金。在此示例中，我们_subid输入为`47914843579104322711844175658084001921319535008700164149259867293999186422780`（先前新创建的订阅 ID），并将`_amount`设置为`100000000000000000000`。
+
+### 3. 部署Random合约
+
+**注意:**，在部署前，需要将`Random.sol`中的vrfCoordinator修改和步骤1中的`VRFCoordinatorV2_5Mock.sol`合约地址一致。
+
+```solidity
+    /*需要手动修改这一行*/
+    address vrfCoordinator = 0xF27374C91BF602603AC5C9DaCC19BE431E3501cb;
+```
+
+`s_subId`即为步骤2中的订阅ID，点击`DEPLOY`进行部署。
+
+### 4. 将消费者地址注册至订阅服务
+
+打开已部署的`VRFCoordinatorV2_5Mock`合约的函数列表，点击`addConsumer`，并在`_subid`中填入订阅ID，`_consumer`填入部署的`Random.sol`（消费者）合约地址。
+
+![添加消费者合约地址](./img/39-12.png)
+
+### 5. 发起随机数请求
+
+点击左侧`mintRandomVRF`，发起随机数请求，可以通过查询`requesetid`来查看发起的请求ID。
+
+![请求ID](./img/39-13.png)
+
+### 6. 模拟完成随机数请求
+
+由于这是在本地环境中测试，因此需要自己来完成VRF请求。
+
+打开先前部署的`VRFCoordinatorV2_5Mock`合约的函数列表，点击`fulfillRandomWords`，填写`_requestID`和`_consumer`参数，`_requestId`即为步骤5中查询的请求ID，`_consumer`即为`random.sol`合约的地址。
+
+点击`transact`，完成随机数请求，合约会自动通过`fulfillRandomWords()`回调函数，来进行`NFT`的`mint`。
+
+### 7. 检查结果
+
+查看`remix`的控制台中日志。
+
+![transfer事件](./img/39-14.png)
+
+第一行为`Transfer`事件的签名哈希，第二行表示表示从初始地址，第三行表示mint接收方地址，第四行表示`tokenID`。
+
+从图中可以看到我们通过随机数生成，并经过取模等处理后，获取随机数`0x27`（十进制为`39`）,`tokenID = 39`的NFT成功铸造。
 
 ## 总结
 
