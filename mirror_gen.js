@@ -13,7 +13,6 @@ function findReadmeFiles(dir) {
         const stat = fs.statSync(filePath);
         
         if (stat.isDirectory() && !file.startsWith('.')) {
-            // 递归搜索子目录
             results = results.concat(findReadmeFiles(filePath));
         } else if (file.toLowerCase() === 'readme.md') {
             results.push(filePath);
@@ -27,29 +26,35 @@ function findReadmeFiles(dir) {
 function processImageLinks(content, dirName) {
     const imageRegex = /!\[(.*?)\]\((\.\/[^)]+)\)/g;
     return content.replace(imageRegex, (match, altText, imagePath) => {
-        // 移除开头的 ./
         const cleanImagePath = imagePath.replace(/^\.\//, '');
-        // 构建新的 CDN URL
         const cdnUrl = `${CDN_PREFIX}/${dirName}/${cleanImagePath}`;
         return `![${altText}](${cdnUrl})`;
     });
 }
 
-async function main() {
+// 删除 frontmatter
+function removeFrontmatter(content) {
+    // 匹配开头的 --- 到结束的 --- 之间的所有内容
+    return content.replace(/^---\n[\s\S]*?\n---\n/, '');
+}
+
+function main() {
     try {
         const readmeFiles = findReadmeFiles('.');
         console.log(`找到 ${readmeFiles.length} 个 readme.md 文件`);
+        
         for (const readmePath of readmeFiles) {
-            const content = fs.readFileSync(readmePath, 'utf-8');
-            const dirName = path.dirname(readmePath);
+            let content = fs.readFileSync(readmePath, 'utf-8');
+            const dirName = path.dirname(readmePath).replace(/^\.[\\/]/, '');
             
-            // 处理内容
+            // 先删除 frontmatter
+            content = removeFrontmatter(content);
+            // 再处理图片链接
             const processedContent = processImageLinks(content, dirName);
             
             // 只有当内容有变化时才创建新文件
             if (content !== processedContent) {
-                // 生成新文件路径
-                const mirrorPath = path.join(dirName, 'readme_mirror.md');
+                const mirrorPath = path.join(path.dirname(readmePath), 'readme_mirror.md');
                 fs.writeFileSync(mirrorPath, processedContent, 'utf-8');
                 console.log(`已生成镜像文件: ${mirrorPath}`);
             }
