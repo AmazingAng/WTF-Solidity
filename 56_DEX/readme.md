@@ -457,4 +457,4 @@ contract SimpleSwap is ERC20 {
 
 ## 总结
 
-这一讲，我们介绍了恒定乘积自动做市商，并写了一个极简的去中心化交易所。在极简Swap合约中，我们有很多没有考虑的部分，例如交易费用以及治理部分。如果你对去中心化交易所感兴趣，推荐你阅读 [Programming DeFi: Uniswap V2](https://jeiwan.net/posts/programming-defi-uniswapv2-1/) 和 [Uniswap v3 book](https://y1cunhui.github.io/uniswapV3-book-zh-cn/) ，更深入的学习。
+这一讲，我们介绍了恒定乘积自动做市商，并写了一个极简的去中心化交易所。在极简Swap合约中，我们有很多没有考虑的部分，例如交易费用以及治理部分。如果你对去中心化交易所感兴趣，推荐你阅读 [Programming DeFi: Uniswap V2](https://jeiwan.net/posts/programming-defi-uniswapv2-1/) 和 [Uniswap v3 book](https://y1cunhui.github.io/uniswapV3-book-zh-cn/)，还可以继续学习 [WTF-Dapp](https://github.com/WTFAcademy/WTF-Dapp) 课程，它包含了一个去中心化交易所实战的内容，可以更深入的学习。
