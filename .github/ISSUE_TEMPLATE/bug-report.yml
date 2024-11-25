@@ -8,7 +8,7 @@ body:
     attributes:
       value: >
         Please make sure what you are reporting is indeed a bug with reproducible steps, if you want to ask questions or share ideas, you can head to our [Discussions](https://github.com/AmazingAng/WTF-Solidity/discussions) tab, you can also join our [discord](https://discord.gg/5akcruXrsk).
-        (请确保您所报告的是一个具有可重现步骤的错误, 如果你是想问一个问题或者分享一个主意，你可以通过以下方式加入我们的[讨论](https://github.com/AmazingAng/WTF-Solidity/discussions), 你也可以加入我们的[discord](https://discord.gg/5akcruXrsk)。
+        (请确保您所报告的是一个具有可重现步骤的错误, 如果你是想问一个问题或者分享一个主意，你可以通过以下方式加入我们的[讨论](https://github.com/AmazingAng/WTF-Solidity/discussions), 你也可以加入我们的[discord](https://discord.gg/5akcruXrsk)。)
 
   - type: textarea
     attributes:
