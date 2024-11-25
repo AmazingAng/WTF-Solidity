@@ -13,7 +13,7 @@ body:
   - type: textarea
     attributes:
       label: Details (细节)
-      description: Describe what happened(描述一下发生了什么)
+      description: Describe what happened. (描述一下发生了什么。)
       placeholder: >
         Please provide the context in which the problem occurred and explain what happened. (请提供问题发生的背景并解释发生的情况。)
     validations:
@@ -31,7 +31,6 @@ body:
 
   - type: checkboxes
     attributes:
-      label: Are you willing to submit PR?(你愿意提交PR吗?)
       label: Are you willing to submit PR?(你愿意提交PR吗?)
       description: >
         This is absolutely not required, but we are happy to guide you in the contribution process
