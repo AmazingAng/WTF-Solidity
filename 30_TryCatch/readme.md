@@ -174,6 +174,46 @@ function executeNew(uint a) external returns (bool success) {
 
 ![30-5](./img/30-5.png)
 
+但是`try-catch`并不是万能的，有两种情况`try-catch`也无法捕获
+
+1.在try中调用的非合约地址的方法，即codesize为0
+```solidity
+// 调用非合约地址的方法，这里无法被try-catch捕获，会导致revert
+    function executeRevert() external {
+        //将0地址强制转换为OnlyEven合约地址，模拟调用非合约地址的方法
+        try OnlyEven(address(0)).onlyEven(1){
+            // call成功的情况下
+            emit SuccessEvent();
+        } catch Error(string memory reason){
+            // catch revert("reasonString") 和 require(false, "reasonString")
+            emit CatchEvent(reason);
+        } catch (bytes memory reason){
+            // catch失败的assert assert失败的错误类型是Panic(uint256) 不是Error(string)类型 故会进入该分支
+            emit CatchByte(reason);
+        }
+    }
+```
+![30-6](./img/30-6.png)
+
+2.函数返回值与期望的不一致
+```solidity
+ // 调用返回值不一致的方法，这里无法被try-catch捕获，会导致revert
+    function executeRevert2() external returns (bool success){
+        address onlyEven2 = address(new OnlyEven2(2));
+        uint256 amount = 2;
+        //OnlyEven2的返回值是 uint256，而这里期望的是bool,会导致revert
+        try OnlyEven(onlyEven2).onlyEven(amount) returns (bool _success){
+            // call成功的情况下
+            emit SuccessEvent();
+            return _success;
+        } catch Error(string memory reason){
+            // call不成功的情况下
+            emit CatchEvent(reason);
+        }
+    }
+```
+![30-7](./img/30-7.png)
+
 ## 总结
 
 在这一讲，我们介绍了如何在`Solidity`使用`try-catch`来处理智能合约运行中的异常：
