@@ -4,9 +4,10 @@
 
 # WTF Solidity
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
 
 路线图根据本仓库star数量来定：
+
 - [x] 64 :star: 建立社群：[discord](https://discord.gg/5akcruXrsk) | [微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform)
 
 - [ ] 128 :star: 录教学视频
@@ -289,7 +290,7 @@
 
 ### NFT
 
-**第1讲：ERC721库：Address, Strings, Context** [代码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/ERC721) | [文章](https://mirror.xyz/wtfacademy.eth/PAsIFLAmEoMufZsXlX0NWsVF8DHpHz3OrYlooosy9Ho)
+**第1讲：ERC721库：Address, Strings, Context** [代码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/ERC721) | [文章](./Topics/ERC721/1_related_libraries/readme.md)
 
 **第2讲：ERC721相关接口** [代码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/ERC721) | [文章](https://mirror.xyz/wtfacademy.eth/4mPkMgHViRjx8OM7TAI-M-2oMfRle36ULzqlpC6S7IQ)
 
