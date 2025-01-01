@@ -290,7 +290,7 @@
 
 ### NFT
 
-**第1讲：ERC721库：Address, Strings, Context** [代码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/ERC721) | [文章](./Topics/ERC721/1_related_libraries/readme.md)
+**第1讲：ERC721库：Address, Strings, Context** [代码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/ERC721) | [文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/ERC721/1_related_libraries/readme.md)
 
 **第2讲：ERC721相关接口** [代码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/ERC721) | [文章](https://mirror.xyz/wtfacademy.eth/4mPkMgHViRjx8OM7TAI-M-2oMfRle36ULzqlpC6S7IQ)
 
@@ -313,7 +313,7 @@
     贡献者是WTF学院的基石
   </h4>
   <a href="https://github.com/AmazingAng/WTF-Solidity/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=AmazingAng/WTFSolidity" />
+    <img src="https://contrib.rocks/image?repo=AmazingAng/WTF-Solidity" />
   </a>
 </div>
 
