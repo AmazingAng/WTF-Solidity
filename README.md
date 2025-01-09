@@ -294,7 +294,7 @@
 
 **第2讲：ERC721相关接口** [代码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/ERC721) | [文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/ERC721/2_Related_interface/readme.md)
 
-**第3讲：ERC721主合约** [代码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/ERC721/ERC721.sol) | [文章](https://mirror.xyz/wtfacademy.eth/-evZa3S--yw9vVcXfhn9I3UiNRaqWOTLG0eZFFgbcT0)
+**第3讲：ERC721主合约** [代码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/ERC721/ERC721.sol) | [文章](https://github.com/AmazingAng/WTF-Solidity/tree/main/Topics/ERC721/3_Erc721_main_contract/readme.md)
 
 **第4讲：BAYC主合约和严重漏洞** [代码](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/ERC721/BAYC.sol) | [文章](https://mirror.xyz/wtfacademy.eth/_buBOQflWtHDpLbg18Fp8zLe8AmLiPka2y-UhppK_u0)
 
