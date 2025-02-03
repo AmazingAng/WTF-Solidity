@@ -7,7 +7,7 @@ pragma solidity ^0.8.21;
 // call: all gas, return (bool, data)
 
 error SendFailed(); // error when sending with Send
-error CallFailed(); // error when seding with Call
+error CallFailed(); // error when sending with Call
 
 contract SendETH {
     // Constructor, make it payable so we can transfer ETH at deployment
