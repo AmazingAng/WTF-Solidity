@@ -42,7 +42,7 @@ EIP-2612 提出了 ERC20Permit，扩展了 ERC20 标准，添加了一个 `permi
 
 首先，让我们学习下 ERC20Permit 的接口合约，它定义了 3 个函数：
 
-- `permit()`: 根据 `owner` 的签名, 将 `owenr` 的ERC20代币余额授权给 `spender`，数量为 `value`。要求：
+- `permit()`: 根据 `owner` 的签名, 将 `owner` 的ERC20代币余额授权给 `spender`，数量为 `value`。要求：
  
     - `spender` 不能是零地址。
     - `deadline` 必须是未来的时间戳。
