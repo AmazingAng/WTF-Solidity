@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 import "./IERC1155.sol";
 import "./IERC1155Receiver.sol";
 import "./IERC1155MetadataURI.sol";
-import "../34_ERC721/Address.sol";
 import "../34_ERC721/String.sol";
 import "../34_ERC721/IERC165.sol";
 
@@ -13,8 +12,8 @@ import "../34_ERC721/IERC165.sol";
  * 见 https://eips.ethereum.org/EIPS/eip-1155
  */
 contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
-    using Address for address; // 使用Address库，用isContract来判断地址是否为合约
-    using Strings for uint256; // 使用Strings库
+
+    using Strings for uint256; // 使用String库
     // Token名称
     string public name;
     // Token代号
@@ -256,6 +255,9 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         emit TransferBatch(operator, from, address(0), ids, amounts);
     }
 
+    // 错误 无效的接收者
+    error ERC1155InvalidReceiver(address receiver);
+
     // @dev ERC1155的安全转账检查
     function _doSafeTransferAcceptanceCheck(
         address operator,
@@ -265,15 +267,20 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         uint256 amount,
         bytes memory data
     ) private {
-        if (to.isContract()) {
+        if (to.code.length > 0) {
             try IERC1155Receiver(to).onERC1155Received(operator, from, id, amount, data) returns (bytes4 response) {
                 if (response != IERC1155Receiver.onERC1155Received.selector) {
-                    revert("ERC1155: ERC1155Receiver rejected tokens");
+                    revert ERC1155InvalidReceiver(to);
                 }
-            } catch Error(string memory reason) {
-                revert(reason);
-            } catch {
-                revert("ERC1155: transfer to non-ERC1155Receiver implementer");
+            } catch (bytes memory reason) {
+                if (reason.length == 0) {
+                    revert ERC1155InvalidReceiver(to);
+                } else {
+                    /// @solidity memory-safe-assembly
+                    assembly {
+                        revert(add(32, reason), mload(reason))
+                    }
+                }
             }
         }
     }
@@ -287,17 +294,22 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         uint256[] memory amounts,
         bytes memory data
     ) private {
-        if (to.isContract()) {
+        if (to.code.length > 0) {
             try IERC1155Receiver(to).onERC1155BatchReceived(operator, from, ids, amounts, data) returns (
                 bytes4 response
             ) {
                 if (response != IERC1155Receiver.onERC1155BatchReceived.selector) {
-                    revert("ERC1155: ERC1155Receiver rejected tokens");
+                    revert ERC1155InvalidReceiver(to);
                 }
-            } catch Error(string memory reason) {
-                revert(reason);
-            } catch {
-                revert("ERC1155: transfer to non-ERC1155Receiver implementer");
+            } catch (bytes memory reason) {
+                if (reason.length == 0) {
+                    revert ERC1155InvalidReceiver(to);
+                } else {
+                    /// @solidity memory-safe-assembly
+                    assembly {
+                        revert(add(32, reason), mload(reason))
+                    }
+                }
             }
         }
     }
