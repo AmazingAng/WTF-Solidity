@@ -51,7 +51,7 @@ function <function name>([parameter types[, ...]]) {internal|external|public|pri
 
 5. `[pure|view|payable]`：决定函数权限/功能的关键字。`payable`（可支付的）很好理解，带着它的函数，运行的时候可以给合约转入 ETH。`pure` 和 `view` 的介绍见下一节。
 
-6. `[virtual|override]`: 方法是否可以被重写，或者是否是重写方法。`virtual`用在父合约上，标识的方法可以被子合约重写。`override`用在自合约上，表名方法重写了父合约的方法。
+6. `[virtual|override]`: 方法是否可以被重写，或者是否是重写方法。`virtual`用在父合约上，标识的方法可以被子合约重写。`override`用在子合约上，表名方法重写了父合约的方法。
 
 7. `<modifiers>`: 自定义的修饰器，可以有0个或多个修饰器。
 
