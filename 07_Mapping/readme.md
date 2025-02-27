@@ -79,6 +79,10 @@ mapping(address => address) public swapPair; // 币对的映射，地址到地�
 
     ![7-3](./img/7-3.jpg)
 
+- 映射示例 3 key-value set get
+
+    ![7-4](./img/7-4.jpg)
+
 ## 总结
 
 这一讲，我们介绍了Solidity中哈希表——映射（`Mapping`）的用法。至此，我们已经学习了所有常用变量种类，之后我们会学习控制流`if-else`，`while`等。
