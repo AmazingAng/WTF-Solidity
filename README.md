@@ -319,7 +319,7 @@
 
 ## 捐赠
 
-- 学院国库地址 Ethereum/Optimism/zkSync/Scroll/evm兼容链地址: 0x25df6da2f4e5c178ddff45038378c0b08e0bce54
+- 学院国库地址 Ethereum/Optimism/zkSync/Scroll/BSC/evm兼容链地址: 0x25df6da2f4e5c178ddff45038378c0b08e0bce54
 - [Mirror](https://mirror.xyz/wtfacademy.eth/WfM30QbSWB2_-9t98g05unTmb_2ZXucOAZMPDa7MX48)
 
 ## 参考
