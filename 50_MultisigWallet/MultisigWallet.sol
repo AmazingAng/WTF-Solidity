@@ -28,7 +28,7 @@ contract MultisigWallet {
     function _setupOwners(address[] memory _owners, uint256 _threshold) internal {
         // threshold没被初始化过
         require(threshold == 0, "WTF5000");
-        // 多签执行门槛 小于 多签人数
+        // 多签执行门槛 小于或等于 多签人数
         require(_threshold <= _owners.length, "WTF5001");
         // 多签执行门槛至少为1
         require(_threshold >= 1, "WTF5002");
@@ -61,7 +61,7 @@ contract MultisigWallet {
         checkSignatures(txHash, signatures); // 检查签名
         // 利用call执行交易，并获取交易结果
         (success, ) = to.call{value: value}(data);
-        require(success , "WTF5004");
+        //require(success , "WTF5004");
         if (success) emit ExecutionSuccess(txHash);
         else emit ExecutionFailure(txHash);
     }

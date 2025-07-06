@@ -25,21 +25,21 @@ tags:
 很多 freemint 的项目为了限制科学家（程序员）会用到 `isContract()` 方法，希望将调用者 `msg.sender` 限制为外部账户（EOA），而非合约。这个函数利用 `extcodesize` 获取该地址所存储的 `bytecode` 长度（runtime），若大于0，则判断为合约，否则就是EOA（用户）。
 
 ```solidity
-    // 利用 extcodesize 检查是否为合约
-    function isContract(address account) public view returns (bool) {
-        // extcodesize > 0 的地址一定是合约地址
-        // 但是合约在构造函数时候 extcodesize 为0
-        uint size;
-        assembly {
-            size := extcodesize(account)
-        }
-        return size > 0;
+// 利用 extcodesize 检查是否为合约
+function isContract(address account) public view returns (bool) {
+    // extcodesize > 0 的地址一定是合约地址
+    // 但是合约在构造函数时候 extcodesize 为0
+    uint size;
+    assembly {
+        size := extcodesize(account)
     }
+    return size > 0;
+}
 ```
 
 这里有一个漏洞，就是在合约在被创建的时候，`runtime bytecode` 还没有被存储到地址上，因此 `bytecode` 长度为0。也就是说，如果我们将逻辑写在合约的构造函数 `constructor` 中的话，就可以绕过 `isContract()` 检查。
 
-![](./img/S08-1.png)
+![image1](./img/S08-1.png)
 
 ## 漏洞例子
 
@@ -109,9 +109,9 @@ contract NotContract {
 
 ## 预防办法
 
-你可以使用 `(tx.origin == msg.sender)` 来检测调用者是否为合约。如果调用者为 EOA，那么`tx.origin`和`msg.sender`相等；如果它们俩不相等，调用者为合约。
+你可以使用 `(tx.origin == msg.sender)` 来检测调用者是否为合约。如果调用者为 EOA，那么`tx.origin`和`msg.sender`相等；如果它们俩不相等，调用者为合约。在[eip-3074](https://eips.ethereum.org/EIPS/eip-3074)中，这样检查合约的方式，会失效。
 
-```
+```solidity
 function realContract(address account) public view returns (bool) {
     return (tx.origin == msg.sender);
 }

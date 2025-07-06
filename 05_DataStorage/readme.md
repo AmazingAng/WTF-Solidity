@@ -25,7 +25,7 @@ tags:
 
 ## 数据位置
 
-Solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同存储位置的`gas`成本不同。`storage`类型的数据存在链上，类似计算机的硬盘，消耗`gas`多；`memory`和`calldata`类型的临时存在内存里，消耗`gas`少。大致用法：
+Solidity数据存储位置有三类：`storage`，`memory`和`calldata`。不同存储位置的`gas`成本不同。`storage`类型的数据存在链上，类似计算机的硬盘，消耗`gas`多；`memory`和`calldata`类型的临时存在内存里，消耗`gas`少。整体消耗`gas`从多到少依次为：`storage` > `memory` > `calldata`。大致用法：
 
 1. `storage`：合约里的状态变量默认都是`storage`，存储在链上。
 
@@ -68,7 +68,7 @@ function fCalldata(uint[] calldata _x) public pure returns(uint[] calldata){
     ![5-2.png](./img/5-2.png)
   - `memory`赋值给`memory`，会创建引用，改变新变量会影响原变量。
 
-- 其他情况下，赋值创建的是本体的副本，即对二者之一的修改，并不会同步到另一方
+- 其他情况下，赋值创建的是本体的副本，即对二者之一的修改，并不会同步到另一方。这有时会涉及到开发中的问题，比如从`storage`中读取数据，赋值给`memory`，然后修改`memory`的数据，但如果没有将`memory`的数据赋值回`storage`，那么`storage`的数据是不会改变的。
 
 ## 变量的作用域
 
@@ -125,7 +125,7 @@ function global() external view returns(address, uint, bytes memory){
 
 在上面例子里，我们使用了3个常用的全局变量：`msg.sender`，`block.number`和`msg.data`，他们分别代表请求发起地址，当前区块高度，和请求数据。下面是一些常用的全局变量，更完整的列表请看这个[链接](https://learnblockchain.cn/docs/solidity/units-and-global-variables.html#special-variables-and-functions)：
 
-- `blockhash(uint blockNumber)`: (`bytes32`) 给定区块的哈希值 – 只适用于256最近区块, 不包含当前区块。
+- `blockhash(uint blockNumber)`: (`bytes32`) 给定区块的哈希值 – 只适用于最近的256个区块, 不包含当前区块。
 - `block.coinbase`: (`address payable`) 当前区块矿工的地址
 - `block.gaslimit`: (`uint`) 当前区块的gaslimit
 - `block.number`: (`uint`) 当前区块的number

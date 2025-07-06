@@ -53,7 +53,7 @@ other Dapps and smart contracts will know how to interact with it. Because it pr
 
 In addition, the interface is equivalent to the contract `ABI` (Application Binary Interface), 
 and they can be converted to each other: compiling the interface contract will give you the contract `ABI`, 
-and [abi-to-sol tool](https://gnidan.github.io/ abi-to-sol/) will convert the `ABI` back to the interface contract.
+and [abi-to-sol tool](https://gnidan.github.io/abi-to-sol/) will convert the `ABI` back to the interface contract.
 
 We take the `IERC721` contract, the interface for the `ERC721` token standard, as an example. It consists of 3 events and 9 functions, 
 which all `ERC721` contracts need to implement. In the interface, each function ends with `;` instead of the function body `{ }`. Moreover, every function in the interface contract is by default `virtual`, so you do not need to label the function as `virtual` explicitly.
@@ -86,8 +86,8 @@ interface IERC721 is IERC165 {
 
 ### IERC721 Event
 `IERC721` contains 3 events.
-- `Transfer` event: emitted during transfer, records the sending address `from`, the receiving address `to`, and `tokenid`.
-- `Approval` event: emitted during approval, records the token owner address `owner`, the approved address `approved`, and `tokenid`.
+- `Transfer` event: emitted during transfer, records the sending address `from`, the receiving address `to`, and `tokenId`.
+- `Approval` event: emitted during approval, records the token owner address `owner`, the approved address `approved`, and `tokenId`.
 - `ApprovalForAll` event: emitted during batch approval, records the owner address `owner` of batch approval, the approved address `operator`, and whether the approve is enabled or disabled `approved`.
 
 ### IERC721 Function

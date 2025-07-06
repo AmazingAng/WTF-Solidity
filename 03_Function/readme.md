@@ -25,7 +25,8 @@ Solidity语言的函数非常灵活，可以进行各种复杂操作。在本教
 我们先看一下 Solidity 中函数的形式:
 
 ```solidity
-function <function name>(<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
+function <function name>([parameter types[, ...]]) {internal|external|public|private} [pure|view|payable] [virtual|override] [<modifiers>]
+[returns (<return types>)]{ <function body> }
 ```
 
 看着有一些复杂，让我们从前往后逐个解释(方括号中的是可写可不
@@ -35,7 +36,7 @@ function <function name>(<parameter types>) {internal|external|public|private} [
 
 2. `<function name>`：函数名。
 
-3. `(<parameter types>)`：圆括号内写入函数的参数，即输入到函数的变量类型和名称。
+3. `([parameter types[, ...]])`：圆括号内写入函数的参数，即输入到函数的变量类型和名称。
 
 4. `{internal|external|public|private}`：函数可见性说明符，共有4种。
 
@@ -46,11 +47,17 @@ function <function name>(<parameter types>) {internal|external|public|private} [
 
     **注意 1**：合约中定义的函数需要明确指定可见性，它们没有默认值。
 
-    **注意 2**：`public|private|internal` 也可用于修饰状态变量。`public`变量会自动生成同名的`getter`函数，用于查询数值。未标明可见性类型的状态变量，默认为`internal`。
+    **注意 2**：`public|private|internal` 也可用于修饰状态变量(定义可参考[WTF Solidity 第5讲的相关内容]([../05_DataStorage/readme.md#1-状态变量](https://github.com/AmazingAng/WTF-Solidity/tree/main/05_DataStorage#1-%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F)))。`public`变量会自动生成同名的`getter`函数，用于查询数值。未标明可见性类型的状态变量，默认为`internal`。
 
 5. `[pure|view|payable]`：决定函数权限/功能的关键字。`payable`（可支付的）很好理解，带着它的函数，运行的时候可以给合约转入 ETH。`pure` 和 `view` 的介绍见下一节。
 
-6. `[returns ()]`：函数返回的变量类型和名称。
+6. `[virtual|override]`: 方法是否可以被重写，或者是否是重写方法。`virtual`用在父合约上，标识的方法可以被子合约重写。`override`用在子合约上，表名方法重写了父合约的方法。
+
+7. `<modifiers>`: 自定义的修饰器，可以有0个或多个修饰器。
+
+8. `[returns ()]`：函数返回的变量类型和名称。
+
+9. `<function body>`: 函数体。 
 
 ## 到底什么是 `Pure` 和`View`？
 
@@ -150,7 +157,7 @@ function minusPayable() external payable returns(uint256 balance) {
 }
 ```
 
-我们定义一个 `external payable` 的 `minusPayable()` 函数，间接的调用 `minus()`，并且返回合约里的 ETH 余额（`this` 关键字可以让我们引用合约地址）。我们可以在调用 `minusPayable()` 时往合约里转入1个 ETH。
+我们定义一个 `external payable` 的 `minusPayable()` 函数，间接地调用 `minus()`，并且返回合约里的 ETH 余额（`this` 关键字可以让我们引用合约地址）。我们可以在调用 `minusPayable()` 时往合约里转入1个 ETH。
 
 ![mirror-image-1](https://images.mirror-media.xyz/publication-images/ETDPN8myq7jFfAL8CUAFt.png?height=148&width=588)
 

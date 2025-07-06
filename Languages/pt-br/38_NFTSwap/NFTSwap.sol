@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-import "../34_ERC721/IERC721.sol";
-import "../34_ERC721/IERC721Receiver.sol";
-import "../34_ERC721/WTFApe.sol";
+import "../../../34_ERC721/IERC721.sol";
+import "../../../34_ERC721/IERC721Receiver.sol";
+import "../../../34_ERC721/WTFApe.sol";
 
 contract NFTSwap is IERC721Receiver {
     event List(
@@ -30,96 +30,95 @@ contract NFTSwap is IERC721Receiver {
         uint256 newPrice
     );
 
-    // Definindo a estrutura 'order'
     struct Order {
         address owner;
         uint256 price;
     }
-    // Mapeamento de Pedido NFT
+
     mapping(address => mapping(uint256 => Order)) public nftList;
 
     fallback() external payable {}
 
-    // Venda pendente: O vendedor listou um NFT, com o endereço do contrato _nftAddr, tokenId _tokenId e preço _price em Ethereum (unidade wei).
     function list(address _nftAddr, uint256 _tokenId, uint256 _price) public {
-        // Declaring variable for IERC721 interface contract
-        // Contrato autorizado
-        // Preço maior que 0
+        require(_price > 0, "Price must be greater than 0");
 
-        //Definir o detentor e o preço do NF
-        _order.owner = msg.sender;
-        _order.price = _price;
-        // Transferir NFT para um contrato.
+        IERC721 _nft = IERC721(_nftAddr);
+        require(
+            _nft.ownerOf(_tokenId) == msg.sender,
+            "Only the owner can list the NFT"
+        );
+        require(
+            _nft.getApproved(_tokenId) == address(this),
+            "Contract is not approved to transfer this NFT"
+        );
+
+        nftList[_nftAddr][_tokenId] = Order(msg.sender, _price);
         _nft.safeTransferFrom(msg.sender, address(this), _tokenId);
 
-        // Liberar evento de List
         emit List(msg.sender, _nftAddr, _tokenId, _price);
     }
 
-    // Compra: O comprador adquire um NFT, com contrato _nftAddr e tokenId _tokenId, ao chamar a função, é necessário fornecer ETH.
     function purchase(address _nftAddr, uint256 _tokenId) public payable {
-        // Obter Pedido
-        // O preço do NFT é maior que 0
-        // O preço de compra é maior do que o preço de etiqueta
-        // Declaring variable for IERC721 interface contract
+        Order memory order = nftList[_nftAddr][_tokenId];
+        require(order.price > 0, "NFT is not listed for sale");
+        require(msg.value >= order.price, "Insufficient ETH to purchase NFT");
+
         IERC721 _nft = IERC721(_nftAddr);
-        // NFT está presente no contrato.
+        require(
+            _nft.ownerOf(_tokenId) == address(this),
+            "NFT is not in the contract"
+        );
 
-        // Transferir o NFT para o comprador
+        delete nftList[_nftAddr][_tokenId];
+
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
-        // Transferir ETH para o vendedor e reembolsar o comprador com o ETH excedente
-        payable(_order.owner).transfer(_order.price);
-        payable(msg.sender).transfer(msg.value - _order.price);
+        payable(order.owner).transfer(order.price);
 
-        // Remover pedido
+        if (msg.value > order.price) {
+            payable(msg.sender).transfer(msg.value - order.price);
+        }
 
-        // Liberar evento de compra
-        emit Purchase(msg.sender, _nftAddr, _tokenId, _order.price);
+        emit Purchase(msg.sender, _nftAddr, _tokenId, order.price);
     }
 
-    // Cancelar pedido: O vendedor cancela a ordem.
     function revoke(address _nftAddr, uint256 _tokenId) public {
-        // Obter Pedido
-        // Deve ser iniciado pelo titular
-        // Declaring variable for IERC721 interface contract
+        Order memory order = nftList[_nftAddr][_tokenId];
+        require(order.owner == msg.sender, "You are not the owner of this NFT");
+
         IERC721 _nft = IERC721(_nftAddr);
-        // NFT está presente no contrato.
+        require(
+            _nft.ownerOf(_tokenId) == address(this),
+            "NFT is not in the contract"
+        );
 
-        // Transferir o NFT para o vendedor.
+        delete nftList[_nftAddr][_tokenId];
+
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
-        // Remover pedido
 
-        // Liberar o evento Revoke
         emit Revoke(msg.sender, _nftAddr, _tokenId);
     }
 
-    // Ajuste de preço: o vendedor ajusta o preço do pedido pendente
     function update(
         address _nftAddr,
         uint256 _tokenId,
         uint256 _newPrice
     ) public {
-        // O preço do NFT é maior que 0
-        // Obter Pedido
-        // Deve ser iniciado pelo titular
-        // Declaring variable for IERC721 interface contract
-        IERC721 _nft = IERC721(_nftAddr);
-        // NFT está presente no contrato.
+        require(_newPrice > 0, "Price must be greater than 0");
 
-        // Ajustar o preço do NFT
-        _order.price = _newPrice;
+        Order storage order = nftList[_nftAddr][_tokenId];
+        require(order.owner == msg.sender, "You are not the owner of this NFT");
 
-        // Liberar evento de atualização
+        order.price = _newPrice;
+
         emit Update(msg.sender, _nftAddr, _tokenId, _newPrice);
     }
 
-    // Implemente o onERC721Received do {IERC721Receiver} para receber tokens ERC721
     function onERC721Received(
-        address operator,
-        address from,
-        uint tokenId,
-        bytes calldata data
-    ) external override returns (bytes4) {
+        address,
+        address,
+        uint256,
+        bytes calldata
+    ) external pure override returns (bytes4) {
         return IERC721Receiver.onERC721Received.selector;
     }
 }
