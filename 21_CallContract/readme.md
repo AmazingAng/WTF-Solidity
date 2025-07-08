@@ -54,7 +54,7 @@ contract OtherContract {
 }
 ```
 
-这个合约包含一个状态变量`_x`，一个事件`Log`在收到`ETH`时触发，三个函数：
+这个合约包含一个状态变量`_x`、一个在收到`ETH`时触发的事件`Log`，以及三个函数：
 
 - `getBalance()`: 返回合约`ETH`余额。
 - `setX()`: `external payable`函数，可以设置`_x`的值，并向合约发送`ETH`。
@@ -62,7 +62,12 @@ contract OtherContract {
 
 ## 调用`OtherContract`合约
 
-我们可以利用合约的地址和合约代码（或接口）来创建合约的引用：`_Name(_Address)`，其中`_Name`是合约名，应与合约代码（或接口）中标注的合约名保持一致，`_Address`是合约地址。然后用合约的引用来调用它的函数：`_Name(_Address).f()`，其中`f()`是要调用的函数。
+我们可以利用合约的地址和合约代码（或接口）来创建对一个合约的引用：`_Name(_Address)`：
+
+- `_Name`是合约名，必须与​​合约代码或接口中定义的合约名​​严格一致​​。
+- `_Address`是目标合约部署在链上的地址。
+
+创建引用后，就可以通过它来调用目标合约的函数了：`_Name(_Address).f()`，其中`f()`是要调用的函数。
 
 下面我们介绍4个调用合约的例子，在remix中编译合约后，分别部署`OtherContract`和`CallContract`：
 
