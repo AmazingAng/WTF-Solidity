@@ -34,7 +34,7 @@ tags:
 3. 不能接收以太币
 4. 不可以被销毁
 
-需要注意的是，库合约中的函数可见性如果被设置为`public`或者`external`，则在调用函数时会触发一次`delegatecall`。而如果被设置为`internal`，则不会引起。对于设置为`private`可见性的函数来说，其仅能在库合约中可见，在其他合约中不可用。
+需要注意的是，库合约中的函数可见性如果被设置为`public`或者`external`，则在调用这个函数时会触发一次`delegatecall`，此时会在调用合约的上下文中执行库合约的代码。而如果被设置为`internal`，则不会触发。对于设置为`private`可见性的函数来说，其仅能在库合约中可见，在其他合约中不可见。
 
 
 ## Strings库合约
@@ -111,7 +111,7 @@ library Strings {
 
 1. 利用using for指令
 
-    指令`using A for B;`可用于附加库合约（从库 A）到任何类型（B）。添加完指令后，库`A`中的函数会自动添加为`B`类型变量的成员，可以直接调用。注意：在调用的时候，这个变量会被当作第一个参数传递给函数：
+    通过`using A for B;`指令，库合约 A 中的函数可被附加到类型 B 的变量上，​​实现直接调用​​。注意：调用时，该变量会自动作为函数的第一个参数传入，无需显式传递：
 
     ```solidity
     // 利用using for指令
@@ -137,7 +137,7 @@ library Strings {
 
 ## 总结
 
-这一讲，我们用`ERC721`的引用的库合约`Strings`为例介绍`Solidity`中的库合约（`Library`）。99%的开发者都不需要自己去写库合约，会用大神写的就可以了。我们只需要知道什么情况该用什么库合约。常用的有：
+这一讲，我们以`ERC721`的引用的库合约`Strings`为例介绍`Solidity`中的库合约（`Library`）。99%的开发者都不需要自己去写库合约，会用大神写的就可以了。我们只需要知道什么情况该用什么库合约。常用的有：
 
 1. [Strings](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/4a9cc8b4918ef3736229a5cc5a310bdc17bf759f/contracts/utils/Strings.sol)：将`uint256`转换为`String`
 2. [Address](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/4a9cc8b4918ef3736229a5cc5a310bdc17bf759f/contracts/utils/Address.sol)：判断某个地址是否为合约地址
