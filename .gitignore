@@ -9,4 +9,5 @@ artifacts
 **node_modules**
 **cache**
 **artifacts**
+.deps
 **readme_mirror.md**
