@@ -43,7 +43,7 @@ event Update(address indexed seller, address indexed nftAddr, uint256 indexed to
 
 ### 订单
 
-`NFT`订单抽象为`Order`结构体，包含挂单价格`price`和持有人`owner`信息。`nftList`映射记录了订单是对应的`NFT`系列（合约地址）和`tokenId`信息。
+`NFT`订单抽象为`Order`结构体，包含挂单价格`price`和持有人`owner`信息。`nftList`映射通过`NFT`合约地址和`tokenId`信息，能定位到具体NFT的订单（包括持有者地址和挂单价格）。
 
 ```solidity
 // 定义order结构体
