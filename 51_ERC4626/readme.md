@@ -135,14 +135,14 @@ interface IERC4626 is IERC20, IERC20Metadata {
     function deposit(uint256 assets, address receiver) external returns (uint256 shares);
 
     /**
-     * @dev 铸造函数: 用户需要存入 assets 单位的基础资产，然后合约给 receiver 地址铸造 share 数量的金库额度
+     * @dev 铸造函数: 用户指定想获得 shares 数量的金库额度，函数计算并返回需要存入的 assets 单位的基础资产，然后合约从用户账户转出 assets 单位的基础资产，再给 receiver 地址铸造指定数量的金库额度。
      * - 必须释放 Deposit 事件.
      * - 如果全部金库额度不能铸造，必须revert，比如铸造数额大大于上限等。
      */
     function mint(uint256 shares, address receiver) external returns (uint256 assets);
 
     /**
-     * @dev 提款函数: owner 地址销毁 share 单位的金库额度，然后合约将 assets 单位的基础资产发送给 receiver 地址
+     * @dev 提款函数: 将 assets 单位的基础资产发送给 receiver 地址，owner 地址销毁 shares 单位的金库额度
      * - 释放 Withdraw 事件
      * - 如果全部基础资产不能提取，将revert
      */
