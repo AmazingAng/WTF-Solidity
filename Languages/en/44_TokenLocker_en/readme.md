@@ -7,13 +7,13 @@ tags:
 
 # WTF Solidity Crash Course: 44. Token Lock
 
-I have been relearning Solidity recently to solidify my understanding of the language and to create a "WTF Solidity Crash Course" for beginners (advanced programmers can find other tutorials). I will update it weekly with 1-3 lessons.
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies.
 
-Feel free to follow me on Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-You are also welcome to join the WTF Scientists community and find information on how to join the WeChat group: [link](https://discord.gg/5akcruXrsk)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-All of the code and tutorials are open source and can be found on GitHub (I will provide a course certification for 1024 stars and a community NFT for 2048 stars): [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 

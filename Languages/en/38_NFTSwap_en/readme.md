@@ -10,13 +10,13 @@ tags:
 
 # WTF Simplified Introduction to Solidity: 38. NFT Exchange
 
-I have been revisiting Solidity lately to review the details and create a "WTF Simplified Introduction to Solidity" for beginners (professional programmers may find other tutorials more suitable), with 1-3 updates per week.
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies.
 
-Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-Discord: [WTF Academy](https://discord.gg/5akcruXrsk)
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
 
-All code and tutorials are open source on Github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
