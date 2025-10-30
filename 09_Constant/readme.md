@@ -44,7 +44,7 @@ address constant CONSTANT_ADDRESS = 0x0000000000000000000000000000000000000000;
 ``` solidity
 // immutable变量可以在constructor里初始化，之后不能改变
 uint256 public immutable IMMUTABLE_NUM = 9999999999;
-// 在`Solidity v8.0.21`以后,下列变量数值暂为初始值
+// 在`Solidity v0.8.21`以后,下列变量数值暂为初始值
 address public immutable IMMUTABLE_ADDRESS; 
 uint256 public immutable IMMUTABLE_BLOCK;
 uint256 public immutable IMMUTABLE_TEST;
