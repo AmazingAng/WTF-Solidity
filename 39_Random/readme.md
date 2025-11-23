@@ -62,9 +62,9 @@ tags:
 
 创建完成后往`Subscription`中转入一些`Link`代币。测试网的`LINK`代币可以从[LINK水龙头](https://faucets.chain.link/)领取。
 
-**2. 用户合约继承`VRFConsumerBaseV2`** 
+**2. 用户合约继承`VRFConsumerBaseV2Plus`** 
 
-为了使用`VRF`获取随机数，合约需要继承`VRFConsumerBaseV2`合约，并在构造函数中初始化`VRFCoordinatorV2Interface`和`Subscription Id`。
+为了使用`VRF`获取随机数，合约需要继承`VRFConsumerBaseV2Plus`合约，并在构造函数中初始化`Subscription Id`。
 
 **注意:** 不同链对应不同的参数，在[这里](https://docs.chain.link/vrf/v2/subscription/supported-networks)查询。
 
@@ -74,47 +74,43 @@ tags:
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
-import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+import {VRFConsumerBaseV2Plus} from "@chainlink/contracts/src/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol";
+import {VRFV2PlusClient} from "@chainlink/contracts/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
 
-contract RandomNumberConsumer is VRFConsumerBaseV2{
-
-    //请求随机数需要调用VRFCoordinatorV2Interface接口
-    VRFCoordinatorV2Interface COORDINATOR;
+contract RandomNumberConsumer is VRFConsumerBaseV2Plus{
     
     // 申请后的subId
-    uint64 subId;
+    //订阅ID类型已从VRF V2中的uint64变为VRF V2.5中的uint256
+    uint256 subId;
 
     //存放得到的 requestId 和 随机数
     uint256 public requestId;
     uint256[] public randomWords;
     
     /**
-     * 使用chainlink VRF，构造函数需要继承 VRFConsumerBaseV2
+     * 使用chainlink VRF，构造函数需要继承 VRFConsumerBaseV2Plus
      * 不同链参数填的不一样
-     * 具体可以看：https://docs.chain.link/vrf/v2/subscription/supported-networks
      * 网络: Sepolia测试网
-     * Chainlink VRF Coordinator 地址: 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
-     * LINK 代币地址: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
-     * 30 gwei Key Hash: 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c
+     * Chainlink VRF Coordinator 地址: 0x9ddfaca8183c41ad55329bdeed9f6a8d53168b1b
+     * LINK 代币地址: 0x779877a7b0d9e8603169ddbd7836e478b4624789
+     * 30 gwei Key Hash: 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae
      * Minimum Confirmations 最小确认块数 : 3 （数字大安全性高，一般填12）
      * callbackGasLimit gas限制 : 最大 2,500,000
      * Maximum Random Values 一次可以得到的随机数个数 : 最大 500          
      */
-    address vrfCoordinator = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
-    bytes32 keyHash = 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
+    address vrfCoordinator = 0x9DdfaCa8183c41ad55329BdeeD9F6A8d53168B1B;
+    bytes32 keyHash = 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae;
     uint16 requestConfirmations = 3;
     uint32 callbackGasLimit = 200_000;
     uint32 numWords = 3;
     
-    constructor(uint64 s_subId) VRFConsumerBaseV2(vrfCoordinator){
-        COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
+    constructor(uint256 s_subId) VRFConsumerBaseV2Plus(vrfCoordinator){
         subId = s_subId;
     }
 ```
 **2. 用户合约申请随机数** 
 
-用户可以调用从`VRFCoordinatorV2Interface`接口合约中的`requestRandomWords`函数申请随机数，并返回申请标识符`requestId`。这个申请会传递给`VRF`合约。
+用户可以通过来自`VRFConsumerBaseV2Plus.sol`的`s_vrfCoordinator`，调用`requestRandomWords`函数申请随机数，并返回申请标识符`requestId`。这个申请会传递给`VRF`合约。
 
 **注意:** 合约部署后，需要把合约加入到`Subscription`的`Consumers`中，才能发送申请。
 
@@ -123,12 +119,20 @@ contract RandomNumberConsumer is VRFConsumerBaseV2{
      * 向VRF合约申请随机数 
      */
     function requestRandomWords() external {
-        requestId = COORDINATOR.requestRandomWords(
-            keyHash,
-            subId,
-            requestConfirmations,
-            callbackGasLimit,
-            numWords
+        requestId = s_vrfCoordinator.requestRandomWords(
+            VRFV2PlusClient.RandomWordsRequest(
+                {
+                    keyHash:keyHash,
+                    subId:subId,
+                    requestConfirmations: requestConfirmations,
+                    callbackGasLimit: callbackGasLimit,
+                    numWords: numWords,
+                    extraArgs: VRFV2PlusClient._argsToBytes(
+                    //此为是否指定原生代币如ETH等，来支付VRF请求的费用，当为false表示使用LINK代币支付
+                    VRFV2PlusClient.ExtraArgsV1({nativePayment: false})
+                    )
+                }
+            )
         );
     }
 ```
@@ -148,24 +152,24 @@ contract RandomNumberConsumer is VRFConsumerBaseV2{
      * VRF合约的回调函数，验证随机数有效之后会自动被调用
      * 消耗随机数的逻辑写在这里
      */
-    function fulfillRandomWords(uint256 requestId, uint256[] memory s_randomWords) internal override {
+    function fulfillRandomWords(uint256 _requestId, uint256[] calldata s_randomWords) internal override {
         randomWords = s_randomWords;
     }
 ```
 
 ## `tokenId`随机铸造的`NFT`
 
-这一节，我们将利用链上和链下随机数来做一款`tokenId`随机铸造的`NFT`。`Random`合约继承`ERC721`和`VRFConsumerBaseV2`合约。
+这一节，我们将利用链上和链下随机数来做一款`tokenId`随机铸造的`NFT`。`Random`合约继承`ERC721`和`VRFConsumerBaseV2Plus`合约。
 
 ```Solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
 import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/ERC721.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
-import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+import {VRFConsumerBaseV2Plus} from "@chainlink/contracts/src/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol";
+import {VRFV2PlusClient} from "@chainlink/contracts/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
 
-contract Random is ERC721, VRFConsumerBaseV2{
+contract Random is ERC721, VRFConsumerBaseV2Plus{
 ```
 
 ### 状态变量
@@ -175,7 +179,6 @@ contract Random is ERC721, VRFConsumerBaseV2{
     - `ids`：数组，用于计算可供`mint`的`tokenId`，见`pickRandomUniqueId()`函数。
     - `mintCount`：已经`mint`的数量。
 - `Chainlink VRF`相关
-    - `COORDINATOR`：调用`VRFCoordinatorV2Interface`接口
     - `vrfCoordinator`:`VRF`合约地址 
     - `keyHash`:`VRF`唯一标识符。
     - `requestConfirmations`:确认块数
@@ -193,26 +196,25 @@ contract Random is ERC721, VRFConsumerBaseV2{
 
     // chainlink VRF参数
     
-    //VRFCoordinatorV2Interface
-    VRFCoordinatorV2Interface COORDINATOR;
     
     /**
-     * 使用chainlink VRF，构造函数需要继承 VRFConsumerBaseV2
+     * 使用chainlink VRF，构造函数需要继承 VRFConsumerBaseV2Plus
      * 不同链参数填的不一样
      * 网络: Sepolia测试网
-     * Chainlink VRF Coordinator 地址: 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
-     * LINK 代币地址: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
-     * 30 gwei Key Hash: 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c
+     * Chainlink VRF Coordinator 地址: 0x9ddfaca8183c41ad55329bdeed9f6a8d53168b1b
+     * LINK 代币地址: 0x779877a7b0d9e8603169ddbd7836e478b4624789
+     * 30 gwei Key Hash: 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae
      * Minimum Confirmations 最小确认块数 : 3 （数字大安全性高，一般填12）
      * callbackGasLimit gas限制 : 最大 2,500,000
      * Maximum Random Values 一次可以得到的随机数个数 : 最大 500          
      */
-    address vrfCoordinator = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
-    bytes32 keyHash = 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
+    address vrfCoordinator = 0x9DdfaCa8183c41ad55329BdeeD9F6A8d53168B1B;
+    bytes32 keyHash = 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae;
     uint16 requestConfirmations = 3;
     uint32 callbackGasLimit = 1_000_000;
     uint32 numWords = 1;
-    uint64 subId;
+    //订阅ID类型已从VRF V2中的uint64变为VRF V2.5中的uint256
+    uint256 subId;
     uint256 public requestId;
     
     // 记录VRF申请标识对应的mint地址
@@ -220,13 +222,12 @@ contract Random is ERC721, VRFConsumerBaseV2{
 ```
 
 ### 构造函数
-初始化继承的`VRFConsumerBaseV2`和`ERC721`合约的相关变量。
+初始化继承的`VRFConsumerBaseV2Plus`和`ERC721`合约的相关变量。
 
 ```solidity
-    constructor(uint64 s_subId) 
-        VRFConsumerBaseV2(vrfCoordinator)
+    constructor(uint256 s_subId) 
+        VRFConsumerBaseV2Plus(vrfCoordinator)
         ERC721("WTF Random", "WTF"){
-            COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
             subId = s_subId;
     }
 ```
@@ -290,12 +291,20 @@ contract Random is ERC721, VRFConsumerBaseV2{
      */
     function mintRandomVRF() public {
         // 调用requestRandomness获取随机数
-        requestId = COORDINATOR.requestRandomWords(
-            keyHash,
-            subId,
-            requestConfirmations,
-            callbackGasLimit,
-            numWords
+        requestId = s_vrfCoordinator.requestRandomWords(
+            VRFV2PlusClient.RandomWordsRequest(
+                {
+                    keyHash:keyHash,
+                    subId:subId,
+                    requestConfirmations: requestConfirmations,
+                    callbackGasLimit: callbackGasLimit,
+                    numWords: numWords,
+                    extraArgs: VRFV2PlusClient._argsToBytes(
+                    //此为是否指定原生代币如ETH等，来支付VRF请求的费用，当为false表示使用LINK代币支付
+                    VRFV2PlusClient.ExtraArgsV1({nativePayment: false})
+                    )
+                }
+            )
         );
         requestToSender[requestId] = msg.sender;
     }
@@ -304,13 +313,13 @@ contract Random is ERC721, VRFConsumerBaseV2{
      * VRF的回调函数，由VRF Coordinator调用
      * 消耗随机数的逻辑写在本函数中
      */
-    function fulfillRandomWords(uint256 requestId, uint256[] memory s_randomWords) internal override{
-        address sender = requestToSender[requestId]; // 从requestToSender中获取minter用户地址
+    function fulfillRandomWords(uint256 _requestId, uint256[] calldata s_randomWords) internal override{
+        address sender = requestToSender[_requestId]; // 从requestToSender中获取minter用户地址
         uint256 tokenId = pickRandomUniqueId(s_randomWords[0]); // 利用VRF返回的随机数生成tokenId
         _mint(sender, tokenId);
     }
 ```
-## `remix`验证
+## `公共测试网`验证
 
 ### 1. 在`Chainlink VRF`上申请`Subscription`
 ![申请Subscription](./img/39-2.png)
@@ -352,6 +361,78 @@ contract Random is ERC721, VRFConsumerBaseV2{
 
 当合约不使用后可以在`Chainlink VRF`上取消订阅，取出剩余的`LINK`代币
 ![取消订阅](./img/39-10.png)
+
+## `remix`本地测试网验证
+
+ChainLink也提供了在remix本地进行测试的方案。
+
+### 1. remix部署`VRFCoordinatorV2_5Mock`合约
+
+该合约用于模拟 `VRFCoordinatorV2_5` 
+
+```solidity
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.21;
+    import "@chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
+```
+
+部署`VRFCoordinatorV2_5Mock.sol`, 在`DEPLOY`下，填写`_BASEFEE`、`_GASPRICELINK`和`_WEIPERUNITLINK`。
+
+这些变量在`VRFCoordinatorV2_5Mock`合约中用于表示`VRF`请求的基本费用和`gas`价格（以`LINK`代币为单位）以及当前的`LINK/ETH`价格。
+你可以设置：`_BASEFEE=1000000000000000000000000`,`_GASPRICELINK=10000000000`,`_WEIPERUNITLINK=4520468802992735`。
+
+![部署VRFCoordinatorV2_5Mock合约](./img/39-10.png)
+
+### 2. 创建订阅
+
+点击左侧`createSubscription`以创建新订阅
+
+在`remix`控制台中，读取交易解码输出，获取订阅ID。在当前示例中，订阅ID为`47914843579104322711844175658084001921319535008700164149259867293999186422780`。
+
+![获取订阅 ID](./img/39-11.png)
+
+之后点击`fundSubscription`为您的订阅提供资金。在此示例中，我们_subid输入为`47914843579104322711844175658084001921319535008700164149259867293999186422780`（先前新创建的订阅 ID），并将`_amount`设置为`100000000000000000000`。
+
+### 3. 部署Random合约
+
+**注意:**，在部署前，需要将`Random.sol`中的vrfCoordinator修改和步骤1中的`VRFCoordinatorV2_5Mock.sol`合约地址一致。
+
+```solidity
+    /*需要手动修改这一行*/
+    address vrfCoordinator = 0xF27374C91BF602603AC5C9DaCC19BE431E3501cb;
+```
+
+`s_subId`即为步骤2中的订阅ID，点击`DEPLOY`进行部署。
+
+### 4. 将消费者地址注册至订阅服务
+
+打开已部署的`VRFCoordinatorV2_5Mock`合约的函数列表，点击`addConsumer`，并在`_subid`中填入订阅ID，`_consumer`填入部署的`Random.sol`（消费者）合约地址。
+
+![添加消费者合约地址](./img/39-12.png)
+
+### 5. 发起随机数请求
+
+点击左侧`mintRandomVRF`，发起随机数请求，可以通过查询`requesetid`来查看发起的请求ID。
+
+![请求ID](./img/39-13.png)
+
+### 6. 模拟完成随机数请求
+
+由于这是在本地环境中测试，因此需要自己来完成VRF请求。
+
+打开先前部署的`VRFCoordinatorV2_5Mock`合约的函数列表，点击`fulfillRandomWords`，填写`_requestID`和`_consumer`参数，`_requestId`即为步骤5中查询的请求ID，`_consumer`即为`random.sol`合约的地址。
+
+点击`transact`，完成随机数请求，合约会自动通过`fulfillRandomWords()`回调函数，来进行`NFT`的`mint`。
+
+### 7. 检查结果
+
+查看`remix`的控制台中日志。
+
+![transfer事件](./img/39-14.png)
+
+第一行为`Transfer`事件的签名哈希，第二行表示从初始地址，第三行表示mint接收方地址，第四行表示`tokenID`。
+
+从图中可以看到我们通过随机数生成，并经过取模等处理后，获取随机数`0x27`（十进制为`39`）,`tokenID = 39`的NFT成功铸造。
 
 ## 总结
 
