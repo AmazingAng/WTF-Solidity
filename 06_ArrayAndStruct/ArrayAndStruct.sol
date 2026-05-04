@@ -43,7 +43,7 @@ contract StructTypes {
     //  给结构体赋值
     // 方法1:在函数中创建一个storage的struct引用
     function initStudent1() external{
-        Student storage _student = student; // assign a copy of student
+        Student storage _student = student; // assign a reference to student
         _student.id = 11;
         _student.score = 100;
     }
