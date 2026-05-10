@@ -44,7 +44,7 @@ contract StructTypes {
     //  assign value to structure（構造体への値の代入）
     // Method 1: Create a storage struct reference in the function（関数内でstorage型の構造体の参照を作成する）
     function initStudent1() external{
-        Student storage _student = student; // assign a copy of student（構造体studentのコピーを代入する）
+        Student storage _student = student; // assign a reference to student（構造体studentへの参照を代入する）
         _student.id = 11;
         _student.score = 100;
     }
