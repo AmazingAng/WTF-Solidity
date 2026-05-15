@@ -1,6 +1,6 @@
 ![](./img/logo2.jpeg)
 
-:globe_with_meridians: **[Inglês](./Languages/en/README.md) / [Espanhol](./Languages/es/README.md) / [Português Brasileiro](./Languages/pt-br/README.md)** :globe_with_meridians:
+:globe_with_meridians: **[Inglês](../en/README.md) / [Espanhol](../es/README.md) / [Português Brasileiro](../pt-br/README.md) / [Japonês](../ja/README.md)** :globe_with_meridians:
 
 # WTF Solidity
 Eu recentemente comecei a reestudar Solidity para reforçar os detalhes e também escrever um "WTF Solidity Guia Básico" para iniciantes (programadores experientes podem procurar outros tutoriais), com atualizações semanais de 1-3 aulas.
