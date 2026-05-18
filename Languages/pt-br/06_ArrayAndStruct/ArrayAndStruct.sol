@@ -39,6 +39,7 @@ contract StructTypes {
         uint256 id;
         uint256 score; 
     }
+    Student student; // Inicializar uma struct Student
     // Inicialize uma estrutura de dados chamada "student"
     // Atribuindo valores a uma estrutura
     // Método 1: Criar uma referência struct para storage dentro da função
