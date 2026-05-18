@@ -107,7 +107,7 @@ Há quatro maneiras de atribuir valores a uma struct:
 // Atribuir valores a uma struct
 // Método 1: Criar uma referência struct storage dentro da função
 function initStudent1() external {
-    Student storage _student = student; // atribuir uma cópia da struct student
+    Student storage _student = student; // atribuir uma referência à struct student
     _student.id = 11;
     _student.score = 100;
 }
