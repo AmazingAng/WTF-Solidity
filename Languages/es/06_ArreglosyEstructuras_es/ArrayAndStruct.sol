@@ -45,7 +45,7 @@ contract StructTypes {
     // Asignar el valor a una struct
     // Método 1: Se crea una referencia storage struct en la función
     function initStudent1() external{
-        Student storage _student = student; // Asignar una copia de estudiante
+        Student storage _student = student; // Asignar una referencia al estudiante
         _student.id = 11;
         _student.score = 100;
     }
