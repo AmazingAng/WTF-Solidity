@@ -103,7 +103,9 @@ function transferOwner3(uint256 tokenId, address newOwner) public {
 2. **`require`方法`gas`消耗**：24755
 3. **`assert`方法`gas`消耗**：24473
 
-我们可以看到，`error`方法`gas`最少，其次是`assert`，`require`方法消耗`gas`最多！因此，`error`既可以告知用户抛出异常的原因，又能省`gas`，大家要多用！（注意，由于部署测试时间的不同，每个函数的`gas`消耗会有所不同，但是比较结果会是一致的。）
+我们可以看到，当`require`带有字符串message时，`error`方法`gas`最少，其次是`assert`，`require`方法消耗`gas`最多！因此，`error`既可以告知用户抛出异常的原因，又能省`gas`，大家要多用！（注意，由于部署测试时间的不同，每个函数的`gas`消耗会有所不同，但是比较结果会是一致的。）
+
+**补充说明：**  若 `require` 不带message（如 require(condition)），其`gas`消耗反而低于 `assert`，因为不带message的`revert`返回空数据，而 `assert` 会返回固定36字节的 Panic(uint256) 错误数据。但此时两者都无法告知用户异常原因，实际开发中仍推荐使用 `error`。
 
 **备注:** Solidity 0.8.0之前的版本，`assert`抛出的是一个 `panic exception`，会把剩余的 `gas` 全部消耗，不会返还。更多细节见[官方文档](https://docs.soliditylang.org/en/v0.8.17/control-structures.html)。
 
