@@ -1,6 +1,6 @@
 ![logo](./img/logo2.jpeg)
 
-:globe_with_meridians: **[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/README.md) / [Español](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/README.md) / [Português Brasileiro](./Languages/pt-br/README.md)** :globe_with_meridians:
+:globe_with_meridians: **[English](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/README.md) / [Español](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/es/README.md) / [Português Brasileiro](./Languages/pt-br/README.md) / [日本語](./Languages/ja/README.md)** :globe_with_meridians:
 
 # WTF Solidity
 
