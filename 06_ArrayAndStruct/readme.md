@@ -103,7 +103,7 @@ tags:
 // 结构体
 struct Student{
     uint256 id;
-    uint256 score; 
+    uint256 score;
 }
 
 Student student; // 初始一个student结构体

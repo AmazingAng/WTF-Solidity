@@ -52,7 +52,7 @@ function fCalldata(uint[] calldata _x) public pure returns(uint[] calldata){
 - 赋值本质上是创建**引用**指向本体，因此修改本体或者是引用，变化可以被同步：
 
   - `storage`（合约的状态变量）赋值给本地`storage`（函数里的）时候，会创建引用，改变新变量会影响原变量。例子：
-  
+
     ```solidity
     uint[] x = [1,2,3]; // 状态变量：数组 x
 

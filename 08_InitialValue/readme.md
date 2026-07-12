@@ -47,7 +47,7 @@ enum ActionSet { Buy, Hold, Sell}
 ActionSet public _enum; // 第1个内容Buy的索引0
 
 function fi() internal{} // internal空白函数
-function fe() external{} // external空白函数 
+function fe() external{} // external空白函数
 ```
 
 ### 引用类型初始值
@@ -68,7 +68,7 @@ mapping(uint => address) public _mapping; // 所有元素都为其默认值的ma
 // 所有成员设为其默认值的结构体 0, 0
 struct Student{
     uint256 id;
-    uint256 score; 
+    uint256 score;
 }
 Student public student;
 ```
@@ -79,7 +79,7 @@ Student public student;
 
 ```solidity
 // delete操作符
-bool public _bool2 = true; 
+bool public _bool2 = true;
 function d() external {
     delete _bool2; // delete 会让_bool2变为默认值，false
 }

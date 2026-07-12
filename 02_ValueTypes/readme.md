@@ -113,8 +113,8 @@ uint256 public balance = _address1.balance; // balance of address
 
 ```solidity
 // 固定长度的字节数组
-bytes32 public _byte32 = "MiniSolidity"; 
-bytes1 public _byte = _byte32[0]; 
+bytes32 public _byte32 = "MiniSolidity";
+bytes1 public _byte = _byte32[0];
 ```
 
 在上述代码中，字符串 `MiniSolidity` 以字节的方式存储进变量 `_byte32`。如果把它转换成 `16 进制`，就是：`0x4d696e69536f6c69646974790000000000000000000000000000000000000000`
@@ -148,7 +148,7 @@ function enumToUint() external view returns(uint){
 - 部署合约后可以查看每个类型的变量的数值：
 
 ![2-1.png](./img/2-1.png)
-  
+
 - `enum` 和 `uint` 转换的示例：
 
 ![2-2.png](./img/2-2.png)

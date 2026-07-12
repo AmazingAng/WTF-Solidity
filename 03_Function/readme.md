@@ -57,7 +57,7 @@ function <function name>([parameter types[, ...]]) {internal|external|public|pri
 
 8. `[returns ()]`：函数返回的变量类型和名称。
 
-9. `<function body>`: 函数体。 
+9. `<function body>`: 函数体。
 
 ## 到底什么是 `Pure` 和`View`？
 
@@ -152,7 +152,7 @@ function minusCall() external {
 ```solidity
 // payable: 递钱，能给合约支付eth的函数
 function minusPayable() external payable returns(uint256 balance) {
-    minus();    
+    minus();
     balance = address(this).balance;
 }
 ```
