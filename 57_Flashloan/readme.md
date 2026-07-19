@@ -183,10 +183,10 @@ contract UniswapV2FlashloanTest is Test {
 }
 ```
 
-在测试合约中，我们分别测试了手续费充足和不足的情况，你可以在安装Foundry后使用下面的命令行进行测试（你可以将RPC换成其他以太坊RPC）：
+在测试合约中，我们分别测试了手续费充足和不足的情况。请将`FORK_URL`替换为你自己的以太坊主网 RPC URL，不要依赖固定的公共节点：
 
 ```shell
-FORK_URL=https://singapore.rpc.blxrbdn.com
+FORK_URL="https://your-ethereum-mainnet-rpc"
 forge test  --fork-url $FORK_URL --match-path test/UniswapV2Flashloan.t.sol -vv
 ```
 
@@ -352,10 +352,10 @@ contract UniswapV2FlashloanTest is Test {
 }
 ```
 
-在测试合约中，我们分别测试了手续费充足和不足的情况，你可以在安装Foundry后使用下面的命令行进行测试（你可以将RPC换成其他以太坊RPC）：
+在测试合约中，我们分别测试了手续费充足和不足的情况。请将`FORK_URL`替换为你自己的以太坊主网 RPC URL，不要依赖固定的公共节点：
 
 ```shell
-FORK_URL=https://singapore.rpc.blxrbdn.com
+FORK_URL="https://your-ethereum-mainnet-rpc"
 forge test  --fork-url $FORK_URL --match-path test/UniswapV3Flashloan.t.sol -vv
 ```
 
@@ -482,10 +482,10 @@ contract UniswapV2FlashloanTest is Test {
 }
 ```
 
-在测试合约中，我们分别测试了手续费充足和不足的情况，你可以在安装Foundry后使用下面的命令行进行测试（你可以将RPC换成其他以太坊RPC）：
+在测试合约中，我们分别测试了手续费充足和不足的情况。请将`FORK_URL`替换为你自己的以太坊主网 RPC URL，不要依赖固定的公共节点：
 
 ```shell
-FORK_URL=https://singapore.rpc.blxrbdn.com
+FORK_URL="https://your-ethereum-mainnet-rpc"
 forge test  --fork-url $FORK_URL --match-path test/AaveV3Flashloan.t.sol -vv
 ```
 

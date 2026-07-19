@@ -184,8 +184,10 @@ function testFlashloan() public {
 
 In the test contract, we tested the cases of sufficient and insufficient handling fees respectively. You can use the following command line to test after installing Foundry (you can change the RPC to another Ethereum RPC):
 
+Set `FORK_URL` to your own Ethereum mainnet RPC URL instead of relying on a fixed public endpoint.
+
 ```shell
-FORK_URL=https://singapore.rpc.blxrbdn.com
+FORK_URL="https://your-ethereum-mainnet-rpc"
 forge test  --fork-url $FORK_URL --match-path test/UniswapV2Flashloan.t.sol -vv
 ```
 
@@ -353,8 +355,10 @@ function testFlashloan() public {
 
 In the test contract, we tested the cases of sufficient and insufficient handling fees respectively. You can use the following command line to test after installing Foundry (you can change the RPC to other Ethereum RPC):
 
+Set `FORK_URL` to your own Ethereum mainnet RPC URL instead of relying on a fixed public endpoint.
+
 ```shell
-FORK_URL=https://singapore.rpc.blxrbdn.com
+FORK_URL="https://your-ethereum-mainnet-rpc"
 forge test  --fork-url $FORK_URL --match-path test/UniswapV3Flashloan.t.sol -vv
 ```
 
@@ -483,8 +487,10 @@ function testFlashloan() public {
 
 In the test contract, we tested the cases of sufficient and insufficient handling fees respectively. You can use the following command line to test after installing Foundry (you can change the RPC to another Ethereum RPC):
 
+Set `FORK_URL` to your own Ethereum mainnet RPC URL instead of relying on a fixed public endpoint.
+
 ```shell
-FORK_URL=https://singapore.rpc.blxrbdn.com
+FORK_URL="https://your-ethereum-mainnet-rpc"
 forge test  --fork-url $FORK_URL --match-path test/AaveV3Flashloan.t.sol -vv
 ```
 

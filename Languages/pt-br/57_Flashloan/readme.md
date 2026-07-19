@@ -171,8 +171,10 @@ contract UniswapV2FlashloanTest is Test {
 
 No contrato de teste, testamos cenários em que a taxa é suficiente e insuficiente. Você pode executar os testes com o Foundry utilizando o seguinte comando (pode trocar o RPC por outro fornecido pela Ethereum):
 
+Defina `FORK_URL` como a URL do seu próprio RPC da mainnet Ethereum; não dependa de um endpoint público fixo.
+
 ```shell
-FORK_URL=https://singapore.rpc.blxrbdn.com
+FORK_URL="https://your-ethereum-mainnet-rpc"
 forge test  --fork-url $FORK_URL --match-path test/UniswapV2Flashloan.t.sol -vv
 ```
 
@@ -336,8 +338,10 @@ function testFlashloan() public {
 
 No contrato de teste, testamos os casos de taxas de manuseio suficientes e insuficientes, respectivamente. Você pode usar a linha de comando a seguir para testar depois de instalar o Foundry (você pode alterar o RPC para outro RPC Ethereum):
 
+Defina `FORK_URL` como a URL do seu próprio RPC da mainnet Ethereum; não dependa de um endpoint público fixo.
+
 ```shell
-FORK_URL=https://singapore.rpc.blxrbdn.com
+FORK_URL="https://your-ethereum-mainnet-rpc"
 forge test  --fork-url $FORK_URL --match-path test/UniswapV3Flashloan.t.sol -vv
 ```
 
@@ -466,8 +470,10 @@ function testFlashloan() public {
 
 No contrato de teste, testamos os casos de taxas de manuseio suficientes e insuficientes, respectivamente. Você pode usar a linha de comando a seguir para testar depois de instalar o Foundry (você pode alterar o RPC para outro RPC Ethereum):
 
+Defina `FORK_URL` como a URL do seu próprio RPC da mainnet Ethereum; não dependa de um endpoint público fixo.
+
 ```shell
-FORK_URL=https://singapore.rpc.blxrbdn.com
+FORK_URL="https://your-ethereum-mainnet-rpc"
 forge test  --fork-url $FORK_URL --match-path test/AaveV3Flashloan.t.sol -vv
 ```
 
