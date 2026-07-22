@@ -16,11 +16,11 @@ tags:
 
 コミュニティ：[Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[公式サイト wtf.academy](https://wtf.academy)
 
-すべてのソースコードやレッスンは github にて公開: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+すべてのソースコードやレッスンは github にて公開: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 ---
 
-以前、私たちは[第 20 回：ETH の送金](https://github.com/AmazingAng/WTFSolidity/tree/main/20_SendETH)にて`call`を使って ETH を送金する方法を紹介しました。今回は、`call`を使って他のコントラクトを呼び出す方法について説明します。
+以前、私たちは[第 20 回：ETH の送金](https://github.com/AmazingAng/WTF-Solidity/tree/main/20_SendETH)にて`call`を使って ETH を送金する方法を紹介しました。今回は、`call`を使って他のコントラクトを呼び出す方法について説明します。
 
 ## Call
 
@@ -28,7 +28,7 @@ tags:
 
 - `call`は`fallback`関数または`receive`関数をトリガーして`ETH`を送信するための`Solidity`の推奨方法です。
 
-- `call`を使って他のコントラクトを呼び出すのをおすすめしません。なぜなら、セキュアでないコントラクトを呼び出すとき、コントロール権を渡すことになるからです。他のコントラクトを呼び出す場合は、コントラクト変数を宣言して関数を呼び出すことがおすすめです。[第 21 回：コントラクトの呼び出し](https://github.com/AmazingAng/WTFSolidity/tree/main/21_CallContract)を参照してほしいです。
+- `call`を使って他のコントラクトを呼び出すのをおすすめしません。なぜなら、セキュアでないコントラクトを呼び出すとき、コントロール権を渡すことになるからです。他のコントラクトを呼び出す場合は、コントラクト変数を宣言して関数を呼び出すことがおすすめです。[第 21 回：コントラクトの呼び出し](https://github.com/AmazingAng/WTF-Solidity/tree/main/21_CallContract)を参照してほしいです。
 - 他のコントラクトのソースコードや`ABI`がわからない場合、コントラクト変数を作成するには難があるので、`call`を使って他のコントラクトの関数を呼び出すことができます。
 
 ### `call`を使うときのルール

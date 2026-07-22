@@ -17,7 +17,7 @@ tags:
 
 コミュニティ：[Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[公式サイト wtf.academy](https://wtf.academy)
 
-すべてのソースコードやレッスンは github にて公開: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+すべてのソースコードやレッスンは github にて公開: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -27,7 +27,7 @@ tags:
 ## Abstract contract（抽象コントラクト）
 
 もし、コントラクトが少なくとも一つの未実装関数（関数本体`{}`に何も内容が無い）を含む場合、`abstract`としてラベルをされなければなりません; さもなければそのコントラクトはコンパイルされません。付け加えると、未実装関数は`virtual`としてラベルされる必要があります。
-例として我々の以前の[Insertion Sort Contract](https://github.com/AmazingAng/WTFSolidity/tree/main/07_InsertionSort)を取ってみると、挿入ソート関数の実装方法が未だ分かっていないのならば、コントラクトに`abstract`として印をつけることが出来、将来的に他のコントラクトに上書きさせることが出来ます。
+例として我々の以前の[Insertion Sort Contract](https://github.com/AmazingAng/WTF-Solidity/tree/main/07_InsertionSort)を取ってみると、挿入ソート関数の実装方法が未だ分かっていないのならば、コントラクトに`abstract`として印をつけることが出来、将来的に他のコントラクトに上書きさせることが出来ます。
 
 ```solidity
 abstract contract InsertionSort{
