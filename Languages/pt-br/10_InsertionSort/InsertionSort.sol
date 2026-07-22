@@ -2,11 +2,11 @@
 pragma solidity ^0.8.34;
 contract InsertionSort {
     // if else
-    
-        if (text.includes('zh')) {
-            text = translate(text, 'zh', 'pt-br');
-        } else {
-            text = text;
+    function ifElseTest(uint256 _number) public pure returns(bool){
+        if(_number == 0){
+            return(true);
+        }else{
+            return(false);
         }
     }
 
