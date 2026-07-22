@@ -87,7 +87,7 @@ Los códigos y tutoriales están como código abierto en GitHub: [github.com/Ama
     Contributors are the basis of WTF Academy
   </h4>
   <a href="https://github.com/AmazingAng/WTF-Solidity/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=AmazingAng/WTFSolidity" />
+    <img src="https://contrib.rocks/image?repo=AmazingAng/WTF-Solidity" />
   </a>
 </div>
 
