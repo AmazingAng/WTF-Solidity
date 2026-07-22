@@ -87,7 +87,7 @@ We input binary encoding of `abi.encode` into `decode`, which will decode the or
 
 ![](https://images.mirror-media.xyz/publication-images/jboRaaq0U57qVYjmsOgbv.png?height=408&width=624)
 
-## 在remix上验证
+## Verify on Remix
 - deploy the contract to check the encoding result of `abi.encode`
 ![](./img/27-1_en.png)
 
@@ -97,7 +97,7 @@ We input binary encoding of `abi.encode` into `decode`, which will decode the or
 - check the decoding result of `abi.decode`
 ![](./img/27-3_en.png)
 
-## ABI的使用场景
+## Use cases of ABI
 1. In contract development, ABI is often paired with a call to implement a low-level call to contract.
 ```solidity  
     bytes4 selector = contract.getValue.selector;
