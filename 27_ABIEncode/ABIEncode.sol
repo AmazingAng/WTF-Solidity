@@ -15,6 +15,16 @@ contract ABIEncode{
         result = abi.encodePacked(x, addr, name, array);
     }
 
+    // 动态类型没有边界时，encodePacked 可能把不同输入拼成同一字节序列
+    function collisionPacked() public pure returns(bool) {
+        return keccak256(abi.encodePacked("ab", "c")) == keccak256(abi.encodePacked("a", "bc"));
+    }
+
+    // abi.encode 保留类型和长度边界，适合为动态参数构造哈希
+    function safeHash() public pure returns(bool) {
+        return keccak256(abi.encode("ab", "c")) != keccak256(abi.encode("a", "bc"));
+    }
+
     function encodeWithSignature() public view returns(bytes memory result) {
         result = abi.encodeWithSignature("foo(uint256,address,string,uint256[2])", x, addr, name, array);
     }
