@@ -120,3 +120,7 @@ RPC URL：填在alchemy申请的optimism rpc链接
 ## 总结
 
 这一讲，我们介绍了如何创建并使用`Alchemy` API Key便捷访问以太坊区块链。
+
+## 延伸阅读：如何客观比较 RPC 节点服务
+
+如果你在 `Alchemy`、`Infura`、`QuickNode`、`Chainstack` 等节点服务之间选择，可以参考 [OpenChainBench](https://openchainbench.com/benchmarks/rpc-capabilities) 的独立基准测试。该项目每分钟从三个地区（美东、欧西、新加坡）测量 10 条 EVM 链和 Solana 上主流 RPC 服务的 p50/p95/p99 延迟、可靠性分类和陈旧区块检测。所有数据基于 CC BY 4.0 开源许可，Go 语言采集器完全开源在 GitHub 上，方法论公开，与任何 RPC 提供商都没有商业关联。
