@@ -38,18 +38,7 @@ cd hardhat-demo
 npx hardhat
 ```
 
-Escolha a terceira opção: "Create an empty hardhat.config.js"
-
-```shell
-👷 Welcome to Hardhat v2.9.9 👷‍
-
-? What do you want to do? …
-  Create a JavaScript project
-  Create a TypeScript project
-❯ Create an empty hardhat.config.js
-  Quit
-
-```
+Escolha a opção "Create an empty hardhat.config.js".
 
 ### Instalando plugins
 ```shell
@@ -63,7 +52,7 @@ require("@nomicfoundation/hardhat-toolbox");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.9",
+  solidity: "0.8.34",
 };
 ```
 
@@ -184,7 +173,8 @@ describe("Teste do contrato ERC20", ()=>{
      // Implantação do contrato, passando os argumentos do construtor do ERC20.sol, que são name e symbol, ambos chamados de WTF
      const hardhatToken = await Token.deploy("WTF", "WTF"); 
       // Obtendo o endereço do contrato
-     const ContractAddress = await hardhatToken.address;
+     await hardhatToken.waitForDeployment();
+     const ContractAddress = await hardhatToken.target;
      expect(ContractAddress).to.properAddress;
   });
 })
@@ -227,9 +217,9 @@ async function main() {
   const Contract = await hre.ethers.getContractFactory("ERC20");
   const token = await Contract.deploy("WTF","WTF");
 
-  await token.deployed();
+  await token.waitForDeployment();
 
-  console.log("Contrato implantado com sucesso:", token.address);
+  console.log("Contrato implantado com sucesso:", token.target);
 }
 
 // Executando o script
@@ -278,25 +268,22 @@ Edite o arquivo `hardhat.config.js`
 ```js
 require("@nomicfoundation/hardhat-toolbox");
 
-// Solicite uma chave de API da Alchemy
-const ALCHEMY_API_KEY = "KEY";
-
-// Substitua esta chave privada pela chave privada da sua conta de teste
-// Exporte sua chave privada do MetaMask, abra o MetaMask e vá para "Detalhes da conta"> "Exportar chave privada"
-// Atenção: nunca coloque ETH real em uma conta de teste
-const GOERLI_PRIVATE_KEY = "YOUR GOERLI PRIVATE KEY";
+// Defina GOERLI_RPC_URL e GOERLI_PRIVATE_KEY no ambiente antes de usar a rede Goerli.
+// Nunca coloque ETH real em uma conta de teste.
+const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL;
+const GOERLI_PRIVATE_KEY = process.env.GOERLI_PRIVATE_KEY;
 
 // Solicite uma chave de API do Etherscan
 const ETHERSCAN_API_KEY = "YOUR_ETHERSCAN_API_KEY";
 
 module.exports = {
-  solidity: "0.8.9", // Versão de compilação do solidity
-  networks: {
+  solidity: "0.8.34", // Versão de compilação do solidity
+  networks: GOERLI_RPC_URL && GOERLI_PRIVATE_KEY ? {
     goerli: {
-      url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+      url: GOERLI_RPC_URL,
       accounts: [GOERLI_PRIVATE_KEY]
     }
-  },
+  } : {},
   etherscan: {
     apiKey: ETHERSCAN_API_KEY,
   },
@@ -335,4 +322,3 @@ npx hardhat verify --network goerli DEPLOYED_CONTRACT_ADDRESS "Constructor argum
 ## Conclusão
 
 Nesta aula, aprendemos o básico do Hardhat. Com o Hardhat, podemos criar projetos de Solidity de forma mais estruturada e ele fornece muitos recursos úteis. Nos próximos artigos, exploraremos recursos avançados do Hardhat, como plugins e frameworks de teste.
-
