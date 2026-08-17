@@ -79,7 +79,7 @@ Assinatura: 0x390d704d7ab732ce034203599ee93dd5d3cb0d4d1d7c600ac11726659489773d55
      * e `EIP191`:https://eips.ethereum.org/EIPS/eip-191`
      * Adiciona o campo "\x19Ethereum Signed Message:\n32" para evitar que a assinatura seja uma transação executável.
      */
-    function toEthSignedMessageHash(bytes32 hash) public pure returns (bytes32) {
+    function toEthSignedMessageHash(bytes32 hash) internal pure returns (bytes32) {
         // O hash tem 32 bytes de comprimento
         return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
     }
