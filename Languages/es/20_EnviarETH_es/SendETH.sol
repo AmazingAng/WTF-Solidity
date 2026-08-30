@@ -4,7 +4,7 @@ pragma solidity ^0.8.34;
 // 3 Formas de enviar ETH
 // transfer: 2300 gas, revertir
 // send: 2300 gas, retorna bool
-// call: all gas, returnar (bool, data)
+// call: all gas, retorna (bool, data)
 
 error SendFailed(); // error cuando se envía con Send 
 error CallFailed(); // error cuando se envía con Call
