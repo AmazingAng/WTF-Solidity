@@ -28,7 +28,7 @@ Em Solidity, os desenvolvedores podem obter o timestamp do bloco atual usando a 
 
 ## Exemplo de Vulnerabilidade
 
-Este exemplo é uma modificação do contrato apresentado em [WTF Solidity Contratos Seguros: S07. Números Aleatórios Ruins](./32_Faucet). Alteramos a condição da função de criação `mint()`: agora, a criação só é bem-sucedida se o timestamp do bloco for divisível por 170:
+Este exemplo é uma modificação do contrato apresentado em [WTF Solidity Contratos Seguros: S07. Números Aleatórios Ruins](../S07_BadRandomness). Alteramos a condição da função de criação `mint()`: agora, a criação só é bem-sucedida se o timestamp do bloco for divisível por 170:
 
 ```solidity
 contract TimeManipulation is ERC721 {
@@ -144,4 +144,3 @@ Podemos ver que a criação é bem-sucedida quando o `block.timestamp` é altera
 ## Conclusão
 
 Nesta lição, discutimos o ataque de manipulação do tempo de bloco em contratos inteligentes e o reproduzimos usando o Foundry. Antes do Merge, os mineradores de Ethereum podiam manipular o tempo de bloco, o que poderia ser explorado se um contrato de loteria dependesse do timestamp do bloco. Após o Merge, o Ethereum fixou o tempo de bloco em 12 segundos e os nós de validação não podem mais manipular o tempo de bloco. Portanto, esse tipo de ataque não ocorrerá no Ethereum, mas ainda pode ser encontrado em outras blockchains.
-
