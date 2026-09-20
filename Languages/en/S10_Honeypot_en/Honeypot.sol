@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract HoneyPot is ERC20, Ownable {
     address public pair;
     // Constructor: Initialize token name and symbol
-    constructor() ERC20("HoneyPot", "Pi Xiu") {
+    constructor() ERC20("HoneyPot", "Pi Xiu") Ownable(msg.sender) {
         address factory = 0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f; // goerli uniswap v2 factory
         address tokenA = address(this); // Honeypot token address
         address tokenB = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6; // goerli WETH
