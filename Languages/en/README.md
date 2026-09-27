@@ -32,7 +32,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTF-Solid
 
 **Chapter 8: Default Value**：[Code](./08_InitialValue_en) | [Tutorial](./08_InitialValue_en/readme.md)
 
-**Chapter 9: Constant (constant/immutable)**：[Code](./09_Constant_en) | [Tutorial](./09_Constant/readme.md)
+**Chapter 9: Constant (constant/immutable)**：[Code](./09_Constant_en) | [Tutorial](./09_Constant_en/readme.md)
 
 **Chapter 10: Control Flow**：[Code](./10_InsertionSort_en) | [Tutorial](./10_InsertionSort_en/readme.md)
 
@@ -132,7 +132,7 @@ Tutorials and codes are open-sourced on github: [github.com/AmazingAng/WTF-Solid
 
 **Chapter S3: Centralization**：[Code](./S03_Centralization_en/) | [Tutorial](./S03_Centralization_en/readme.md)
 
-**Chapter S4: Centralization Risks**：[Code](./S04_Centralization_en/) | [Tutorial](./S04_Centralization_en/readme.md)
+**Chapter S4: Centralization Risks**：[Code](./S04_AccessControlExploit_en/) | [Tutorial](./S04_AccessControlExploit_en/readme.md)
 
 **Chapter S5: Integer Overflow**：[Code](./S05_Overflow_en/) | [Tutorial](./S05_Overflow_en/readme.md)
 
