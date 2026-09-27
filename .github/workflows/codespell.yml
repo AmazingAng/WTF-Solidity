@@ -10,9 +10,9 @@ jobs:
   codespell:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Run CodeSpell
-        uses: codespell-project/actions-codespell@v1.0
+        uses: codespell-project/actions-codespell@22ff5a2e4b591290baf82d47c9feadac31c65441 # v1.0
         with:
           check_filenames: true
           ignore_words_file: .codespellignore
