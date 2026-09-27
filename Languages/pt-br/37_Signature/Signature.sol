@@ -48,7 +48,7 @@ library ECDSA{
      * E também `EIP191`: https://eips.ethereum.org/EIPS/eip-191`
      * Adiciona o campo "\x19Ethereum Signed Message:\n32" para evitar que a assinatura seja uma transação executável.
      */
-    function toEthSignedMessageHash(bytes32 hash) public pure returns (bytes32) {
+    function toEthSignedMessageHash(bytes32 hash) internal pure returns (bytes32) {
         // 32 é o comprimento em bytes do hash,
         // aplicado pela assinatura de tipo acima
         return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
