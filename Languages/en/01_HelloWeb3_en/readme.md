@@ -12,76 +12,76 @@ Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidi
 
 ## WTF is Solidity?
 
-`Solidity` is a programming language used for creating smart contracts on the Ethereum Virtual Machine (EVM). It's a necessary skill for working on blockchain projects. Moreover, as many of them are open-source, understanding the code can help in avoiding money-losing projects.
+`Solidity` is an object-oriented programming language for writing smart contracts on the Ethereum Virtual Machine (EVM). Mastering Solidity is a crucial skill for participating in blockchain projects. Since most blockchain projects are open-source, understanding the code allows you to evaluate project risks and avoid potential scams.
 
+`Solidity` has two key characteristics:
 
-`Solidity` has two characteristics:
-
-1. Object-oriented: After learning it, you can use it to make money by finding the right projects.
-2. Advanced: If you can write smart contracts in Solidity, you are the first class citizen of Ethereum.
+1. "Object-oriented": Mastering Solidity can help you land a good job in the blockchain industry, helping you earn money and potentially find a partner (a play on "objects").
+2. "Advanced": Not knowing Solidity can make you seem out of touch in the crypto world.
 
 ## Development tool: Remix
 
-In this tutorial, we will be using `Remix` to run `solidity` contracts. `Remix` is a smart contract development IDE (Integrated Development Environment) recommended by Ethereum official. It is suitable for beginners, allows for quick deployment and testing of smart contracts in the browser, without needing to install any programs on your local machine.
+In this tutorial, we will use `Remix` to run `Solidity` contracts. `Remix` is the official Integrated Development Environment (IDE) recommended by the Ethereum Foundation. It is beginner-friendly and allows for quick development and deployment of smart contracts directly in the browser without local installation.
 
 Website: [remix.ethereum.org](https://remix.ethereum.org)
 
-Upon entering `Remix`, you can see that the menu on the left-hand side has three buttons, corresponding to the file (where you write the code), compile (where you run the code), and deploy (where you deploy to the chain). By clicking the "Create New File" button, you can create a blank `solidity` contract.
-
-Within Remix, we can see that there are four buttons on the leftmost vertical menu, corresponding to FILE EXPLORER (where to write code), SEARCH IN FILES (find and replace files), SOLIDITY COMPILER (to run code), and DEPLOY & RUN TRANSACTIONS (on-chain deployment). We can create a blank Solidity contract by clicking the `Create New File` button.
+On the Remix interface, the left-hand menu has three main buttons: File Explorer (for writing code), Solidity Compiler (for compiling code), and Deploy & Run Transactions (for deploying to the chain). Click the "Create New File" button to start a blank `Solidity` contract.
 
 ![Remix Menu](./img/1-1.png)
 
 ## The first Solidity program
 
-This one is easy, the program only contains 1 line of comment and 3 lines of code:
+This simple program consists of just 1 line of comment and 3 lines of code:
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 contract HelloWeb3{
-    string public _string = "Hello Web3!";}
+    string public _string = "Hello Web3!";
+}
 ```
 
-Now, we will breakdown and analyze the source code in detail, understanding the basic structure: 
+Let's break down the source code to understand its structure:
 
-1. The first line is a comment, which denotes the software license (license identifier) used by the program. We are using the MIT license. If you do not indicate the license used, the program can compile successfully but will report a warning during compilation. Solidity's comments are denoted with "//", followed by the content of the comment (which will not be run by the program).
+1. The first line is a comment specifying the software license (SPDX license identifier). Here, we use the MIT license. If no license is specified, the compiler will issue a warning, though the program will still run. Solidity comments start with `//`, and their content is ignored by the compiler.
 
-```solidity
-// SPDX-License-Identifier: MIT
-```
+   ```solidity
+   // SPDX-License-Identifier: MIT
+   ```
 
-2. The second line declares the Solidity version used by the source file because the syntax of different versions is different. This line of code means that the source file will not allow compilation by compiler versions lower than v0.8.21 and not higher than v0.9.0 (the second condition is provided by `^`).
+2. The second line declares the Solidity version required for the source file, as syntax varies between versions. This line specifies that the code is compatible with compiler versions greater than or equal to `0.8.21` and less than `0.9.0` (indicated by `^`). Solidity statements end with a semicolon (`;`).
 
-```solidity
-pragma solidity ^0.8.21;
-```
-    
-3. Lines 3 and 4 are the main body of the smart contract. Line 3 creates a contract with the name `HelloWeb3`. Line 4 is the content of the contract. Here, we created a string variable called `_string` and assigned "Hello Web3!" as value to it.
+   ```solidity
+   pragma solidity ^0.8.21;
+   ```
 
-```solidity
-contract HelloWeb3{
-    string public _string = "Hello Web3!";}
-```
-We will introduce the different variables in Solidity later.
+3. Lines 3-4 define the contract. Line 3 declares a contract named `HelloWeb3`. Line 4 defines the contract's content, where we declare a public string variable named `_string` and initialize it with the value "Hello Web3!".
+
+   ```solidity
+   contract HelloWeb3 {
+       string public _string = "Hello Web3!";
+   }
+   ```
+
+We will cover Solidity variables in more detail in future lessons.
 
 ## Code compilation and deployment
 
-In the code editor, press CTRL+S to compile the code.
+In the Remix editor, press `Ctrl + S` to compile the code.
 
-After compilation, click the `Deploy` button on the left menu to enter the deployment page.
+Once compiled, click the "Deploy & Run Transactions" button in the left menu to enter the deployment interface.
 
-   ![](./img/1-2.png)
+![Deploy](./img/1-2.png)
 
-By default, Remix uses the JavaScript virtual machine to simulate the Ethereum chain and run smart contracts, similar to running a testnet on the browser. Remix will allocate several test accounts to you, each with 100 ETH (test tokens). You can click `Deploy` (yellow button) to deploy the contract.
+By default, Remix uses the "Remix VM" (formerly JavaScript VM) to simulate an Ethereum chain. This acts like a local testnet in your browser. Remix provides several test accounts, each loaded with 100 ETH (test tokens). Click the yellow "Deploy" button to deploy your contract.
 
-   ![](./img/1-3.png)
+![_string](./img/1-3.png)
 
-After a successful deployment, you will see a contract named `HelloWeb3` below. By clicking on the variable `_string`, it will print its value: `"Hello Web3!"`.
+After successful deployment, you will see the `HelloWeb3` contract under "Deployed Contracts". Clicking on the `_string` button will display its value: "Hello Web3!".
 
 ## Summary
 
-In this tutorial, we briefly introduced `Solidity`, `Remix` IDE, and completed our first Solidity program - `HelloWeb3`. Going forward, we will continue our Solidity journey.
+In this lesson, we briefly introduced `Solidity` and the `Remix` IDE, and wrote our first `Solidity` program, `HelloWeb3`. We will dive deeper into `Solidity` in the upcoming tutorials!
 
 ### Recommended materials on Solidity：
 
