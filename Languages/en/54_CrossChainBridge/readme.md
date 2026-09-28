@@ -194,6 +194,8 @@ main();
 
      ![](./img/54-8.png)
 
+> **Bridge safety note:** The minimum confirmation depth a bridge must wait depends on the source chain's finality time. For a live cross-chain reference, see [OpenChainBench L1 Finality](https://openchainbench.com/benchmarks/l1-finality) — Ethereum finalizes in ~12.8 min, Solana in ~12.8 s, Bitcoin in ~1 h at 6 confirmations.
+
 ## Summary
 
 In this lecture, we introduced the cross-chain bridge, which allows digital assets and information to be moved between two or more blockchains, making it convenient for users to operate assets on multiple chains. At the same time, it also carries great risks. Attacks on cross-chain bridges in the past two years have caused more than **2 billion US dollars** in user asset losses. In this tutorial, we build a simple cross-chain bridge and implement ERC20 token transfer between the Goerli testnet and the Sepolia testnet. I believe that through this tutorial, you will have a deeper understanding of cross-chain bridges.
