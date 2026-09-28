@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.34;
 
-import "../../../34_ERC721/IERC721.sol";
-import "../../../34_ERC721/IERC721Receiver.sol";
-import "../../../34_ERC721/WTFApe.sol";
+import "../34_ERC721/IERC721.sol";
+import "../34_ERC721/IERC721Receiver.sol";
+import "../34_ERC721/WTFApe.sol";
 
 contract NFTSwap is IERC721Receiver {
     event List(
