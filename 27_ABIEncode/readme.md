@@ -22,7 +22,7 @@ tags:
 
 `ABI` (Application Binary Interface，应用二进制接口)是与以太坊智能合约交互的标准。数据基于他们的类型编码；并且由于编码后不包含类型信息，解码时需要注明它们的类型。
 
-`Solidity`中，`ABI编码`有4个函数：`abi.encode`, `abi.encodePacked`, `abi.encodeWithSignature`, `abi.encodeWithSelector`。而`ABI解码`有1个函数：`abi.decode`，用于解码`abi.encode`的数据。这一讲，我们将学习如何使用这些函数。
+`Solidity`中，`ABI编码`有5个函数：`abi.encode`, `abi.encodePacked`, `abi.encodeWithSignature`, `abi.encodeWithSelector`, `abi.encodeCall`。而`ABI解码`有1个函数：`abi.decode`，用于解码`abi.encode`的数据。这一讲，我们将学习如何使用这些函数。
 
 ## ABI编码
 
@@ -95,6 +95,20 @@ function encodeWithSelector() public view returns(bytes memory result) {
 ```
 
 编码的结果为`0xe87082f1000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000007a58c0be72be218b41c608b7fe7c5bb630736c7100000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000043078414100000000000000000000000000000000000000000000000000000000`，与`abi.encodeWithSignature`结果一样。
+
+### `abi.encodeCall`
+
+`abi.encodeCall`的第一个参数是函数指针，第二个参数是元组形式的函数参数。与手写字符串签名或函数选择器相比，它会在编译期检查函数签名和参数类型，因此在已知目标函数时更安全。
+
+```solidity
+function foo(uint256, address, string memory, uint256[2] memory) external pure {}
+
+function encodeCall() public view returns(bytes memory result) {
+    result = abi.encodeCall(this.foo, (x, addr, name, array));
+}
+```
+
+它编码出的调用数据与`abi.encodeWithSignature("foo(uint256,address,string,uint256[2])", ...)`相同，但不需要手动拼写函数签名。
 
 ## ABI解码
 
