@@ -16,7 +16,7 @@ contract Constant {
     // 利用constructor初始化immutable变量，因此可以利用
     constructor(){
         IMMUTABLE_ADDRESS = address(this);
-        IMMUTABLE_NUM = 1118;
+        IMMUTABLE_BLOCK = block.number;
         IMMUTABLE_TEST = test();
     }
 
