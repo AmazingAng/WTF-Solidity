@@ -24,6 +24,7 @@ contract God {
 contract Adam is God {
     function foo() public virtual override {
         emit Log("Adam.foo called");
+        super.foo();
     }
 
     function bar() public virtual override {
@@ -35,6 +36,7 @@ contract Adam is God {
 contract Eve is God {
     function foo() public virtual override {
         emit Log("Eve.foo called");
+        super.foo();
     }
 
     function bar() public virtual override {
