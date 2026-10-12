@@ -31,4 +31,30 @@ describe("create2 test", function () {
     expect(createPair2Address).to.equal(predictedAddress);
 
   });
+
+  it("Should reject zero addresses before calculating or creating a pair", async function () {
+    const PairFactory2Factory = await ethers.getContractFactory("PairFactory2");
+    const PairFactory2 = await PairFactory2Factory.deploy();
+    await PairFactory2.waitForDeployment();
+
+    const token = "0x2c44b726ADF1963cA47Af88B284C06f30380fC78";
+    await expect(PairFactory2.createPair2(token, token))
+      .to.be.revertedWith("IDENTICAL_ADDRESSES");
+    await expect(PairFactory2.calculateAddr(ethers.ZeroAddress, token))
+      .to.be.revertedWith("ZERO_ADDRESS");
+    await expect(PairFactory2.createPair2(token, ethers.ZeroAddress))
+      .to.be.revertedWith("ZERO_ADDRESS");
+  });
+
+  it("Should reject creating the same pair twice", async function () {
+    const PairFactory2Factory = await ethers.getContractFactory("PairFactory2");
+    const PairFactory2 = await PairFactory2Factory.deploy();
+    await PairFactory2.waitForDeployment();
+
+    const tokenA = "0x2c44b726ADF1963cA47Af88B284C06f30380fC78";
+    const tokenB = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
+    await PairFactory2.createPair2(tokenA, tokenB);
+    await expect(PairFactory2.createPair2(tokenB, tokenA))
+      .to.be.revertedWith("PAIR_EXISTS");
+  });
 });
