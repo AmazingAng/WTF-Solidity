@@ -47,7 +47,12 @@ contract Call{
             abi.encodeWithSignature("getX()")
         );
 
-        emit Response(success, data); //emitir evento
+        if (!success) {
+            emit Response(false, data); // emitir evento de fallo
+            return 0;
+        }
+
+        emit Response(true, data); // emitir evento de éxito
         return abi.decode(data, (uint256));
     }
 
