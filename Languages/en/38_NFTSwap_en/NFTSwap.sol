@@ -65,18 +65,23 @@ contract NFTSwap is IERC721Receiver {
         IERC721 _nft = IERC721(_nftAddr);
         require(_nft.ownerOf(_tokenId) == address(this), "Invalid Order"); // NFT is in the contract
 
+        // Cache order info in memory, following Checks-Effects-Interactions pattern
+        address owner = _order.owner;
+        uint256 price = _order.price;
+
+        // Delete order first to prevent reentrancy
+        delete nftList[_nftAddr][_tokenId];
+
         // Transfer NFT to buyer
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
         // Transfer ETH to the seller, and refund the excess ETH to the buyer
-        payable(_order.owner).transfer(_order.price);
-        if (msg.value > _order.price) {
-            payable(msg.sender).transfer(msg.value - _order.price);
+        payable(owner).transfer(price);
+        if (msg.value > price) {
+            payable(msg.sender).transfer(msg.value - price);
         }
-        
-        // Release the Purchase event
-        emit Purchase(msg.sender, _nftAddr, _tokenId, _order.price);
 
-        delete nftList[_nftAddr][_tokenId]; // delete order
+        // Release the Purchase event
+        emit Purchase(msg.sender, _nftAddr, _tokenId, price);
     }
 
     // Cancellation: The seller cancels the pending order
@@ -87,9 +92,11 @@ contract NFTSwap is IERC721Receiver {
         IERC721 _nft = IERC721(_nftAddr);
         require(_nft.ownerOf(_tokenId) == address(this), "Invalid Order"); // NFT is in the contract
 
+        // Delete order first, following Checks-Effects-Interactions pattern
+        delete nftList[_nftAddr][_tokenId];
+
         // Transfer NFT to seller
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
-        delete nftList[_nftAddr][_tokenId]; // delete order
 
         // Release the Revoke event
         emit Revoke(msg.sender, _nftAddr, _tokenId);

@@ -65,19 +65,24 @@ contract NFTSwap is IERC721Receiver {
         IERC721 _nft = IERC721(_nftAddr);
         require(_nft.ownerOf(_tokenId) == address(this), "Invalid Order"); // NFT在合约中
 
+        // 将order信息缓存到内存变量，遵循 Checks-Effects-Interactions 模式
+        address owner = _order.owner;
+        uint256 price = _order.price;
+
+        // 先删除order，防止重入攻击
+        delete nftList[_nftAddr][_tokenId];
+
         // 将NFT转给买家
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
         // 将ETH转给卖家
-        payable(_order.owner).transfer(_order.price);
+        payable(owner).transfer(price);
         // 多余ETH给买家退款
-        if (msg.value > _order.price) {
-            payable(msg.sender).transfer(msg.value - _order.price);
+        if (msg.value > price) {
+            payable(msg.sender).transfer(msg.value - price);
         }
 
         // 释放Purchase事件
-        emit Purchase(msg.sender, _nftAddr, _tokenId, _order.price);
-
-        delete nftList[_nftAddr][_tokenId]; // 删除order
+        emit Purchase(msg.sender, _nftAddr, _tokenId, price);
     }
 
     // 撤单： 卖家取消挂单
@@ -88,9 +93,11 @@ contract NFTSwap is IERC721Receiver {
         IERC721 _nft = IERC721(_nftAddr);
         require(_nft.ownerOf(_tokenId) == address(this), "Invalid Order"); // NFT在合约中
 
+        // 先删除order，遵循 Checks-Effects-Interactions 模式
+        delete nftList[_nftAddr][_tokenId];
+
         // 将NFT转给卖家
         _nft.safeTransferFrom(address(this), msg.sender, _tokenId);
-        delete nftList[_nftAddr][_tokenId]; // 删除order
 
         // 释放Revoke事件
         emit Revoke(msg.sender, _nftAddr, _tokenId);
