@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.34;
 contract ValueTypes{
     // Boolean
     bool public _bool = true;

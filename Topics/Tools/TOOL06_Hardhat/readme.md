@@ -1,12 +1,12 @@
 # WTF Solidity极简入门-工具篇6：Hardhat以太坊开发环境
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 
@@ -25,6 +25,7 @@ Hardhat是以太坊最流行的开发环境，它可以帮你编译和部署智�
 打开命令行工具，输入：
 ```shell
 mkdir hardhat-demo
+cd hardhat-demo
 npm init -y
 npm install --save-dev hardhat
 ```
@@ -40,14 +41,14 @@ npx hardhat
 选择第三项：创建空白项目配置 `Create an empty hardhat.config.js`
 
 ```shell
-👷 Welcome to Hardhat v2.9.9 👷‍
+Welcome to Hardhat v2.22.2
 
-? What do you want to do? …
-  Create a JavaScript project
+? What do you want to do? ...
+> Create a JavaScript project
   Create a TypeScript project
-❯ Create an empty hardhat.config.js
+  Create a TypeScript project (with Viem)
+  Create an empty hardhat.config.js
   Quit
-
 ```
 
 ### 安装插件
@@ -62,7 +63,7 @@ require("@nomicfoundation/hardhat-toolbox");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.9",
+  solidity: "0.8.21",
 };
 ```
 
@@ -74,13 +75,13 @@ module.exports = {
 新建`contracts`合约目录，并添加第31章节的ERC20合约。
 
 ### 编写合约
-这里的合约直接使用[WTF Solidity第31讲](https://github.com/AmazingAng/WTFSolidity/blob/main/31_ERC20/readme.md]的ERC20合约
+这里的合约直接使用[WTF Solidity第31讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/31_ERC20/readme.md)的ERC20合约
 
 ```js
 // SPDX-License-Identifier: MIT
 // WTF Solidity by 0xAA
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "./IERC20.sol";
 
@@ -181,8 +182,9 @@ describe("ERC20 合约测试", ()=>{
      const Token = await ethers.getContractFactory("ERC20");
      // 部署合约, 传入参数 ERC20.sol 中的构造函数参数分别是 name, symbol 这里我们都叫做WTF
      const hardhatToken = await Token.deploy("WTF", "WTF"); 
+     await hardhatToken.waitForDeployment();
       // 获取合约地址
-     const ContractAddress = await hardhatToken.address;
+     const ContractAddress = await hardhatToken.target;
      expect(ContractAddress).to.properAddress;
   });
 })
@@ -225,9 +227,9 @@ async function main() {
   const Contract = await hre.ethers.getContractFactory("ERC20");
   const token = await Contract.deploy("WTF","WTF");
 
-  await token.deployed();
+  await token.waitForDeployment();
 
-  console.log("成功部署合约:", token.address);
+  console.log("成功部署合约:", token.target);
 }
 
 // 运行脚本
@@ -259,11 +261,13 @@ npx hardhat run --network hardhat  scripts/deploy.js
 ### 前期准备
 
 1. 申请alchemy的api key
-参考【[第4讲：Alchemy, 区块链API和节点基础设施](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】 
+参考【[第4讲：Alchemy, 区块链API和节点基础设施](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md)】 
 2. 申请Goerli测试代币
 [点击申请](https://goerlifaucet.com/) 登录alchemy账号每天可以领取0.2个代币
 3. 导出私钥
 因为需要把合约部署到Goerli测试网络，所以该测试账号中留有一定的测试代币。导出已有测试代币的账户的私钥，用于部署合约
+4. 申请 etherscan 的 api key，用于验证合约
+[点击申请](https://etherscan.io/myapikey)
 
 ### 配置网络
 
@@ -280,18 +284,24 @@ require("@nomicfoundation/hardhat-toolbox");
 const ALCHEMY_API_KEY = "KEY";
 
 //将此私钥替换为测试账号私钥
-//从Metamask导出您的私钥，打开Metamask和进入“帐户详细信息”>导出私钥
+//从MetaMask导出您的私钥，打开MetaMask和进入“帐户详细信息”>导出私钥
 //注意:永远不要把真正的以太放入测试帐户
 const GOERLI_PRIVATE_KEY = "YOUR GOERLI PRIVATE KEY";
 
+// 申请etherscan的api key
+const ETHERSCAN_API_KEY = "YOUR_ETHERSCAN_API_KEY";
+
 module.exports = {
-  solidity: "0.8.9", // solidity的编译版本
+  solidity: "0.8.21", // solidity的编译版本
   networks: {
     goerli: {
       url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
       accounts: [GOERLI_PRIVATE_KEY]
     }
-  }
+  },
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
+  },
 };
 ```
 
@@ -316,6 +326,12 @@ npx hardhat run --network goerli scripts/deploy.js
 可以通过[etherscan](https://etherscan.io/)查看合约部署情况
 
 同理你也可以配置多个网络，比如`mainnet`，`rinkeby`等。
+
+最后验证你的合约：
+
+```shell
+npx hardhat verify --network goerli DEPLOYED_CONTRACT_ADDRESS "Constructor argument 1"
+```
 
 
 ## 总结

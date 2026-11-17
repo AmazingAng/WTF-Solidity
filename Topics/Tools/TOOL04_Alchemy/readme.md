@@ -1,12 +1,12 @@
 # WTF Solidity极简入门-工具篇4：Alchemy, 区块链API和节点基础设施
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
 -----
 ## Alchemy是什么
@@ -19,7 +19,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 
 `Alchemy` 和 `Infura`在链下、链上之间搭了一座桥，让两者的交互变的简单。它为用户提供对以太坊和IPFS网络的即时、可扩展的`API`访问。开发者在`Alchemy` 和 `Infura`官网注册后，就可以免费申请的以太坊`API KEY`，就可以利用它们的节点与区块链交互。另外，小狐狸`metamask`钱包内置了`Infura`服务，方便用户访问以太坊网络。
 
-关于`Infura`的介绍，可以参考 [WTF Solidity极简入门-工具篇2：Infura, 连接链下与链上的桥梁](https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL02_Infura/readme.md)
+关于`Infura`的介绍，可以参考 [WTF Solidity极简入门-工具篇2：Infura, 连接链下与链上的桥梁](https://github.com/AmazingAng/WTF-Solidity/blob/main/Topics/Tools/TOOL02_Infura/readme.md)
 
 ## Alchemy 和 Infura 的区别
 
@@ -102,9 +102,9 @@ const ALCHEMY_ID = ''
 const provider = new ethers.providers.JsonRpcProvider(`https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_ID}`)
 ```
 
-### `Metamask`小狐狸钱包
+### `MetaMask`小狐狸钱包
 
-进入小狐狸钱包设置 **Setting** 页面，点击网络 **Netowrk**，点击添加网络 **Add Network**。你可以利用下面的参数在小狐狸中添加`Alchemy` 的eth链：
+进入小狐狸钱包设置 **Setting** 页面，点击网络 **Network**，点击添加网络 **Add Network**。你可以利用下面的参数在小狐狸中添加`Alchemy` 的eth链：
 
 ```
 网络名称（Network Name）: Alchemy-eth

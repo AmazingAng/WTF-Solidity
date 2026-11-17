@@ -8,15 +8,15 @@ tags:
 
 # WTF Solidity极简入门: 45. 时间锁
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://wechat.wtf.academy)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
------
+---
 
 这一讲，我们介绍时间锁和时间锁合约。代码由Compound的[Timelock合约](https://github.com/compound-finance/compound-protocol/blob/master/contracts/Timelock.sol)简化而来。
 
@@ -108,7 +108,7 @@ tags:
     - `executeTime`：交易执行的区块链时间戳。
     
     调用这个函数时，要保证交易预计执行时间`executeTime`大于当前区块链时间戳+锁定时间`delay`。交易的唯一标识符为所有参数的哈希值，利用`getTxHash()`函数计算。进入队列的交易会更新在`queuedTransactions`变量中，并释放`QueueTransaction`事件。
-- `executeTransaction()`：执行交易。它的参数与`queueTransaction()`相同。要求被执行的交易在时间锁队列中，达到交易的执行时间，且没有过期。执行交易时用到了`solidity`的低级成员函数`call`，在[第22讲](https://github.com/AmazingAng/WTFSolidity/blob/main/22_Call/readme.md)中有介绍。
+- `executeTransaction()`：执行交易。它的参数与`queueTransaction()`相同。要求被执行的交易在时间锁队列中，达到交易的执行时间，且没有过期。执行交易时用到了`solidity`的低级成员函数`call`，在[第22讲](https://github.com/AmazingAng/WTF-Solidity/blob/main/22_Call/readme.md)中有介绍。
 - `cancelTransaction()`：取消交易。它的参数与`queueTransaction()`相同。它要求被取消的交易在队列中，会更新`queuedTransactions`并释放`CancelTransaction`事件。
 - `changeAdmin()`：修改管理员地址，只能被`Timelock`合约调用。
 - `getBlockTimestamp()`：获取当前区块链时间戳。
@@ -242,7 +242,7 @@ address target, uint256 value, string memory signature, bytes memory data, uint2
 - `target`：因为调用的是`Timelock`自己的函数，填入合约地址。
 - `value`：不用转入ETH，这里填`0`。
 - `signature`：`changeAdmin()`的函数签名为：`"changeAdmin(address)"`。
-- `data`：这里填要传入的参数，也就是新管理员的地址。但是要把地址填充为32字节的数据，以满足[以太坊ABI编码标准](https://github.com/AmazingAng/WTFSolidity/blob/main/27_ABIEncode/readme.md)。可以使用[hashex](https://abi.hashex.org/)网站进行参数的ABI编码。例子：
+- `data`：这里填要传入的参数，也就是新管理员的地址。但是要把地址填充为32字节的数据，以满足[以太坊ABI编码标准](https://github.com/AmazingAng/WTF-Solidity/blob/main/27_ABIEncode/readme.md)。可以使用[hashex](https://abi.hashex.org/)网站进行参数的ABI编码。例子：
     ```solidity
     编码前地址：0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
     编码后地址：0x000000000000000000000000ab8483f64d9c6d1ecf9b849ae677dd3315835cb2

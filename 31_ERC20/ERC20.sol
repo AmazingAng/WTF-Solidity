@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // WTF Solidity by 0xAA
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.34;
 
 import "./IERC20.sol";
 
@@ -25,7 +25,8 @@ contract ERC20 is IERC20 {
     }
 
     // @dev 实现`transfer`函数，代币转账逻辑
-    function transfer(address recipient, uint amount) external override returns (bool) {
+    function transfer(address recipient, uint amount) public override returns (bool) {
+        require(recipient != address(0), "transfer to zero address");
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;
         emit Transfer(msg.sender, recipient, amount);
@@ -33,7 +34,7 @@ contract ERC20 is IERC20 {
     }
 
     // @dev 实现 `approve` 函数, 代币授权逻辑
-    function approve(address spender, uint amount) external override returns (bool) {
+    function approve(address spender, uint amount) public override returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
@@ -44,7 +45,8 @@ contract ERC20 is IERC20 {
         address sender,
         address recipient,
         uint amount
-    ) external override returns (bool) {
+    ) public override returns (bool) {
+        require(recipient != address(0), "transfer to zero address");
         allowance[sender][msg.sender] -= amount;
         balanceOf[sender] -= amount;
         balanceOf[recipient] += amount;

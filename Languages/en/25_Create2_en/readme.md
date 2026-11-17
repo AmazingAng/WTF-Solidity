@@ -1,0 +1,175 @@
+---
+title: 25. Create2
+tags:
+  - solidity
+  - advanced
+  - wtfacademy
+  - create contract
+  - create2
+---
+
+# Solidity Minimalist Tutorial: 25. Create2
+
+Recently, I have been revisiting Solidity, consolidating the finer details, and writing "WTF Solidity" tutorials for newbies.
+
+Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science) | [@WTFAcademy_](https://twitter.com/WTFAcademy_)
+
+Community: [Discord](https://discord.gg/5akcruXrsk)｜[Wechat](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[Website wtf.academy](https://wtf.academy)
+
+Codes and tutorials are open source on GitHub: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
+
+-----
+
+`CREATE2` opcode helps us to predict the address of the smart contract before it is deployed on the Ethereum network, and `Uniswap` created `Pair` contract with `CREATE2` instead of `CREATE`.
+
+In this chapter, I will introduce the use of `CREATE2`.
+
+## How does `CREATE` calculate the address
+Smart contracts can be created by other contracts and regular accounts using the `CREATE` opcode. 
+
+In both cases, the address of the new contract is calculated in the same way: the hash of the creator's address (usually the wallet address which will deploy or the contract address) and the nonce(the total number of transactions sent from this address or, for contract account, the total number of contracts created. Every time a contract is created, the nonce will plus one).
+```
+new address = hash(creator's address, nonce)
+```
+creator's address won't change, but the nonce may change over time, so it's
+difficult to predict the address of the contract created with CREATE.
+
+## How does `CREATE2` calculate address
+The purpose of `CREATE2` is to make contract addresses independent of future events. No matter what happens on blockchain in the future, you can deploy the contract to a pre-calculated address.
+
+The address of the contract created with `CREATE2` is determined by four parts:
+- `0xFF`: a constant to avoid conflict with `CREATE`
+- creator's address
+- salt: a value given by the creator
+- The bytecode of the contract to be deployed
+
+```
+new address = hash("0xFF", creator's address, salt, bytecode)
+```
+`CREATE2` ensures that if the creator deploys a given contract bytecode with `CREATE2` and is given `salt`, it will be stored at `new address`.
+
+## How to use `CREATE2`
+`CREATE2` is used in the same way as `Create`. It also creates a `new` contract and passes in parameters which are needed for the new contract constructor, except with an extra `salt` parameter.
+```
+Contract x = new Contract{salt: _salt, value: _value}(params)
+```
+`Contract` is the name of the contract to be created, `x` is the contract object (address), and `_salt` is the specified salt; If the constructor is `payable`, a number of(`_value`) `ETH` can be transferred to the contract at creation, and `params` is the parameter of new contract constructor.
+
+## Minimalist Uniswap2
+
+Similar to [the previous chapter](https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/24_Create_en), we use `Create2` to implement a minimalist `Uniswap`.
+
+### `Pair`
+```solidity
+contract Pair{
+    address public factory; // factory contract address
+    address public token0; // token1
+    address public token1; // token2
+
+    constructor() payable {
+        factory = msg.sender;
+    }
+
+    // called once by the factory at time of deployment
+    function initialize(address _token0, address _token1) external {
+        require(msg.sender == factory, 'UniswapV2: FORBIDDEN'); // sufficient check
+        token0 = _token0;
+        token1 = _token1;
+    }
+}
+```
+`Pair` contract is simple and contains three state variables: `factory`, `token0` and `token1`.
+
+The constructor assigns the `factory` to the factory contract address at deployment time. `initialize` function is called once by the factory contract when the `Pair` contract is created, updating `token0` and `token1` to the addresses of two tokens in the token pair.
+
+### `PairFactory2`
+```solidity
+contract PairFactory2{
+        mapping(address => mapping(address => address)) public getPair; // Find the Pair address by two token addresses
+        address[] public allPairs; // Save all Pair addresses
+
+        function createPair2(address tokenA, address tokenB) external returns (address pairAddr) {
+            require(tokenA != tokenB, 'IDENTICAL_ADDRESSES'); //Avoid conflicts when tokenA and tokenB are the same
+            // Calculate salt with tokenA and tokenB addresses
+            (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA); //Sort tokenA and tokenB by size
+            bytes32 salt = keccak256(abi.encodePacked(token0, token1));
+            //Deploy new contract with create2
+            Pair pair = new Pair{salt: salt}(); 
+            // call initialize function of the new contract
+            pair.initialize(tokenA, tokenB);
+            // Update address map
+            pairAddr = address(pair);
+            allPairs.push(pairAddr);
+            getPair[tokenA][tokenB] = pairAddr;
+            getPair[tokenB][tokenA] = pairAddr;
+        }
+```
+Factory contract(`PairFactory2`) has two state variables. `getPair` is a map of two token addresses to the token pair address. It is convenient to find the token pair address according to tokens. `allPairs` is an array of token pair addresses, storing all token pair addresses.
+
+`PairFactory2` contract has only one `createPair2` function, which uses `CREATE2` to create a new `Pair` contract based on the two token addresses `tokenA` and `tokenB` entered. Inside
+```solidity
+    Pair pair = new Pair{salt: salt}(); 
+```
+It's the above code that uses `CREATE2` to create a contract, which is very simple, and `salt` is the hash of `token1` and `token2`.
+```solidity
+    bytes32 salt = keccak256(abi.encodePacked(token0, token1));
+```
+
+### Calculate the `Pair` address beforehand
+```solidity
+        // Calculate Pair contract address beforehand
+        function calculateAddr(address tokenA, address tokenB) public view returns(address predictedAddress){
+            require(tokenA != tokenB, 'IDENTICAL_ADDRESSES'); //Avoid conflicts when tokenA and tokenB are the same
+            // Calculate salt with tokenA and tokenB addresses
+            (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA); //Sort tokenA and tokenB by size
+            bytes32 salt = keccak256(abi.encodePacked(token0, token1));
+            // Calculate contract address
+            predictedAddress = address(uint160(uint(keccak256(abi.encodePacked(
+                bytes1(0xff),
+                address(this),
+                salt,
+                keccak256(type(Pair).creationCode)
+            )))));
+        }
+```
+We write a `calculateAddr` function to precompute the address of `Pair` that `tokenA` and `tokenB` will generate. With it, we can verify whether the address we calculated in advance is the same as the actual address.
+
+To verify whether the address of the token pair created matches the precomputed address, you can deploy the `PairFactory2` contract and call `createPair2` with the following two addresses as parameters. Then, observe the resulting address of the token pair created.
+
+```
+WBNB address: 0x2c44b726ADF1963cA47Af88B284C06f30380fC78
+PEOPLE address on BSC:
+0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
+```
+
+#### If there are parameters in the deployment contract constructor
+
+For example, when `create2` contract:
+> Pair pair = new Pair{salt: salt}(address(this)); 
+
+When calculating, you need to package parameters and bytecode together:
+
+> ~~keccak256(type(Pair).creationCode)~~
+> => keccak256(abi.encodePacked(type(Pair).creationCode, abi.encode(address(this))))
+```solidity
+predictedAddress = address(uint160(uint(keccak256(abi.encodePacked(
+                bytes1(0xff),
+                address(this),
+                salt,
+                keccak256(abi.encodePacked(type(Pair).creationCode, abi.encode(address(this))))
+            )))));
+```
+
+### Verify on remix
+1. First, the address hash of `WBNB` and `PEOPLE` is used as `salt` to calculate the address of `Pair` contract
+2. Calling `PairFactory2.createPair2` and the address of `WBNB` and `PEOPLE` are passed in as parameters to get the address of `pair` contract created.
+3. Compare the contract address.
+
+![create2_remix_test.png](./img/25-1_en.jpg)
+
+## Application scenario of `CREATE2`
+1. The exchange reserves addresses for new users to create wallet contracts.
+2. `Factory` contract driven by `CREATE2`. The creation of trading pairs in `UniswapV2` is done by calling `create2` in `Factory`. The advantage is that it can get a certain `pair` address so that the Router can calculate `pair` address through `(tokenA, tokenB)`, and no longer need to perform a `Factory.getPair(tokenA, tokenB)` cross-contract call.
+
+## Summary
+In this chapter, we introduced the principle of `CREATE2` opcode and how to use it. Besides, we used it to create a minimalist version of `Uniswap` and calculate the token pair contract address in advance. `CREATE2` helps us to determine the contract address before deploying the contract, which is the basis for some `layer2` projects.

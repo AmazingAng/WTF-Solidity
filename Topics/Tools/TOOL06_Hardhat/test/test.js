@@ -11,9 +11,9 @@ describe("ERC20 合约测试", ()=>{
      // 部署合约, 传入参数 ERC20.sol 中的构造函数参数分别是 name, symbol 这里我们都叫做WTF
      const hardhatToken = await Token.deploy("WTF", "WTF"); 
       // 等待合约部署完成
-      await hardhatToken.deployed();
+      await hardhatToken.waitForDeployment();
       // 获取合约地址
-      const ContractAddress = await hardhatToken.address;
+      const ContractAddress = await hardhatToken.target;
       expect(ContractAddress).to.properAddress;
   });
 })

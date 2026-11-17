@@ -1,14 +1,14 @@
-# WTF Solidity极简入门 ERC721专题5：Loot
+# WTF Solidity极简入门: ERC721专题：5. Loot
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity 极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy\_](https://twitter.com/WTFAcademy_)
 
-WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github（1024个star发课程认证，2048个star发社群NFT）: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
------
+---
 
 ## Loot
 
@@ -23,7 +23,7 @@ WTF技术社群discord，内有加微信群方法：[链接](https://discord.gg/
 ## Loot代码
 `Loot`代码在etherscan上开源，地址：[链接](https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7#code)
 
-主合约`Loot`从`1291行`开始，继承了`ERC721Enumerable`，`ReentrancyGuard`和`Ownable`，这些合约都是`oppenzepplin`标准库中的。
+主合约`Loot`从`1291行`开始，继承了`ERC721Enumerable`，`ReentrancyGuard`和`Ownable`，这些合约都是`OpenZeppelin`标准库中的。
 
 ```solidity
 contract Loot is ERC721Enumerable, ReentrancyGuard, Ownable {

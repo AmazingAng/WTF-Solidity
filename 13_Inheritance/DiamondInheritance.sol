@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.34;
 
 /* 继承树：
   God
@@ -24,6 +24,7 @@ contract God {
 contract Adam is God {
     function foo() public virtual override {
         emit Log("Adam.foo called");
+        super.foo();
     }
 
     function bar() public virtual override {
@@ -35,6 +36,7 @@ contract Adam is God {
 contract Eve is God {
     function foo() public virtual override {
         emit Log("Eve.foo called");
+        super.foo();
     }
 
     function bar() public virtual override {

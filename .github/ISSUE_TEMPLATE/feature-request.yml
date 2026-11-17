@@ -1,0 +1,40 @@
+
+name: ⭐ Feature request(功能请求)
+description: Suggest an idea for this project (对此项目提出一个想法)
+title: "[Feature]"
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For better global communication, Please write in English.
+        If you feel the description in English is not clear, then you can use Chinese, thanks!
+        (为了更好的全球化的交流，请使用英文，如果觉得用英文无法清楚描述，可以使用中文，谢谢！)
+
+  - type: textarea
+    attributes:
+      label:  Details(细节)
+      description: Please describe your feature request in detail. (请详细描述您的功能请求。)
+
+  - type: textarea
+    attributes:
+      label: Motivation(动机)
+      description: Please describe your motivation in the feature request. (请描述您在功能请求中的动机。)
+      placeholder: >
+        Please describe your motivation in the feature request. (请描述您在功能请求中的动机。)
+
+
+
+  - type: checkboxes
+    attributes:
+      label: Are you willing to submit a PR? (你愿意提交PR吗?)
+      description: >
+         This is absolutely not required, but we are happy to guide you in the contribution process especially if you already have a good understanding of how to implement the fix.
+         (这不是必须的, 但是我们很高兴您能够提交PR)
+      options:
+        - label: Yes, I am willing to submit a PR!(是的, 我愿意!)
+
+  - type: markdown
+    attributes:
+      value: "Thanks for completing our form!(感谢填写表单!)"

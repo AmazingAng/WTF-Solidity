@@ -1,0 +1,42 @@
+name: 🕷️ Bug report (程序Bug报告)
+title: "[Bug]"
+description: Report errors or unexpected behavior (报告错误或意外行为)
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Please make sure what you are reporting is indeed a bug with reproducible steps, if you want to ask questions or share ideas, you can head to our [Discussions](https://github.com/AmazingAng/WTF-Solidity/discussions) tab, you can also join our [discord](https://discord.gg/5akcruXrsk).
+        (请确保您所报告的是一个具有可重现步骤的错误, 如果你是想问一个问题或者分享一个主意，你可以通过以下方式加入我们的[讨论](https://github.com/AmazingAng/WTF-Solidity/discussions), 你也可以加入我们的[discord](https://discord.gg/5akcruXrsk)。)
+
+  - type: textarea
+    attributes:
+      label: Details (细节)
+      description: Describe what happened. (描述一下发生了什么。)
+      placeholder: >
+        Please provide the context in which the problem occurred and explain what happened. (请提供问题发生的背景并解释发生的情况。)
+    validations:
+      required: true
+
+
+  - type: textarea
+    attributes:
+      label: Environment (环境)
+      description: Tell us about your environment. (告诉我们你的环境信息。)
+      placeholder: >
+        Tell us what you're using it: Hardhat, Remix, etc. (告诉我们你使用的环境:Hardhat, Remix等等。)
+
+
+  - type: checkboxes
+    attributes:
+      label: Are you willing to submit PR?(你愿意提交PR吗?)
+      description: >
+        This is absolutely not required, but we are happy to guide you in the contribution process especially if you already have a good understanding of how to implement the fix.
+        (这不是必须的, 但是我们很高兴您能够提交PR。)
+      options:
+        - label: Yes, I am willing to submit a PR!(是的, 我愿意!)
+
+  - type: markdown
+    attributes:
+      value: "Thanks for completing our form!(感谢填写表单！)"

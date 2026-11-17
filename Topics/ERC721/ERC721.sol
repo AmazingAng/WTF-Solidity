@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.5.0) (token/ERC721/ERC721.sol)
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.34;
 
 import "./IERC721.sol";
 import "./IERC721Receiver.sol";
@@ -470,7 +470,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      *
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
-    // 这个函数在token被转账之前会被表用，包括mint和burn
+    // 这个函数在token被转账之前会被调用，包括mint和burn
     function _beforeTokenTransfer(
         address from,
         address to,

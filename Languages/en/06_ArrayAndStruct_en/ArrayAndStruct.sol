@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.34;
 contract ArrayTypes {
 
     // Fixed Length Array
@@ -33,7 +33,7 @@ contract ArrayTypes {
     }
 }
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.34;
 contract StructTypes {
     // Struct
     struct Student{
@@ -44,7 +44,7 @@ contract StructTypes {
     //  assign value to structure
     // Method 1: Create a storage struct reference in the function
     function initStudent1() external{
-        Student storage _student = student; // assign a copy of student
+        Student storage _student = student; // assign a reference to student
         _student.id = 11;
         _student.score = 100;
     }
@@ -54,18 +54,14 @@ contract StructTypes {
         student.id = 1;
         student.score = 80;
     }
-  
-}
 
-pragma solidity ^0.8.4;
-contract EnumTypes {
-    // Represent uint 0, 1, 2 as Buy, Hold, Sell
-    enum ActionSet { Buy, Hold, Sell }
-    // Create enum variable action
-    ActionSet action = ActionSet.Buy;
-
-    // enum can be explicitly converted to uint
-    function enumToUint() external view returns(uint){
-        return uint(action);
+    // Method 3: struct constructor
+    function initStudent3() external {
+        student = Student(3, 90);
+    }
+    
+    // Method 4: key value
+    function initStudent4() external {
+        student = Student({id: 4, score: 60});
     }
 }

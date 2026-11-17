@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // WTF Solidity by 0xAA
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.34;
 
 import "./IERC20.sol";
 

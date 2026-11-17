@@ -1,0 +1,7 @@
+[profile.default]
+src = 'src'
+out = 'out'
+libs = ['lib','node_modules']
+solc = "0.8.34"
+
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config

@@ -1,17 +1,15 @@
 // SPDX-License-Identifier: MIT
 // by 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.34;
 
 import "./IERC165.sol";
 import "./IERC721.sol";
 import "./IERC721Receiver.sol";
 import "./IERC721Metadata.sol";
-import "./Address.sol";
 import "./String.sol";
 
 contract ERC721 is IERC721, IERC721Metadata{
-    using Address for address; // 使用Address库，用isContract来判断地址是否为合约
-    using Strings for uint256; // 使用String库，
+    using Strings for uint256; // 使用Strings库，
 
     // Token名称
     string public override name;
@@ -23,8 +21,11 @@ contract ERC721 is IERC721, IERC721Metadata{
     mapping(address => uint) private _balances;
     // tokenID 到 授权地址 的授权映射
     mapping(uint => address) private _tokenApprovals;
-    //  owner地址。到operator地址 的批量授权映射
+    // owner地址 到 operator地址 的批量授权映射
     mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    // 错误 无效的接收者
+    error ERC721InvalidReceiver(address receiver);
 
     /**
      * 构造函数，初始化`name` 和`symbol` .
@@ -101,7 +102,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         _approve(owner, to, tokenId);
     }
 
-    // 查询 spender地址是否被可以使用tokenId（他是owner或被授权地址）。
+    // 查询 spender地址是否可以使用tokenId（需要是owner或被授权地址）
     function _isApprovedOrOwner(
         address owner,
         address spender,
@@ -113,7 +114,7 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     /*
-     * 转账函数。通过调整_balances和_owner变量将 tokenId 从 from 转账给 to，同时释放Tranfer事件。
+     * 转账函数。通过调整_balances和_owner变量将 tokenId 从 from 转账给 to，同时释放Transfer事件。
      * 条件:
      * 1. tokenId 被 from 拥有
      * 2. to 不是0地址
@@ -165,7 +166,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         bytes memory _data
     ) private {
         _transfer(owner, from, to, tokenId);
-        require(_checkOnERC721Received(from, to, tokenId, _data), "not ERC721Receiver");
+        _checkOnERC721Received(from, to, tokenId, _data);
     }
 
     /**
@@ -195,7 +196,7 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     /** 
-     * 铸造函数。通过调整_balances和_owners变量来铸造tokenId并转账给 to，同时释放Tranfer事件。铸造函数。通过调整_balances和_owners变量来铸造tokenId并转账给 to，同时释放Tranfer事件。
+     * 铸造函数。通过调整_balances和_owners变量来铸造tokenId并转账给 to，同时释放Transfer事件。铸造函数。通过调整_balances和_owners变量来铸造tokenId并转账给 to，同时释放Transfer事件。
      * 这个mint函数所有人都能调用，实际使用需要开发人员重写，加上一些条件。
      * 条件:
      * 1. tokenId尚不存在。
@@ -211,7 +212,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         emit Transfer(address(0), to, tokenId);
     }
 
-    // 销毁函数，通过调整_balances和_owners变量来销毁tokenId，同时释放Tranfer事件。条件：tokenId存在。
+    // 销毁函数，通过调整_balances和_owners变量来销毁tokenId，同时释放Transfer事件。条件：tokenId存在。
     function _burn(uint tokenId) internal virtual {
         address owner = ownerOf(tokenId);
         require(msg.sender == owner, "not owner of token");
@@ -225,22 +226,22 @@ contract ERC721 is IERC721, IERC721Metadata{
     }
 
     // _checkOnERC721Received：函数，用于在 to 为合约的时候调用IERC721Receiver-onERC721Received, 以防 tokenId 被不小心转入黑洞。
-    function _checkOnERC721Received(
-        address from,
-        address to,
-        uint tokenId,
-        bytes memory _data
-    ) private returns (bool) {
-        if (to.isContract()) {
-            return
-                IERC721Receiver(to).onERC721Received(
-                    msg.sender,
-                    from,
-                    tokenId,
-                    _data
-                ) == IERC721Receiver.onERC721Received.selector;
-        } else {
-            return true;
+    function _checkOnERC721Received(address from, address to, uint256 tokenId, bytes memory data) private {
+        if (to.code.length > 0) {
+            try IERC721Receiver(to).onERC721Received(msg.sender, from, tokenId, data) returns (bytes4 retval) {
+                if (retval != IERC721Receiver.onERC721Received.selector) {
+                    revert ERC721InvalidReceiver(to);
+                }
+            } catch (bytes memory reason) {
+                if (reason.length == 0) {
+                    revert ERC721InvalidReceiver(to);
+                } else {
+                    /// @solidity memory-safe-assembly
+                    assembly {
+                        revert(add(32, reason), mload(reason))
+                    }
+                }
+            }
         }
     }
 

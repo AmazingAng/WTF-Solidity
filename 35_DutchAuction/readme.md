@@ -10,21 +10,21 @@ tags:
 
 # WTF Solidity极简入门: 35. 荷兰拍卖
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-欢迎关注我的推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-欢迎加入WTF科学家社区，内有加微信群方法：[链接](https://discord.gg/5akcruXrsk)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github（1024个star发课程认证，2048个star发社群NFT）: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
------
+---
 
 这一讲，我将介绍荷兰拍卖，并通过简化版`Azuki`荷兰拍卖代码，讲解如何通过`荷兰拍卖`发售`ERC721`标准的`NFT`。
 
 ## 荷兰拍卖
 
-荷兰拍卖（`Dutch Auction`）是一种特殊的拍卖形式。 亦称“减价拍卖”，它是指拍卖标的的竞价由高到低依次递减直到第一个竞买人应价（达到或超过底价）时击槌成交的一种拍卖。
+荷兰拍卖（`Dutch Auction`）是一种特殊的拍卖形式。 亦称“减价拍卖”，它是指拍卖标的竞价由高到低依次递减直到第一个竞买人应价（达到或超过底价）时击槌成交的一种拍卖。
 
 ![荷兰拍卖](./img/35-1.png)
 
@@ -38,14 +38,14 @@ tags:
 
 ## `DutchAuction`合约
 
-代码基于`Azuki`的[代码](https://etherscan.io/address/0xed5af388653567af2f388e6224dc7c4b3241c544#code)简化而成。`DucthAuction`合约继承了之前介绍的`ERC721`和`Ownable`合约：
+代码基于`Azuki`的[代码](https://etherscan.io/address/0xed5af388653567af2f388e6224dc7c4b3241c544#code)简化而成。`DutchAuction`合约继承了之前介绍的`ERC721`和`Ownable`合约：
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/ERC721.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/ERC721.sol";
 
 contract DutchAuction is Ownable, ERC721 {
 ```
@@ -54,7 +54,7 @@ contract DutchAuction is Ownable, ERC721 {
 
 合约中一共有`9`个状态变量，其中有`6`个和拍卖相关，他们是：
 
-- `COLLECTOIN_SIZE`：NFT总量。
+- `COLLECTION_SIZE`：NFT总量。
 - `AUCTION_START_PRICE`：荷兰拍卖起拍价，也是最高价。
 - `AUCTION_END_PRICE`：荷兰拍卖结束价，也是最低价/地板价。
 - `AUCTION_TIME`：拍卖持续时长。
@@ -62,7 +62,7 @@ contract DutchAuction is Ownable, ERC721 {
 - `auctionStartTime`：拍卖起始时间（区块链时间戳，`block.timestamp`）。
 
 ```solidity
-    uint256 public constant COLLECTOIN_SIZE = 10000; // NFT总数
+    uint256 public constant COLLECTION_SIZE = 10000; // NFT总数
     uint256 public constant AUCTION_START_PRICE = 1 ether; // 起拍价(最高价)
     uint256 public constant AUCTION_END_PRICE = 0.1 ether; // 结束价(最低价/地板价)
     uint256 public constant AUCTION_TIME = 10 minutes; // 拍卖时间，为了测试方便设为10分钟
@@ -82,7 +82,7 @@ contract DutchAuction is Ownable, ERC721 {
 - 设定拍卖起始时间：我们在构造函数中会声明当前区块时间为起始时间，项目方也可以通过`setAuctionStartTime()`函数来调整：
 
 ```solidity
-    constructor() ERC721("WTF Dutch Auctoin", "WTF Dutch Auctoin") {
+    constructor() ERC721("WTF Dutch Auction", "WTF Dutch Auction") {
         auctionStartTime = block.timestamp;
     }
 
@@ -102,17 +102,17 @@ contract DutchAuction is Ownable, ERC721 {
 
 ```solidity
     // 获取拍卖实时价格
-    function getAuctionPrice(uint256 _auctionStartTime)
+    function getAuctionPrice()
         public
         view
         returns (uint256)
     {
-        if (block.timestamp < _auctionStartTime) {
+        if (block.timestamp < auctionStartTime) {
         return AUCTION_START_PRICE;
-        }else if (block.timestamp - _auctionStartTime >= AUCTION_TIME) {
+        }else if (block.timestamp - auctionStartTime >= AUCTION_TIME) {
         return AUCTION_END_PRICE;
         } else {
-        uint256 steps = (block.timestamp - _auctionStartTime) /
+        uint256 steps = (block.timestamp - auctionStartTime) /
             AUCTION_DROP_INTERVAL;
         return AUCTION_START_PRICE - (steps * AUCTION_DROP_PER_STEP);
         }
@@ -130,24 +130,24 @@ contract DutchAuction is Ownable, ERC721 {
         require(
         _saleStartTime != 0 && block.timestamp >= _saleStartTime,
         "sale has not started yet"
-        ); // 检查拍卖是否开始
+        ); // 检查是否设置起拍时间，拍卖是否开始
         require(
-        totalSupply() + quantity <= COLLECTOIN_SIZE,
+        totalSupply() + quantity <= COLLECTION_SIZE,
         "not enough remaining reserved for auction to support desired mint amount"
         ); // 检查是否超过NFT上限
 
-        uint256 totalCost = getAuctionPrice(auctionStartTime) * quantity; // 计算mint成本
+        uint256 totalCost = getAuctionPrice() * quantity; // 计算mint成本
         require(msg.value >= totalCost, "Need to send more ETH."); // 检查用户是否支付足够ETH
-
+        
         // Mint NFT
-        for(uint i = 0; i < quantity; i++) {
-            uint mintIndex = totalSupply();
+        for(uint256 i = 0; i < quantity; i++) {
+            uint256 mintIndex = totalSupply();
             _mint(msg.sender, mintIndex);
             _addTokenToAllTokensEnumeration(mintIndex);
         }
         // 多余ETH退款
         if (msg.value > totalCost) {
-            payable(msg.sender).transfer(msg.value - totalCost);
+            payable(msg.sender).transfer(msg.value - totalCost); //注意一下这里是否有重入的风险
         }
     }
 ```
@@ -157,7 +157,7 @@ contract DutchAuction is Ownable, ERC721 {
 ```solidity
     // 提款函数，onlyOwner
     function withdrawMoney() external onlyOwner {
-        (bool success, ) = msg.sender.call{value: address(this).balance}("");
+        (bool success, ) = msg.sender.call{value: address(this).balance}(""); // call函数的调用方式详见第22讲
         require(success, "Transfer failed.");
     }
 ```
@@ -170,7 +170,7 @@ contract DutchAuction is Ownable, ERC721 {
 2. 荷兰拍卖：随后，可以通过`getAuctionPrice()`函数获取到**当前**的拍卖价格。可以观察到，拍卖开始前的价格为`起拍价 AUCTION_START_PRICE`随着拍卖进行，拍卖价格在逐渐降低，直到降低至`地板价 AUCTION_END_PRICE`后不再变化。
 ![荷兰拍卖价格变化](./img/35-3.png)
 
-3. Mint操作：通过`auctionMin()`函数，完成mint，可以看见本例中，由于时间已经超过拍卖时间，因此仅耗费了`地板价`就完成了拍卖。
+3. Mint操作：通过`auctionMint()`函数，完成mint，可以看见本例中，由于时间已经超过拍卖时间，因此仅耗费了`地板价`就完成了拍卖。
 ![完成荷兰拍卖](./img/35-4.png)
 
 4. 提取`ETH`：直接通过`withdrawMoney()`函数，便能将筹集到的`ETH`通过`call()`发送到合约创建者的地址。

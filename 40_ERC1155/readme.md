@@ -9,22 +9,22 @@ tags:
 
 # WTF Solidity极简入门: 40. ERC1155
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-discord：[WTF Academy](https://discord.gg/5akcruXrsk)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
------
+---
 
 这一讲，我们将学习`ERC1155`标准，它支持一个合约包含多种代币。并且，我们会发行一个魔改的无聊猿 - `BAYC1155`：它包含`10,000`种代币，且元数据与`BAYC`一致。
 
 ## `EIP1155`
 不论是`ERC20`还是`ERC721`标准，每个合约都对应一个独立的代币。假设我们要在以太坊上打造一个类似《魔兽世界》的大型游戏，这需要我们对每个装备都部署一个合约。上千种装备就要部署和管理上千个合约，这非常麻烦。因此，[以太坊EIP1155](https://eips.ethereum.org/EIPS/eip-1155)提出了一个多代币标准`ERC1155`，允许一个合约包含多个同质化和非同质化代币。`ERC1155`在GameFi应用最多，Decentraland、Sandbox等知名链游都使用它。
 
-简单来说，`ERC1155`与之前介绍的非同质化代币标准[ERC721](https://github.com/AmazingAng/WTFSolidity/tree/main/34_ERC721)类似：在`ERC721`中，每个代币都有一个`tokenId`作为唯一标识，每个`tokenId`只对应一个代币；而在`ERC1155`中，每一种代币都有一个`id`作为唯一标识，每个`id`对应一种代币。这样，代币种类就可以非同质的在同一个合约里管理了，并且每种代币都有一个网址`uri`来存储它的元数据，类似`ERC721`的`tokenURI`。下面是`ERC1155`的元数据接口合约`IERC1155MetadataURI`：
+简单来说，`ERC1155`与之前介绍的非同质化代币标准[ERC721](https://github.com/AmazingAng/WTF-Solidity/tree/main/34_ERC721)类似：在`ERC721`中，每个代币都有一个`tokenId`作为唯一标识，每个`tokenId`只对应一个代币；而在`ERC1155`中，每一种代币都有一个`id`作为唯一标识，每个`id`对应一种代币。这样，代币种类就可以非同质的在同一个合约里管理了，并且每种代币都有一个网址`uri`来存储它的元数据，类似`ERC721`的`tokenURI`。下面是`ERC1155`的元数据接口合约`IERC1155MetadataURI`：
 
 ```solidity
 /**
@@ -35,6 +35,7 @@ interface IERC1155MetadataURI is IERC1155 {
      * @dev 返回第`id`种类代币的URI
      */
     function uri(uint256 id) external view returns (string memory);
+}
 ```
 
 那么怎么区分`ERC1155`中的某类代币是同质化还是非同质化代币呢？其实很简单：如果某个`id`对应的代币总量为`1`，那么它就是非同质化代币，类似`ERC721`；如果某个`id`对应的代币总量大于`1`，那么他就是同质化代币，因为这些代币都分享同一个`id`，类似`ERC20`。
@@ -47,7 +48,7 @@ interface IERC1155MetadataURI is IERC1155 {
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.sol";
 
 /**
  * @dev ERC1155标准的接口合约，实现了EIP1155的功能
@@ -89,7 +90,7 @@ interface IERC1155 is IERC165 {
     function balanceOf(address account, uint256 id) external view returns (uint256);
 
     /**
-     * @dev 批量持仓查询，`accounts`和`ids`数组的长度要想等。
+     * @dev 批量持仓查询，`accounts`和`ids`数组的长度要相等。
      */
     function balanceOfBatch(address[] calldata accounts, uint256[] calldata ids)
         external
@@ -150,7 +151,7 @@ interface IERC1155 is IERC165 {
 ### `IERC1155`函数
 - `balanceOf()`：单币种余额查询，返回`account`拥有的`id`种类的代币的持仓量。
 - `balanceOfBatch()`：多币种余额查询，查询的地址`accounts`数组和代币种类`ids`数组的长度要相等。
-- `setApprovalForAll()`：批量授权，将调用者的代币授权给`operator`地址。。
+- `setApprovalForAll()`：批量授权，将调用者的代币授权给`operator`地址。
 - `isApprovedForAll()`：查询批量授权信息，如果授权地址`operator`被`account`授权，则返回`true`。
 - `safeTransferFrom()`：安全单币转账，将`amount`单位`id`种类的代币从`from`地址转账给`to`地址。如果`to`地址是合约，则会验证是否实现了`onERC1155Received()`接收函数。
 - `safeBatchTransferFrom()`：安全多币转账，与单币转账类似，只不过转账数量`amounts`和代币种类`ids`变为数组，且长度相等。如果`to`地址是合约，则会验证是否实现了`onERC1155BatchReceived()`接收函数。
@@ -167,7 +168,7 @@ interface IERC1155 is IERC165 {
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.sol";
 
 /**
  * @dev ERC1155接收合约，要接受ERC1155的安全转账，需要实现这个合约
@@ -240,16 +241,15 @@ pragma solidity ^0.8.0;
 import "./IERC1155.sol";
 import "./IERC1155Receiver.sol";
 import "./IERC1155MetadataURI.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/Address.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/String.sol";
-import "https://github.com/AmazingAng/WTFSolidity/blob/main/34_ERC721/IERC165.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/String.sol";
+import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/IERC165.sol";
 
 /**
  * @dev ERC1155多代币标准
  * 见 https://eips.ethereum.org/EIPS/eip-1155
  */
 contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
-    using Address for address; // 使用Address库，用isContract来判断地址是否为合约
+
     using Strings for uint256; // 使用String库
     // Token名称
     string public name;
@@ -492,6 +492,9 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         emit TransferBatch(operator, from, address(0), ids, amounts);
     }
 
+    // 错误 无效的接收者
+    error ERC1155InvalidReceiver(address receiver);
+
     // @dev ERC1155的安全转账检查
     function _doSafeTransferAcceptanceCheck(
         address operator,
@@ -501,15 +504,20 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         uint256 amount,
         bytes memory data
     ) private {
-        if (to.isContract()) {
+        if (to.code.length > 0) {
             try IERC1155Receiver(to).onERC1155Received(operator, from, id, amount, data) returns (bytes4 response) {
                 if (response != IERC1155Receiver.onERC1155Received.selector) {
-                    revert("ERC1155: ERC1155Receiver rejected tokens");
+                    revert ERC1155InvalidReceiver(to);
                 }
-            } catch Error(string memory reason) {
-                revert(reason);
-            } catch {
-                revert("ERC1155: transfer to non-ERC1155Receiver implementer");
+            } catch (bytes memory reason) {
+                if (reason.length == 0) {
+                    revert ERC1155InvalidReceiver(to);
+                } else {
+                    /// @solidity memory-safe-assembly
+                    assembly {
+                        revert(add(32, reason), mload(reason))
+                    }
+                }
             }
         }
     }
@@ -523,17 +531,22 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         uint256[] memory amounts,
         bytes memory data
     ) private {
-        if (to.isContract()) {
+        if (to.code.length > 0) {
             try IERC1155Receiver(to).onERC1155BatchReceived(operator, from, ids, amounts, data) returns (
                 bytes4 response
             ) {
                 if (response != IERC1155Receiver.onERC1155BatchReceived.selector) {
-                    revert("ERC1155: ERC1155Receiver rejected tokens");
+                    revert ERC1155InvalidReceiver(to);
                 }
-            } catch Error(string memory reason) {
-                revert(reason);
-            } catch {
-                revert("ERC1155: transfer to non-ERC1155Receiver implementer");
+            } catch (bytes memory reason) {
+                if (reason.length == 0) {
+                    revert ERC1155InvalidReceiver(to);
+                } else {
+                    /// @solidity memory-safe-assembly
+                    assembly {
+                        revert(add(32, reason), mload(reason))
+                    }
+                }
             }
         }
     }
@@ -562,7 +575,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
 ```solidity
 // SPDX-License-Identifier: MIT
 // by 0xAA
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.21;
 
 import "./ERC1155.sol";
 
@@ -610,7 +623,7 @@ contract BAYC1155 is ERC1155{
 
 ![mint1](./img/40-3.jpg)
 
-`blanceOf`一栏中输入账户地址和`id`查看对应持仓
+`balanceOf`一栏中输入账户地址和`id`查看对应持仓
 
 ![mint2](./img/40-4.jpg)
 
@@ -639,7 +652,3 @@ contract BAYC1155 is ERC1155{
 ## 总结
 
 这一讲我们学习了以太坊`EIP1155`提出的`ERC1155`多代币标准，它允许一个合约中包含多个同质化或非同质化代币。并且，我们创建了魔改版无聊猿 - `BAYC1155`：一个包含`10,000`种代币且元数据与`BAYC`相同的`ERC1155`代币。目前，`ERC1155`主要应用于`GameFi`中。但我相信随着元宇宙技术不断发展，这个标准会越来越流行。
-
-
-
-

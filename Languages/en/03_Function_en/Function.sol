@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.34;
 contract FunctionTypes{
     uint256 public number = 5;
     
     constructor() payable {}
 
     // function type
-    // function (<parameter types>) {internal|external} [pure|view|payable] [returns (<return types>)]
+    // function (<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
     // default function
     function add() external{
         number = number + 1;
@@ -27,12 +27,12 @@ contract FunctionTypes{
         number = number - 1;
     }
 
-    // external: function can be called by other contract
+    // external: function can be called by EOA/other contract
     function minusCall() external {
         minus();
     }
 
-    // payable: ensure that money(eth) is being sent to the contract and out of the contract as well
+    //payable: money (ETH) can be sent to the contract via this function
     function minusPayable() external payable returns(uint256 balance) {
         minus();    
         balance = address(this).balance;

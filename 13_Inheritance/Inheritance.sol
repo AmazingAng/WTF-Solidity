@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.34;
 
 // 合约继承
 contract Yeye {
     event Log(string msg);
 
-    // 定义3个function: hip(), pop(), man()，Log值为Yeye。
+    // 定义3个function: hip(), pop(), yeye()，Log值为Yeye。
     function hip() public virtual{
         emit Log("Yeye");
     }

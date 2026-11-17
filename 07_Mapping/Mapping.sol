@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.34;
 contract Mapping {
     mapping(uint => address) public idToAddress; // id映射到地址
     mapping(address => address) public swapPair; // 币对的映射，地址到地址
     
-    // 规则1. _KeyType不能是自定义的 下面这个例子会报错
+    // 规则1. _KeyType 不能是自定义的, 下面这个例子会报错
+    // _KeyType 可以是 内置值类型，string, bytes, 合约，枚举类型
     // 我们定义一个结构体 Struct
     // struct Student{
     //    uint256 id;

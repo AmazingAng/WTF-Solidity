@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.34;
 
 contract OtherContract {
     uint256 private _x = 0; // 状态变量x
@@ -52,7 +52,7 @@ contract Call{
     }
 
     function callNonExist(address _addr) external{
-        // call getX()
+        // call 不存在的函数
         (bool success, bytes memory data) = _addr.call(
             abi.encodeWithSignature("foo(uint256)")
         );

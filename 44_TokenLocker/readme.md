@@ -9,15 +9,15 @@ tags:
 
 # WTF Solidity极简入门: 44. 代币锁
 
-我最近在重新学solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新1-3讲。
+我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
-推特：[@0xAA_Science](https://twitter.com/0xAA_Science)
+推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy_](https://twitter.com/WTFAcademy_)
 
-社区：[Discord](https://discord.wtf.academy)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
+社区：[Discord](https://discord.gg/5akcruXrsk)｜[微信群](https://docs.google.com/forms/d/e/1FAIpQLSe4KGT8Sh6sJ7hedQRuIYirOoZK_85miz3dw7vA1-YjodgJ-A/viewform?usp=sf_link)｜[官网 wtf.academy](https://wtf.academy)
 
-所有代码和教程开源在github: [github.com/AmazingAng/WTFSolidity](https://github.com/AmazingAng/WTFSolidity)
+所有代码和教程开源在 github: [github.com/AmazingAng/WTF-Solidity](https://github.com/AmazingAng/WTF-Solidity)
 
------
+---
 
 这一讲，我们介绍什么是流动性提供者`LP`代币，为什么要锁定流动性，并写一个简单的`ERC20`代币锁合约。
 
@@ -29,7 +29,7 @@ tags:
 
 ### 什么是`LP`代币？
 
-区块链中，用户在去中心化交易所`DEX`上交易代币，例如`Uniswap`交易所。`DEX`和中心化交易所不同，中心化交易所使用自动做市商机制，需要用户或项目方提供资金池，以使得其他用户能够即时买卖。简单来说，用户/项目方需要质押相应的币对（比如`ETH/DAI`）到资金池中，作为补偿，`DEX`会给他们铸造相应的流动性提供者`LP`代币凭证，证明他们质押了相应的份额，供他们收取手续费。
+区块链中，用户在去中心化交易所`DEX`上交易代币，例如`Uniswap`交易所。`DEX`和中心化交易所(`CEX`)不同，去中心化交易所使用自动做市商(`AMM`)机制，需要用户或项目方提供资金池，以使得其他用户能够即时买卖。简单来说，用户/项目方需要质押相应的币对（比如`ETH/DAI`）到资金池中，作为补偿，`DEX`会给他们铸造相应的流动性提供者`LP`代币凭证，证明他们质押了相应的份额，供他们收取手续费。
 
 
 ### 为什么要锁定流动性？
@@ -51,7 +51,7 @@ tags:
 `TokenLocker`合约中共有`2`个事件。
 
 - `TokenLockStart`：锁仓开始事件，在合约部署时释放，记录受益人地址，代币地址，锁仓起始时间，和结束时间。
-- `Release`：代币释放事件，在受益人取出代币时释放，记录记录受益人地址，代币地址，释放代币时间，和代币数量。
+- `Release`：代币释放事件，在受益人取出代币时释放，记录受益人地址，代币地址，释放代币时间，和代币数量。
 
 ```solidity
     // 事件
@@ -87,7 +87,7 @@ tags:
 
 ```solidity
     /**
-     * @dev 部署时间锁合约，初始化代币合约地址，受益人地址和锁仓时间。
+     * @dev 部署代币锁合约，初始化代币合约地址，受益人地址和锁仓时间。
      * @param token_: 被锁仓的ERC20代币合约
      * @param beneficiary_: 受益人地址
      * @param lockTime_: 锁仓时间(秒)
@@ -127,7 +127,7 @@ tags:
 
 ![`Remix`演示](./img/44-2.jpg)
 
-### 2. 部署`ToeknLocker`合约，代币地址为`ERC20`合约地址，受益人为自己，锁仓期填`180`秒。
+### 2. 部署`TokenLocker`合约，代币地址为`ERC20`合约地址，受益人为自己，锁仓期填`180`秒。
 
 ![`Remix`演示](./img/44-3.jpg)
 
@@ -145,4 +145,4 @@ tags:
 
 ## 总结
 
-这一讲，我们介绍了代币锁合约。项目方一般在`DEX`上提供流动性，供投资者交易。项目方突然撤出`LP`会造成`rug-pull`，而将`LP`锁在在代币锁合约中可以避免这种情况。
+这一讲，我们介绍了代币锁合约。项目方一般在`DEX`上提供流动性，供投资者交易。项目方突然撤出`LP`会造成`rug-pull`，而将`LP`锁在代币锁合约中可以避免这种情况。

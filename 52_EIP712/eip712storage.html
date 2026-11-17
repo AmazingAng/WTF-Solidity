@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EIP-712 Signature Example</title>
+</head>
+<body>
+  <h1>EIP-712 Signature Example</h1>
+
+  <label for="name">Name:</label>
+  <input id="name" value="EIP712Storage">
+  <br>
+  <label for="chainId">Chain ID:</label>
+  <input id="chainId" value="1">
+  <br>
+  <label for="contractAddress">Contract Address:</label>
+  <input id="contractAddress" value="0xf8e81D47203A594245E36C48e151709F0C19fBe8">
+  <br>
+  <label for="spender">Spender:</label>
+  <input id="spender" value="0x5B38Da6a701c568545dCfcB03FcB875f56beddC4">
+  <br>
+  <label for="number">number:</label>
+  <input id="number" value="100">
+  <br>
+  <button id="connectButton">Connect MetaMask</button>
+  <button id="signPermitButton" disabled>Sign Permit</button>
+  <br>
+  <pre id="signatureOutput"></pre>
+
+  <h5>钱包地址: <span class="showAccount"></span></h5>
+  <h5>ChainID: <span class="showChainID"></span></h5>
+  <h5>ETH 余额: <span class="showETHBalance"></span></h5>
+  <h5>签名数据: <span class="showSignature"></span></h5>
+
+  <script type = "module">
+    import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.3.0/ethers.js";      const ethereumButton = document.querySelector('.connect');
+    const showAccount = document.querySelector('.showAccount');
+    const showChainID = document.querySelector('.showChainID');
+    const showETHBalance = document.querySelector('.showETHBalance');
+    const showSignature = document.querySelector('.showSignature');
+    const connectButton = document.getElementById("connectButton");
+    const signPermitButton = document.getElementById("signPermitButton");
+
+    let provider;
+    let signer;
+
+    async function connectMetaMask() {
+        // 获得provider
+        const provider = new ethers.BrowserProvider(window.ethereum)
+        
+        // 读取钱包地址
+        const accounts = await provider.send("eth_requestAccounts", []);
+        const account = accounts[0]
+        console.log(`钱包地址: ${account}`)
+        showAccount.innerHTML = account;
+        
+        // 读取chainid
+        const { chainId } = await provider.getNetwork()
+        console.log(`chainid: ${chainId}`)
+        showChainID.innerHTML = chainId;
+
+        // 读取ETH余额
+        const signer = await provider.getSigner()
+        const balance = await provider.getBalance(signer.getAddress());
+        console.log(`以太坊余额： ${ethers.formatUnits(balance)}`)
+        showETHBalance.innerHTML = ethers.formatUnits(balance);
+        signPermitButton.disabled = false;
+    }
+
+    async function signPermit() {
+      const name = document.getElementById('name').value;
+      const version = "1";
+      const chainId = parseInt(document.getElementById('chainId').value);
+      const contractAddress = document.getElementById('contractAddress').value;
+      const spender = document.getElementById('spender').value;
+      const number = document.getElementById('number').value;
+      const provider = new ethers.BrowserProvider(window.ethereum)
+      const signer = await provider.getSigner()
+      const owner = await signer.getAddress();
+
+      const domain = {
+        name: name,
+        version: version,
+        chainId: chainId,
+        verifyingContract: contractAddress,
+      };
+
+      const types = {
+        Storage: [
+          { name: "spender", type: "address" },
+          { name: "number", type: "uint256" },
+        ],
+      };
+
+      const message = {
+        spender: spender,
+        number: number,
+      };
+
+      try {
+        console.log(message)
+        const signature = await signer.signTypedData(domain, types, message);
+        console.log("Signature:", signature);
+        showSignature.innerHTML = `${signature}`;
+      } catch (error) {
+        console.error("Error signing permit:", error);
+      }
+    }
+
+    connectButton.addEventListener(`click`, connectMetaMask)
+    signPermitButton.addEventListener(`click`, signPermit)
+  </script>
+</body>
+</html>

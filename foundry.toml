@@ -1,0 +1,18 @@
+# WTF Solidity 教程 - 根目录统一 Foundry 配置
+# 用于对全仓库合约运行 forge test
+[profile.default]
+src = "src"
+out = "out"
+test = "test"
+libs = ["lib", "node_modules"]
+solc = "0.8.34"
+
+remappings = [
+    "forge-std/=lib/forge-std/src/",
+    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+    "openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/"
+]
+
+# 仅对根目录 test/ 运行测试，不编译 Languages/Topics 下的子项目
+[profile.default.fmt]
+line_length = 120
