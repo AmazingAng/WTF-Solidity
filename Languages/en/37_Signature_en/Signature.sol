@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.34;
 
-import "../34_ERC721/ERC721.sol";
+import "../34_ERC721_en/ERC721.sol";
 
 // ECDSA库
 library ECDSA{

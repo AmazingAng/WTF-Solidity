@@ -8,6 +8,7 @@ pragma solidity ^0.8.34;
  * O valor de retorno da chamada delegada é diretamente retornado ao chamador do Proxy.
  */
 contract Proxy {
+    address public implementation;
     // Endereço do contrato lógico. O tipo de variável de estado da implementação deve ser o mesmo do contrato Proxy no mesmo local, caso contrário, ocorrerá um erro.
 
     /**
@@ -62,7 +63,7 @@ contract Proxy {
  * @dev Contrato lógico, executa a chamada delegada
  */
 contract Logic {
-    // Manter consistência com o Proxy para evitar conflitos de slots
+    address public implementation; // Mesmo layout de armazenamento do Proxy
     uint public x = 99; 
     event CallSuccess();
 
@@ -78,7 +79,7 @@ contract Logic {
  * @dev Contrato Caller, chama o contrato proxy e obtém o resultado da execução
  */
 contract Caller{
-    // Endereço do contrato de proxy
+    address public proxy;
 
     constructor(address proxy_){
         proxy = proxy_;
@@ -86,7 +87,8 @@ contract Caller{
 
     // Ao chamar a função increase() através do contrato de proxy
     function increase() external returns(uint) {
-        ( , bytes memory data) = proxy.call(abi.encodeWithSignature("increment()"));
+        (bool success, bytes memory data) = proxy.call(abi.encodeWithSignature("increment()"));
+        require(success, "Proxy call failed");
         return abi.decode(data,(uint));
     }
 }

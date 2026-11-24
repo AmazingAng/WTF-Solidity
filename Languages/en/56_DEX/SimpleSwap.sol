@@ -15,7 +15,7 @@ contract SimpleSwap is ERC20 {
      // event 
      event Mint(address indexed sender, uint amount0, uint amount1);
      event Burn(address indexed sender, uint amount0, uint amount1);
-     eventSwap(
+     event Swap(
          address indexed sender,
          uint amountIn,
          address tokenIn,

@@ -60,7 +60,7 @@ contract TokenVesting {
         // 根据线性释放公式，计算已经释放的数量
         if (timestamp < start) {
             return 0;
-        } else if (timestamp > start + duration) {
+        } else if (timestamp - start >= duration) {
             return totalAllocation;
         } else {
             return (totalAllocation * (timestamp - start)) / duration;

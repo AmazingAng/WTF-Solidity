@@ -2,7 +2,7 @@
 // Por 0xAA
 pragma solidity ^0.8.34;
 
-//importar IERC20
+import "./IERC20.sol";
 
 contract ERC20 is IERC20 {
 
@@ -10,12 +10,10 @@ contract ERC20 is IERC20 {
 
     mapping(address => mapping(address => uint256)) public override allowance;
 
-    // Fornecimento total de tokens
-
-    // Nome
-    // Símbolos
-    
-    // Número de casas decimais
+    uint256 public override totalSupply;
+    string public name;
+    string public symbol;
+    uint8 public decimals = 18;
 
     constructor(string memory name_, string memory symbol_){
         name = name_;
@@ -69,27 +67,25 @@ contract ERC20 is IERC20 {
 // Contrato de torneira para tokens ERC20
 contract Faucet {
 
-    // Cada vez que você resgata 100 unidades de tokens.
-    // Endereço do contrato de token
-    // Registre os endereços que receberam tokens
+    uint256 public amountAllowed = 100;
+    address public tokenContract;
+    mapping(address => bool) public requestedAddress;
 
     // Evento SendToken
     event SendToken(address indexed Receiver, uint256 indexed Amount); 
 
     // Ao implantar, defina o contrato de token ERC2.
     constructor(address _tokenContract) {
-        // definir contrato de token
+        tokenContract = _tokenContract;
     }
 
     // Função para o usuário receber tokens
     function requestTokens() external {
-        // Cada endereço só pode ser resgatado uma vez.
-        // Criar objeto de contrato IERC20
-        // A torneira está vazia.
-
-        // Enviar token
-        // Registre o endereço de recebimento
-        
-        // Liberar o evento SendToken
+        require(!requestedAddress[msg.sender], "Can't Request Multiple Times!");
+        IERC20 token = IERC20(tokenContract);
+        require(token.balanceOf(address(this)) >= amountAllowed, "Faucet Empty!");
+        requestedAddress[msg.sender] = true;
+        require(token.transfer(msg.sender, amountAllowed), "Token transfer failed");
+        emit SendToken(msg.sender, amountAllowed);
     }
 }

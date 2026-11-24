@@ -5,6 +5,9 @@ pragma solidity ^0.8.34;
 // Contrato simples e atualizável, onde o administrador pode alterar o endereço do contrato lógico através da função de atualização, modificando assim a lógica do contrato.
 // Para fins de demonstração educacional, não utilizar em ambiente de produção.
 contract SimpleUpgrade {
+    address public implementation;
+    address public admin;
+    string public words;
     // Endereço do contrato lógico
     // admin address
     // Strings, podem ser alterados por meio de funções de contrato lógico.
@@ -32,6 +35,7 @@ contract Logic1 {
     // Variáveis de estado e contratos proxy são consistentes para evitar conflitos de slot
     address public implementation; 
     address public admin; 
+    string public words;
     // Strings, podem ser alterados por meio de funções de contrato lógico.
 
     // Alterando a variável de estado no proxy, seletor: 0xc2985578
@@ -45,6 +49,7 @@ contract Logic2 {
     // Variáveis de estado e contratos proxy são consistentes para evitar conflitos de slot
     address public implementation; 
     address public admin; 
+    string public words;
     // Strings, podem ser alterados por meio de funções de contrato lógico.
 
     // Alterando a variável de estado no proxy, seletor: 0xc2985578

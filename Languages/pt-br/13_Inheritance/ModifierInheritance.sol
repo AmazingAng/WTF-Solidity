@@ -25,7 +25,8 @@ contract Identifier is Base1 {
     //Sobrescrevendo o modificador: Se não for sobrescrito, ao chamar getExactDividedBy2And3 com entrada 9, ocorrerá um revert, pois não passará na verificação.
     //Remova as três linhas de comentário abaixo e reescreva o Modificador. Quando você digitar 9 e chamar getExactDividedBy2And3, a chamada será bem-sucedida.
     // modifier exactDividedBy2And3(uint _a) override {
-    modifier exatoDivididoPor2E3(uint _a) override {
+    //     require(_a % 3 == 0);
+    //     _;
     // }
 }
 

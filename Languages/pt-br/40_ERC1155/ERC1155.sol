@@ -13,8 +13,7 @@ import "../34_ERC721/IERC165.sol";
  * Veja https://eips.ethereum.org/EIPS/eip-1155
  */
 contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
-    // Usando a biblioteca Address, use isContract para verificar se um endereço é um contrato
-    // Usando a biblioteca String
+    using Strings for uint256;
     // Token nome
     string public name;
     // Token código
@@ -265,7 +264,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         uint256 amount,
         bytes memory data
     ) private {
-        if (to.isContract()) {
+        if (to.code.length > 0) {
             try IERC1155Receiver(to).onERC1155Received(operator, from, id, amount, data) returns (bytes4 response) {
                 if (response != IERC1155Receiver.onERC1155Received.selector) {
                     revert("ERC1155: ERC1155Receiver rejected tokens");
@@ -287,7 +286,7 @@ contract ERC1155 is IERC165, IERC1155, IERC1155MetadataURI {
         uint256[] memory amounts,
         bytes memory data
     ) private {
-        if (to.isContract()) {
+        if (to.code.length > 0) {
             try IERC1155Receiver(to).onERC1155BatchReceived(operator, from, ids, amounts, data) returns (
                 bytes4 response
             ) {

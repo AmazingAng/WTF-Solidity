@@ -11,12 +11,11 @@ contract ERC20 is IERC20 {
 
     mapping(address => mapping(address => uint256)) public override allowance;
 
-    // Fornecimento total de tokens
+    uint256 public override totalSupply; // Oferta total de tokens
 
-    // Nome
-    // Símbolos
-    
-    // Número de casas decimais
+    string public name;
+    string public symbol;
+    uint8 public decimals = 18;
 
     // @dev Implement contract name and symbol during contract deployment
     constructor(string memory name_, string memory symbol_){

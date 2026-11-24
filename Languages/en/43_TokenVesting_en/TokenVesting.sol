@@ -65,7 +65,7 @@ contract TokenVesting {
         // According to the linear release formula, calculate the released quantity
         if (timestamp < start) {
             return 0;
-        } else if (timestamp > start + duration) {
+        } else if (timestamp - start >= duration) {
             return totalAllocation;
         } else {
             return (totalAllocation * (timestamp - start)) / duration;

@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.34;
 
-//github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/ERC721.sol";
+import "../34_ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 
 contract Random is ERC721, VRFConsumerBaseV2{
     // NFT relacionado
-    // Oferta total
-    // Usado para calcular o tokenId disponível para mintar
-    // Quantidade já mintada
+    uint256 public totalSupply = 100;
+    uint256[100] public ids;
+    uint256 public mintCount;
 
     // Parâmetros do Chainlink VRF
     
@@ -49,15 +49,14 @@ contract Random is ERC721, VRFConsumerBaseV2{
     * Insira um número uint256 e receba um tokenId que pode ser mintado
     */
     function pickRandomUniqueId(uint256 random) private returns (uint256 tokenId) {
-        // Primeiro, faça a subtração e depois calcule o incremento. Preste atenção na diferença entre (a++, ++a).
-        // Quantidade mintável
-        // Todos os tokenId foram mintados completamente.
-        // Obter um número aleatório na cadeia
+        uint256 len = totalSupply - mintCount;
+        require(len > 0, "mint close");
+        mintCount++;
+        uint256 randomIndex = random % len;
 
-        //Gerando um número aleatório e obtendo o tokenId através do módulo, que será usado como índice do array. Ao mesmo tempo, o valor é registrado como len-1. Se o valor obtido pelo módulo já existir, o tokenId será obtido do valor do índice do array.
-        // Obter tokenId
-        // Atualizar lista de ids
-        // Remover o último elemento e retornar o gas
+        tokenId = ids[randomIndex] != 0 ? ids[randomIndex] : randomIndex;
+        ids[randomIndex] = ids[len - 1] == 0 ? len - 1 : ids[len - 1];
+        ids[len - 1] = 0;
     }
 
     /**
@@ -76,8 +75,8 @@ contract Random is ERC721, VRFConsumerBaseV2{
 
     // Usando números pseudoaleatórios na cadeia para criar NFTs
     function mintRandomOnchain() public {
-        // Usando números aleatórios na cadeia para gerar um tokenId
-        _mint(msg.sender, _tokenId);
+        uint256 tokenId = pickRandomUniqueId(getRandomOnchain());
+        _mint(msg.sender, tokenId);
     }
 
     /**
@@ -102,8 +101,8 @@ contract Random is ERC721, VRFConsumerBaseV2{
      * A lógica de consumo de números aleatórios é escrita nesta função
      */
     function fulfillRandomWords(uint256 requestId, uint256[] memory s_randomWords) internal override{
-        // Obter o endereço do usuário minter de requestToSender
-        // Usando o número aleatório retornado pelo VRF para gerar o tokenId
+        address sender = requestToSender[requestId];
+        uint256 tokenId = pickRandomUniqueId(s_randomWords[0]);
         _mint(sender, tokenId);
     }
 }

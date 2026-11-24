@@ -2,9 +2,9 @@
 pragma solidity ^0.8.34;
 
 contract Pair{
-    // Endereço do contrato da fábrica
-    // Token 1
-    // Token 2
+    address public factory;
+    address public token0;
+    address public token1;
 
     constructor() payable {
         factory = msg.sender;
@@ -12,18 +12,19 @@ contract Pair{
 
     // chamado uma vez pela fábrica no momento da implantação
     function initialize(address _token0, address _token1) external {
-        // verificação suficiente
+        require(msg.sender == factory, "UniswapV2: FORBIDDEN");
         token0 = _token0;
         token1 = _token1;
     }
 }
 
 contract PairFactory2{
-    // Traduzindo o texto para 'pt-br':
-    // Encontre o endereço do par através de dois endereços de tokens
+    mapping(address => mapping(address => address)) public getPair;
+    address[] public allPairs;
 
     function createPair2(address tokenA, address tokenB) external returns (address pairAddr) {
-        //Evite conflitos entre tokenA e tokenB se forem iguais
+        require(tokenA != tokenB, "IDENTICAL_ADDRESSES");
+        (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
         // Calcular o salt usando os endereços tokenA e tokenB
         //Ordenar tokenA e tokenB em ordem crescente
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));
@@ -40,7 +41,8 @@ contract PairFactory2{
 
     // Calcular antecipadamente o endereço do contrato pair
     function calculateAddr(address tokenA, address tokenB) public view returns(address predictedAddress){
-        //Evite conflitos entre tokenA e tokenB se forem iguais
+        require(tokenA != tokenB, "IDENTICAL_ADDRESSES");
+        (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
         // Calcular o salt usando os endereços tokenA e tokenB
         //Ordenar tokenA e tokenB em ordem crescente
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));

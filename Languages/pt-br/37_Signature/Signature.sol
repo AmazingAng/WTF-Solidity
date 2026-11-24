@@ -56,8 +56,8 @@ library ECDSA{
 }
 
 contract SignatureNFT is ERC721 {
-    // Endereço de assinatura
-    // Registre os endereços já mintados
+    address public immutable signer;
+    mapping(address => bool) public mintedAddress;
 
     // Construtor, inicializa o nome, código e endereço de assinatura da coleção NFT
     constructor(string memory _name, string memory _symbol, address _signer)
@@ -70,13 +70,12 @@ contract SignatureNFT is ERC721 {
     function mint(address _account, uint256 _tokenId, bytes memory _signature)
     external
     {
-        // Empacotar mensagem com _account e _tokenId
-        // Calcular mensagem de assinatura Ethereum
-        // ECDSA verificado com sucesso
-        // O endereço não foi mintado antes.
-                
-        // Registre os endereços que foram mintados
-        // mint
+        bytes32 msgHash = getMessageHash(_account, _tokenId);
+        bytes32 ethSignedMessageHash = ECDSA.toEthSignedMessageHash(msgHash);
+        require(verify(ethSignedMessageHash, _signature), "Invalid signature");
+        require(!mintedAddress[_account], "Already minted!");
+        mintedAddress[_account] = true;
+        _mint(_account, _tokenId);
     }
 
     /*

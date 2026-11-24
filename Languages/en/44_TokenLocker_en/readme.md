@@ -130,7 +130,7 @@ There are `2` functions in the `TokenLocker` contract.
 
 ## `Remix` Demonstration
 
-### 1. Deploy the `ERC20` contract in [Lesson 31](../31_ERC20/readme.md), and mint `10000` tokens for yourself
+### 1. Deploy the `ERC20` contract in [Lesson 31](../31_ERC20_en/readme.md), and mint `10000` tokens for yourself
 
 ![`Remix` Demonstration](./img/44-2.png)
 

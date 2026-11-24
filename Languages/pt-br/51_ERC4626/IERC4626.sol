@@ -11,9 +11,6 @@ import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
  * https://eips.ethereum.org/EIPS/eip-4626[ERC-4626].
  */
 interface IERC4626 is IERC20, IERC20Metadata {
-    //////////////////////////////////////////////////////////////
-                                 事件
-    //////////////////////////////////////////////////////////////*/
     // Acionado ao fazer um depósito
     event Deposit(address indexed sender, address indexed owner, uint256 assets, uint256 shares);
 
@@ -26,9 +23,6 @@ interface IERC4626 is IERC20, IERC20Metadata {
         uint256 shares
     );
 
-    //////////////////////////////////////////////////////////////
-                            元数据
-    //////////////////////////////////////////////////////////////*/
     /**
      * @dev Retorna o endereço do token de ativo base do cofre (para depósito e retirada)
      * - Deve ser um endereço de contrato de token ERC20.
@@ -36,9 +30,6 @@ interface IERC4626 is IERC20, IERC20Metadata {
      */
     function asset() external view returns (address assetTokenAddress);
 
-    //////////////////////////////////////////////////////////////
-                        存款/提款逻辑
-    //////////////////////////////////////////////////////////////*/
     /**
      * @dev Função de depósito: o usuário deposita ativos básicos na tesouraria na quantidade de 'assets' unidades e o contrato emite 'shares' unidades de crédito da tesouraria para o endereço do destinatário.
      *
@@ -68,9 +59,6 @@ interface IERC4626 is IERC20, IERC20Metadata {
      */
     function redeem(uint256 shares, address receiver, address owner) external returns (uint256 assets);
 
-    //////////////////////////////////////////////////////////////
-                            会计逻辑
-    //////////////////////////////////////////////////////////////*/
 
     /**
      * @dev Retorna o total de tokens de ativos básicos gerenciados pelo cofre
@@ -133,9 +121,6 @@ interface IERC4626 is IERC20, IERC20Metadata {
      */
     function previewRedeem(uint256 shares) external view returns (uint256 assets);
 
-    //////////////////////////////////////////////////////////////
-                     存款/提款限额逻辑
-    //////////////////////////////////////////////////////////////*/
     /**
      * @dev Retorna o valor máximo de ativos básicos que um endereço de usuário pode depositar de uma só vez.
      * - Se houver um limite de depósito, o valor retornado deve ser um valor finito.

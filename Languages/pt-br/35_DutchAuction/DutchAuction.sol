@@ -5,18 +5,17 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "../34_ERC721/ERC721.sol";
 
 contract DutchAuction is Ownable, ERC721 {
-    // Número total de NFTs
-    // Preço inicial
-    // Preço de fechamento (preço mínimo)
-    // Tempo do leilão, definido como 10 minutos para facilitar os testes.
-    // A cada quanto tempo o preço diminui?
+    uint256 public constant COLLECTION_SIZE = 10_000;
+    uint256 public constant AUCTION_START_PRICE = 1 ether;
+    uint256 public constant AUCTION_END_PRICE = 0.1 ether;
+    uint256 public constant AUCTION_TIME = 10 minutes;
+    uint256 public constant AUCTION_DROP_INTERVAL = 1 minutes;
     uint256 public constant AUCTION_DROP_PER_STEP =
-        (AUCTION_START_PRICE - AUCTION_END_PRICE) /
-        // Cada vez que o preço diminui em um passo
-    
-    // Horário de início do leilão
-    // metadata URI
-    // Registre todos os tokenId existentes
+        (AUCTION_START_PRICE - AUCTION_END_PRICE) / (AUCTION_TIME / AUCTION_DROP_INTERVAL);
+
+    uint256 public auctionStartTime;
+    string private _baseTokenURI;
+    uint256[] private _allTokens;
 
     //Definir o horário de início do leilão: Vamos declarar o horário do bloco atual como o horário de início no construtor. O projeto também pode ajustar o horário de início através da função `setAuctionStartTime(uint32)`.
     constructor() Ownable(msg.sender) ERC721("WTF Dutch Auction", "WTF Dutch Auction") {
@@ -39,19 +38,13 @@ contract DutchAuction is Ownable, ERC721 {
 
     // Função de mint para leilão
     function auctionMint(uint256 quantity) external payable{
-        // Criar uma variável local para reduzir os custos de gas
-        require(
-        _saleStartTime != 0 && block.timestamp >= _saleStartTime,
-        "sale has not started yet"
-        // Verificando se o horário de início do leilão foi definido e se o leilão já começou
-        require(
-        totalSupply() + quantity <= COLLECTION_SIZE,
-        "not enough remaining reserved for auction to support desired mint amount"
-        // Verificar se excede o limite de NFTs
+        uint256 saleStartTime = auctionStartTime;
+        require(saleStartTime != 0 && block.timestamp >= saleStartTime, "sale has not started yet");
+        require(totalSupply() + quantity <= COLLECTION_SIZE, "not enough NFTs left");
 
-        // Calcular o custo de produção do mint
-        // Verificar se o usuário pagou ETH suficiente
-        
+        uint256 totalCost = getAuctionPrice() * quantity;
+        require(msg.value >= totalCost, "Need to send more ETH.");
+
         // Mintar NFT
         for(uint256 i = 0; i < quantity; i++) {
             uint256 mintIndex = totalSupply();
@@ -60,7 +53,7 @@ contract DutchAuction is Ownable, ERC721 {
         }
         // Reembolso ETH em excesso
         if (msg.value > totalCost) {
-            //Atenção se há risco de reentrada aqui
+            payable(msg.sender).transfer(msg.value - totalCost);
         }
     }
 

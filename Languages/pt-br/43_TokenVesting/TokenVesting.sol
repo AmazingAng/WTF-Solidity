@@ -12,14 +12,12 @@ import "../31_ERC20/ERC20.sol";
  * O contrato é uma simplificação da VestingWallet da OpenZeppelin.
  */
 contract TokenVesting {
-    // Eventos
-    // Evento de retirada de moedas
+    event ERC20Released(address indexed token, uint256 amount);
 
-    // Variável de estado
-    // Mapeamento do endereço do token para a quantidade liberada, registrando a quantidade de tokens que o beneficiário já recebeu
-    // Endereço do beneficiário
-    // Data de início do período de pertencimento
-    // Período de Atribuição (em segundos)
+    mapping(address => uint256) public erc20Released;
+    address public immutable beneficiary;
+    uint256 public immutable start;
+    uint256 public immutable duration;
 
     /**
      * @dev Inicializa o endereço do beneficiário, o período de liberação (em segundos) e o carimbo de data/hora de início (carimbo de data/hora atual da blockchain)
@@ -60,7 +58,7 @@ contract TokenVesting {
         // De acordo com a fórmula de liberação linear, calcule a quantidade já liberada
         if (timestamp < start) {
             return 0;
-        } else if (timestamp > start + duration) {
+        } else if (timestamp - start >= duration) {
             return totalAllocation;
         } else {
             return (totalAllocation * (timestamp - start)) / duration;

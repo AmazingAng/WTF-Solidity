@@ -2,7 +2,7 @@
 // Por 0xAA
 pragma solidity ^0.8.34;
 
-//importar IERC20
+import "../31_ERC20/IERC20.sol";
 
 /// @notice Transfer ERC20 tokens to multiple addresses
 contract Airdrop {
@@ -23,11 +23,11 @@ contract Airdrop {
             _addresses.length == _amounts.length,
             "Lengths of Addresses and Amounts NOT EQUAL"
         );
-        // Declaração da variável do contrato IERC
-        // Calcular o total de tokens airdrop
+        IERC20 token = IERC20(_token);
+        uint256 _amountSum = getSum(_amounts);
         // Verificar: quantidade de tokens autorizados > quantidade total de tokens airdrop
         require(
-            token.allowance(msg.sender, address(this)) > _amountSum,
+            token.allowance(msg.sender, address(this)) >= _amountSum,
             "Need Approve ERC20 token"
         );
 
@@ -47,7 +47,7 @@ contract Airdrop {
             _addresses.length == _amounts.length,
             "Lengths of Addresses and Amounts NOT EQUAL"
         );
-        // Calcular o total de ETH airdrop
+        uint256 _amountSum = getSum(_amounts);
         // Verificando se a quantidade de ETH recebida é igual à quantidade total do airdrop
         require(msg.value == _amountSum, "Transfer amount error");
         // para loop, use a função transfer para enviar ETH
@@ -83,12 +83,10 @@ contract ERC20 is IERC20 {
 
     mapping(address => mapping(address => uint256)) public override allowance;
 
-    // Fornecimento total de tokens
-
-    // Nome
-    // Símbolos
-
-    // Número de casas decimais
+    uint256 public override totalSupply;
+    string public name;
+    string public symbol;
+    uint8 public decimals = 18;
 
     constructor(string memory name_, string memory symbol_) {
         name = name_;

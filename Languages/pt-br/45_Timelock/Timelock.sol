@@ -13,10 +13,10 @@ contract Timelock{
     event NewAdmin(address indexed newAdmin);
 
     // Variável de estado
-    // Endereço do administrador
-    // Prazo de validade da transação, transações expiradas serão canceladas
-    // Tempo de bloqueio da transação (em segundos)
-    // txHash para bool, registra todas as transações na fila de bloqueio de tempo
+    address public admin;
+    uint256 public constant GRACE_PERIOD = 7 days;
+    uint256 public delay;
+    mapping(bytes32 => bool) public queuedTransactions;
     
     // modificador onlyOwner
     modifier onlyOwner() {

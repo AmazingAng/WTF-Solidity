@@ -2,9 +2,9 @@
 pragma solidity ^0.8.34;
 
 contract Pair{
-    // Endereço do contrato da fábrica
-    // Token 1
-    // Token 2
+    address public factory;
+    address public token0;
+    address public token1;
 
     constructor() payable {
         factory = msg.sender;
@@ -12,15 +12,15 @@ contract Pair{
 
     // chamado uma vez pela fábrica no momento da implantação
     function initialize(address _token0, address _token1) external {
-        // verificação suficiente
+        require(msg.sender == factory, "UniswapV2: FORBIDDEN");
         token0 = _token0;
         token1 = _token1;
     }
 }
 
 contract PairFactory{
-    // Traduzindo o texto para 'pt-br':
-    // Encontre o endereço do par através de dois endereços de tokens
+    mapping(address => mapping(address => address)) public getPair;
+    address[] public allPairs;
 
     function createPair(address tokenA, address tokenB) external returns (address pairAddr) {
         // Criar novo contrato

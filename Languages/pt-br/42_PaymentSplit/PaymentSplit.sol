@@ -6,23 +6,22 @@ pragma solidity ^0.8.34;
  * @dev Este contrato irá dividir os ETH recebidos em várias contas de acordo com as proporções pré-determinadas. Os ETH recebidos serão armazenados no contrato de divisão e cada beneficiário precisará chamar a função release() para receber sua parte.
  */
 contract PaymentSplit{
-    // Eventos
-    // Adicionar evento de beneficiário
-    // Evento de saque do beneficiário
-    // Evento de recebimento de contrato
+    event PayeeAdded(address account, uint256 shares);
+    event PaymentReleased(address to, uint256 amount);
+    event PaymentReceived(address from, uint256 amount);
 
-    // Total de participações
-    // Total de pagamento
-
-    // Cota de cada beneficiário
-    // Valor a ser pago para cada beneficiário
-    // Array de beneficiários
+    uint256 public totalShares;
+    uint256 public totalReleased;
+    mapping(address => uint256) public shares;
+    mapping(address => uint256) public released;
+    address[] public payees;
 
     /**
      * @dev Inicializa os arrays de beneficiários _payees e de participação na divisão _shares
      * O comprimento dos arrays não pode ser zero e os comprimentos dos dois arrays devem ser iguais.
      * Os elementos do array _shares devem ser maiores que zero, os endereços do array _payees não podem ser endereços zero e não podem haver endereços duplicados.
     */
+    constructor(address[] memory _payees, uint256[] memory _shares) payable {
         // Verifique se os arrays '_payees' e '_shares' têm o mesmo comprimento e não são vazios.
         require(_payees.length == _shares.length, "PaymentSplitter: payees and shares length mismatch");
         require(_payees.length > 0, "PaymentSplitter: no payees");

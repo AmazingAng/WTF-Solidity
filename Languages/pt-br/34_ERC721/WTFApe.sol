@@ -5,7 +5,7 @@ pragma solidity ^0.8.34;
 import "./ERC721.sol";
 
 contract WTFApe is ERC721{
-    // Total
+    uint256 public constant MAX_APES = 10_000;
 
     // Construtor
     constructor(string memory name_, string memory symbol_) ERC721(name_, symbol_){
@@ -13,7 +13,7 @@ contract WTFApe is ERC721{
 
     //O baseURI do BAYC é ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/
     function _baseURI() internal pure override returns (string memory) {
-        //QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/
+        return "ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/";
     }
     
     // Função de construção
