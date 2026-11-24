@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 pragma solidity >=0.8.13 <0.9.0;
 
+/// @notice Abstract contract providing configuration utilities for Forge invariant tests.
 abstract contract StdInvariant {
     struct FuzzSelector {
         address addr;
@@ -35,52 +36,62 @@ abstract contract StdInvariant {
     // Functions for users:
     // These are intended to be called in tests.
 
-    /// @dev Excludes a contract address from invariant target selection.
+    /// @notice Excludes a contract address from invariant target selection.
+    /// @param newExcludedContract_ The contract address to exclude.
     function excludeContract(address newExcludedContract_) internal {
         _excludedContracts.push(newExcludedContract_);
     }
 
-    /// @dev Excludes specific selectors on a contract from invariant fuzzing.
+    /// @notice Excludes specific selectors on a contract from invariant fuzzing.
+    /// @param newExcludedSelector_ The selector configuration to exclude.
     function excludeSelector(FuzzSelector memory newExcludedSelector_) internal {
         _excludedSelectors.push(newExcludedSelector_);
     }
 
-    /// @dev Excludes a sender from invariant fuzzing; exclusion takes precedence over targeted senders.
+    /// @notice Excludes a sender from invariant fuzzing; exclusion takes precedence over targeted senders.
+    /// @param newExcludedSender_ The sender address to exclude.
     function excludeSender(address newExcludedSender_) internal {
         _excludedSenders.push(newExcludedSender_);
     }
 
-    /// @dev Excludes an artifact identifier from invariant target selection.
+    /// @notice Excludes an artifact identifier from invariant target selection.
+    /// @param newExcludedArtifact_ The artifact identifier to exclude.
     function excludeArtifact(string memory newExcludedArtifact_) internal {
         _excludedArtifacts.push(newExcludedArtifact_);
     }
 
-    /// @dev Targets an artifact identifier for invariant fuzzing.
+    /// @notice Targets an artifact identifier for invariant fuzzing.
+    /// @param newTargetedArtifact_ The artifact identifier to target.
     function targetArtifact(string memory newTargetedArtifact_) internal {
         _targetedArtifacts.push(newTargetedArtifact_);
     }
 
-    /// @dev Targets specific selectors for an artifact identifier during invariant fuzzing.
+    /// @notice Targets specific selectors for an artifact identifier during invariant fuzzing.
+    /// @param newTargetedArtifactSelector_ The artifact-selector configuration to target.
     function targetArtifactSelector(FuzzArtifactSelector memory newTargetedArtifactSelector_) internal {
         _targetedArtifactSelectors.push(newTargetedArtifactSelector_);
     }
 
-    /// @dev Targets a contract address for invariant fuzzing.
+    /// @notice Targets a contract address for invariant fuzzing.
+    /// @param newTargetedContract_ The contract address to target.
     function targetContract(address newTargetedContract_) internal {
         _targetedContracts.push(newTargetedContract_);
     }
 
-    /// @dev Targets specific selectors on a contract for invariant fuzzing.
+    /// @notice Targets specific selectors on a contract for invariant fuzzing.
+    /// @param newTargetedSelector_ The selector configuration to target.
     function targetSelector(FuzzSelector memory newTargetedSelector_) internal {
         _targetedSelectors.push(newTargetedSelector_);
     }
 
-    /// @dev Adds a sender to the invariant sender allowlist; when non-empty, fuzzing uses only targeted non-excluded senders.
+    /// @notice Adds a sender to the invariant sender allowlist; when non-empty, fuzzing uses only targeted non-excluded senders.
+    /// @param newTargetedSender_ The sender address to target.
     function targetSender(address newTargetedSender_) internal {
         _targetedSenders.push(newTargetedSender_);
     }
 
-    /// @dev Targets an address plus artifact interfaces for invariant fuzzing.
+    /// @notice Targets an address plus artifact interfaces for invariant fuzzing.
+    /// @param newTargetedInterface_ The address-interface configuration to target.
     function targetInterface(FuzzInterface memory newTargetedInterface_) internal {
         _targetedInterfaces.push(newTargetedInterface_);
     }
@@ -88,52 +99,62 @@ abstract contract StdInvariant {
     // Functions for forge:
     // These are called by forge to run invariant tests and don't need to be called in tests.
 
-    /// @dev Returns artifact identifiers configured via `excludeArtifact`.
+    /// @notice Returns artifact identifiers configured via `excludeArtifact`.
+    /// @return excludedArtifacts_ The list of excluded artifact identifiers.
     function excludeArtifacts() public view returns (string[] memory excludedArtifacts_) {
         excludedArtifacts_ = _excludedArtifacts;
     }
 
-    /// @dev Returns contract addresses configured via `excludeContract`.
+    /// @notice Returns contract addresses configured via `excludeContract`.
+    /// @return excludedContracts_ The list of excluded contract addresses.
     function excludeContracts() public view returns (address[] memory excludedContracts_) {
         excludedContracts_ = _excludedContracts;
     }
 
-    /// @dev Returns selector exclusions configured via `excludeSelector`.
+    /// @notice Returns selector exclusions configured via `excludeSelector`.
+    /// @return excludedSelectors_ The list of excluded selector configurations.
     function excludeSelectors() public view returns (FuzzSelector[] memory excludedSelectors_) {
         excludedSelectors_ = _excludedSelectors;
     }
 
-    /// @dev Returns senders configured via `excludeSender`.
+    /// @notice Returns senders configured via `excludeSender`.
+    /// @return excludedSenders_ The list of excluded sender addresses.
     function excludeSenders() public view returns (address[] memory excludedSenders_) {
         excludedSenders_ = _excludedSenders;
     }
 
-    /// @dev Returns artifact identifiers configured via `targetArtifact`.
+    /// @notice Returns artifact identifiers configured via `targetArtifact`.
+    /// @return targetedArtifacts_ The list of targeted artifact identifiers.
     function targetArtifacts() public view returns (string[] memory targetedArtifacts_) {
         targetedArtifacts_ = _targetedArtifacts;
     }
 
-    /// @dev Returns artifact-selector targets configured via `targetArtifactSelector`.
+    /// @notice Returns artifact-selector targets configured via `targetArtifactSelector`.
+    /// @return targetedArtifactSelectors_ The list of targeted artifact-selector configurations.
     function targetArtifactSelectors() public view returns (FuzzArtifactSelector[] memory targetedArtifactSelectors_) {
         targetedArtifactSelectors_ = _targetedArtifactSelectors;
     }
 
-    /// @dev Returns contract addresses configured via `targetContract`.
+    /// @notice Returns contract addresses configured via `targetContract`.
+    /// @return targetedContracts_ The list of targeted contract addresses.
     function targetContracts() public view returns (address[] memory targetedContracts_) {
         targetedContracts_ = _targetedContracts;
     }
 
-    /// @dev Returns selector targets configured via `targetSelector`.
+    /// @notice Returns selector targets configured via `targetSelector`.
+    /// @return targetedSelectors_ The list of targeted selector configurations.
     function targetSelectors() public view returns (FuzzSelector[] memory targetedSelectors_) {
         targetedSelectors_ = _targetedSelectors;
     }
 
-    /// @dev Returns sender allowlist configured via `targetSender` (empty means no sender allowlist).
+    /// @notice Returns sender allowlist configured via `targetSender` (empty means no sender allowlist).
+    /// @return targetedSenders_ The list of targeted sender addresses.
     function targetSenders() public view returns (address[] memory targetedSenders_) {
         targetedSenders_ = _targetedSenders;
     }
 
-    /// @dev Returns address-interface targets configured via `targetInterface`.
+    /// @notice Returns address-interface targets configured via `targetInterface`.
+    /// @return targetedInterfaces_ The list of targeted address-interface configurations.
     function targetInterfaces() public view returns (FuzzInterface[] memory targetedInterfaces_) {
         targetedInterfaces_ = _targetedInterfaces;
     }

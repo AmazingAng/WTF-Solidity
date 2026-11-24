@@ -1,5 +1,7 @@
 # WTF Solidity 极简入门-工具篇 7：Foundry，以 Solidity 为中心的开发工具包
 
+本章配套项目使用 Foundry v1.10.0、Solidity 0.8.39、forge-std v1.17.0 和 OpenZeppelin Contracts 5.6.1。进入 [hello_wtf](./hello_wtf)，执行 `npm ci` 和 `forge test --match-path test/Counter.t.sol` 可运行本地计数器测试。
+
 我最近在重新学 Solidity，巩固一下细节，也写一个“WTF Solidity 极简入门”，供小白们使用（编程大佬可以另找教程），每周更新 1-3 讲。
 
 推特：[@0xAA_Science](https://twitter.com/0xAA_Science)｜[@WTFAcademy\_](https://twitter.com/WTFAcademy_)

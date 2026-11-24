@@ -88,9 +88,8 @@ contract CallReceiverMock {
         }
     }
 
-    function mockFunctionExtra() public payable returns (address, uint256) {
+    function mockFunctionExtra() public payable {
         emit MockFunctionCalledExtra(msg.sender, msg.value);
-        return (msg.sender, msg.value);
     }
 }
 

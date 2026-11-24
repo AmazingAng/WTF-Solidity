@@ -21,8 +21,10 @@ import {VmSafe} from "./Vm.sol";
 // 📦 BOILERPLATE
 import {ScriptBase} from "./Base.sol";
 
-// ⭐️ SCRIPT
+/// @notice Default base contract for Forge scripts.
+/// @dev Includes safe cheatcodes, chain helpers, utility helpers, and console modules.
 abstract contract Script is ScriptBase, StdChains, StdCheatsSafe, StdUtils {
-    // Note: IS_SCRIPT() must return true.
+    /// @notice Marker used by Forge to identify script contracts.
+    /// @dev The generated `IS_SCRIPT()` getter must return true.
     bool public IS_SCRIPT = true;
 }

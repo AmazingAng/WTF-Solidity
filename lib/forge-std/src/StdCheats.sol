@@ -8,10 +8,10 @@ import {Vm} from "./Vm.sol";
 abstract contract StdCheatsSafe {
     Vm private constant vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
 
-    uint256 private constant UINT256_MAX =
+    uint256 private constant _UINT256_MAX =
         115792089237316195423570985008687907853269984665640564039457584007913129639935;
 
-    bool private gasMeteringOff;
+    bool private _gasMeteringOff;
 
     // Data structures to parse Transaction objects from the broadcast artifact
     // that conform to EIP1559. The Raw structs are what are parsed from the JSON
@@ -203,7 +203,7 @@ abstract contract StdCheatsSafe {
         ForgeAddress
     }
 
-    // Checks that `addr` is not blacklisted by token contracts that have a blacklist.
+    /// @notice Assumes `addr` is not blacklisted by `token`, skipping the fuzz run if it is.
     function assumeNotBlacklisted(address token, address addr) internal view virtual {
         // Nothing to check if `token` is not a contract.
         uint256 tokenCodeSize;
@@ -224,14 +224,13 @@ abstract contract StdCheatsSafe {
         vm.assume(!success || abi.decode(returnData, (bool)) == false);
     }
 
-    // Checks that `addr` is not blacklisted by token contracts that have a blacklist.
-    // This is identical to `assumeNotBlacklisted(address,address)` but with a different name, for
-    // backwards compatibility, since this name was used in the original PR which already has
-    // a release. This function can be removed in a future release once we want a breaking change.
+    /// @notice Assumes `addr` is not blacklisted by `token`, skipping the fuzz run if it is.
+    /// @dev Deprecated alias for `assumeNotBlacklisted`. Will be removed in a future breaking release.
     function assumeNoBlacklisted(address token, address addr) internal view virtual {
         assumeNotBlacklisted(token, addr);
     }
 
+    /// @notice Assumes `addr` does not match `addressType`, skipping the fuzz run if it does.
     function assumeAddressIsNot(address addr, AddressType addressType) internal virtual {
         if (addressType == AddressType.Payable) {
             assumeNotPayable(addr);
@@ -246,11 +245,13 @@ abstract contract StdCheatsSafe {
         }
     }
 
+    /// @notice Assumes `addr` does not match `addressType1` or `addressType2`, skipping the fuzz run if it does.
     function assumeAddressIsNot(address addr, AddressType addressType1, AddressType addressType2) internal virtual {
         assumeAddressIsNot(addr, addressType1);
         assumeAddressIsNot(addr, addressType2);
     }
 
+    /// @notice Assumes `addr` does not match any of the three given address types, skipping the fuzz run if it does.
     function assumeAddressIsNot(
         address addr,
         AddressType addressType1,
@@ -262,6 +263,7 @@ abstract contract StdCheatsSafe {
         assumeAddressIsNot(addr, addressType3);
     }
 
+    /// @notice Assumes `addr` does not match any of the four given address types, skipping the fuzz run if it does.
     function assumeAddressIsNot(
         address addr,
         AddressType addressType1,
@@ -281,7 +283,7 @@ abstract contract StdCheatsSafe {
     // implemented by `addr`, which should be taken into account when this function is used.
     function _isPayable(address addr) private returns (bool) {
         require(
-            addr.balance < UINT256_MAX,
+            addr.balance < _UINT256_MAX,
             "StdCheats _isPayable(address): Balance equals max uint256, so it cannot receive any more funds"
         );
         uint256 origBalanceTest = address(this).balance;
@@ -297,25 +299,29 @@ abstract contract StdCheatsSafe {
         return success;
     }
 
-    // NOTE: This function may result in state changes depending on the fallback/receive logic
-    // implemented by `addr`, which should be taken into account when this function is used. See the
-    // `_isPayable` method for more information.
+    /// @notice Assumes `addr` is a payable address, skipping the fuzz run if it is not.
+    /// @dev May cause state changes depending on `addr`'s fallback or receive logic.
     function assumePayable(address addr) internal virtual {
         vm.assume(_isPayable(addr));
     }
 
+    /// @notice Assumes `addr` is not a payable address, skipping the fuzz run if it is.
+    /// @dev May cause state changes depending on `addr`'s fallback or receive logic.
     function assumeNotPayable(address addr) internal virtual {
         vm.assume(!_isPayable(addr));
     }
 
+    /// @notice Assumes `addr` is not the zero address, skipping the fuzz run if it is.
     function assumeNotZeroAddress(address addr) internal pure virtual {
         vm.assume(addr != address(0));
     }
 
+    /// @notice Assumes `addr` is not a precompile on the current chain, skipping the fuzz run if it is.
     function assumeNotPrecompile(address addr) internal pure virtual {
         assumeNotPrecompile(addr, _pureChainId());
     }
 
+    /// @notice Assumes `addr` is not a precompile on `chainId`, skipping the fuzz run if it is.
     function assumeNotPrecompile(address addr, uint256 chainId) internal pure virtual {
         // Note: For some chains like Optimism these are technically predeploys (i.e. bytecode placed at a specific
         // address), but the same rationale for excluding them applies so we include those too.
@@ -339,6 +345,7 @@ abstract contract StdCheatsSafe {
         // forgefmt: disable-end
     }
 
+    /// @notice Assumes `addr` is not a Forge-reserved address (vm, console, Create2Deployer), skipping the fuzz run if it is.
     function assumeNotForgeAddress(address addr) internal pure virtual {
         // vm, console, and Create2Deployer addresses
         vm.assume(
@@ -347,6 +354,7 @@ abstract contract StdCheatsSafe {
         );
     }
 
+    /// @notice Assumes `addr` has no code and is not a precompile, zero, or Forge-reserved address.
     function assumeUnusedAddress(address addr) internal view virtual {
         uint256 size;
         assembly {
@@ -359,6 +367,7 @@ abstract contract StdCheatsSafe {
         assumeNotForgeAddress(addr);
     }
 
+    /// @notice Reads and parses an EIP-1559 broadcast artifact from `path`.
     function readEIP1559ScriptArtifact(string memory path)
         internal
         view
@@ -379,6 +388,7 @@ abstract contract StdCheatsSafe {
         return artifact;
     }
 
+    /// @notice Converts an array of raw EIP-1559 transactions to the user-friendly `Tx1559` format.
     function rawToConvertedEIPTx1559s(RawTx1559[] memory rawTxs) internal pure virtual returns (Tx1559[] memory) {
         Tx1559[] memory txs = new Tx1559[](rawTxs.length);
         for (uint256 i; i < rawTxs.length; i++) {
@@ -387,6 +397,7 @@ abstract contract StdCheatsSafe {
         return txs;
     }
 
+    /// @notice Converts a single raw EIP-1559 transaction to the user-friendly `Tx1559` format.
     function rawToConvertedEIPTx1559(RawTx1559 memory rawTx) internal pure virtual returns (Tx1559 memory) {
         Tx1559 memory transaction;
         transaction.arguments = rawTx.arguments;
@@ -399,6 +410,7 @@ abstract contract StdCheatsSafe {
         return transaction;
     }
 
+    /// @notice Converts raw EIP-1559 transaction detail fields to the user-friendly `Tx1559Detail` format.
     function rawToConvertedEIP1559Detail(RawTx1559Detail memory rawDetail)
         internal
         pure
@@ -417,6 +429,7 @@ abstract contract StdCheatsSafe {
         return txDetail;
     }
 
+    /// @notice Reads all EIP-1559 transactions from the broadcast artifact at `path`.
     function readTx1559s(string memory path) internal view virtual returns (Tx1559[] memory) {
         string memory deployData = vm.readFile(path);
         bytes memory parsedDeployData = vm.parseJson(deployData, ".transactions");
@@ -424,6 +437,7 @@ abstract contract StdCheatsSafe {
         return rawToConvertedEIPTx1559s(rawTxs);
     }
 
+    /// @notice Reads the EIP-1559 transaction at `index` from the broadcast artifact at `path`.
     function readTx1559(string memory path, uint256 index) internal view virtual returns (Tx1559 memory) {
         string memory deployData = vm.readFile(path);
         string memory key = string(abi.encodePacked(".transactions[", vm.toString(index), "]"));
@@ -432,7 +446,7 @@ abstract contract StdCheatsSafe {
         return rawToConvertedEIPTx1559(rawTx);
     }
 
-    // Analogous to readTransactions, but for receipts.
+    /// @notice Reads all transaction receipts from the broadcast artifact at `path`.
     function readReceipts(string memory path) internal view virtual returns (Receipt[] memory) {
         string memory deployData = vm.readFile(path);
         bytes memory parsedDeployData = vm.parseJson(deployData, ".receipts");
@@ -440,6 +454,7 @@ abstract contract StdCheatsSafe {
         return rawToConvertedReceipts(rawReceipts);
     }
 
+    /// @notice Reads the transaction receipt at `index` from the broadcast artifact at `path`.
     function readReceipt(string memory path, uint256 index) internal view virtual returns (Receipt memory) {
         string memory deployData = vm.readFile(path);
         string memory key = string(abi.encodePacked(".receipts[", vm.toString(index), "]"));
@@ -448,6 +463,7 @@ abstract contract StdCheatsSafe {
         return rawToConvertedReceipt(rawReceipt);
     }
 
+    /// @notice Converts an array of raw receipts to the user-friendly `Receipt` format.
     function rawToConvertedReceipts(RawReceipt[] memory rawReceipts) internal pure virtual returns (Receipt[] memory) {
         Receipt[] memory receipts = new Receipt[](rawReceipts.length);
         for (uint256 i; i < rawReceipts.length; i++) {
@@ -456,6 +472,7 @@ abstract contract StdCheatsSafe {
         return receipts;
     }
 
+    /// @notice Converts a single raw receipt to the user-friendly `Receipt` format.
     function rawToConvertedReceipt(RawReceipt memory rawReceipt) internal pure virtual returns (Receipt memory) {
         Receipt memory receipt;
         receipt.blockHash = rawReceipt.blockHash;
@@ -474,6 +491,7 @@ abstract contract StdCheatsSafe {
         return receipt;
     }
 
+    /// @notice Converts an array of raw receipt logs to the user-friendly `ReceiptLog` format.
     function rawToConvertedReceiptLogs(RawReceiptLog[] memory rawLogs)
         internal
         pure
@@ -495,9 +513,7 @@ abstract contract StdCheatsSafe {
         return logs;
     }
 
-    // Deploy a contract by fetching the contract bytecode from
-    // the artifacts directory
-    // e.g. `deployCode(code, abi.encode(arg1,arg2,arg3))`
+    /// @notice Deploys a contract from the artifacts directory with ABI-encoded constructor arguments.
     function deployCode(string memory what, bytes memory args) internal virtual returns (address addr) {
         bytes memory bytecode = abi.encodePacked(vm.getCode(what), args);
         assembly ("memory-safe") {
@@ -507,6 +523,7 @@ abstract contract StdCheatsSafe {
         require(addr != address(0), "StdCheats deployCode(string,bytes): Deployment failed.");
     }
 
+    /// @notice Deploys a contract from the artifacts directory.
     function deployCode(string memory what) internal virtual returns (address addr) {
         bytes memory bytecode = vm.getCode(what);
         assembly ("memory-safe") {
@@ -516,7 +533,7 @@ abstract contract StdCheatsSafe {
         require(addr != address(0), "StdCheats deployCode(string): Deployment failed.");
     }
 
-    /// @dev deploy contract with value on construction
+    /// @notice Deploys a contract from the artifacts directory with ABI-encoded constructor arguments, sending `val` wei on construction.
     function deployCode(string memory what, bytes memory args, uint256 val) internal virtual returns (address addr) {
         bytes memory bytecode = abi.encodePacked(vm.getCode(what), args);
         assembly ("memory-safe") {
@@ -526,6 +543,7 @@ abstract contract StdCheatsSafe {
         require(addr != address(0), "StdCheats deployCode(string,bytes,uint256): Deployment failed.");
     }
 
+    /// @notice Deploys a contract from the artifacts directory, sending `val` wei on construction.
     function deployCode(string memory what, uint256 val) internal virtual returns (address addr) {
         bytes memory bytecode = vm.getCode(what);
         assembly ("memory-safe") {
@@ -535,22 +553,20 @@ abstract contract StdCheatsSafe {
         require(addr != address(0), "StdCheats deployCode(string,uint256): Deployment failed.");
     }
 
-    // creates a labeled address and the corresponding private key
+    /// @notice Creates a labeled address and the corresponding private key derived from `name`.
     function makeAddrAndKey(string memory name) internal virtual returns (address addr, uint256 privateKey) {
         privateKey = uint256(keccak256(abi.encodePacked(name)));
         addr = vm.addr(privateKey);
         vm.label(addr, name);
     }
 
-    // creates a labeled address
+    /// @notice Creates a labeled address derived from `name`.
     function makeAddr(string memory name) internal virtual returns (address addr) {
         (addr,) = makeAddrAndKey(name);
     }
 
-    // Destroys an account immediately, sending the balance to beneficiary.
-    // Destroying means: balance will be zero, code will be empty, and nonce will be 0
-    // This is similar to selfdestruct but not identical: selfdestruct destroys code and nonce
-    // only after tx ends, this will run immediately.
+    /// @notice Immediately destroys `who`, zeroing its balance, code, and nonce, and sending its balance to `beneficiary`.
+    /// @dev Unlike `selfdestruct`, this takes effect immediately within the same transaction.
     function destroyAccount(address who, address beneficiary) internal virtual {
         uint256 currBalance = who.balance;
         vm.etch(who, abi.encode());
@@ -561,11 +577,12 @@ abstract contract StdCheatsSafe {
         vm.deal(beneficiary, currBalance + beneficiaryBalance);
     }
 
-    // creates a struct containing both a labeled address and the corresponding private key
+    /// @notice Creates an `Account` struct with a labeled address and private key derived from `name`.
     function makeAccount(string memory name) internal virtual returns (Account memory account) {
         (account.addr, account.key) = makeAddrAndKey(name);
     }
 
+    /// @notice Derives a private key from `mnemonic` at `index`, stores it in the local wallet, and returns the address and key.
     function deriveRememberKey(string memory mnemonic, uint32 index)
         internal
         virtual
@@ -580,24 +597,29 @@ abstract contract StdCheatsSafe {
         return abi.decode(abi.encodePacked(new bytes(32 - b.length), b), (uint256));
     }
 
+    /// @notice Returns whether the current test environment is running against a forked network.
     function isFork() internal view virtual returns (bool status) {
         try vm.activeFork() {
             status = true;
         } catch (bytes memory) {}
     }
 
+    /// @notice Skips the test body when running against a forked network.
     modifier skipWhenForking() {
         if (!isFork()) {
             _;
         }
     }
 
+    /// @notice Skips the test body when not running against a forked network.
     modifier skipWhenNotForking() {
         if (isFork()) {
             _;
         }
     }
 
+    /// @notice Disables gas metering for the duration of the function, re-enabling it on exit.
+    /// @dev When nested, gas metering is only resumed at the end of the outermost function that uses this modifier.
     modifier noGasMetering() {
         vm.pauseGasMetering();
         // To prevent turning gas monitoring back on with nested functions that use this modifier,
@@ -607,14 +629,14 @@ abstract contract StdCheatsSafe {
         // i.e. funcA() noGasMetering { funcB() }, where funcB has noGasMetering as well.
         // funcA will have `gasStartedOff` as false, funcB will have it as true,
         // so we only turn metering back on at the end of the funcA
-        bool gasStartedOff = gasMeteringOff;
-        gasMeteringOff = true;
+        bool gasStartedOff = _gasMeteringOff;
+        _gasMeteringOff = true;
 
         _;
 
         // if gas metering was on when this modifier was called, turn it back on at the end
         if (!gasStartedOff) {
-            gasMeteringOff = false;
+            _gasMeteringOff = false;
             vm.resumeGasMetering();
         }
     }
@@ -646,100 +668,167 @@ abstract contract StdCheatsSafe {
 abstract contract StdCheats is StdCheatsSafe {
     using stdStorage for StdStorage;
 
-    StdStorage private stdstore;
+    StdStorage private _stdstore;
     Vm private constant vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
-    address private constant CONSOLE2_ADDRESS = 0x000000000000000000636F6e736F6c652e6c6f67;
+    address private constant _CONSOLE2_ADDRESS = 0x000000000000000000636F6e736F6c652e6c6f67;
 
-    // Skip forward or rewind time by the specified number of seconds
+    /// @notice Advances the block timestamp forward by `time` seconds.
     function skip(uint256 time) internal virtual {
         vm.warp(vm.getBlockTimestamp() + time);
     }
 
+    /// @notice Rewinds the block timestamp backward by `time` seconds.
     function rewind(uint256 time) internal virtual {
         vm.warp(vm.getBlockTimestamp() - time);
     }
 
-    // Setup a prank from an address that has some ether
+    /// @notice Sets up a single-call prank from `msgSender`, giving it `2**128` wei.
     function hoax(address msgSender) internal virtual {
         vm.deal(msgSender, 1 << 128);
         vm.prank(msgSender);
     }
 
+    /// @notice Sets up a single-call prank from `msgSender`, giving it `give` wei.
     function hoax(address msgSender, uint256 give) internal virtual {
         vm.deal(msgSender, give);
         vm.prank(msgSender);
     }
 
+    /// @notice Sets up a single-call prank from `msgSender` with `origin` as `tx.origin`, giving `msgSender` `2**128` wei.
     function hoax(address msgSender, address origin) internal virtual {
         vm.deal(msgSender, 1 << 128);
         vm.prank(msgSender, origin);
     }
 
+    /// @notice Sets up a single-call prank from `msgSender` with `origin` as `tx.origin`, giving `msgSender` `give` wei.
     function hoax(address msgSender, address origin, uint256 give) internal virtual {
         vm.deal(msgSender, give);
         vm.prank(msgSender, origin);
     }
 
-    // Start perpetual prank from an address that has some ether
+    /// @notice Starts a persistent prank from `msgSender`, giving it `2**128` wei.
     function startHoax(address msgSender) internal virtual {
         vm.deal(msgSender, 1 << 128);
         vm.startPrank(msgSender);
     }
 
+    /// @notice Starts a persistent prank from `msgSender`, giving it `give` wei.
     function startHoax(address msgSender, uint256 give) internal virtual {
         vm.deal(msgSender, give);
         vm.startPrank(msgSender);
     }
 
-    // Start perpetual prank from an address that has some ether
-    // tx.origin is set to the origin parameter
+    /// @notice Starts a persistent prank from `msgSender` with `origin` as `tx.origin`, giving `msgSender` `2**128` wei.
     function startHoax(address msgSender, address origin) internal virtual {
         vm.deal(msgSender, 1 << 128);
         vm.startPrank(msgSender, origin);
     }
 
+    /// @notice Starts a persistent prank from `msgSender` with `origin` as `tx.origin`, giving `msgSender` `give` wei.
     function startHoax(address msgSender, address origin, uint256 give) internal virtual {
         vm.deal(msgSender, give);
         vm.startPrank(msgSender, origin);
     }
 
+    /// @notice Changes the active prank to `msgSender`.
+    /// @dev Deprecated. Use `vm.startPrank` instead.
     function changePrank(address msgSender) internal virtual {
-        console2_log_StdCheats("changePrank is deprecated. Please use vm.startPrank instead.");
+        _console2_log_StdCheats("changePrank is deprecated. Please use vm.startPrank instead.");
         vm.stopPrank();
         vm.startPrank(msgSender);
     }
 
+    /// @notice Changes the active prank to `msgSender` with `txOrigin` as `tx.origin`.
+    /// @dev Deprecated. Use `vm.startPrank` instead.
     function changePrank(address msgSender, address txOrigin) internal virtual {
-        console2_log_StdCheats("changePrank is deprecated. Please use vm.startPrank instead.");
+        _console2_log_StdCheats("changePrank is deprecated. Please use vm.startPrank instead.");
         vm.stopPrank();
         vm.startPrank(msgSender, txOrigin);
     }
 
-    // The same as Vm's `deal`
-    // Use the alternative signature for ERC20 tokens
+    /// @notice Expects a call to `callee` with `data` and mocks it to return `returnData`.
+    function expectAndMockCall(address callee, bytes memory data, bytes memory returnData) internal virtual {
+        vm.expectCall(callee, data);
+        vm.mockCall(callee, data, returnData);
+    }
+
+    /// @notice Expects exactly `count` calls to `callee` with `data` and mocks them to return `returnData`.
+    function expectAndMockCall(address callee, bytes memory data, uint64 count, bytes memory returnData)
+        internal
+        virtual
+    {
+        vm.expectCall(callee, data, count);
+        vm.mockCall(callee, data, returnData);
+    }
+
+    /// @notice Expects a call to `callee` with `msgValue` and `data` and mocks it to return `returnData`.
+    function expectAndMockCall(address callee, uint256 msgValue, bytes memory data, bytes memory returnData)
+        internal
+        virtual
+    {
+        vm.expectCall(callee, msgValue, data);
+        vm.mockCall(callee, msgValue, data, returnData);
+    }
+
+    /// @notice Expects exactly `count` calls to `callee` with `msgValue` and `data` and mocks them to return `returnData`.
+    function expectAndMockCall(
+        address callee,
+        uint256 msgValue,
+        bytes memory data,
+        uint64 count,
+        bytes memory returnData
+    ) internal virtual {
+        vm.expectCall(callee, msgValue, data, count);
+        vm.mockCall(callee, msgValue, data, returnData);
+    }
+
+    /// @notice Expects a call to `callee` with `msgValue` and `data` forwarding `gas`, and mocks it to return `returnData`.
+    /// @dev `gas` only applies to the call expectation; the mock call ignores `gas`.
+    function expectAndMockCall(address callee, uint256 msgValue, uint64 gas, bytes memory data, bytes memory returnData)
+        internal
+        virtual
+    {
+        vm.expectCall(callee, msgValue, gas, data);
+        vm.mockCall(callee, msgValue, data, returnData);
+    }
+
+    /// @notice Expects exactly `count` calls to `callee` with `msgValue` and `data` forwarding `gas`, and mocks them to return `returnData`.
+    /// @dev `gas` only applies to the call expectation; the mock call ignores `gas`.
+    function expectAndMockCall(
+        address callee,
+        uint256 msgValue,
+        uint64 gas,
+        bytes memory data,
+        uint64 count,
+        bytes memory returnData
+    ) internal virtual {
+        vm.expectCall(callee, msgValue, gas, data, count);
+        vm.mockCall(callee, msgValue, data, returnData);
+    }
+
+    /// @notice Sets the ETH balance of `to` to `give`.
     function deal(address to, uint256 give) internal virtual {
         vm.deal(to, give);
     }
 
-    // Set the balance of an account for any ERC20 token
-    // Use the alternative signature to update `totalSupply`
+    /// @notice Sets the ERC20 `token` balance of `to` to `give`.
     function deal(address token, address to, uint256 give) internal virtual {
         deal(token, to, give, false);
     }
 
-    // Set the balance of an account for any ERC1155 token
-    // Use the alternative signature to update `totalSupply`
+    /// @notice Sets the ERC1155 `token` balance of `to` for token `id` to `give`.
     function dealERC1155(address token, address to, uint256 id, uint256 give) internal virtual {
         dealERC1155(token, to, id, give, false);
     }
 
+    /// @notice Sets the ERC20 `token` balance of `to` to `give`, optionally adjusting the total supply.
     function deal(address token, address to, uint256 give, bool adjust) internal virtual {
         // get current balance
         (, bytes memory balData) = token.staticcall(abi.encodeWithSelector(0x70a08231, to));
         uint256 prevBal = abi.decode(balData, (uint256));
 
         // update balance
-        stdstore.target(token).sig(0x70a08231).with_key(to).checked_write(give);
+        _stdstore.target(token).sig(0x70a08231).with_key(to).checked_write(give);
 
         // update total supply
         if (adjust) {
@@ -750,17 +839,18 @@ abstract contract StdCheats is StdCheatsSafe {
             } else {
                 totSup += (give - prevBal);
             }
-            stdstore.target(token).sig(0x18160ddd).checked_write(totSup);
+            _stdstore.target(token).sig(0x18160ddd).checked_write(totSup);
         }
     }
 
+    /// @notice Sets the ERC1155 `token` balance of `to` for token `id` to `give`, optionally adjusting the total supply.
     function dealERC1155(address token, address to, uint256 id, uint256 give, bool adjust) internal virtual {
         // get current balance
         (, bytes memory balData) = token.staticcall(abi.encodeWithSelector(0x00fdd58e, to, id));
         uint256 prevBal = abi.decode(balData, (uint256));
 
         // update balance
-        stdstore.target(token).sig(0x00fdd58e).with_key(to).with_key(id).checked_write(give);
+        _stdstore.target(token).sig(0x00fdd58e).with_key(to).with_key(id).checked_write(give);
 
         // update total supply
         if (adjust) {
@@ -775,10 +865,11 @@ abstract contract StdCheats is StdCheatsSafe {
             } else {
                 totSup += (give - prevBal);
             }
-            stdstore.target(token).sig(0xbd85b039).with_key(id).checked_write(totSup);
+            _stdstore.target(token).sig(0xbd85b039).with_key(id).checked_write(totSup);
         }
     }
 
+    /// @notice Transfers ownership of ERC721 `token` with `id` to `to`, updating balances accordingly.
     function dealERC721(address token, address to, uint256 id) internal virtual {
         // check if token id is already minted and the actual owner.
         (bool successMinted, bytes memory ownerData) = token.staticcall(abi.encodeWithSelector(0x6352211e, id));
@@ -794,21 +885,27 @@ abstract contract StdCheats is StdCheatsSafe {
         uint256 toPrevBal = abi.decode(toBalData, (uint256));
 
         // update balances
-        stdstore.target(token).sig(0x70a08231).with_key(abi.decode(ownerData, (address))).checked_write(--fromPrevBal);
-        stdstore.target(token).sig(0x70a08231).with_key(to).checked_write(++toPrevBal);
+        _stdstore.target(token).sig(0x70a08231).with_key(abi.decode(ownerData, (address))).checked_write(--fromPrevBal);
+        _stdstore.target(token).sig(0x70a08231).with_key(to).checked_write(++toPrevBal);
 
         // update owner
-        stdstore.target(token).sig(0x6352211e).with_key(id).checked_write(to);
+        _stdstore.target(token).sig(0x6352211e).with_key(id).checked_write(to);
     }
 
+    /// @notice Etches the runtime bytecode of `what` (from the artifacts directory) at `where`.
+    /// @dev Runs the contract's creation code via `vm.etch` + a self-call, then etches the resulting runtime code at `where`. Constructor side-effects on other contracts are not preserved.
     function deployCodeTo(string memory what, address where) internal virtual {
         deployCodeTo(what, "", 0, where);
     }
 
+    /// @notice Etches the runtime bytecode of `what` (from the artifacts directory) at `where`, using `args` as ABI-encoded constructor arguments.
+    /// @dev Runs the contract's creation code via `vm.etch` + a self-call, then etches the resulting runtime code at `where`. Constructor side-effects on other contracts are not preserved.
     function deployCodeTo(string memory what, bytes memory args, address where) internal virtual {
         deployCodeTo(what, args, 0, where);
     }
 
+    /// @notice Etches the runtime bytecode of `what` (from the artifacts directory) at `where`, using `args` as ABI-encoded constructor arguments and sending `value` wei to the constructor.
+    /// @dev Runs the contract's creation code via `vm.etch` + a self-call, then etches the resulting runtime code at `where`. Constructor side-effects on other contracts are not preserved.
     function deployCodeTo(string memory what, bytes memory args, uint256 value, address where) internal virtual {
         bytes memory creationCode = vm.getCode(what);
         vm.etch(where, abi.encodePacked(creationCode, args));
@@ -818,8 +915,8 @@ abstract contract StdCheats is StdCheatsSafe {
     }
 
     // Used to prevent the compilation of console, which shortens the compilation time when console is not used elsewhere.
-    function console2_log_StdCheats(string memory p0) private view {
-        (bool status,) = address(CONSOLE2_ADDRESS).staticcall(abi.encodeWithSignature("log(string)", p0));
+    function _console2_log_StdCheats(string memory p0) private view {
+        (bool status,) = address(_CONSOLE2_ADDRESS).staticcall(abi.encodeWithSignature("log(string)", p0));
         status;
     }
 }

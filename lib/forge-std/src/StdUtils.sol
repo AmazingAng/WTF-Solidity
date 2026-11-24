@@ -11,18 +11,24 @@ abstract contract StdUtils {
     //////////////////////////////////////////////////////////////////////////*/
 
     VmSafe private constant vm = VmSafe(address(uint160(uint256(keccak256("hevm cheat code")))));
-    address private constant CONSOLE2_ADDRESS = 0x000000000000000000636F6e736F6c652e6c6f67;
-    uint256 private constant INT256_MIN_ABS =
+    address private constant _CONSOLE2_ADDRESS = 0x000000000000000000636F6e736F6c652e6c6f67;
+    uint256 private constant _INT256_MIN_ABS =
         57896044618658097711785492504343953926634992332820282019728792003956564819968;
-    uint256 private constant SECP256K1_ORDER =
+    uint256 private constant _SECP256K1_ORDER =
         115792089237316195423570985008687907852837564279074904382605163141518161494337;
-    uint256 private constant UINT256_MAX =
+    uint256 private constant _UINT256_MAX =
         115792089237316195423570985008687907853269984665640564039457584007913129639935;
 
     /*//////////////////////////////////////////////////////////////////////////
                                  INTERNAL FUNCTIONS
     //////////////////////////////////////////////////////////////////////////*/
 
+    /// @notice Maps an unsigned integer into the inclusive range `[min, max]`.
+    /// @dev Values outside the range are wrapped into it.
+    /// @param x The unsigned value to bound.
+    /// @param min The inclusive lower bound.
+    /// @param max The inclusive upper bound.
+    /// @return result The bounded value.
     function _bound(uint256 x, uint256 min, uint256 max) internal pure virtual returns (uint256 result) {
         require(min <= max, "StdUtils bound(uint256,uint256,uint256): Max is less than min.");
         // If x is between min and max, return x directly. This is to ensure that dictionary values
@@ -31,10 +37,10 @@ abstract contract StdUtils {
 
         uint256 size = max - min + 1;
 
-        // If the value is 0, 1, 2, 3, wrap that to min, min+1, min+2, min+3. Similarly for the UINT256_MAX side.
+        // If the value is 0, 1, 2, 3, wrap that to min, min+1, min+2, min+3. Similarly for the _UINT256_MAX side.
         // This helps ensure coverage of the min/max values.
         if (x <= 3 && size > x) return min + x;
-        if (x >= UINT256_MAX - 3 && size > UINT256_MAX - x) return max - (UINT256_MAX - x);
+        if (x >= _UINT256_MAX - 3 && size > _UINT256_MAX - x) return max - (_UINT256_MAX - x);
 
         // Otherwise, wrap x into the range [min, max], i.e. the range is inclusive.
         if (x > max) {
@@ -50,79 +56,120 @@ abstract contract StdUtils {
         }
     }
 
+    /// @notice Wrapper for `_bound(uint256,uint256,uint256)`.
+    /// @param x The unsigned value to bound.
+    /// @param min The inclusive lower bound.
+    /// @param max The inclusive upper bound.
+    /// @return result The bounded value.
     function bound(uint256 x, uint256 min, uint256 max) internal pure virtual returns (uint256 result) {
         result = _bound(x, min, max);
     }
 
+    /// @notice Maps a signed integer into the inclusive range `[min, max]`.
+    /// @dev Values outside the range are wrapped into it.
+    /// @param x The signed value to bound.
+    /// @param min The inclusive lower bound.
+    /// @param max The inclusive upper bound.
+    /// @return result The bounded value.
     function _bound(int256 x, int256 min, int256 max) internal pure virtual returns (int256 result) {
         require(min <= max, "StdUtils bound(int256,int256,int256): Max is less than min.");
 
         // Shifting all int256 values to uint256 to use _bound function. The range of two types are:
         // int256 : -(2**255) ~ (2**255 - 1)
         // uint256:     0     ~ (2**256 - 1)
-        // So, add 2**255, INT256_MIN_ABS to the integer values.
+        // So, add 2**255, _INT256_MIN_ABS to the integer values.
         //
         // If the given integer value is -2**255, we cannot use `-uint256(-x)` because of the overflow.
         // So, use `~uint256(x) + 1` instead.
-        uint256 _x = x < 0 ? (INT256_MIN_ABS - ~uint256(x) - 1) : (uint256(x) + INT256_MIN_ABS);
-        uint256 _min = min < 0 ? (INT256_MIN_ABS - ~uint256(min) - 1) : (uint256(min) + INT256_MIN_ABS);
-        uint256 _max = max < 0 ? (INT256_MIN_ABS - ~uint256(max) - 1) : (uint256(max) + INT256_MIN_ABS);
+        uint256 _x = x < 0 ? (_INT256_MIN_ABS - ~uint256(x) - 1) : (uint256(x) + _INT256_MIN_ABS);
+        uint256 _min = min < 0 ? (_INT256_MIN_ABS - ~uint256(min) - 1) : (uint256(min) + _INT256_MIN_ABS);
+        uint256 _max = max < 0 ? (_INT256_MIN_ABS - ~uint256(max) - 1) : (uint256(max) + _INT256_MIN_ABS);
 
         uint256 y = _bound(_x, _min, _max);
 
-        // To move it back to int256 value, subtract INT256_MIN_ABS at here.
-        result = y < INT256_MIN_ABS ? int256(~(INT256_MIN_ABS - y) + 1) : int256(y - INT256_MIN_ABS);
+        // To move it back to int256 value, subtract _INT256_MIN_ABS at here.
+        result = y < _INT256_MIN_ABS ? int256(~(_INT256_MIN_ABS - y) + 1) : int256(y - _INT256_MIN_ABS);
     }
 
+    /// @notice Wrapper for `_bound(int256,int256,int256)`.
+    /// @param x The signed value to bound.
+    /// @param min The inclusive lower bound.
+    /// @param max The inclusive upper bound.
+    /// @return result The bounded value.
     function bound(int256 x, int256 min, int256 max) internal pure virtual returns (int256 result) {
         result = _bound(x, min, max);
     }
 
+    /// @notice Maps a value into the valid secp256k1 private key range `[1, n - 1]`.
+    /// @param privateKey The raw private key candidate.
+    /// @return result The bounded private key.
     function boundPrivateKey(uint256 privateKey) internal pure virtual returns (uint256 result) {
-        result = _bound(privateKey, 1, SECP256K1_ORDER - 1);
+        result = _bound(privateKey, 1, _SECP256K1_ORDER - 1);
     }
 
+    /// @notice Converts a byte array (up to 32 bytes) into a `uint256`.
+    /// @param b The byte array to decode.
+    /// @return The decoded unsigned integer.
     function bytesToUint(bytes memory b) internal pure virtual returns (uint256) {
         require(b.length <= 32, "StdUtils bytesToUint(bytes): Bytes length exceeds 32.");
         return abi.decode(abi.encodePacked(new bytes(32 - b.length), b), (uint256));
     }
 
-    /// @dev Compute the address a contract will be deployed at for a given deployer address and nonce
+    /// @notice Computes the CREATE deployment address for `deployer` and `nonce`.
+    /// @dev Deprecated in favor of `vm.computeCreateAddress`.
+    /// @param deployer The deployer address.
+    /// @param nonce The deployer nonce used for CREATE.
+    /// @return The computed CREATE address.
     function computeCreateAddress(address deployer, uint256 nonce) internal pure virtual returns (address) {
-        console2_log_StdUtils("computeCreateAddress is deprecated. Please use vm.computeCreateAddress instead.");
+        _console2_log_StdUtils("computeCreateAddress is deprecated. Please use vm.computeCreateAddress instead.");
         return vm.computeCreateAddress(deployer, nonce);
     }
 
+    /// @notice Computes the CREATE2 address from a salt, init code hash, and deployer.
+    /// @dev Deprecated in favor of `vm.computeCreate2Address`.
+    /// @param salt The CREATE2 salt.
+    /// @param initcodeHash The hash of the full init code.
+    /// @param deployer The deployer address.
+    /// @return The computed CREATE2 address.
     function computeCreate2Address(bytes32 salt, bytes32 initcodeHash, address deployer)
         internal
         pure
         virtual
         returns (address)
     {
-        console2_log_StdUtils("computeCreate2Address is deprecated. Please use vm.computeCreate2Address instead.");
+        _console2_log_StdUtils("computeCreate2Address is deprecated. Please use vm.computeCreate2Address instead.");
         return vm.computeCreate2Address(salt, initcodeHash, deployer);
     }
 
-    /// @dev returns the address of a contract created with CREATE2 using the default CREATE2 deployer
+    /// @notice Computes a CREATE2 address using the default CREATE2 deployer.
+    /// @dev Deprecated in favor of `vm.computeCreate2Address`.
+    /// @param salt The CREATE2 salt.
+    /// @param initCodeHash The hash of the full init code.
+    /// @return The computed CREATE2 address.
     function computeCreate2Address(bytes32 salt, bytes32 initCodeHash) internal pure returns (address) {
-        console2_log_StdUtils("computeCreate2Address is deprecated. Please use vm.computeCreate2Address instead.");
+        _console2_log_StdUtils("computeCreate2Address is deprecated. Please use vm.computeCreate2Address instead.");
         return vm.computeCreate2Address(salt, initCodeHash);
     }
 
-    /// @dev returns the hash of the init code (creation code + no args) used in CREATE2 with no constructor arguments
-    /// @param creationCode the creation code of a contract C, as returned by type(C).creationCode
+    /// @notice Returns the init code hash for CREATE2 without constructor arguments.
+    /// @param creationCode The creation code of contract `C`, as returned by `type(C).creationCode`.
+    /// @return The keccak256 hash of the init code.
     function hashInitCode(bytes memory creationCode) internal pure returns (bytes32) {
         return hashInitCode(creationCode, "");
     }
 
-    /// @dev returns the hash of the init code (creation code + ABI-encoded args) used in CREATE2
-    /// @param creationCode the creation code of a contract C, as returned by type(C).creationCode
-    /// @param args the ABI-encoded arguments to the constructor of C
+    /// @notice Returns the init code hash for CREATE2 with ABI-encoded constructor arguments.
+    /// @param creationCode The creation code of contract `C`, as returned by `type(C).creationCode`.
+    /// @param args The ABI-encoded constructor arguments for `C`.
+    /// @return The keccak256 hash of `creationCode || args`.
     function hashInitCode(bytes memory creationCode, bytes memory args) internal pure returns (bytes32) {
         return keccak256(abi.encodePacked(creationCode, args));
     }
 
-    // Performs a single call with Multicall3 to query the ERC-20 token balances of the given addresses.
+    /// @notice Queries ERC-20 balances for multiple addresses in one Multicall3 request.
+    /// @param token The ERC-20 token contract to query.
+    /// @param addresses The addresses to query balances for.
+    /// @return balances The token balances in the same order as `addresses`.
     function getTokenBalances(address token, address[] memory addresses)
         internal
         virtual
@@ -156,7 +203,7 @@ abstract contract StdUtils {
                                  PRIVATE FUNCTIONS
     //////////////////////////////////////////////////////////////////////////*/
 
-    function addressFromLast20Bytes(bytes32 bytesValue) private pure returns (address) {
+    function _addressFromLast20Bytes(bytes32 bytesValue) private pure returns (address) {
         return address(uint160(uint256(bytesValue)));
     }
 
@@ -179,22 +226,22 @@ abstract contract StdUtils {
 
     function _sendLogPayloadView(bytes memory payload) private view {
         uint256 payloadLength = payload.length;
-        address consoleAddress = CONSOLE2_ADDRESS;
+        address consoleAddress = _CONSOLE2_ADDRESS;
         assembly ("memory-safe") {
             let payloadStart := add(payload, 32)
             let r := staticcall(gas(), consoleAddress, payloadStart, payloadLength, 0, 0)
         }
     }
 
-    function console2_log_StdUtils(string memory p0) private pure {
+    function _console2_log_StdUtils(string memory p0) private pure {
         _sendLogPayload(abi.encodeWithSignature("log(string)", p0));
     }
 
-    function console2_log_StdUtils(string memory p0, uint256 p1) private pure {
+    function _console2_log_StdUtils(string memory p0, uint256 p1) private pure {
         _sendLogPayload(abi.encodeWithSignature("log(string,uint256)", p0, p1));
     }
 
-    function console2_log_StdUtils(string memory p0, string memory p1) private pure {
+    function _console2_log_StdUtils(string memory p0, string memory p1) private pure {
         _sendLogPayload(abi.encodeWithSignature("log(string,string)", p0, p1));
     }
 }
