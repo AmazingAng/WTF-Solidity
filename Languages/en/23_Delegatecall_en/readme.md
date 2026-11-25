@@ -135,7 +135,7 @@ While function `delegatecallSetVars` calls `setVars` via `delegatecall`. Similar
 
 6. Because of `delegatecall`, the execution context is contract `B`. After execution, the state variables of contract `B` are changed: `num` is changed to 100, `sender` is changed to your wallet's address. The state variables of contract `C` are unchanged.
 
-![resultdelegatecall.png](./img/23-8.png)
+![resultdelegatecall.png](../../../23_Delegatecall/img/23-6.png)
 
 ## Summary
 In this lecture, we introduce another low-level function in `Solidity`, `delegatecall`. Similar to `call`, `delegatecall` can be used to call another contract; the difference between `delegatecall` and `call` is `execution context`, the `execution context` is `C` if `B` `call` `C`; but the `execution context` is `B` if `B` `delegatecall` `C`. The major use cases for delegatecall are `proxy contract` and `EIP-2535 Diamonds`.

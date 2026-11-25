@@ -6,8 +6,8 @@ pragma solidity ^0.8.34;
 // enviar: 2300 gás, retornar bool
 // chamar: todo gás, retornar (bool, dados)
 
-// Falha ao enviar ETH usando o comando send
-// Falha ao enviar ETH usando a função call
+error SendFailed();
+error CallFailed();
 
 contract SendETH {
     // Construtor, payable permite transferir ETH durante a implantação

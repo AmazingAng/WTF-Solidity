@@ -120,7 +120,7 @@ There are `3` functions in the LinearVesting contract.
         // According to the linear release formula, calculate the released quantity
         if (timestamp < start) {
             return 0;
-        } else if (timestamp > start + duration) {
+        } else if (timestamp - start >= duration) {
             return totalAllocation;
         } else {
             return (totalAllocation * (timestamp - start)) / duration;
@@ -130,7 +130,7 @@ There are `3` functions in the LinearVesting contract.
 
 ## `Remix` Demo
 
-### 1. Deploy the `ERC20` contract in [Lesson 31](../31_ERC20/readme.md), and mint yourself `1000` tokens.
+### 1. Deploy the `ERC20` contract in [Lesson 31](../31_ERC20_en/readme.md), and mint yourself `1000` tokens.
 
 ![Deploy ERC20](./img/43-2.png)
 

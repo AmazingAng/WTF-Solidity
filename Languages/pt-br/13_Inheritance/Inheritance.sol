@@ -20,11 +20,9 @@ contract Yeye {
 }
 
 contract Baba is Yeye{
-    // class Baba extends hip() {
-    pop() {
-        co console.log("Baba")
+    function hip() public virtual override {
+        emit Log("Baba");
     }
- }
     function pop() public virtual override{
         emit Log("Baba");
     }

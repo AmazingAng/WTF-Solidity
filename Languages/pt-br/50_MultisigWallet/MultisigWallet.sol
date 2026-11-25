@@ -4,13 +4,13 @@ pragma solidity ^0.8.34;
 
 /// Carteira multi-assinatura baseada em assinaturas, simplificada a partir do contrato Gnosis Safe, para fins educacionais.
 contract MultisigWallet {
-    // Evento de transação bem-sucedida
-    // Evento de falha na transação
-    // Array de detentores de múltiplas assinaturas
-    // Registra se um endereço é um endereço multi-assinatura
-    // Número de titulares de múltiplas assinaturas
-    // O limite de execução de assinaturas múltiplas requer que uma transação seja assinada por pelo menos n pessoas para ser executada.
-    // nonce, para evitar ataques de repetição de assinatura
+    event ExecutionSuccess(bytes32 txHash);
+    event ExecutionFailure(bytes32 txHash);
+    address[] public owners;
+    mapping(address => bool) public isOwner;
+    uint256 public ownerCount;
+    uint256 public threshold;
+    uint256 public nonce;
 
     receive() external payable {}
 

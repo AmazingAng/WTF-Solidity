@@ -6,7 +6,8 @@ import './Yeye.sol';
 // Importar um contrato específico através do `símbolo global`
 import {Yeye} from './Yeye.sol';
 // Por meio de um URL de referência
-//github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
+// A dependência da OpenZeppelin também pode ser importada do pacote.
+import {Address} from '@openzeppelin/contracts/utils/Address.sol';
 // Importar contrato OpenZeppelin
 import '@openzeppelin/contracts/access/Ownable.sol';
 

@@ -10,8 +10,7 @@ import "./Address.sol";
 import "./String.sol";
 
 contract ERC721 is IERC721, IERC721Metadata{
-    // Usando a biblioteca Address, use isContract para verificar se um endereço é um contrato
-    // Importando a biblioteca String,
+    using Strings for uint256;
 
     // Token nome
     string public override name;
@@ -231,7 +230,7 @@ contract ERC721 is IERC721, IERC721Metadata{
         uint tokenId,
         bytes memory _data
     ) private returns (bool) {
-        if (to.isContract()) {
+        if (to.code.length > 0) {
             return
                 IERC721Receiver(to).onERC721Received(
                     msg.sender,

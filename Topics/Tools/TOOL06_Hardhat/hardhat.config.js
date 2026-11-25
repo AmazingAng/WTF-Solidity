@@ -1,14 +1,15 @@
-require("@nomicfoundation/hardhat-toolbox");
-/** @type import('hardhat/config').HardhatUserConfig */
-module.exports = {
-  solidity: "0.8.21",
+import toolbox from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
+import { configVariable, defineConfig } from "hardhat/config";
+
+export default defineConfig({
+  plugins: [toolbox],
+  solidity: "0.8.39",
   networks: {
-    goerli: {
-      url: "https://eth-goerli.g.alchemy.com/v2/API_KEY",
-      accounts: ["PRIVATE_KEY"],
+    sepolia: {
+      type: "http",
+      chainType: "l1",
+      url: configVariable("SEPOLIA_RPC_URL"),
+      accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
     },
   },
-  etherscan: {
-    apiKey: "YOUR_ETHERSCAN_API_KEY",
-  },
-};
+});

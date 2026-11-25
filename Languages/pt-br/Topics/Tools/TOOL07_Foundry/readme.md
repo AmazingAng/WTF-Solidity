@@ -1,5 +1,7 @@
 # WTF Solidity - Introdução Simplificada às Ferramentas 7: Foundry, um Kit de Desenvolvimento Centrado em Solidity
 
+O projeto deste capítulo usa Foundry v1.10.0, Solidity 0.8.39, forge-std v1.17.0 e OpenZeppelin Contracts 5.6.1. Em [hello_wtf](./hello_wtf), execute `npm ci` e `forge test --match-path test/Counter.t.sol` para rodar os testes locais do contador.
+
 Recentemente, estou reaprendendo solidity para reforçar os detalhes e também escrevendo um "WTF Solidity - Introdução Simplificada" para iniciantes usarem. Atualizações de 1 a 3 palestras por semana.
 
 Twitter: [@0xAA_Science](https://twitter.com/0xAA_Science)

@@ -77,7 +77,7 @@ contract CrossChainToken is ERC20, Ownable {
         string memory name,
         string memory symbol,
         uint256 totalSupply
-    ) payable ERC20(name, symbol) {
+    ) payable ERC20(name, symbol) Ownable(msg.sender) {
         _mint(msg.sender, totalSupply);
     }
 

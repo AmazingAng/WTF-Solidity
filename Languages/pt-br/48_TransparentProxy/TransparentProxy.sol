@@ -14,6 +14,9 @@ contract Foo {
 
 // Código de ensino para um contrato transparente e atualizável, não utilizar em produção.
 contract TransparentProxy {
+    address implementation;
+    address admin;
+    string public words;
     // Endereço do contrato lógico
     // Administrador
     // Strings, podem ser alterados por meio de funções de contrato lógico.
@@ -43,6 +46,7 @@ contract Logic1 {
     // Variáveis de estado e contratos proxy são consistentes para evitar conflitos de slot
     address public implementation; 
     address public admin; 
+    string public words;
     // Strings, podem ser alterados por meio de funções de contrato lógico.
 
     // Alterando a variável de estado no proxy, seletor: 0xc2985578
@@ -56,6 +60,7 @@ contract Logic2 {
     // Variáveis de estado e contratos proxy são consistentes para evitar conflitos de slot
     address public implementation; 
     address public admin; 
+    string public words;
     // Strings, podem ser alterados por meio de funções de contrato lógico.
 
     // Alterando a variável de estado no proxy, seletor: 0xc2985578

@@ -5,7 +5,7 @@ src = "src"
 out = "out"
 test = "test"
 libs = ["lib", "node_modules"]
-solc = "0.8.34"
+solc = "0.8.39"
 
 remappings = [
     "forge-std/=lib/forge-std/src/",

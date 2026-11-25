@@ -2,21 +2,18 @@
 pragma solidity ^0.8.34;
 
 contract Owner {
-   // Definir a variável owner
+   address public owner;
 
-   // Construtor
    constructor() {
-      // Ao implantar o contrato, defina o proprietário como o endereço do implantador.
+      owner = msg.sender;
    }
 
-   // Definir modificador
    modifier onlyOwner {
-      // Verificar se o chamador é o endereço do proprietário
-      // Se for o caso, continue executando o corpo da função; caso contrário, ocorrerá um erro e a transação será revertida.
+      require(msg.sender == owner);
+      _;
    }
 
-   // Definir uma função com o modificador onlyOwner
-   function changeOwner(address _newOwner) external onlyOwner{
-      // Apenas o endereço do proprietário pode executar esta função e alterar o proprietário
+   function changeOwner(address _newOwner) external onlyOwner {
+      owner = _newOwner;
    }
 }

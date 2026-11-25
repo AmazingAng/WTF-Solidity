@@ -1,17 +1,12 @@
-// Podemos executar o script desejado usando npx hardhat run <script>
-// Aqui você pode usar npx hardhat run deploy.js para executar
-const hre = require("hardhat");
+import { network } from "hardhat";
 
 async function main() {
-  const Contract = await hre.ethers.getContractFactory("ERC20");
-  const token = await Contract.deploy("WTF","WTF");
-
-  await token.deployed();
-
-  console.log("Contrato implantado com sucesso:", token.address)
+  const { ethers } = await network.create();
+  const token = await ethers.deployContract("ERC20", ["WTF", "WTF"]);
+  await token.waitForDeployment();
+  console.log(await token.getAddress());
 }
 
-// Executar script
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

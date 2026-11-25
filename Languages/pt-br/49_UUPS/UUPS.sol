@@ -6,6 +6,9 @@ pragma solidity ^0.8.34;
 // A função de atualização está dentro da função lógica, onde o administrador pode alterar o endereço do contrato lógico usando a função de atualização, alterando assim a lógica do contrato.
 // Para fins de demonstração educacional, não utilizar em ambiente de produção.
 contract UUPSProxy {
+    address public implementation;
+    address public admin;
+    string public words;
     // Endereço do contrato lógico
     // admin address
     // Strings, podem ser alterados por meio de funções de contrato lógico.
@@ -27,6 +30,7 @@ contract UUPS1{
     // Variáveis de estado e contratos proxy são consistentes para evitar conflitos de slot
     address public implementation; 
     address public admin; 
+    string public words;
     // Strings, podem ser alterados por meio de funções de contrato lógico.
 
     // Alterando a variável de estado no proxy, seletor: 0xc2985578
@@ -47,6 +51,7 @@ contract UUPS2{
     // Variáveis de estado e contratos proxy são consistentes para evitar conflitos de slot
     address public implementation; 
     address public admin; 
+    string public words;
     // Strings, podem ser alterados por meio de funções de contrato lógico.
 
     // Alterando a variável de estado no proxy, seletor: 0xc2985578

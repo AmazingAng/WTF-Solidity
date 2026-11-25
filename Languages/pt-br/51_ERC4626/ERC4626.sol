@@ -9,10 +9,8 @@ import {ERC20, IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/ERC20.s
  * @dev Contrato ERC4626 "Padrão de Tesouraria Tokenizada", apenas para uso educacional, não utilizar em produção
  */
 contract ERC4626 is ERC20, IERC4626 {
-    //////////////////////////////////////////////////////////////
-                    状态变量
-    //////////////////////////////////////////////////////////////*/
     //
+    ERC20 private immutable _asset;
     uint8 private immutable _decimals;
 
     constructor(
@@ -37,9 +35,6 @@ contract ERC4626 is ERC20, IERC4626 {
         return _decimals;
     }
 
-    //////////////////////////////////////////////////////////////
-                        存款/提款逻辑
-    //////////////////////////////////////////////////////////////*/
     /** @dev Veja {IERC4626-depositar}. */
     function deposit(uint256 assets, address receiver) public virtual returns (uint256 shares) {
         // Utilizando o previewDeposit() para calcular a participação no cofre que será obtida
@@ -111,9 +106,6 @@ contract ERC4626 is ERC20, IERC4626 {
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
     }
 
-    //////////////////////////////////////////////////////////////
-                            会计逻辑
-    //////////////////////////////////////////////////////////////*/
     /** @dev Veja {IERC4626-totalAssets}. */
     function totalAssets() public view virtual returns (uint256){
         // Retorna a posição do ativo subjacente no contrato
@@ -156,9 +148,7 @@ contract ERC4626 is ERC20, IERC4626 {
         return convertToAssets(shares);
     }
 
-    //////////////////////////////////////////////////////////////
-                     DEPOSIT/WITHDRAWAL LIMIT LOGIC
-    //////////////////////////////////////////////////////////////*/
+    // DEPOSIT/WITHDRAWAL LIMIT LOGIC
     /** @dev Veja {IERC4626-maxDeposit}. */
     function maxDeposit(address) public view virtual returns (uint256) {
         return type(uint256).max;

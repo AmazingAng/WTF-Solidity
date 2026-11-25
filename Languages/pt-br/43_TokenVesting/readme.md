@@ -105,7 +105,7 @@ Existem 3 funções no contrato de liberação linear.
         // Calcula a quantidade de tokens liberados com base na fórmula de liberação linear
         if (timestamp < start) {
             return 0;
-        } else if (timestamp > start + duration) {
+        } else if (timestamp - start >= duration) {
             return totalAllocation;
         } else {
             return (totalAllocation * (timestamp - start)) / duration;

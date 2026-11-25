@@ -103,11 +103,12 @@ interface IERC7540Redeem is IERC7540Operator {
     );
 
     /**
-     * @dev Assumes control of shares from sender into the Vault and submits a Request for asynchronous redeem.
+     * @dev Assumes control of shares from owner and submits a Request for asynchronous redeem.
      *
-     * - MUST support a redeem Request flow where the control of shares is taken from sender directly
-     *   where msg.sender has ERC-20 approval over the shares of owner.
-     * - MUST revert if all shares cannot be requested for redeem.
+     * - MUST support a redeem Request flow where the control of shares is taken from owner directly.
+     * - Redeem Request approval of shares for a msg.sender not equal to owner MAY come either from ERC-20 approval
+     *   over the shares of owner or if the owner has approved the msg.sender as an operator.
+     * - MUST revert if all shares cannot be requested for redeem or withdraw.
      *
      * @param shares the amount of shares to be redeemed to transfer from owner
      * @param controller the controller of the request who will be able to operate the request

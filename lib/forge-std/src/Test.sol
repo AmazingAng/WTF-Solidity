@@ -25,8 +25,10 @@ import {Vm} from "./Vm.sol";
 // 📦 BOILERPLATE
 import {TestBase} from "./Base.sol";
 
-// ⭐️ TEST
+/// @notice Default base contract for Forge tests.
+/// @dev Includes assertions, cheatcodes, invariant helpers, chain helpers, utility helpers, and console modules.
 abstract contract Test is TestBase, StdAssertions, StdChains, StdCheats, StdInvariant, StdUtils {
-    // Note: IS_TEST() must return true.
+    /// @notice Marker used by Forge to identify test contracts.
+    /// @dev The generated `IS_TEST()` getter must return true.
     bool public IS_TEST = true;
 }

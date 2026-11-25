@@ -20,10 +20,9 @@ import {CrosschainLinked} from "../../CrosschainLinked.sol";
  * extension, which embeds the bridge logic directly in the token contract.
  */
 abstract contract BridgeFungible is Context, CrosschainLinked {
-    /// @dev Emitted when a crosschain ERC-20 transfer is sent.
-    event CrosschainFungibleTransferSent(bytes32 indexed sendId, address indexed from, bytes to, uint256 amount);
+    using InteroperableAddress for bytes;
 
-    /// @dev Emitted when a crosschain ERC-20 transfer is received.
+    event CrosschainFungibleTransferSent(bytes32 indexed sendId, address indexed from, bytes to, uint256 amount);
     event CrosschainFungibleTransferReceived(bytes32 indexed receiveId, bytes from, address indexed to, uint256 amount);
 
     /**
@@ -43,7 +42,7 @@ abstract contract BridgeFungible is Context, CrosschainLinked {
     function _crosschainTransfer(address from, bytes memory to, uint256 amount) internal virtual returns (bytes32) {
         _onSend(from, amount);
 
-        (bytes2 chainType, bytes memory chainReference, bytes memory addr) = InteroperableAddress.parseV1(to);
+        (bytes2 chainType, bytes memory chainReference, bytes memory addr) = to.parseV1();
         bytes memory chain = InteroperableAddress.formatV1(chainType, chainReference, hex"");
 
         bytes32 sendId = _sendMessageToCounterpart(
@@ -64,11 +63,9 @@ abstract contract BridgeFungible is Context, CrosschainLinked {
         bytes calldata /*sender*/,
         bytes calldata payload
     ) internal virtual override {
-        // NOTE: Gateway is validated by {_isAuthorizedGateway} (implemented in {CrosschainLinked}). No need to check here.
-
         // split payload
-        (bytes memory from, bytes memory toEvm, uint256 amount) = abi.decode(payload, (bytes, bytes, uint256));
-        address to = address(bytes20(toEvm));
+        (bytes memory from, bytes memory toBinary, uint256 amount) = abi.decode(payload, (bytes, bytes, uint256));
+        address to = address(bytes20(toBinary));
 
         _onReceive(to, amount);
 

@@ -2,7 +2,7 @@
 pragma solidity ^0.8.34;
 
 contract OtherContract {
-    // Variável de estado x
+    uint256 private _x; // Variável de estado x
     // Recebendo evento eth, registrando amount e gas
     event Log(uint amount, uint gas);
 
