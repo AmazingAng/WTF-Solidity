@@ -85,7 +85,7 @@ We can use `selector` to call the target function. For example, if I want to cal
 
 ````solidity
      function callWithSignature() external returns(bool, bytes memory){
-         (bool success, bytes memory data) = address(this).call(abi.encodeWithSelector(0x6a627842, "0x2c44b726ADF1963cA47Af88B284C06f30380fC78"));
+         (bool success, bytes memory data) = address(this).call(abi.encodeWithSelector(0x6a627842, 0x2c44b726ADF1963cA47Af88B284C06f30380fC78));
          return(success, data);
      }
 ````

@@ -85,7 +85,7 @@ El resultado es `0x6a627842`:
 Se puede usar `selector` para llamar a la función de destino. Por ejemplo, si se quiere llamar a la función `mint`, solo se necesita usar `abi.encodeWithSelector` para empaquetar y codificar el `method id` de la función `mint` como el `selector` y los parámetros, y pasarlo a la función `call`:
 ```solidity
     function callWithSignature() external returns(bool, bytes memory){
-        (bool success, bytes memory data) = address(this).call(abi.encodeWithSelector(0x6a627842, "0x2c44b726ADF1963cA47Af88B284C06f30380fC78"));
+        (bool success, bytes memory data) = address(this).call(abi.encodeWithSelector(0x6a627842, 0x2c44b726ADF1963cA47Af88B284C06f30380fC78));
         return(success, data);
     }
 ```
