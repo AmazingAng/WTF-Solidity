@@ -22,7 +22,7 @@ Todo o código e tutoriais são de código aberto no GitHub: [github.com/Amazing
 
 `ABI` (Interface Binária de Aplicação) é o padrão para interagir com contratos inteligentes no Ethereum. Os dados são codificados com base em seus tipos; e como a codificação não inclui informações de tipo, a decodificação precisa especificar seus tipos.
 
-Em `Solidity`, a `codificação ABI` possui 4 funções: `abi.encode`, `abi.encodePacked`, `abi.encodeWithSignature`, `abi.encodeWithSelector`. E a `decodificação ABI` tem 1 função: `abi.decode`, usada para decodificar dados codificados por `abi.encode`. Nesta lição, aprenderemos como usar essas funções.
+Em `Solidity`, a `codificação ABI` possui 5 funções: `abi.encode`, `abi.encodePacked`, `abi.encodeWithSignature`, `abi.encodeWithSelector`, `abi.encodeCall`. E a `decodificação ABI` tem 1 função: `abi.decode`, usada para decodificar dados codificados por `abi.encode`. Nesta lição, aprenderemos como usar essas funções.
 
 ## Codificação ABI
 
@@ -82,6 +82,20 @@ function encodeWithSelector() public view returns(bytes memory result) {
 ```
 
 O resultado da codificação é `0xe87082f1000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000007a58c0be72be218b41c608b7fe7c5bb630736c7100000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000043078414100000000000000000000000000000000000000000000000000000000`, igual ao resultado de `abi.encodeWithSignature`.
+
+### `abi.encodeCall`
+
+`abi.encodeCall` recebe um ponteiro de função como primeiro parâmetro e os argumentos da função em uma tupla como segundo parâmetro. Diferentemente de escrever manualmente uma assinatura de função ou um seletor, ele verifica a assinatura e os tipos dos argumentos em tempo de compilação; por isso é mais seguro quando a função de destino é conhecida.
+
+```solidity
+function foo(uint256, address, string memory, uint256[2] memory) external pure {}
+
+function encodeCall() public view returns(bytes memory result) {
+    result = abi.encodeCall(this.foo, (x, addr, name, array));
+}
+```
+
+Os dados de chamada codificados são iguais aos de `abi.encodeWithSignature("foo(uint256,address,string,uint256[2])", ...)`, mas não exigem escrever manualmente a assinatura da função.
 
 ## Decodificação ABI
 

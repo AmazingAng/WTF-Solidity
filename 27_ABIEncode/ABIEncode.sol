@@ -22,6 +22,13 @@ contract ABIEncode{
     function encodeWithSelector() public view returns(bytes memory result) {
         result = abi.encodeWithSelector(bytes4(keccak256("foo(uint256,address,string,uint256[2])")), x, addr, name, array);
     }
+
+    function foo(uint256, address, string memory, uint256[2] memory) external pure {}
+
+    function encodeCall() public view returns(bytes memory result) {
+        result = abi.encodeCall(this.foo, (x, addr, name, array));
+    }
+
     function decode(bytes memory data) public pure returns(uint dx, address daddr, string memory dname, uint[2] memory darray) {
         (dx, daddr, dname, darray) = abi.decode(data, (uint, address, string, uint[2]));
     }
