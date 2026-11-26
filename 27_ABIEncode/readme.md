@@ -71,6 +71,22 @@ function encodePacked() public view returns(bytes memory result) {
 
 编码的结果为`0x000000000000000000000000000000000000000000000000000000000000000a7a58c0be72be218b41c608b7fe7c5bb630736c713078414100000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000006`，由于`abi.encodePacked`对编码进行了压缩，长度比`abi.encode`短很多。
 
+#### 动态参数的拼接歧义
+
+`abi.encodePacked`不会记录动态参数之间的边界，因此不同输入可能产生相同的字节序列：`abi.encodePacked("ab", "c")`和`abi.encodePacked("a", "bc")`都编码为`0x616263`。如果直接对这种结果签名或哈希，攻击者可能把一组参数替换成另一组参数。
+
+```solidity
+function collisionPacked() public pure returns(bool) {
+    return keccak256(abi.encodePacked("ab", "c")) == keccak256(abi.encodePacked("a", "bc"));
+}
+
+function safeHash() public pure returns(bool) {
+    return keccak256(abi.encode("ab", "c")) != keccak256(abi.encode("a", "bc"));
+}
+```
+
+当哈希输入包含多个动态类型（例如`string`、`bytes`或动态数组）时，不要用`abi.encodePacked`直接拼接；优先使用`abi.encode`保留类型和长度边界。`abi.encodePacked`更适合参数边界本来就固定且不会产生歧义的场景。
+
 ### `abi.encodeWithSignature`
 
 与`abi.encode`功能类似，只不过第一个参数为`函数签名`，比如`"foo(uint256,address,string,uint256[2])"`。当调用其他合约的时候可以使用。
