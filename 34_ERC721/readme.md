@@ -150,32 +150,25 @@ interface IERC721Receiver {
 
 我们看下`ERC721`利用`_checkOnERC721Received`来确保目标合约实现了`onERC721Received()`函数（返回`onERC721Received`的`selector`）：
 ```solidity
-function _checkOnERC721Received(
-    address operator,
-    address from,
-    address to,
-    uint256 tokenId,
-    bytes memory data
-) internal {
-    if (to.code.length > 0) {
-        try IERC721Receiver(to).onERC721Received(operator, from, tokenId, data) returns (bytes4 retval) {
-            if (retval != IERC721Receiver.onERC721Received.selector) {
-                // Token rejected
-                revert IERC721Errors.ERC721InvalidReceiver(to);
-            }
-        } catch (bytes memory reason) {
-            if (reason.length == 0) {
-                // non-IERC721Receiver implementer
-                revert IERC721Errors.ERC721InvalidReceiver(to);
-            } else {
-                /// @solidity memory-safe-assembly
-                assembly {
-                    revert(add(32, reason), mload(reason))
+function _checkOnERC721Received(address from, address to, uint256 tokenId, bytes memory data) private {
+        if (to.code.length > 0) {
+            try IERC721Receiver(to).onERC721Received(msg.sender, from, tokenId, data) returns (bytes4 retval) {
+                if (retval != IERC721Receiver.onERC721Received.selector) {
+                    revert ERC721InvalidReceiver(to);
+                }
+            } catch (bytes memory reason) {
+                if (reason.length == 0) {
+                    revert ERC721InvalidReceiver(to);
+                } else {
+                    /// @solidity memory-safe-assembly
+                    assembly {
+                        revert(add(32, reason), mload(reason))
+                    }
                 }
             }
         }
     }
-}
+
 ```
 
 ## IERC721Metadata
